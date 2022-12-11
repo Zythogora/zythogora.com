@@ -1,4 +1,4 @@
-import { ChangeEvent, useContext, useEffect, useState } from 'react';
+import { ChangeEvent, useContext, useState } from 'react';
 import { useFocus } from 'react-aria';
 
 import { Beer } from 'business/beer/types';
@@ -6,7 +6,7 @@ import { Brewery } from 'business/brewery/types';
 import SearchResult from 'business/search/components/searchResult';
 import { SearchBeers } from 'business/search/services/beers';
 import { SearchBreweries } from 'business/search/services/breweries';
-import { api } from 'technical/api';
+import { ApiError } from 'technical/api/types/error';
 import Alert from 'ui/alert';
 import { AlertContext } from 'ui/alert/provider';
 import { AlertType } from 'ui/alert/types';
@@ -48,14 +48,16 @@ const SearchBar = ({ active, setActive }: SearchBarProps) => {
 
       setActive(beerResults.length !== 0 && breweryResults.length !== 0);
     } catch (error: any) {
-      alert(
-        <Alert
-          type={AlertType.ERROR}
-          compact={false}
-          title="Server error"
-          description={error.message}
-        />,
-      );
+      if (error instanceof ApiError) {
+        alert(
+          <Alert
+            type={AlertType.ERROR}
+            compact={false}
+            title="Server error"
+            description={error.message}
+          />,
+        );
+      }
     }
   };
 

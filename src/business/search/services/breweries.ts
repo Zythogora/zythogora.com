@@ -1,13 +1,16 @@
 import { Brewery } from 'business/brewery/types';
 import { api } from 'technical/api';
+import { ApiError } from 'technical/api/types/error';
 
 export const SearchBreweries = async (name: string, count: number) => {
-  const response = await api.get<Brewery[]>(
-    `/breweries/search/${name}?count=${count}`,
-  );
-
-  if (response.status !== 200) {
-    throw new Error(
+  let response;
+  try {
+    response = await api.get<Brewery[]>(
+      `/breweries/search/${name}?count=${count}`,
+    );
+  } catch (error: any) {
+    throw new ApiError(
+      500,
       'Something went wrong on our side while searching for breweries.',
     );
   }

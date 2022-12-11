@@ -14,20 +14,22 @@ interface AlertProviderProps {
 export const AlertProvider = ({ children }: AlertProviderProps) => {
   const [alerts, setAlerts] = useState<JSX.Element[]>([]);
 
+  const alert = (newAlert: JSX.Element, duration?: number) => {
+    setAlerts([...alerts, newAlert]);
+
+    setTimeout(
+      () => {
+        setAlerts(alerts?.filter((a) => a !== newAlert));
+      },
+      duration ? duration * 1000 : 5000,
+    );
+  };
+
   return (
     <AlertContext.Provider
       value={{
-        alerts: alerts,
-        alert: (newAlert: JSX.Element, duration?: number) => {
-          setAlerts([...alerts, newAlert]);
-
-          setTimeout(
-            () => {
-              setAlerts(alerts?.filter((alert) => alert !== newAlert));
-            },
-            duration ? duration * 1000 : 5000,
-          );
-        },
+        alerts,
+        alert,
       }}
     >
       {children}
