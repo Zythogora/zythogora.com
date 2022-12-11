@@ -16,14 +16,14 @@ const LayoutContainer = ({ children = undefined }: LayoutContainerProps) => {
 
       <div>
         {alerts.length !== 0 ? (
-          <div className="fixed z-9999 top-[100px] right-5 flex flex-col gap-y-5">
+          <div className="fixed z-9999 top-24 right-4 flex flex-col gap-y-5">
             {alerts.map((alert, i) => {
               return <span key={i}>{alert}</span>;
             })}
           </div>
         ) : null}
 
-        {children}
+        <div className="flex justify-center mt-10">{children}</div>
       </div>
     </div>
   );

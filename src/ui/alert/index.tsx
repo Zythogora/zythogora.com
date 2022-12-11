@@ -26,8 +26,7 @@ const Alert = ({
   compact = true,
   description = undefined,
 }: AlertProps) => {
-  const alertBaseStyle =
-    'flex flex-row items-center w-[500px] border-[1px] rounded-lg';
+  const alertBaseStyle = 'flex flex-row items-center w-96 border rounded-lg';
 
   let alertCompactStyle;
   let iconCompactStyle;

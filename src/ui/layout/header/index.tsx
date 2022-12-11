@@ -22,7 +22,7 @@ const LayoutHeader = () => {
       className="relative"
     >
       <div className="flex justify-between items-center h-20 px-20 border-b border-gray-200">
-        <div className="text-2xl text-[#ffb300] font-sans font-bold">
+        <div className="text-2xl text-primary font-sans font-bold">
           zythogora
         </div>
 
