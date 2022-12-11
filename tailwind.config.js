@@ -15,6 +15,9 @@ module.exports = {
       colors: {
         'primary': "#ffb300",
       },
+      backgroundImage: {
+        'gradient-card': "radial-gradient(circle farthest-corner at 10% 20%, #00989b, #005e78)",
+      },
     },
   },
   plugins: [],
