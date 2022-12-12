@@ -69,17 +69,17 @@ const SearchBar = ({ active, setActive }: SearchBarProps) => {
         {...focusProps}
         onChange={handleInput}
         className="
-          w-full px-6 py-2 border rounded-3xl border-gray-300 shadow
+          w-full px-6 py-2 border rounded-3xl border-neutral-300 shadow
           transition duration-200
           hover:shadow-md
-          outline-0 focus:border-gray-400
+          outline-0 focus:border-neutral-400
         "
       />
 
       {active ? (
         <div
           id="results"
-          className="absolute top-12 w-full p-6 bg-white border rounded-3xl border-gray-300 shadow-md"
+          className="absolute top-12 w-full p-6 bg-white border rounded-3xl border-neutral-300 shadow-md"
         >
           {beers.map((beer) => (
             <SearchResult
