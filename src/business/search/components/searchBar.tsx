@@ -69,17 +69,23 @@ const SearchBar = ({ active, setActive }: SearchBarProps) => {
         {...focusProps}
         onChange={handleInput}
         className="
-          w-full px-6 py-2 border rounded-3xl border-neutral-300 shadow
+          w-full px-6 py-2 border rounded-3xl
+          border-neutral-300 focus:border-neutral-400 shadow
+          dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500 dark:focus:border-gray-400
           transition duration-200
           hover:shadow-md
-          outline-0 focus:border-neutral-400
+          outline-0 
         "
       />
 
       {active ? (
         <div
           id="results"
-          className="absolute top-12 w-full p-6 bg-white border rounded-3xl border-neutral-300 shadow-md"
+          className="
+            absolute top-12 w-full p-6 border rounded-3xl shadow-md
+            bg-white border-neutral-300
+            dark:bg-gray-800 dark:border-gray-400
+          "
         >
           {beers.map((beer) => (
             <SearchResult
@@ -91,7 +97,7 @@ const SearchBar = ({ active, setActive }: SearchBarProps) => {
             />
           ))}
 
-          <hr className="my-4" />
+          <hr className="my-4 dark:border-gray-400" />
 
           {breweries.map((brewery) => (
             <SearchResult

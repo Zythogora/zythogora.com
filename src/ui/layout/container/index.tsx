@@ -14,7 +14,7 @@ const LayoutContainer = ({ children = undefined }: LayoutContainerProps) => {
     <div className="min-h-screen">
       <LayoutHeader />
 
-      <div>
+      <div className="min-h-[calc(theme(height.screen)-theme(space.20))] flex flex-col items-center pt-12 bg-neutral-100 dark:bg-gray-800">
         {alerts.length !== 0 ? (
           <div className="fixed z-9999 top-24 right-4 flex flex-col gap-y-5">
             {alerts.map((alert, i) => {
@@ -23,7 +23,7 @@ const LayoutContainer = ({ children = undefined }: LayoutContainerProps) => {
           </div>
         ) : null}
 
-        <div className="flex justify-center mt-10">{children}</div>
+        {children}
       </div>
     </div>
   );
