@@ -61,7 +61,7 @@ const BeerHeader = ({ beerId }: BeerHeaderProps) => {
 
   useEffect(() => {
     fetchBeer(beerId);
-  }, [beerId]);
+  }, []);
 
   if (beer === undefined) {
     return <Spinner />;
@@ -72,7 +72,7 @@ const BeerHeader = ({ beerId }: BeerHeaderProps) => {
   }
 
   return (
-    <div className="w-256 p-12 flex flex-col justify-between z-0 bg-gradient-card rounded-xl">
+    <div className="w-256 h-fit p-12 mb-12 flex flex-col justify-between z-0 bg-gradient-card rounded-xl shadow-xl">
       <div className="flex flex-col justify-around gap-y-4">
         <h1 className="text-4xl text-white font-bold">{beer.name}</h1>
 

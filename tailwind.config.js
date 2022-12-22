@@ -34,7 +34,7 @@ const config = {
         }
       },
       backgroundImage: {
-        'gradient-card': "radial-gradient(circle farthest-corner at 10% 20%, #00989b, #005e78)",
+        'gradient-card': "radial-gradient(circle farthest-corner at 10% 20%, hsl(181,100%,31%), hsl(193,100%,24%))",
       },
     },
   },
