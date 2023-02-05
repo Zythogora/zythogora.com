@@ -4,7 +4,7 @@ import { AlertContextType } from 'ui/alert/types';
 
 export const AlertContext = createContext<AlertContextType>({
   alerts: [],
-  alert: () => {},
+  triggerAlert: () => {},
 });
 
 interface AlertProviderProps {
@@ -14,7 +14,7 @@ interface AlertProviderProps {
 export const AlertProvider = ({ children }: AlertProviderProps) => {
   const [alerts, setAlerts] = useState<JSX.Element[]>([]);
 
-  const alert = (newAlert: JSX.Element, duration?: number) => {
+  const triggerAlert = (newAlert: JSX.Element, duration?: number) => {
     setAlerts([...alerts, newAlert]);
 
     setTimeout(
@@ -29,7 +29,7 @@ export const AlertProvider = ({ children }: AlertProviderProps) => {
     <AlertContext.Provider
       value={{
         alerts,
-        alert,
+        triggerAlert,
       }}
     >
       {children}

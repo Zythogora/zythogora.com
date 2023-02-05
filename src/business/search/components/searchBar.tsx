@@ -19,7 +19,7 @@ interface SearchBarProps {
 const SearchBar = ({ active, setActive }: SearchBarProps) => {
   const [input, setInput] = useState<string>('');
 
-  const { alert } = useContext(AlertContext);
+  const { triggerAlert } = useContext(AlertContext);
 
   const [beers, setBeers] = useState<Beer[]>([]);
   const [breweries, setBreweries] = useState<Brewery[]>([]);
@@ -49,7 +49,7 @@ const SearchBar = ({ active, setActive }: SearchBarProps) => {
       setActive(beerResults.length !== 0 && breweryResults.length !== 0);
     } catch (error: any) {
       if (error instanceof ApiError) {
-        alert(
+        triggerAlert(
           <Alert
             type={AlertType.ERROR}
             compact={false}

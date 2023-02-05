@@ -19,7 +19,7 @@ interface BeerHeaderProps {
 }
 
 const BeerHeader = ({ beerId }: BeerHeaderProps) => {
-  const { alert } = useContext(AlertContext);
+  const { triggerAlert } = useContext(AlertContext);
   const navigate = useNavigate();
 
   const [beer, setBeer] = useState<Beer | null>();
@@ -31,7 +31,7 @@ const BeerHeader = ({ beerId }: BeerHeaderProps) => {
     } catch (error: any) {
       if (error instanceof ApiError) {
         if (error.status === 404) {
-          alert(
+          triggerAlert(
             <Alert
               type={AlertType.ERROR}
               compact={false}
@@ -46,7 +46,7 @@ const BeerHeader = ({ beerId }: BeerHeaderProps) => {
             navigate('/');
           }, 3000);
         } else {
-          alert(
+          triggerAlert(
             <Alert
               type={AlertType.ERROR}
               compact={false}

@@ -7,5 +7,5 @@ export enum AlertType {
 
 export type AlertContextType = {
   alerts: JSX.Element[];
-  alert: (newAlert: JSX.Element, duration?: number) => void;
+  triggerAlert: (newAlert: JSX.Element, duration?: number) => void;
 };
