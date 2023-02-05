@@ -63,10 +63,6 @@ const BeerHeader = ({ beerId }: BeerHeaderProps) => {
     fetchBeer(beerId);
   }, []);
 
-  if (beer === undefined) {
-    return <Spinner />;
-  }
-
   if (beer === null) {
     return null;
   }
@@ -74,16 +70,31 @@ const BeerHeader = ({ beerId }: BeerHeaderProps) => {
   return (
     <div className="w-256 h-fit p-12 mb-12 flex flex-col justify-between z-0 bg-gradient-card rounded-xl shadow-xl">
       <div className="flex flex-col justify-around gap-y-4">
-        <h1 className="text-4xl text-white font-bold">{beer.name}</h1>
+        <h1 className="text-4xl text-white font-bold">
+          {beer ? (
+            beer.name
+          ) : (
+            <div className="w-48 h-4 mt-4 mb-2 bg-white rounded-full animate-pulse"></div>
+          )}
+        </h1>
 
         <h2 className="flex-grow text-2xl text-white">
-          Brewed by{' '}
-          <Link
-            to={`/breweries/${beer.brewery.id}`}
-            className="text-primary font-bold"
-          >
-            {beer.brewery.name}
-          </Link>
+          {beer ? (
+            <>
+              {'Brewed by '}
+              <Link
+                to={`/breweries/${beer.brewery.id}`}
+                className="text-primary font-bold"
+              >
+                {beer.brewery.name}
+              </Link>
+            </>
+          ) : (
+            <div className="flex flex-row gap-x-4 animate-pulse mt-3 mb-2">
+              <div className="w-28 h-3 bg-white rounded-full"></div>
+              <div className="w-44 h-3 bg-primary rounded-full"></div>
+            </div>
+          )}
         </h2>
       </div>
 
@@ -92,12 +103,16 @@ const BeerHeader = ({ beerId }: BeerHeaderProps) => {
           <StyleIcon fill="#ffffff" className="w-10 h-10 opacity-70" />
           <div className="flex flex-col">
             <h1 className="text-xs text-white opacity-70 uppercase">Style</h1>
-            <p className="text-2xl text-white">{beer.style.name}</p>
+            {beer ? (
+              <p className="text-2xl text-white">{beer.style.name}</p>
+            ) : (
+              <div className="w-36 h-3 mt-3 mb-2 bg-white rounded-full animate-pulse"></div>
+            )}
           </div>
         </div>
 
         <div className="flex flex-row items-center gap-x-4">
-          {beer.color && (
+          {beer && beer.color && (
             <>
               <PintIcon
                 fill="white"
@@ -119,12 +134,16 @@ const BeerHeader = ({ beerId }: BeerHeaderProps) => {
           <AbvIcon fill="#ffffff" className="w-10 h-10 opacity-70" />
           <div className="flex flex-col">
             <h1 className="text-xs text-white opacity-70">ABV</h1>
-            <p className="text-2xl text-white">{beer.abv}</p>
+            {beer ? (
+              <p className="text-2xl text-white">{beer.abv}</p>
+            ) : (
+              <div className="w-10 h-3 mt-3 mb-2 bg-white rounded-full animate-pulse"></div>
+            )}
           </div>
         </div>
 
         <div className="flex flex-row items-center gap-x-4">
-          {beer.ibu && (
+          {beer && beer.ibu && (
             <>
               <IbuIcon fill="#ffffff" className="w-10 h-10 opacity-70" />
               <div className="flex flex-col">
