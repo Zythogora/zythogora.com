@@ -3,3 +3,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+// Temporary workaround until a bug from tailwindcss-forms gets fixed
+// https://github.com/tailwindlabs/tailwindcss-forms/issues/74
+.dark [type='checkbox']:checked,
+.dark [type='radio']:checked {
+  background-color: currentColor;
+}

@@ -38,7 +38,9 @@ const config = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/forms'),
+  ],
 };
 
 config.theme.extend.colors.primary["DEFAULT"] = config.theme.extend.colors.primary["500"];
