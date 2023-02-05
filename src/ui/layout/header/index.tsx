@@ -1,9 +1,31 @@
 import { useState } from 'react';
 
 import SearchBar from 'business/search/components/searchBar';
+import ThemeDarkIcon from 'ui/assets/themeDarkIcon';
+import ThemeLightIcon from 'ui/assets/themeLightIcon';
+import {
+  getTheme,
+  persistTheme,
+  setPageTheme,
+  Theme,
+  ThemeValue,
+} from 'ui/layout/theme';
 
 const LayoutHeader = () => {
   const [searchActive, setSearchActive] = useState<boolean>(false);
+
+  const defaultTheme = getTheme();
+  setPageTheme(defaultTheme);
+
+  const [theme, setTheme] = useState<ThemeValue>(defaultTheme);
+
+  const switchTheme = () => {
+    const newTheme = theme === Theme.dark ? Theme.light : Theme.dark;
+
+    setPageTheme(newTheme);
+    setTheme(newTheme);
+    persistTheme(newTheme);
+  };
 
   return (
     <div
@@ -27,7 +49,7 @@ const LayoutHeader = () => {
           dark:bg-gray-900 dark:border-gray-700
         "
       >
-        <div className="text-2xl text-primary font-sans font-bold">
+        <div className="flex-1 mr-auto text-2xl text-primary font-sans font-bold">
           zythogora
         </div>
 
@@ -35,25 +57,35 @@ const LayoutHeader = () => {
           <SearchBar active={searchActive} setActive={setSearchActive} />
         </div>
 
-        <div
-          className="
-          flex flex-row items-center px-1.5 py-1.5 border rounded-3xl cursor-pointer
-          border-neutral-300
-          dark:border-gray-500 dark:hover:shadow-gray-700
-          transition duration-200
-          hover:shadow-md
-        "
-        >
-          <div className="px-3">
-            <span className="block w-4 h-0.5 mb-0.5 rounded-sm bg-neutral-900 dark:bg-gray-300"></span>
-            <span className="block w-4 h-0.5 rounded-sm bg-neutral-900 dark:bg-gray-300"></span>
-            <span className="block w-4 h-0.5 mt-0.5 rounded-sm bg-neutral-900 dark:bg-gray-300"></span>
+        <div className="flex-1 justify-end ml-auto flex flex-row items-center gap-x-6">
+          <div className="w-6 h-6 cursor-pointer" onClick={switchTheme}>
+            {theme === Theme.dark ? (
+              <ThemeLightIcon className="w-full h-full" fill="white" />
+            ) : (
+              <ThemeDarkIcon className="w-full h-full" fill="black" />
+            )}
           </div>
 
-          <div className="relative w-7 h-7 overflow-hidden rounded-full bg-neutral-500 dark:bg-gray-600">
-            <span className="absolute top-1.5 left-2 w-3 h-3 rounded-full bg-white dark:bg-gray-300"></span>
-            <span className="absolute top-4 left-1 w-5 h-5 rounded-full bg-white dark:bg-gray-300"></span>
-            <span className="absolute w-7 h-7 border-2 rounded-full border-neutral-500 dark:border-gray-600"></span>
+          <div
+            className="
+              flex flex-row items-center px-1.5 py-1.5 border rounded-3xl cursor-pointer
+              border-neutral-300
+              dark:border-gray-500 dark:hover:shadow-gray-700
+              transition duration-200
+              hover:shadow-md
+            "
+          >
+            <div className="px-3">
+              <span className="block w-4 h-0.5 mb-0.5 rounded-sm bg-neutral-900 dark:bg-gray-300"></span>
+              <span className="block w-4 h-0.5 rounded-sm bg-neutral-900 dark:bg-gray-300"></span>
+              <span className="block w-4 h-0.5 mt-0.5 rounded-sm bg-neutral-900 dark:bg-gray-300"></span>
+            </div>
+
+            <div className="relative w-7 h-7 overflow-hidden rounded-full bg-neutral-500 dark:bg-gray-600">
+              <span className="absolute top-1.5 left-2 w-3 h-3 rounded-full bg-white dark:bg-gray-300"></span>
+              <span className="absolute top-4 left-1 w-5 h-5 rounded-full bg-white dark:bg-gray-300"></span>
+              <span className="absolute w-7 h-7 border-2 rounded-full border-neutral-500 dark:border-gray-600"></span>
+            </div>
           </div>
         </div>
       </div>
