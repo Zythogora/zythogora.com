@@ -1,19 +1,22 @@
+import { AxiosError } from 'axios';
+
 import { Brewery } from 'business/brewery/types';
 import { api } from 'technical/api';
 import { ApiError } from 'technical/api/types/error';
 
 export const SearchBreweries = async (name: string, count: number) => {
-  let response;
   try {
-    response = await api.get<Brewery[]>(
+    const response = await api.get<Brewery[]>(
       `/breweries/search/${name}?count=${count}`,
     );
+    return response.data;
   } catch (error: any) {
-    throw new ApiError(
-      500,
-      'Something went wrong on our side while searching for breweries.',
-    );
+    if (error instanceof AxiosError && error.response) {
+      throw new ApiError(
+        error.response.status,
+        'Something went wrong on our side while searching for breweries.',
+      );
+    }
+    throw error;
   }
-
-  return response.data;
 };
