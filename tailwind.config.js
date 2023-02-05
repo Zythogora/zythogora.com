@@ -36,6 +36,9 @@ const config = {
       backgroundImage: {
         'gradient-card': "radial-gradient(circle farthest-corner at 10% 20%, hsl(181,100%,31%), hsl(193,100%,24%))",
       },
+      rotate: {
+        '30': '30deg',
+      }
     },
   },
   plugins: [
