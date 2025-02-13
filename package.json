@@ -19,10 +19,16 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "eslint": "^9",
+    "eslint": "^9.20.1",
     "eslint-config-next": "15.1.7",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-unused-imports": "^4.1.4",
     "postcss": "^8.5.2",
+    "prettier": "^3.5.0",
+    "prettier-plugin-tailwindcss": "^0.6.11",
     "tailwindcss": "^4.0.6",
-    "typescript": "^5"
+    "typescript": "^5",
+    "typescript-eslint": "^8.24.0"
   }
 }
