@@ -14,5 +14,10 @@
   },
   "[typescriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  },
+  "i18n-ally.enabledFrameworks": ["next-intl"],
+  "i18n-ally.localesPaths": ["src/lib/i18n/translations"],
+  "i18n-ally.keystyle": "nested",
+  "i18n-ally.displayLanguage": "fr",
+  "i18n-ally.sourceLanguage": "fr"
 }
