@@ -1,0 +1,13 @@
+{
+  "metadata": {
+    "title": "Zythogora",
+    "description": "The ultimate app for beer reviews"
+  },
+  "locale": {
+    "en": "English",
+    "fr": "French"
+  },
+  "home": {
+    "title": "Welcome to<br></br><highlight>Zythogora</highlight>"
+  }
+}

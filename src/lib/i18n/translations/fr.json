@@ -1,0 +1,13 @@
+{
+  "metadata": {
+    "title": "Zythogora",
+    "description": "L'app de référence pour la review de bières"
+  },
+  "locale": {
+    "en": "Anglais",
+    "fr": "Français"
+  },
+  "home": {
+    "title": "Bienvenue sur<br></br><highlight>Zythogora</highlight>"
+  }
+}

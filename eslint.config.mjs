@@ -31,7 +31,8 @@ const eslintConfig = [
             caseInsensitive: true,
           },
           groups: [
-            ["builtin", "external", "internal"],
+            ["builtin", "external"],
+            "internal",
             "parent",
             ["sibling", "index"],
             "type",
@@ -51,6 +52,34 @@ const eslintConfig = [
       // Prevent unused imports and variables
       "@typescript-eslint/no-unused-vars": "error",
       "unused-imports/no-unused-imports": "error",
+
+      // Restrict the use of navigation utilities not localized
+      "no-restricted-imports": [
+        "error",
+        {
+          paths: [
+            {
+              name: "next/link",
+              message: 'Please import Links from "@/lib/i18n" instead.',
+            },
+            {
+              name: "next/navigation",
+              importNames: [
+                "permanentRedirect",
+                "redirect",
+                "usePathname",
+                "useRouter",
+              ],
+              message:
+                'Please import navigation utilities from "@/lib/i18n" instead.',
+            },
+            {
+              name: "next/router",
+              message: 'Please use the router from "@/lib/i18n" instead.',
+            },
+          ],
+        },
+      ],
 
       // Include jsx-a11y rules
       ...a11yPlugin.flatConfigs.recommended.rules,
