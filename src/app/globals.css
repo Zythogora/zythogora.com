@@ -3,16 +3,20 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
+  --foreground: var(--color-stone-950);
+  --background: var(--color-stone-50);
+
   --primary: oklch(80.16% 0.1705 73.27);
 }
 
-/* 
-.dark { :root { } }
-*/
+.dark {
+  --foreground: var(--color-stone-50);
+  --background: var(--color-stone-800);
+}
 
 @theme inline {
-  --color-foreground: var(--color-stone-950);
-  --color-background: var(--color-stone-50);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
   --color-primary: var(--primary);
 
   --font-title: var(--font-title);

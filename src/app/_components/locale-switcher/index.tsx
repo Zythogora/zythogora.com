@@ -48,7 +48,7 @@ const LocaleButton = ({
         "rounded-full px-4 py-2.5 text-xs",
         locale === selectedLocale
           ? "bg-background border-2 drop-shadow"
-          : "cursor-pointer bg-stone-300",
+          : "cursor-pointer bg-stone-300 dark:bg-stone-600",
       )}
     >
       {t(`locale.${locale}`)}
