@@ -8,9 +8,14 @@ import {
 } from "next-intl/server";
 
 import LocaleSwitcher from "@/app/_components/locale-switcher";
+import ThemeProvider, {
+  availableThemes,
+} from "@/app/_components/providers/theme-provider";
+import ThemeSwitcher from "@/app/_components/theme-switcher";
 import { routing } from "@/lib/i18n";
 
 import type { Locale } from "@/lib/i18n";
+import type { Viewport } from "next";
 import type { PropsWithChildren } from "react";
 
 import "@/app/globals.css";
@@ -42,6 +47,13 @@ export async function generateMetadata({
   };
 }
 
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#FBFAFA" },
+    { media: "(prefers-color-scheme: dark)", color: "#292526" },
+  ],
+};
+
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
@@ -65,12 +77,22 @@ export default async function RootLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale}>
+    <html lang={locale} suppressHydrationWarning>
       <body className={`${title.variable} ${paragraph.variable} antialiased`}>
         <NextIntlClientProvider messages={messages}>
-          <LocaleSwitcher />
+          <ThemeProvider
+            defaultTheme="system"
+            enableSystem
+            attribute="class"
+            themes={availableThemes as unknown as string[]}
+            disableTransitionOnChange
+          >
+            <LocaleSwitcher />
 
-          {children}
+            <ThemeSwitcher />
+
+            {children}
+          </ThemeProvider>
         </NextIntlClientProvider>
       </body>
     </html>

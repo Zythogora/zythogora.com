@@ -7,6 +7,11 @@
     "en": "English",
     "fr": "French"
   },
+  "theme": {
+    "light": "Light theme",
+    "dark": "Dark theme",
+    "system": "System theme"
+  },
   "home": {
     "title": "Welcome to<br></br><highlight>Zythogora</highlight>"
   }
