@@ -13,4 +13,6 @@ export const serverSideSchema = z.object({
   DIRECT_URL: z.string(),
   RESEND_API_KEY: z.string(),
   EMAIL_FROM: z.string(),
+  COOKIE_PREFIX: z.string(),
+  HASH_PEPPER_SECRET: z.string(),
 });

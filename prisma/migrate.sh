@@ -9,7 +9,7 @@ migrationName=$1
 
 prismaFolder=$(dirname $(realpath "$0"))
 
-schemaFile="${prismaFolder}/schema.prisma"
+schemaFile="${prismaFolder}/schema"
 migrationsFolder="${prismaFolder}/migrations"
 
 echo -e "Generating migration \`${migrationName}\`..."

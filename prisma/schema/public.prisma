@@ -1,0 +1,9 @@
+model Users {
+  id       String @id
+  username String @unique
+
+  betterAuthUser BetterAuthUsers @relation(fields: [id], references: [id])
+
+  @@map("users")
+  @@schema("public")
+}

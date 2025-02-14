@@ -28,6 +28,12 @@ const loadConfig = () => {
       from: env.EMAIL_FROM,
       resendApiKey: env.RESEND_API_KEY,
     },
+    auth: {
+      cookiePrefix: env.COOKIE_PREFIX,
+      hash: {
+        pepper: env.HASH_PEPPER_SECRET,
+      },
+    },
   };
 };
 

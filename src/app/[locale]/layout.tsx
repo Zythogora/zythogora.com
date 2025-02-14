@@ -7,11 +7,9 @@ import {
   setRequestLocale,
 } from "next-intl/server";
 
-import LocaleSwitcher from "@/app/_components/locale-switcher";
 import ThemeProvider, {
   availableThemes,
 } from "@/app/_components/providers/theme-provider";
-import ThemeSwitcher from "@/app/_components/theme-switcher";
 import { routing } from "@/lib/i18n";
 
 import type { Locale } from "@/lib/i18n";
@@ -87,10 +85,6 @@ export default async function RootLayout({
             themes={availableThemes as unknown as string[]}
             disableTransitionOnChange
           >
-            <LocaleSwitcher />
-
-            <ThemeSwitcher />
-
             {children}
           </ThemeProvider>
         </NextIntlClientProvider>
