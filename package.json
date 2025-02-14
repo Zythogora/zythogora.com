@@ -6,13 +6,19 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "db.generate": "prisma/migrate.sh",
+    "db.migrate": "prisma migrate deploy",
+    "db.reset": "prisma migrate reset",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
+    "@prisma/client": "6.3.1",
     "clsx": "^2.1.1",
     "next": "15.1.7",
     "next-intl": "^3.26.3",
     "next-themes": "^0.4.4",
+    "prisma": "^6.3.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "tailwind-merge": "^3.0.1"
