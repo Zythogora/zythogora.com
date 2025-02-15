@@ -14,5 +14,16 @@
   },
   "home": {
     "title": "Bienvenue sur<br></br><highlight>Zythogora</highlight>"
+  },
+  "email": {
+    "welcome": {
+      "subject": "Bienvenue sur Zythogora",
+      "preview": "Activez votre compte Zythogora",
+      "title": "Bienvenue sur <highlight>Zythogora</highlight>",
+      "text": "Nous sommes ravis de vous compter parmi nous {username} !",
+      "text2": "Vous pouvez activer votre compte en cliquant sur le bouton ci-dessous.",
+      "button": "Activez votre compte",
+      "buttonFallback": "Si le bouton ne fonctionne pas, vous pouvez également copier et coller l'URL suivante dans votre navigateur : <link>{activationUrl}</link>."
+    }
   }
 }

@@ -19,7 +19,6 @@ const loadConfig = () => {
 
   return {
     nodeEnv: env.NODE_ENV,
-    baseUrl: env.BASE_URL,
     database: {
       url: env.DATABASE_URL,
       directUrl: env.DIRECT_URL,
