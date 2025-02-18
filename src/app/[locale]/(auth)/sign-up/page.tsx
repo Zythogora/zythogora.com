@@ -1,37 +1,55 @@
-"use client";
+import { getTranslations } from "next-intl/server";
 
-import { signUp } from "@/app/[locale]/(auth)/sign-up/actions";
+import SignInProviders from "@/app/[locale]/(auth)/_components/providers";
+import SignUpForm from "@/app/[locale]/(auth)/sign-up/_components/form";
+import Wave from "@/app/_components/wave";
+import { config } from "@/lib/config";
+import { cn } from "@/lib/tailwind";
 
-const SignUpPage = () => {
+const SignUpPage = async () => {
+  const t = await getTranslations();
+
+  const availableProviders = config.auth.availableProviders;
+
   return (
-    <div className="flex flex-col gap-y-8">
-      <h1 className="text-2xl font-bold">Sign Up</h1>
+    <>
+      <div className="flex grow items-center justify-center">
+        <h1 className="text-foreground text-center text-[40px] leading-none font-semibold">
+          {t.rich("auth.signUp.title", {
+            br: () => <br />,
+          })}
+        </h1>
+      </div>
 
-      <form action={signUp} className="flex w-128 flex-col gap-y-4">
-        <input
-          name="username"
-          type="text"
-          placeholder="Username"
-          className="rounded-lg border bg-stone-50 px-4 py-2 drop-shadow"
-        />
+      <div
+        className={cn(
+          "bg-primary relative flex h-[75vh] min-h-fit flex-col items-center justify-between gap-y-4 p-12",
+          availableProviders.length > 0 ? "justify-between" : "justify-center",
+        )}
+      >
+        <Wave className="fill-primary absolute top-[calc(-5vh+10px)] z-50 h-[5vh]" />
 
-        <input
-          name="email"
-          type="email"
-          placeholder="Email"
-          className="rounded-lg border bg-stone-50 px-4 py-2 drop-shadow"
-        />
+        <div className="flex w-full flex-col items-end gap-y-2 md:w-128">
+          <SignUpForm />
+        </div>
 
-        <input
-          name="password"
-          type="password"
-          placeholder="Password"
-          className="rounded-lg border bg-stone-50 px-4 py-2 drop-shadow"
-        />
+        {availableProviders.length > 0 ? (
+          <>
+            <p
+              className={cn(
+                "font-title flex flex-row items-center gap-x-1.5 text-xs opacity-50",
+                "before:bg-foreground before:h-px before:w-4",
+                "after:bg-foreground after:h-px after:w-4",
+              )}
+            >
+              {t("common.or")}
+            </p>
 
-        <button type="submit">Sign Up</button>
-      </form>
-    </div>
+            <SignInProviders availableProviders={availableProviders} />
+          </>
+        ) : null}
+      </div>
+    </>
   );
 };
 

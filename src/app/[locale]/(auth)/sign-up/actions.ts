@@ -1,50 +1,70 @@
 "use server";
 
-import { APIError } from "better-auth/api";
+import { parseWithZod } from "@conform-to/zod";
 
-import { auth } from "@/lib/auth/server";
-import prisma from "@/lib/prisma";
+import { signUpSchema } from "@/app/[locale]/(auth)/sign-up/schemas";
+import { signUp } from "@/domain/auth";
+import {
+  EmailAlreadyExistsError,
+  PasswordTooLongError,
+  PasswordTooShortError,
+  UnknownSignUpError,
+  UsernameAlreadyExistsError,
+} from "@/domain/auth/errors";
 
-export const signUp = async (formData: FormData) => {
-  const username = formData.get("username");
-  const email = formData.get("email");
-  const password = formData.get("password");
-
-  if (!username || !email || !password) {
-    throw new Error("All fields are required");
-  }
-
-  const existingUser = await prisma.users.findUnique({
-    where: {
-      username: username as string,
-    },
+export const signUpAction = async (prevState: unknown, formData: FormData) => {
+  const submission = parseWithZod(formData, {
+    schema: signUpSchema,
   });
 
-  if (existingUser) {
-    throw new Error("Username taken");
-  }
-
-  let response;
-  try {
-    response = await auth.api.signUpEmail({
-      body: {
-        email: email as string,
-        password: password as string,
-        name: username as string,
-      },
+  if (submission.status !== "success") {
+    return submission.reply({
+      resetForm: false,
     });
-  } catch (error) {
-    if (error instanceof APIError) {
-      console.log({ body: error.body });
-    }
-
-    throw error;
   }
 
-  await prisma.users.create({
-    data: {
-      id: response.user.id,
-      username: username as string,
-    },
-  });
+  try {
+    await signUp(submission.value);
+  } catch (error) {
+    if (error instanceof UsernameAlreadyExistsError) {
+      return submission.reply({
+        resetForm: false,
+        fieldErrors: {
+          username: ["auth.signUp.errors.USERNAME_ALREADY_EXISTS"],
+        },
+      });
+    } else if (error instanceof EmailAlreadyExistsError) {
+      return submission.reply({
+        resetForm: false,
+        fieldErrors: {
+          email: ["auth.signUp.errors.EMAIL_ALREADY_EXISTS"],
+        },
+      });
+    } else if (error instanceof PasswordTooShortError) {
+      return submission.reply({
+        resetForm: false,
+        fieldErrors: {
+          password: ["auth.signUp.errors.PASSWORD_TOO_SHORT"],
+        },
+      });
+    } else if (error instanceof PasswordTooLongError) {
+      return submission.reply({
+        resetForm: false,
+        fieldErrors: {
+          password: ["auth.signUp.errors.PASSWORD_TOO_LONG"],
+        },
+      });
+    } else if (error instanceof UnknownSignUpError) {
+      return submission.reply({
+        resetForm: false,
+        formErrors: ["form.errors.UNKNOWN_ERROR"],
+      });
+    } else {
+      console.error(error);
+      return submission.reply({
+        resetForm: false,
+        formErrors: ["form.errors.UNKNOWN_ERROR"],
+      });
+    }
+  }
 };

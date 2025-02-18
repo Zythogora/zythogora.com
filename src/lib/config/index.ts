@@ -32,6 +32,7 @@ const loadConfig = () => {
       hash: {
         pepper: env.HASH_PEPPER_SECRET,
       },
+      availableProviders: env.AVAILABLE_PROVIDERS,
     },
   };
 };

@@ -7,9 +7,6 @@ import {
   setRequestLocale,
 } from "next-intl/server";
 
-import ThemeProvider, {
-  availableThemes,
-} from "@/app/_components/providers/theme-provider";
 import { routing } from "@/lib/i18n";
 
 import type { Locale } from "@/lib/i18n";
@@ -78,15 +75,7 @@ export default async function RootLayout({
     <html lang={locale} suppressHydrationWarning>
       <body className={`${title.variable} ${paragraph.variable} antialiased`}>
         <NextIntlClientProvider messages={messages}>
-          <ThemeProvider
-            defaultTheme="system"
-            enableSystem
-            attribute="class"
-            themes={availableThemes as unknown as string[]}
-            disableTransitionOnChange
-          >
-            {children}
-          </ThemeProvider>
+          {children}
         </NextIntlClientProvider>
       </body>
     </html>

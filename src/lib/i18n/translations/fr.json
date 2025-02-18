@@ -12,9 +12,6 @@
     "dark": "Thème sombre",
     "system": "Thème système"
   },
-  "home": {
-    "title": "Bienvenue sur<br></br><highlight>Zythogora</highlight>"
-  },
   "email": {
     "welcome": {
       "subject": "Bienvenue sur Zythogora",
@@ -25,5 +22,60 @@
       "button": "Activez votre compte",
       "buttonFallback": "Si le bouton ne fonctionne pas, vous pouvez également copier et coller l'URL suivante dans votre navigateur : <link>{activationUrl}</link>."
     }
+  },
+  "common": {
+    "or": "OU"
+  },
+  "form": {
+    "fields": {
+      "username": {
+        "label": "Nom d'utilisateur",
+        "placeholder": "Nom d'utilisateur"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "Email"
+      },
+      "password": {
+        "label": "Mot de passe",
+        "placeholder": "Mot de passe",
+        "show": {
+          "true": "Masquer le mot de passe",
+          "false": "Afficher le mot de passe",
+          "ariaLabel": "Afficher le mot de passe"
+        }
+      },
+      "confirmPassword": {
+        "placeholder": "Confirmer le mot de passe"
+      }
+    },
+    "errors": {
+      "FIELD_REQUIRED": "Ce champ est requis",
+      "EMAIL_INVALID": "L'email est invalide",
+      "PASSWORDS_DO_NOT_MATCH": "Les mots de passe ne correspondent pas",
+      "UNKNOWN_ERROR": "Une erreur inconnue est survenue"
+    }
+  },
+  "auth": {
+    "signUp": {
+      "title": "Bienvenue sur<br></br>Zythogora",
+      "actions": {
+        "signUp": "S'inscrire",
+        "signUpPending": "Inscription en cours",
+        "signIn": "Déjà un compte ?"
+      },
+      "errors": {
+        "USERNAME_TOO_SHORT": "Le nom d'utilisateur doit contenir au moins 3 caractères",
+        "USERNAME_TOO_LONG": "Le nom d'utilisateur ne peut pas contenir plus de 25 caractères",
+        "USERNAME_INVALID_CHARACTERS": "Le nom d'utilisateur ne peut contenir que des chiffres, des lettres et des tirets du bas (_)",
+        "PASSWORD_TOO_SHORT": "Le mot de passe doit contenir au moins 8 caractères",
+        "PASSWORD_TOO_LONG": "Le mot de passe ne peut pas contenir plus de 1024 caractères",
+        "USERNAME_ALREADY_EXISTS": "Ce nom d'utilisateur existe déjà",
+        "EMAIL_ALREADY_EXISTS": "Cet email existe déjà"
+      }
+    }
+  },
+  "home": {
+    "title": "Bienvenue sur<br></br><highlight>Zythogora</highlight>"
   }
 }
