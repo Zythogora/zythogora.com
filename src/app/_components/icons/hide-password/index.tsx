@@ -1,12 +1,10 @@
-interface HidePasswordIconProps {
-  className?: string;
-}
+import type { IconProps } from "@/app/_components/icons/types";
 
-const HidePasswordIcon = ({ className }: HidePasswordIconProps) => {
+const HidePasswordIcon = ({ size, className }: IconProps) => {
   return (
     <svg
-      width="64"
-      height="64"
+      width={size}
+      height={size}
       viewBox="0 0 64 64"
       xmlns="http://www.w3.org/2000/svg"
       className={className}

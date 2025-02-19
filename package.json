@@ -36,6 +36,7 @@
     "resend": "^4.1.2",
     "sonner": "^2.0.1",
     "tailwind-merge": "^3.0.1",
+    "use-debounce": "^10.0.4",
     "zod": "^3.24.2"
   },
   "devDependencies": {
