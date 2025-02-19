@@ -4,10 +4,12 @@
     "description": "The ultimate app for beer reviews"
   },
   "locale": {
+    "menuLabel": "Language",
     "en": "English",
     "fr": "French"
   },
   "theme": {
+    "menuLabel": "Appearance",
     "light": "Light theme",
     "dark": "Dark theme",
     "system": "System theme"

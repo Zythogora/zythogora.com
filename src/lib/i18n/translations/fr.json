@@ -4,10 +4,12 @@
     "description": "L'app de référence pour la review de bières"
   },
   "locale": {
+    "menuLabel": "Langue",
     "en": "Anglais",
     "fr": "Français"
   },
   "theme": {
+    "menuLabel": "Apparence",
     "light": "Thème clair",
     "dark": "Thème sombre",
     "system": "Thème système"
