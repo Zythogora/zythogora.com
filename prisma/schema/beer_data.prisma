@@ -1,0 +1,71 @@
+model Beers {
+  id   String @id @default(nanoid())
+  name String
+  abv  Float
+  ibu  Int?
+
+  breweryId String    @map("brewery_id")
+  brewery   Breweries @relation(fields: [breweryId], references: [id])
+  styleId   String    @map("style_id")
+  style     Styles    @relation(fields: [styleId], references: [id])
+  colorId   String    @map("color_id")
+  color     Colors    @relation(fields: [colorId], references: [id])
+
+  createdAt     DateTime @default(now()) @map("created_at")
+  createdBy     String   @map("created_by")
+  createdByUser Users    @relation("created_beers", fields: [createdBy], references: [id])
+  updatedAt     DateTime @default(now()) @updatedAt @map("updated_at")
+  updatedBy     String   @map("updated_by")
+  updatedByUser Users    @relation("updated_beers", fields: [updatedBy], references: [id])
+
+  @@unique([name, breweryId])
+  @@map("beers")
+  @@schema("beer_data")
+}
+
+model Breweries {
+  id                String @id @default(nanoid())
+  name              String
+  countryAlpha2Code String @map("country_alpha_2_code")
+
+  createdAt     DateTime @default(now()) @map("created_at")
+  createdBy     String   @map("created_by")
+  createdByUser Users    @relation("created_breweries", fields: [createdBy], references: [id])
+  updatedAt     DateTime @default(now()) @updatedAt @map("updated_at")
+  updatedBy     String   @map("updated_by")
+  updatedByUser Users    @relation("updated_breweries", fields: [updatedBy], references: [id])
+
+  beers Beers[]
+
+  @@map("breweries")
+  @@schema("beer_data")
+}
+
+model Styles {
+  id   String @id @default(nanoid())
+  name String
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
+
+  beers Beers[]
+
+  @@map("styles")
+  @@schema("beer_data")
+}
+
+model Colors {
+  id     String @id @default(nanoid())
+  name   String
+  srmMin Int    @map("srm_min")
+  srmMax Int    @map("srm_max")
+  hex    String
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
+
+  beers Beers[]
+
+  @@map("colors")
+  @@schema("beer_data")
+}

@@ -65,7 +65,7 @@
         "signUp": "Pas encore de compte ?"
       },
       "errors": {
-        "PASSWORD_INVALID": "Ca ne ressemble pas à un mot de passe valide",
+        "PASSWORD_INVALID": "Cela ne ressemble pas à un mot de passe valide",
         "CREDENTIALS_INVALID": "Identifiants invalides",
         "EMAIL_NOT_VERIFIED": "Votre compte n'est pas vérifié, un email vous a été envoyé"
       }
