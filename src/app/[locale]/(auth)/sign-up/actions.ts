@@ -74,7 +74,7 @@ export const signUpAction = async (prevState: unknown, formData: FormData) => {
   }
 
   redirect({
-    href: Routes.SIGN_UP_VERIFICATION,
+    href: `${Routes.SIGN_UP_VERIFICATION}?email=${submission.value.email}`,
     locale,
   });
 };

@@ -1,11 +1,29 @@
 import { MailCheckIcon } from "lucide-react";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 
-import { Link } from "@/lib/i18n";
+import { isUserVerified } from "@/domain/auth";
+import { Link, redirect } from "@/lib/i18n";
 import { Routes } from "@/lib/routes";
 
-const SignUpEmailVerificationPage = async () => {
+interface SignUpEmailVerificationPageProps {
+  searchParams: Promise<{ email: string }>;
+}
+
+const SignUpEmailVerificationPage = async ({
+  searchParams,
+}: SignUpEmailVerificationPageProps) => {
   const t = await getTranslations();
+  const locale = await getLocale();
+
+  const { email } = await searchParams;
+  if (!email) {
+    redirect({ href: Routes.HOME, locale });
+  }
+
+  const isVerified = await isUserVerified(email);
+  if (isVerified === null || isVerified) {
+    redirect({ href: Routes.HOME, locale });
+  }
 
   return (
     <div className="bg-primary flex size-full flex-col items-center justify-center gap-y-8 px-4">

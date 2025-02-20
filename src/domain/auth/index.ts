@@ -108,3 +108,15 @@ export const signUp = async ({ username, email, password }: SignUpParams) => {
 
   return response.user.id;
 };
+
+export const isUserVerified = async (email: string) => {
+  const user = await prisma.betterAuthUsers.findUnique({
+    where: { email },
+  });
+
+  if (!user) {
+    return null;
+  }
+
+  return user.emailVerified;
+};

@@ -53,8 +53,5 @@ export const signInAction = async (prevState: unknown, formData: FormData) => {
     }
   }
 
-  redirect({
-    href: Routes.HOME,
-    locale,
-  });
+  redirect({ href: Routes.HOME, locale });
 };
