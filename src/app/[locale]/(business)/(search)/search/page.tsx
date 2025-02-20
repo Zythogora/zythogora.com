@@ -1,10 +1,18 @@
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
+import { Suspense } from "react";
 
-import BeerSearchResult from "@/app/[locale]/(business)/(search)/search/_components/beer-result";
-import { searchBeers } from "@/domain/search";
+import BeerTab from "@/app/[locale]/(business)/(search)/search/_components/tab/beer";
+import BeerTabLoader from "@/app/[locale]/(business)/(search)/search/_components/tab/beer/loader";
+import BreweryTab from "@/app/[locale]/(business)/(search)/search/_components/tab/brewery";
+import BreweryTabLoader from "@/app/[locale]/(business)/(search)/search/_components/tab/brewery/loader";
+import Await from "@/app/_components/await";
+import { searchBeers, searchBreweries } from "@/domain/search";
+import { redirect } from "@/lib/i18n";
+import { Routes } from "@/lib/routes";
 
 interface SearchPageProps {
   searchParams: Promise<{
+    kind?: string;
     search?: string;
   }>;
 }
@@ -12,44 +20,43 @@ interface SearchPageProps {
 const SearchPage = async ({ searchParams }: SearchPageProps) => {
   const t = await getTranslations();
 
-  const { search } = await searchParams;
+  const locale = await getLocale();
 
-  if (!search) {
-    return <p>{t("searchPage.beers.noSearch")}</p>;
+  const { kind, search } = await searchParams;
+
+  if (!kind || kind === "beers") {
+    if (!search) {
+      return <p>{t("searchPage.beers.noSearch")}</p>;
+    }
+
+    return (
+      <Suspense fallback={<BeerTabLoader search={search} />}>
+        <Await promise={searchBeers(search)}>
+          {(beers) => <BeerTab results={beers} />}
+        </Await>
+      </Suspense>
+    );
   }
 
-  const beerResults = await searchBeers(search);
+  if (kind === "breweries") {
+    if (!search) {
+      return <p>{t("searchPage.breweries.noSearch")}</p>;
+    }
 
-  if (beerResults.length === 0) {
-    return <p>{t("searchPage.beers.noResults")}</p>;
+    return (
+      <Suspense fallback={<BreweryTabLoader search={search} />}>
+        <Await promise={searchBreweries(search)}>
+          {(breweryResults) => <BreweryTab results={breweryResults} />}
+        </Await>
+      </Suspense>
+    );
   }
 
-  return (
-    <div className="flex w-full flex-col gap-y-4">
-      <p>{t("searchPage.beers.results", { count: beerResults.length })}</p>
-
-      <div className="flex w-full flex-col gap-y-8">
-        {beerResults.map((beerResult) => (
-          <BeerSearchResult
-            key={beerResult.id}
-            name={beerResult.name}
-            brewery={{
-              name: beerResult.brewery.name,
-              countryCode: beerResult.brewery.countryAlpha2Code,
-            }}
-            style={beerResult.style.name}
-            abv={beerResult.abv}
-            ibu={beerResult.ibu ?? undefined}
-            color={
-              beerResult.color.name !== "Other"
-                ? beerResult.color.hex
-                : undefined
-            }
-          />
-        ))}
-      </div>
-    </div>
-  );
+  // Unknown kind, redirect to beer tab
+  redirect({
+    href: search ? `${Routes.SEARCH}?search=${search}` : Routes.SEARCH,
+    locale,
+  });
 };
 
 export default SearchPage;

@@ -37,8 +37,8 @@ const BeerSearchResult = async ({
         <PintIcon size={40} className="size-10" unknownColor />
       )}
 
-      <div className="flex grow flex-col gap-y-2">
-        <p className="font-title text-lg leading-none">{name}</p>
+      <div className="flex flex-col gap-y-2 overflow-hidden">
+        <p className="font-title truncate text-lg leading-none">{name}</p>
 
         <div className="flex flex-row gap-x-1">
           <CountryFlag
@@ -50,22 +50,22 @@ const BeerSearchResult = async ({
             className="size-3.5"
           />
 
-          <p className="text-foreground/62.5 text-sm leading-none">
+          <p className="text-foreground/62.5 truncate text-sm leading-none">
             {brewery.name}
           </p>
         </div>
 
         <p className="flex flex-row gap-x-1.5 text-xs leading-none">
-          <span className="bg-foreground/7.5 text-foreground/62.5 rounded-full px-2 py-1">
+          <span className="bg-foreground/7.5 text-foreground/62.5 shrink truncate rounded-full px-2 py-1">
             {style}
           </span>
 
-          <span className="bg-foreground/7.5 text-foreground/62.5 rounded-full px-2 py-1">
+          <span className="bg-foreground/7.5 text-foreground/62.5 w-fit rounded-full px-2 py-1 text-nowrap">
             {abv}%
           </span>
 
           {ibu ? (
-            <span className="bg-foreground/7.5 text-foreground/62.5 rounded-full px-2 py-1">
+            <span className="bg-foreground/7.5 text-foreground/62.5 w-fit rounded-full px-2 py-1 text-nowrap">
               {ibu} IBU
             </span>
           ) : null}

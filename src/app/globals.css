@@ -59,6 +59,7 @@
   --radius-3xl: calc(var(--base-radius) * 4);
 
   --drop-shadow: 0 2px 0 var(--color-foreground);
+  --inset-shadow: inset 0 0 0 2px var(--color-foreground);
 }
 
 @layer base {
