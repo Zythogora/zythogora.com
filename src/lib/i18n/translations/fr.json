@@ -57,6 +57,19 @@
     }
   },
   "auth": {
+    "signIn": {
+      "title": "Heureux de<br></br>vous revoir !",
+      "actions": {
+        "signIn": "Connexion",
+        "signInPending": "Connexion en cours",
+        "signUp": "Pas encore de compte ?"
+      },
+      "errors": {
+        "PASSWORD_INVALID": "Ca ne ressemble pas à un mot de passe valide",
+        "CREDENTIALS_INVALID": "Identifiants invalides",
+        "EMAIL_NOT_VERIFIED": "Votre compte n'est pas vérifié, un email vous a été envoyé"
+      }
+    },
     "signUp": {
       "title": "Bienvenue sur<br></br>Zythogora",
       "actions": {

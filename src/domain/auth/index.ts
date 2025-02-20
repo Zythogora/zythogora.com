@@ -1,14 +1,48 @@
 import { APIError } from "better-auth/api";
 
 import {
+  CredentialsInvalidError,
   EmailAlreadyExistsError,
+  EmailNotVerifiedError,
   PasswordTooLongError,
   PasswordTooShortError,
+  UnknownSignInError,
   UnknownSignUpError,
   UsernameAlreadyExistsError,
 } from "@/domain/auth/errors";
 import { auth } from "@/lib/auth/server";
 import prisma from "@/lib/prisma";
+
+type SignInParams = {
+  email: string;
+  password: string;
+};
+
+export const signIn = async ({ email, password }: SignInParams) => {
+  try {
+    await auth.api.signInEmail({
+      body: {
+        email: email as string,
+        password: password as string,
+      },
+    });
+  } catch (error) {
+    if (error instanceof APIError) {
+      if (
+        error.body.code === "INVALID_EMAIL" ||
+        error.body.code === "INVALID_PASSWORD" ||
+        error.body.code === "INVALID_EMAIL_OR_PASSWORD"
+      ) {
+        throw new CredentialsInvalidError();
+      } else if (error.body.code === "EMAIL_NOT_VERIFIED") {
+        throw new EmailNotVerifiedError();
+      }
+    }
+
+    console.error(error);
+    throw new UnknownSignInError();
+  }
+};
 
 type SignUpParams = {
   username: string;

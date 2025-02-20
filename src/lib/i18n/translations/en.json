@@ -57,6 +57,19 @@
     }
   },
   "auth": {
+    "signIn": {
+      "title": "Welcome<br></br>back!",
+      "actions": {
+        "signIn": "Sign in",
+        "signInPending": "Signing in",
+        "signUp": "Sign up instead"
+      },
+      "errors": {
+        "PASSWORD_INVALID": "That does not look like a valid password",
+        "CREDENTIALS_INVALID": "Invalid credentials",
+        "EMAIL_NOT_VERIFIED": "Your account is not verified, an email has been sent to you"
+      }
+    },
     "signUp": {
       "title": "Welcome to<br></br>Zythogora",
       "actions": {
