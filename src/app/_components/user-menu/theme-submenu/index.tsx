@@ -20,14 +20,14 @@ const ThemeSubMenu = () => {
 
   return (
     <DropdownMenuSub>
-      <DropdownMenuSubTrigger>
+      <DropdownMenuSubTrigger className="flex flex-row gap-x-2">
         {selectedTheme === "dark" ? (
-          <Moon className="mr-2 size-4" />
+          <Moon className="size-4" />
         ) : (
-          <Sun className="mr-2 size-4" />
+          <Sun className="size-4" />
         )}
 
-        <span>{t("theme.menuLabel")}</span>
+        <span>{t("userMenu.theme.menuLabel")}</span>
       </DropdownMenuSubTrigger>
 
       <DropdownMenuSubContent>
@@ -37,7 +37,7 @@ const ThemeSubMenu = () => {
             onClick={() => setTheme(theme)}
             disabled={theme === selectedTheme}
           >
-            <span>{t(`theme.${theme}`)}</span>
+            <span>{t(`userMenu.theme.${theme}`)}</span>
 
             {theme === selectedTheme && (
               <DropdownMenuShortcut className="ml-auto size-4">

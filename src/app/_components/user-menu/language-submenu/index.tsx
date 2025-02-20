@@ -46,10 +46,10 @@ const LanguageSubMenu = () => {
   };
   return (
     <DropdownMenuSub>
-      <DropdownMenuSubTrigger>
-        <Globe className="mr-2 size-4" />
+      <DropdownMenuSubTrigger className="flex flex-row gap-x-2">
+        <Globe className="size-4" />
 
-        <span>{t("locale.menuLabel")}</span>
+        <span>{t("userMenu.locale.menuLabel")}</span>
       </DropdownMenuSubTrigger>
 
       <DropdownMenuSubContent>
@@ -59,7 +59,7 @@ const LanguageSubMenu = () => {
             onClick={() => localeChange(locale)}
             disabled={locale === selectedLocale || isPending}
           >
-            <span>{t(`locale.${locale}`)}</span>
+            <span>{t(`userMenu.locale.${locale}`)}</span>
 
             {locale === selectedLocale && (
               <DropdownMenuShortcut className="ml-auto size-4">

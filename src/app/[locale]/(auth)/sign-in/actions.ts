@@ -11,7 +11,6 @@ import {
   UnknownSignInError,
 } from "@/domain/auth/errors";
 import { redirect } from "@/lib/i18n";
-import { Routes } from "@/lib/routes";
 
 export const signInAction = async (prevState: unknown, formData: FormData) => {
   const locale = await getLocale();
@@ -53,5 +52,5 @@ export const signInAction = async (prevState: unknown, formData: FormData) => {
     }
   }
 
-  redirect({ href: Routes.HOME, locale });
+  redirect({ href: submission.value.redirectUrl, locale });
 };
