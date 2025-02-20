@@ -1,6 +1,5 @@
 import CountryFlag from "@/app/_components/icons/country-flag";
 import PintIcon from "@/app/_components/icons/pint";
-import { getCountryName } from "@/lib/i18n/countries";
 
 import type { CSSProperties } from "react";
 
@@ -8,7 +7,10 @@ interface BeerSearchResultProps {
   name: string;
   brewery: {
     name: string;
-    countryCode: string;
+    country: {
+      name: string;
+      code: string;
+    };
   };
   style: string;
   abv: number;
@@ -16,7 +18,7 @@ interface BeerSearchResultProps {
   color?: string;
 }
 
-const BeerSearchResult = async ({
+const BeerSearchResult = ({
   name,
   brewery,
   style,
@@ -42,10 +44,7 @@ const BeerSearchResult = async ({
 
         <div className="flex flex-row gap-x-1">
           <CountryFlag
-            country={{
-              name: await getCountryName(brewery.countryCode),
-              code: brewery.countryCode,
-            }}
+            country={brewery.country}
             size={14}
             className="size-3.5"
           />

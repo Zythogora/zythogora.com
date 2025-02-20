@@ -47,6 +47,11 @@
       "UNKNOWN_ERROR": "An unknown error occurred"
     }
   },
+  "pagination": {
+    "page": "Page <highlight>{page}</highlight> of <highlight>{total}</highlight>",
+    "previous": "Previous page",
+    "next": "Next page"
+  },
   "userMenu": {
     "beers": "{count, plural, =0 {0 <muted>beers</muted>} =1 {1 <muted>beer</muted>} other {# <muted>beers</muted>}}",
     "reviews": "{count, plural, =0 {0 <muted>reviews</muted>} =1 {1 <muted>review</muted>} other {# <muted>reviews</muted>}}",

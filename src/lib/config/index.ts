@@ -1,6 +1,6 @@
 "server only";
 
-import { serverSideSchema } from "./types";
+import { serverSideSchema } from "@/lib/config/types";
 
 const loadConfig = () => {
   const parseResult = serverSideSchema.safeParse(process.env);

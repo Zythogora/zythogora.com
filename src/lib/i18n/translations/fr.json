@@ -47,6 +47,11 @@
       "UNKNOWN_ERROR": "Une erreur inconnue est survenue"
     }
   },
+  "pagination": {
+    "page": "Page <highlight>{page}</highlight> de <highlight>{total}</highlight>",
+    "previous": "Page précédente",
+    "next": "Page suivante"
+  },
   "userMenu": {
     "beers": "{count, plural, =0 {0 <muted>bière</muted>} =1 {1 <muted>bière</muted>} other {# <muted>bières</muted>}}",
     "reviews": "{count, plural, =0 {0 <muted>avis</muted>} =1 {1 <muted>avis</muted>} other {# <muted>avis</muted>}}",

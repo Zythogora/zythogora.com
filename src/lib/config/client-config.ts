@@ -1,4 +1,4 @@
-import { clientSideSchema } from "./types";
+import { clientSideSchema } from "@/lib/config/types";
 
 const loadPublicConfig = () => {
   // Need to explicitely pass each public variable for bundle substitution
