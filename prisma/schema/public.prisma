@@ -4,6 +4,12 @@ model Users {
 
   betterAuthUser BetterAuthUsers @relation(fields: [id], references: [id])
 
+  CreatedBeers Beers[] @relation("created_beers")
+  UpdatedBeers Beers[] @relation("updated_beers")
+
+  CreatedBreweries Breweries[] @relation("created_breweries")
+  UpdatedBreweries Breweries[] @relation("updated_breweries")
+
   @@map("users")
   @@schema("public")
 }
