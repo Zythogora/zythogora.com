@@ -27,7 +27,7 @@ const WelcomeEmail = async ({ username, activationUrl }: WelcomeEmailProps) => {
 
       <Button
         href={activationUrl}
-        className="bg-primary rounded-lg border-2 border-b-[6px] border-solid border-stone-950 px-16 py-4 text-sm font-bold text-stone-950"
+        className="bg-primary rounded-lg border-2 border-b-6 border-solid border-stone-950 px-16 py-4 text-sm font-bold text-stone-950"
       >
         {t("email.welcome.button")}
       </Button>

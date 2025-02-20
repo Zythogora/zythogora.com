@@ -23,11 +23,11 @@ const SignInPage = async () => {
 
       <div
         className={cn(
-          "bg-primary relative flex h-[75vh] min-h-fit flex-col items-center justify-between gap-y-4 p-12",
+          "bg-primary relative flex h-3/4 min-h-fit flex-col items-center justify-between gap-y-4 p-12",
           availableProviders.length > 0 ? "justify-between" : "justify-center",
         )}
       >
-        <Wave className="fill-primary absolute top-[calc(-5vh+10px)] z-50 h-[5vh]" />
+        <Wave className="fill-primary absolute top-[calc(-5%+10px)] z-50 h-1/20" />
 
         <div className="flex w-full flex-col items-end gap-y-2 md:w-128">
           <SignInForm />

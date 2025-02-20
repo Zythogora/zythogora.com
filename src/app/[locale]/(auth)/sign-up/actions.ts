@@ -1,6 +1,7 @@
 "use server";
 
 import { parseWithZod } from "@conform-to/zod";
+import { getLocale } from "next-intl/server";
 
 import { signUpSchema } from "@/app/[locale]/(auth)/sign-up/schemas";
 import { signUp } from "@/domain/auth";
@@ -11,8 +12,12 @@ import {
   UnknownSignUpError,
   UsernameAlreadyExistsError,
 } from "@/domain/auth/errors";
+import { redirect } from "@/lib/i18n";
+import { Routes } from "@/lib/routes";
 
 export const signUpAction = async (prevState: unknown, formData: FormData) => {
+  const locale = await getLocale();
+
   const submission = parseWithZod(formData, {
     schema: signUpSchema,
   });
@@ -67,4 +72,9 @@ export const signUpAction = async (prevState: unknown, formData: FormData) => {
       });
     }
   }
+
+  redirect({
+    href: Routes.SIGN_UP_VERIFICATION,
+    locale,
+  });
 };

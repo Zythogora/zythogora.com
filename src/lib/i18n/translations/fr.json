@@ -86,6 +86,10 @@
         "USERNAME_ALREADY_EXISTS": "Ce nom d'utilisateur existe déjà",
         "EMAIL_ALREADY_EXISTS": "Cet email existe déjà"
       }
+    },
+    "emailVerification": {
+      "title": "Un email vous a été envoyé<br></br>pour activer votre compte.",
+      "text": "Vérifiez vos mails et cliquez sur le lien<br></br>pour pouvoir vous <link>connecter</link> !"
     }
   },
   "home": {

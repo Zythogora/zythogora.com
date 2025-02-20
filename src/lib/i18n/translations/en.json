@@ -86,6 +86,10 @@
         "USERNAME_ALREADY_EXISTS": "This username already exists",
         "EMAIL_ALREADY_EXISTS": "This email already exists"
       }
+    },
+    "emailVerification": {
+      "title": "An email has been sent to you<br></br>to verify your account.",
+      "text": "Check your mailbox and click on the link<br></br>to be able to <link>sign-in</link>!"
     }
   },
   "home": {
