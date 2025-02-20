@@ -3,9 +3,11 @@
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { nextCookies } from "better-auth/next-js";
+import { customSession } from "better-auth/plugins";
 import { getTranslations } from "next-intl/server";
 
 import { hash, verify } from "@/lib/auth/crypto";
+import { UserRecordNotFoundError } from "@/lib/auth/errors";
 import { config } from "@/lib/config";
 import { publicConfig } from "@/lib/config/client-config";
 import { sendEmail } from "@/lib/email";
@@ -21,7 +23,31 @@ export const auth = betterAuth({
   baseURL: publicConfig.baseUrl,
   appName: "Zythogora",
 
-  plugins: [nextCookies()], // ⚠️ `nextCookies` must be the last plugin of the array
+  plugins: [
+    customSession(async ({ user: betterAuthUser, session }) => {
+      const user = await prisma.users.findUnique({
+        where: { id: betterAuthUser.id },
+      });
+
+      if (!user) {
+        console.error(`User with id ${betterAuthUser.id} not found`);
+        throw new UserRecordNotFoundError();
+      }
+
+      return {
+        user: {
+          id: betterAuthUser.id,
+          name: betterAuthUser.name,
+          username: user.username,
+          email: betterAuthUser.email,
+          image: betterAuthUser.image,
+        },
+        session,
+      };
+    }),
+    // ⚠️ `nextCookies` must be the last plugin of the array
+    nextCookies(),
+  ],
 
   user: {
     modelName: "BetterAuthUsers",

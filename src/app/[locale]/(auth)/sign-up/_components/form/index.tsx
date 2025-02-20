@@ -13,6 +13,7 @@ import FormError from "@/app/_components/ui/form-error";
 import Input from "@/app/_components/ui/input";
 import Label from "@/app/_components/ui/label";
 import { Link } from "@/lib/i18n";
+import { Routes } from "@/lib/routes";
 import { cn } from "@/lib/tailwind";
 
 const SignUpForm = () => {
@@ -137,7 +138,10 @@ const SignUpForm = () => {
         </Button>
 
         <div className="flex flex-row-reverse items-center justify-between">
-          <Link href="" className="font-title pr-3 text-sm font-medium">
+          <Link
+            href={Routes.SIGN_IN}
+            className="font-title pr-3 text-sm font-medium"
+          >
             {t("auth.signUp.actions.signIn")}
           </Link>
 

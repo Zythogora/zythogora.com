@@ -3,17 +3,6 @@
     "title": "Zythogora",
     "description": "L'app de référence pour la review de bières"
   },
-  "locale": {
-    "menuLabel": "Langue",
-    "en": "Anglais",
-    "fr": "Français"
-  },
-  "theme": {
-    "menuLabel": "Apparence",
-    "light": "Thème clair",
-    "dark": "Thème sombre",
-    "system": "Thème système"
-  },
   "email": {
     "welcome": {
       "subject": "Bienvenue sur Zythogora",
@@ -58,6 +47,21 @@
       "UNKNOWN_ERROR": "Une erreur inconnue est survenue"
     }
   },
+  "userMenu": {
+    "beers": "{count, plural, =0 {0 <muted>bière</muted>} =1 {1 <muted>bière</muted>} other {# <muted>bières</muted>}}",
+    "reviews": "{count, plural, =0 {0 <muted>avis</muted>} =1 {1 <muted>avis</muted>} other {# <muted>avis</muted>}}",
+    "locale": {
+      "menuLabel": "Langue",
+      "en": "Anglais",
+      "fr": "Français"
+    },
+    "theme": {
+      "menuLabel": "Apparence",
+      "light": "Thème clair",
+      "dark": "Thème sombre",
+      "system": "Thème système"
+    }
+  },
   "auth": {
     "signIn": {
       "title": "Heureux de<br></br>vous revoir !",
@@ -99,7 +103,7 @@
     "title": "Bienvenue sur<br></br><highlight>Zythogora</highlight>"
   },
   "searchPage": {
-    "searchBarPlaceholder": "Rechercher une bière ou une brasserie",
+    "searchBarPlaceholder": "Recherchez une bière ou une brasserie",
     "beers": {
       "noSearch": "Recherchez une bière !",
       "noResults": "Aucune bière trouvée",

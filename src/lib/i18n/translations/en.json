@@ -3,17 +3,6 @@
     "title": "Zythogora",
     "description": "The ultimate app for beer reviews"
   },
-  "locale": {
-    "menuLabel": "Language",
-    "en": "English",
-    "fr": "French"
-  },
-  "theme": {
-    "menuLabel": "Appearance",
-    "light": "Light theme",
-    "dark": "Dark theme",
-    "system": "System theme"
-  },
   "email": {
     "welcome": {
       "subject": "Welcome to Zythogora",
@@ -56,6 +45,21 @@
       "EMAIL_INVALID": "The email is invalid",
       "PASSWORDS_DO_NOT_MATCH": "The passwords do not match",
       "UNKNOWN_ERROR": "An unknown error occurred"
+    }
+  },
+  "userMenu": {
+    "beers": "{count, plural, =0 {0 <muted>beers</muted>} =1 {1 <muted>beer</muted>} other {# <muted>beers</muted>}}",
+    "reviews": "{count, plural, =0 {0 <muted>reviews</muted>} =1 {1 <muted>review</muted>} other {# <muted>reviews</muted>}}",
+    "locale": {
+      "menuLabel": "Language",
+      "en": "English",
+      "fr": "French"
+    },
+    "theme": {
+      "menuLabel": "Appearance",
+      "light": "Light theme",
+      "dark": "Dark theme",
+      "system": "System theme"
     }
   },
   "auth": {

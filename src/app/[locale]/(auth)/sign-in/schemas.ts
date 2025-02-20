@@ -8,4 +8,5 @@ export const signInSchema = z.object({
     .string({ required_error: "form.errors.FIELD_REQUIRED" })
     .min(8, { message: "auth.signIn.errors.PASSWORD_INVALID" })
     .max(1024, { message: "auth.signIn.errors.PASSWORD_INVALID" }),
+  redirectUrl: z.string(),
 });
