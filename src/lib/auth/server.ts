@@ -11,8 +11,7 @@ import { publicConfig } from "@/lib/config/client-config";
 import { sendEmail } from "@/lib/email";
 import WelcomeEmail from "@/lib/email/templates/welcome";
 import prisma from "@/lib/prisma";
-
-import type { TFunction } from "@/lib/i18n/types";
+import { Routes } from "@/lib/routes";
 
 export const auth = betterAuth({
   database: prismaAdapter(prisma, {
@@ -66,11 +65,17 @@ export const auth = betterAuth({
     autoSignInAfterVerification: true,
 
     sendVerificationEmail: async ({ user, url }) => {
-      const t = (await getTranslations()) as TFunction;
+      const t = await getTranslations();
+
+      const urlWithCallback = new URL(url);
+      urlWithCallback.searchParams.set(
+        "callbackURL",
+        `${Routes.HOME}?verified=true`,
+      );
 
       await sendEmail(user.email, t("email.welcome.subject"), WelcomeEmail, {
         username: user.name,
-        activationUrl: url,
+        activationUrl: urlWithCallback.toString(),
       });
     },
   },

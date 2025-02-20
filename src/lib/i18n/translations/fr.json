@@ -89,7 +89,8 @@
     },
     "emailVerification": {
       "title": "Un email vous a été envoyé<br></br>pour activer votre compte.",
-      "text": "Vérifiez vos mails et cliquez sur le lien<br></br>pour pouvoir vous <link>connecter</link> !"
+      "text": "Vérifiez vos mails et cliquez sur le lien<br></br>pour pouvoir vous <link>connecter</link> !",
+      "success": "Votre email a été vérifié avec succès, vous êtes maintenant connecté !"
     }
   },
   "home": {

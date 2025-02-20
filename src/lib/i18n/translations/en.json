@@ -89,7 +89,8 @@
     },
     "emailVerification": {
       "title": "An email has been sent to you<br></br>to verify your account.",
-      "text": "Check your mailbox and click on the link<br></br>to be able to <link>sign-in</link>!"
+      "text": "Check your mailbox and click on the link<br></br>to be able to <link>sign-in</link>!",
+      "success": "Your email has been verified with success, you are now connected!"
     }
   },
   "home": {
