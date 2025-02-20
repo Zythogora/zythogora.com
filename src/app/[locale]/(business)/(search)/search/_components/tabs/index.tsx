@@ -3,34 +3,33 @@
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 
+import { SEARCH_KINDS } from "@/app/[locale]/(business)/(search)/search/types";
 import Tab from "@/app/_components/ui/tab";
-import { useRouterWithSearchParams } from "@/lib/i18n/hooks";
+import { useRouter } from "@/lib/i18n";
 import { Routes } from "@/lib/routes";
 
-const TAB_KINDS = ["beers", "breweries"] as const;
-
 interface SearchTabsProps {
-  defaultTab: (typeof TAB_KINDS)[number];
+  defaultTab: (typeof SEARCH_KINDS)[number];
 }
 
 const SearchTabs = ({ defaultTab }: SearchTabsProps) => {
   const t = useTranslations();
 
-  const { push } = useRouterWithSearchParams();
-
+  const router = useRouter();
   const searchParams = useSearchParams();
   const kind = searchParams.get("kind") ?? defaultTab;
 
   const handleTabClick = (tabKind: string) => {
-    push(Routes.SEARCH, {
-      ...Object.fromEntries(searchParams.entries()),
-      kind: tabKind,
-    });
+    const newSearchParams = new URLSearchParams(searchParams.toString());
+    newSearchParams.delete("page");
+    newSearchParams.set("kind", tabKind);
+
+    router.push(`${Routes.SEARCH}?${newSearchParams.toString()}`);
   };
 
   return (
     <div className="flex flex-row gap-x-3">
-      {TAB_KINDS.map((tab) => (
+      {SEARCH_KINDS.map((tab) => (
         <Tab
           key={tab}
           active={kind === tab}

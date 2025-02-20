@@ -3,7 +3,10 @@ export type BeerResult = {
   name: string;
   brewery: {
     name: string;
-    countryCode: string;
+    country: {
+      name: string;
+      code: string;
+    };
   };
   style: string;
   abv: number;
@@ -17,6 +20,9 @@ export type BeerResult = {
 export type BreweryResult = {
   id: string;
   name: string;
-  countryCode: string;
+  country: {
+    name: string;
+    code: string;
+  };
   beerCount: number;
 };
