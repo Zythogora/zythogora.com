@@ -12,6 +12,87 @@
     "dark": "Dark theme",
     "system": "System theme"
   },
+  "email": {
+    "welcome": {
+      "subject": "Welcome to Zythogora",
+      "preview": "Activate your Zythogora account",
+      "title": "Welcome to <highlight>Zythogora</highlight>",
+      "text": "We are happy to count you among us {username}!",
+      "text2": "You can activate your account by clicking the button below.",
+      "button": "Activate your account",
+      "buttonFallback": "If the button does not work, you can also copy and paste the following URL into your browser: <link>{activationUrl}</link>."
+    }
+  },
+  "common": {
+    "or": "OR"
+  },
+  "form": {
+    "fields": {
+      "username": {
+        "label": "Username",
+        "placeholder": "Username"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "Email"
+      },
+      "password": {
+        "label": "Password",
+        "placeholder": "Password",
+        "show": {
+          "true": "Hide password",
+          "false": "Show password",
+          "ariaLabel": "Toggle password visibility"
+        }
+      },
+      "confirmPassword": {
+        "placeholder": "Confirm password"
+      }
+    },
+    "errors": {
+      "FIELD_REQUIRED": "This field is required",
+      "EMAIL_INVALID": "The email is invalid",
+      "PASSWORDS_DO_NOT_MATCH": "The passwords do not match",
+      "UNKNOWN_ERROR": "An unknown error occurred"
+    }
+  },
+  "auth": {
+    "signIn": {
+      "title": "Welcome<br></br>back!",
+      "actions": {
+        "signIn": "Sign in",
+        "signInPending": "Signing in",
+        "signUp": "Sign up instead"
+      },
+      "errors": {
+        "PASSWORD_INVALID": "That does not look like a valid password",
+        "CREDENTIALS_INVALID": "Invalid credentials",
+        "EMAIL_NOT_VERIFIED": "Your account is not verified, an email has been sent to you"
+      }
+    },
+    "signUp": {
+      "title": "Welcome to<br></br>Zythogora",
+      "actions": {
+        "signUp": "Sign up",
+        "signUpPending": "Signing up",
+        "signIn": "Sign in instead"
+      },
+      "errors": {
+        "USERNAME_TOO_SHORT": "The username has to be at least 3 characters long",
+        "USERNAME_TOO_LONG": "The username cannot be longer than 25 characters",
+        "USERNAME_INVALID_CHARACTERS": "The username can only contain numbers, letters and underscores (_)",
+        "PASSWORD_TOO_SHORT": "The password has to be at least 8 characters long",
+        "PASSWORD_TOO_LONG": "The password cannot be longer than 1024 characters",
+        "USERNAME_ALREADY_EXISTS": "This username already exists",
+        "EMAIL_ALREADY_EXISTS": "This email already exists"
+      }
+    },
+    "emailVerification": {
+      "title": "An email has been sent to you<br></br>to verify your account.",
+      "text": "Check your mailbox and click on the link<br></br>to be able to <link>sign-in</link>!",
+      "success": "Your email has been verified with success, you are now connected!"
+    }
+  },
   "home": {
     "title": "Welcome to<br></br><highlight>Zythogora</highlight>"
   }

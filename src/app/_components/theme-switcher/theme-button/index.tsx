@@ -14,7 +14,7 @@ interface ThemeButtonProps {
 const ThemeButton = ({ theme }: ThemeButtonProps) => {
   const t = useTranslations();
 
-  const { theme: selectedTheme, setTheme } = useTheme();
+  const { theme: selectedTheme = "system", setTheme } = useTheme();
 
   return (
     <button

@@ -9,9 +9,9 @@ export type Theme = (typeof availableThemes)[number] | "system";
 
 const ThemeProvider = ({
   children,
-  ...props
+  ...restProps
 }: ComponentProps<typeof NextThemesProvider>) => {
-  return <NextThemesProvider {...props}>{children}</NextThemesProvider>;
+  return <NextThemesProvider {...restProps}>{children}</NextThemesProvider>;
 };
 
 export default ThemeProvider;

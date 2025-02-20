@@ -19,7 +19,6 @@ const loadConfig = () => {
 
   return {
     nodeEnv: env.NODE_ENV,
-    baseUrl: env.BASE_URL,
     database: {
       url: env.DATABASE_URL,
       directUrl: env.DIRECT_URL,
@@ -27,6 +26,13 @@ const loadConfig = () => {
     email: {
       from: env.EMAIL_FROM,
       resendApiKey: env.RESEND_API_KEY,
+    },
+    auth: {
+      cookiePrefix: env.COOKIE_PREFIX,
+      hash: {
+        pepper: env.HASH_PEPPER_SECRET,
+      },
+      availableProviders: env.AVAILABLE_PROVIDERS,
     },
   };
 };

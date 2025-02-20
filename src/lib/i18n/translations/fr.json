@@ -12,6 +12,87 @@
     "dark": "Thème sombre",
     "system": "Thème système"
   },
+  "email": {
+    "welcome": {
+      "subject": "Bienvenue sur Zythogora",
+      "preview": "Activez votre compte Zythogora",
+      "title": "Bienvenue sur <highlight>Zythogora</highlight>",
+      "text": "Nous sommes ravis de vous compter parmi nous {username} !",
+      "text2": "Vous pouvez activer votre compte en cliquant sur le bouton ci-dessous.",
+      "button": "Activez votre compte",
+      "buttonFallback": "Si le bouton ne fonctionne pas, vous pouvez également copier et coller l'URL suivante dans votre navigateur : <link>{activationUrl}</link>."
+    }
+  },
+  "common": {
+    "or": "OU"
+  },
+  "form": {
+    "fields": {
+      "username": {
+        "label": "Nom d'utilisateur",
+        "placeholder": "Nom d'utilisateur"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "Email"
+      },
+      "password": {
+        "label": "Mot de passe",
+        "placeholder": "Mot de passe",
+        "show": {
+          "true": "Masquer le mot de passe",
+          "false": "Afficher le mot de passe",
+          "ariaLabel": "Afficher le mot de passe"
+        }
+      },
+      "confirmPassword": {
+        "placeholder": "Confirmer le mot de passe"
+      }
+    },
+    "errors": {
+      "FIELD_REQUIRED": "Ce champ est requis",
+      "EMAIL_INVALID": "L'email est invalide",
+      "PASSWORDS_DO_NOT_MATCH": "Les mots de passe ne correspondent pas",
+      "UNKNOWN_ERROR": "Une erreur inconnue est survenue"
+    }
+  },
+  "auth": {
+    "signIn": {
+      "title": "Heureux de<br></br>vous revoir !",
+      "actions": {
+        "signIn": "Connexion",
+        "signInPending": "Connexion en cours",
+        "signUp": "Pas encore de compte ?"
+      },
+      "errors": {
+        "PASSWORD_INVALID": "Ca ne ressemble pas à un mot de passe valide",
+        "CREDENTIALS_INVALID": "Identifiants invalides",
+        "EMAIL_NOT_VERIFIED": "Votre compte n'est pas vérifié, un email vous a été envoyé"
+      }
+    },
+    "signUp": {
+      "title": "Bienvenue sur<br></br>Zythogora",
+      "actions": {
+        "signUp": "S'inscrire",
+        "signUpPending": "Inscription en cours",
+        "signIn": "Déjà un compte ?"
+      },
+      "errors": {
+        "USERNAME_TOO_SHORT": "Le nom d'utilisateur doit contenir au moins 3 caractères",
+        "USERNAME_TOO_LONG": "Le nom d'utilisateur ne peut pas contenir plus de 25 caractères",
+        "USERNAME_INVALID_CHARACTERS": "Le nom d'utilisateur ne peut contenir que des chiffres, des lettres et des tirets du bas (_)",
+        "PASSWORD_TOO_SHORT": "Le mot de passe doit contenir au moins 8 caractères",
+        "PASSWORD_TOO_LONG": "Le mot de passe ne peut pas contenir plus de 1024 caractères",
+        "USERNAME_ALREADY_EXISTS": "Ce nom d'utilisateur existe déjà",
+        "EMAIL_ALREADY_EXISTS": "Cet email existe déjà"
+      }
+    },
+    "emailVerification": {
+      "title": "Un email vous a été envoyé<br></br>pour activer votre compte.",
+      "text": "Vérifiez vos mails et cliquez sur le lien<br></br>pour pouvoir vous <link>connecter</link> !",
+      "success": "Votre email a été vérifié avec succès, vous êtes maintenant connecté !"
+    }
+  },
   "home": {
     "title": "Bienvenue sur<br></br><highlight>Zythogora</highlight>"
   }

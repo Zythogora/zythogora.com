@@ -4,23 +4,59 @@
 
 :root {
   --foreground: var(--color-stone-950);
-  --background: var(--color-stone-50);
+  --foreground-muted: var(--color-stone-400);
 
-  --primary: oklch(80.16% 0.1705 73.27);
+  --background: var(--color-stone-50);
+  --background-muted: var(--color-stone-200);
+
+  --destructive: var(--color-red-700);
 }
 
 .dark {
   --foreground: var(--color-stone-50);
+  --foreground-muted: var(--color-stone-300);
+
   --background: var(--color-stone-800);
+  --background-muted: var(--color-stone-600);
+
+  --destructive: var(--color-red-400);
 }
 
 @theme inline {
-  --color-foreground: var(--foreground);
-  --color-background: var(--background);
+  --primary: oklch(80.16% 0.171 73.27);
   --color-primary: var(--primary);
+  --color-primary-50: oklch(97.76% 0.025 86.87);
+  --color-primary-100: oklch(95.4% 0.048 84.56);
+  --color-primary-200: oklch(91.08% 0.093 84.12);
+  --color-primary-300: oklch(87.07% 0.133 82.74);
+  --color-primary-400: oklch(83.42% 0.159 79.51);
+  --color-primary-500: var(--primary);
+  --color-primary-600: oklch(67.92% 0.144 73.84);
+  --color-primary-700: oklch(55.09% 0.116 74.75);
+  --color-primary-800: oklch(41.47% 0.087 76.48);
+  --color-primary-900: oklch(26.6% 0.055 80.87);
+  --color-primary-950: oklch(18.29% 0.037 88.42);
+
+  --color-foreground: var(--foreground);
+  --color-foreground-muted: var(--foreground-muted);
+
+  --color-background: var(--background);
+  --color-background-muted: var(--background-muted);
+
+  --color-destructive: var(--destructive);
 
   --font-title: var(--font-title);
   --font-paragraph: var(--font-paragraph);
+
+  --base-radius: 0.5rem;
+  --radius-xs: calc(var(--base-radius) * 0.25);
+  --radius-sm: calc(var(--base-radius) * 0.5);
+  --radius-md: calc(var(--base-radius) * 0.75);
+  --radius: var(--base-radius);
+  --radius-lg: calc(var(--base-radius) * 1.5);
+  --radius-xl: calc(var(--base-radius) * 2);
+  --radius-2xl: calc(var(--base-radius) * 3);
+  --radius-3xl: calc(var(--base-radius) * 4);
 
   --drop-shadow: 0 2px 0 var(--color-foreground);
 }
@@ -39,5 +75,31 @@
   h5,
   h6 {
     @apply font-title;
+  }
+}
+
+@utility rectangular-drop-shadow {
+  & {
+    clip-path: polygon(
+      0 calc(100% - 6px),
+      100% calc(100% - 6px),
+      100% calc(100% - 4px),
+      100% 100%,
+      0 100%,
+      0 calc(100% - 4px)
+    );
+  }
+}
+
+@utility triangular-drop-shadow {
+  & {
+    clip-path: polygon(
+      0 calc(100% - 6px),
+      100% calc(100% - 6px),
+      100% calc(100% - 4px),
+      calc(100% - 6px) 100%,
+      6px 100%,
+      0 calc(100% - 4px)
+    );
   }
 }
