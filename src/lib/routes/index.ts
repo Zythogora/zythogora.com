@@ -4,4 +4,6 @@ export const Routes = {
   SIGN_UP_VERIFICATION: "/sign-up/email-verification",
 
   HOME: "/",
+
+  SEARCH: "/search",
 };

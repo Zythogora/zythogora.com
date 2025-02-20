@@ -17,7 +17,8 @@ import {
 import LanguageSubMenu from "@/app/_components/user-menu/language-submenu";
 import ThemeSubMenu from "@/app/_components/user-menu/theme-submenu";
 import { authClient } from "@/lib/auth/client";
-import { usePathname, useRouter } from "@/lib/i18n";
+import { usePathname } from "@/lib/i18n";
+import { useRouterWithSearchParams } from "@/lib/i18n/hooks";
 import { Routes } from "@/lib/routes";
 import { cn } from "@/lib/tailwind";
 
@@ -32,7 +33,7 @@ export const UserMenuTrigger = ({
       variant="outline"
       size="icon"
       className={cn(
-        "relative size-9 rounded-full before:rounded-full",
+        "relative size-9 shrink-0 rounded-full before:rounded-full",
         "hover:bg-primary hover:w-9 hover:translate-x-0 hover:translate-y-0 hover:before:w-9 hover:before:translate-y-0.5",
         "focus-visible:bg-primary focus-visible:w-9 focus-visible:translate-x-0 focus-visible:translate-y-0 focus-visible:before:w-9 focus-visible:before:translate-y-0.5",
         className,
@@ -49,11 +50,11 @@ const UserMenu = () => {
 
   const { data: session } = authClient.useSession();
 
-  const router = useRouter();
+  const { push } = useRouterWithSearchParams();
   const pathname = usePathname();
 
   const handleSignIn = () => {
-    router.push(`${Routes.SIGN_IN}?redirect=${pathname}`);
+    push(Routes.SIGN_IN, { redirect: pathname });
   };
 
   const handleSignOut = async () => {
