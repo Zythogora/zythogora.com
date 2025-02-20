@@ -58,9 +58,9 @@ const Input = ({
           className="absolute inset-y-[15px] right-[15px] size-7 p-1"
         >
           {showPassword ? (
-            <HidePasswordIcon className="size-full" />
+            <HidePasswordIcon size={28} className="size-full" />
           ) : (
-            <ShowPasswordIcon className="size-full" />
+            <ShowPasswordIcon size={28} className="size-full" />
           )}
         </button>
       ) : null}

@@ -95,5 +95,13 @@
   },
   "home": {
     "title": "Welcome to<br></br><highlight>Zythogora</highlight>"
+  },
+  "searchPage": {
+    "searchBarPlaceholder": "Search for a beer or a brewery",
+    "beers": {
+      "noSearch": "Search for a beer!",
+      "noResults": "No beers found",
+      "results": "{count, plural, =0 {No beers found} =1 {1 beer found} other {# beers found}}"
+    }
   }
 }
