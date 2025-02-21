@@ -48,7 +48,7 @@
     }
   },
   "pagination": {
-    "page": "Page <highlight>{page}</highlight> de <highlight>{total}</highlight>",
+    "page": "Page <highlight>{page}</highlight> sur <highlight>{total}</highlight>",
     "previous": "Page précédente",
     "next": "Page suivante"
   },
