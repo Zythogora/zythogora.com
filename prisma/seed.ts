@@ -8,6 +8,22 @@ import { existing_styles } from "prisma/existing-data/styles";
 
 const prisma = new PrismaClient();
 
+const slugify = (id: string, name: string) =>
+  [
+    id
+      .replace(/[^a-zA-Z0-9]/g, "")
+      .slice(0, 4)
+      .toUpperCase(),
+    name
+      .normalize("NFD")
+      .replace(/[^\x00-\x7F]/g, "")
+      .replace(/[^a-zA-Z0-9\s]/g, "")
+      .slice(0, 60)
+      .trim()
+      .replace(/\s+/g, "-")
+      .toLowerCase(),
+  ].join("-");
+
 async function main() {
   await prisma.$transaction(
     async (tx) => {
@@ -107,30 +123,24 @@ async function main() {
         return acc;
       }, {});
 
-      await tx.$executeRaw`
-      INSERT INTO "beer_data"."breweries" ("id", "previous_id", "name", "country_alpha_2_code", "created_at", "created_by", "updated_at", "updated_by")
-      VALUES ${Prisma.join(
-        existing_breweries.map(
-          (brewery) =>
-            Prisma.sql`(${nanoid()}, ${Number(brewery.id)}, ${brewery.name}, ${brewery.country_alpha_2_code}, ${new Date(brewery.created_at)}, ${seedingUserId}, ${new Date(brewery.created_at)}, ${seedingUserId})`,
-        ),
-      )}
-      ON CONFLICT (name) DO UPDATE SET previous_id = EXCLUDED.previous_id;
-    `;
-
-      const breweries =
-        (await tx.$queryRaw`SELECT * FROM "beer_data"."breweries";`) as {
-          id: string;
-          previous_id: number;
-        }[];
-
-      const breweryIdsMap = breweries.reduce<Record<string, string>>(
-        (acc, val) => {
-          acc[`${val.previous_id}`] = val.id;
+      const breweryIdsMap = existing_breweries.reduce<Record<string, string>>(
+        (acc, brewery) => {
+          acc[`${brewery.id}`] = nanoid();
           return acc;
         },
         {},
       );
+
+      await tx.$executeRaw`
+      INSERT INTO "beer_data"."breweries" ("id", "slug", "previous_id", "name", "country_alpha_2_code", "created_at", "created_by", "updated_at", "updated_by")
+      VALUES ${Prisma.join(
+        existing_breweries.map(
+          (brewery) =>
+            Prisma.sql`(${breweryIdsMap[brewery.id]!}, ${slugify(breweryIdsMap[brewery.id]!, brewery.name)}, ${Number(brewery.id)}, ${brewery.name}, ${brewery.country_alpha_2_code}, ${new Date(brewery.created_at)}, ${seedingUserId}, ${new Date(brewery.created_at)}, ${seedingUserId})`,
+        ),
+      )}
+      ON CONFLICT (name) DO UPDATE SET previous_id = EXCLUDED.previous_id;
+    `;
 
       const beersAvailable = await tx.beers.findMany();
 
@@ -146,18 +156,24 @@ async function main() {
       console.log(`New beers to insert: ${beersToInsert.length}`);
 
       await tx.beers.createMany({
-        data: beersToInsert.map((beer) => ({
-          name: beer.name,
-          abv: Number(beer.abv),
-          ibu: beer.ibu ? Number(beer.ibu) : null,
-          breweryId: breweryIdsMap[beer.brewery]!,
-          styleId: styleIdsMap[beer.style]!,
-          colorId: beer.color ? colorIdsMap[beer.color]! : otherColorId,
-          createdAt: new Date(beer.created_at),
-          createdBy: seedingUserId,
-          updatedAt: new Date(beer.created_at),
-          updatedBy: seedingUserId,
-        })),
+        data: beersToInsert.map((beer) => {
+          const id = nanoid();
+
+          return {
+            id,
+            name: beer.name,
+            slug: slugify(id, beer.name),
+            abv: Number(beer.abv),
+            ibu: beer.ibu ? Number(beer.ibu) : null,
+            breweryId: breweryIdsMap[beer.brewery]!,
+            styleId: styleIdsMap[beer.style]!,
+            colorId: beer.color ? colorIdsMap[beer.color]! : otherColorId,
+            createdAt: new Date(beer.created_at),
+            createdBy: seedingUserId,
+            updatedAt: new Date(beer.created_at),
+            updatedBy: seedingUserId,
+          };
+        }),
       });
 
       await tx.$executeRaw`ALTER TABLE "beer_data"."breweries" DROP CONSTRAINT "breweries_name_key";`;

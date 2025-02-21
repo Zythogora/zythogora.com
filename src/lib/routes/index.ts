@@ -6,4 +6,10 @@ export const Routes = {
   HOME: "/",
 
   SEARCH: "/search",
-};
+
+  BREWERY: "/breweries/:brewerySlug",
+
+  BEER: "/breweries/:brewerySlug/beers/:beerSlug",
+} as const;
+
+export type Path = (typeof Routes)[keyof typeof Routes];

@@ -2,6 +2,9 @@ import { getTranslations } from "next-intl/server";
 
 import BeerSearchResult from "@/app/[locale]/(business)/(search)/search/_components/tab/beer/result";
 import Pagination from "@/app/_components/ui/pagination";
+import { Link } from "@/lib/i18n";
+import { Routes } from "@/lib/routes";
+import { generatePath } from "@/lib/routes/utils";
 
 import type { BeerResult } from "@/domain/search/types";
 
@@ -27,15 +30,22 @@ const BeerTab = async ({ results, count, page }: BeerTabProps) => {
 
       <div className="flex w-full flex-col gap-y-8">
         {results.map((beer) => (
-          <BeerSearchResult
+          <Link
             key={beer.id}
-            name={beer.name}
-            brewery={beer.brewery}
-            style={beer.style}
-            abv={beer.abv}
-            ibu={beer.ibu}
-            color={beer.color.name !== "Other" ? beer.color.hex : undefined}
-          />
+            href={generatePath(Routes.BEER, {
+              brewerySlug: beer.brewery.slug,
+              beerSlug: beer.slug,
+            })}
+          >
+            <BeerSearchResult
+              name={beer.name}
+              brewery={beer.brewery}
+              style={beer.style}
+              abv={beer.abv}
+              ibu={beer.ibu}
+              color={beer.color}
+            />
+          </Link>
         ))}
 
         <Pagination current={page.current} total={page.total} />

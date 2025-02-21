@@ -126,5 +126,15 @@
         "beerCount": "{count, plural, =0 {0 beers} =1 {1 beer} other {# beers}}"
       }
     }
+  },
+  "beerPage": {
+    "brewedBy": "Brewed by <link>{brewery}</link>",
+    "style": "Style",
+    "abv": "ABV",
+    "ibu": "IBU",
+    "404": {
+      "title": "We don't know this beer<br></br><muted>(yet)</muted> :(",
+      "cta": "But you can <link>search</link> for another one!"
+    }
   }
 }
