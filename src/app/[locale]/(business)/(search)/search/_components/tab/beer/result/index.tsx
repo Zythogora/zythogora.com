@@ -39,22 +39,24 @@ const BeerSearchResult = ({
         <PintIcon size={40} className="size-10" unknownColor />
       )}
 
-      <div className="flex flex-col gap-y-2 overflow-hidden">
-        <p className="font-title truncate text-lg leading-none">{name}</p>
+      <div className="flex flex-col gap-y-1 overflow-hidden">
+        <div>
+          <p className="font-title truncate text-lg">{name}</p>
 
-        <div className="flex flex-row gap-x-1">
-          <CountryFlag
-            country={brewery.country}
-            size={14}
-            className="size-3.5"
-          />
+          <div className="flex flex-row gap-x-1">
+            <CountryFlag
+              country={brewery.country}
+              size={14}
+              className="size-3.5"
+            />
 
-          <p className="text-foreground/62.5 truncate text-sm leading-none">
-            {brewery.name}
-          </p>
+            <p className="text-foreground/62.5 truncate text-sm">
+              {brewery.name}
+            </p>
+          </div>
         </div>
 
-        <p className="flex flex-row gap-x-1.5 text-xs leading-none">
+        <p className="flex flex-row gap-x-1.5 text-xs">
           <span className="bg-foreground/7.5 text-foreground/62.5 shrink truncate rounded-full px-2 py-1">
             {style}
           </span>

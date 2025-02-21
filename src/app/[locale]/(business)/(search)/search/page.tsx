@@ -40,7 +40,10 @@ const SearchPage = async ({ searchParams }: SearchPageProps) => {
     }
 
     return (
-      <Suspense fallback={<p>{t("searchPage.beers.searching", { search })}</p>}>
+      <Suspense
+        key={`${kind}-${search}-${page}`}
+        fallback={<p>{t("searchPage.beers.searching", { search })}</p>}
+      >
         <Await promise={searchBeers({ search, limit, page })}>
           {({ results, count, page }) => (
             <BeerTab results={results} count={count} page={page} />
@@ -57,6 +60,7 @@ const SearchPage = async ({ searchParams }: SearchPageProps) => {
 
     return (
       <Suspense
+        key={`${kind}-${search}-${page}`}
         fallback={<p>{t("searchPage.breweries.searching", { search })}</p>}
       >
         <Await
