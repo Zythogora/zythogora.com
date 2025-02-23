@@ -5,6 +5,7 @@ import BreweryBeer from "@/app/[locale]/(business)/breweries/[brewerySlug]/_comp
 import BreweryCard from "@/app/[locale]/(business)/breweries/[brewerySlug]/_components/brewery-card";
 import ReplacePathname from "@/app/_components/replace-pathname";
 import { getBreweryBeers, getBreweryBySlug } from "@/domain/breweries";
+import { publicConfig } from "@/lib/config/client-config";
 import { Link } from "@/lib/i18n";
 import { Routes } from "@/lib/routes";
 import { generatePath } from "@/lib/routes/utils";
@@ -13,6 +14,16 @@ interface BreweryPageProps {
   params: Promise<{
     brewerySlug: string;
   }>;
+}
+
+export async function generateMetadata({ params }: BreweryPageProps) {
+  const { brewerySlug } = await params;
+
+  const brewery = await getBreweryBySlug(brewerySlug).catch(() => notFound());
+
+  return {
+    title: `${brewery.name} | ${publicConfig.appName}`,
+  };
 }
 
 const BreweryPage = async ({ params }: BreweryPageProps) => {

@@ -6,6 +6,14 @@ import Wave from "@/app/_components/wave";
 import { config } from "@/lib/config";
 import { cn } from "@/lib/tailwind";
 
+export async function generateMetadata() {
+  const t = await getTranslations();
+
+  return {
+    title: t("auth.signUp.metadata.title"),
+  };
+}
+
 const SignUpPage = async () => {
   const t = await getTranslations();
 

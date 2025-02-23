@@ -41,4 +41,5 @@ export const serverSideSchema = z.object({
 
 export const clientSideSchema = z.object({
   NEXT_PUBLIC_BASE_URL: z.string(),
+  NEXT_PUBLIC_APP_NAME: z.string(),
 });
