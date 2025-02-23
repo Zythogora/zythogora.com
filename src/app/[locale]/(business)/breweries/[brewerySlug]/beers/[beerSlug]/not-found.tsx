@@ -4,7 +4,7 @@ import NotFoundIllustration from "@/app/_components/ui/not-found-illustration";
 import { Link } from "@/lib/i18n";
 import { Routes } from "@/lib/routes";
 
-const NotFound = async () => {
+const BeerNotFound = async () => {
   const t = await getTranslations();
 
   return (
@@ -35,4 +35,4 @@ const NotFound = async () => {
   );
 };
 
-export default NotFound;
+export default BeerNotFound;

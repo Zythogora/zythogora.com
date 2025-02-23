@@ -18,7 +18,7 @@ const SearchLayout = ({ children }: PropsWithChildren) => {
           </Suspense>
         </div>
 
-        <SearchTabs defaultTab="beers" />
+        <SearchTabs defaultTab="beer" />
       </div>
 
       <div className="flex flex-col p-8">{children}</div>

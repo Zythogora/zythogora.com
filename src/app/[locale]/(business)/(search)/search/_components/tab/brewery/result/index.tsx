@@ -38,7 +38,7 @@ const BrewerySearchResult = async ({
 
       <p className="flex flex-row gap-x-1.5 text-xs leading-none">
         <span className="bg-foreground/7.5 text-foreground/62.5 rounded-full px-2 py-1">
-          {t("searchPage.breweries.result.beerCount", { count: beerCount })}
+          {t("searchPage.brewery.result.beerCount", { count: beerCount })}
         </span>
       </p>
     </div>

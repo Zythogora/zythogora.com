@@ -34,15 +34,15 @@ const SearchPage = async ({ searchParams }: SearchPageProps) => {
 
   const { search, kind, limit, page } = searchParamsResult.data;
 
-  if (kind === "beers") {
+  if (kind === "beer") {
     if (!search) {
-      return <p>{t("searchPage.beers.noSearch")}</p>;
+      return <p>{t("searchPage.beer.noSearch")}</p>;
     }
 
     return (
       <Suspense
         key={`${kind}-${search}-${page}`}
-        fallback={<p>{t("searchPage.beers.searching", { search })}</p>}
+        fallback={<p>{t("searchPage.beer.searching", { search })}</p>}
       >
         <Await promise={searchBeers({ search, limit, page })}>
           {({ results, count, page }) => (
@@ -53,15 +53,15 @@ const SearchPage = async ({ searchParams }: SearchPageProps) => {
     );
   }
 
-  if (kind === "breweries") {
+  if (kind === "brewery") {
     if (!search) {
-      return <p>{t("searchPage.breweries.noSearch")}</p>;
+      return <p>{t("searchPage.brewery.noSearch")}</p>;
     }
 
     return (
       <Suspense
         key={`${kind}-${search}-${page}`}
-        fallback={<p>{t("searchPage.breweries.searching", { search })}</p>}
+        fallback={<p>{t("searchPage.brewery.searching", { search })}</p>}
       >
         <Await
           promise={searchBreweries({

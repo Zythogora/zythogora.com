@@ -1,1 +1,1 @@
-export const SEARCH_KINDS = ["beers", "breweries"] as const;
+export const SEARCH_KINDS = ["beer", "brewery"] as const;
