@@ -2,21 +2,25 @@ import SparkleIcon from "@/app/_components/icons/sparkle";
 import { cn } from "@/lib/tailwind";
 
 import type { IconProps } from "@/app/_components/icons/types";
+import type { CSSProperties } from "react";
 
-interface PintIconProps extends IconProps {
+interface ColoredPintIconProps extends IconProps {
   beerFillClassName?: string;
   unknownColor?: boolean;
+  alt?: string;
 }
 
-const PintIcon = ({
+const ColoredPintIcon = ({
   size,
   beerFillClassName,
   unknownColor = false,
+  alt,
   ...restProps
-}: PintIconProps) => {
+}: ColoredPintIconProps) => {
   return (
-    <div className="relative size-fit">
+    <div className="relative size-fit" title={alt}>
       <svg
+        aria-label={alt}
         width={size}
         height={size}
         viewBox="0 0 24 24"
@@ -24,7 +28,8 @@ const PintIcon = ({
         fill="none"
         {...restProps}
       >
-        <path d="M5 6L6 1H18L19 6H5Z" className="fill-background" />
+        {/* As the head is transparent, we do not need this path (at the moment)
+        <path d="M5 6L6 1H18L19 6H5Z" /> */}
 
         <path
           d="M6 11L5 6H19L18 11L17.5 23H6.5L6 11Z"
@@ -86,6 +91,28 @@ const PintIcon = ({
         </>
       ) : null}
     </div>
+  );
+};
+
+interface PintIconProps extends IconProps {
+  color: {
+    name: string;
+    hex: string;
+  };
+}
+
+const PintIcon = ({ color, ...restProps }: PintIconProps) => {
+  if (color.name === "Other") {
+    return <ColoredPintIcon alt={color.name} unknownColor {...restProps} />;
+  }
+
+  return (
+    <ColoredPintIcon
+      alt={color.name}
+      beerFillClassName="fill-[var(--beer-color)]"
+      style={{ "--beer-color": `#${color.hex}` } as CSSProperties}
+      {...restProps}
+    />
   );
 };
 

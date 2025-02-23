@@ -1,8 +1,6 @@
 import CountryFlag from "@/app/_components/icons/country-flag";
 import PintIcon from "@/app/_components/icons/pint";
 
-import type { CSSProperties } from "react";
-
 interface BeerSearchResultProps {
   name: string;
   brewery: {
@@ -15,7 +13,10 @@ interface BeerSearchResultProps {
   style: string;
   abv: number;
   ibu?: number;
-  color?: string;
+  color: {
+    name: string;
+    hex: string;
+  };
 }
 
 const BeerSearchResult = ({
@@ -28,16 +29,7 @@ const BeerSearchResult = ({
 }: BeerSearchResultProps) => {
   return (
     <div className="flex w-full flex-row items-center gap-x-4">
-      {color ? (
-        <PintIcon
-          size={40}
-          className="size-10"
-          beerFillClassName="fill-[var(--beer-color)]"
-          style={{ "--beer-color": `#${color}` } as CSSProperties}
-        />
-      ) : (
-        <PintIcon size={40} className="size-10" unknownColor />
-      )}
+      <PintIcon color={color} size={40} className="size-10" />
 
       <div className="flex flex-col gap-y-1 overflow-hidden">
         <div>

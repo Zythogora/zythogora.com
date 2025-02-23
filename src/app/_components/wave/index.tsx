@@ -1,6 +1,6 @@
 "use client";
 
-import * as motion from "motion/react-client";
+import { motion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 
 import { cn } from "@/lib/tailwind";

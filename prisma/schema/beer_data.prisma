@@ -1,5 +1,6 @@
 model Beers {
   id   String @id @default(nanoid())
+  slug String @unique
   name String
   abv  Float
   ibu  Int?
@@ -25,6 +26,7 @@ model Beers {
 
 model Breweries {
   id                String @id @default(nanoid())
+  slug              String @unique
   name              String
   countryAlpha2Code String @map("country_alpha_2_code")
 

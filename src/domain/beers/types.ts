@@ -1,8 +1,17 @@
-export type BeerResult = {
+import type { Beers, Breweries, Colors, Styles } from "@prisma/client";
+
+export type RawBeer = Beers & {
+  brewery: Breweries;
+  style: Styles;
+  color: Colors;
+};
+
+export type Beer = {
   id: string;
   slug: string;
   name: string;
   brewery: {
+    id: string;
     slug: string;
     name: string;
     country: {
@@ -17,14 +26,4 @@ export type BeerResult = {
     name: string;
     hex: string;
   };
-};
-
-export type BreweryResult = {
-  id: string;
-  name: string;
-  country: {
-    name: string;
-    code: string;
-  };
-  beerCount: number;
 };
