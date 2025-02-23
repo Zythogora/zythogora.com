@@ -35,6 +35,7 @@ const BeerCard = async ({
   color,
 }: BeerCardProps) => {
   const t = await getTranslations();
+
   return (
     <div className="bg-primary-50 dark:bg-primary-800 flex flex-col gap-y-6 overflow-hidden rounded rounded-t-xl border-2 p-8 drop-shadow">
       <div className="flex flex-col gap-y-1">

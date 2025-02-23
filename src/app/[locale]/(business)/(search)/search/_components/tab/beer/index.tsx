@@ -21,12 +21,12 @@ const BeerTab = async ({ results, count, page }: BeerTabProps) => {
   const t = await getTranslations();
 
   if (results.length === 0) {
-    return <p>{t("searchPage.beers.noResult")}</p>;
+    return <p>{t("searchPage.beer.noResult")}</p>;
   }
 
   return (
     <div className="flex w-full flex-col gap-y-4">
-      <p>{t("searchPage.beers.results", { count })}</p>
+      <p>{t("searchPage.beer.results", { count })}</p>
 
       <div className="flex w-full flex-col gap-y-8">
         {results.map((beer) => (

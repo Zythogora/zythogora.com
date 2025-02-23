@@ -6,14 +6,14 @@ import { getBeerBySlug } from "@/domain/beers";
 import { Routes } from "@/lib/routes";
 import { generatePath } from "@/lib/routes/utils";
 
-interface Props {
+interface BeerPageProps {
   params: Promise<{
     brewerySlug: string;
     beerSlug: string;
   }>;
 }
 
-const BeerPage = async ({ params }: Props) => {
+const BeerPage = async ({ params }: BeerPageProps) => {
   const { brewerySlug, beerSlug } = await params;
 
   const beer = await getBeerBySlug(beerSlug, brewerySlug).catch(() =>

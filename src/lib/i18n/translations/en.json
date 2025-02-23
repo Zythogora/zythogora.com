@@ -109,14 +109,14 @@
   },
   "searchPage": {
     "searchBarPlaceholder": "Search for a beer or a brewery",
-    "beers": {
+    "beer": {
       "tabName": "Beers",
       "searching": "Searching for beers matching \"{search}\"",
       "noSearch": "Search for a beer!",
       "noResult": "No beers found",
       "results": "{count, plural, =0 {No beers found} =1 {1 beer found} other {# beers found}}"
     },
-    "breweries": {
+    "brewery": {
       "tabName": "Breweries",
       "searching": "Searching for breweries matching \"{search}\"",
       "noSearch": "Search for a brewery!",
