@@ -1,5 +1,6 @@
 import CountryFlag from "@/app/_components/icons/country-flag";
 import PintIcon from "@/app/_components/icons/pint";
+import Chip from "@/app/_components/ui/chip";
 
 interface BeerSearchResultProps {
   name: string;
@@ -48,21 +49,13 @@ const BeerSearchResult = ({
           </div>
         </div>
 
-        <p className="flex flex-row gap-x-1.5 text-xs">
-          <span className="bg-foreground/7.5 text-foreground/62.5 shrink truncate rounded-full px-2 py-1">
-            {style}
-          </span>
+        <div className="flex min-w-0 flex-row gap-x-1.5">
+          <Chip className="truncate">{style}</Chip>
 
-          <span className="bg-foreground/7.5 text-foreground/62.5 w-fit rounded-full px-2 py-1 text-nowrap">
-            {abv}%
-          </span>
+          <Chip className="w-fit text-nowrap">{abv}%</Chip>
 
-          {ibu ? (
-            <span className="bg-foreground/7.5 text-foreground/62.5 w-fit rounded-full px-2 py-1 text-nowrap">
-              {ibu} IBU
-            </span>
-          ) : null}
-        </p>
+          {ibu ? <Chip className="w-fit text-nowrap">{ibu} IBU</Chip> : null}
+        </div>
       </div>
     </div>
   );

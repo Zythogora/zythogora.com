@@ -4,10 +4,13 @@ import {
   InvalidSlugError,
   UnknownBreweryError,
 } from "@/domain/breweries/errors";
-import { transformRawBreweryToBrewery } from "@/domain/breweries/transforms";
+import {
+  transformRawBreweryBeerToBreweryBeer,
+  transformRawBreweryToBrewery,
+} from "@/domain/breweries/transforms";
 import prisma from "@/lib/prisma";
 
-import type { Brewery } from "@/domain/breweries/types";
+import type { Brewery, BreweryBeer } from "@/domain/breweries/types";
 
 export const getBreweryBySlug = async (
   brewerySlug: string,
@@ -31,4 +34,19 @@ export const getBreweryBySlug = async (
   }
 
   return transformRawBreweryToBrewery(brewery);
+};
+
+export const getBreweryBeers = async (
+  breweryId: string,
+): Promise<BreweryBeer[]> => {
+  const beers = await prisma.beers.findMany({
+    where: { brewery: { id: breweryId } },
+    include: {
+      style: true,
+      color: true,
+    },
+    orderBy: { name: "asc" },
+  });
+
+  return beers.map((beer) => transformRawBreweryBeerToBreweryBeer(beer));
 };
