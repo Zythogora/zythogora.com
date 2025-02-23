@@ -56,7 +56,7 @@ const Pagination = ({ current, total }: PaginationProps) => {
         </li>
 
         <li>
-          <p className="text-muted-foreground text-sm" aria-live="polite">
+          <p className="text-foreground-muted text-sm" aria-live="polite">
             {t.rich("pagination.page", {
               page: current,
               total,

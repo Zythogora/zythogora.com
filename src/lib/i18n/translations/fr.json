@@ -139,6 +139,9 @@
   },
   "breweryPage": {
     "country": "Lieu",
+    "beers": {
+      "count": "{count, plural, =0 {0 bière} =1 {1 bière} other {# bières}}"
+    },
     "404": {
       "title": "On ne connait pas <muted>(encore)</muted><br></br>cette brasserie :(",
       "cta": "Mais tu peux en <link>chercher</link> une autre !"
