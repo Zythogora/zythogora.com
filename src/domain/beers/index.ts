@@ -19,9 +19,7 @@ export const getBeerBySlug = async (
   }
 
   let beer = await prisma.beers.findUnique({
-    where: {
-      slug: beerSlug,
-    },
+    where: { slug: beerSlug },
     include: {
       brewery: true,
       style: true,
@@ -33,11 +31,11 @@ export const getBeerBySlug = async (
     beer = await prisma.beers.findFirst({
       where: {
         AND: [
-          { slug: { startsWith: beerSlug } },
+          { slug: { startsWith: beerSlug.slice(0, 4) } },
           {
             OR: [
               { brewery: { slug: brewerySlug } },
-              { brewery: { slug: { startsWith: brewerySlug } } },
+              { brewery: { slug: { startsWith: brewerySlug.slice(0, 4) } } },
             ],
           },
         ],

@@ -21,6 +21,7 @@ export type BeerResult = {
 
 export type BreweryResult = {
   id: string;
+  slug: string;
   name: string;
   country: {
     name: string;

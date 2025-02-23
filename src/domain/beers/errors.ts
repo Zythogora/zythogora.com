@@ -6,7 +6,7 @@ export class BeerError extends Error {
 
 export class InvalidSlugError extends BeerError {
   constructor() {
-    super("Invalid slug");
+    super("Invalid beer slug");
   }
 }
 
@@ -18,6 +18,6 @@ export class UnknownBeerError extends BeerError {
 
 export class InvalidBreweryError extends BeerError {
   constructor() {
-    super("Invalid brewery");
+    super("Invalid beer's brewery");
   }
 }

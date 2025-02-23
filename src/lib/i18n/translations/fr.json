@@ -136,5 +136,12 @@
       "title": "On ne connait pas <muted>(encore)</muted><br></br>cette bière :(",
       "cta": "Mais tu peux en <link>chercher</link> une autre !"
     }
+  },
+  "breweryPage": {
+    "country": "Lieu",
+    "404": {
+      "title": "On ne connait pas <muted>(encore)</muted><br></br>cette brasserie :(",
+      "cta": "Mais tu peux en <link>chercher</link> une autre !"
+    }
   }
 }
