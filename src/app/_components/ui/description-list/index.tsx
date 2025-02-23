@@ -1,10 +1,10 @@
 import { cn } from "@/lib/tailwind";
 
-import type { HTMLAttributes } from "react";
+import type { HTMLAttributes, ReactNode } from "react";
 
 interface DescriptionListProps extends HTMLAttributes<HTMLDListElement> {
   label: string;
-  value: string | number;
+  value: ReactNode;
 }
 
 const DescriptionList = ({

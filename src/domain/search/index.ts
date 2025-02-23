@@ -106,6 +106,7 @@ export const searchBreweries = async ({
   const breweries = await Promise.all(
     rawBreweries.map(async ({ _count, ...brewery }) => ({
       id: brewery.id,
+      slug: brewery.slug,
       name: brewery.name,
       country: {
         name: await getCountryName(brewery.countryAlpha2Code),
