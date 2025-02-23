@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import BeerCard from "@/app/[locale]/(business)/breweries/[brewerySlug]/beers/[beerSlug]/_components/beer-card";
 import ReplacePathname from "@/app/_components/replace-pathname";
 import { getBeerBySlug } from "@/domain/beers";
+import { publicConfig } from "@/lib/config/client-config";
 import { Routes } from "@/lib/routes";
 import { generatePath } from "@/lib/routes/utils";
 
@@ -11,6 +12,18 @@ interface BeerPageProps {
     brewerySlug: string;
     beerSlug: string;
   }>;
+}
+
+export async function generateMetadata({ params }: BeerPageProps) {
+  const { brewerySlug, beerSlug } = await params;
+
+  const beer = await getBeerBySlug(beerSlug, brewerySlug).catch(() =>
+    notFound(),
+  );
+
+  return {
+    title: `${beer.name} - ${beer.brewery.name} | ${publicConfig.appName}`,
+  };
 }
 
 const BeerPage = async ({ params }: BeerPageProps) => {

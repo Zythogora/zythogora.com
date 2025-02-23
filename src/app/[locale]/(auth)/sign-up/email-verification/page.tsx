@@ -9,6 +9,14 @@ interface SignUpEmailVerificationPageProps {
   searchParams: Promise<{ email: string }>;
 }
 
+export async function generateMetadata() {
+  const t = await getTranslations();
+
+  return {
+    title: t("auth.emailVerification.metadata.title"),
+  };
+}
+
 const SignUpEmailVerificationPage = async ({
   searchParams,
 }: SignUpEmailVerificationPageProps) => {

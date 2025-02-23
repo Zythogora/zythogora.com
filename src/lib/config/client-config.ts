@@ -5,6 +5,7 @@ const loadPublicConfig = () => {
   // https://nextjs.org/docs/app/building-your-application/configuring/environment-variables#bundling-environment-variables-for-the-browser
   const parseResult = clientSideSchema.safeParse({
     NEXT_PUBLIC_BASE_URL: process.env["NEXT_PUBLIC_BASE_URL"],
+    NEXT_PUBLIC_APP_NAME: process.env["NEXT_PUBLIC_APP_NAME"],
   });
 
   if (!parseResult.success) {
@@ -21,6 +22,7 @@ const loadPublicConfig = () => {
 
   return {
     baseUrl: env.NEXT_PUBLIC_BASE_URL,
+    appName: env.NEXT_PUBLIC_APP_NAME,
   };
 };
 

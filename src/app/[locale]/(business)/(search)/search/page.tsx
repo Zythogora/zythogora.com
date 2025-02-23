@@ -17,6 +17,28 @@ interface SearchPageProps {
   }>;
 }
 
+export async function generateMetadata({ searchParams }: SearchPageProps) {
+  const t = await getTranslations();
+
+  const locale = await getLocale();
+
+  const searchParamsResult = searchParamsSchema.safeParse(await searchParams);
+
+  if (!searchParamsResult.success) {
+    return redirect({
+      href: Routes.SEARCH,
+      locale,
+    });
+  }
+
+  return {
+    title:
+      searchParamsResult.data.kind === "beer"
+        ? t("searchPage.metadata.beerTabTitle")
+        : t("searchPage.metadata.breweryTabTitle"),
+  };
+}
+
 const SearchPage = async ({ searchParams }: SearchPageProps) => {
   const t = await getTranslations();
 
@@ -25,7 +47,6 @@ const SearchPage = async ({ searchParams }: SearchPageProps) => {
   const searchParamsResult = searchParamsSchema.safeParse(await searchParams);
 
   if (!searchParamsResult.success) {
-    console.error(searchParamsResult.error);
     return redirect({
       href: Routes.SEARCH,
       locale,

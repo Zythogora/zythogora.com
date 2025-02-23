@@ -1,5 +1,7 @@
 "server only";
 
+import { cache } from "react";
+
 import {
   InvalidSlugError,
   UnknownBreweryError,
@@ -12,41 +14,41 @@ import prisma from "@/lib/prisma";
 
 import type { Brewery, BreweryBeer } from "@/domain/breweries/types";
 
-export const getBreweryBySlug = async (
-  brewerySlug: string,
-): Promise<Brewery> => {
-  if (brewerySlug.length < 4) {
-    throw new InvalidSlugError();
-  }
+export const getBreweryBySlug = cache(
+  async (brewerySlug: string): Promise<Brewery> => {
+    if (brewerySlug.length < 4) {
+      throw new InvalidSlugError();
+    }
 
-  let brewery = await prisma.breweries.findUnique({
-    where: { slug: brewerySlug },
-  });
-
-  if (!brewery) {
-    brewery = await prisma.breweries.findFirst({
-      where: { slug: { startsWith: brewerySlug.slice(0, 4) } },
+    let brewery = await prisma.breweries.findUnique({
+      where: { slug: brewerySlug },
     });
-  }
 
-  if (!brewery) {
-    throw new UnknownBreweryError();
-  }
+    if (!brewery) {
+      brewery = await prisma.breweries.findFirst({
+        where: { slug: { startsWith: brewerySlug.slice(0, 4) } },
+      });
+    }
 
-  return transformRawBreweryToBrewery(brewery);
-};
+    if (!brewery) {
+      throw new UnknownBreweryError();
+    }
 
-export const getBreweryBeers = async (
-  breweryId: string,
-): Promise<BreweryBeer[]> => {
-  const beers = await prisma.beers.findMany({
-    where: { brewery: { id: breweryId } },
-    include: {
-      style: true,
-      color: true,
-    },
-    orderBy: { name: "asc" },
-  });
+    return transformRawBreweryToBrewery(brewery);
+  },
+);
 
-  return beers.map((beer) => transformRawBreweryBeerToBreweryBeer(beer));
-};
+export const getBreweryBeers = cache(
+  async (breweryId: string): Promise<BreweryBeer[]> => {
+    const beers = await prisma.beers.findMany({
+      where: { brewery: { id: breweryId } },
+      include: {
+        style: true,
+        color: true,
+      },
+      orderBy: { name: "asc" },
+    });
+
+    return beers.map((beer) => transformRawBreweryBeerToBreweryBeer(beer));
+  },
+);

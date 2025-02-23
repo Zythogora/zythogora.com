@@ -21,7 +21,7 @@ export const auth = betterAuth({
   }),
 
   baseURL: publicConfig.baseUrl,
-  appName: "Zythogora",
+  appName: publicConfig.appName,
 
   plugins: [
     customSession(async ({ user: betterAuthUser, session }) => {
