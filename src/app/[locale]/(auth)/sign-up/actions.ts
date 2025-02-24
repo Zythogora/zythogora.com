@@ -9,7 +9,6 @@ import {
   EmailAlreadyExistsError,
   PasswordTooLongError,
   PasswordTooShortError,
-  UnknownSignUpError,
   UsernameAlreadyExistsError,
 } from "@/domain/auth/errors";
 import { redirect } from "@/lib/i18n";
@@ -49,23 +48,17 @@ export const signUpAction = async (prevState: unknown, formData: FormData) => {
       return submission.reply({
         resetForm: false,
         fieldErrors: {
-          password: ["auth.signUp.errors.PASSWORD_TOO_SHORT"],
+          password: ["form.errors.PASSWORD_TOO_SHORT"],
         },
       });
     } else if (error instanceof PasswordTooLongError) {
       return submission.reply({
         resetForm: false,
         fieldErrors: {
-          password: ["auth.signUp.errors.PASSWORD_TOO_LONG"],
+          password: ["form.errors.PASSWORD_TOO_LONG"],
         },
       });
-    } else if (error instanceof UnknownSignUpError) {
-      return submission.reply({
-        resetForm: false,
-        formErrors: ["form.errors.UNKNOWN_ERROR"],
-      });
     } else {
-      console.error(error);
       return submission.reply({
         resetForm: false,
         formErrors: ["form.errors.UNKNOWN_ERROR"],

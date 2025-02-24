@@ -28,7 +28,7 @@ const BreweryNotFound = async () => {
             link: (chunks) => (
               <Link
                 href={`${Routes.SEARCH}?kind=${"brewery" satisfies (typeof SEARCH_KINDS)[number]}`}
-                className="text-primary underline"
+                className="text-primary-700 dark:text-primary underline"
               >
                 {chunks}
               </Link>

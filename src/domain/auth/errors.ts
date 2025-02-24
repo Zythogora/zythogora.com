@@ -77,3 +77,26 @@ export class UnknownSignUpError extends SignUpError {
     super(SignUpErrorType.UNKNOWN_SIGN_UP_ERROR);
   }
 }
+
+export enum ResetPasswordErrorType {
+  INVALID_TOKEN = "INVALID_TOKEN",
+  UNKNOWN_RESET_PASSWORD_ERROR = "UNKNOWN_RESET_PASSWORD_ERROR",
+}
+
+export class ResetPasswordError extends AuthError {
+  constructor(message: string) {
+    super(message);
+  }
+}
+
+export class InvalidTokenError extends ResetPasswordError {
+  constructor() {
+    super(ResetPasswordErrorType.INVALID_TOKEN);
+  }
+}
+
+export class UnknownResetPasswordError extends ResetPasswordError {
+  constructor() {
+    super(ResetPasswordErrorType.UNKNOWN_RESET_PASSWORD_ERROR);
+  }
+}

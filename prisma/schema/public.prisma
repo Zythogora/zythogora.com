@@ -2,7 +2,7 @@ model Users {
   id       String @id
   username String @unique
 
-  betterAuthUser BetterAuthUsers @relation(fields: [id], references: [id])
+  betterAuthUser BetterAuthUsers @relation(fields: [id], references: [id], onDelete: Cascade)
 
   CreatedBeers Beers[] @relation("created_beers")
   UpdatedBeers Beers[] @relation("updated_beers")

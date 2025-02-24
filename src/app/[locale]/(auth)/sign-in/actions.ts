@@ -8,7 +8,6 @@ import { signIn } from "@/domain/auth";
 import {
   CredentialsInvalidError,
   EmailNotVerifiedError,
-  UnknownSignInError,
 } from "@/domain/auth/errors";
 import { redirect } from "@/lib/i18n";
 
@@ -38,13 +37,7 @@ export const signInAction = async (prevState: unknown, formData: FormData) => {
         resetForm: false,
         formErrors: ["auth.signIn.errors.EMAIL_NOT_VERIFIED"],
       });
-    } else if (error instanceof UnknownSignInError) {
-      return submission.reply({
-        resetForm: false,
-        formErrors: ["form.errors.UNKNOWN_ERROR"],
-      });
     } else {
-      console.error(error);
       return submission.reply({
         resetForm: false,
         formErrors: ["form.errors.UNKNOWN_ERROR"],

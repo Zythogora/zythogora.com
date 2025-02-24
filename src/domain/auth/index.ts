@@ -4,14 +4,17 @@ import {
   CredentialsInvalidError,
   EmailAlreadyExistsError,
   EmailNotVerifiedError,
+  InvalidTokenError,
   PasswordTooLongError,
   PasswordTooShortError,
+  UnknownResetPasswordError,
   UnknownSignInError,
   UnknownSignUpError,
   UsernameAlreadyExistsError,
 } from "@/domain/auth/errors";
 import { auth } from "@/lib/auth/server";
 import prisma from "@/lib/prisma";
+import { Routes } from "@/lib/routes";
 
 type SignInParams = {
   email: string;
@@ -107,6 +110,47 @@ export const signUp = async ({ username, email, password }: SignUpParams) => {
   }
 
   return response.user.id;
+};
+
+type PasswordForgottenParams = {
+  email: string;
+};
+
+export const passwordForgotten = async ({ email }: PasswordForgottenParams) => {
+  await auth.api.forgetPassword({
+    body: {
+      email,
+      redirectTo: Routes.RESET_PASSWORD,
+    },
+  });
+};
+
+type ResetPasswordParams = {
+  token: string;
+  newPassword: string;
+};
+
+export const resetPassword = async ({
+  token,
+  newPassword,
+}: ResetPasswordParams) => {
+  try {
+    await auth.api.resetPassword({
+      body: {
+        token,
+        newPassword,
+      },
+    });
+  } catch (error) {
+    if (error instanceof APIError) {
+      if (error.body.code === "INVALID_TOKEN") {
+        throw new InvalidTokenError();
+      }
+    }
+
+    console.error(error);
+    throw new UnknownResetPasswordError();
+  }
 };
 
 export const isUserVerified = async (email: string) => {

@@ -11,6 +11,7 @@ import { UserRecordNotFoundError } from "@/lib/auth/errors";
 import { config } from "@/lib/config";
 import { publicConfig } from "@/lib/config/client-config";
 import { sendEmail } from "@/lib/email";
+import ResetPasswordEmail from "@/lib/email/templates/reset-password";
 import WelcomeEmail from "@/lib/email/templates/welcome";
 import prisma from "@/lib/prisma";
 import { Routes } from "@/lib/routes";
@@ -83,6 +84,19 @@ export const auth = betterAuth({
     password: {
       hash,
       verify,
+    },
+    sendResetPassword: async ({ user, url }) => {
+      const t = await getTranslations();
+
+      await sendEmail(
+        user.email,
+        t("email.resetPassword.subject"),
+        ResetPasswordEmail,
+        {
+          username: user.name,
+          resetPasswordUrl: url,
+        },
+      );
     },
   },
 
