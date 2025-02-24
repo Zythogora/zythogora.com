@@ -24,7 +24,10 @@ const BeerNotFound = async () => {
         <p className="text-center">
           {t.rich("beerPage.404.cta", {
             link: (chunks) => (
-              <Link href={Routes.SEARCH} className="text-primary underline">
+              <Link
+                href={Routes.SEARCH}
+                className="text-primary-700 dark:text-primary underline"
+              >
                 {chunks}
               </Link>
             ),

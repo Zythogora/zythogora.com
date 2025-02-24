@@ -12,6 +12,15 @@
       "text2": "Vous pouvez activer votre compte en cliquant sur le bouton ci-dessous.",
       "button": "Activez votre compte",
       "buttonFallback": "Si le bouton ne fonctionne pas, vous pouvez également copier et coller l'URL suivante dans votre navigateur : <link>{activationUrl}</link>."
+    },
+    "resetPassword": {
+      "subject": "Réinitialisez votre mot de passe Zythogora",
+      "preview": "Réinitialisez votre mot de passe",
+      "text": "Bonjour {username},<br></br>Vous avez demandé à réinitialiser votre mot de passe pour votre compte Zythogora.",
+      "text2": "Pour réinitialiser votre mot de passe, cliquez sur le bouton ci-dessous.",
+      "text3": "Si vous n'êtes pas à l'origine de cette demande, vous pouvez ignorer cet email.",
+      "button": "Réinitialiser mon mot de passe",
+      "buttonFallback": "Si le bouton ne fonctionne pas, vous pouvez également copier et coller l'URL suivante dans votre navigateur : <link>{resetPasswordUrl}</link>."
     }
   },
   "common": {
@@ -43,6 +52,8 @@
     "errors": {
       "FIELD_REQUIRED": "Ce champ est requis",
       "EMAIL_INVALID": "L'email est invalide",
+      "PASSWORD_TOO_SHORT": "Le mot de passe doit contenir au moins 8 caractères",
+      "PASSWORD_TOO_LONG": "Le mot de passe ne peut pas contenir plus de 1024 caractères",
       "PASSWORDS_DO_NOT_MATCH": "Les mots de passe ne correspondent pas",
       "UNKNOWN_ERROR": "Une erreur inconnue est survenue"
     }
@@ -76,6 +87,7 @@
       "actions": {
         "signIn": "Connexion",
         "signInPending": "Connexion en cours",
+        "passwordForgotten": "Mot de passe oublié ?",
         "signUp": "Pas encore de compte ?"
       },
       "errors": {
@@ -98,8 +110,6 @@
         "USERNAME_TOO_SHORT": "Le nom d'utilisateur doit contenir au moins 3 caractères",
         "USERNAME_TOO_LONG": "Le nom d'utilisateur ne peut pas contenir plus de 25 caractères",
         "USERNAME_INVALID_CHARACTERS": "Le nom d'utilisateur ne peut contenir que des chiffres, des lettres et des tirets du bas (_)",
-        "PASSWORD_TOO_SHORT": "Le mot de passe doit contenir au moins 8 caractères",
-        "PASSWORD_TOO_LONG": "Le mot de passe ne peut pas contenir plus de 1024 caractères",
         "USERNAME_ALREADY_EXISTS": "Ce nom d'utilisateur existe déjà",
         "EMAIL_ALREADY_EXISTS": "Cet email existe déjà"
       }
@@ -111,6 +121,33 @@
       "title": "Un email vous a été envoyé<br></br>pour activer votre compte.",
       "text": "Vérifiez vos mails et cliquez sur le lien<br></br>pour pouvoir vous <link>connecter</link> !",
       "success": "Votre email a été vérifié avec succès, vous êtes maintenant connecté !"
+    },
+    "passwordForgotten": {
+      "metadata": {
+        "title": "Mot de passe oublié | Zythogora"
+      },
+      "title": "Mot de passe oublié",
+      "description": "Entrez votre adresse email ci-dessous pour recevoir un email de réinitialisation de mot de passe.",
+      "actions": {
+        "send": "M'envoyer un email",
+        "sending": "Envoi en cours..."
+      },
+      "success": "Un email de réinitialisation de mot de passe a été envoyé à {email} si cette adresse est associée à un compte."
+    },
+    "resetPassword": {
+      "metadata": {
+        "title": "Réinitialisez votre mot de passe | Zythogora"
+      },
+      "title": "Réinitialisez votre mot de passe",
+      "description": "Entrez votre nouveau mot de passe ci-dessous.",
+      "actions": {
+        "reset": "Réinitialiser mon mot de passe",
+        "resetPending": "Réinitialisation en cours"
+      },
+      "success": "Votre mot de passe a été réinitialisé avec succès, vous pouvez maintenant vous connecter !",
+      "errors": {
+        "INVALID_TOKEN": "Le token est invalide ou a expiré.<br></br>Demandez-en un nouveau <link>ici</link>."
+      }
     }
   },
   "home": {

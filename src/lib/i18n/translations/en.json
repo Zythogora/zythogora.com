@@ -12,6 +12,15 @@
       "text2": "You can activate your account by clicking the button below.",
       "button": "Activate your account",
       "buttonFallback": "If the button does not work, you can also copy and paste the following URL into your browser: <link>{activationUrl}</link>."
+    },
+    "resetPassword": {
+      "subject": "Reset your Zythogora password",
+      "preview": "Reset your password",
+      "text": "Hello {username},<br></br>You have requested to reset your password for your Zythogora account.",
+      "text2": "To reset your password, click the button below.",
+      "text3": "If you did not request this, you can safely ignore this email.",
+      "button": "Reset your password",
+      "buttonFallback": "If the button does not work, you can also copy and paste the following URL into your browser: <link>{resetPasswordUrl}</link>."
     }
   },
   "common": {
@@ -43,6 +52,8 @@
     "errors": {
       "FIELD_REQUIRED": "This field is required",
       "EMAIL_INVALID": "The email is invalid",
+      "PASSWORD_TOO_SHORT": "The password has to be at least 8 characters long",
+      "PASSWORD_TOO_LONG": "The password cannot be longer than 1024 characters",
       "PASSWORDS_DO_NOT_MATCH": "The passwords do not match",
       "UNKNOWN_ERROR": "An unknown error occurred"
     }
@@ -76,6 +87,7 @@
       "actions": {
         "signIn": "Sign in",
         "signInPending": "Signing in",
+        "passwordForgotten": "Forgot your password?",
         "signUp": "Sign up instead"
       },
       "errors": {
@@ -98,8 +110,6 @@
         "USERNAME_TOO_SHORT": "The username has to be at least 3 characters long",
         "USERNAME_TOO_LONG": "The username cannot be longer than 25 characters",
         "USERNAME_INVALID_CHARACTERS": "The username can only contain numbers, letters and underscores (_)",
-        "PASSWORD_TOO_SHORT": "The password has to be at least 8 characters long",
-        "PASSWORD_TOO_LONG": "The password cannot be longer than 1024 characters",
         "USERNAME_ALREADY_EXISTS": "This username already exists",
         "EMAIL_ALREADY_EXISTS": "This email already exists"
       }
@@ -111,6 +121,33 @@
       "title": "An email has been sent to you<br></br>to verify your account.",
       "text": "Check your mailbox and click on the link<br></br>to be able to <link>sign-in</link>!",
       "success": "Your email has been verified with success, you are now connected!"
+    },
+    "passwordForgotten": {
+      "metadata": {
+        "title": "Password forgotten | Zythogora"
+      },
+      "title": "Password forgotten",
+      "description": "Enter your email below to receive an email to reset your password.",
+      "actions": {
+        "send": "Send me an email",
+        "sending": "Sending email..."
+      },
+      "success": "An email to reset your password has been sent to {email} if this address is associated with an account."
+    },
+    "resetPassword": {
+      "metadata": {
+        "title": "Reset your password | Zythogora"
+      },
+      "title": "Reset your password",
+      "description": "Enter your new password below.",
+      "actions": {
+        "reset": "Reset my password",
+        "resetPending": "Resetting password"
+      },
+      "success": "Your password has been reset with success, you can now sign in!",
+      "errors": {
+        "INVALID_TOKEN": "The token is invalid or has expired.<br></br>Request a new one <link>here</link>."
+      }
     }
   },
   "home": {

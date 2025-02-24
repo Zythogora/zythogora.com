@@ -87,22 +87,29 @@ const SignInForm = () => {
             : t("auth.signIn.actions.signIn")}
         </Button>
 
-        <div className="flex flex-row-reverse items-center justify-between">
+        <div className="flex flex-row items-center justify-between">
+          <Link
+            href={Routes.PASSWORD_FORGOTTEN}
+            className="font-title pl-3 text-sm font-medium"
+          >
+            {t("auth.signIn.actions.passwordForgotten")}
+          </Link>
+
           <Link
             href={Routes.SIGN_UP}
             className="font-title pr-3 text-sm font-medium"
           >
             {t("auth.signIn.actions.signUp")}
           </Link>
-
-          {lastResult?.error?.[""] ? (
-            <FormError
-              id={form.errorId}
-              errors={lastResult?.error?.[""] ?? []}
-              className="my-0 h-fit text-red-900"
-            />
-          ) : null}
         </div>
+
+        {lastResult?.error?.[""] ? (
+          <FormError
+            id={form.errorId}
+            errors={lastResult?.error?.[""] ?? []}
+            className="my-0 h-fit text-red-900"
+          />
+        ) : null}
       </div>
     </form>
   );

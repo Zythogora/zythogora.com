@@ -49,7 +49,7 @@ const SignUpEmailVerificationPage = async ({
         {t.rich("auth.emailVerification.text", {
           br: () => <br />,
           link: (chunks) => (
-            <Link href={Routes.SIGN_IN} className="text-primary-800 underline">
+            <Link href={Routes.SIGN_IN} className="text-primary-700 underline">
               {chunks}
             </Link>
           ),

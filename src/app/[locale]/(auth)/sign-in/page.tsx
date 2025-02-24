@@ -1,9 +1,13 @@
-import { getTranslations } from "next-intl/server";
+import { headers } from "next/headers";
+import { getLocale, getTranslations } from "next-intl/server";
 
 import SignInProviders from "@/app/[locale]/(auth)/_components/providers";
 import SignInForm from "@/app/[locale]/(auth)/sign-in/_components/form";
 import Wave from "@/app/_components/wave";
+import { auth } from "@/lib/auth/server";
 import { config } from "@/lib/config";
+import { redirect } from "@/lib/i18n";
+import { Routes } from "@/lib/routes";
 import { cn } from "@/lib/tailwind";
 
 export async function generateMetadata() {
@@ -16,6 +20,16 @@ export async function generateMetadata() {
 
 const SignInPage = async () => {
   const t = await getTranslations();
+
+  const locale = await getLocale();
+
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  if (session) {
+    redirect({ href: Routes.HOME, locale });
+  }
 
   const availableProviders = config.auth.availableProviders;
 
