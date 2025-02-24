@@ -4,8 +4,28 @@ import BeerCard from "@/app/[locale]/(business)/breweries/[brewerySlug]/beers/[b
 import ReplacePathname from "@/app/_components/replace-pathname";
 import { getBeerBySlug } from "@/domain/beers";
 import { publicConfig } from "@/lib/config/client-config";
+import prisma from "@/lib/prisma";
 import { Routes } from "@/lib/routes";
 import { generatePath } from "@/lib/routes/utils";
+
+export async function generateStaticParams() {
+  const beers = await prisma.beers.findMany({
+    include: { brewery: true },
+  });
+
+  return beers
+    .map((beer) => [
+      {
+        brewerySlug: beer.brewery.slug.slice(0, 4),
+        beerSlug: beer.slug.slice(0, 4),
+      },
+      {
+        brewerySlug: beer.brewery.slug,
+        beerSlug: beer.slug,
+      },
+    ])
+    .flat();
+}
 
 interface BeerPageProps {
   params: Promise<{
