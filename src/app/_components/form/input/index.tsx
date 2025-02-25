@@ -3,6 +3,7 @@ import { getInputProps, type FieldMetadata } from "@conform-to/react";
 import FormError from "@/app/_components/ui/form-error";
 import Input from "@/app/_components/ui/input";
 import Label from "@/app/_components/ui/label";
+import { cn } from "@/lib/tailwind";
 
 interface FormInputProps {
   label: string;
@@ -10,12 +11,7 @@ interface FormInputProps {
   type: Parameters<typeof getInputProps>[1]["type"];
   field: FieldMetadata;
   disabled?: boolean;
-  className?: {
-    label?: string;
-    input?: string;
-    inputContainer?: string;
-    error?: string;
-  };
+  className?: string;
 }
 
 const FormInput = ({
@@ -27,10 +23,8 @@ const FormInput = ({
   className,
 }: FormInputProps) => {
   return (
-    <div className="flex flex-col gap-y-1">
-      <Label htmlFor={field.id} className={className?.label}>
-        {label}
-      </Label>
+    <div className={cn("flex flex-col gap-y-1", className)}>
+      <Label htmlFor={field.id}>{label}</Label>
 
       <div>
         <Input
@@ -38,15 +32,9 @@ const FormInput = ({
           key={field.key}
           disabled={disabled}
           placeholder={placeholder}
-          className={className?.input}
-          containerClassName={className?.inputContainer}
         />
 
-        <FormError
-          id={field.errorId}
-          errors={field.errors}
-          className={className?.error}
-        />
+        <FormError id={field.errorId} errors={field.errors} />
       </div>
     </div>
   );

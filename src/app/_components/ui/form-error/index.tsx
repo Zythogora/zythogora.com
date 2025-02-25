@@ -19,11 +19,12 @@ const FormError = ({ errors, className, ...restProps }: FormErrorProps) => {
 
   return (
     <p
-      {...restProps}
+      data-slot="form-error"
       className={cn(
         "text-destructive mt-1 -mb-1 flex h-0 flex-col pl-3 text-xs",
         className,
       )}
+      {...restProps}
     >
       {
         // @ts-expect-error Typescript doesn't know that the error is a message key

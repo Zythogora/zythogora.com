@@ -67,34 +67,32 @@ const ResetPasswordForm = ({ token }: ResetPasswordFormProps) => {
           </Label>
 
           <div>
-            <div className="flex flex-col">
+            <div
+              className={cn(
+                "flex flex-col rounded-[7px] *:m-[-1px]",
+                "focus-within:outline-primary-700 focus-within:outline-3 focus-within:outline-offset-1",
+                "before:bg-foreground relative before:absolute before:inset-[-1px] before:bottom-[-3px] before:z-[-1] before:rounded",
+                "**:data-[slot=input-container]:rounded-none **:data-[slot=input-container]:focus-within:z-50!",
+                "**:data-[slot=input-container]:before:bottom-0",
+                "not-focus-within:**:data-[slot=input-container]:last-of-type:before:-bottom-0.5!",
+                "**:data-[slot=input-container]:has-aria-invalid:z-40",
+                "**:data-[slot=input]:rounded-none",
+              )}
+            >
               <Input
                 {...getInputProps(fields.password, { type: "password" })}
-                disabled={isPending}
                 key={fields.password.key}
+                disabled={isPending}
                 placeholder={t("form.fields.password.placeholder")}
-                className={cn(
-                  "rounded-b-none border-b-0",
-                  "aria-invalid:border-red-800",
-                )}
-                containerClassName={cn(
-                  "before:rounded-b-none has-aria-invalid:before:bg-red-800",
-                  "before:rectangular-drop-shadow hover:before:triangular-drop-shadow has-focus-visible:before:triangular-drop-shadow",
-                )}
+                className={cn("rounded-t", "*:data-[slot=input]:rounded-t!")}
               />
 
               <Input
-                {...getInputProps(fields.confirmPassword, {
-                  type: "password",
-                })}
+                {...getInputProps(fields.confirmPassword, { type: "password" })}
                 key={fields.confirmPassword.key}
                 disabled={isPending}
                 placeholder={t("form.fields.confirmPassword.placeholder")}
-                className={cn(
-                  "rounded-t-none border-t-2",
-                  "aria-invalid:border-red-800",
-                )}
-                containerClassName="has-aria-invalid:before:bg-red-800"
+                className={cn("rounded-b", "*:data-[slot=input]:rounded-b!")}
               />
             </div>
 
@@ -102,13 +100,11 @@ const ResetPasswordForm = ({ token }: ResetPasswordFormProps) => {
               <FormError
                 id={fields.password.errorId}
                 errors={fields.password.errors}
-                className="text-red-900"
               />
             ) : (
               <FormError
                 id={fields.confirmPassword.errorId}
                 errors={fields.confirmPassword.errors}
-                className="text-red-900"
               />
             )}
           </div>
@@ -126,7 +122,7 @@ const ResetPasswordForm = ({ token }: ResetPasswordFormProps) => {
           <FormError
             id={form.errorId}
             errors={lastResult?.error?.[""] ?? []}
-            className="my-0 h-fit text-red-900"
+            className="my-0 h-fit"
           />
         ) : null}
       </div>
