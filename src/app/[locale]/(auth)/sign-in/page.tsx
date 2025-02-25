@@ -45,7 +45,8 @@ const SignInPage = async () => {
 
       <div
         className={cn(
-          "bg-primary relative flex h-3/4 min-h-fit flex-col items-center justify-between gap-y-4 p-12",
+          "relative flex h-3/4 min-h-fit flex-col items-center justify-between gap-y-4 p-12",
+          "before:bg-primary before:absolute before:inset-0 before:z-[-2]",
           availableProviders.length > 0 ? "justify-between" : "justify-center",
         )}
       >

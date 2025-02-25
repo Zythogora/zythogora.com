@@ -7,6 +7,7 @@ import { useDebouncedCallback } from "use-debounce";
 import Input from "@/app/_components/ui/input";
 import { usePathname } from "@/lib/i18n";
 import { useRouterWithSearchParams } from "@/lib/i18n/hooks";
+import { cn } from "@/lib/tailwind";
 
 import type { ChangeEvent, FormEvent } from "react";
 
@@ -41,8 +42,10 @@ const SearchBar = ({ initialValue }: SearchBarProps) => {
         defaultValue={initialValue}
         onChange={handleSearchChange}
         placeholder={t("searchPage.searchBarPlaceholder")}
-        containerClassName="before:rounded-full"
-        className="rounded-full"
+        className={cn(
+          "before:rounded-full",
+          "*:data-[slot=input]:rounded-full",
+        )}
       />
     </form>
   );

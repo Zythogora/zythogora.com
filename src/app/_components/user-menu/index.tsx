@@ -33,9 +33,14 @@ export const UserMenuTrigger = ({
       variant="outline"
       size="icon"
       className={cn(
-        "relative size-9 shrink-0 rounded-full before:rounded-full",
-        "hover:bg-primary hover:w-9 hover:translate-x-0 hover:translate-y-0 hover:before:w-9 hover:before:translate-y-0.5",
-        "focus-visible:bg-primary focus-visible:w-9 focus-visible:translate-x-0 focus-visible:translate-y-0 focus-visible:before:w-9 focus-visible:before:translate-y-0.5",
+        "relative size-10 shrink-0 rounded-full before:rounded-full",
+        "outline-0 outline-solid",
+        "hover:outline-primary hover:outline-3",
+        "focus-visible:outline-primary focus-visible:outline-3",
+        // Disable normal button hover/focus effects
+        "transition-none",
+        "hover:w-10 hover:translate-x-0 hover:translate-y-0 hover:before:w-10 hover:before:translate-y-0.5",
+        "focus-visible:w-10 focus-visible:translate-x-0 focus-visible:translate-y-0 focus-visible:before:w-10 focus-visible:before:translate-y-0.5",
         className,
       )}
       {...restProps}

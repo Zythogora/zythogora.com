@@ -70,7 +70,7 @@ const PasswordForgottenForm = ({ email }: PasswordForgottenFormProps) => {
 
       {!isPending ? (
         lastResult?.status === "success" ? (
-          <p className="text-green-900">
+          <p className="text-success">
             {t("auth.passwordForgotten.success", {
               email: submittedEmail,
             })}
@@ -79,7 +79,7 @@ const PasswordForgottenForm = ({ email }: PasswordForgottenFormProps) => {
           <FormError
             id={form.errorId}
             errors={lastResult?.error?.[""] ?? []}
-            className="my-0 h-fit text-red-900"
+            className="my-0 h-fit"
           />
         ) : null
       ) : null}

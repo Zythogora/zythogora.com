@@ -9,6 +9,7 @@
   --background: var(--color-stone-50);
   --background-muted: var(--color-stone-200);
 
+  --success: var(--color-green-700);
   --destructive: var(--color-red-700);
 }
 
@@ -19,6 +20,7 @@
   --background: var(--color-stone-800);
   --background-muted: var(--color-stone-600);
 
+  --success: var(--color-green-400);
   --destructive: var(--color-red-400);
 }
 
@@ -44,6 +46,7 @@
   --color-background-muted: var(--background-muted);
 
   --color-destructive: var(--destructive);
+  --color-success: var(--success);
 
   --font-title: var(--font-title);
   --font-paragraph: var(--font-paragraph);
@@ -78,31 +81,5 @@
   h5,
   h6 {
     @apply font-title;
-  }
-}
-
-@utility rectangular-drop-shadow {
-  & {
-    clip-path: polygon(
-      0 calc(100% - 6px),
-      100% calc(100% - 6px),
-      100% calc(100% - 4px),
-      100% 100%,
-      0 100%,
-      0 calc(100% - 4px)
-    );
-  }
-}
-
-@utility triangular-drop-shadow {
-  & {
-    clip-path: polygon(
-      0 calc(100% - 6px),
-      100% calc(100% - 6px),
-      100% calc(100% - 4px),
-      calc(100% - 6px) 100%,
-      6px 100%,
-      0 calc(100% - 4px)
-    );
   }
 }
