@@ -20,10 +20,8 @@ export const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-primary hover:bg-primary-400 text-stone-950 transition-[bottom,background-color] selection:bg-stone-950/15",
-        outline: cn(
-          "bg-background border-foreground before:bg-foreground dark:bg-stone-700",
-        ),
+          "bg-primary hover:bg-primary-400 dark:before:bg-primary-700 text-stone-950 transition-[bottom,background-color] selection:bg-stone-950/15",
+        outline: "bg-background dark:bg-stone-700",
       },
       size: {
         default: "px-5 py-4",

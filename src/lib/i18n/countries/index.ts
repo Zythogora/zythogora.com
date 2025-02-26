@@ -12,6 +12,10 @@ for (const locale of routing.locales) {
   );
 }
 
+export const countryCodes = Object.keys(
+  countries.getNames(routing.defaultLocale),
+).sort();
+
 export const getCountry = async (code: string): Promise<Country> => {
   const locale = await getLocale();
 

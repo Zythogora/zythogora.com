@@ -49,15 +49,19 @@
         "placeholder": "Confirm password"
       },
       "countrySelect": {
+        "searchPlaceholder": "Search for a country",
         "noResult": "No country found"
       }
     },
     "errors": {
       "FIELD_REQUIRED": "This field is required",
       "EMAIL_INVALID": "The email is invalid",
+      "PHONE_NUMBER_INVALID": "The phone number does not match the selected country or has no international prefix",
       "PASSWORD_TOO_SHORT": "The password has to be at least 8 characters long",
       "PASSWORD_TOO_LONG": "The password cannot be longer than 1024 characters",
       "PASSWORDS_DO_NOT_MATCH": "The passwords do not match",
+      "URL_INVALID": "The URL is invalid",
+      "COUNTRY_CODE_INVALID": "Unknown country",
       "UNKNOWN_ERROR": "An unknown error occurred"
     }
   },
@@ -214,6 +218,63 @@
     "404": {
       "title": "We don't know this brewery<br></br><muted>(yet)</muted> :(",
       "cta": "But you can <link>search</link> for another one!"
+    }
+  },
+  "createBreweryPage": {
+    "title": "Add a new brewery",
+    "fields": {
+      "name": {
+        "label": "Brewery name"
+      },
+      "creationDate": {
+        "label": "Creation date"
+      },
+      "country": {
+        "label": "Country"
+      },
+      "state": {
+        "label": "State"
+      },
+      "city": {
+        "label": "City"
+      },
+      "address": {
+        "label": "Address"
+      },
+      "description": {
+        "label": "Description"
+      },
+      "websiteLink": {
+        "label": "Website link"
+      },
+      "socialLinks": {
+        "label": "Social links",
+        "name": {
+          "label": "Social link name",
+          "placeholder": "Display name (Instagram, TikTok, etc.)"
+        },
+        "url": {
+          "label": "Social link URL",
+          "placeholder": "URL of the account (https://www.instagram.com/my_brewery)"
+        },
+        "actions": {
+          "add": "Add another social link",
+          "remove": "Remove social link"
+        }
+      },
+      "contactEmail": {
+        "label": "Contact email"
+      },
+      "contactPhoneNumber": {
+        "label": "Contact phone number"
+      }
+    },
+    "actions": {
+      "submit": "Create brewery"
+    },
+    "errors": {
+      "MIN_CREATION_DATE_ERROR": "The creation date cannot be before the year 1000",
+      "MAX_CREATION_DATE_ERROR": "The creation date cannot be in the future"
     }
   }
 }

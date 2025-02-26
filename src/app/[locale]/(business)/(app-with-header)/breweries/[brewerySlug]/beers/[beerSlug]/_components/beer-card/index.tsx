@@ -43,7 +43,7 @@ const BeerCard = async ({
         <div className="flex flex-row items-center gap-x-2">
           <CountryFlag country={brewery.country} size={12} />
 
-          <p className="gap-x-inter-space flex min-w-0 flex-row text-xs text-nowrap">
+          <p className="gap-x-paragraph-space flex min-w-0 flex-row text-xs text-nowrap">
             {t.rich("beerPage.brewedBy", {
               brewery: brewery.name,
               link: (chunks) => (

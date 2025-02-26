@@ -3,7 +3,7 @@
 import { Command } from "cmdk";
 import { CheckIcon, ChevronDownIcon, SearchIcon } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
-import { useId, useState } from "react";
+import { useState, type ComponentProps } from "react";
 
 import CountryFlag from "@/app/_components/icons/country-flag";
 import Button from "@/app/_components/ui/button";
@@ -16,16 +16,25 @@ import countries from "@/lib/i18n/countries";
 import { cn } from "@/lib/tailwind";
 
 import type { Country } from "@/lib/i18n/countries/types";
+import type { getSelectProps } from "@conform-to/react";
 
-interface CountrySelectProps {
-  placeholder?: string;
+interface CountrySelectProps
+  extends Partial<ReturnType<typeof getSelectProps>>,
+    Pick<ComponentProps<"input">, "placeholder" | "disabled" | "className"> {
+  onChange?: (value: Country) => void;
+  searchPlaceholder?: string;
 }
 
-const CountrySelect = ({ placeholder }: CountrySelectProps) => {
+const CountrySelect = ({
+  onChange,
+  placeholder,
+  searchPlaceholder,
+  className,
+  ...restProps
+}: CountrySelectProps) => {
   const t = useTranslations();
   const locale = useLocale();
 
-  const id = useId();
   const [open, setOpen] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
 
@@ -37,15 +46,18 @@ const CountrySelect = ({ placeholder }: CountrySelectProps) => {
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <Button
+          {...restProps}
           data-slot="country-select-trigger"
-          id={id}
           variant="outline"
-          role="combobox"
           aria-expanded={open}
+          role="combobox"
+          value={selectedCountry?.code}
           className={cn(
             "group/country-select-trigger font-medium",
             "justify-between pr-4",
-            "aria-expanded:duration-0 aria-expanded:before:duration-0 aria-expanded:hover:bottom-0 aria-expanded:hover:before:-bottom-1",
+            "hover:bottom-0 hover:before:-bottom-1",
+            "aria-invalid:before:bg-destructive",
+            className,
           )}
         >
           {selectedCountry ? (
@@ -60,7 +72,11 @@ const CountrySelect = ({ placeholder }: CountrySelectProps) => {
 
           <ChevronDownIcon
             size={24}
-            className="shrink-0 transition-transform duration-300 group-aria-expanded/country-select-trigger:-scale-y-100"
+            className={cn(
+              "shrink-0 transition-transform duration-300",
+              "group-aria-expanded/country-select-trigger:-scale-y-100",
+              "group-aria-invalid/country-select-trigger:text-destructive",
+            )}
             aria-hidden="true"
           />
         </Button>
@@ -70,7 +86,7 @@ const CountrySelect = ({ placeholder }: CountrySelectProps) => {
         align="start"
         alignOffset={-2}
         sideOffset={8}
-        className="w-full min-w-[var(--radix-popper-anchor-width)] p-0"
+        className="w-full max-w-[calc(100vw-theme(spacing.16))] min-w-[var(--radix-popper-anchor-width)] p-0"
       >
         <Command
           data-slot="country-select"
@@ -96,6 +112,7 @@ const CountrySelect = ({ placeholder }: CountrySelectProps) => {
 
             <Command.Input
               data-slot="country-select-input"
+              placeholder={searchPlaceholder}
               className={cn(
                 "flex w-full rounded outline-hidden",
                 "text-sm md:text-base",
@@ -108,7 +125,7 @@ const CountrySelect = ({ placeholder }: CountrySelectProps) => {
           <Command.List
             data-slot="country-select-list"
             className={cn(
-              "max-h-[300px] scroll-py-1 overflow-x-hidden overflow-y-auto",
+              "max-h-72 scroll-py-1 overflow-x-hidden overflow-y-auto md:max-h-80",
               "bg-background dark:bg-stone-700",
               "*:[&[cmdk-list-sizer]]:p-2",
             )}
@@ -124,6 +141,7 @@ const CountrySelect = ({ placeholder }: CountrySelectProps) => {
                 value={country.code}
                 keywords={[country.code, country.name]}
                 onSelect={() => {
+                  onChange?.(country);
                   setSelectedCountry(country);
                   setOpen(false);
                 }}
