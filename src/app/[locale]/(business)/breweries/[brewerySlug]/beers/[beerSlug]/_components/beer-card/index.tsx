@@ -7,15 +7,14 @@ import { Link } from "@/lib/i18n";
 import { Routes } from "@/lib/routes";
 import { generatePath } from "@/lib/routes/utils";
 
+import type { Country } from "@/lib/i18n/countries/types";
+
 interface BeerCardProps {
   name: string;
   brewery: {
     slug: string;
     name: string;
-    country: {
-      name: string;
-      code: string;
-    };
+    country: Country;
   };
   style: string;
   abv: number;

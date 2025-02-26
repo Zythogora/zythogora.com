@@ -1,6 +1,6 @@
 "server only";
 
-import { getCountryName } from "@/lib/i18n/countries";
+import { getCountry } from "@/lib/i18n/countries";
 import { getPaginatedResults } from "@/lib/pagination";
 import { sanitizeFullTextSearch } from "@/lib/prisma";
 import prisma from "@/lib/prisma";
@@ -56,10 +56,7 @@ export const searchBeers = async ({
       brewery: {
         slug: brewery.slug,
         name: brewery.name,
-        country: {
-          name: await getCountryName(brewery.countryAlpha2Code),
-          code: brewery.countryAlpha2Code,
-        },
+        country: await getCountry(brewery.countryAlpha2Code),
       },
       style: style.name,
       abv: beer.abv,
@@ -108,10 +105,7 @@ export const searchBreweries = async ({
       id: brewery.id,
       slug: brewery.slug,
       name: brewery.name,
-      country: {
-        name: await getCountryName(brewery.countryAlpha2Code),
-        code: brewery.countryAlpha2Code,
-      },
+      country: await getCountry(brewery.countryAlpha2Code),
       beerCount: _count.beers,
     })),
   );

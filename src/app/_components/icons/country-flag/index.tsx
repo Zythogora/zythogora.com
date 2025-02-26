@@ -3,12 +3,10 @@ import Image from "next/image";
 import { cn } from "@/lib/tailwind";
 
 import type { IconProps } from "@/app/_components/icons/types";
+import type { Country } from "@/lib/i18n/countries/types";
 
 interface CountryFlagProps extends IconProps {
-  country: {
-    name: string;
-    code: string;
-  };
+  country: Country;
 }
 
 const CountryFlag = ({ country, size, className }: CountryFlagProps) => {

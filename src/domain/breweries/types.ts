@@ -1,3 +1,4 @@
+import type { Country } from "@/lib/i18n/countries/types";
 import type { Beers, Breweries, Colors, Styles } from "@prisma/client";
 
 export type RawBrewery = Breweries;
@@ -6,10 +7,7 @@ export type Brewery = {
   id: string;
   slug: string;
   name: string;
-  country: {
-    name: string;
-    code: string;
-  };
+  country: Country;
 };
 
 export type RawBreweryBeer = Beers & {

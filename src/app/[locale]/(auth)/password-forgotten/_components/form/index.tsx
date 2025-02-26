@@ -62,7 +62,7 @@ const PasswordForgottenForm = ({ email }: PasswordForgottenFormProps) => {
         field={fields.email}
       />
 
-      <Button type="submit" className="w-full" disabled={isPending}>
+      <Button type="submit" disabled={isPending}>
         {isPending
           ? t("auth.passwordForgotten.actions.sending")
           : t("auth.passwordForgotten.actions.send")}

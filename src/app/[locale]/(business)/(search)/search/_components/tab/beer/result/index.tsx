@@ -2,14 +2,13 @@ import CountryFlag from "@/app/_components/icons/country-flag";
 import PintIcon from "@/app/_components/icons/pint";
 import Chip from "@/app/_components/ui/chip";
 
+import type { Country } from "@/lib/i18n/countries/types";
+
 interface BeerSearchResultProps {
   name: string;
   brewery: {
     name: string;
-    country: {
-      name: string;
-      code: string;
-    };
+    country: Country;
   };
   style: string;
   abv: number;

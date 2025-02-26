@@ -51,7 +51,7 @@ const SignInForm = () => {
         "flex w-full flex-col gap-y-8",
         "**:data-[slot=input-container]:has-aria-invalid:before:bg-red-800",
         "**:data-[slot=input]:focus-visible:outline-foreground **:data-[slot=input]:aria-invalid:border-red-800",
-        "**:data-[slot=show-password-button]:focus-visible:outline-foreground **:data-[slot=show-password-button]:group-has-aria-invalid:fill-red-800",
+        "**:data-[slot=show-password-button]:focus-visible:outline-foreground **:data-[slot=show-password-button]:group-has-aria-invalid/input:fill-red-800",
         "**:data-[slot=form-error]:text-red-900",
       )}
     >
@@ -76,12 +76,7 @@ const SignInForm = () => {
       </div>
 
       <div className="flex flex-col gap-y-2">
-        <Button
-          type="submit"
-          disabled={isPending}
-          variant="outline"
-          className="w-full"
-        >
+        <Button type="submit" disabled={isPending} variant="outline">
           {isPending
             ? t("auth.signIn.actions.signInPending")
             : t("auth.signIn.actions.signIn")}
@@ -90,14 +85,20 @@ const SignInForm = () => {
         <div className="flex flex-row items-center justify-between">
           <Link
             href={Routes.PASSWORD_FORGOTTEN}
-            className="font-title pl-3 text-sm font-medium"
+            className={cn(
+              "font-title ml-1 rounded px-2 py-1 text-sm font-medium",
+              "focus-visible:outline-foreground focus-visible:outline-3",
+            )}
           >
             {t("auth.signIn.actions.passwordForgotten")}
           </Link>
 
           <Link
             href={Routes.SIGN_UP}
-            className="font-title pr-3 text-sm font-medium"
+            className={cn(
+              "font-title mr-1 rounded px-2 py-1 text-sm font-medium",
+              "focus-visible:outline-foreground focus-visible:outline-3",
+            )}
           >
             {t("auth.signIn.actions.signUp")}
           </Link>

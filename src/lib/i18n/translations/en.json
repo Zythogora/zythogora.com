@@ -47,6 +47,9 @@
       },
       "confirmPassword": {
         "placeholder": "Confirm password"
+      },
+      "countrySelect": {
+        "noResult": "No country found"
       }
     },
     "errors": {
@@ -142,11 +145,12 @@
       "description": "Enter your new password below.",
       "actions": {
         "reset": "Reset my password",
-        "resetPending": "Resetting password"
+        "resetPending": "Resetting password",
+        "requestNewToken": "The token is invalid or has expired.<br></br>Request a new one <link>here</link>."
       },
       "success": "Your password has been reset with success, you can now sign in!",
       "errors": {
-        "INVALID_TOKEN": "The token is invalid or has expired.<br></br>Request a new one <link>here</link>."
+        "INVALID_TOKEN": "The token is invalid or has expired"
       }
     }
   },

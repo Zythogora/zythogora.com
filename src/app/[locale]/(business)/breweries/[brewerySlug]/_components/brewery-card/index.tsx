@@ -3,12 +3,11 @@ import { getTranslations } from "next-intl/server";
 import CountryFlag from "@/app/_components/icons/country-flag";
 import DescriptionList from "@/app/_components/ui/description-list";
 
+import type { Country } from "@/lib/i18n/countries/types";
+
 interface BreweryCardProps {
   name: string;
-  country: {
-    name: string;
-    code: string;
-  };
+  country: Country;
 }
 
 const BeerCard = async ({ name, country }: BreweryCardProps) => {

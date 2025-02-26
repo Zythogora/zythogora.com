@@ -16,7 +16,7 @@ const Input = ({ className, type, ...restProps }: ComponentProps<"input">) => {
     <div
       data-slot="input-container"
       className={cn(
-        "group",
+        "group/input",
         "before:bg-foreground relative before:absolute before:inset-0 before:-bottom-0.5 before:z-[-1] before:rounded",
         "has-aria-invalid:before:bg-destructive",
         className,
@@ -27,14 +27,13 @@ const Input = ({ className, type, ...restProps }: ComponentProps<"input">) => {
         type={type === "password" && showPassword ? "text" : type}
         className={cn(
           "bg-background border-foreground flex w-full min-w-0 rounded border-2 px-5 py-4",
-          "text-base md:text-sm",
+          "text-sm md:text-base",
           "dark:bg-stone-700",
-          "placeholder:text-muted-foreground placeholder:select-none",
+          "placeholder:text-foreground-muted placeholder:select-none",
           "disabled:bg-background-muted disabled:pointer-events-none disabled:cursor-not-allowed",
           "focus-visible:outline-primary focus-visible:outline-3",
           "aria-invalid:border-destructive",
           "aria-invalid:placeholder:text-destructive/50",
-          "selection:bg-primary/25",
         )}
         {...restProps}
       />
@@ -51,7 +50,7 @@ const Input = ({ className, type, ...restProps }: ComponentProps<"input">) => {
           className={cn(
             "fill-foreground absolute inset-y-[15px] right-[15px] size-7 rounded p-1",
             "focus-visible:outline-primary focus-visible:outline-3",
-            "group-has-aria-invalid:fill-destructive",
+            "group-has-aria-invalid/input:fill-destructive",
           )}
         >
           {showPassword ? (

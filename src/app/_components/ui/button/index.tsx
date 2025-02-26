@@ -7,18 +7,20 @@ import type { ComponentProps } from "react";
 
 export const buttonVariants = cva(
   [
-    "relative flex origin-bottom cursor-pointer items-center justify-center rounded border-2 text-sm font-bold ring-0 transition-all duration-300 outline-none transform-3d",
-    "before:absolute before:size-[calc(100%+4px)] before:translate-y-0.5 before:translate-z-[-1px] before:rounded before:transition-all before:duration-300 before:transform-3d",
-    "md:text-base",
-    "hover:w-[calc(100%+8px)] hover:-translate-x-1 hover:-translate-y-1 hover:before:translate-y-1.5 hover:before:translate-z-[-1px]",
-    "focus-visible:w-[calc(100%+8px)] focus-visible:-translate-x-1 focus-visible:-translate-y-1 focus-visible:before:translate-y-1.5 focus-visible:before:translate-z-[-1px]",
+    "left-0.5 flex w-[calc(100%-4px)] min-w-0 cursor-pointer flex-row items-center justify-center gap-x-2 rounded-md font-bold",
+    "text-sm md:text-base",
+    "before:bg-foreground relative before:absolute before:-inset-0.5 before:z-[-1] before:rounded",
+    "bottom-0 transition-[bottom] duration-300 hover:bottom-0.5",
+    "before:-bottom-1 before:transition-[bottom] before:duration-300 hover:before:-bottom-1.5",
+    "focus-visible:outline-primary focus-visible:outline-3 focus-visible:outline-offset-2",
+    "focus-visible:hover:bottom-0 focus-visible:hover:before:-bottom-1",
     "disabled:pointer-events-none disabled:cursor-default",
   ],
   {
     variants: {
       variant: {
         default:
-          "bg-primary border-primary-700 before:bg-primary-700 text-stone-950",
+          "bg-primary hover:bg-primary-400 text-stone-950 transition-[bottom,background-color] selection:bg-stone-950/15",
         outline: cn(
           "bg-background border-foreground before:bg-foreground dark:bg-stone-700",
         ),
