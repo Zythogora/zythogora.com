@@ -47,6 +47,9 @@
       },
       "confirmPassword": {
         "placeholder": "Confirmer le mot de passe"
+      },
+      "countrySelect": {
+        "noResult": "Aucun pays trouvé"
       }
     },
     "errors": {
@@ -142,11 +145,12 @@
       "description": "Entrez votre nouveau mot de passe ci-dessous.",
       "actions": {
         "reset": "Réinitialiser mon mot de passe",
-        "resetPending": "Réinitialisation en cours"
+        "resetPending": "Réinitialisation en cours",
+        "requestNewToken": "Le token est invalide ou a expiré.<br></br>Demandez-en un nouveau <link>ici</link>."
       },
       "success": "Votre mot de passe a été réinitialisé avec succès, vous pouvez maintenant vous connecter !",
       "errors": {
-        "INVALID_TOKEN": "Le token est invalide ou a expiré.<br></br>Demandez-en un nouveau <link>ici</link>."
+        "INVALID_TOKEN": "Le token est invalide ou a expiré"
       }
     }
   },

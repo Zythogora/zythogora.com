@@ -1,6 +1,6 @@
 "server only";
 
-import { getCountryName } from "@/lib/i18n/countries";
+import { getCountry } from "@/lib/i18n/countries";
 
 import type { Beer, RawBeer } from "@/domain/beers/types";
 
@@ -14,10 +14,7 @@ export const transformRawBeerToBeer = async (
     id: rawBeer.brewery.id,
     slug: rawBeer.brewery.slug,
     name: rawBeer.brewery.name,
-    country: {
-      name: await getCountryName(rawBeer.brewery.countryAlpha2Code),
-      code: rawBeer.brewery.countryAlpha2Code,
-    },
+    country: await getCountry(rawBeer.brewery.countryAlpha2Code),
   },
   style: rawBeer.style.name,
   abv: rawBeer.abv,

@@ -49,7 +49,7 @@ const ResetPasswordPage = async ({ searchParams }: ResetPasswordPageProps) => {
           </h1>
 
           <p>
-            {t.rich("auth.resetPassword.errors.INVALID_TOKEN", {
+            {t.rich("auth.resetPassword.actions.requestNewToken", {
               br: () => <br />,
               link: (chunks) => (
                 <Link

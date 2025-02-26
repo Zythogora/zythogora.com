@@ -14,7 +14,7 @@ const Label = ({
       className={cn(
         "font-title pl-3 text-base font-medium select-none",
         "md:text-lg",
-        "peer-disabled:pointer-events-none peer-disabled:cursor-not-allowed peer-disabled:opacity-50",
+        "group-has-disabled/form-input:text-foreground-muted group-has-disabled/form-input:pointer-events-none group-has-disabled/form-input:cursor-not-allowed",
         className,
       )}
       {...restProps}

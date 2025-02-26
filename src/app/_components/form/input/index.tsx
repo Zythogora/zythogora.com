@@ -23,7 +23,7 @@ const FormInput = ({
   className,
 }: FormInputProps) => {
   return (
-    <div className={cn("flex flex-col gap-y-1", className)}>
+    <div className={cn("group/form-input", "flex flex-col gap-y-1", className)}>
       <Label htmlFor={field.id}>{label}</Label>
 
       <div>

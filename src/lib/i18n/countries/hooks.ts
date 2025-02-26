@@ -5,14 +5,20 @@ import { useLocale } from "next-intl";
 import countries from "@/lib/i18n/countries";
 import { UnknownCountryCodeError } from "@/lib/i18n/countries/errors";
 
-export const useCountryCode = (code: string): string => {
+import type { Country } from "@/lib/i18n/countries/types";
+
+export const useCountryCode = () => {
   const locale = useLocale();
 
-  const countryName = countries.getName(code, locale);
+  return {
+    getCountry: (code: string): Country => {
+      const name = countries.getName(code, locale);
 
-  if (countryName === undefined) {
-    throw new UnknownCountryCodeError(code);
-  }
+      if (name === undefined) {
+        throw new UnknownCountryCodeError(code);
+      }
 
-  return countryName;
+      return { code, name: name };
+    },
+  };
 };

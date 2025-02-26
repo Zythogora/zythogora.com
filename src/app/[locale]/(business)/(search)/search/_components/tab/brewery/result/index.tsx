@@ -2,13 +2,12 @@ import { getTranslations } from "next-intl/server";
 
 import CountryFlag from "@/app/_components/icons/country-flag";
 
+import type { Country } from "@/lib/i18n/countries/types";
+
 interface BrewerySearchResultProps {
   name: string;
   location: {
-    country: {
-      name: string;
-      code: string;
-    };
+    country: Country;
   };
   beerCount: number;
 }
