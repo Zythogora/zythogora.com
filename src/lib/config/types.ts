@@ -6,6 +6,12 @@ export enum NodeEnv {
   test = "test",
 }
 
+export enum StaticGenerationMode {
+  ALL = "ALL",
+  SLUG_ONLY = "SLUG_ONLY",
+  NONE = "NONE",
+}
+
 const parseArray = z.string().transform((str, ctx): string[] => {
   try {
     const parsed = JSON.parse(str);
@@ -30,6 +36,7 @@ const parseArray = z.string().transform((str, ctx): string[] => {
 
 export const serverSideSchema = z.object({
   NODE_ENV: z.nativeEnum(NodeEnv),
+  STATIC_GENERATION: z.nativeEnum(StaticGenerationMode),
   DATABASE_URL: z.string(),
   DIRECT_URL: z.string(),
   RESEND_API_KEY: z.string(),

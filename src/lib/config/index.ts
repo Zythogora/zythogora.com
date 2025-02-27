@@ -19,6 +19,9 @@ const loadConfig = () => {
 
   return {
     nodeEnv: env.NODE_ENV,
+    next: {
+      staticGeneration: env.STATIC_GENERATION,
+    },
     database: {
       url: env.DATABASE_URL,
       directUrl: env.DIRECT_URL,
