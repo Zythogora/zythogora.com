@@ -35,14 +35,14 @@ const BeerSearchResult = ({
         <div>
           <p className="font-title truncate text-lg">{name}</p>
 
-          <div className="flex flex-row gap-x-1">
+          <div className="flex flex-row items-center gap-x-1">
             <CountryFlag
               country={brewery.country}
               size={14}
               className="size-3.5"
             />
 
-            <p className="text-foreground/62.5 truncate text-sm">
+            <p className="text-foreground/62.5 truncate overflow-visible text-sm leading-none">
               {brewery.name}
             </p>
           </div>

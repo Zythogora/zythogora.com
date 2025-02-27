@@ -8,8 +8,10 @@ import Tab from "@/app/_components/ui/tab";
 import { useRouter } from "@/lib/i18n";
 import { Routes } from "@/lib/routes";
 
+import type { SearchKind } from "@/app/[locale]/(business)/(search)/search/types";
+
 interface SearchTabsProps {
-  defaultTab: (typeof SEARCH_KINDS)[number];
+  defaultTab: SearchKind;
 }
 
 const SearchTabs = ({ defaultTab }: SearchTabsProps) => {

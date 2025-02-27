@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
 import { getLocale } from "next-intl/server";
 
-import BreweryBeerList from "@/app/[locale]/(business)/breweries/[brewerySlug]/_components/brewery-beer-list";
-import BreweryCard from "@/app/[locale]/(business)/breweries/[brewerySlug]/_components/brewery-card";
+import BreweryBeerList from "@/app/[locale]/(business)/(app-with-header)/breweries/[brewerySlug]/_components/brewery-beer-list";
+import BreweryCard from "@/app/[locale]/(business)/(app-with-header)/breweries/[brewerySlug]/_components/brewery-card";
 import { getBreweryBySlug } from "@/domain/breweries";
 import { config } from "@/lib/config";
 import { publicConfig } from "@/lib/config/client-config";
@@ -71,11 +71,11 @@ const BreweryPage = async ({ params }: BreweryPageProps) => {
   }
 
   return (
-    <div className="flex flex-col gap-y-8 p-8">
+    <>
       <BreweryCard name={brewery.name} country={brewery.country} />
 
       <BreweryBeerList breweryId={brewery.id} brewerySlug={brewerySlug} />
-    </div>
+    </>
   );
 };
 
