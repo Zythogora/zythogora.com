@@ -23,7 +23,10 @@ export async function generateStaticParams(): Promise<
   Awaited<BreweryPageProps["params"]>[]
 > {
   if (config.next.staticGeneration === StaticGenerationMode.NONE) {
-    return [];
+    // There's a bug in Next.js that crashes dynamic routes when using
+    // generateStaticParams and an empty array of params.
+    // The workaround is to return a dummy value.
+    return [{ brewerySlug: "-" }];
   }
 
   const breweries = await prisma.breweries.findMany();
