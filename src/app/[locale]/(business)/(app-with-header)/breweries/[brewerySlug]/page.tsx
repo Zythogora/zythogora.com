@@ -77,7 +77,7 @@ const BreweryPage = async ({ params }: BreweryPageProps) => {
     <>
       <BreweryCard name={brewery.name} country={brewery.country} />
 
-      <BreweryBeerList breweryId={brewery.id} brewerySlug={brewerySlug} />
+      <BreweryBeerList brewerySlug={brewerySlug} beers={brewery.beers} />
     </>
   );
 };
