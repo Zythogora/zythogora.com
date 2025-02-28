@@ -28,6 +28,7 @@
     "clsx": "^2.1.1",
     "cmdk": "^1.0.4",
     "i18n-iso-countries": "^7.14.0",
+    "libphonenumber-js": "^1.12.4",
     "lucide-react": "^0.475.0",
     "motion": "^12.4.3",
     "nanoid": "^5.1.0",

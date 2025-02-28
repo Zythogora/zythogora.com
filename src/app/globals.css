@@ -64,7 +64,8 @@
   --drop-shadow: 0 2px 0 var(--color-foreground);
   --inset-shadow: inset 0 0 0 2px var(--color-foreground);
 
-  --spacing-inter-space: 0.4ch;
+  --spacing-title-space: calc(1 / 3 * 1ch);
+  --spacing-paragraph-space: 0.4ch;
 }
 
 @layer base {

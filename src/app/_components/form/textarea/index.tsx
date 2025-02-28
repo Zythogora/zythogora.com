@@ -1,29 +1,27 @@
-import { getInputProps } from "@conform-to/react";
+import { getTextareaProps, type FieldMetadata } from "@conform-to/react";
 
 import FormError from "@/app/_components/ui/form-error";
-import Input from "@/app/_components/ui/input";
 import Label from "@/app/_components/ui/label";
+import Textarea from "@/app/_components/ui/textarea";
 import { cn } from "@/lib/tailwind";
 
-import type { FieldMetadata } from "@conform-to/react";
+import type { ComponentProps } from "react";
 
-interface FormInputProps {
+interface FormTextareaProps
+  extends Pick<
+    ComponentProps<typeof Textarea>,
+    "placeholder" | "disabled" | "rows" | "className"
+  > {
   label: string;
-  type: Parameters<typeof getInputProps>[1]["type"];
   field: FieldMetadata;
-  placeholder?: string;
-  disabled?: boolean;
-  className?: string;
 }
 
-const FormInput = ({
+const FormTextarea = ({
   label,
-  type,
   field,
-  placeholder,
-  disabled,
   className,
-}: FormInputProps) => {
+  ...restProps
+}: FormTextareaProps) => {
   return (
     <div
       className={cn("group/form-component", "flex flex-col gap-y-1", className)}
@@ -33,11 +31,10 @@ const FormInput = ({
       </Label>
 
       <div>
-        <Input
-          {...getInputProps(field, { type, ariaAttributes: true })}
+        <Textarea
+          {...getTextareaProps(field, { ariaAttributes: true })}
           key={field.key}
-          disabled={disabled}
-          placeholder={placeholder}
+          {...restProps}
         />
 
         <FormError id={field.errorId} errors={field.errors} />
@@ -46,4 +43,4 @@ const FormInput = ({
   );
 };
 
-export default FormInput;
+export default FormTextarea;

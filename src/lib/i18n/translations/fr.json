@@ -49,15 +49,19 @@
         "placeholder": "Confirmer le mot de passe"
       },
       "countrySelect": {
+        "searchPlaceholder": "Rechercher un pays",
         "noResult": "Aucun pays trouvé"
       }
     },
     "errors": {
       "FIELD_REQUIRED": "Ce champ est requis",
       "EMAIL_INVALID": "L'email est invalide",
+      "PHONE_NUMBER_INVALID": "Le numéro de téléphone ne correspond pas au pays sélectionné ou n'a pas d'indicatif international",
       "PASSWORD_TOO_SHORT": "Le mot de passe doit contenir au moins 8 caractères",
       "PASSWORD_TOO_LONG": "Le mot de passe ne peut pas contenir plus de 1024 caractères",
       "PASSWORDS_DO_NOT_MATCH": "Les mots de passe ne correspondent pas",
+      "URL_INVALID": "L'URL est invalide",
+      "COUNTRY_CODE_INVALID": "Pays inconnu",
       "UNKNOWN_ERROR": "Une erreur inconnue est survenue"
     }
   },
@@ -214,6 +218,63 @@
     "404": {
       "title": "On ne connait pas <muted>(encore)</muted><br></br>cette brasserie :(",
       "cta": "Mais tu peux en <link>chercher</link> une autre !"
+    }
+  },
+  "createBreweryPage": {
+    "title": "Ajouter une nouvelle brasserie",
+    "fields": {
+      "name": {
+        "label": "Nom de la brasserie"
+      },
+      "creationDate": {
+        "label": "Date de création"
+      },
+      "country": {
+        "label": "Pays"
+      },
+      "state": {
+        "label": "Département"
+      },
+      "city": {
+        "label": "Ville"
+      },
+      "address": {
+        "label": "Adresse"
+      },
+      "description": {
+        "label": "Description"
+      },
+      "websiteLink": {
+        "label": "Lien du site web"
+      },
+      "socialLinks": {
+        "label": "Réseaux sociaux",
+        "name": {
+          "label": "Nom du réseau social",
+          "placeholder": "Nom à afficher (Instagram, TikTok, etc.)"
+        },
+        "url": {
+          "label": "URL du réseau social",
+          "placeholder": "URL du compte (https://www.instagram.com/ma_brasserie)"
+        },
+        "actions": {
+          "add": "Ajouter un autre réseau social",
+          "remove": "Supprimer le réseau social"
+        }
+      },
+      "contactEmail": {
+        "label": "Email de contact"
+      },
+      "contactPhoneNumber": {
+        "label": "Numéro de contact"
+      }
+    },
+    "actions": {
+      "submit": "Créer la brasserie"
+    },
+    "errors": {
+      "MIN_CREATION_DATE_ERROR": "La date de création ne peut pas être antérieure à l'an 1000",
+      "MAX_CREATION_DATE_ERROR": "La date de création ne peut pas être dans le futur"
     }
   }
 }
