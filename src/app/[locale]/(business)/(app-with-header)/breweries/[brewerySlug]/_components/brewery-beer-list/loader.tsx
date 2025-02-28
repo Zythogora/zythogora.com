@@ -1,6 +1,6 @@
 import { getTranslations } from "next-intl/server";
 
-import BreweryBeerLoader from "@/app/[locale]/(business)/breweries/[brewerySlug]/_components/brewery-beer/loader";
+import BreweryBeerLoader from "@/app/[locale]/(business)/(app-with-header)/breweries/[brewerySlug]/_components/brewery-beer/loader";
 
 const BreweryBeerListLoader = async () => {
   const t = await getTranslations();

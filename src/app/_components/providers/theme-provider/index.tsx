@@ -7,11 +7,8 @@ import type { ComponentProps } from "react";
 export const availableThemes = ["light", "dark"] as const;
 export type Theme = (typeof availableThemes)[number] | "system";
 
-const ThemeProvider = ({
-  children,
-  ...restProps
-}: ComponentProps<typeof NextThemesProvider>) => {
-  return <NextThemesProvider {...restProps}>{children}</NextThemesProvider>;
+const ThemeProvider = (props: ComponentProps<typeof NextThemesProvider>) => {
+  return <NextThemesProvider {...props} />;
 };
 
 export default ThemeProvider;

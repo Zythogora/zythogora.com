@@ -1,7 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import { Suspense } from "react";
 
-import HasVerifiedEmail from "@/app/[locale]/(business)/_components/has-verified-email";
+import HasVerifiedEmail from "@/app/[locale]/(business)/(app-with-header)/_components/has-verified-email";
 
 const HomePage = async () => {
   const t = await getTranslations();

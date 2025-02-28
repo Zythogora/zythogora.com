@@ -1,8 +1,10 @@
-import { Suspense, type PropsWithChildren } from "react";
+import { Suspense } from "react";
 
 import SearchTabs from "@/app/[locale]/(business)/(search)/search/_components/tabs";
 import SearchBar, { SearchBarClient } from "@/app/_components/search-bar";
 import UserMenu, { UserMenuTrigger } from "@/app/_components/user-menu";
+
+import type { PropsWithChildren } from "react";
 
 const SearchLayout = ({ children }: PropsWithChildren) => {
   return (

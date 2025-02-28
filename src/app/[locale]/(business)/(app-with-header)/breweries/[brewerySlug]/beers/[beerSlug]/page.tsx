@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { getLocale } from "next-intl/server";
 
-import BeerCard from "@/app/[locale]/(business)/breweries/[brewerySlug]/beers/[beerSlug]/_components/beer-card";
+import BeerCard from "@/app/[locale]/(business)/(app-with-header)/breweries/[brewerySlug]/beers/[beerSlug]/_components/beer-card";
 import { getBeerBySlug } from "@/domain/beers";
 import { config } from "@/lib/config";
 import { publicConfig } from "@/lib/config/client-config";
@@ -89,7 +89,7 @@ const BeerPage = async ({ params }: BeerPageProps) => {
   }
 
   return (
-    <div className="flex flex-col gap-y-8 p-8">
+    <>
       <BeerCard
         name={beer.name}
         brewery={beer.brewery}
@@ -98,7 +98,7 @@ const BeerPage = async ({ params }: BeerPageProps) => {
         style={beer.style}
         color={beer.color}
       />
-    </div>
+    </>
   );
 };
 

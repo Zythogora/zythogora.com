@@ -1,8 +1,8 @@
 import { getTranslations } from "next-intl/server";
 import { Suspense } from "react";
 
-import BreweryBeer from "@/app/[locale]/(business)/breweries/[brewerySlug]/_components/brewery-beer";
-import BreweryBeerListLoader from "@/app/[locale]/(business)/breweries/[brewerySlug]/_components/brewery-beer-list/loader";
+import BreweryBeer from "@/app/[locale]/(business)/(app-with-header)/breweries/[brewerySlug]/_components/brewery-beer";
+import BreweryBeerListLoader from "@/app/[locale]/(business)/(app-with-header)/breweries/[brewerySlug]/_components/brewery-beer-list/loader";
 import Await from "@/app/_components/await";
 import { getBreweryBeers } from "@/domain/breweries";
 import { Link } from "@/lib/i18n";

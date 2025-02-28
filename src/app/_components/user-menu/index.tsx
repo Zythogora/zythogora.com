@@ -33,14 +33,11 @@ export const UserMenuTrigger = ({
       variant="outline"
       size="icon"
       className={cn(
-        "relative size-10 shrink-0 rounded-full before:rounded-full",
-        "outline-0 outline-solid",
-        "hover:outline-primary hover:outline-3",
-        "focus-visible:outline-primary focus-visible:outline-3",
-        // Disable normal button hover/focus effects
-        "transition-none",
-        "hover:w-10 hover:translate-x-0 hover:translate-y-0 hover:before:w-10 hover:before:translate-y-0.5",
-        "focus-visible:w-10 focus-visible:translate-x-0 focus-visible:translate-y-0 focus-visible:before:w-10 focus-visible:before:translate-y-0.5",
+        "size-10 shrink-0 rounded-full before:rounded-full",
+        // Disable default button hover effects
+        "transition-none hover:bottom-0 hover:before:-bottom-1",
+        // Add the outline on hover
+        "hover:outline-primary hover:outline-3 hover:outline-offset-2",
         className,
       )}
       {...restProps}
@@ -50,7 +47,11 @@ export const UserMenuTrigger = ({
   );
 };
 
-const UserMenu = () => {
+interface UserMenuProps {
+  className?: string;
+}
+
+const UserMenu = ({ className }: UserMenuProps) => {
   const t = useTranslations();
 
   const { data: session } = authClient.useSession();
@@ -69,7 +70,7 @@ const UserMenu = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <UserMenuTrigger />
+        <UserMenuTrigger className={className} />
       </DropdownMenuTrigger>
 
       <DropdownMenuContent

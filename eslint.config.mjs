@@ -1,4 +1,5 @@
 import { FlatCompat } from "@eslint/eslintrc";
+import pluginQuery from "@tanstack/eslint-plugin-query";
 import importPlugin from "eslint-plugin-import";
 import a11yPlugin from "eslint-plugin-jsx-a11y";
 import unusedImports from "eslint-plugin-unused-imports";
@@ -14,6 +15,7 @@ const compat = new FlatCompat({
 
 const eslintConfig = [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
+  ...pluginQuery.configs["flat/recommended"],
   {
     plugins: {
       import: importPlugin,

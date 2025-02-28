@@ -1,11 +1,13 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { useState, type ComponentProps } from "react";
+import { useState } from "react";
 
 import HidePasswordIcon from "@/app/_components/icons/hide-password";
 import ShowPasswordIcon from "@/app/_components/icons/show-password";
 import { cn } from "@/lib/tailwind";
+
+import type { ComponentProps } from "react";
 
 const Input = ({ className, type, ...restProps }: ComponentProps<"input">) => {
   const t = useTranslations();
@@ -23,6 +25,7 @@ const Input = ({ className, type, ...restProps }: ComponentProps<"input">) => {
       )}
     >
       <input
+        {...restProps}
         data-slot="input"
         type={type === "password" && showPassword ? "text" : type}
         className={cn(
@@ -35,7 +38,6 @@ const Input = ({ className, type, ...restProps }: ComponentProps<"input">) => {
           "aria-invalid:border-destructive",
           "aria-invalid:placeholder:text-destructive/50",
         )}
-        {...restProps}
       />
 
       {type === "password" ? (

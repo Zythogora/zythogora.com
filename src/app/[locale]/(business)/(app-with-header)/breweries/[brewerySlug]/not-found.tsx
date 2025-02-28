@@ -4,7 +4,7 @@ import NotFoundIllustration from "@/app/_components/ui/not-found-illustration";
 import { Link } from "@/lib/i18n";
 import { Routes } from "@/lib/routes";
 
-import type { SEARCH_KINDS } from "@/app/[locale]/(business)/(search)/search/types";
+import type { SearchKind } from "@/app/[locale]/(business)/(search)/search/types";
 
 const BreweryNotFound = async () => {
   const t = await getTranslations();
@@ -27,7 +27,7 @@ const BreweryNotFound = async () => {
           {t.rich("breweryPage.404.cta", {
             link: (chunks) => (
               <Link
-                href={`${Routes.SEARCH}?kind=${"brewery" satisfies (typeof SEARCH_KINDS)[number]}`}
+                href={`${Routes.SEARCH}?kind=${"brewery" satisfies SearchKind}`}
                 className="text-primary-700 dark:text-primary underline"
               >
                 {chunks}
