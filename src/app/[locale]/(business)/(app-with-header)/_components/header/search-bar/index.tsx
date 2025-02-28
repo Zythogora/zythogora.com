@@ -5,6 +5,7 @@ import { Command } from "cmdk";
 import { Loader2Icon, SearchIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
+import { useDebouncedCallback } from "use-debounce";
 
 import { searchAction } from "@/app/[locale]/(business)/(app-with-header)/_components/header/search-bar/actions";
 import BeerSearchResult from "@/app/[locale]/(business)/(search)/search/_components/tab/beer/result";
@@ -75,8 +76,13 @@ const HeaderSearchBar = ({ className }: HeaderSearchBarProps) => {
     staleTime: Number.POSITIVE_INFINITY,
   });
 
+  const debouncedSearch = useDebouncedCallback(
+    (search: string) => setSearch(search),
+    300,
+  );
+
   const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.target.value);
+    debouncedSearch(e.target.value);
     setResultsVisible(e.target.value !== "");
   };
 
@@ -101,7 +107,6 @@ const HeaderSearchBar = ({ className }: HeaderSearchBarProps) => {
               <Command.Input asChild>
                 <Input
                   ref={inputRef}
-                  value={search}
                   onChange={handleSearchChange}
                   onFocus={() => setResultsVisible(true)}
                   className={cn(
@@ -136,7 +141,7 @@ const HeaderSearchBar = ({ className }: HeaderSearchBarProps) => {
               ) : null}
             </div>
 
-            {search !== "" && searchResults ? (
+            {search !== "" && (searchResults || isPending) ? (
               <PopoverContent
                 align="start"
                 sideOffset={8}
@@ -169,9 +174,13 @@ const HeaderSearchBar = ({ className }: HeaderSearchBarProps) => {
 
                   <div className="flex flex-col">
                     <p className="px-3 py-2 text-base">
-                      {t(`headerSearch.${searchKind}.results`, {
-                        count: searchResults?.[searchKind].count,
-                      })}
+                      {isPending
+                        ? t(`headerSearch.${searchKind}.searching`, {
+                            search,
+                          })
+                        : t(`headerSearch.${searchKind}.results`, {
+                            count: searchResults?.[searchKind].count,
+                          })}
                     </p>
 
                     {searchKind === "beer"
@@ -239,7 +248,7 @@ const HeaderSearchBar = ({ className }: HeaderSearchBarProps) => {
                         : null}
                   </div>
 
-                  {searchResults?.[searchKind].count > 3 && (
+                  {searchResults && searchResults[searchKind].count > 3 ? (
                     <Command.Item
                       onSelect={() => {
                         router.push(
@@ -259,7 +268,7 @@ const HeaderSearchBar = ({ className }: HeaderSearchBarProps) => {
                         })}
                       </Link>
                     </Command.Item>
-                  )}
+                  ) : null}
                 </Command.List>
               </PopoverContent>
             ) : null}
