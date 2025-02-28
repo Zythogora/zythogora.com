@@ -69,11 +69,13 @@
   "headerSearch": {
     "beer": {
       "tabName": "Bières",
+      "searching": "Recherche de bières correspondant à \"{search}\"",
       "results": "{count, plural, =0 {Aucune bière trouvée} =1 {1 bière trouvée} other {# bières trouvées}}",
       "seeMore": "Voir {count, plural, =1 {1 autre bière} other {# autres bières}}"
     },
     "brewery": {
       "tabName": "Brasseries",
+      "searching": "Recherche de brasseries correspondant à \"{search}\"",
       "results": "{count, plural, =0 {Aucune brasserie trouvée} =1 {1 brasserie trouvée} other {# brasseries trouvées}}",
       "seeMore": "Voir {count, plural, =1 {1 autre brasserie} other {# autres brasseries}}"
     }

@@ -2,7 +2,7 @@
 
 import { getCountry } from "@/lib/i18n/countries";
 import { getPaginatedResults } from "@/lib/pagination";
-import { sanitizeFullTextSearch } from "@/lib/prisma";
+import { prepareFullTextSearch, prepareLikeSearch } from "@/lib/prisma";
 import prisma from "@/lib/prisma";
 
 import type { BeerResult, BreweryResult } from "@/domain/search/types";
@@ -18,14 +18,19 @@ export const searchBeers = async ({
 }: PaginationParams<{ search: string }>): Promise<
   PaginatedResults<BeerResult>
 > => {
-  const sanitizedSearch = sanitizeFullTextSearch(search);
+  const likeSearch = prepareLikeSearch(search);
+  const fullTextSearch = prepareFullTextSearch(search);
 
   const [rawBeers, { _count: beerCount }] = await Promise.all([
     prisma.beers.findMany({
       where: {
         OR: [
-          { name: { search: sanitizedSearch } },
-          { brewery: { name: { search: sanitizedSearch } } },
+          { name: { contains: likeSearch, mode: "insensitive" } },
+          { name: { search: fullTextSearch, mode: "insensitive" } },
+          { brewery: { name: { contains: likeSearch, mode: "insensitive" } } },
+          {
+            brewery: { name: { search: fullTextSearch, mode: "insensitive" } },
+          },
         ],
       },
       include: {
@@ -40,8 +45,12 @@ export const searchBeers = async ({
     prisma.beers.aggregate({
       where: {
         OR: [
-          { name: { search: sanitizedSearch } },
-          { brewery: { name: { search: sanitizedSearch } } },
+          { name: { contains: likeSearch, mode: "insensitive" } },
+          { name: { search: fullTextSearch, mode: "insensitive" } },
+          { brewery: { name: { contains: likeSearch, mode: "insensitive" } } },
+          {
+            brewery: { name: { search: fullTextSearch, mode: "insensitive" } },
+          },
         ],
       },
       _count: true,
@@ -78,12 +87,16 @@ export const searchBreweries = async ({
 }: PaginationParams<{ search: string }>): Promise<
   PaginatedResults<BreweryResult>
 > => {
-  const sanitizedSearch = sanitizeFullTextSearch(search);
+  const likeSearch = prepareLikeSearch(search);
+  const fullTextSearch = prepareFullTextSearch(search);
 
   const [rawBreweries, { _count: breweryCount }] = await Promise.all([
     prisma.breweries.findMany({
       where: {
-        name: { search: sanitizedSearch },
+        OR: [
+          { name: { contains: likeSearch, mode: "insensitive" } },
+          { name: { search: fullTextSearch, mode: "insensitive" } },
+        ],
       },
       include: {
         _count: { select: { beers: true } },
@@ -94,7 +107,10 @@ export const searchBreweries = async ({
 
     prisma.breweries.aggregate({
       where: {
-        name: { search: sanitizedSearch },
+        OR: [
+          { name: { contains: likeSearch, mode: "insensitive" } },
+          { name: { search: fullTextSearch, mode: "insensitive" } },
+        ],
       },
       _count: true,
     }),
