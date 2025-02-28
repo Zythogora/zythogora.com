@@ -22,11 +22,29 @@ export const getBreweryBySlug = cache(
 
     let brewery = await prisma.breweries.findUnique({
       where: { slug: brewerySlug },
+      include: {
+        beers: {
+          include: {
+            style: true,
+            color: true,
+          },
+          orderBy: { name: "asc" },
+        },
+      },
     });
 
     if (!brewery) {
       brewery = await prisma.breweries.findFirst({
         where: { slug: { startsWith: brewerySlug.slice(0, 4) } },
+        include: {
+          beers: {
+            include: {
+              style: true,
+              color: true,
+            },
+            orderBy: { name: "asc" },
+          },
+        },
       });
     }
 

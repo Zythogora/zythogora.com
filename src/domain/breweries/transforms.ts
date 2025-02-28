@@ -16,6 +16,7 @@ export const transformRawBreweryToBrewery = async (
   slug: rawBrewery.slug,
   name: rawBrewery.name,
   country: await getCountry(rawBrewery.countryAlpha2Code),
+  beers: rawBrewery.beers.map(transformRawBreweryBeerToBreweryBeer),
 });
 
 export const transformRawBreweryBeerToBreweryBeer = (
