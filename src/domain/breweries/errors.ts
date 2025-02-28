@@ -15,3 +15,15 @@ export class UnknownBreweryError extends BreweryError {
     super("Unknown brewery");
   }
 }
+
+export class BreweryCreationError extends BreweryError {
+  constructor(message: string) {
+    super(message);
+  }
+}
+
+export class UnauthorizedError extends BreweryCreationError {
+  constructor() {
+    super("Unauthorized call to create brewery");
+  }
+}

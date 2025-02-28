@@ -1,18 +1,19 @@
 "server only";
 
+import { nanoid } from "nanoid";
 import { cache } from "react";
 
 import {
   InvalidSlugError,
+  UnauthorizedError,
   UnknownBreweryError,
 } from "@/domain/breweries/errors";
-import {
-  transformRawBreweryBeerToBreweryBeer,
-  transformRawBreweryToBrewery,
-} from "@/domain/breweries/transforms";
-import prisma from "@/lib/prisma";
+import { transformRawBreweryToBrewery } from "@/domain/breweries/transforms";
+import { getCurrentUser } from "@/lib/auth";
+import prisma, { slugify } from "@/lib/prisma";
 
-import type { Brewery, BreweryBeer } from "@/domain/breweries/types";
+import type { CreateBreweryData } from "@/app/[locale]/create/brewery/schemas";
+import type { Brewery } from "@/domain/breweries/types";
 
 export const getBreweryBySlug = cache(
   async (brewerySlug: string): Promise<Brewery> => {
@@ -56,17 +57,32 @@ export const getBreweryBySlug = cache(
   },
 );
 
-export const getBreweryBeers = cache(
-  async (breweryId: string): Promise<BreweryBeer[]> => {
-    const beers = await prisma.beers.findMany({
-      where: { brewery: { id: breweryId } },
-      include: {
-        style: true,
-        color: true,
-      },
-      orderBy: { name: "asc" },
-    });
+export const createBrewery = async (data: CreateBreweryData) => {
+  const user = await getCurrentUser();
+  if (!user) {
+    throw new UnauthorizedError();
+  }
 
-    return beers.map((beer) => transformRawBreweryBeerToBreweryBeer(beer));
-  },
-);
+  const id = nanoid();
+
+  const brewery = await prisma.breweries.create({
+    data: {
+      id,
+      slug: slugify(id, data.name),
+      name: data.name,
+      countryAlpha2Code: data.country,
+      state: data.state ?? null,
+      city: data.city ?? null,
+      address: data.address ?? null,
+      description: data.description ?? null,
+      websiteLink: data.websiteLink ?? null,
+      socialLinks: data.socialLinks ?? null,
+      contactEmail: data.contactEmail ?? null,
+      contactPhoneNumber: data.contactPhoneNumber ?? null,
+      createdBy: user.id,
+      updatedBy: user.id,
+    },
+  });
+
+  return brewery;
+};

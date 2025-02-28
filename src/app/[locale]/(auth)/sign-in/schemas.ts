@@ -1,12 +1,12 @@
 import { z } from "zod";
 
+import { zEmail, zPassword } from "@/lib/validator";
+
 export const signInSchema = z.object({
-  email: z
-    .string({ required_error: "form.errors.FIELD_REQUIRED" })
-    .email({ message: "form.errors.EMAIL_INVALID" }),
-  password: z
-    .string({ required_error: "form.errors.FIELD_REQUIRED" })
-    .min(8, { message: "auth.signIn.errors.PASSWORD_INVALID" })
-    .max(1024, { message: "auth.signIn.errors.PASSWORD_INVALID" }),
+  email: zEmail,
+  password: zPassword({
+    tooShort: "auth.signIn.errors.PASSWORD_INVALID",
+    tooLong: "auth.signIn.errors.PASSWORD_INVALID",
+  }),
   redirectUrl: z.string(),
 });

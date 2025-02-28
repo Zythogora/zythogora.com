@@ -270,7 +270,8 @@
       }
     },
     "actions": {
-      "submit": "Créer la brasserie"
+      "submit": "Créer la brasserie",
+      "submitting": "Création en cours..."
     },
     "errors": {
       "MIN_CREATION_DATE_ERROR": "La date de création ne peut pas être antérieure à l'an 1000",

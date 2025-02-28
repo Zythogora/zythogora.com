@@ -270,7 +270,8 @@
       }
     },
     "actions": {
-      "submit": "Create brewery"
+      "submit": "Create brewery",
+      "submitting": "Creating brewery..."
     },
     "errors": {
       "MIN_CREATION_DATE_ERROR": "The creation date cannot be before the year 1000",
