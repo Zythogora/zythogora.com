@@ -25,10 +25,19 @@ model Beers {
 }
 
 model Breweries {
-  id                String @id @default(nanoid())
-  slug              String @unique
-  name              String
-  countryAlpha2Code String @map("country_alpha_2_code")
+  id                 String  @id @default(nanoid())
+  slug               String  @unique
+  name               String
+  countryAlpha2Code  String  @map("country_alpha_2_code")
+  state              String?
+  city               String?
+  address            String?
+  description        String?
+  websiteLink        String? @map("website_link")
+  /// [SocialLink]
+  socialLinks        Json[]  @map("social_links")
+  contactEmail       String? @map("contact_email")
+  contactPhoneNumber String? @map("contact_phone_number")
 
   createdAt     DateTime @default(now()) @map("created_at")
   createdBy     String   @map("created_by")

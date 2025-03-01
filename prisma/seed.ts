@@ -1,28 +1,13 @@
 import { Prisma, PrismaClient } from "@prisma/client";
 import { nanoid } from "nanoid";
 
+import { slugify } from "@/lib/prisma";
 import { existing_beers } from "prisma/existing-data/beers";
 import { existing_breweries } from "prisma/existing-data/breweries";
 import { existing_colors } from "prisma/existing-data/colors";
 import { existing_styles } from "prisma/existing-data/styles";
 
 const prisma = new PrismaClient();
-
-const slugify = (id: string, name: string) =>
-  [
-    id
-      .replace(/[^a-zA-Z0-9]/g, "")
-      .slice(0, 4)
-      .toUpperCase(),
-    name
-      .normalize("NFD")
-      .replace(/[^\x00-\x7F]/g, "")
-      .replace(/[^a-zA-Z0-9\s]/g, "")
-      .slice(0, 60)
-      .trim()
-      .replace(/\s+/g, "-")
-      .toLowerCase(),
-  ].join("-");
 
 async function main() {
   await prisma.$transaction(

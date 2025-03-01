@@ -5,7 +5,7 @@ import { parseWithZod } from "@conform-to/zod";
 import { getZodConstraint } from "@conform-to/zod";
 import { PlusIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useActionState, useState, useTransition } from "react";
+import { useActionState, useEffect, useState, useTransition } from "react";
 
 import SocialLink, {
   emptySocialLinkValue,
@@ -17,12 +17,25 @@ import FormInput from "@/app/_components/form/input";
 import FormTextarea from "@/app/_components/form/textarea";
 import Button from "@/app/_components/ui/button";
 import Label from "@/app/_components/ui/label";
+import { authClient } from "@/lib/auth/client";
+import { useRouter } from "@/lib/i18n";
+import { Routes } from "@/lib/routes";
 import { cn } from "@/lib/tailwind";
 
 import type { CreateBreweryData } from "@/app/[locale]/create/brewery/schemas";
 
 const CreateBreweryPage = () => {
   const t = useTranslations();
+
+  const router = useRouter();
+
+  const session = authClient.useSession();
+
+  useEffect(() => {
+    if (!session.isPending && session.data === null) {
+      router.replace(Routes.SIGN_IN);
+    }
+  }, [session, router]);
 
   const [socialLinks, setSocialLinks] = useState<
     CreateBreweryData["socialLinks"]
@@ -116,7 +129,7 @@ const CreateBreweryPage = () => {
               label={t("createBreweryPage.fields.creationDate.label")}
               field={fields.creationDate}
               type="number"
-              className="col-span-2 row-start-6 @3xl:row-start-auto"
+              className="col-span-2 hidden @3xl:flex"
             />
 
             <FormCountrySelect
@@ -154,6 +167,13 @@ const CreateBreweryPage = () => {
               field={fields.description}
               rows={4}
               className="col-span-2 @3xl:col-span-7"
+            />
+
+            <FormInput
+              label={t("createBreweryPage.fields.creationDate.label")}
+              field={fields.creationDate}
+              type="number"
+              className="col-span-2 flex @3xl:hidden"
             />
 
             <FormInput
@@ -220,7 +240,9 @@ const CreateBreweryPage = () => {
               disabled={isPending}
               className="col-span-2 mt-2 w-full @3xl:col-span-7"
             >
-              {t("createBreweryPage.actions.submit")}
+              {isPending
+                ? t("createBreweryPage.actions.submitting")
+                : t("createBreweryPage.actions.submit")}
             </Button>
           </form>
         </FormProvider>

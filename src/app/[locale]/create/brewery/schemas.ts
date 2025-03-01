@@ -1,11 +1,11 @@
-import { isValidPhoneNumber, type CountryCode } from "libphonenumber-js";
+import { parsePhoneNumberWithError, type CountryCode } from "libphonenumber-js";
 import { z } from "zod";
 
-import { zCountryCode } from "@/lib/i18n/countries/schemas";
+import { zCountryCode, zEmail, zRequiredString, zUrl } from "@/lib/validator";
 
 export const createBrewerySchema = z
   .object({
-    name: z.string({ required_error: "form.errors.FIELD_REQUIRED" }),
+    name: zRequiredString,
     country: zCountryCode,
     state: z.string().optional(),
     city: z.string().optional(),
@@ -20,36 +20,46 @@ export const createBrewerySchema = z
       })
       .optional(),
     description: z.string().optional(),
-    websiteLink: z.string().optional(),
+    websiteLink: zUrl.optional(),
     socialLinks: z.array(
       z.object({
         name: z.string({ required_error: "form.errors.FIELD_REQUIRED" }),
-        url: z
-          .string({ required_error: "form.errors.FIELD_REQUIRED" })
-          .regex(/^[^\s\.]+\.\S{2,}$/, {
-            message: "form.errors.URL_INVALID",
-          }),
+        url: zUrl,
       }),
     ),
-    contactEmail: z
-      .string()
-      .email({ message: "form.errors.EMAIL_INVALID" })
-      .optional(),
+    contactEmail: zEmail.optional(),
     contactPhoneNumber: z.string().optional(),
   })
   .superRefine((data, ctx) => {
-    if (
-      data.contactPhoneNumber &&
-      !isValidPhoneNumber(data.contactPhoneNumber, {
-        defaultCountry: data.country as CountryCode,
-      })
-    ) {
-      ctx.addIssue({
-        path: ["contactPhoneNumber"],
-        code: z.ZodIssueCode.custom,
-        message: "form.errors.PHONE_NUMBER_INVALID",
-      });
+    if (data.contactPhoneNumber) {
+      try {
+        parsePhoneNumberWithError(
+          data.contactPhoneNumber,
+          data.country as CountryCode,
+        );
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      } catch (error) {
+        ctx.addIssue({
+          path: ["contactPhoneNumber"],
+          code: z.ZodIssueCode.custom,
+          message: "form.errors.PHONE_NUMBER_INVALID",
+        });
+      }
     }
+    return z.NEVER;
+  })
+  .transform((data) => {
+    if (data.contactPhoneNumber) {
+      return {
+        ...data,
+        contactPhoneNumber: parsePhoneNumberWithError(
+          data.contactPhoneNumber,
+          data.country as CountryCode,
+        ).formatInternational(),
+      };
+    }
+
+    return data;
   });
 
 export type CreateBreweryData = z.infer<typeof createBrewerySchema>;

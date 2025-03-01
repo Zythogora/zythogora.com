@@ -8,4 +8,12 @@ type Messages = typeof en;
 declare global {
   // Use type safe message keys with `next-intl`
   type IntlMessages = Messages;
+
+  // Add types for JSON fields in Prisma
+  namespace PrismaJson {
+    type SocialLink = {
+      name: string;
+      url: string;
+    };
+  }
 }

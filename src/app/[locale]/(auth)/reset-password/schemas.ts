@@ -1,11 +1,13 @@
 import { z } from "zod";
 
+import { zPassword } from "@/lib/validator";
+
 export const resetPasswordSchema = z
   .object({
-    password: z
-      .string({ required_error: "form.errors.FIELD_REQUIRED" })
-      .min(8, { message: "form.errors.PASSWORD_TOO_SHORT" })
-      .max(1024, { message: "form.errors.PASSWORD_TOO_LONG" }),
+    password: zPassword({
+      tooShort: "form.errors.PASSWORD_TOO_SHORT",
+      tooLong: "form.errors.PASSWORD_TOO_LONG",
+    }),
     confirmPassword: z.string({
       required_error: "form.errors.FIELD_REQUIRED",
     }),
