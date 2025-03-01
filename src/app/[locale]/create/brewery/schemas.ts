@@ -10,13 +10,13 @@ export const createBrewerySchema = z
     state: z.string().optional(),
     city: z.string().optional(),
     address: z.string().optional(),
-    creationDate: z
+    creationYear: z
       .number()
       .min(1000, {
-        message: "createBreweryPage.errors.MIN_CREATION_DATE_ERROR",
+        message: "createBreweryPage.errors.MIN_CREATION_YEAR_ERROR",
       })
       .max(new Date().getFullYear(), {
-        message: "createBreweryPage.errors.MAX_CREATION_DATE_ERROR",
+        message: "createBreweryPage.errors.MAX_CREATION_YEAR_ERROR",
       })
       .optional(),
     description: z.string().optional(),

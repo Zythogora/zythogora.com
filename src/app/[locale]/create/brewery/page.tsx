@@ -126,8 +126,8 @@ const CreateBreweryPage = () => {
             />
 
             <FormInput
-              label={t("createBreweryPage.fields.creationDate.label")}
-              field={fields.creationDate}
+              label={t("createBreweryPage.fields.creationYear.label")}
+              field={fields.creationYear}
               type="number"
               className="col-span-2 hidden @3xl:flex"
             />
@@ -170,8 +170,8 @@ const CreateBreweryPage = () => {
             />
 
             <FormInput
-              label={t("createBreweryPage.fields.creationDate.label")}
-              field={fields.creationDate}
+              label={t("createBreweryPage.fields.creationYear.label")}
+              field={fields.creationYear}
               type="number"
               className="col-span-2 flex @3xl:hidden"
             />

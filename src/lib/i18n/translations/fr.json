@@ -226,8 +226,8 @@
       "name": {
         "label": "Nom de la brasserie"
       },
-      "creationDate": {
-        "label": "Date de création"
+      "creationYear": {
+        "label": "Année de création"
       },
       "country": {
         "label": "Pays"
@@ -274,8 +274,8 @@
       "submitting": "Création en cours..."
     },
     "errors": {
-      "MIN_CREATION_DATE_ERROR": "La date de création ne peut pas être antérieure à l'an 1000",
-      "MAX_CREATION_DATE_ERROR": "La date de création ne peut pas être dans le futur"
+      "MIN_CREATION_YEAR_ERROR": "L'année de création ne peut pas être antérieure à l'an 1000",
+      "MAX_CREATION_YEAR_ERROR": "L'année de création ne peut pas être dans le futur"
     }
   }
 }

@@ -33,6 +33,7 @@ model Breweries {
   city               String?
   address            String?
   description        String?
+  creationYear       Int?    @map("creation_year")
   websiteLink        String? @map("website_link")
   /// [SocialLink]
   socialLinks        Json[]  @map("social_links")

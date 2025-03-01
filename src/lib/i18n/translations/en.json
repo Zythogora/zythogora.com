@@ -226,8 +226,8 @@
       "name": {
         "label": "Brewery name"
       },
-      "creationDate": {
-        "label": "Creation date"
+      "creationYear": {
+        "label": "Creation year"
       },
       "country": {
         "label": "Country"
@@ -274,8 +274,8 @@
       "submitting": "Creating brewery..."
     },
     "errors": {
-      "MIN_CREATION_DATE_ERROR": "The creation date cannot be before the year 1000",
-      "MAX_CREATION_DATE_ERROR": "The creation date cannot be in the future"
+      "MIN_CREATION_YEAR_ERROR": "The creation year cannot be before the year 1000",
+      "MAX_CREATION_YEAR_ERROR": "The creation year cannot be in the future"
     }
   }
 }
