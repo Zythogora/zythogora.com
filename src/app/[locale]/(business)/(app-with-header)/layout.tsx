@@ -1,15 +1,24 @@
 import Header from "@/app/[locale]/(business)/(app-with-header)/_components/header";
 import QueryClientProvider from "@/app/_components/providers/query-client-provider";
+import { cn } from "@/lib/tailwind";
 
 import type { PropsWithChildren } from "react";
 
 const AppWithHeaderLayout = async ({ children }: PropsWithChildren) => {
   return (
     <QueryClientProvider>
-      <div className="flex flex-col">
+      <div className="flex min-h-screen flex-col">
         <Header />
 
-        <div className="flex flex-col gap-y-8 p-8">{children}</div>
+        <div
+          className={cn(
+            "flex grow flex-col items-center",
+            "dark:bg-background bg-stone-100",
+            "md:px-16 md:py-12",
+          )}
+        >
+          <div className="flex w-224 max-w-full flex-col">{children}</div>
+        </div>
       </div>
     </QueryClientProvider>
   );

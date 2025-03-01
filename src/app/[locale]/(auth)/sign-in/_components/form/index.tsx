@@ -87,7 +87,7 @@ const SignInForm = () => {
             href={Routes.PASSWORD_FORGOTTEN}
             className={cn(
               "font-title ml-1 rounded px-2 py-1 text-sm font-medium",
-              "focus-visible:outline-foreground focus-visible:outline-3",
+              "focus-visible:outline-foreground",
             )}
           >
             {t("auth.signIn.actions.passwordForgotten")}
@@ -97,7 +97,7 @@ const SignInForm = () => {
             href={Routes.SIGN_UP}
             className={cn(
               "font-title mr-1 rounded px-2 py-1 text-sm font-medium",
-              "focus-visible:outline-foreground focus-visible:outline-3",
+              "focus-visible:outline-foreground",
             )}
           >
             {t("auth.signIn.actions.signUp")}

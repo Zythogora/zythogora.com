@@ -209,7 +209,7 @@ const CreateBreweryPage = () => {
                   )}
                   className={cn(
                     "ml-2 flex flex-row items-center gap-x-2 rounded px-1",
-                    "focus-visible:outline-primary focus-visible:outline-3 focus-visible:outline-offset-4",
+                    "focus-visible:outline-offset-4",
                   )}
                 >
                   <PlusIcon className="size-4" />

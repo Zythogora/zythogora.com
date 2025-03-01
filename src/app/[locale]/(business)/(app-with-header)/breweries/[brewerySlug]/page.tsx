@@ -11,6 +11,7 @@ import { redirect } from "@/lib/i18n";
 import prisma from "@/lib/prisma";
 import { Routes } from "@/lib/routes";
 import { generatePath } from "@/lib/routes/utils";
+import { cn } from "@/lib/tailwind";
 import { exhaustiveCheck } from "@/lib/typescript/utils";
 
 interface BreweryPageProps {
@@ -74,11 +75,11 @@ const BreweryPage = async ({ params }: BreweryPageProps) => {
   }
 
   return (
-    <>
-      <BreweryCard name={brewery.name} country={brewery.country} />
+    <div className={cn("flex w-full flex-col", "md:gap-y-12")}>
+      <BreweryCard brewery={brewery} />
 
       <BreweryBeerList brewerySlug={brewerySlug} beers={brewery.beers} />
-    </>
+    </div>
   );
 };
 

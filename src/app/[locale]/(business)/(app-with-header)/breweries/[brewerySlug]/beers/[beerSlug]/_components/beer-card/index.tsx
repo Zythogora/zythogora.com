@@ -6,6 +6,7 @@ import DescriptionList from "@/app/_components/ui/description-list";
 import { Link } from "@/lib/i18n";
 import { Routes } from "@/lib/routes";
 import { generatePath } from "@/lib/routes/utils";
+import { cn } from "@/lib/tailwind";
 
 import type { Country } from "@/lib/i18n/countries/types";
 
@@ -36,14 +37,31 @@ const BeerCard = async ({
   const t = await getTranslations();
 
   return (
-    <div className="bg-primary-50 dark:bg-primary-800 flex flex-col gap-y-6 overflow-hidden rounded rounded-t-xl border-2 p-8 drop-shadow">
+    <div
+      className={cn(
+        "flex flex-col overflow-hidden drop-shadow",
+        "gap-y-6 border-b-2 p-8 md:gap-y-8 md:rounded md:border-2 md:px-12 md:py-10",
+        "bg-primary-50 dark:bg-primary-800",
+      )}
+    >
       <div className="flex flex-col gap-y-1">
-        <h1 className="text-2xl">{name}</h1>
+        <h1 className="text-2xl md:text-4xl">{name}</h1>
 
-        <div className="flex flex-row items-center gap-x-2">
-          <CountryFlag country={brewery.country} size={12} />
+        <div
+          className={cn("flex flex-row items-center", "gap-x-1.5 md:gap-x-2")}
+        >
+          <CountryFlag
+            country={brewery.country}
+            size={14}
+            className="size-3 md:size-3.5"
+          />
 
-          <p className="gap-x-paragraph-space flex min-w-0 flex-row text-xs text-nowrap">
+          <p
+            className={cn(
+              "gap-x-paragraph-space flex min-w-0 flex-row text-nowrap",
+              "text-xs md:text-sm",
+            )}
+          >
             {t.rich("beerPage.brewedBy", {
               brewery: brewery.name,
               link: (chunks) => (

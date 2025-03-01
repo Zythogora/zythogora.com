@@ -14,10 +14,30 @@ const DescriptionList = ({
   ...restProps
 }: DescriptionListProps) => {
   return (
-    <dl className={cn("flex flex-col", className)} {...restProps}>
-      <dt className="font-title text-xs uppercase opacity-75">{label}</dt>
+    <dl
+      className={cn(
+        "flex flex-col items-start",
+        "gap-y-0 md:gap-y-0.5",
+        className,
+      )}
+      {...restProps}
+    >
+      <dt
+        data-slot="description-term"
+        className={cn(
+          "font-title uppercase opacity-50",
+          "text-[10px] md:text-xs",
+        )}
+      >
+        {label}
+      </dt>
 
-      <dd className="text-xs">{value}</dd>
+      <dd
+        data-slot="description-details"
+        className={cn("text-left", "text-xs md:text-sm")}
+      >
+        {value}
+      </dd>
     </dl>
   );
 };

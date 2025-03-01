@@ -34,7 +34,6 @@ const Input = ({ className, type, ...restProps }: ComponentProps<"input">) => {
           "dark:bg-stone-700",
           "placeholder:text-foreground-muted placeholder:select-none",
           "disabled:bg-background-muted disabled:pointer-events-none disabled:cursor-not-allowed",
-          "focus-visible:outline-primary focus-visible:outline-3",
           "aria-invalid:border-destructive",
           "aria-invalid:placeholder:text-destructive/50",
         )}
@@ -51,7 +50,6 @@ const Input = ({ className, type, ...restProps }: ComponentProps<"input">) => {
           aria-expanded={showPassword}
           className={cn(
             "fill-foreground absolute inset-y-[15px] right-[15px] size-7 rounded p-1",
-            "focus-visible:outline-primary focus-visible:outline-3",
             "group-has-aria-invalid/input:fill-destructive",
           )}
         >

@@ -210,7 +210,8 @@
     }
   },
   "breweryPage": {
-    "country": "Lieu",
+    "location": "Origine",
+    "creationYear": "Création",
     "beers": {
       "loading": "Chargement des bières...",
       "count": "{count, plural, =0 {0 bière} =1 {1 bière} other {# bières}}"

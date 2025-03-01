@@ -210,7 +210,8 @@
     }
   },
   "breweryPage": {
-    "country": "Location",
+    "location": "Origin",
+    "creationYear": "Creation",
     "beers": {
       "loading": "Loading beers...",
       "count": "{count, plural, =0 {0 beers} =1 {1 beer} other {# beers}}"
