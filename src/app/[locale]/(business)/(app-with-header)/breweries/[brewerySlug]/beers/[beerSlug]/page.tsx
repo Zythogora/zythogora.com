@@ -92,16 +92,14 @@ const BeerPage = async ({ params }: BeerPageProps) => {
   }
 
   return (
-    <>
-      <BeerCard
-        name={beer.name}
-        brewery={beer.brewery}
-        abv={beer.abv}
-        ibu={beer.ibu}
-        style={beer.style}
-        color={beer.color}
-      />
-    </>
+    <BeerCard
+      name={beer.name}
+      brewery={beer.brewery}
+      abv={beer.abv}
+      ibu={beer.ibu}
+      style={beer.style}
+      color={beer.color}
+    />
   );
 };
 

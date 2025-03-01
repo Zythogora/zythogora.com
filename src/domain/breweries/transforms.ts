@@ -15,7 +15,16 @@ export const transformRawBreweryToBrewery = async (
   id: rawBrewery.id,
   slug: rawBrewery.slug,
   name: rawBrewery.name,
-  country: await getCountry(rawBrewery.countryAlpha2Code),
+  location: {
+    country: await getCountry(rawBrewery.countryAlpha2Code),
+    state: rawBrewery.state ?? undefined,
+    city: rawBrewery.city ?? undefined,
+    address: rawBrewery.address ?? undefined,
+  },
+  creationYear: rawBrewery.creationYear ?? undefined,
+  description: rawBrewery.description ?? undefined,
+  websiteLink: rawBrewery.websiteLink ?? undefined,
+  socialLinks: rawBrewery.socialLinks ?? undefined,
   beers: rawBrewery.beers.map(transformRawBreweryBeerToBreweryBeer),
 });
 

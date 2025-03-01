@@ -12,7 +12,7 @@ export const buttonVariants = cva(
     "before:bg-foreground relative before:absolute before:-inset-0.5 before:z-[-1] before:rounded",
     "bottom-0 transition-[bottom] duration-300 hover:bottom-0.5",
     "before:-bottom-1 before:transition-[bottom] before:duration-300 hover:before:-bottom-1.5",
-    "focus-visible:outline-primary focus-visible:outline-3 focus-visible:outline-offset-2",
+    "focus-visible:outline-offset-2",
     "focus-visible:hover:bottom-0 focus-visible:hover:before:-bottom-1",
     "disabled:pointer-events-none disabled:cursor-default",
   ],

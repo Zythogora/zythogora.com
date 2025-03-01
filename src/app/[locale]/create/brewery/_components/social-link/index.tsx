@@ -96,7 +96,7 @@ const SocialLink = ({
           className={cn(
             "border-foreground col-start-2 row-span-2 row-start-1 cursor-pointer rounded-r border-2 px-3",
             "bg-stone-300 dark:bg-stone-500",
-            "focus-visible:outline-primary focus-visible:z-50 focus-visible:outline-3",
+            "focus-visible:z-50",
           )}
         >
           <XIcon className="size-6" />

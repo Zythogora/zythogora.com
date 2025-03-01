@@ -9,7 +9,21 @@ export type Brewery = {
   id: string;
   slug: string;
   name: string;
-  country: Country;
+  location: {
+    country: Country;
+    state?: string;
+    city?: string;
+    address?: string;
+  };
+  creationYear?: number;
+  description?: string;
+  websiteLink?: string;
+  socialLinks?: {
+    name: string;
+    url: string;
+  }[];
+  contactEmail?: string;
+  contactPhoneNumber?: string;
   beers: BreweryBeer[];
 };
 

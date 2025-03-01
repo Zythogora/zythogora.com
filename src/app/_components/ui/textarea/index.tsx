@@ -22,7 +22,6 @@ const Textarea = ({ className, ...restProps }: ComponentProps<"textarea">) => {
           "dark:bg-stone-700",
           "placeholder:text-foreground-muted placeholder:select-none",
           "disabled:bg-background-muted disabled:pointer-events-none disabled:cursor-not-allowed",
-          "focus-visible:outline-primary focus-visible:outline-3",
           "aria-invalid:border-destructive",
           "aria-invalid:placeholder:text-destructive/50",
         )}
