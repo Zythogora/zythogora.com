@@ -2,10 +2,10 @@ import { Prisma, PrismaClient } from "@prisma/client";
 import { nanoid } from "nanoid";
 
 import { slugify } from "@/lib/prisma";
-import { existing_beers } from "prisma/existing-data/beers";
-import { existing_breweries } from "prisma/existing-data/breweries";
-import { existing_colors } from "prisma/existing-data/colors";
-import { existing_styles } from "prisma/existing-data/styles";
+import { existing_beers } from "prisma/seeding/existing/data/beers";
+import { existing_breweries } from "prisma/seeding/existing/data/breweries";
+import { existing_colors } from "prisma/seeding/existing/data/colors";
+import { existing_styles } from "prisma/seeding/existing/data/styles";
 
 const prisma = new PrismaClient();
 

@@ -2,7 +2,7 @@
 node_modules
 .next
 .vercel
-prisma/existing-data
+prisma/seeding/existing/data
 
 # Files
 .env
