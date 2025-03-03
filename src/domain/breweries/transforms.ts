@@ -25,6 +25,8 @@ export const transformRawBreweryToBrewery = async (
   description: rawBrewery.description ?? undefined,
   websiteLink: rawBrewery.websiteLink ?? undefined,
   socialLinks: rawBrewery.socialLinks ?? undefined,
+  contactEmail: rawBrewery.contactEmail ?? undefined,
+  contactPhoneNumber: rawBrewery.contactPhoneNumber ?? undefined,
   beers: rawBrewery.beers.map(transformRawBreweryBeerToBreweryBeer),
 });
 

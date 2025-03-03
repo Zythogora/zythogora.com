@@ -162,18 +162,36 @@ const BreweryCard = ({ brewery }: BreweryCardProps) => {
             <CollapsibleContent
               className={cn("contents", "text-xs md:text-sm")}
             >
-              {brewery.websiteLink ? (
-                <div className="flex flex-row items-center gap-x-2">
-                  <LinkIcon
-                    size={14}
-                    className={cn("fill-foreground", "size-3 md:size-3.5")}
-                  />
+              <div className="flex flex-col gap-y-2">
+                {brewery.websiteLink ? (
+                  <div className="flex flex-row items-center gap-x-2">
+                    <LinkIcon
+                      size={14}
+                      className={cn("fill-foreground", "size-3 md:size-3.5")}
+                    />
 
-                  <a href={brewery.websiteLink} target="_blank">
-                    {brewery.websiteLink}
-                  </a>
-                </div>
-              ) : null}
+                    <a href={brewery.websiteLink} target="_blank">
+                      {brewery.websiteLink}
+                    </a>
+                  </div>
+                ) : null}
+
+                {brewery.location.address ? (
+                  <div
+                    className={cn(
+                      "flex flex-row items-center",
+                      "gap-x-1.5 md:gap-x-2",
+                    )}
+                  >
+                    <LocationIcon
+                      size={14}
+                      className="fill-foreground size-3 md:size-3.5"
+                    />
+
+                    <p>{brewery.location.address}</p>
+                  </div>
+                ) : null}
+              </div>
 
               {brewery.socialLinks ? (
                 <ul className="flex flex-col gap-y-2">
@@ -206,57 +224,43 @@ const BreweryCard = ({ brewery }: BreweryCardProps) => {
                 </ul>
               ) : null}
 
-              {brewery.contactEmail ? (
-                <div
-                  className={cn(
-                    "flex flex-row items-center",
-                    "gap-x-1.5 md:gap-x-2",
-                  )}
-                >
-                  <MailIcon
-                    size={14}
-                    className={cn("fill-foreground", "size-3 md:size-3.5")}
-                  />
+              <div className="flex flex-col gap-y-2">
+                {brewery.contactEmail ? (
+                  <div
+                    className={cn(
+                      "flex flex-row items-center",
+                      "gap-x-1.5 md:gap-x-2",
+                    )}
+                  >
+                    <MailIcon
+                      size={14}
+                      className={cn("text-foreground", "size-3 md:size-3.5")}
+                    />
 
-                  <a href={`mailto:${brewery.contactEmail}`}>
-                    {brewery.contactEmail}
-                  </a>
-                </div>
-              ) : null}
+                    <a href={`mailto:${brewery.contactEmail}`}>
+                      {brewery.contactEmail}
+                    </a>
+                  </div>
+                ) : null}
 
-              {brewery.contactPhoneNumber ? (
-                <div
-                  className={cn(
-                    "flex flex-row items-center",
-                    "gap-x-1.5 md:gap-x-2",
-                  )}
-                >
-                  <PhoneIcon
-                    size={14}
-                    className={cn("fill-foreground", "size-3 md:size-3.5")}
-                  />
+                {brewery.contactPhoneNumber ? (
+                  <div
+                    className={cn(
+                      "flex flex-row items-center",
+                      "gap-x-1.5 md:gap-x-2",
+                    )}
+                  >
+                    <PhoneIcon
+                      size={14}
+                      className={cn("text-foreground", "size-3 md:size-3.5")}
+                    />
 
-                  <a href={`tel:${brewery.contactPhoneNumber}`}>
-                    {brewery.contactPhoneNumber}
-                  </a>
-                </div>
-              ) : null}
-
-              {brewery.location.address ? (
-                <div
-                  className={cn(
-                    "flex flex-row items-center",
-                    "gap-x-1.5 md:gap-x-2",
-                  )}
-                >
-                  <LocationIcon
-                    size={14}
-                    className="fill-foreground size-3 md:size-3.5"
-                  />
-
-                  <p>{brewery.location.address}</p>
-                </div>
-              ) : null}
+                    <a href={`tel:${brewery.contactPhoneNumber}`}>
+                      {brewery.contactPhoneNumber}
+                    </a>
+                  </div>
+                ) : null}
+              </div>
             </CollapsibleContent>
           ) : null}
         </div>
