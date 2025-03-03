@@ -10,7 +10,8 @@
     "db.generate": "prisma/migrate.sh",
     "db.migrate": "prisma migrate deploy",
     "db.reset": "prisma migrate reset",
-    "db.seed": "bunx tsx prisma/seed.ts",
+    "db.seed-existing": "bunx tsx prisma/seeding/existing/index.ts",
+    "db.seed-new": "bunx tsx prisma/seeding/new/index.ts",
     "postinstall": "prisma generate"
   },
   "dependencies": {
