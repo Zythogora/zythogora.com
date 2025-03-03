@@ -8,7 +8,7 @@ import type { ComponentProps } from "react";
 
 export const buttonVariants = cva(
   [
-    "mx-0.5 flex w-[calc(100%-4px)] min-w-0 cursor-pointer flex-row items-center justify-center gap-x-2 rounded-md font-bold",
+    "m-0.5 flex w-[calc(100%-theme(spacing.1))] min-w-0 cursor-pointer flex-row items-center justify-center gap-x-2 rounded-md font-bold",
     "text-sm md:text-base",
     "before:bg-foreground relative before:absolute before:-inset-0.5 before:z-[-1] before:rounded",
     "bottom-0 transition-[bottom] duration-300 hover:bottom-0.5",

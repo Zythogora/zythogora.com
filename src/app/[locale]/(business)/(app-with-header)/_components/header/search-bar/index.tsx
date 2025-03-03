@@ -248,26 +248,54 @@ const HeaderSearchBar = ({ className }: HeaderSearchBarProps) => {
                         : null}
                   </div>
 
-                  {searchResults && searchResults[searchKind].count > 3 ? (
-                    <Command.Item
-                      onSelect={() => {
-                        router.push(
-                          `${Routes.SEARCH}?search=${search}&kind=${searchKind}`,
-                        );
-                      }}
-                      data-slot="search-bar-item"
-                      className="mx-auto w-fit px-3 py-2"
-                      asChild
-                    >
-                      <Link
-                        href={`${Routes.SEARCH}?search=${search}&kind=${searchKind}`}
-                        className="text-primary-700 dark:text-primary underline"
+                  {searchResults ? (
+                    searchResults[searchKind].count > 3 ? (
+                      <Command.Item
+                        onSelect={() => {
+                          router.push(
+                            `${Routes.SEARCH}?search=${search}&kind=${searchKind}`,
+                          );
+                        }}
+                        data-slot="search-bar-item"
+                        className="mx-auto w-fit px-3 py-2"
+                        asChild
                       >
-                        {t(`headerSearch.${searchKind}.seeMore`, {
-                          count: searchResults?.[searchKind].count - 3,
-                        })}
-                      </Link>
-                    </Command.Item>
+                        <Link
+                          href={`${Routes.SEARCH}?search=${search}&kind=${searchKind}`}
+                          className="text-primary-700 dark:text-primary underline"
+                        >
+                          {t(`headerSearch.${searchKind}.seeMore`, {
+                            count: searchResults?.[searchKind].count - 3,
+                          })}
+                        </Link>
+                      </Command.Item>
+                    ) : (
+                      <Command.Item
+                        onSelect={() =>
+                          router.push(
+                            {
+                              beer: Routes.CREATE_BEER,
+                              brewery: Routes.CREATE_BREWERY,
+                            }[searchKind],
+                          )
+                        }
+                        data-slot="search-bar-item"
+                        className="mx-auto w-fit px-3 py-2"
+                        asChild
+                      >
+                        <Link
+                          href={
+                            {
+                              beer: Routes.CREATE_BEER,
+                              brewery: Routes.CREATE_BREWERY,
+                            }[searchKind]
+                          }
+                          className="text-primary-700 dark:text-primary underline"
+                        >
+                          {t(`headerSearch.${searchKind}.create`)}
+                        </Link>
+                      </Command.Item>
+                    )
                   ) : null}
                 </Command.List>
               </PopoverContent>

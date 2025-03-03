@@ -55,6 +55,21 @@
       "countrySelect": {
         "searchPlaceholder": "Rechercher un pays",
         "noResult": "Aucun pays trouvé"
+      },
+      "brewerySelect": {
+        "searchPlaceholder": "Rechercher une brasserie",
+        "noResult": "Aucune brasserie trouvée",
+        "pending": "Recherche...",
+        "resultCount": "{count, plural, =0 {Aucune brasserie trouvée} =1 {1 brasserie trouvée} other {# brasseries trouvées}}",
+        "create": "Brasserie manquante ? La créer"
+      },
+      "styleSelect": {
+        "searchPlaceholder": "Rechercher un style",
+        "noResult": "Aucun style correspondant"
+      },
+      "colorSelect": {
+        "searchPlaceholder": "Rechercher une couleur",
+        "noResult": "Aucune couleur trouvée"
       }
     },
     "errors": {
@@ -79,13 +94,15 @@
       "tabName": "Bières",
       "searching": "Recherche de bières correspondant à \"{search}\"",
       "results": "{count, plural, =0 {Aucune bière trouvée} =1 {1 bière trouvée} other {# bières trouvées}}",
-      "seeMore": "Voir {count, plural, =1 {1 autre bière} other {# autres bières}}"
+      "seeMore": "Voir {count, plural, =1 {1 autre bière} other {# autres bières}}",
+      "create": "Bière manquante ? La créer"
     },
     "brewery": {
       "tabName": "Brasseries",
       "searching": "Recherche de brasseries correspondant à \"{search}\"",
       "results": "{count, plural, =0 {Aucune brasserie trouvée} =1 {1 brasserie trouvée} other {# brasseries trouvées}}",
-      "seeMore": "Voir {count, plural, =1 {1 autre brasserie} other {# autres brasseries}}"
+      "seeMore": "Voir {count, plural, =1 {1 autre brasserie} other {# autres brasseries}}",
+      "create": "Brasserie manquante ? La créer"
     }
   },
   "userMenu": {
@@ -197,7 +214,9 @@
       "searching": "Recherche de bières correspondant à \"{search}\"",
       "noSearch": "Recherchez une bière !",
       "noResult": "Aucune bière trouvée",
-      "results": "{count, plural, =0 {Aucune bière trouvée} =1 {1 bière trouvée} other {# bières trouvées}}"
+      "results": "{count, plural, =0 {Aucune bière trouvée} =1 {1 bière trouvée} other {# bières trouvées}}",
+      "create": "Bière manquante ? La créer",
+      "createNoResult": "Créer une bière manquante"
     },
     "brewery": {
       "tabName": "Brasseries",
@@ -205,6 +224,8 @@
       "noSearch": "Recherchez une brasserie !",
       "noResult": "Aucune brasserie trouvée",
       "results": "{count, plural, =0 {Aucune brasserie trouvée} =1 {1 brasserie trouvée} other {# brasseries trouvées}}",
+      "create": "Brasserie manquante ? La créer",
+      "createNoResult": "Créer une brasserie manquante",
       "result": {
         "beerCount": "{count, plural, =0 {0 bières} =1 {1 bière} other {# bières}}"
       }
@@ -391,6 +412,43 @@
       "complete": "Compléter la review",
       "saving": "Enregistrement en cours...",
       "cancel": "Annuler"
+    }
+  },
+  "createBeerPage": {
+    "title": "Ajouter une nouvelle bière",
+    "fields": {
+      "name": {
+        "label": "Nom de la bière"
+      },
+      "releasedIn": {
+        "label": "Sortie en"
+      },
+      "brewery": {
+        "label": "Brasserie"
+      },
+      "style": {
+        "label": "Style"
+      },
+      "color": {
+        "label": "Couleur"
+      },
+      "abv": {
+        "label": "Degré"
+      },
+      "ibu": {
+        "label": "IBU"
+      },
+      "description": {
+        "label": "Description"
+      }
+    },
+    "actions": {
+      "submit": "Créer la bière",
+      "submitting": "Création en cours..."
+    },
+    "errors": {
+      "MIN_CREATION_YEAR_ERROR": "L'année de création ne peut pas être antérieure à l'an 1000",
+      "MAX_CREATION_YEAR_ERROR": "L'année de création ne peut pas être dans le futur"
     }
   },
   "createBreweryPage": {

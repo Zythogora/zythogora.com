@@ -31,7 +31,7 @@ import FormServingFromSelector from "@/app/_components/form/serving-form-selecto
 import FormSlider from "@/app/_components/form/slider";
 import FormTextarea from "@/app/_components/form/textarea";
 import Button from "@/app/_components/ui/button";
-import { useRouter } from "@/lib/i18n";
+import { usePathname, useRouter } from "@/lib/i18n";
 
 interface ReviewFormProps {
   beerId: string;
@@ -41,9 +41,10 @@ const ReviewForm = ({ beerId }: ReviewFormProps) => {
   const t = useTranslations();
 
   const router = useRouter();
+  const pathname = usePathname();
 
   const [lastResult, action, isPending] = useActionState(
-    reviewAction,
+    reviewAction.bind(null, pathname),
     undefined,
   );
 

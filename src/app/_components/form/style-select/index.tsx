@@ -3,29 +3,33 @@
 import { getSelectProps, type FieldMetadata } from "@conform-to/react";
 import { useEffect, useRef, useState } from "react";
 
-import CountrySelect from "@/app/_components/ui/country-select";
 import FormError from "@/app/_components/ui/form-error";
 import Label from "@/app/_components/ui/label";
+import StyleSelect from "@/app/_components/ui/style-select";
 import { cn } from "@/lib/tailwind";
 
-interface FormCountrySelectProps {
+import type { StyleCategory } from "@/domain/beers/types";
+
+interface FormStyleSelectProps {
   label: string;
   field: FieldMetadata;
+  styleCategories: StyleCategory[];
   placeholder?: string;
   searchPlaceholder?: string;
   disabled?: boolean;
   className?: string;
 }
 
-const FormCountrySelect = ({
+const FormStyleSelect = ({
   label,
+  field,
+  styleCategories,
   placeholder,
   searchPlaceholder,
-  field,
   disabled,
   className,
-}: FormCountrySelectProps) => {
-  const [selectedCountryCode, setSelectedCountryCode] = useState<string>("");
+}: FormStyleSelectProps) => {
+  const [selectedStyleId, setSelectedStyleId] = useState<string>("");
 
   const inputRef = useRef<HTMLInputElement>(null);
   useEffect(() => {
@@ -34,7 +38,7 @@ const FormCountrySelect = ({
       const event = new Event("input", { bubbles: true });
       inputRef.current.dispatchEvent(event);
     }
-  }, [selectedCountryCode]);
+  }, [selectedStyleId]);
 
   const { key, name, ...restSelectProps } = getSelectProps(field);
 
@@ -42,23 +46,19 @@ const FormCountrySelect = ({
     <div
       className={cn("group/form-component", "flex flex-col gap-y-1", className)}
     >
-      <input
-        ref={inputRef}
-        type="hidden"
-        name={name}
-        value={selectedCountryCode}
-      />
+      <input ref={inputRef} type="hidden" name={name} value={selectedStyleId} />
 
       <Label htmlFor={field.id} required={field.required}>
         {label}
       </Label>
 
       <div>
-        <CountrySelect
+        <StyleSelect
           {...restSelectProps}
           name={name}
           key={key}
-          onChange={(value) => setSelectedCountryCode(value.code)}
+          styleCategories={styleCategories}
+          onChange={(value) => setSelectedStyleId(value.id)}
           disabled={disabled}
           placeholder={placeholder}
           searchPlaceholder={searchPlaceholder}
@@ -70,4 +70,4 @@ const FormCountrySelect = ({
   );
 };
 
-export default FormCountrySelect;
+export default FormStyleSelect;

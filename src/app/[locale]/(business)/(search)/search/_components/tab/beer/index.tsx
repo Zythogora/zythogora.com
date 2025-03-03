@@ -5,6 +5,7 @@ import Pagination from "@/app/_components/ui/pagination";
 import { Link } from "@/lib/i18n";
 import { Routes } from "@/lib/routes";
 import { generatePath } from "@/lib/routes/utils";
+import { cn } from "@/lib/tailwind";
 
 import type { BeerResult } from "@/domain/search/types";
 
@@ -21,7 +22,18 @@ const BeerTab = async ({ results, count, page }: BeerTabProps) => {
   const t = await getTranslations();
 
   if (results.length === 0) {
-    return <p>{t("searchPage.beer.noResult")}</p>;
+    return (
+      <div className="flex w-full flex-col gap-y-4">
+        <p>{t("searchPage.beer.noResult")}</p>
+
+        <Link
+          href={generatePath(Routes.CREATE_BEER)}
+          className={cn("underline", "text-primary-700 dark:text-primary")}
+        >
+          {t("searchPage.beer.createNoResult")}
+        </Link>
+      </div>
+    );
   }
 
   return (
@@ -49,6 +61,16 @@ const BeerTab = async ({ results, count, page }: BeerTabProps) => {
         ))}
 
         <Pagination current={page.current} total={page.total} />
+
+        <Link
+          href={generatePath(Routes.CREATE_BEER)}
+          className={cn(
+            "mx-auto underline",
+            "text-primary-700 dark:text-primary",
+          )}
+        >
+          {t("searchPage.beer.create")}
+        </Link>
       </div>
     </div>
   );

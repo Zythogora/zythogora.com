@@ -16,6 +16,9 @@ export const Routes = {
   PROFILE: "/users/:username",
 
   REVIEW_FORM: "/breweries/:brewerySlug/beers/:beerSlug/review",
+
+  CREATE_BEER: "/create/beer",
+  CREATE_BREWERY: "/create/brewery",
 } as const;
 
 export type Path = (typeof Routes)[keyof typeof Routes];

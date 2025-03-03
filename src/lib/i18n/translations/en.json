@@ -55,6 +55,21 @@
       "countrySelect": {
         "searchPlaceholder": "Search for a country",
         "noResult": "No country found"
+      },
+      "brewerySelect": {
+        "searchPlaceholder": "Search for a brewery",
+        "noResult": "No brewery found",
+        "pending": "Searching...",
+        "resultCount": "{count, plural, =0 {No brewery found} =1 {1 brewery found} other {# breweries found}}",
+        "create": "Brewery missing? Create it"
+      },
+      "styleSelect": {
+        "searchPlaceholder": "Search for a style",
+        "noResult": "No matching style"
+      },
+      "colorSelect": {
+        "searchPlaceholder": "Search for a color",
+        "noResult": "No color found"
       }
     },
     "errors": {
@@ -79,13 +94,15 @@
       "tabName": "Beers",
       "searching": "Searching for beers matching \"{search}\"",
       "results": "{count, plural, =0 {No beers found} =1 {1 beer found} other {# beers found}}",
-      "seeMore": "See {count, plural, =1 {more beer} other {# more beers}}"
+      "seeMore": "See {count, plural, =1 {more beer} other {# more beers}}",
+      "create": "Beer missing? Create it"
     },
     "brewery": {
       "tabName": "Breweries",
       "searching": "Searching for breweries matching \"{search}\"",
       "results": "{count, plural, =0 {No breweries found} =1 {1 brewery found} other {# breweries found}}",
-      "seeMore": "See {count, plural, =1 {more brewery} other {# more breweries}}"
+      "seeMore": "See {count, plural, =1 {more brewery} other {# more breweries}}",
+      "create": "Brewery missing? Create it"
     }
   },
   "userMenu": {
@@ -197,7 +214,9 @@
       "searching": "Searching for beers matching \"{search}\"",
       "noSearch": "Search for a beer!",
       "noResult": "No beers found",
-      "results": "{count, plural, =0 {No beers found} =1 {1 beer found} other {# beers found}}"
+      "results": "{count, plural, =0 {No beers found} =1 {1 beer found} other {# beers found}}",
+      "create": "Beer missing? Create it",
+      "createNoResult": "Create a missing beer"
     },
     "brewery": {
       "tabName": "Breweries",
@@ -205,6 +224,8 @@
       "noSearch": "Search for a brewery!",
       "noResult": "No breweries found",
       "results": "{count, plural, =0 {No breweries found} =1 {1 brewery found} other {# breweries found}}",
+      "create": "Brewery missing? Create it",
+      "createNoResult": "Create a missing brewery",
       "result": {
         "beerCount": "{count, plural, =0 {0 beers} =1 {1 beer} other {# beers}}"
       }
@@ -391,6 +412,43 @@
       "complete": "Complete review",
       "saving": "Saving review...",
       "cancel": "Cancel"
+    }
+  },
+  "createBeerPage": {
+    "title": "Add a new beer",
+    "fields": {
+      "name": {
+        "label": "Beer name"
+      },
+      "releasedIn": {
+        "label": "Released in"
+      },
+      "brewery": {
+        "label": "Brewery"
+      },
+      "style": {
+        "label": "Style"
+      },
+      "color": {
+        "label": "Color"
+      },
+      "abv": {
+        "label": "ABV"
+      },
+      "ibu": {
+        "label": "IBU"
+      },
+      "description": {
+        "label": "Description"
+      }
+    },
+    "actions": {
+      "submit": "Create beer",
+      "submitting": "Creating beer..."
+    },
+    "errors": {
+      "MIN_CREATION_YEAR_ERROR": "The creation year cannot be before the year 1000",
+      "MAX_CREATION_YEAR_ERROR": "The creation year cannot be in the future"
     }
   },
   "createBreweryPage": {

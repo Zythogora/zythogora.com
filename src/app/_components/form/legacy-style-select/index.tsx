@@ -3,29 +3,33 @@
 import { getSelectProps, type FieldMetadata } from "@conform-to/react";
 import { useEffect, useRef, useState } from "react";
 
-import CountrySelect from "@/app/_components/ui/country-select";
+import LegacyStyleSelect from "@/app/_components/form/legacy-style-select/style-select";
 import FormError from "@/app/_components/ui/form-error";
 import Label from "@/app/_components/ui/label";
 import { cn } from "@/lib/tailwind";
 
-interface FormCountrySelectProps {
+import type { LegacyStyle } from "@/domain/beers/types";
+
+interface FormLegacyStyleSelectProps {
   label: string;
   field: FieldMetadata;
+  styles: LegacyStyle[];
   placeholder?: string;
   searchPlaceholder?: string;
   disabled?: boolean;
   className?: string;
 }
 
-const FormCountrySelect = ({
+const FormLegacyStyleSelect = ({
   label,
+  field,
+  styles,
   placeholder,
   searchPlaceholder,
-  field,
   disabled,
   className,
-}: FormCountrySelectProps) => {
-  const [selectedCountryCode, setSelectedCountryCode] = useState<string>("");
+}: FormLegacyStyleSelectProps) => {
+  const [selectedStyleId, setSelectedStyleId] = useState<string>("");
 
   const inputRef = useRef<HTMLInputElement>(null);
   useEffect(() => {
@@ -34,7 +38,7 @@ const FormCountrySelect = ({
       const event = new Event("input", { bubbles: true });
       inputRef.current.dispatchEvent(event);
     }
-  }, [selectedCountryCode]);
+  }, [selectedStyleId]);
 
   const { key, name, ...restSelectProps } = getSelectProps(field);
 
@@ -42,23 +46,19 @@ const FormCountrySelect = ({
     <div
       className={cn("group/form-component", "flex flex-col gap-y-1", className)}
     >
-      <input
-        ref={inputRef}
-        type="hidden"
-        name={name}
-        value={selectedCountryCode}
-      />
+      <input ref={inputRef} type="hidden" name={name} value={selectedStyleId} />
 
       <Label htmlFor={field.id} required={field.required}>
         {label}
       </Label>
 
       <div>
-        <CountrySelect
+        <LegacyStyleSelect
           {...restSelectProps}
           name={name}
           key={key}
-          onChange={(value) => setSelectedCountryCode(value.code)}
+          styles={styles}
+          onChange={(value) => setSelectedStyleId(value.id)}
           disabled={disabled}
           placeholder={placeholder}
           searchPlaceholder={searchPlaceholder}
@@ -70,4 +70,4 @@ const FormCountrySelect = ({
   );
 };
 
-export default FormCountrySelect;
+export default FormLegacyStyleSelect;

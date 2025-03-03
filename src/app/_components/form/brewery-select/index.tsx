@@ -3,12 +3,12 @@
 import { getSelectProps, type FieldMetadata } from "@conform-to/react";
 import { useEffect, useRef, useState } from "react";
 
-import CountrySelect from "@/app/_components/ui/country-select";
+import BrewerySelect from "@/app/_components/ui/brewery-select";
 import FormError from "@/app/_components/ui/form-error";
 import Label from "@/app/_components/ui/label";
 import { cn } from "@/lib/tailwind";
 
-interface FormCountrySelectProps {
+interface FormBrewerySelectProps {
   label: string;
   field: FieldMetadata;
   placeholder?: string;
@@ -17,15 +17,15 @@ interface FormCountrySelectProps {
   className?: string;
 }
 
-const FormCountrySelect = ({
+const FormBrewerySelect = ({
   label,
+  field,
   placeholder,
   searchPlaceholder,
-  field,
   disabled,
   className,
-}: FormCountrySelectProps) => {
-  const [selectedCountryCode, setSelectedCountryCode] = useState<string>("");
+}: FormBrewerySelectProps) => {
+  const [selectedBreweryId, setSelectedBreweryId] = useState<string>("");
 
   const inputRef = useRef<HTMLInputElement>(null);
   useEffect(() => {
@@ -34,7 +34,7 @@ const FormCountrySelect = ({
       const event = new Event("input", { bubbles: true });
       inputRef.current.dispatchEvent(event);
     }
-  }, [selectedCountryCode]);
+  }, [selectedBreweryId]);
 
   const { key, name, ...restSelectProps } = getSelectProps(field);
 
@@ -46,7 +46,7 @@ const FormCountrySelect = ({
         ref={inputRef}
         type="hidden"
         name={name}
-        value={selectedCountryCode}
+        value={selectedBreweryId}
       />
 
       <Label htmlFor={field.id} required={field.required}>
@@ -54,11 +54,11 @@ const FormCountrySelect = ({
       </Label>
 
       <div>
-        <CountrySelect
+        <BrewerySelect
           {...restSelectProps}
           name={name}
           key={key}
-          onChange={(value) => setSelectedCountryCode(value.code)}
+          onChange={(value) => setSelectedBreweryId(value.id)}
           disabled={disabled}
           placeholder={placeholder}
           searchPlaceholder={searchPlaceholder}
@@ -70,4 +70,4 @@ const FormCountrySelect = ({
   );
 };
 
-export default FormCountrySelect;
+export default FormBrewerySelect;
