@@ -24,7 +24,8 @@
     }
   },
   "common": {
-    "or": "OU"
+    "or": "OU",
+    "abv": "{abv}°"
   },
   "form": {
     "fields": {
@@ -202,7 +203,7 @@
   "beerPage": {
     "brewedBy": "Brassée par <link>{brewery}</link>",
     "style": "Style",
-    "abv": "ABV",
+    "abv": "Degré",
     "ibu": "IBU",
     "404": {
       "title": "On ne connait pas <muted>(encore)</muted><br></br>cette bière :(",

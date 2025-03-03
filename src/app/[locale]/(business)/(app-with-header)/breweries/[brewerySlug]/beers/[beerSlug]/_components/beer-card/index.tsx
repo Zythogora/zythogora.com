@@ -94,7 +94,7 @@ const BeerCard = async ({
 
         <DescriptionList
           label={t("beerPage.abv")}
-          value={`${abv}%`}
+          value={t("common.abv", { abv })}
           className={ibu ? "" : "col-start-5"}
         />
 

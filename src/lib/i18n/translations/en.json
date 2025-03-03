@@ -24,7 +24,8 @@
     }
   },
   "common": {
-    "or": "OR"
+    "or": "OR",
+    "abv": "{abv}%"
   },
   "form": {
     "fields": {
