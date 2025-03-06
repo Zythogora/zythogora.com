@@ -3,7 +3,7 @@
 import { parseWithZod } from "@conform-to/zod";
 import { getLocale } from "next-intl/server";
 
-import { createBrewerySchema } from "@/app/[locale]/create/brewery/schemas";
+import { createBrewerySchema } from "@/app/[locale]/(forms)/create/brewery/schemas";
 import { createBrewery } from "@/domain/breweries";
 import { getCurrentUser } from "@/lib/auth";
 import { redirect } from "@/lib/i18n";

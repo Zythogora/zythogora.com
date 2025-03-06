@@ -7,7 +7,7 @@ import FormError from "@/app/_components/ui/form-error";
 import Input from "@/app/_components/ui/input";
 import { cn } from "@/lib/tailwind";
 
-import type { CreateBreweryData } from "@/app/[locale]/create/brewery/schemas";
+import type { CreateBreweryData } from "@/app/[locale]/(forms)/create/brewery/schemas";
 
 export const emptySocialLinkValue = {
   name: "",
@@ -41,8 +41,8 @@ const SocialLink = ({
       <div
         className={cn(
           "grid w-full grid-cols-[auto_max-content] rounded-[7px] *:m-[-1px]",
-          "focus-within:outline-primary-700 focus-within:outline-3 focus-within:outline-offset-1",
-          "dark:focus-within:outline-primary-100",
+          "focus-within:outline-3 focus-within:outline-offset-1",
+          "focus-within:outline-primary-700 dark:focus-within:outline-primary-100",
           "before:bg-foreground relative before:absolute before:inset-[-1px] before:bottom-[-3px] before:z-[-1] before:rounded",
           "**:data-[slot=input-container]:rounded-none **:data-[slot=input-container]:focus-within:z-50",
           "**:data-[slot=input]:rounded-none",

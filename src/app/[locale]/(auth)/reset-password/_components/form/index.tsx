@@ -71,7 +71,8 @@ const ResetPasswordForm = ({ token }: ResetPasswordFormProps) => {
               <div
                 className={cn(
                   "flex flex-col rounded-[7px] *:-m-px",
-                  "focus-within:outline-primary-700 focus-within:outline-3 focus-within:outline-offset-1",
+                  "focus-within:outline-3 focus-within:outline-offset-1",
+                  "focus-within:outline-primary-700 dark:focus-within:outline-primary-100",
                   "before:bg-foreground relative before:absolute before:inset-[-1px] before:bottom-[-3px] before:z-[-1] before:rounded",
                   "**:data-[slot=input-container]:rounded-none **:data-[slot=input-container]:focus-within:z-50!",
                   "**:data-[slot=input-container]:before:bottom-0",

@@ -4,7 +4,7 @@ import { availableThemes } from "@/app/_components/providers/theme-provider";
 
 import type { PropsWithChildren } from "react";
 
-const CreateLayout = ({ children }: PropsWithChildren) => {
+const FormsLayout = ({ children }: PropsWithChildren) => {
   return (
     <ThemeProvider
       defaultTheme="system"
@@ -18,4 +18,4 @@ const CreateLayout = ({ children }: PropsWithChildren) => {
   );
 };
 
-export default CreateLayout;
+export default FormsLayout;

@@ -9,9 +9,12 @@ import { useActionState, useEffect, useState, useTransition } from "react";
 
 import SocialLink, {
   emptySocialLinkValue,
-} from "@/app/[locale]/create/brewery/_components/social-link";
-import { createBreweryAction } from "@/app/[locale]/create/brewery/actions";
-import { createBrewerySchema } from "@/app/[locale]/create/brewery/schemas";
+} from "@/app/[locale]/(forms)/create/brewery/_components/social-link";
+import { createBreweryAction } from "@/app/[locale]/(forms)/create/brewery/actions";
+import {
+  createBrewerySchema,
+  type CreateBreweryData,
+} from "@/app/[locale]/(forms)/create/brewery/schemas";
 import FormCountrySelect from "@/app/_components/form/country-select";
 import FormInput from "@/app/_components/form/input";
 import FormTextarea from "@/app/_components/form/textarea";
@@ -21,8 +24,6 @@ import { authClient } from "@/lib/auth/client";
 import { useRouter } from "@/lib/i18n";
 import { Routes } from "@/lib/routes";
 import { cn } from "@/lib/tailwind";
-
-import type { CreateBreweryData } from "@/app/[locale]/create/brewery/schemas";
 
 const CreateBreweryPage = () => {
   const t = useTranslations();
@@ -114,7 +115,7 @@ const CreateBreweryPage = () => {
           <form
             {...getFormProps(form)}
             className={cn(
-              "grid flex-col gap-x-6 gap-y-8",
+              "grid gap-x-6 gap-y-8",
               "w-full grid-cols-2 @3xl:w-192 @3xl:grid-cols-7",
             )}
           >
