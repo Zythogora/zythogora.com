@@ -1,5 +1,6 @@
 "server only";
 
+import { transformRawColorToColor } from "@/domain/beers/transforms";
 import { getCountry } from "@/lib/i18n/countries";
 
 import type {
@@ -39,8 +40,5 @@ export const transformRawBreweryBeerToBreweryBeer = (
   style: rawBeer.style.name,
   abv: rawBeer.abv,
   ibu: rawBeer.ibu ?? undefined,
-  color: {
-    name: rawBeer.color.name,
-    hex: rawBeer.color.hex,
-  },
+  color: transformRawColorToColor(rawBeer.color),
 });

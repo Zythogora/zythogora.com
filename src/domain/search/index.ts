@@ -1,5 +1,6 @@
 "server only";
 
+import { transformRawColorToColor } from "@/domain/beers/transforms";
 import { getCountry } from "@/lib/i18n/countries";
 import { getPaginatedResults } from "@/lib/pagination";
 import { prepareFullTextSearch, prepareLikeSearch } from "@/lib/prisma";
@@ -70,10 +71,7 @@ export const searchBeers = async ({
       style: style.name,
       abv: beer.abv,
       ibu: beer.ibu ?? undefined,
-      color: {
-        name: color.name,
-        hex: color.hex,
-      },
+      color: transformRawColorToColor(color),
     })),
   );
 

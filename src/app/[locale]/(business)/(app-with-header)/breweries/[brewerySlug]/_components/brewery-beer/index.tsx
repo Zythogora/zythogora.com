@@ -1,17 +1,16 @@
 import { getTranslations } from "next-intl/server";
 
-import PintIcon from "@/app/_components/icons/pint";
+import ColoredPintIcon from "@/app/_components/icons/colored-pint";
 import Chip from "@/app/_components/ui/chip";
+
+import type { Color } from "@/domain/beers/types";
 
 interface BreweryBeerProps {
   name: string;
   style: string;
   abv: number;
   ibu?: number;
-  color: {
-    name: string;
-    hex: string;
-  };
+  color: Color;
 }
 
 const BreweryBeer = async ({
@@ -25,7 +24,7 @@ const BreweryBeer = async ({
 
   return (
     <div className="flex w-full min-w-0 flex-row items-center gap-x-4">
-      <PintIcon color={color} size={40} className="size-10" />
+      <ColoredPintIcon color={color} size={40} className="size-10" />
 
       <div className="flex flex-col gap-y-1 overflow-hidden">
         <p className="font-title truncate text-lg">{name}</p>

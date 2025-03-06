@@ -12,6 +12,8 @@ export const Routes = {
   BREWERY: "/breweries/:brewerySlug",
 
   BEER: "/breweries/:brewerySlug/beers/:beerSlug",
+
+  PROFILE: "/users/:username",
 } as const;
 
 export type Path = (typeof Routes)[keyof typeof Routes];

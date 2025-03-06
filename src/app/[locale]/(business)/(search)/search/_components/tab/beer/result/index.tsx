@@ -1,9 +1,10 @@
 import { useTranslations } from "next-intl";
 
 import CountryFlag from "@/app/_components/icons/country-flag";
-import PintIcon from "@/app/_components/icons/pint";
+import ColoredPintIcon from "@/app/_components/icons/colored-pint";
 import Chip from "@/app/_components/ui/chip";
 
+import type { Color } from "@/domain/beers/types";
 import type { Country } from "@/lib/i18n/countries/types";
 
 interface BeerSearchResultProps {
@@ -15,10 +16,7 @@ interface BeerSearchResultProps {
   style: string;
   abv: number;
   ibu?: number;
-  color: {
-    name: string;
-    hex: string;
-  };
+  color: Color;
 }
 
 const BeerSearchResult = ({
@@ -33,23 +31,21 @@ const BeerSearchResult = ({
 
   return (
     <div className="flex w-full flex-row items-center gap-x-4">
-      <PintIcon color={color} size={40} className="size-10" />
+      <ColoredPintIcon color={color} size={40} className="size-10" />
 
       <div className="flex flex-col gap-y-1 overflow-hidden">
-        <div>
-          <p className="font-title truncate text-lg">{name}</p>
+        <p className="font-title truncate text-lg">{name}</p>
 
-          <div className="flex flex-row items-center gap-x-1">
-            <CountryFlag
-              country={brewery.country}
-              size={14}
-              className="size-3.5"
-            />
+        <div className="flex flex-row items-center gap-x-1">
+          <CountryFlag
+            country={brewery.country}
+            size={14}
+            className="size-3.5"
+          />
 
-            <p className="text-foreground/62.5 truncate overflow-visible text-sm leading-none">
-              {brewery.name}
-            </p>
-          </div>
+          <p className="text-foreground/62.5 truncate overflow-visible text-sm leading-none">
+            {brewery.name}
+          </p>
         </div>
 
         <div className="flex min-w-0 flex-row gap-x-1.5">

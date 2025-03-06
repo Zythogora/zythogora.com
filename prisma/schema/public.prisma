@@ -4,13 +4,13 @@ model Users {
 
   betterAuthUser BetterAuthUsers @relation(fields: [id], references: [id], onDelete: Cascade)
 
-  Reviews Reviews[]
+  reviews Reviews[]
 
-  CreatedBeers Beers[] @relation("created_beers")
-  UpdatedBeers Beers[] @relation("updated_beers")
+  createdBeers Beers[] @relation("created_beers")
+  updatedBeers Beers[] @relation("updated_beers")
 
-  CreatedBreweries Breweries[] @relation("created_breweries")
-  UpdatedBreweries Breweries[] @relation("updated_breweries")
+  createdBreweries Breweries[] @relation("created_breweries")
+  updatedBreweries Breweries[] @relation("updated_breweries")
 
   @@map("users")
   @@schema("public")

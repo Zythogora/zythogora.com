@@ -1,6 +1,6 @@
 "use client";
 
-import { LogInIcon, LogOutIcon } from "lucide-react";
+import { LogInIcon, LogOutIcon, UserRoundPlusIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 import UserIcon from "@/app/_components/icons/user";
@@ -10,16 +10,16 @@ import {
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/app/_components/ui/dropdown-menu";
 import LanguageSubMenu from "@/app/_components/user-menu/language-submenu";
 import ThemeSubMenu from "@/app/_components/user-menu/theme-submenu";
 import { authClient } from "@/lib/auth/client";
-import { usePathname } from "@/lib/i18n";
+import { usePathname, useRouter } from "@/lib/i18n";
 import { useRouterWithSearchParams } from "@/lib/i18n/hooks";
 import { Routes } from "@/lib/routes";
+import { generatePath } from "@/lib/routes/utils";
 import { cn } from "@/lib/tailwind";
 
 import type { ComponentProps } from "react";
@@ -56,11 +56,24 @@ const UserMenu = ({ className }: UserMenuProps) => {
 
   const { data: session } = authClient.useSession();
 
+  const router = useRouter();
   const { push } = useRouterWithSearchParams();
   const pathname = usePathname();
 
+  const handleViewProfile = () => {
+    if (session) {
+      router.push(
+        generatePath(Routes.PROFILE, { username: session.user.username }),
+      );
+    }
+  };
+
   const handleSignIn = () => {
     push(Routes.SIGN_IN, { redirect: pathname });
+  };
+
+  const handleSignUp = () => {
+    push(Routes.SIGN_UP, { redirect: pathname });
   };
 
   const handleSignOut = async () => {
@@ -82,15 +95,18 @@ const UserMenu = ({ className }: UserMenuProps) => {
       >
         {session ? (
           <>
-            <DropdownMenuLabel className="flex flex-col gap-y-2 p-2">
+            <DropdownMenuItem
+              onClick={handleViewProfile}
+              className="flex flex-col gap-y-2 px-8 py-4"
+            >
               <p className="truncate text-lg font-bold">
                 {session.user.username}
               </p>
 
-              <div className="flex flex-row justify-between">
+              <div className="flex w-full flex-row justify-between">
                 <p className="text-sm leading-none">
-                  {t.rich("userMenu.beers", {
-                    count: 0, // FIXME: Get the actual number of beers
+                  {t.rich("userMenu.user.reviews", {
+                    count: session.user.reviewCount,
                     muted: (chunks) => (
                       <span className="text-foreground/62.5">{chunks}</span>
                     ),
@@ -98,15 +114,15 @@ const UserMenu = ({ className }: UserMenuProps) => {
                 </p>
 
                 <p className="text-sm leading-none">
-                  {t.rich("userMenu.reviews", {
-                    count: 0, // FIXME: Get the actual number of reviews
+                  {t.rich("userMenu.user.beers", {
+                    count: session.user.uniqueBeerCount,
                     muted: (chunks) => (
                       <span className="text-foreground/62.5">{chunks}</span>
                     ),
                   })}
                 </p>
               </div>
-            </DropdownMenuLabel>
+            </DropdownMenuItem>
 
             <DropdownMenuSeparator />
           </>
@@ -126,18 +142,29 @@ const UserMenu = ({ className }: UserMenuProps) => {
               onClick={handleSignOut}
               className="flex flex-row gap-x-2"
             >
-              <LogOutIcon className="size-4" />
-              Sign out
+              <LogOutIcon className="text-foreground size-4" />
+
+              {t("userMenu.auth.signOut")}
             </DropdownMenuItem>
           </DropdownMenuGroup>
         ) : (
           <DropdownMenuGroup>
             <DropdownMenuItem
+              onClick={handleSignUp}
+              className="flex flex-row gap-x-2"
+            >
+              <UserRoundPlusIcon className="text-foreground size-4" />
+
+              {t("userMenu.auth.signUp")}
+            </DropdownMenuItem>
+
+            <DropdownMenuItem
               onClick={handleSignIn}
               className="flex flex-row gap-x-2"
             >
-              <LogInIcon className="size-4" />
-              Sign in
+              <LogInIcon className="text-foreground size-4" />
+
+              {t("userMenu.auth.signIn")}
             </DropdownMenuItem>
           </DropdownMenuGroup>
         )}

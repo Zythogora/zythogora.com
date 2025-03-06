@@ -42,10 +42,7 @@ const BreweryBeerList = async ({
               style={beer.style}
               abv={beer.abv}
               ibu={beer.ibu ?? undefined}
-              color={{
-                name: beer.color.name,
-                hex: beer.color.hex,
-              }}
+              color={beer.color}
             />
           </Link>
         ))}
