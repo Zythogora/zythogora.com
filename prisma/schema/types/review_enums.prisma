@@ -1,0 +1,120 @@
+enum ServingFrom {
+  DRAFT
+  BOTTLE
+  CAN
+  GROWLER
+  CASK
+
+  @@map("serving_from")
+  @@schema("public")
+}
+
+enum LabelDesign {
+  HATE_IT
+  MEH
+  AVERAGE
+  GOOD
+  LOVE_IT
+
+  @@map("label_design")
+  @@schema("public")
+}
+
+enum Haziness {
+  COMPLETELY_CLEAR
+  VERY_SLIGHTLY_CAST
+  SLIGHTLY_HAZY
+  HAZY
+  VERY_HAZY
+
+  @@map("haziness")
+  @@schema("public")
+}
+
+enum HeadRetention {
+  POOR
+  SHORT_LIVED
+  MODERATE
+  GOOD
+  EXCELLENT
+
+  @@map("head_retention")
+  @@schema("public")
+}
+
+enum AromasIntensity {
+  FAINT
+  MILD
+  MODERATE
+  PRONOUNCED
+  INTENSE
+
+  @@map("aromas_intensity")
+  @@schema("public")
+}
+
+enum FlavorsIntensity {
+  FAINT
+  MILD
+  MODERATE
+  PRONOUNCED
+  INTENSE
+
+  @@map("flavors_intensity")
+  @@schema("public")
+}
+
+enum BodyStrength {
+  THIN
+  LIGHT
+  MEDIUM
+  FULL
+  HEAVY
+
+  @@map("body_strength")
+  @@schema("public")
+}
+
+enum CarbonationIntensity {
+  FLAT
+  LOW
+  MODERATE
+  LIVELY
+  HIGHLY_CARBONATED
+
+  @@map("carbonation_intensity")
+  @@schema("public")
+}
+
+enum Bitterness {
+  LOW
+  MODERATE
+  PRONOUNCED
+  AGGRESSIVE
+  LINGERING
+
+  @@map("bitterness")
+  @@schema("public")
+}
+
+enum Acidity {
+  NONE
+  SOFT
+  BRIGHT
+  TART
+  PUCKERING
+
+  @@map("acidity")
+  @@schema("public")
+}
+
+enum Duration {
+  SHORT
+  MODERATE
+  MEDIUM
+  LONG
+  ENDLESS
+
+  @@map("duration")
+  @@schema("public")
+}
