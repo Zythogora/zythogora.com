@@ -19,6 +19,8 @@ model Beers {
   updatedBy     String   @map("updated_by")
   updatedByUser Users    @relation("updated_beers", fields: [updatedBy], references: [id])
 
+  reviews Reviews[]
+
   @@unique([name, breweryId])
   @@map("beers")
   @@schema("beer_data")

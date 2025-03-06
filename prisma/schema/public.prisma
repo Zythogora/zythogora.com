@@ -4,6 +4,8 @@ model Users {
 
   betterAuthUser BetterAuthUsers @relation(fields: [id], references: [id], onDelete: Cascade)
 
+  Reviews Reviews[]
+
   CreatedBeers Beers[] @relation("created_beers")
   UpdatedBeers Beers[] @relation("updated_beers")
 
@@ -11,5 +13,34 @@ model Users {
   UpdatedBreweries Breweries[] @relation("updated_breweries")
 
   @@map("users")
+  @@schema("public")
+}
+
+model Reviews {
+  id                   String                @id @default(nanoid())
+  globalScore          Decimal               @map("global_score") @db.Decimal(3, 1)
+  servingFrom          ServingFrom           @map("serving_from")
+  comment              String?
+  labelDesign          LabelDesign?          @map("label_design")
+  haziness             Haziness?
+  headRetention        HeadRetention?        @map("head_retention")
+  aromasIntensity      AromasIntensity?      @map("aromas_intensity")
+  flavorsIntensity     FlavorsIntensity?     @map("flavors_intensity")
+  bodyStrength         BodyStrength?         @map("body_strength")
+  carbonationIntensity CarbonationIntensity? @map("carbonation_intensity")
+  bitterness           Bitterness?
+  acidity              Acidity?
+  duration             Duration?
+
+  beerId String @map("beer_id")
+  beer   Beers  @relation(fields: [beerId], references: [id])
+
+  userId String @map("user_id")
+  user   Users  @relation(fields: [userId], references: [id])
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
+
+  @@map("reviews")
   @@schema("public")
 }
