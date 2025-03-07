@@ -4,21 +4,21 @@ import { nanoid } from "nanoid";
 import { cache } from "react";
 
 import {
-  InvalidSlugError,
-  UnauthorizedError,
+  InvalidBrewerySlugError,
+  UnauthorizedBreweryCreationError,
   UnknownBreweryError,
 } from "@/domain/breweries/errors";
 import { transformRawBreweryToBrewery } from "@/domain/breweries/transforms";
 import { getCurrentUser } from "@/lib/auth";
 import prisma, { slugify } from "@/lib/prisma";
 
-import type { CreateBreweryData } from "@/app/[locale]/create/brewery/schemas";
+import type { CreateBreweryData } from "@/app/[locale]/(forms)/create/brewery/schemas";
 import type { Brewery } from "@/domain/breweries/types";
 
 export const getBreweryBySlug = cache(
   async (brewerySlug: string): Promise<Brewery> => {
     if (brewerySlug.length < 4) {
-      throw new InvalidSlugError();
+      throw new InvalidBrewerySlugError();
     }
 
     let brewery = await prisma.breweries.findUnique({
@@ -60,7 +60,7 @@ export const getBreweryBySlug = cache(
 export const createBrewery = async (data: CreateBreweryData) => {
   const user = await getCurrentUser();
   if (!user) {
-    throw new UnauthorizedError();
+    throw new UnauthorizedBreweryCreationError();
   }
 
   const id = nanoid();

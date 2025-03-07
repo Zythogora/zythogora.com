@@ -25,7 +25,10 @@
   },
   "common": {
     "or": "OR",
-    "abv": "{abv}%"
+    "abv": "{abv}%",
+    "actions": {
+      "copiedToClipboard": "The URL has been copied to your clipboard"
+    }
   },
   "form": {
     "fields": {
@@ -212,6 +215,10 @@
     "style": "Style",
     "abv": "ABV",
     "ibu": "IBU",
+    "actions": {
+      "review": "Add a review",
+      "share": "Share this beer"
+    },
     "404": {
       "title": "We don't know this beer<br></br><muted>(yet)</muted> :(",
       "cta": "But you can <link>search</link> for another one!"
@@ -235,6 +242,156 @@
     "uniqueBreweries": "Breweries",
     "uniqueStyles": "Styles",
     "uniqueCountries": "Countries"
+  },
+  "createReviewPage": {
+    "fieldGroups": {
+      "overall": {
+        "label": "Overall",
+        "fields": {
+          "appreciation": {
+            "label": "Global appreciation"
+          },
+          "servingFrom": {
+            "label": "Beer served from",
+            "options": {
+              "draft": "Beer served on draught",
+              "bottle": "Beer served in a bottle",
+              "can": "Beer served in a can",
+              "growler": "Beer served from a growler",
+              "cask": "Beer served from a cask pump"
+            }
+          },
+          "comment": {
+            "label": "Comment"
+          }
+        }
+      },
+      "appearance": {
+        "label": "Appearance",
+        "fields": {
+          "labelDesign": {
+            "label": "Label design",
+            "possibleValues": {
+              "hateIt": "Hate it...",
+              "meh": "Meh",
+              "average": "Average",
+              "good": "Good",
+              "loveIt": "Love it!"
+            }
+          },
+          "haziness": {
+            "label": "Haziness",
+            "possibleValues": {
+              "completelyClear": "Completely Clear",
+              "verySlightlyCast": "Very Slightly Cast",
+              "slightlyHazy": "Slightly Hazy",
+              "hazy": "Hazy",
+              "veryHazy": "Very Hazy"
+            }
+          },
+          "headRetention": {
+            "label": "Head retention",
+            "possibleValues": {
+              "poor": "Poor",
+              "shortLived": "Short-lived",
+              "moderate": "Moderate",
+              "good": "Good",
+              "excellent": "Excellent"
+            }
+          }
+        }
+      },
+      "nose": {
+        "label": "Nose",
+        "fields": {
+          "aromasIntensity": {
+            "label": "Aromas intensity",
+            "possibleValues": {
+              "faint": "Faint",
+              "mild": "Mild",
+              "moderate": "Moderate",
+              "pronounced": "Pronounced",
+              "intense": "Intense"
+            }
+          }
+        }
+      },
+      "taste": {
+        "label": "Taste",
+        "fields": {
+          "flavorsIntensity": {
+            "label": "Flavors intensity",
+            "possibleValues": {
+              "faint": "Faint",
+              "mild": "Mild",
+              "moderate": "Moderate",
+              "pronounced": "Pronounced",
+              "intense": "Intense"
+            }
+          },
+          "bodyStrength": {
+            "label": "Body strength",
+            "possibleValues": {
+              "thin": "Thin",
+              "light": "Light",
+              "medium": "Medium",
+              "full": "Full",
+              "heavy": "Heavy"
+            }
+          },
+          "carbonationIntensity": {
+            "label": "Carbonation intensity",
+            "possibleValues": {
+              "flat": "Flat",
+              "low": "Low",
+              "moderate": "Moderate",
+              "lively": "Lively",
+              "highlyCarbonated": "Highly Carbonated"
+            }
+          },
+          "bitterness": {
+            "label": "Bitterness",
+            "possibleValues": {
+              "low": "Low",
+              "moderate": "Moderate",
+              "pronounced": "Pronounced",
+              "aggressive": "Agressive",
+              "lingering": "Lingering"
+            }
+          },
+          "acidity": {
+            "label": "Acidity",
+            "possibleValues": {
+              "none": "None",
+              "soft": "Soft",
+              "bright": "Bright",
+              "tart": "Tart",
+              "puckering": "Puckering"
+            }
+          }
+        }
+      },
+      "finish": {
+        "label": "Finish",
+        "fields": {
+          "duration": {
+            "label": "Duration",
+            "possibleValues": {
+              "short": "Short",
+              "moderate": "Moderate",
+              "medium": "Medium",
+              "long": "Long",
+              "endless": "Endless"
+            }
+          }
+        }
+      }
+    },
+    "actions": {
+      "complete": "Complete review",
+      "saving": "Saving review...",
+      "cancel": "Cancel"
+    }
   },
   "createBreweryPage": {
     "title": "Add a new brewery",

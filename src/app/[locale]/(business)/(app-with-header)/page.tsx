@@ -12,7 +12,7 @@ const HomePage = async () => {
         <HasVerifiedEmail />
       </Suspense>
 
-      <div className="flex h-screen flex-col items-center justify-center">
+      <div className="flex flex-col items-center justify-center">
         <h1 className="text-center text-4xl font-bold">
           {t.rich("home.title", {
             br: () => <br />,

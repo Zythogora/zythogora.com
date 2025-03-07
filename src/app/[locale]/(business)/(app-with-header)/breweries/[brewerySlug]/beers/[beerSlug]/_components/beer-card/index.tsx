@@ -1,7 +1,7 @@
 import { getTranslations } from "next-intl/server";
 
-import CountryFlag from "@/app/_components/icons/country-flag";
 import ColoredPintIcon from "@/app/_components/icons/colored-pint";
+import CountryFlag from "@/app/_components/icons/country-flag";
 import DescriptionList from "@/app/_components/ui/description-list";
 import { Link } from "@/lib/i18n";
 import { Routes } from "@/lib/routes";
@@ -22,6 +22,7 @@ interface BeerCardProps {
   abv: number;
   ibu?: number;
   color: Color;
+  className?: string;
 }
 
 const BeerCard = async ({
@@ -31,6 +32,7 @@ const BeerCard = async ({
   abv,
   ibu,
   color,
+  className,
 }: BeerCardProps) => {
   const t = await getTranslations();
 
@@ -40,6 +42,7 @@ const BeerCard = async ({
         "flex flex-col overflow-hidden drop-shadow",
         "gap-y-6 border-b-2 p-8 md:gap-y-8 md:rounded md:border-2 md:px-12 md:py-10",
         "bg-primary-50 dark:bg-primary-800",
+        className,
       )}
     >
       <div className="flex flex-col gap-y-1">

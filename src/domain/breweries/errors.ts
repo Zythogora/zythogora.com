@@ -4,7 +4,7 @@ export class BreweryError extends Error {
   }
 }
 
-export class InvalidSlugError extends BreweryError {
+export class InvalidBrewerySlugError extends BreweryError {
   constructor() {
     super("Invalid brewery slug");
   }
@@ -22,7 +22,7 @@ export class BreweryCreationError extends BreweryError {
   }
 }
 
-export class UnauthorizedError extends BreweryCreationError {
+export class UnauthorizedBreweryCreationError extends BreweryCreationError {
   constructor() {
     super("Unauthorized call to create brewery");
   }

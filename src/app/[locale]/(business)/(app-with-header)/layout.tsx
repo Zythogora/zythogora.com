@@ -17,7 +17,7 @@ const AppWithHeaderLayout = async ({ children }: PropsWithChildren) => {
             "md:px-16 md:py-12",
           )}
         >
-          <div className="flex w-224 max-w-full flex-col">{children}</div>
+          <div className="flex w-192 max-w-full flex-col">{children}</div>
         </div>
       </div>
     </QueryClientProvider>

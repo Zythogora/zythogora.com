@@ -1,3 +1,4 @@
+import * as Slot from "@radix-ui/react-slot";
 import { cva } from "class-variance-authority";
 
 import { cn } from "@/lib/tailwind";
@@ -7,7 +8,7 @@ import type { ComponentProps } from "react";
 
 export const buttonVariants = cva(
   [
-    "left-0.5 flex w-[calc(100%-4px)] min-w-0 cursor-pointer flex-row items-center justify-center gap-x-2 rounded-md font-bold",
+    "mx-0.5 flex w-[calc(100%-4px)] min-w-0 cursor-pointer flex-row items-center justify-center gap-x-2 rounded-md font-bold",
     "text-sm md:text-base",
     "before:bg-foreground relative before:absolute before:-inset-0.5 before:z-[-1] before:rounded",
     "bottom-0 transition-[bottom] duration-300 hover:bottom-0.5",
@@ -35,21 +36,30 @@ export const buttonVariants = cva(
   },
 );
 
+interface ButtonProps
+  extends ComponentProps<"button">,
+    VariantProps<typeof buttonVariants> {
+  asChild?: boolean;
+}
+
 const Button = ({
   className,
   variant,
   size,
   children,
+  asChild,
   ...restProps
-}: ComponentProps<"button"> & VariantProps<typeof buttonVariants>) => {
+}: ButtonProps) => {
+  const Comp = asChild ? Slot.Root : "button";
+
   return (
-    <button
+    <Comp
       data-slot="button"
       className={cn(buttonVariants({ variant, size, className }))}
       {...restProps}
     >
       {children}
-    </button>
+    </Comp>
   );
 };
 

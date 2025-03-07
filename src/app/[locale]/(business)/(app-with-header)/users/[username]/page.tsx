@@ -47,6 +47,17 @@ const ProfilePage = async ({ params, searchParams }: ProfilePageProps) => {
 
   const user = await getUserByUsername(username).catch(() => notFound());
 
+  if (user.username !== username) {
+    redirect({
+      href: `${generatePath(Routes.PROFILE, { username: user.username })}${
+        searchParamsResult.data.page
+          ? `?page=${searchParamsResult.data.page}`
+          : ""
+      }`,
+      locale,
+    });
+  }
+
   const reviews = await getReviewsByUser({
     userId: user.id,
     page: searchParamsResult.data.page,
