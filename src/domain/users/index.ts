@@ -4,13 +4,13 @@ import { cache } from "react";
 
 import { UnknownUserError } from "@/domain/users/errors";
 import {
-  transformRawReviewToReview,
+  transformRawUserReviewToUserReview,
   transformRawUserToUser,
 } from "@/domain/users/transforms";
 import { getPaginatedResults } from "@/lib/pagination";
 import prisma from "@/lib/prisma";
 
-import type { Review, User } from "@/domain/users/types";
+import type { UserReview, User } from "@/domain/users/types";
 import type {
   PaginatedResults,
   PaginationParams,
@@ -61,7 +61,7 @@ export const getReviewsByUser = cache(
     limit = 20,
     page = 1,
   }: PaginationParams<{ userId: string }>): Promise<
-    PaginatedResults<Review>
+    PaginatedResults<UserReview>
   > => {
     const [rawReviews, reviewCount] = await Promise.all([
       prisma.reviews.findMany({
@@ -85,7 +85,7 @@ export const getReviewsByUser = cache(
     ]);
 
     const reviews = await Promise.all(
-      rawReviews.map(transformRawReviewToReview),
+      rawReviews.map(transformRawUserReviewToUserReview),
     );
 
     return getPaginatedResults(reviews, reviewCount, page, limit);

@@ -35,6 +35,10 @@ const Pagination = ({ current, total }: PaginationProps) => {
     [pathname, searchParams, total],
   );
 
+  if (total === 1) {
+    return null;
+  }
+
   return (
     <nav
       role="navigation"

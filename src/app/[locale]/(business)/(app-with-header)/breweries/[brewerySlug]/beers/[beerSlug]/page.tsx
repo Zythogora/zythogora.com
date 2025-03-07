@@ -2,9 +2,12 @@ import { notFound } from "next/navigation";
 import { getLocale, getTranslations } from "next-intl/server";
 
 import BeerCard from "@/app/[locale]/(business)/(app-with-header)/breweries/[brewerySlug]/beers/[beerSlug]/_components/beer-card";
+import BeerReviewCard from "@/app/[locale]/(business)/(app-with-header)/breweries/[brewerySlug]/beers/[beerSlug]/_components/review-card";
+import { beerPageSearchParamsSchema } from "@/app/[locale]/(business)/(app-with-header)/breweries/[brewerySlug]/beers/[beerSlug]/schemas";
 import ShareButton from "@/app/_components/share-button";
 import Button from "@/app/_components/ui/button";
-import { getBeerBySlug } from "@/domain/beers";
+import Pagination from "@/app/_components/ui/pagination";
+import { getBeerBySlug, getReviewsByBeer } from "@/domain/beers";
 import { config } from "@/lib/config";
 import { publicConfig } from "@/lib/config/client-config";
 import { StaticGenerationMode } from "@/lib/config/types";
@@ -19,6 +22,9 @@ interface BeerPageProps {
   params: Promise<{
     brewerySlug: string;
     beerSlug: string;
+  }>;
+  searchParams: Promise<{
+    page?: string;
   }>;
 }
 
@@ -75,12 +81,26 @@ export async function generateMetadata({ params }: BeerPageProps) {
   };
 }
 
-const BeerPage = async ({ params }: BeerPageProps) => {
+const BeerPage = async ({ params, searchParams }: BeerPageProps) => {
   const t = await getTranslations();
 
   const locale = await getLocale();
 
   const { brewerySlug, beerSlug } = await params;
+
+  const searchParamsResult = beerPageSearchParamsSchema.safeParse(
+    await searchParams,
+  );
+
+  if (!searchParamsResult.success) {
+    return redirect({
+      href: generatePath(Routes.BEER, {
+        brewerySlug,
+        beerSlug,
+      }),
+      locale,
+    });
+  }
 
   const beer = await getBeerBySlug(beerSlug, brewerySlug).catch(() =>
     notFound(),
@@ -88,13 +108,23 @@ const BeerPage = async ({ params }: BeerPageProps) => {
 
   if (beer.brewery.slug !== brewerySlug || beer.slug !== beerSlug) {
     redirect({
-      href: generatePath(Routes.BEER, {
+      href: `${generatePath(Routes.BEER, {
         brewerySlug: beer.brewery.slug,
         beerSlug: beer.slug,
-      }),
+      })}${
+        searchParamsResult.data.page
+          ? `?page=${searchParamsResult.data.page}`
+          : ""
+      }`,
       locale,
     });
   }
+
+  const reviews = await getReviewsByBeer({
+    beerId: beer.id,
+    page: searchParamsResult.data.page,
+    limit: 10,
+  });
 
   return (
     <div className="isolate flex flex-col gap-y-2">
@@ -139,6 +169,21 @@ const BeerPage = async ({ params }: BeerPageProps) => {
             "md:rounded-t-md md:rounded-br-[14px] md:before:rounded-t md:before:rounded-br-xl",
           )}
         />
+      </div>
+
+      <div
+        className={cn(
+          "grid grid-cols-[minmax(0,1fr)_auto] gap-x-4 gap-y-8",
+          "px-10 py-12 md:px-0",
+        )}
+      >
+        <p>{t("beerPage.reviewCount", { count: reviews.count })}</p>
+
+        {reviews.results.map((review) => (
+          <BeerReviewCard key={review.id} review={review} />
+        ))}
+
+        <Pagination current={reviews.page.current} total={reviews.page.total} />
       </div>
     </div>
   );
