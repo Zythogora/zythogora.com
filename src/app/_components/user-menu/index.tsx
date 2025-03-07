@@ -113,7 +113,7 @@ const UserMenu = ({ className }: UserMenuProps) => {
                   })}
                 </p>
 
-                <p className="text-sm leading-none">
+                <p className="text-right text-sm leading-none">
                   {t.rich("userMenu.user.beers", {
                     count: session.user.uniqueBeerCount,
                     muted: (chunks) => (
