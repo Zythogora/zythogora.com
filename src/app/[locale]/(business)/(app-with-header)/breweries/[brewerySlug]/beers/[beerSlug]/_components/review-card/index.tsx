@@ -27,15 +27,18 @@ const BeerReviewCard = async ({ review }: BeerReviewCardProps) => {
             CAN: <ServingFromCanIcon size={40} className="size-10" />,
             GROWLER: <ServingFromGrowlerIcon size={40} className="size-10" />,
             CASK: <ServingFromCaskIcon size={40} className="size-10" />,
+            UNKNOWN: null,
           }[review.servingFrom]
         }
 
         <div className="flex min-w-0 flex-col">
           <p className="font-title truncate text-lg">{review.username}</p>
 
-          <p className="text-foreground/62.5 truncate text-sm">
-            {t(`beerPage.result.servingFrom.${review.servingFrom}`)}
-          </p>
+          {review.servingFrom !== "UNKNOWN" ? (
+            <p className="text-foreground/62.5 truncate text-sm">
+              {t(`beerPage.result.servingFrom.${review.servingFrom}`)}
+            </p>
+          ) : null}
         </div>
       </div>
 

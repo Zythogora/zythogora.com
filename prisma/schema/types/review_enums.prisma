@@ -4,6 +4,7 @@ enum ServingFrom {
   CAN
   GROWLER
   CASK
+  UNKNOWN
 
   @@map("serving_from")
   @@schema("public")
