@@ -20,14 +20,14 @@ export type User = {
   uniqueCountryCount: number;
 };
 
-export type RawReview = Reviews & {
+export type RawUserReview = Reviews & {
   beer: Beers & {
     brewery: Breweries;
     color: Colors;
   };
 };
 
-export type Review = {
+export type UserReview = {
   id: string;
   globalScore: number;
   beer: {

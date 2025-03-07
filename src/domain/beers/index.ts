@@ -24,21 +24,28 @@ import {
   UnauthorizedBeerCreationError,
 } from "@/domain/beers/errors";
 import {
+  transformRawBeerReviewToBeerReview,
   transformRawBeerToBeer,
   transformRawColorToColor,
   transformRawStyleCategoryToStyleCategory,
 } from "@/domain/beers/transforms";
 import { getCurrentUser } from "@/lib/auth";
+import { getPaginatedResults } from "@/lib/pagination";
 import prisma, { slugify } from "@/lib/prisma";
 
 import type { CreateReviewData } from "@/app/[locale]/(forms)/(review)/breweries/[brewerySlug]/beers/[beerSlug]/review/schemas";
 import type { CreateBeerData } from "@/app/[locale]/(forms)/create/beer/schemas";
 import type {
   Beer,
+  BeerReview,
   Color,
   LegacyStyle,
   StyleCategory,
 } from "@/domain/beers/types";
+import type {
+  PaginatedResults,
+  PaginationParams,
+} from "@/lib/pagination/types";
 
 export const getBeerBySlug = cache(
   async (beerSlug: string, brewerySlug: string): Promise<Beer> => {
@@ -113,6 +120,36 @@ export const getLegacyStyles = async (): Promise<LegacyStyle[]> => {
     name: style.name,
   }));
 };
+
+export const getReviewsByBeer = cache(
+  async ({
+    beerId,
+    limit = 20,
+    page = 1,
+  }: PaginationParams<{ beerId: string }>): Promise<
+    PaginatedResults<BeerReview>
+  > => {
+    const [rawReviews, reviewCount] = await Promise.all([
+      prisma.reviews.findMany({
+        where: { beerId },
+        include: {
+          user: true,
+        },
+        take: limit,
+        skip: (page - 1) * limit,
+        orderBy: { createdAt: "desc" },
+      }),
+
+      prisma.reviews.count({
+        where: { beerId },
+      }),
+    ]);
+
+    const reviews = rawReviews.map(transformRawBeerReviewToBeerReview);
+
+    return getPaginatedResults(reviews, reviewCount, page, limit);
+  },
+);
 
 export const createBeer = async (data: CreateBeerData) => {
   const user = await getCurrentUser();

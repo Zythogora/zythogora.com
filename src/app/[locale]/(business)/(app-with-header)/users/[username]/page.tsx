@@ -1,9 +1,9 @@
 import { notFound } from "next/navigation";
 import { getLocale } from "next-intl/server";
 
-import ReviewCard from "@/app/[locale]/(business)/(app-with-header)/users/[username]/_components/review-card";
+import UserReviewCard from "@/app/[locale]/(business)/(app-with-header)/users/[username]/_components/review-card";
 import UserHeader from "@/app/[locale]/(business)/(app-with-header)/users/[username]/_components/user-header";
-import { profileParamsSchema } from "@/app/[locale]/(business)/(app-with-header)/users/[username]/schemas";
+import { profileSearchParamsSchema } from "@/app/[locale]/(business)/(app-with-header)/users/[username]/schemas";
 import Pagination from "@/app/_components/ui/pagination";
 import { getReviewsByUser, getUserByUsername } from "@/domain/users";
 import { publicConfig } from "@/lib/config/client-config";
@@ -36,7 +36,9 @@ const ProfilePage = async ({ params, searchParams }: ProfilePageProps) => {
 
   const { username } = await params;
 
-  const searchParamsResult = profileParamsSchema.safeParse(await searchParams);
+  const searchParamsResult = profileSearchParamsSchema.safeParse(
+    await searchParams,
+  );
 
   if (!searchParamsResult.success) {
     return redirect({
@@ -75,7 +77,7 @@ const ProfilePage = async ({ params, searchParams }: ProfilePageProps) => {
         )}
       >
         {reviews.results.map((review) => (
-          <ReviewCard key={review.id} review={review} />
+          <UserReviewCard key={review.id} review={review} />
         ))}
 
         <Pagination current={reviews.page.current} total={reviews.page.total} />

@@ -236,6 +236,16 @@
     "style": "Style",
     "abv": "Degré",
     "ibu": "IBU",
+    "reviewCount": "{count, plural, =0 {Pas encore d'avis} =1 {1 avis} other {# avis}}",
+    "result": {
+      "servingFrom": {
+        "DRAFT": "À la pression",
+        "BOTTLE": "En bouteille",
+        "CAN": "En canette",
+        "GROWLER": "En growler",
+        "CASK": "À la pompe (cask-ale)"
+      }
+    },
     "actions": {
       "review": "Ajouter un avis",
       "share": "Partager cette bière"

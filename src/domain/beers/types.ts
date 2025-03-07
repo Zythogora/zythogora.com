@@ -6,6 +6,9 @@ import type {
   LegacyStyles,
   StyleCategories,
   Styles as RawStyles,
+  Reviews,
+  Users,
+  ServingFrom,
 } from "@prisma/client";
 
 export type RawColor = Colors;
@@ -56,4 +59,16 @@ export type Style = {
 export type LegacyStyle = {
   id: string;
   name: string;
+};
+
+export type RawBeerReview = Reviews & {
+  user: Users;
+};
+
+export type BeerReview = {
+  id: string;
+  globalScore: number;
+  servingFrom: ServingFrom;
+  username: string;
+  createdAt: Date;
 };

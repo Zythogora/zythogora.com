@@ -236,6 +236,16 @@
     "style": "Style",
     "abv": "ABV",
     "ibu": "IBU",
+    "reviewCount": "{count, plural, =0 {No reviews yet} =1 {1 review} other {# reviews}}",
+    "result": {
+      "servingFrom": {
+        "DRAFT": "On draught",
+        "BOTTLE": "Bottled",
+        "CAN": "Canned",
+        "GROWLER": "From a growler",
+        "CASK": "Cask ale"
+      }
+    },
     "actions": {
       "review": "Add a review",
       "share": "Share this beer"

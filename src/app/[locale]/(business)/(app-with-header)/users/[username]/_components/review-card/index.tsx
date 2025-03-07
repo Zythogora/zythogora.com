@@ -3,13 +3,13 @@ import { getFormatter } from "next-intl/server";
 import ColoredPintIcon from "@/app/_components/icons/colored-pint";
 import CountryFlag from "@/app/_components/icons/country-flag";
 
-import type { Review } from "@/domain/users/types";
+import type { UserReview } from "@/domain/users/types";
 
-interface ReviewCardProps {
-  review: Review;
+interface UserReviewCardProps {
+  review: UserReview;
 }
 
-const ReviewCard = async ({ review }: ReviewCardProps) => {
+const UserReviewCard = async ({ review }: UserReviewCardProps) => {
   const format = await getFormatter();
 
   return (
@@ -49,4 +49,4 @@ const ReviewCard = async ({ review }: ReviewCardProps) => {
   );
 };
 
-export default ReviewCard;
+export default UserReviewCard;

@@ -1,5 +1,5 @@
 import { z } from "zod";
 
-export const profileSearchParamsSchema = z.object({
+export const beerPageSearchParamsSchema = z.object({
   page: z.coerce.number().optional().default(1),
 });

@@ -4,8 +4,10 @@ import { getCountry } from "@/lib/i18n/countries";
 
 import type {
   Beer,
+  BeerReview,
   Color,
   RawBeer,
+  RawBeerReview,
   RawColor,
   RawStyleCategory,
   StyleCategory,
@@ -44,4 +46,14 @@ export const transformRawStyleCategoryToStyleCategory = (
     id: style.id,
     name: style.name,
   })),
+});
+
+export const transformRawBeerReviewToBeerReview = (
+  rawBeerReview: RawBeerReview,
+): BeerReview => ({
+  id: rawBeerReview.id,
+  globalScore: rawBeerReview.globalScore.toNumber(),
+  servingFrom: rawBeerReview.servingFrom,
+  username: rawBeerReview.user.username,
+  createdAt: rawBeerReview.createdAt,
 });

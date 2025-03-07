@@ -1,7 +1,12 @@
 import { transformRawColorToColor } from "@/domain/beers/transforms";
 import { getCountry } from "@/lib/i18n/countries";
 
-import type { RawReview, RawUser, Review, User } from "@/domain/users/types";
+import type {
+  RawUserReview,
+  RawUser,
+  UserReview,
+  User,
+} from "@/domain/users/types";
 
 export const transformRawUserToUser = (rawUser: RawUser): User => {
   return {
@@ -15,22 +20,22 @@ export const transformRawUserToUser = (rawUser: RawUser): User => {
   };
 };
 
-export const transformRawReviewToReview = async (
-  rawReview: RawReview,
-): Promise<Review> => {
+export const transformRawUserReviewToUserReview = async (
+  rawUserReview: RawUserReview,
+): Promise<UserReview> => {
   return {
-    id: rawReview.id,
-    globalScore: rawReview.globalScore.toNumber(),
+    id: rawUserReview.id,
+    globalScore: rawUserReview.globalScore.toNumber(),
     beer: {
-      id: rawReview.beer.id,
-      name: rawReview.beer.name,
+      id: rawUserReview.beer.id,
+      name: rawUserReview.beer.name,
       brewery: {
-        id: rawReview.beer.brewery.id,
-        name: rawReview.beer.brewery.name,
-        country: await getCountry(rawReview.beer.brewery.countryAlpha2Code),
+        id: rawUserReview.beer.brewery.id,
+        name: rawUserReview.beer.brewery.name,
+        country: await getCountry(rawUserReview.beer.brewery.countryAlpha2Code),
       },
-      color: transformRawColorToColor(rawReview.beer.color),
+      color: transformRawColorToColor(rawUserReview.beer.color),
     },
-    createdAt: rawReview.createdAt,
+    createdAt: rawUserReview.createdAt,
   };
 };
