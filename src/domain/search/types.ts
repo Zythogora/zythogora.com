@@ -1,3 +1,4 @@
+import type { Color } from "@/domain/beers/types";
 import type { Country } from "@/lib/i18n/countries/types";
 
 export type BeerResult = {
@@ -12,10 +13,7 @@ export type BeerResult = {
   style: string;
   abv: number;
   ibu?: number;
-  color: {
-    name: string;
-    hex: string;
-  };
+  color: Color;
 };
 
 export type BreweryResult = {

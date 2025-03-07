@@ -1,13 +1,14 @@
 import { getTranslations } from "next-intl/server";
 
 import CountryFlag from "@/app/_components/icons/country-flag";
-import PintIcon from "@/app/_components/icons/pint";
+import ColoredPintIcon from "@/app/_components/icons/colored-pint";
 import DescriptionList from "@/app/_components/ui/description-list";
 import { Link } from "@/lib/i18n";
 import { Routes } from "@/lib/routes";
 import { generatePath } from "@/lib/routes/utils";
 import { cn } from "@/lib/tailwind";
 
+import type { Color } from "@/domain/beers/types";
 import type { Country } from "@/lib/i18n/countries/types";
 
 interface BeerCardProps {
@@ -20,10 +21,7 @@ interface BeerCardProps {
   style: string;
   abv: number;
   ibu?: number;
-  color: {
-    name: string;
-    hex: string;
-  };
+  color: Color;
 }
 
 const BeerCard = async ({
@@ -89,7 +87,7 @@ const BeerCard = async ({
         />
 
         <div className="flex items-center justify-center">
-          <PintIcon color={color} size={28} className="size-7" />
+          <ColoredPintIcon color={color} size={28} className="size-7" />
         </div>
 
         <DescriptionList

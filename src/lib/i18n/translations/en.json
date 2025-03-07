@@ -86,8 +86,10 @@
     }
   },
   "userMenu": {
-    "beers": "{count, plural, =0 {0 <muted>beers</muted>} =1 {1 <muted>beer</muted>} other {# <muted>beers</muted>}}",
-    "reviews": "{count, plural, =0 {0 <muted>reviews</muted>} =1 {1 <muted>review</muted>} other {# <muted>reviews</muted>}}",
+    "user": {
+      "reviews": "{count, plural, =0 {0 <muted>reviews</muted>} =1 {1 <muted>review</muted>} other {# <muted>reviews</muted>}}",
+      "beers": "{count, plural, =0 {0 <muted>beers</muted>} =1 {1 <muted>beer</muted>} other {# <muted>beers</muted>}}"
+    },
     "locale": {
       "menuLabel": "Language",
       "en": "English",
@@ -98,6 +100,11 @@
       "light": "Light theme",
       "dark": "Dark theme",
       "system": "System theme"
+    },
+    "auth": {
+      "signIn": "Sign in",
+      "signUp": "Sign up",
+      "signOut": "Sign out"
     }
   },
   "auth": {
@@ -221,6 +228,13 @@
       "title": "We don't know this brewery<br></br><muted>(yet)</muted> :(",
       "cta": "But you can <link>search</link> for another one!"
     }
+  },
+  "profilePage": {
+    "reviewCount": "{count, plural, =0 {0 reviews} =1 {1 review} other {# reviews}}",
+    "uniqueBeers": "Beers",
+    "uniqueBreweries": "Breweries",
+    "uniqueStyles": "Styles",
+    "uniqueCountries": "Countries"
   },
   "createBreweryPage": {
     "title": "Add a new brewery",

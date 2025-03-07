@@ -61,7 +61,7 @@ model StyleCategories {
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
-  Styles    Styles[]
+  styles    Styles[]
 
   @@map("style_categories")
   @@schema("beer_data")

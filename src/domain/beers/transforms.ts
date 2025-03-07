@@ -2,7 +2,12 @@
 
 import { getCountry } from "@/lib/i18n/countries";
 
-import type { Beer, RawBeer } from "@/domain/beers/types";
+import type { Beer, Color, RawBeer, RawColor } from "@/domain/beers/types";
+
+export const transformRawColorToColor = (rawColor: RawColor): Color => ({
+  name: rawColor.name,
+  hex: rawColor.hex,
+});
 
 export const transformRawBeerToBeer = async (
   rawBeer: RawBeer,
@@ -19,8 +24,5 @@ export const transformRawBeerToBeer = async (
   style: rawBeer.style.name,
   abv: rawBeer.abv,
   ibu: rawBeer.ibu ?? undefined,
-  color: {
-    name: rawBeer.color.name,
-    hex: rawBeer.color.hex,
-  },
+  color: transformRawColorToColor(rawBeer.color),
 });

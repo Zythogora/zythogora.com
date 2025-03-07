@@ -26,11 +26,20 @@ export const auth = betterAuth({
 
   plugins: [
     customSession(async ({ user: betterAuthUser, session }) => {
-      const user = await prisma.users.findUnique({
-        where: { id: betterAuthUser.id },
-      });
+      const [user, [stats]] = await Promise.all([
+        prisma.users.findUnique({
+          where: { id: betterAuthUser.id },
+          include: { _count: { select: { reviews: true } } },
+        }),
 
-      if (!user) {
+        prisma.$queryRaw`
+          SELECT COUNT(DISTINCT beer_id)
+          FROM public.reviews
+          WHERE user_id = ${betterAuthUser.id};
+        ` as Promise<{ count: number }[]>,
+      ]);
+
+      if (!user || !stats) {
         console.error(`User with id ${betterAuthUser.id} not found`);
         throw new UserRecordNotFoundError();
       }
@@ -42,6 +51,8 @@ export const auth = betterAuth({
           username: user.username,
           email: betterAuthUser.email,
           image: betterAuthUser.image,
+          reviewCount: user._count.reviews,
+          uniqueBeerCount: Number(stats.count),
         },
         session,
       };

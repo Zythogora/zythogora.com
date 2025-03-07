@@ -1,5 +1,6 @@
+import type { Color } from "@/domain/beers/types";
 import type { Country } from "@/lib/i18n/countries/types";
-import type { Beers, Breweries, Colors, Styles } from "@prisma/client";
+import type { Beers, Breweries, Colors, LegacyStyles } from "@prisma/client";
 
 export type RawBrewery = Breweries & {
   beers: RawBreweryBeer[];
@@ -28,7 +29,7 @@ export type Brewery = {
 };
 
 export type RawBreweryBeer = Beers & {
-  style: Styles;
+  style: LegacyStyles;
   color: Colors;
 };
 
@@ -39,8 +40,5 @@ export type BreweryBeer = {
   style: string;
   abv: number;
   ibu?: number;
-  color: {
-    name: string;
-    hex: string;
-  };
+  color: Color;
 };

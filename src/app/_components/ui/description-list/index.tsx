@@ -15,6 +15,7 @@ const DescriptionList = ({
 }: DescriptionListProps) => {
   return (
     <dl
+      data-slot="description-list"
       className={cn(
         "flex flex-col items-start",
         "gap-y-0 md:gap-y-0.5",
