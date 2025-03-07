@@ -1,12 +1,13 @@
 import { headers } from "next/headers";
 import { getLocale, getTranslations } from "next-intl/server";
 
-import CreateBreweryForm from "@/app/[locale]/(forms)/create/brewery/_components/form";
+import CreateBeerForm from "@/app/[locale]/(forms)/create/beer/_components/form";
+import { getColors, getLegacyStyles } from "@/domain/beers";
 import { auth } from "@/lib/auth/server";
 import { redirect } from "@/lib/i18n";
 import { Routes } from "@/lib/routes";
 
-const CreateBreweryPage = async () => {
+const CreateBeerPage = async () => {
   const t = await getTranslations();
 
   const locale = await getLocale();
@@ -19,23 +20,26 @@ const CreateBreweryPage = async () => {
     redirect({
       href: {
         pathname: Routes.SIGN_IN,
-        query: { redirect: Routes.CREATE_BREWERY },
+        query: { redirect: Routes.CREATE_BEER },
       },
       locale,
     });
   }
 
+  const [legacyStyles, colors] = await Promise.all([
+    getLegacyStyles(),
+    getColors(),
+  ]);
+
   return (
     <div className="@container flex size-full min-h-screen items-center justify-center p-8">
       <div className="flex w-fit flex-col gap-y-8">
-        <h1 className="text-2xl font-semibold">
-          {t("createBreweryPage.title")}
-        </h1>
+        <h1 className="text-2xl font-semibold">{t("createBeerPage.title")}</h1>
 
-        <CreateBreweryForm />
+        <CreateBeerForm styles={legacyStyles} colors={colors} />
       </div>
     </div>
   );
 };
 
-export default CreateBreweryPage;
+export default CreateBeerPage;

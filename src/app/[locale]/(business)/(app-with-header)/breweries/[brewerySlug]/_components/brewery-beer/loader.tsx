@@ -15,7 +15,7 @@ const BreweryBeerLoader = ({
   return (
     <div className="flex w-full min-w-0 animate-pulse flex-row items-center gap-x-4">
       <ColoredPintIcon
-        color={{ name: "", hex: "999999" }}
+        color={{ id: "", name: "", hex: "999999" }}
         size={40}
         className="size-10"
       />

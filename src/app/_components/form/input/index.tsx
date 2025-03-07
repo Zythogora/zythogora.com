@@ -1,3 +1,4 @@
+"use client";
 import { getInputProps } from "@conform-to/react";
 
 import FormError from "@/app/_components/ui/form-error";

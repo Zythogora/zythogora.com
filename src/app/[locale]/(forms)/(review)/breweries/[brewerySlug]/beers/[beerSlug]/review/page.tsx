@@ -20,11 +20,6 @@ interface ReviewPageProps {
 const ReviewPage = async ({ params }: ReviewPageProps) => {
   const locale = await getLocale();
 
-  const user = await getCurrentUser();
-  if (!user) {
-    redirect({ href: Routes.SIGN_IN, locale });
-  }
-
   const { brewerySlug, beerSlug } = await params;
 
   const beer = await getBeerBySlug(beerSlug, brewerySlug).catch(() =>
@@ -37,6 +32,22 @@ const ReviewPage = async ({ params }: ReviewPageProps) => {
         brewerySlug: beer.brewery.slug,
         beerSlug: beer.slug,
       }),
+      locale,
+    });
+  }
+
+  const user = await getCurrentUser();
+  if (!user) {
+    redirect({
+      href: {
+        pathname: Routes.SIGN_IN,
+        query: {
+          redirect: generatePath(Routes.REVIEW_FORM, {
+            brewerySlug,
+            beerSlug,
+          }),
+        },
+      },
       locale,
     });
   }

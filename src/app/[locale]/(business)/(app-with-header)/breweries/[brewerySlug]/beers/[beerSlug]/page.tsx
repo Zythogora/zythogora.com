@@ -108,7 +108,9 @@ const BeerPage = async ({ params }: BeerPageProps) => {
         className="md:rounded-t-xl md:rounded-b"
       />
 
-      <div className={cn("flex flex-row gap-x-1", "px-6 py-4 md:p-0")}>
+      <div
+        className={cn("flex flex-row", "gap-x-2 px-6 py-4 md:gap-x-1 md:p-0")}
+      >
         <Button
           asChild
           className={cn(

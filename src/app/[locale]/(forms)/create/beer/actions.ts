@@ -3,16 +3,16 @@
 import { parseWithZod } from "@conform-to/zod";
 import { getLocale } from "next-intl/server";
 
-import { createBrewerySchema } from "@/app/[locale]/(forms)/create/brewery/schemas";
-import { createBrewery } from "@/domain/breweries";
+import { createBeer } from "@/domain/beers";
 import { getCurrentUser } from "@/lib/auth";
 import { redirect } from "@/lib/i18n";
 import { Routes } from "@/lib/routes";
 import { generatePath } from "@/lib/routes/utils";
 
-export const createBreweryAction = async (
+import { createBeerSchema } from "./schemas";
+
+export const createBeerAction = async (
   pathname: string,
-  redirectUrl: string | null,
   prevState: unknown,
   formData: FormData,
 ) => {
@@ -30,7 +30,7 @@ export const createBreweryAction = async (
   }
 
   const submission = parseWithZod(formData, {
-    schema: createBrewerySchema,
+    schema: createBeerSchema,
   });
 
   if (submission.status !== "success") {
@@ -39,12 +39,13 @@ export const createBreweryAction = async (
     });
   }
 
-  const brewery = await createBrewery(submission.value);
+  const beer = await createBeer(submission.value);
 
   redirect({
-    href: redirectUrl
-      ? redirectUrl
-      : generatePath(Routes.BREWERY, { brewerySlug: brewery.slug }),
+    href: generatePath(Routes.BEER, {
+      brewerySlug: beer.brewery.slug,
+      beerSlug: beer.slug,
+    }),
     locale,
   });
 };

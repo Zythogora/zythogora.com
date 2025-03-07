@@ -22,6 +22,18 @@ export class InvalidBreweryError extends BeerError {
   }
 }
 
+export class BeerCreationError extends BeerError {
+  constructor(message: string) {
+    super(message);
+  }
+}
+
+export class UnauthorizedBeerCreationError extends BeerCreationError {
+  constructor() {
+    super("Unauthorized call to create beer");
+  }
+}
+
 export class BeerReviewError extends BeerError {
   constructor(message: string) {
     super(message);

@@ -11,6 +11,7 @@ import { Routes } from "@/lib/routes";
 import { generatePath } from "@/lib/routes/utils";
 
 export const reviewAction = async (
+  pathname: string,
   previousState: unknown,
   formData: FormData,
 ) => {
@@ -18,7 +19,13 @@ export const reviewAction = async (
 
   const user = await getCurrentUser();
   if (!user) {
-    redirect({ href: Routes.SIGN_IN, locale });
+    redirect({
+      href: {
+        pathname: Routes.SIGN_IN,
+        query: { redirect: pathname },
+      },
+      locale,
+    });
   }
 
   const submission = parseWithZod(formData, {

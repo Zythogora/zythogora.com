@@ -13,6 +13,7 @@ import {
   LabelDesign,
   ServingFrom,
 } from "@prisma/client";
+import { nanoid } from "nanoid";
 import { cache } from "react";
 
 import {
@@ -20,13 +21,24 @@ import {
   InvalidBeerSlugError,
   UnknownBeerError,
   UnauthorizedBeerReviewError,
+  UnauthorizedBeerCreationError,
 } from "@/domain/beers/errors";
-import { transformRawBeerToBeer } from "@/domain/beers/transforms";
+import {
+  transformRawBeerToBeer,
+  transformRawColorToColor,
+  transformRawStyleCategoryToStyleCategory,
+} from "@/domain/beers/transforms";
 import { getCurrentUser } from "@/lib/auth";
-import prisma from "@/lib/prisma";
+import prisma, { slugify } from "@/lib/prisma";
 
 import type { CreateReviewData } from "@/app/[locale]/(forms)/(review)/breweries/[brewerySlug]/beers/[beerSlug]/review/schemas";
-import type { Beer } from "@/domain/beers/types";
+import type { CreateBeerData } from "@/app/[locale]/(forms)/create/beer/schemas";
+import type {
+  Beer,
+  Color,
+  LegacyStyle,
+  StyleCategory,
+} from "@/domain/beers/types";
 
 export const getBeerBySlug = cache(
   async (beerSlug: string, brewerySlug: string): Promise<Beer> => {
@@ -75,6 +87,59 @@ export const getBeerBySlug = cache(
     return transformRawBeerToBeer(beer);
   },
 );
+
+export const getColors = async (): Promise<Color[]> => {
+  const colors = await prisma.colors.findMany();
+
+  return colors.map(transformRawColorToColor);
+};
+
+export const getStyles = async (): Promise<StyleCategory[]> => {
+  const categories = await prisma.styleCategories.findMany({
+    include: { styles: { orderBy: { name: "asc" } } },
+    orderBy: { name: "asc" },
+  });
+
+  return categories.map(transformRawStyleCategoryToStyleCategory);
+};
+
+export const getLegacyStyles = async (): Promise<LegacyStyle[]> => {
+  const styles = await prisma.legacyStyles.findMany({
+    orderBy: { name: "asc" },
+  });
+
+  return styles.map((style) => ({
+    id: style.id,
+    name: style.name,
+  }));
+};
+
+export const createBeer = async (data: CreateBeerData) => {
+  const user = await getCurrentUser();
+  if (!user) {
+    throw new UnauthorizedBeerCreationError();
+  }
+
+  const id = nanoid();
+
+  const beer = await prisma.beers.create({
+    data: {
+      id,
+      slug: slugify(id, data.name),
+      name: data.name,
+      abv: data.abv,
+      ibu: data.ibu,
+      breweryId: data.breweryId,
+      styleId: data.styleId,
+      colorId: data.colorId,
+      createdBy: user.id,
+      updatedBy: user.id,
+    },
+    include: { brewery: true },
+  });
+
+  return beer;
+};
 
 export const reviewBeer = async (
   beerId: string,

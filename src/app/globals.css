@@ -111,4 +111,13 @@
   h6 {
     @apply font-title;
   }
+
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"] {
+    margin: 0;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: textfield !important;
+  }
 }
