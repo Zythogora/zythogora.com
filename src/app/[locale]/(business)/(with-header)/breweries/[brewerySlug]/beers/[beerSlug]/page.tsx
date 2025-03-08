@@ -183,7 +183,12 @@ const BeerPage = async ({ params, searchParams }: BeerPageProps) => {
           <BeerReviewCard key={review.id} review={review} />
         ))}
 
-        <Pagination current={reviews.page.current} total={reviews.page.total} />
+        <div className="col-span-2">
+          <Pagination
+            current={reviews.page.current}
+            total={reviews.page.total}
+          />
+        </div>
       </div>
     </div>
   );
