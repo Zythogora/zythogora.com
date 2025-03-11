@@ -6,13 +6,15 @@ import { useTranslations } from "next-intl";
 import { useCallback } from "react";
 
 import { Link, usePathname } from "@/lib/i18n";
+import { cn } from "@/lib/tailwind";
 
 interface PaginationProps {
   current: number;
   total: number;
+  className?: string;
 }
 
-const Pagination = ({ current, total }: PaginationProps) => {
+const Pagination = ({ current, total, className }: PaginationProps) => {
   const t = useTranslations();
 
   const pathname = usePathname();
@@ -44,7 +46,7 @@ const Pagination = ({ current, total }: PaginationProps) => {
       role="navigation"
       aria-label="pagination"
       data-slot="pagination"
-      className="mx-auto flex w-full justify-center"
+      className={cn("mx-auto flex w-full justify-center", className)}
     >
       <ul className="flex flex-row items-center gap-x-3">
         <li>
