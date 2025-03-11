@@ -1,6 +1,6 @@
 import * as RadioGroup from "@radix-ui/react-radio-group";
 
-import { servingFromValues } from "@/app/[locale]/(forms)/(review)/breweries/[brewerySlug]/beers/[beerSlug]/review/schemas";
+import { servingFromValues } from "@/app/[locale]/(business)/(without-header)/breweries/[brewerySlug]/beers/[beerSlug]/review/schemas";
 import ServingFromBottleIcon from "@/app/_components/icons/serving-from/bottle";
 import ServingFromCanIcon from "@/app/_components/icons/serving-from/can";
 import ServingFromCaskIcon from "@/app/_components/icons/serving-from/cask";

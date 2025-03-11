@@ -33,8 +33,8 @@ import { getCurrentUser } from "@/lib/auth";
 import { getPaginatedResults } from "@/lib/pagination";
 import prisma, { slugify } from "@/lib/prisma";
 
-import type { CreateReviewData } from "@/app/[locale]/(forms)/(review)/breweries/[brewerySlug]/beers/[beerSlug]/review/schemas";
-import type { CreateBeerData } from "@/app/[locale]/(forms)/create/beer/schemas";
+import type { CreateReviewData } from "@/app/[locale]/(business)/(without-header)/breweries/[brewerySlug]/beers/[beerSlug]/review/schemas";
+import type { CreateBeerData } from "@/app/[locale]/(business)/(without-header)/create/beer/schemas";
 import type {
   Beer,
   BeerReview,
