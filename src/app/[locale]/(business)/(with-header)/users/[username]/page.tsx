@@ -80,7 +80,11 @@ const ProfilePage = async ({ params, searchParams }: ProfilePageProps) => {
           <UserReviewCard key={review.id} review={review} />
         ))}
 
-        <Pagination current={reviews.page.current} total={reviews.page.total} />
+        <Pagination
+          current={reviews.page.current}
+          total={reviews.page.total}
+          className="col-span-2"
+        />
       </div>
     </div>
   );

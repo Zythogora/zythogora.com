@@ -9,7 +9,7 @@ export const getPaginatedResults = <T>(
     count,
     page: {
       current: page,
-      total: Math.ceil(count / limit),
+      total: count === 0 ? 1 : Math.ceil(count / limit),
     },
   };
 };
