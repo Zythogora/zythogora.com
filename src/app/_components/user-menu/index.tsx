@@ -97,7 +97,7 @@ const UserMenu = ({ className }: UserMenuProps) => {
           <>
             <DropdownMenuItem
               onClick={handleViewProfile}
-              className="flex flex-col gap-y-2 px-8 py-4"
+              className="flex flex-col gap-y-2 p-4"
             >
               <p className="truncate text-lg font-bold">
                 {session.user.username}
