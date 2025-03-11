@@ -12,7 +12,7 @@ import { transformRawBreweryToBrewery } from "@/domain/breweries/transforms";
 import { getCurrentUser } from "@/lib/auth";
 import prisma, { slugify } from "@/lib/prisma";
 
-import type { CreateBreweryData } from "@/app/[locale]/(forms)/create/brewery/schemas";
+import type { CreateBreweryData } from "@/app/[locale]/(business)/(without-header)/create/brewery/schemas";
 import type { Brewery } from "@/domain/breweries/types";
 
 export const getBreweryBySlug = cache(
