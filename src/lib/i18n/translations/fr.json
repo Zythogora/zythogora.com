@@ -1,7 +1,7 @@
 {
   "metadata": {
     "title": "Zythogora",
-    "description": "L'app de référence pour la review de bières"
+    "description": "L'app de référence pour la critique de bières"
   },
   "email": {
     "welcome": {
@@ -107,7 +107,7 @@
   },
   "userMenu": {
     "user": {
-      "reviews": "{count, plural, =0 {0 <muted>avis</muted>} =1 {1 <muted>avis</muted>} other {# <muted>avis</muted>}}",
+      "reviews": "{count, plural, =0 {0 <muted>critique</muted>} =1 {1 <muted>critique</muted>} other {# <muted>critiques</muted>}}",
       "beers": "{count, plural, =0 {0 <muted>bière</muted>} =1 {1 <muted>bière</muted>} other {# <muted>bières</muted>}}"
     },
     "locale": {
@@ -247,7 +247,7 @@
       }
     },
     "actions": {
-      "review": "Ajouter un avis",
+      "review": "Rédiger une critique",
       "share": "Partager cette bière"
     },
     "404": {
@@ -268,7 +268,7 @@
     }
   },
   "profilePage": {
-    "reviewCount": "{count, plural, =0 {0 avis} =1 {1 avis} other {# avis}}",
+    "reviewCount": "{count, plural, =0 {0 critique} =1 {1 critique} other {# critiques}}",
     "uniqueBeers": "Bières",
     "uniqueBreweries": "Brasseries",
     "uniqueStyles": "Styles",
@@ -419,8 +419,8 @@
       }
     },
     "actions": {
-      "complete": "Compléter la review",
-      "saving": "Enregistrement en cours...",
+      "complete": "Publier la critique",
+      "saving": "Publication en cours...",
       "cancel": "Annuler"
     }
   },
