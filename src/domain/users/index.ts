@@ -2,15 +2,16 @@
 
 import { cache } from "react";
 
-import { UnknownUserError } from "@/domain/users/errors";
+import { UnknownReviewError, UnknownUserError } from "@/domain/users/errors";
 import {
+  transformRawReviewToReview,
   transformRawUserReviewToUserReview,
   transformRawUserToUser,
 } from "@/domain/users/transforms";
 import { getPaginatedResults } from "@/lib/pagination";
 import prisma from "@/lib/prisma";
 
-import type { UserReview, User } from "@/domain/users/types";
+import type { UserReview, User, Review } from "@/domain/users/types";
 import type {
   PaginatedResults,
   PaginationParams,
@@ -89,5 +90,36 @@ export const getReviewsByUser = cache(
     );
 
     return getPaginatedResults(reviews, reviewCount, page, limit);
+  },
+);
+
+export const getReviewByUsernameAndSlug = cache(
+  async (username: string, reviewSlug: string): Promise<Review> => {
+    const [user] = await prisma.users.findMany({
+      where: { username: { equals: username, mode: "insensitive" } },
+    });
+
+    if (!user) {
+      throw new UnknownUserError();
+    }
+
+    const review = await prisma.reviews.findUnique({
+      where: {
+        slug_userId: {
+          slug: reviewSlug,
+          userId: user.id,
+        },
+      },
+      include: {
+        user: true,
+        beer: { include: { brewery: true, style: true } },
+      },
+    });
+
+    if (!review) {
+      throw new UnknownReviewError();
+    }
+
+    return transformRawReviewToReview(review);
   },
 );

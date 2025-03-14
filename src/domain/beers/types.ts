@@ -67,8 +67,10 @@ export type RawBeerReview = Reviews & {
 
 export type BeerReview = {
   id: string;
+  slug: string;
   globalScore: number;
   servingFrom: ServingFrom;
   username: string;
   createdAt: Date;
+  hasDetails: boolean;
 };

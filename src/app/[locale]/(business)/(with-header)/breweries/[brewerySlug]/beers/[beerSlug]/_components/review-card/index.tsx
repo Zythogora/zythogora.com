@@ -1,3 +1,4 @@
+import { ChevronRightIcon } from "lucide-react";
 import { getFormatter, getTranslations } from "next-intl/server";
 
 import ServingFromBottleIcon from "@/app/_components/icons/serving-from/bottle";
@@ -5,6 +6,9 @@ import ServingFromCanIcon from "@/app/_components/icons/serving-from/can";
 import ServingFromCaskIcon from "@/app/_components/icons/serving-from/cask";
 import ServingFromDraftIcon from "@/app/_components/icons/serving-from/draft";
 import ServingFromGrowlerIcon from "@/app/_components/icons/serving-from/growler";
+import { Link } from "@/lib/i18n";
+import { Routes } from "@/lib/routes";
+import { generatePath } from "@/lib/routes/utils";
 
 import type { BeerReview } from "@/domain/beers/types";
 
@@ -17,8 +21,21 @@ const BeerReviewCard = async ({ review }: BeerReviewCardProps) => {
 
   const format = await getFormatter();
 
+  const Comp = review.hasDetails ? Link : "div";
+
   return (
-    <div className="col-span-2 grid grid-cols-subgrid">
+    // @ts-expect-error TypeScript lost the relation between Comp and its props
+    <Comp
+      {...(review.hasDetails
+        ? {
+            href: generatePath(Routes.REVIEW, {
+              username: review.username,
+              reviewSlug: review.slug,
+            }),
+          }
+        : {})}
+      className="col-span-2 grid grid-cols-subgrid"
+    >
       <div className="flex flex-row items-center gap-x-4">
         {
           {
@@ -42,14 +59,18 @@ const BeerReviewCard = async ({ review }: BeerReviewCardProps) => {
         </div>
       </div>
 
-      <div className="flex flex-col items-end">
-        <p className="font-title text-lg">{review.globalScore} / 10</p>
+      <div className="flex flex-row items-center justify-end gap-x-4">
+        <div className="flex flex-col items-end">
+          <p className="font-title text-lg">{review.globalScore} / 10</p>
 
-        <p className="text-foreground/45 text-sm text-nowrap">
-          {format.relativeTime(review.createdAt)}
-        </p>
+          <p className="text-foreground/45 text-sm text-nowrap">
+            {format.relativeTime(review.createdAt)}
+          </p>
+        </div>
+
+        {review.hasDetails ? <ChevronRightIcon className="size-6" /> : null}
       </div>
-    </div>
+    </Comp>
   );
 };
 

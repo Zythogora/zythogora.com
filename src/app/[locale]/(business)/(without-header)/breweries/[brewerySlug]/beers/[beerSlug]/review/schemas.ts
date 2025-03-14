@@ -1,91 +1,104 @@
+import {
+  Acidity,
+  AromasIntensity,
+  Bitterness,
+  BodyStrength,
+  CarbonationIntensity,
+  Duration,
+  FlavorsIntensity,
+  Haziness,
+  HeadRetention,
+  LabelDesign,
+  ServingFrom,
+} from "@prisma/client";
 import { z } from "zod";
 
 export const servingFromValues = [
-  "draft",
-  "bottle",
-  "can",
-  "growler",
-  "cask",
+  ServingFrom.DRAFT,
+  ServingFrom.BOTTLE,
+  ServingFrom.CAN,
+  ServingFrom.GROWLER,
+  ServingFrom.CASK,
 ] as const;
 
 export const labelDesignValues = [
-  "hateIt",
-  "meh",
-  "average",
-  "good",
-  "loveIt",
+  LabelDesign.HATE_IT,
+  LabelDesign.MEH,
+  LabelDesign.AVERAGE,
+  LabelDesign.GOOD,
+  LabelDesign.LOVE_IT,
 ] as const;
 
 export const hazinessValues = [
-  "completelyClear",
-  "verySlightlyCast",
-  "slightlyHazy",
-  "hazy",
-  "veryHazy",
+  Haziness.COMPLETELY_CLEAR,
+  Haziness.VERY_SLIGHTLY_CAST,
+  Haziness.SLIGHTLY_HAZY,
+  Haziness.HAZY,
+  Haziness.VERY_HAZY,
 ] as const;
 
 export const headRetentionValues = [
-  "poor",
-  "shortLived",
-  "moderate",
-  "good",
-  "excellent",
+  HeadRetention.POOR,
+  HeadRetention.SHORT_LIVED,
+  HeadRetention.MODERATE,
+  HeadRetention.GOOD,
+  HeadRetention.EXCELLENT,
 ] as const;
 
 export const aromasIntensityValues = [
-  "faint",
-  "mild",
-  "moderate",
-  "pronounced",
-  "intense",
+  AromasIntensity.FAINT,
+  AromasIntensity.MILD,
+  AromasIntensity.MODERATE,
+  AromasIntensity.PRONOUNCED,
+  AromasIntensity.INTENSE,
 ] as const;
 
 export const flavorsIntensityValues = [
-  "faint",
-  "mild",
-  "moderate",
-  "pronounced",
-  "intense",
+  FlavorsIntensity.FAINT,
+  FlavorsIntensity.MILD,
+  FlavorsIntensity.MODERATE,
+  FlavorsIntensity.PRONOUNCED,
+  FlavorsIntensity.INTENSE,
 ] as const;
 
 export const bodyStrengthValues = [
-  "thin",
-  "light",
-  "medium",
-  "full",
-  "heavy",
+  BodyStrength.THIN,
+  BodyStrength.LIGHT,
+  BodyStrength.MEDIUM,
+  BodyStrength.FULL,
+  BodyStrength.HEAVY,
 ] as const;
 
 export const carbonationIntensityValues = [
-  "flat",
-  "low",
-  "moderate",
-  "lively",
-  "highlyCarbonated",
+  CarbonationIntensity.FLAT,
+  CarbonationIntensity.LOW,
+  CarbonationIntensity.MODERATE,
+  CarbonationIntensity.LIVELY,
+  CarbonationIntensity.HIGHLY_CARBONATED,
 ] as const;
 
 export const bitternessValues = [
-  "low",
-  "moderate",
-  "pronounced",
-  "aggressive",
-  "lingering",
+  Bitterness.LOW,
+  Bitterness.MODERATE,
+  Bitterness.PRONOUNCED,
+  Bitterness.AGGRESSIVE,
+  Bitterness.LINGERING,
 ] as const;
 
 export const acidityValues = [
-  "none",
-  "soft",
-  "bright",
-  "tart",
-  "puckering",
+  Acidity.NONE,
+  Acidity.SOFT,
+  Acidity.BRIGHT,
+  Acidity.TART,
+  Acidity.PUCKERING,
 ] as const;
 
 export const durationValues = [
-  "short",
-  "moderate",
-  "medium",
-  "long",
-  "endless",
+  Duration.SHORT,
+  Duration.MODERATE,
+  Duration.MEDIUM,
+  Duration.LONG,
+  Duration.ENDLESS,
 ] as const;
 
 export const reviewSchema = z.object({

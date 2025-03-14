@@ -51,7 +51,9 @@ const BeerSearchResult = ({
         <div className="flex min-w-0 flex-row gap-x-1.5">
           <Chip className="truncate">{style}</Chip>
 
-          <Chip className="w-fit text-nowrap">{t("common.abv", { abv })}</Chip>
+          <Chip className="w-fit text-nowrap">
+            {t("common.beer.abv.value", { abv })}
+          </Chip>
 
           {ibu ? <Chip className="w-fit text-nowrap">{ibu} IBU</Chip> : null}
         </div>

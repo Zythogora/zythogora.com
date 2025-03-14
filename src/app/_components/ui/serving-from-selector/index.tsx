@@ -1,3 +1,4 @@
+import { ServingFrom } from "@prisma/client";
 import * as RadioGroup from "@radix-ui/react-radio-group";
 
 import { servingFromValues } from "@/app/[locale]/(business)/(without-header)/breweries/[brewerySlug]/beers/[beerSlug]/review/schemas";
@@ -19,9 +20,9 @@ interface ServingFromIconProps {
 
 const ServingFromIcon = ({ size, type, className }: ServingFromIconProps) => {
   switch (type) {
-    case "draft":
+    case ServingFrom.DRAFT:
       return <ServingFromDraftIcon size={size} className={className} />;
-    case "bottle":
+    case ServingFrom.BOTTLE:
       return (
         <ServingFromBottleIcon
           size={size}
@@ -32,7 +33,7 @@ const ServingFromIcon = ({ size, type, className }: ServingFromIconProps) => {
           )}
         />
       );
-    case "can":
+    case ServingFrom.CAN:
       return (
         <ServingFromCanIcon
           size={size}
@@ -43,7 +44,7 @@ const ServingFromIcon = ({ size, type, className }: ServingFromIconProps) => {
           )}
         />
       );
-    case "growler":
+    case ServingFrom.GROWLER:
       return (
         <ServingFromGrowlerIcon
           size={size}
@@ -54,7 +55,7 @@ const ServingFromIcon = ({ size, type, className }: ServingFromIconProps) => {
           )}
         />
       );
-    case "cask":
+    case ServingFrom.CASK:
       return <ServingFromCaskIcon size={size} className={className} />;
     default:
       exhaustiveCheck({ value: type, error: "Invalid serving from value" });

@@ -148,15 +148,22 @@ async function main() {
       });
 
       await tx.reviews.createMany({
-        data: existing_reviews.map((review) => ({
-          globalScore: Number(review.score),
-          servingFrom: ServingFrom.UNKNOWN,
-          comment: review.comment,
-          userId: userIdsMap[review.user]!,
-          beerId: beerIdsMap[review.beer]!,
-          createdAt: new Date(review.date),
-          updatedAt: new Date(review.date),
-        })),
+        data: existing_reviews.map((review) => {
+          const id = nanoid();
+
+          return {
+            id,
+            slug: slugify(id, beerIdsMap[review.beer]!),
+
+            globalScore: Number(review.score),
+            servingFrom: ServingFrom.UNKNOWN,
+            comment: review.comment,
+            userId: userIdsMap[review.user]!,
+            beerId: beerIdsMap[review.beer]!,
+            createdAt: new Date(review.date),
+            updatedAt: new Date(review.date),
+          };
+        }),
       });
     },
     {

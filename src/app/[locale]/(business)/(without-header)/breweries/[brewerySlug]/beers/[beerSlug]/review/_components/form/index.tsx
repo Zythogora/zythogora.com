@@ -82,14 +82,9 @@ const ReviewForm = ({ beerId }: ReviewFormProps) => {
           key={fields.beerId.key}
         />
 
-        <FormGroup
-          formId={form.id}
-          label={t("createReviewPage.fieldGroups.overall.label")}
-        >
+        <FormGroup formId={form.id} label={t("reviewPage.overall.title")}>
           <FormSlider
-            label={t(
-              "createReviewPage.fieldGroups.overall.fields.appreciation.label",
-            )}
+            label={t("reviewPage.overall.fields.appreciation.label")}
             field={fields.globalScore}
             min={0}
             max={10}
@@ -100,9 +95,7 @@ const ReviewForm = ({ beerId }: ReviewFormProps) => {
           <FormServingFromSelector field={fields.servingFrom} />
 
           <FormTextarea
-            label={t(
-              "createReviewPage.fieldGroups.overall.fields.comment.label",
-            )}
+            label={t("reviewPage.overall.fields.comment.label")}
             field={fields.comment}
             rows={6}
           />
@@ -110,7 +103,7 @@ const ReviewForm = ({ beerId }: ReviewFormProps) => {
 
         <FormGroup
           formId={form.id}
-          label={t("createReviewPage.fieldGroups.appearance.label")}
+          label={t("reviewPage.appearance.title")}
           className="grid grid-cols-1 gap-x-12 gap-y-8 @3xl:grid-cols-2"
         >
           <FormFiveStepSelector
@@ -133,10 +126,7 @@ const ReviewForm = ({ beerId }: ReviewFormProps) => {
           />
         </FormGroup>
 
-        <FormGroup
-          formId={form.id}
-          label={t("createReviewPage.fieldGroups.nose.label")}
-        >
+        <FormGroup formId={form.id} label={t("reviewPage.nose.title")}>
           <FormFiveStepSelector
             field={fields.aromasIntensity}
             group="nose"
@@ -146,7 +136,7 @@ const ReviewForm = ({ beerId }: ReviewFormProps) => {
 
         <FormGroup
           formId={form.id}
-          label={t("createReviewPage.fieldGroups.taste.label")}
+          label={t("reviewPage.taste.title")}
           className="grid grid-cols-1 gap-x-12 gap-y-8 @3xl:grid-cols-2"
         >
           <FormFiveStepSelector
@@ -181,10 +171,7 @@ const ReviewForm = ({ beerId }: ReviewFormProps) => {
           />
         </FormGroup>
 
-        <FormGroup
-          formId={form.id}
-          label={t("createReviewPage.fieldGroups.finish.label")}
-        >
+        <FormGroup formId={form.id} label={t("reviewPage.finish.title")}>
           <FormFiveStepSelector
             field={fields.duration}
             group="finish"

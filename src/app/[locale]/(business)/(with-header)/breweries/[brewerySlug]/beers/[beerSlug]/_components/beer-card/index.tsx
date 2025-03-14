@@ -63,7 +63,7 @@ const BeerCard = async ({
               "text-xs md:text-sm",
             )}
           >
-            {t.rich("beerPage.brewedBy", {
+            {t.rich("common.beer.brewedBy", {
               brewery: brewery.name,
               link: (chunks) => (
                 <Link
@@ -71,7 +71,7 @@ const BeerCard = async ({
                     brewerySlug: brewery.slug,
                   })}
                   title={brewery.name}
-                  className="text-primary truncate"
+                  className="text-primary cursor-pointer truncate"
                 >
                   {chunks}
                 </Link>
@@ -83,7 +83,7 @@ const BeerCard = async ({
 
       <div className="grid grid-cols-5 items-center justify-between gap-x-4">
         <DescriptionList
-          label={t("beerPage.style")}
+          label={t("common.beer.style")}
           value={style}
           className="col-span-2 [&>dd]:truncate"
           title={style}
@@ -94,12 +94,14 @@ const BeerCard = async ({
         </div>
 
         <DescriptionList
-          label={t("beerPage.abv")}
-          value={t("common.abv", { abv })}
+          label={t("common.beer.abv.label")}
+          value={t("common.beer.abv.value", { abv })}
           className={ibu ? "" : "col-start-5"}
         />
 
-        {ibu ? <DescriptionList label={t("beerPage.ibu")} value={ibu} /> : null}
+        {ibu ? (
+          <DescriptionList label={t("common.beer.ibu")} value={ibu} />
+        ) : null}
       </div>
     </div>
   );
