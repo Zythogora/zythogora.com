@@ -14,9 +14,9 @@ import type {
   Haziness,
   HeadRetention,
   LabelDesign,
+  LegacyStyles,
   Reviews,
   ServingFrom,
-  Styles,
   Users,
 } from "@prisma/client";
 
@@ -67,7 +67,7 @@ export type RawReview = Reviews & {
   user: Users;
   beer: Beers & {
     brewery: Breweries;
-    style: Styles;
+    style: LegacyStyles;
   };
 };
 
