@@ -227,9 +227,10 @@ const UserReviewPage = async ({ params }: UserReviewPageProps) => {
                   label={t("reviewPage.appearance.fields.labelDesign.label")}
                   value={
                     <ReviewFieldValue
-                      value={t(
+                      label={t(
                         `reviewPage.appearance.fields.labelDesign.possibleValues.${review.labelDesign}`,
                       )}
+                      value={review.labelDesign}
                       possibleValues={labelDesignValues as unknown as string[]}
                     />
                   }
@@ -245,9 +246,10 @@ const UserReviewPage = async ({ params }: UserReviewPageProps) => {
                   label={t("reviewPage.appearance.fields.haziness.label")}
                   value={
                     <ReviewFieldValue
-                      value={t(
+                      label={t(
                         `reviewPage.appearance.fields.haziness.possibleValues.${review.haziness}`,
                       )}
+                      value={review.haziness}
                       possibleValues={hazinessValues as unknown as string[]}
                     />
                   }
@@ -260,9 +262,10 @@ const UserReviewPage = async ({ params }: UserReviewPageProps) => {
                   label={t("reviewPage.appearance.fields.headRetention.label")}
                   value={
                     <ReviewFieldValue
-                      value={t(
+                      label={t(
                         `reviewPage.appearance.fields.headRetention.possibleValues.${review.headRetention}`,
                       )}
+                      value={review.headRetention}
                       possibleValues={
                         headRetentionValues as unknown as string[]
                       }
@@ -286,9 +289,10 @@ const UserReviewPage = async ({ params }: UserReviewPageProps) => {
                 label={t("reviewPage.nose.fields.aromasIntensity.label")}
                 value={
                   <ReviewFieldValue
-                    value={t(
+                    label={t(
                       `reviewPage.nose.fields.aromasIntensity.possibleValues.${review.aromasIntensity}`,
                     )}
+                    value={review.aromasIntensity}
                     possibleValues={
                       aromasIntensityValues as unknown as string[]
                     }
@@ -315,9 +319,10 @@ const UserReviewPage = async ({ params }: UserReviewPageProps) => {
                   label={t("reviewPage.taste.fields.flavorsIntensity.label")}
                   value={
                     <ReviewFieldValue
-                      value={t(
+                      label={t(
                         `reviewPage.taste.fields.flavorsIntensity.possibleValues.${review.flavorsIntensity}`,
                       )}
+                      value={review.flavorsIntensity}
                       possibleValues={
                         flavorsIntensityValues as unknown as string[]
                       }
@@ -335,9 +340,10 @@ const UserReviewPage = async ({ params }: UserReviewPageProps) => {
                   label={t("reviewPage.taste.fields.bodyStrength.label")}
                   value={
                     <ReviewFieldValue
-                      value={t(
+                      label={t(
                         `reviewPage.taste.fields.bodyStrength.possibleValues.${review.bodyStrength}`,
                       )}
+                      value={review.bodyStrength}
                       possibleValues={bodyStrengthValues as unknown as string[]}
                     />
                   }
@@ -352,9 +358,10 @@ const UserReviewPage = async ({ params }: UserReviewPageProps) => {
                   )}
                   value={
                     <ReviewFieldValue
-                      value={t(
+                      label={t(
                         `reviewPage.taste.fields.carbonationIntensity.possibleValues.${review.carbonationIntensity}`,
                       )}
+                      value={review.carbonationIntensity}
                       possibleValues={
                         carbonationIntensityValues as unknown as string[]
                       }
@@ -369,9 +376,10 @@ const UserReviewPage = async ({ params }: UserReviewPageProps) => {
                   label={t("reviewPage.taste.fields.bitterness.label")}
                   value={
                     <ReviewFieldValue
-                      value={t(
+                      label={t(
                         `reviewPage.taste.fields.bitterness.possibleValues.${review.bitterness}`,
                       )}
+                      value={review.bitterness}
                       possibleValues={bitternessValues as unknown as string[]}
                     />
                   }
@@ -384,9 +392,10 @@ const UserReviewPage = async ({ params }: UserReviewPageProps) => {
                   label={t("reviewPage.taste.fields.acidity.label")}
                   value={
                     <ReviewFieldValue
-                      value={t(
+                      label={t(
                         `reviewPage.taste.fields.acidity.possibleValues.${review.acidity}`,
                       )}
+                      value={review.acidity}
                       possibleValues={acidityValues as unknown as string[]}
                     />
                   }
@@ -408,9 +417,10 @@ const UserReviewPage = async ({ params }: UserReviewPageProps) => {
                 label={t("reviewPage.finish.fields.duration.label")}
                 value={
                   <ReviewFieldValue
-                    value={t(
+                    label={t(
                       `reviewPage.finish.fields.duration.possibleValues.${review.duration}`,
                     )}
+                    value={review.duration}
                     possibleValues={durationValues as unknown as string[]}
                   />
                 }
