@@ -19,6 +19,28 @@ interface UserReviewPageProps {
   }>;
 }
 
+export async function generateMetadata({ params }: UserReviewPageProps) {
+  const t = await getTranslations();
+
+  const { username, reviewSlug } = await params;
+
+  const review = await getReviewByUsernameAndSlug(username, reviewSlug).catch(
+    () => notFound(),
+  );
+
+  return {
+    title: `${review.user.username} - ${review.beer.name} | ${publicConfig.appName}`,
+    description: t("reviewPage.metadata.description", {
+      username: review.user.username,
+      beerName: review.beer.name,
+      breweryName: review.beer.brewery.name,
+      servingFrom: review.servingFrom,
+      score: review.globalScore,
+      reviewDate: review.createdAt,
+    }),
+  };
+}
+
 const UserReviewPage = async ({ params }: UserReviewPageProps) => {
   const t = await getTranslations();
 
