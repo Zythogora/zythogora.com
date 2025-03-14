@@ -86,6 +86,9 @@ const UserReviewPage = async ({ params }: UserReviewPageProps) => {
             )}
           >
             <BackButton
+              fallbackRoute={generatePath(Routes.PROFILE, {
+                username,
+              })}
               className={cn(
                 "stroke-foreground stroke-[1.5]",
                 "size-8 md:size-12",
