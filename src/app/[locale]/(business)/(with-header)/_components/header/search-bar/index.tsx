@@ -42,9 +42,27 @@ const HeaderSearchBar = ({ className }: HeaderSearchBarProps) => {
 
   const [resultsVisible, setResultsVisible] = useState(false);
 
+  const [inputHasFocus, setInputHasFocus] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const platform = usePlatformDetection();
+  useEffect(() => {
+    const current = inputRef.current;
+
+    const focus = () => setInputHasFocus(true);
+    const blur = () => setInputHasFocus(false);
+
+    if (current) {
+      current.addEventListener("focus", focus);
+      current.addEventListener("blur", blur);
+    }
+
+    return () => {
+      if (current) {
+        current.removeEventListener("focus", focus);
+        current.removeEventListener("blur", blur);
+      }
+    };
+  }, [inputRef]);
 
   useEffect(() => {
     // Unfocus the input if the user navigates to a new page
@@ -53,6 +71,8 @@ const HeaderSearchBar = ({ className }: HeaderSearchBarProps) => {
     }
     setResultsVisible(false);
   }, [pathname]);
+
+  const platform = usePlatformDetection();
 
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
@@ -117,7 +137,7 @@ const HeaderSearchBar = ({ className }: HeaderSearchBarProps) => {
                 />
               </Command.Input>
 
-              {platform.isDetected ? (
+              {platform.isDetected && !inputHasFocus ? (
                 <kbd
                   className={cn(
                     "font-title border-foreground absolute top-1/2 right-6 -translate-y-1/2 flex-row items-center rounded border-2 px-2 py-1 opacity-25",
