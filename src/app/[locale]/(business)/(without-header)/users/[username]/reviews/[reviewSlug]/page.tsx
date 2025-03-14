@@ -1,7 +1,20 @@
 import { notFound } from "next/navigation";
 import { getFormatter, getTranslations } from "next-intl/server";
 
+import {
+  acidityValues,
+  aromasIntensityValues,
+  bitternessValues,
+  bodyStrengthValues,
+  carbonationIntensityValues,
+  durationValues,
+  flavorsIntensityValues,
+  hazinessValues,
+  headRetentionValues,
+  labelDesignValues,
+} from "@/app/[locale]/(business)/(without-header)/breweries/[brewerySlug]/beers/[beerSlug]/review/schemas";
 import BackButton from "@/app/[locale]/(business)/(without-header)/users/[username]/reviews/[reviewSlug]/_components/back-button";
+import ReviewFieldValue from "@/app/[locale]/(business)/(without-header)/users/[username]/reviews/[reviewSlug]/_components/field-value";
 import ShareButton from "@/app/_components/share-button";
 import DescriptionList from "@/app/_components/ui/description-list";
 import { Separator } from "@/app/_components/ui/separator";
@@ -17,6 +30,28 @@ interface UserReviewPageProps {
     username: string;
     reviewSlug: string;
   }>;
+}
+
+export async function generateMetadata({ params }: UserReviewPageProps) {
+  const t = await getTranslations();
+
+  const { username, reviewSlug } = await params;
+
+  const review = await getReviewByUsernameAndSlug(username, reviewSlug).catch(
+    () => notFound(),
+  );
+
+  return {
+    title: `${review.user.username} - ${review.beer.name} | ${publicConfig.appName}`,
+    description: t("reviewPage.metadata.description", {
+      username: review.user.username,
+      beerName: review.beer.name,
+      breweryName: review.beer.brewery.name,
+      servingFrom: review.servingFrom,
+      score: review.globalScore,
+      reviewDate: review.createdAt,
+    }),
+  };
 }
 
 const UserReviewPage = async ({ params }: UserReviewPageProps) => {
@@ -51,6 +86,9 @@ const UserReviewPage = async ({ params }: UserReviewPageProps) => {
             )}
           >
             <BackButton
+              fallbackRoute={generatePath(Routes.PROFILE, {
+                username,
+              })}
               className={cn(
                 "stroke-foreground stroke-[1.5]",
                 "size-8 md:size-12",
@@ -187,28 +225,50 @@ const UserReviewPage = async ({ params }: UserReviewPageProps) => {
               {review.labelDesign ? (
                 <DescriptionList
                   label={t("reviewPage.appearance.fields.labelDesign.label")}
-                  value={t(
-                    `reviewPage.appearance.fields.labelDesign.possibleValues.${review.labelDesign}`,
+                  value={
+                    <ReviewFieldValue
+                      value={t(
+                        `reviewPage.appearance.fields.labelDesign.possibleValues.${review.labelDesign}`,
+                      )}
+                      possibleValues={labelDesignValues as unknown as string[]}
+                    />
+                  }
+                  className={cn(
+                    "col-span-2",
+                    "*:data-[slot=description-details]:gap-x-paragraph-space *:data-[slot=description-details]:flex *:data-[slot=description-details]:flex-row *:data-[slot=description-details]:items-baseline",
                   )}
-                  className="col-span-2"
                 />
               ) : null}
 
               {review.haziness ? (
                 <DescriptionList
                   label={t("reviewPage.appearance.fields.haziness.label")}
-                  value={t(
-                    `reviewPage.appearance.fields.haziness.possibleValues.${review.haziness}`,
-                  )}
+                  value={
+                    <ReviewFieldValue
+                      value={t(
+                        `reviewPage.appearance.fields.haziness.possibleValues.${review.haziness}`,
+                      )}
+                      possibleValues={hazinessValues as unknown as string[]}
+                    />
+                  }
+                  className="*:data-[slot=description-details]:gap-x-paragraph-space *:data-[slot=description-details]:flex *:data-[slot=description-details]:flex-row *:data-[slot=description-details]:items-baseline"
                 />
               ) : null}
 
               {review.headRetention ? (
                 <DescriptionList
                   label={t("reviewPage.appearance.fields.headRetention.label")}
-                  value={t(
-                    `reviewPage.appearance.fields.headRetention.possibleValues.${review.headRetention}`,
-                  )}
+                  value={
+                    <ReviewFieldValue
+                      value={t(
+                        `reviewPage.appearance.fields.headRetention.possibleValues.${review.headRetention}`,
+                      )}
+                      possibleValues={
+                        headRetentionValues as unknown as string[]
+                      }
+                    />
+                  }
+                  className="*:data-[slot=description-details]:gap-x-paragraph-space *:data-[slot=description-details]:flex *:data-[slot=description-details]:flex-row *:data-[slot=description-details]:items-baseline"
                 />
               ) : null}
             </div>
@@ -224,8 +284,19 @@ const UserReviewPage = async ({ params }: UserReviewPageProps) => {
             {review.aromasIntensity ? (
               <DescriptionList
                 label={t("reviewPage.nose.fields.aromasIntensity.label")}
-                value={t(
-                  `reviewPage.nose.fields.aromasIntensity.possibleValues.${review.aromasIntensity}`,
+                value={
+                  <ReviewFieldValue
+                    value={t(
+                      `reviewPage.nose.fields.aromasIntensity.possibleValues.${review.aromasIntensity}`,
+                    )}
+                    possibleValues={
+                      aromasIntensityValues as unknown as string[]
+                    }
+                  />
+                }
+                className={cn(
+                  "col-span-2",
+                  "*:data-[slot=description-details]:gap-x-paragraph-space *:data-[slot=description-details]:flex *:data-[slot=description-details]:flex-row *:data-[slot=description-details]:items-baseline",
                 )}
               />
             ) : null}
@@ -242,19 +313,35 @@ const UserReviewPage = async ({ params }: UserReviewPageProps) => {
               {review.flavorsIntensity ? (
                 <DescriptionList
                   label={t("reviewPage.taste.fields.flavorsIntensity.label")}
-                  value={t(
-                    `reviewPage.taste.fields.flavorsIntensity.possibleValues.${review.flavorsIntensity}`,
+                  value={
+                    <ReviewFieldValue
+                      value={t(
+                        `reviewPage.taste.fields.flavorsIntensity.possibleValues.${review.flavorsIntensity}`,
+                      )}
+                      possibleValues={
+                        flavorsIntensityValues as unknown as string[]
+                      }
+                    />
+                  }
+                  className={cn(
+                    "col-span-2",
+                    "*:data-[slot=description-details]:gap-x-paragraph-space *:data-[slot=description-details]:flex *:data-[slot=description-details]:flex-row *:data-[slot=description-details]:items-baseline",
                   )}
-                  className="col-span-2"
                 />
               ) : null}
 
               {review.bodyStrength ? (
                 <DescriptionList
                   label={t("reviewPage.taste.fields.bodyStrength.label")}
-                  value={t(
-                    `reviewPage.taste.fields.bodyStrength.possibleValues.${review.bodyStrength}`,
-                  )}
+                  value={
+                    <ReviewFieldValue
+                      value={t(
+                        `reviewPage.taste.fields.bodyStrength.possibleValues.${review.bodyStrength}`,
+                      )}
+                      possibleValues={bodyStrengthValues as unknown as string[]}
+                    />
+                  }
+                  className="*:data-[slot=description-details]:gap-x-paragraph-space *:data-[slot=description-details]:flex *:data-[slot=description-details]:flex-row *:data-[slot=description-details]:items-baseline"
                 />
               ) : null}
 
@@ -263,27 +350,47 @@ const UserReviewPage = async ({ params }: UserReviewPageProps) => {
                   label={t(
                     "reviewPage.taste.fields.carbonationIntensity.label",
                   )}
-                  value={t(
-                    `reviewPage.taste.fields.carbonationIntensity.possibleValues.${review.carbonationIntensity}`,
-                  )}
+                  value={
+                    <ReviewFieldValue
+                      value={t(
+                        `reviewPage.taste.fields.carbonationIntensity.possibleValues.${review.carbonationIntensity}`,
+                      )}
+                      possibleValues={
+                        carbonationIntensityValues as unknown as string[]
+                      }
+                    />
+                  }
+                  className="*:data-[slot=description-details]:gap-x-paragraph-space *:data-[slot=description-details]:flex *:data-[slot=description-details]:flex-row *:data-[slot=description-details]:items-baseline"
                 />
               ) : null}
 
               {review.bitterness ? (
                 <DescriptionList
                   label={t("reviewPage.taste.fields.bitterness.label")}
-                  value={t(
-                    `reviewPage.taste.fields.bitterness.possibleValues.${review.bitterness}`,
-                  )}
+                  value={
+                    <ReviewFieldValue
+                      value={t(
+                        `reviewPage.taste.fields.bitterness.possibleValues.${review.bitterness}`,
+                      )}
+                      possibleValues={bitternessValues as unknown as string[]}
+                    />
+                  }
+                  className="*:data-[slot=description-details]:gap-x-paragraph-space *:data-[slot=description-details]:flex *:data-[slot=description-details]:flex-row *:data-[slot=description-details]:items-baseline"
                 />
               ) : null}
 
               {review.acidity ? (
                 <DescriptionList
                   label={t("reviewPage.taste.fields.acidity.label")}
-                  value={t(
-                    `reviewPage.taste.fields.acidity.possibleValues.${review.acidity}`,
-                  )}
+                  value={
+                    <ReviewFieldValue
+                      value={t(
+                        `reviewPage.taste.fields.acidity.possibleValues.${review.acidity}`,
+                      )}
+                      possibleValues={acidityValues as unknown as string[]}
+                    />
+                  }
+                  className="*:data-[slot=description-details]:gap-x-paragraph-space *:data-[slot=description-details]:flex *:data-[slot=description-details]:flex-row *:data-[slot=description-details]:items-baseline"
                 />
               ) : null}
             </div>
@@ -299,9 +406,15 @@ const UserReviewPage = async ({ params }: UserReviewPageProps) => {
             {review.duration ? (
               <DescriptionList
                 label={t("reviewPage.finish.fields.duration.label")}
-                value={t(
-                  `reviewPage.finish.fields.duration.possibleValues.${review.duration}`,
-                )}
+                value={
+                  <ReviewFieldValue
+                    value={t(
+                      `reviewPage.finish.fields.duration.possibleValues.${review.duration}`,
+                    )}
+                    possibleValues={durationValues as unknown as string[]}
+                  />
+                }
+                className="*:data-[slot=description-details]:gap-x-paragraph-space *:data-[slot=description-details]:flex *:data-[slot=description-details]:flex-row *:data-[slot=description-details]:items-baseline"
               />
             ) : null}
           </div>

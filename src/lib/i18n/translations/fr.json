@@ -280,6 +280,9 @@
     "uniqueCountries": "Pays"
   },
   "reviewPage": {
+    "metadata": {
+      "description": "{username} a dégusté une {beerName} de {breweryName} {servingFrom, select, DRAFT {à la pression} BOTTLE {en bouteille} CAN {en canette} GROWLER {depuis un growler} CASK {à la pompe} other {}} et l'a notée {score}/10 le {reviewDate, date, long}. Lire sa critique détaillée sur Zythogora."
+    },
     "overall": {
       "title": "Général",
       "fields": {

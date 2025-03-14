@@ -6,16 +6,21 @@ import { useTranslations } from "next-intl";
 import { useRouter } from "@/lib/i18n";
 
 interface BackButtonProps {
+  fallbackRoute: string;
   className?: string;
 }
 
-const BackButton = ({ className }: BackButtonProps) => {
+const BackButton = ({ fallbackRoute, className }: BackButtonProps) => {
   const t = useTranslations();
 
   const router = useRouter();
 
   const handleBack = () => {
-    router.back();
+    if (window.history.length > 1) {
+      router.back();
+    } else {
+      router.push(fallbackRoute);
+    }
   };
 
   return (
