@@ -1,14 +1,19 @@
 interface ReviewFieldValueProps {
+  label: string;
   value: string;
   possibleValues: string[];
 }
 
-const ReviewFieldValue = ({ value, possibleValues }: ReviewFieldValueProps) => {
-  const index = possibleValues.findIndex((value) => value === value) + 1;
+const ReviewFieldValue = ({
+  label,
+  value,
+  possibleValues,
+}: ReviewFieldValueProps) => {
+  const index = possibleValues.findIndex((val) => val === value) + 1;
 
   return (
     <>
-      <span>{value}</span>
+      <span>{label}</span>
 
       <span className="text-foreground/50 text-[75%]">
         <span>(</span>
