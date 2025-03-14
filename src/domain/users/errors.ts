@@ -9,3 +9,15 @@ export class UnknownUserError extends UserError {
     super("Unknown user");
   }
 }
+
+export class ReviewError extends UserError {
+  constructor(message: string) {
+    super(message);
+  }
+}
+
+export class UnknownReviewError extends ReviewError {
+  constructor() {
+    super("Unknown review");
+  }
+}

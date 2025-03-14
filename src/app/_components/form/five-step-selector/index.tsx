@@ -14,7 +14,7 @@ import type { FieldMetadata } from "@conform-to/react";
 interface FormFiveStepSelectorProps
   extends ComponentProps<typeof FiveStepSelector> {
   field: FieldMetadata;
-  group: string;
+  group: "overall" | "appearance" | "nose" | "taste" | "finish";
   possibleValues: readonly [string, string, string, string, string];
   className?: string;
 }
@@ -61,14 +61,14 @@ const FormFiveStepSelector = ({
         {selectedValue
           ? `${t(
               // @ts-expect-error The possible values cannot be typed
-              `createReviewPage.fieldGroups.${group}.fields.${field.name}.label`,
+              `reviewPage.${group}.fields.${field.name}.label`,
             )}: ${t(
               // @ts-expect-error The possible values cannot be typed
-              `createReviewPage.fieldGroups.${group}.fields.${field.name}.possibleValues.${selectedValue}`,
+              `reviewPage.${group}.fields.${field.name}.possibleValues.${selectedValue}`,
             )}`
           : t(
               // @ts-expect-error The possible values cannot be typed
-              `createReviewPage.fieldGroups.${group}.fields.${field.name}.label`,
+              `reviewPage.${group}.fields.${field.name}.label`,
             )}
       </Label>
 

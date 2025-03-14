@@ -77,7 +77,11 @@ const ProfilePage = async ({ params, searchParams }: ProfilePageProps) => {
         )}
       >
         {reviews.results.map((review) => (
-          <UserReviewCard key={review.id} review={review} />
+          <UserReviewCard
+            key={review.id}
+            username={user.username}
+            review={review}
+          />
         ))}
 
         <Pagination

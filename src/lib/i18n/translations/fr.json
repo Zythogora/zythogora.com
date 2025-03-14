@@ -25,7 +25,16 @@
   },
   "common": {
     "or": "OU",
-    "abv": "{abv}°",
+    "back": "Retour",
+    "beer": {
+      "brewedBy": "Brassée par <link>{brewery}</link>",
+      "style": "Style",
+      "abv": {
+        "label": "Degré",
+        "value": "{abv}°"
+      },
+      "ibu": "IBU"
+    },
     "actions": {
       "copiedToClipboard": "L'URL a été copiée dans le presse-papiers"
     }
@@ -232,10 +241,6 @@
     }
   },
   "beerPage": {
-    "brewedBy": "Brassée par <link>{brewery}</link>",
-    "style": "Style",
-    "abv": "Degré",
-    "ibu": "IBU",
     "reviewCount": "{count, plural, =0 {Pas encore d'avis} =1 {1 avis} other {# avis}}",
     "result": {
       "servingFrom": {
@@ -274,150 +279,154 @@
     "uniqueStyles": "Styles",
     "uniqueCountries": "Pays"
   },
-  "createReviewPage": {
-    "fieldGroups": {
-      "overall": {
-        "label": "Général",
-        "fields": {
-          "appreciation": {
-            "label": "Appréciation globale"
-          },
-          "servingFrom": {
-            "label": "Servie depuis",
-            "options": {
-              "draft": "Servie à la pression",
-              "bottle": "Servie en bouteille",
-              "can": "Servie en canette",
-              "growler": "Servie depuis un growler",
-              "cask": "Servie à la pompe"
-            }
-          },
-          "comment": {
-            "label": "Commentaire"
+  "reviewPage": {
+    "overall": {
+      "title": "Général",
+      "fields": {
+        "appreciation": {
+          "label": "Appréciation globale",
+          "value": "Appréciation globale : {score}/10"
+        },
+        "servingFrom": {
+          "label": "Servie depuis",
+          "possibleValues": {
+            "DRAFT": "Servie à la pression",
+            "BOTTLE": "Servie en bouteille",
+            "CAN": "Servie en canette",
+            "GROWLER": "Servie depuis un growler",
+            "CASK": "Servie à la pompe"
           }
+        },
+        "comment": {
+          "label": "Commentaire"
         }
-      },
-      "appearance": {
-        "label": "Apparence",
-        "fields": {
-          "labelDesign": {
-            "label": "Style de l'étiquette",
-            "possibleValues": {
-              "hateIt": "Je n'aime pas...",
-              "meh": "Bof",
-              "average": "Sans plus",
-              "good": "Sympa",
-              "loveIt": "J'adore !"
-            }
-          },
-          "haziness": {
-            "label": "Clarté",
-            "possibleValues": {
-              "completelyClear": "Limpide",
-              "verySlightlyCast": "Très léger voile",
-              "slightlyHazy": "Léger voile",
-              "hazy": "Trouble",
-              "veryHazy": "Complètement trouble"
-            }
-          },
-          "headRetention": {
-            "label": "Maintien de la mousse",
-            "possibleValues": {
-              "poor": "Mauvais",
-              "shortLived": "Court",
-              "moderate": "Modéré",
-              "good": "Bon",
-              "excellent": "Excellent"
-            }
+      }
+    },
+    "appearance": {
+      "title": "Apparence",
+      "fields": {
+        "labelDesign": {
+          "label": "Style de l'étiquette",
+          "possibleValues": {
+            "HATE_IT": "Je n'aime pas...",
+            "MEH": "Bof",
+            "AVERAGE": "Sans plus",
+            "GOOD": "Sympa",
+            "LOVE_IT": "J'adore !"
           }
-        }
-      },
-      "nose": {
-        "label": "Nez",
-        "fields": {
-          "aromasIntensity": {
-            "label": "Intensité des arômes",
-            "possibleValues": {
-              "faint": "Faible",
-              "mild": "Moyenne",
-              "moderate": "Modérée",
-              "pronounced": "Prononcée",
-              "intense": "Intense"
-            }
+        },
+        "haziness": {
+          "label": "Clarté",
+          "possibleValues": {
+            "COMPLETELY_CLEAR": "Limpide",
+            "VERY_SLIGHTLY_CAST": "Très léger voile",
+            "SLIGHTLY_HAZY": "Léger voile",
+            "HAZY": "Trouble",
+            "VERY_HAZY": "Complètement trouble"
           }
-        }
-      },
-      "taste": {
-        "label": "Goût",
-        "fields": {
-          "flavorsIntensity": {
-            "label": "Intensité des saveurs",
-            "possibleValues": {
-              "faint": "Faible",
-              "mild": "Moyenne",
-              "moderate": "Modérée",
-              "pronounced": "Prononcée",
-              "intense": "Intense"
-            }
-          },
-          "bodyStrength": {
-            "label": "Corps",
-            "possibleValues": {
-              "thin": "Très léger",
-              "light": "Léger",
-              "medium": "Moyen",
-              "full": "Lourd",
-              "heavy": "Très lourd"
-            }
-          },
-          "carbonationIntensity": {
-            "label": "Effervescence",
-            "possibleValues": {
-              "flat": "Plate",
-              "low": "Faible",
-              "moderate": "Modérée",
-              "lively": "Vive",
-              "highlyCarbonated": "Très vive"
-            }
-          },
-          "bitterness": {
-            "label": "Amertume",
-            "possibleValues": {
-              "low": "Faible",
-              "moderate": "Modérée",
-              "pronounced": "Prononcée",
-              "aggressive": "Agressive",
-              "lingering": "Persistante"
-            }
-          },
-          "acidity": {
-            "label": "Acidité",
-            "possibleValues": {
-              "none": "Absente",
-              "soft": "Douce",
-              "bright": "Franche",
-              "tart": "Vive",
-              "puckering": "Mordante"
-            }
-          }
-        }
-      },
-      "finish": {
-        "label": "Fin",
-        "fields": {
-          "duration": {
-            "label": "Durée en bouche",
-            "possibleValues": {
-              "short": "Courte",
-              "moderate": "Modérée",
-              "medium": "Moyenne",
-              "long": "Longue",
-              "endless": "Persistante"
-            }
+        },
+        "headRetention": {
+          "label": "Maintien de la mousse",
+          "possibleValues": {
+            "POOR": "Mauvais",
+            "SHORT_LIVED": "Court",
+            "MODERATE": "Modéré",
+            "GOOD": "Bon",
+            "EXCELLENT": "Excellent"
           }
         }
       }
     },
+    "nose": {
+      "title": "Nez",
+      "fields": {
+        "aromasIntensity": {
+          "label": "Intensité des arômes",
+          "possibleValues": {
+            "FAINT": "Faible",
+            "MILD": "Moyenne",
+            "MODERATE": "Modérée",
+            "PRONOUNCED": "Prononcée",
+            "INTENSE": "Intense"
+          }
+        }
+      }
+    },
+    "taste": {
+      "title": "Goût",
+      "fields": {
+        "flavorsIntensity": {
+          "label": "Intensité des saveurs",
+          "possibleValues": {
+            "FAINT": "Faible",
+            "MILD": "Moyenne",
+            "MODERATE": "Modérée",
+            "PRONOUNCED": "Prononcée",
+            "INTENSE": "Intense"
+          }
+        },
+        "bodyStrength": {
+          "label": "Corps",
+          "possibleValues": {
+            "THIN": "Très léger",
+            "LIGHT": "Léger",
+            "MEDIUM": "Moyen",
+            "FULL": "Lourd",
+            "HEAVY": "Très lourd"
+          }
+        },
+        "carbonationIntensity": {
+          "label": "Effervescence",
+          "possibleValues": {
+            "FLAT": "Plate",
+            "LOW": "Faible",
+            "MODERATE": "Modérée",
+            "LIVELY": "Vive",
+            "HIGHLY_CARBONATED": "Très vive"
+          }
+        },
+        "bitterness": {
+          "label": "Amertume",
+          "possibleValues": {
+            "LOW": "Faible",
+            "MODERATE": "Modérée",
+            "PRONOUNCED": "Prononcée",
+            "AGGRESSIVE": "Agressive",
+            "LINGERING": "Persistante"
+          }
+        },
+        "acidity": {
+          "label": "Acidité",
+          "possibleValues": {
+            "NONE": "Absente",
+            "SOFT": "Douce",
+            "BRIGHT": "Franche",
+            "TART": "Vive",
+            "PUCKERING": "Mordante"
+          }
+        }
+      }
+    },
+    "finish": {
+      "title": "Fin",
+      "fields": {
+        "duration": {
+          "label": "Durée en bouche",
+          "possibleValues": {
+            "SHORT": "Courte",
+            "MODERATE": "Modérée",
+            "MEDIUM": "Moyenne",
+            "LONG": "Longue",
+            "ENDLESS": "Persistante"
+          }
+        }
+      }
+    },
+    "actions": {
+      "share": "Partager"
+    }
+  },
+  "createReviewPage": {
     "actions": {
       "complete": "Publier la critique",
       "saving": "Publication en cours...",

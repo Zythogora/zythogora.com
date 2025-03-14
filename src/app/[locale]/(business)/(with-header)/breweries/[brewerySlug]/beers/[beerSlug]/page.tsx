@@ -159,12 +159,14 @@ const BeerPage = async ({ params, searchParams }: BeerPageProps) => {
         </Button>
 
         <ShareButton
+          size="icon"
+          variant="outline"
           label={t("beerPage.actions.share")}
           link={`${publicConfig.baseUrl}${generatePath(Routes.BEER, {
             brewerySlug: beer.brewery.slug.slice(0, 4),
             beerSlug: beer.slug.slice(0, 4),
           })}`}
-          className={cn(
+          triggerClassName={cn(
             "shrink-0",
             "md:rounded-t-md md:rounded-br-[14px] md:before:rounded-t md:before:rounded-br-xl",
           )}

@@ -36,9 +36,9 @@ const FormServingFromSelector = ({
       <Label htmlFor={field.id} required={field.required}>
         {field.value
           ? t(
-              `createReviewPage.fieldGroups.overall.fields.servingFrom.options.${field.value as (typeof servingFromValues)[number]}`,
+              `reviewPage.overall.fields.servingFrom.possibleValues.${field.value as (typeof servingFromValues)[number]}`,
             )
-          : t("createReviewPage.fieldGroups.overall.fields.servingFrom.label")}
+          : t("reviewPage.overall.fields.servingFrom.label")}
       </Label>
 
       <div className="w-full">

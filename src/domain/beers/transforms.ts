@@ -1,5 +1,6 @@
 "server only";
 
+import { reviewHasDetails } from "@/domain/users/utils";
 import { getCountry } from "@/lib/i18n/countries";
 
 import type {
@@ -52,8 +53,10 @@ export const transformRawBeerReviewToBeerReview = (
   rawBeerReview: RawBeerReview,
 ): BeerReview => ({
   id: rawBeerReview.id,
+  slug: rawBeerReview.slug,
   globalScore: rawBeerReview.globalScore.toNumber(),
   servingFrom: rawBeerReview.servingFrom,
   username: rawBeerReview.user.username,
   createdAt: rawBeerReview.createdAt,
+  hasDetails: reviewHasDetails(rawBeerReview),
 });

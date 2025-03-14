@@ -18,6 +18,7 @@ model Users {
 
 model Reviews {
   id                   String                @id @default(nanoid())
+  slug                 String
   globalScore          Decimal               @map("global_score") @db.Decimal(3, 1)
   servingFrom          ServingFrom           @map("serving_from")
   comment              String?
@@ -41,6 +42,7 @@ model Reviews {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
 
+  @@unique([slug, userId])
   @@map("reviews")
   @@schema("public")
 }

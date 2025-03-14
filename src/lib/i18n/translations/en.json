@@ -25,7 +25,16 @@
   },
   "common": {
     "or": "OR",
-    "abv": "{abv}%",
+    "back": "Back",
+    "beer": {
+      "brewedBy": "Brewed by <link>{brewery}</link>",
+      "style": "Style",
+      "abv": {
+        "label": "ABV",
+        "value": "{abv}%"
+      },
+      "ibu": "IBU"
+    },
     "actions": {
       "copiedToClipboard": "The URL has been copied to your clipboard"
     }
@@ -232,10 +241,6 @@
     }
   },
   "beerPage": {
-    "brewedBy": "Brewed by <link>{brewery}</link>",
-    "style": "Style",
-    "abv": "ABV",
-    "ibu": "IBU",
     "reviewCount": "{count, plural, =0 {No reviews yet} =1 {1 review} other {# reviews}}",
     "result": {
       "servingFrom": {
@@ -274,150 +279,154 @@
     "uniqueStyles": "Styles",
     "uniqueCountries": "Countries"
   },
-  "createReviewPage": {
-    "fieldGroups": {
-      "overall": {
-        "label": "Overall",
-        "fields": {
-          "appreciation": {
-            "label": "Global appreciation"
-          },
-          "servingFrom": {
-            "label": "Beer served from",
-            "options": {
-              "draft": "Beer served on draught",
-              "bottle": "Beer served in a bottle",
-              "can": "Beer served in a can",
-              "growler": "Beer served from a growler",
-              "cask": "Beer served from a cask pump"
-            }
-          },
-          "comment": {
-            "label": "Comment"
+  "reviewPage": {
+    "overall": {
+      "title": "Overall",
+      "fields": {
+        "appreciation": {
+          "label": "Global appreciation",
+          "value": "Global appreciation: {score}/10"
+        },
+        "servingFrom": {
+          "label": "Beer served from",
+          "possibleValues": {
+            "DRAFT": "Beer served on draught",
+            "BOTTLE": "Beer served in a bottle",
+            "CAN": "Beer served in a can",
+            "GROWLER": "Beer served from a growler",
+            "CASK": "Beer served from a cask pump"
           }
+        },
+        "comment": {
+          "label": "Comment"
         }
-      },
-      "appearance": {
-        "label": "Appearance",
-        "fields": {
-          "labelDesign": {
-            "label": "Label design",
-            "possibleValues": {
-              "hateIt": "Hate it...",
-              "meh": "Meh",
-              "average": "Average",
-              "good": "Good",
-              "loveIt": "Love it!"
-            }
-          },
-          "haziness": {
-            "label": "Haziness",
-            "possibleValues": {
-              "completelyClear": "Completely Clear",
-              "verySlightlyCast": "Very Slightly Cast",
-              "slightlyHazy": "Slightly Hazy",
-              "hazy": "Hazy",
-              "veryHazy": "Very Hazy"
-            }
-          },
-          "headRetention": {
-            "label": "Head retention",
-            "possibleValues": {
-              "poor": "Poor",
-              "shortLived": "Short-lived",
-              "moderate": "Moderate",
-              "good": "Good",
-              "excellent": "Excellent"
-            }
+      }
+    },
+    "appearance": {
+      "title": "Appearance",
+      "fields": {
+        "labelDesign": {
+          "label": "Label design",
+          "possibleValues": {
+            "HATE_IT": "Hate it...",
+            "MEH": "Meh",
+            "AVERAGE": "Average",
+            "GOOD": "Good",
+            "LOVE_IT": "Love it!"
           }
-        }
-      },
-      "nose": {
-        "label": "Nose",
-        "fields": {
-          "aromasIntensity": {
-            "label": "Aromas intensity",
-            "possibleValues": {
-              "faint": "Faint",
-              "mild": "Mild",
-              "moderate": "Moderate",
-              "pronounced": "Pronounced",
-              "intense": "Intense"
-            }
+        },
+        "haziness": {
+          "label": "Haziness",
+          "possibleValues": {
+            "COMPLETELY_CLEAR": "Completely Clear",
+            "VERY_SLIGHTLY_CAST": "Very Slightly Cast",
+            "SLIGHTLY_HAZY": "Slightly Hazy",
+            "HAZY": "Hazy",
+            "VERY_HAZY": "Very Hazy"
           }
-        }
-      },
-      "taste": {
-        "label": "Taste",
-        "fields": {
-          "flavorsIntensity": {
-            "label": "Flavors intensity",
-            "possibleValues": {
-              "faint": "Faint",
-              "mild": "Mild",
-              "moderate": "Moderate",
-              "pronounced": "Pronounced",
-              "intense": "Intense"
-            }
-          },
-          "bodyStrength": {
-            "label": "Body strength",
-            "possibleValues": {
-              "thin": "Thin",
-              "light": "Light",
-              "medium": "Medium",
-              "full": "Full",
-              "heavy": "Heavy"
-            }
-          },
-          "carbonationIntensity": {
-            "label": "Carbonation intensity",
-            "possibleValues": {
-              "flat": "Flat",
-              "low": "Low",
-              "moderate": "Moderate",
-              "lively": "Lively",
-              "highlyCarbonated": "Highly Carbonated"
-            }
-          },
-          "bitterness": {
-            "label": "Bitterness",
-            "possibleValues": {
-              "low": "Low",
-              "moderate": "Moderate",
-              "pronounced": "Pronounced",
-              "aggressive": "Agressive",
-              "lingering": "Lingering"
-            }
-          },
-          "acidity": {
-            "label": "Acidity",
-            "possibleValues": {
-              "none": "None",
-              "soft": "Soft",
-              "bright": "Bright",
-              "tart": "Tart",
-              "puckering": "Puckering"
-            }
-          }
-        }
-      },
-      "finish": {
-        "label": "Finish",
-        "fields": {
-          "duration": {
-            "label": "Duration",
-            "possibleValues": {
-              "short": "Short",
-              "moderate": "Moderate",
-              "medium": "Medium",
-              "long": "Long",
-              "endless": "Endless"
-            }
+        },
+        "headRetention": {
+          "label": "Head retention",
+          "possibleValues": {
+            "POOR": "Poor",
+            "SHORT_LIVED": "Short-lived",
+            "MODERATE": "Moderate",
+            "GOOD": "Good",
+            "EXCELLENT": "Excellent"
           }
         }
       }
     },
+    "nose": {
+      "title": "Nose",
+      "fields": {
+        "aromasIntensity": {
+          "label": "Aromas intensity",
+          "possibleValues": {
+            "FAINT": "Faint",
+            "MILD": "Mild",
+            "MODERATE": "Moderate",
+            "PRONOUNCED": "Pronounced",
+            "INTENSE": "Intense"
+          }
+        }
+      }
+    },
+    "taste": {
+      "title": "Taste",
+      "fields": {
+        "flavorsIntensity": {
+          "label": "Flavors intensity",
+          "possibleValues": {
+            "FAINT": "Faint",
+            "MILD": "Mild",
+            "MODERATE": "Moderate",
+            "PRONOUNCED": "Pronounced",
+            "INTENSE": "Intense"
+          }
+        },
+        "bodyStrength": {
+          "label": "Body strength",
+          "possibleValues": {
+            "THIN": "Thin",
+            "LIGHT": "Light",
+            "MEDIUM": "Medium",
+            "FULL": "Full",
+            "HEAVY": "Heavy"
+          }
+        },
+        "carbonationIntensity": {
+          "label": "Carbonation intensity",
+          "possibleValues": {
+            "FLAT": "Flat",
+            "LOW": "Low",
+            "MODERATE": "Moderate",
+            "LIVELY": "Lively",
+            "HIGHLY_CARBONATED": "Highly Carbonated"
+          }
+        },
+        "bitterness": {
+          "label": "Bitterness",
+          "possibleValues": {
+            "LOW": "Low",
+            "MODERATE": "Moderate",
+            "PRONOUNCED": "Pronounced",
+            "AGGRESSIVE": "Agressive",
+            "LINGERING": "Lingering"
+          }
+        },
+        "acidity": {
+          "label": "Acidity",
+          "possibleValues": {
+            "NONE": "None",
+            "SOFT": "Soft",
+            "BRIGHT": "Bright",
+            "TART": "Tart",
+            "PUCKERING": "Puckering"
+          }
+        }
+      }
+    },
+    "finish": {
+      "title": "Finish",
+      "fields": {
+        "duration": {
+          "label": "Duration",
+          "possibleValues": {
+            "SHORT": "Short",
+            "MODERATE": "Moderate",
+            "MEDIUM": "Medium",
+            "LONG": "Long",
+            "ENDLESS": "Endless"
+          }
+        }
+      }
+    },
+    "actions": {
+      "share": "Share"
+    }
+  },
+  "createReviewPage": {
     "actions": {
       "complete": "Complete review",
       "saving": "Saving review...",
