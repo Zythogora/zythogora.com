@@ -26,7 +26,6 @@ import type {
   Beer,
   BeerReview,
   Color,
-  LegacyStyle,
   StyleCategory,
 } from "@/domain/beers/types";
 import type {
@@ -88,24 +87,13 @@ export const getColors = async (): Promise<Color[]> => {
   return colors.map(transformRawColorToColor);
 };
 
-export const getStyles = async (): Promise<StyleCategory[]> => {
+export const getStyleCategories = async (): Promise<StyleCategory[]> => {
   const categories = await prisma.styleCategories.findMany({
     include: { styles: { orderBy: { name: "asc" } } },
     orderBy: { name: "asc" },
   });
 
   return categories.map(transformRawStyleCategoryToStyleCategory);
-};
-
-export const getLegacyStyles = async (): Promise<LegacyStyle[]> => {
-  const styles = await prisma.legacyStyles.findMany({
-    orderBy: { name: "asc" },
-  });
-
-  return styles.map((style) => ({
-    id: style.id,
-    name: style.name,
-  }));
 };
 
 export const getReviewsByBeer = cache(

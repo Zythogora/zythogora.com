@@ -5,12 +5,12 @@ model Beers {
   abv  Float
   ibu  Int?
 
-  breweryId String       @map("brewery_id")
-  brewery   Breweries    @relation(fields: [breweryId], references: [id])
-  styleId   String       @map("style_id")
-  style     LegacyStyles @relation(fields: [styleId], references: [id])
-  colorId   String       @map("color_id")
-  color     Colors       @relation(fields: [colorId], references: [id])
+  breweryId String    @map("brewery_id")
+  brewery   Breweries @relation(fields: [breweryId], references: [id])
+  styleId   String    @map("style_id")
+  style     Styles    @relation(fields: [styleId], references: [id])
+  colorId   String    @map("color_id")
+  color     Colors    @relation(fields: [colorId], references: [id])
 
   createdAt     DateTime @default(now()) @map("created_at")
   createdBy     String   @map("created_by")
@@ -77,6 +77,8 @@ model Styles {
   categoryId String          @map("category_id")
   category   StyleCategories @relation(fields: [categoryId], references: [id])
 
+  Beers Beers[]
+
   @@map("styles")
   @@schema("beer_data")
 }
@@ -87,8 +89,6 @@ model LegacyStyles {
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
-
-  beers Beers[]
 
   @@map("legacy_styles")
   @@schema("beer_data")

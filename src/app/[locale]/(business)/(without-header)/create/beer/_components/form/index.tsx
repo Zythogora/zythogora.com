@@ -11,20 +11,20 @@ import { createBeerSchema } from "@/app/[locale]/(business)/(without-header)/cre
 import FormBrewerySelect from "@/app/_components/form/brewery-select";
 import FormColorSelect from "@/app/_components/form/color-select";
 import FormInput from "@/app/_components/form/input";
-import FormLegacyStyleSelect from "@/app/_components/form/legacy-style-select";
+import FormStyleSelect from "@/app/_components/form/style-select";
 import QueryClientProvider from "@/app/_components/providers/query-client-provider";
 import Button from "@/app/_components/ui/button";
 import { Routes } from "@/lib/routes";
 import { cn } from "@/lib/tailwind";
 
-import type { Color, LegacyStyle } from "@/domain/beers/types";
+import type { Color, StyleCategory } from "@/domain/beers/types";
 
 interface CreateBeerFormProps {
-  styles: LegacyStyle[];
+  styleCategories: StyleCategory[];
   colors: Color[];
 }
 
-const CreateBeerForm = ({ styles, colors }: CreateBeerFormProps) => {
+const CreateBeerForm = ({ styleCategories, colors }: CreateBeerFormProps) => {
   const t = useTranslations();
 
   const [lastResult, action] = useActionState(
@@ -88,10 +88,10 @@ const CreateBeerForm = ({ styles, colors }: CreateBeerFormProps) => {
             className="col-span-8 @3xl:col-span-7"
           />
 
-          <FormLegacyStyleSelect
+          <FormStyleSelect
             label={t("createBeerPage.fields.style.label")}
             field={fields.styleId}
-            styles={styles}
+            styleCategories={styleCategories}
             className="col-span-8 @3xl:col-span-3"
           />
 
