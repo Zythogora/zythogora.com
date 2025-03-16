@@ -39,11 +39,36 @@ const BeerReviewCard = async ({ review }: BeerReviewCardProps) => {
       <div className="flex flex-row items-center gap-x-4">
         {
           {
-            DRAFT: <ServingFromDraftIcon size={40} className="size-10" />,
-            BOTTLE: <ServingFromBottleIcon size={40} className="size-10" />,
-            CAN: <ServingFromCanIcon size={40} className="size-10" />,
-            GROWLER: <ServingFromGrowlerIcon size={40} className="size-10" />,
-            CASK: <ServingFromCaskIcon size={40} className="size-10" />,
+            DRAFT: (
+              <ServingFromDraftIcon
+                size={40}
+                className="fill-foreground size-10"
+              />
+            ),
+            BOTTLE: (
+              <ServingFromBottleIcon
+                size={40}
+                className="fill-foreground size-10"
+              />
+            ),
+            CAN: (
+              <ServingFromCanIcon
+                size={40}
+                className="fill-foreground size-10"
+              />
+            ),
+            GROWLER: (
+              <ServingFromGrowlerIcon
+                size={40}
+                className="fill-foreground size-10"
+              />
+            ),
+            CASK: (
+              <ServingFromCaskIcon
+                size={40}
+                className="fill-foreground size-10"
+              />
+            ),
             UNKNOWN: null,
           }[review.servingFrom]
         }
