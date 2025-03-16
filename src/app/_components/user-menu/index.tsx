@@ -3,6 +3,7 @@
 import { LogInIcon, LogOutIcon, UserRoundPlusIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 
+import StPatrickHatIcon from "@/app/_components/icons/st-patrick-hat";
 import UserIcon from "@/app/_components/icons/user";
 import Button from "@/app/_components/ui/button";
 import {
@@ -33,6 +34,7 @@ export const UserMenuTrigger = ({
       variant="outline"
       size="icon"
       className={cn(
+        "relative",
         "size-10 shrink-0 rounded-full before:rounded-full",
         // Disable default button hover effects
         "transition-none hover:bottom-0 hover:before:-bottom-1",
@@ -43,6 +45,8 @@ export const UserMenuTrigger = ({
       {...restProps}
     >
       <UserIcon size={24} className="fill-foreground rounded-full" />
+
+      <StPatrickHatIcon size={16} className="absolute top-0 left-3 size-4" />
     </Button>
   );
 };

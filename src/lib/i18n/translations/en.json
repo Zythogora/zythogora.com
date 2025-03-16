@@ -210,7 +210,8 @@
     }
   },
   "home": {
-    "title": "Welcome to<br></br><highlight>Zythogora</highlight>"
+    "title": "Welcome to<br></br><highlight>Zythogora</highlight>",
+    "stPatrickWelcomeMessage": "Happy <highlight>St Patrick's Day</highlight> to you, fellow craft beer lover!"
   },
   "searchPage": {
     "metadata": {
