@@ -241,7 +241,7 @@
     }
   },
   "beerPage": {
-    "reviewCount": "{count, plural, =0 {Pas encore d'avis} =1 {1 avis} other {# avis}}",
+    "reviewCount": "{count, plural, =0 {Pas encore de critique} =1 {1 critique} other {# critiques}}",
     "result": {
       "servingFrom": {
         "DRAFT": "À la pression",
@@ -319,13 +319,13 @@
           }
         },
         "haziness": {
-          "label": "Clarté",
+          "label": "Opacité",
           "possibleValues": {
             "COMPLETELY_CLEAR": "Limpide",
             "VERY_SLIGHTLY_CAST": "Très léger voile",
             "SLIGHTLY_HAZY": "Léger voile",
             "HAZY": "Trouble",
-            "VERY_HAZY": "Complètement trouble"
+            "VERY_HAZY": "Opaque"
           }
         },
         "headRetention": {

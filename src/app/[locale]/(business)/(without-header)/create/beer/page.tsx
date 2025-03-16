@@ -2,7 +2,7 @@ import { headers } from "next/headers";
 import { getLocale, getTranslations } from "next-intl/server";
 
 import CreateBeerForm from "@/app/[locale]/(business)/(without-header)/create/beer/_components/form";
-import { getColors, getLegacyStyles } from "@/domain/beers";
+import { getColors, getStyleCategories } from "@/domain/beers";
 import { auth } from "@/lib/auth/server";
 import { redirect } from "@/lib/i18n";
 import { Routes } from "@/lib/routes";
@@ -26,8 +26,8 @@ const CreateBeerPage = async () => {
     });
   }
 
-  const [legacyStyles, colors] = await Promise.all([
-    getLegacyStyles(),
+  const [styleCategories, colors] = await Promise.all([
+    getStyleCategories(),
     getColors(),
   ]);
 
@@ -36,7 +36,7 @@ const CreateBeerPage = async () => {
       <div className="flex w-fit flex-col gap-y-8">
         <h1 className="text-2xl font-semibold">{t("createBeerPage.title")}</h1>
 
-        <CreateBeerForm styles={legacyStyles} colors={colors} />
+        <CreateBeerForm styleCategories={styleCategories} colors={colors} />
       </div>
     </div>
   );

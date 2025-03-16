@@ -1,32 +1,38 @@
 import { PrismaClient } from "@prisma/client";
 import { nanoid } from "nanoid";
 
-import { bjcp_categories, bjcp_styles } from "prisma/seeding/new/data/bjcp";
+import { new_styles } from "./data/styles";
 
 const prisma = new PrismaClient();
 
 async function main() {
   await prisma.$transaction(async (tx) => {
-    const styleCategoriesIdsMap = bjcp_categories.reduce<
+    const styleCategories = new_styles.reduce<string[]>((acc, category) => {
+      if (!acc.includes(category.category)) {
+        acc.push(category.category);
+      }
+      return acc;
+    }, []);
+
+    const styleCategoriesIdsMap = styleCategories.reduce<
       Record<string, string>
     >((acc, category) => {
-      acc[`${category.bjcp_id}`] = nanoid();
+      acc[`${category}`] = nanoid();
       return acc;
     }, {});
 
     await tx.styleCategories.createMany({
-      data: bjcp_categories.map((category) => ({
-        id: styleCategoriesIdsMap[category.bjcp_id]!,
-        name: category.name,
+      data: styleCategories.map((category) => ({
+        id: styleCategoriesIdsMap[category]!,
+        name: category,
       })),
       skipDuplicates: true,
     });
 
     await tx.styles.createMany({
-      data: bjcp_styles.map((style) => ({
-        id: nanoid(),
-        categoryId: styleCategoriesIdsMap[style.bjcp_category_id]!,
-        name: style.name,
+      data: new_styles.map((style) => ({
+        categoryId: styleCategoriesIdsMap[style.category]!,
+        name: style.style,
       })),
       skipDuplicates: true,
     });

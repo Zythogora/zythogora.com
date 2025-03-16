@@ -3,12 +3,11 @@ import type {
   Beers,
   Breweries,
   Colors,
-  LegacyStyles,
+  Reviews,
+  ServingFrom,
   StyleCategories,
   Styles as RawStyles,
-  Reviews,
   Users,
-  ServingFrom,
 } from "@prisma/client";
 
 export type RawColor = Colors;
@@ -21,7 +20,7 @@ export type Color = {
 
 export type RawBeer = Beers & {
   brewery: Breweries;
-  style: LegacyStyles;
+  style: RawStyles;
   color: Colors;
 };
 
@@ -52,11 +51,6 @@ export type StyleCategory = {
 };
 
 export type Style = {
-  id: string;
-  name: string;
-};
-
-export type LegacyStyle = {
   id: string;
   name: string;
 };
