@@ -3,6 +3,32 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
+  /* Global colors */
+  --brand-50: oklch(97.76% 0.025 86.87);
+  --brand-100: oklch(95.4% 0.048 84.56);
+  --brand-200: oklch(91.08% 0.093 84.12);
+  --brand-300: oklch(87.07% 0.133 82.74);
+  --brand-400: oklch(83.42% 0.159 79.51);
+  --brand-500: oklch(80.16% 0.171 73.27);
+  --brand-600: oklch(67.92% 0.144 73.84);
+  --brand-700: oklch(55.09% 0.116 74.75);
+  --brand-800: oklch(41.47% 0.087 76.48);
+  --brand-900: oklch(26.6% 0.055 80.87);
+  --brand-950: oklch(18.29% 0.037 88.42);
+
+  --patrick-50: oklch(98.06% 0.0231 165.88);
+  --patrick-100: oklch(95.16% 0.0539 161.85);
+  --patrick-200: oklch(90.98% 0.0968 163.11);
+  --patrick-300: oklch(85.3% 0.1382 163.78);
+  --patrick-400: oklch(78.45% 0.1618 161.8);
+  --patrick-500: oklch(60.92% 0.1343 161.65);
+  --patrick-600: oklch(60.92% 0.1343 161.65);
+  --patrick-700: oklch(51.9% 0.110765 163.8948);
+  --patrick-800: oklch(44.02% 0.0912 165.25);
+  --patrick-900: oklch(38.37% 0.0764 167.5);
+  --patrick-950: oklch(26.5% 0.0508 171.33);
+
+  /* Light theme colors */
   --foreground: var(--color-stone-950);
   --foreground-muted: var(--color-stone-400);
 
@@ -25,19 +51,18 @@
 }
 
 @theme inline {
-  --primary: oklch(80.16% 0.171 73.27);
-  --color-primary: var(--primary);
-  --color-primary-50: oklch(97.76% 0.025 86.87);
-  --color-primary-100: oklch(95.4% 0.048 84.56);
-  --color-primary-200: oklch(91.08% 0.093 84.12);
-  --color-primary-300: oklch(87.07% 0.133 82.74);
-  --color-primary-400: oklch(83.42% 0.159 79.51);
-  --color-primary-500: var(--primary);
-  --color-primary-600: oklch(67.92% 0.144 73.84);
-  --color-primary-700: oklch(55.09% 0.116 74.75);
-  --color-primary-800: oklch(41.47% 0.087 76.48);
-  --color-primary-900: oklch(26.6% 0.055 80.87);
-  --color-primary-950: oklch(18.29% 0.037 88.42);
+  --color-primary: var(--patrick-500);
+  --color-primary-50: var(--patrick-50);
+  --color-primary-100: var(--patrick-100);
+  --color-primary-200: var(--patrick-200);
+  --color-primary-300: var(--patrick-300);
+  --color-primary-400: var(--patrick-400);
+  --color-primary-500: var(--patrick-500);
+  --color-primary-600: var(--patrick-600);
+  --color-primary-700: var(--patrick-700);
+  --color-primary-800: var(--patrick-800);
+  --color-primary-900: var(--patrick-900);
+  --color-primary-950: var(--patrick-950);
 
   --color-foreground: var(--foreground);
   --color-foreground-muted: var(--foreground-muted);
