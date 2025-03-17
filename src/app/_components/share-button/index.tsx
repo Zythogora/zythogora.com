@@ -68,12 +68,7 @@ const ShareButton = ({
             <p>{label}:</p>
 
             <div className="flex flex-row-reverse items-center gap-x-2">
-              <Button
-                onClick={handleShare}
-                variant="outline"
-                size="icon"
-                className="size-8"
-              >
+              <Button onClick={handleShare} size="icon" className="size-8">
                 <CopyIcon className="size-4" />
               </Button>
 

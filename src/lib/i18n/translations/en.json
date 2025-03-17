@@ -281,9 +281,23 @@
   "breweryPage": {
     "location": "Origin",
     "creationYear": "Creation",
-    "beers": {
-      "loading": "Loading beers...",
-      "count": "{count, plural, =0 {0 beers} =1 {1 beer} other {# beers}}"
+    "tabs": {
+      "beers": {
+        "title": "Beers",
+        "content": {
+          "count": "{count, plural, =0 {0 beers} =1 {1 beer} other {# beers}}"
+        }
+      },
+      "reviews": {
+        "title": "My reviews",
+        "content": {
+          "login": "Please <link>sign in</link> to see your reviews",
+          "count": "{count, plural, =0 {0 reviews} =1 {1 review} other {# reviews}}"
+        }
+      }
+    },
+    "reviews": {
+      "count": "{count, plural, =0 {0 reviews} =1 {1 review} other {# reviews}}"
     },
     "404": {
       "title": "We don't know this brewery<br></br><muted>(yet)</muted> :(",

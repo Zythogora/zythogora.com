@@ -8,12 +8,21 @@ import {
   UnauthorizedBreweryCreationError,
   UnknownBreweryError,
 } from "@/domain/breweries/errors";
-import { transformRawBreweryToBrewery } from "@/domain/breweries/transforms";
+import {
+  transformRawBreweryReviewToBreweryReview,
+  transformRawBreweryToBrewery,
+} from "@/domain/breweries/transforms";
 import { getCurrentUser } from "@/lib/auth";
+import { getPaginatedResults } from "@/lib/pagination";
 import prisma, { slugify } from "@/lib/prisma";
 
 import type { CreateBreweryData } from "@/app/[locale]/(business)/(without-header)/create/brewery/schemas";
-import type { Brewery } from "@/domain/breweries/types";
+import type { Brewery, BreweryReview } from "@/domain/breweries/types";
+import type {
+  PaginatedResults,
+  PaginationParams,
+} from "@/lib/pagination/types";
+import type { Prisma } from "@prisma/client";
 
 export const getBreweryBySlug = cache(
   async (brewerySlug: string): Promise<Brewery> => {
@@ -56,6 +65,43 @@ export const getBreweryBySlug = cache(
     return transformRawBreweryToBrewery(brewery);
   },
 );
+
+interface GetBreweryReviewsByUserParams {
+  userId: string;
+  brewerySlug: string;
+}
+
+export const getBreweryReviewsByUser = async ({
+  userId,
+  brewerySlug,
+  limit = 10,
+  page = 1,
+}: PaginationParams<GetBreweryReviewsByUserParams>): Promise<
+  PaginatedResults<BreweryReview>
+> => {
+  const query = {
+    where: {
+      user: { id: userId },
+      beer: { brewery: { slug: brewerySlug } },
+    },
+    include: {
+      user: true,
+      beer: { include: { style: true, color: true } },
+    },
+    orderBy: { createdAt: "desc" },
+    take: limit,
+    skip: (page - 1) * limit,
+  } satisfies Prisma.ReviewsFindManyArgs;
+
+  const [rawReviews, reviewCount] = await prisma.$transaction([
+    prisma.reviews.findMany(query),
+    prisma.reviews.count({ where: query.where }),
+  ]);
+
+  const reviews = rawReviews.map(transformRawBreweryReviewToBreweryReview);
+
+  return getPaginatedResults(reviews, reviewCount, page, limit);
+};
 
 export const createBrewery = async (data: CreateBreweryData) => {
   const user = await getCurrentUser();

@@ -3,6 +3,10 @@ import { getLocale } from "next-intl/server";
 
 import BreweryBeerList from "@/app/[locale]/(business)/(with-header)/breweries/[brewerySlug]/_components/brewery-beer-list";
 import BreweryCard from "@/app/[locale]/(business)/(with-header)/breweries/[brewerySlug]/_components/brewery-card";
+import BreweryReviewList from "@/app/[locale]/(business)/(with-header)/breweries/[brewerySlug]/_components/brewery-review-list";
+import BreweryTabList from "@/app/[locale]/(business)/(with-header)/breweries/[brewerySlug]/_components/brewery-tab-list";
+import { brewerySearchParamsSchema } from "@/app/[locale]/(business)/(with-header)/breweries/[brewerySlug]/schemas";
+import { Tabs, TabContent } from "@/app/_components/ui/tabs";
 import { getBreweryBySlug } from "@/domain/breweries";
 import { config } from "@/lib/config";
 import { publicConfig } from "@/lib/config/client-config";
@@ -17,6 +21,9 @@ import { exhaustiveCheck } from "@/lib/typescript/utils";
 interface BreweryPageProps {
   params: Promise<{
     brewerySlug: string;
+  }>;
+  searchParams: Promise<{
+    page?: string;
   }>;
 }
 
@@ -60,10 +67,21 @@ export async function generateMetadata({ params }: BreweryPageProps) {
   };
 }
 
-const BreweryPage = async ({ params }: BreweryPageProps) => {
+const BreweryPage = async ({ params, searchParams }: BreweryPageProps) => {
   const locale = await getLocale();
 
   const { brewerySlug } = await params;
+
+  const searchParamsResult = brewerySearchParamsSchema.safeParse(
+    await searchParams,
+  );
+
+  if (!searchParamsResult.success) {
+    return redirect({
+      href: generatePath(Routes.BREWERY, { brewerySlug }),
+      locale,
+    });
+  }
 
   const brewery = await getBreweryBySlug(brewerySlug).catch(() => notFound());
 
@@ -75,10 +93,25 @@ const BreweryPage = async ({ params }: BreweryPageProps) => {
   }
 
   return (
-    <div className={cn("flex w-full flex-col", "md:gap-y-12")}>
+    <div className={cn("flex w-full flex-col", "gap-y-16 md:gap-y-12")}>
       <BreweryCard brewery={brewery} />
 
-      <BreweryBeerList brewerySlug={brewerySlug} beers={brewery.beers} />
+      <div className="px-10 md:px-0">
+        <Tabs defaultValue={searchParamsResult.data.tab}>
+          <BreweryTabList brewerySlug={brewerySlug} />
+
+          <TabContent value="beers">
+            <BreweryBeerList brewerySlug={brewerySlug} beers={brewery.beers} />
+          </TabContent>
+
+          <TabContent value="reviews">
+            <BreweryReviewList
+              brewerySlug={brewerySlug}
+              page={searchParamsResult.data.page}
+            />
+          </TabContent>
+        </Tabs>
+      </div>
     </div>
   );
 };
