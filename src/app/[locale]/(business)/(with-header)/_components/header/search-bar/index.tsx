@@ -10,6 +10,7 @@ import { useDebouncedCallback } from "use-debounce";
 import { searchAction } from "@/app/[locale]/(business)/(with-header)/_components/header/search-bar/actions";
 import BeerSearchResult from "@/app/[locale]/(business)/(without-header)/search/_components/tab/beer/result";
 import BrewerySearchResult from "@/app/[locale]/(business)/(without-header)/search/_components/tab/brewery/result";
+import UserSearchResult from "@/app/[locale]/(business)/(without-header)/search/_components/tab/user/result";
 import { SEARCH_KINDS } from "@/app/[locale]/(business)/(without-header)/search/types";
 import Input from "@/app/_components/ui/input";
 import {
@@ -265,7 +266,35 @@ const HeaderSearchBar = ({ className }: HeaderSearchBarProps) => {
                               </Link>
                             </Command.Item>
                           ))
-                        : null}
+                        : searchKind === "user"
+                          ? searchResults?.user.results.map((user) => (
+                              <Command.Item
+                                key={user.id}
+                                onSelect={() => {
+                                  router.push(
+                                    generatePath(Routes.PROFILE, {
+                                      username: user.username,
+                                    }),
+                                  );
+                                }}
+                                data-slot="search-bar-item"
+                                className="p-1.5 pl-3"
+                                asChild
+                              >
+                                <Link
+                                  href={generatePath(Routes.PROFILE, {
+                                    username: user.username,
+                                  })}
+                                >
+                                  <UserSearchResult
+                                    key={user.id}
+                                    username={user.username}
+                                    reviewCount={user.reviewCount}
+                                  />
+                                </Link>
+                              </Command.Item>
+                            ))
+                          : null}
                   </div>
 
                   {searchResults ? (
@@ -289,7 +318,7 @@ const HeaderSearchBar = ({ className }: HeaderSearchBarProps) => {
                           })}
                         </Link>
                       </Command.Item>
-                    ) : (
+                    ) : searchKind === "beer" || searchKind === "brewery" ? (
                       <Command.Item
                         onSelect={() =>
                           router.push(
@@ -315,7 +344,7 @@ const HeaderSearchBar = ({ className }: HeaderSearchBarProps) => {
                           {t(`headerSearch.${searchKind}.create`)}
                         </Link>
                       </Command.Item>
-                    )
+                    ) : null
                   ) : null}
                 </Command.List>
               </PopoverContent>

@@ -3,9 +3,10 @@ import { Suspense } from "react";
 
 import BeerTab from "@/app/[locale]/(business)/(without-header)/search/_components/tab/beer";
 import BreweryTab from "@/app/[locale]/(business)/(without-header)/search/_components/tab/brewery";
+import UserTab from "@/app/[locale]/(business)/(without-header)/search/_components/tab/user";
 import { searchParamsSchema } from "@/app/[locale]/(business)/(without-header)/search/schemas";
 import Await from "@/app/_components/await";
-import { searchBeers, searchBreweries } from "@/domain/search";
+import { searchBeers, searchBreweries, searchUsers } from "@/domain/search";
 import { redirect } from "@/lib/i18n";
 import { Routes } from "@/lib/routes";
 
@@ -32,10 +33,11 @@ export async function generateMetadata({ searchParams }: SearchPageProps) {
   }
 
   return {
-    title:
-      searchParamsResult.data.kind === "beer"
-        ? t("searchPage.metadata.beerTabTitle")
-        : t("searchPage.metadata.breweryTabTitle"),
+    title: {
+      beer: t("searchPage.metadata.beerTabTitle"),
+      brewery: t("searchPage.metadata.breweryTabTitle"),
+      user: t("searchPage.metadata.userTabTitle"),
+    }[searchParamsResult.data.kind],
   };
 }
 
@@ -93,6 +95,31 @@ const SearchPage = async ({ searchParams }: SearchPageProps) => {
         >
           {({ results, count, page }) => (
             <BreweryTab results={results} count={count} page={page} />
+          )}
+        </Await>
+      </Suspense>
+    );
+  }
+
+  if (kind === "user") {
+    if (!search) {
+      return <p>{t("searchPage.user.noSearch")}</p>;
+    }
+
+    return (
+      <Suspense
+        key={`${kind}-${search}-${page}`}
+        fallback={<p>{t("searchPage.user.searching", { search })}</p>}
+      >
+        <Await
+          promise={searchUsers({
+            search,
+            limit,
+            page,
+          })}
+        >
+          {({ results, count, page }) => (
+            <UserTab results={results} count={count} page={page} />
           )}
         </Await>
       </Suspense>

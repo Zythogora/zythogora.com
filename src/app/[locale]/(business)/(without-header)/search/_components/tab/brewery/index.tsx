@@ -23,7 +23,7 @@ const BreweryTab = async ({ results, count, page }: BreweryTabProps) => {
 
   if (results.length === 0) {
     return (
-      <div className="flex w-full flex-col gap-y-4">
+      <>
         <p>{t("searchPage.brewery.noResult")}</p>
 
         <Link
@@ -32,12 +32,12 @@ const BreweryTab = async ({ results, count, page }: BreweryTabProps) => {
         >
           {t("searchPage.brewery.createNoResult")}
         </Link>
-      </div>
+      </>
     );
   }
 
   return (
-    <div className="flex w-full flex-col gap-y-4">
+    <>
       <p>{t("searchPage.brewery.results", { count })}</p>
 
       <div className="flex w-full flex-col gap-y-8">
@@ -69,7 +69,7 @@ const BreweryTab = async ({ results, count, page }: BreweryTabProps) => {
           {t("searchPage.brewery.create")}
         </Link>
       </div>
-    </div>
+    </>
   );
 };
 

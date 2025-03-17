@@ -48,13 +48,19 @@ const Pagination = ({ current, total, className }: PaginationProps) => {
       data-slot="pagination"
       className={cn("mx-auto flex w-full justify-center", className)}
     >
-      <ul className="flex flex-row items-center gap-x-3">
+      <ul
+        className={cn(
+          "flex flex-row items-center gap-x-3",
+          "[&_li]:focus-within:outline-primary [&_li]:rounded-xs [&_li]:focus-within:outline-3 [&_li]:focus-within:outline-offset-4",
+        )}
+      >
         <li>
           <Link
             href={getPageUrl(current - 1)}
             aria-label={t("pagination.previous")}
             aria-disabled={current === 1 ? true : undefined}
             role={current === 1 ? "link" : undefined}
+            tabIndex={current === 1 ? -1 : undefined}
             className="aria-disabled:pointer-events-none aria-disabled:opacity-50"
           >
             <ChevronLeftIcon size={16} aria-hidden="true" />
@@ -79,6 +85,7 @@ const Pagination = ({ current, total, className }: PaginationProps) => {
             aria-label={t("pagination.next")}
             aria-disabled={current === total ? true : undefined}
             role={current === total ? "link" : undefined}
+            tabIndex={current === total ? -1 : undefined}
             className="aria-disabled:pointer-events-none aria-disabled:opacity-50"
           >
             <ChevronRightIcon size={16} aria-hidden="true" />

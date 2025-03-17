@@ -112,6 +112,12 @@
       "results": "{count, plural, =0 {Aucune brasserie trouvée} =1 {1 brasserie trouvée} other {# brasseries trouvées}}",
       "seeMore": "Voir {count, plural, =1 {1 autre brasserie} other {# autres brasseries}}",
       "create": "Brasserie manquante ? La créer"
+    },
+    "user": {
+      "tabName": "Utilisateurs",
+      "searching": "Recherche d'utilisateurs correspondant à \"{search}\"",
+      "results": "{count, plural, =0 {Aucun utilisateur trouvé} =1 {1 utilisateur trouvé} other {# utilisateurs trouvés}}",
+      "seeMore": "Voir {count, plural, =1 {1 autre utilisateur} other {# autres utilisateurs}}"
     }
   },
   "userMenu": {
@@ -216,9 +222,10 @@
   "searchPage": {
     "metadata": {
       "beerTabTitle": "Recherchez une bière | Zythogora",
-      "breweryTabTitle": "Recherchez une brasserie | Zythogora"
+      "breweryTabTitle": "Recherchez une brasserie | Zythogora",
+      "userTabTitle": "Recherchez un utilisateur | Zythogora"
     },
-    "searchBarPlaceholder": "Recherchez une bière ou une brasserie",
+    "searchBarPlaceholder": "Recherchez une bière, une brasserie ou un utilisateur",
     "beer": {
       "tabName": "Bières",
       "searching": "Recherche de bières correspondant à \"{search}\"",
@@ -238,6 +245,16 @@
       "createNoResult": "Créer une brasserie manquante",
       "result": {
         "beerCount": "{count, plural, =0 {0 bières} =1 {1 bière} other {# bières}}"
+      }
+    },
+    "user": {
+      "tabName": "Utilisateurs",
+      "searching": "Recherche d'utilisateurs correspondant à \"{search}\"",
+      "noSearch": "Recherchez un utilisateur !",
+      "noResult": "Aucun utilisateur trouvé",
+      "results": "{count, plural, =0 {Aucun utilisateur trouvé} =1 {1 utilisateur trouvé} other {# utilisateurs trouvés}}",
+      "result": {
+        "reviewCount": "{count, plural, =0 {0 critique} =1 {1 critique} other {# critiques}}"
       }
     }
   },

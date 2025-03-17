@@ -112,6 +112,12 @@
       "results": "{count, plural, =0 {No breweries found} =1 {1 brewery found} other {# breweries found}}",
       "seeMore": "See {count, plural, =1 {more brewery} other {# more breweries}}",
       "create": "Brewery missing? Create it"
+    },
+    "user": {
+      "tabName": "Users",
+      "searching": "Searching for users matching \"{search}\"",
+      "results": "{count, plural, =0 {No users found} =1 {1 user found} other {# users found}}",
+      "seeMore": "See {count, plural, =1 {more user} other {# more users}}"
     }
   },
   "userMenu": {
@@ -216,9 +222,10 @@
   "searchPage": {
     "metadata": {
       "beerTabTitle": "Search for a beer | Zythogora",
-      "breweryTabTitle": "Search for a brewery | Zythogora"
+      "breweryTabTitle": "Search for a brewery | Zythogora",
+      "userTabTitle": "Search for a user | Zythogora"
     },
-    "searchBarPlaceholder": "Search for a beer or a brewery",
+    "searchBarPlaceholder": "Search for a beer, a brewery or a user",
     "beer": {
       "tabName": "Beers",
       "searching": "Searching for beers matching \"{search}\"",
@@ -238,6 +245,16 @@
       "createNoResult": "Create a missing brewery",
       "result": {
         "beerCount": "{count, plural, =0 {0 beers} =1 {1 beer} other {# beers}}"
+      }
+    },
+    "user": {
+      "tabName": "Users",
+      "searching": "Searching for users matching \"{search}\"",
+      "noSearch": "Search for a user!",
+      "noResult": "No users found",
+      "results": "{count, plural, =0 {No users found} =1 {1 user found} other {# users found}}",
+      "result": {
+        "reviewCount": "{count, plural, =0 {0 reviews} =1 {1 review} other {# reviews}}"
       }
     }
   },
