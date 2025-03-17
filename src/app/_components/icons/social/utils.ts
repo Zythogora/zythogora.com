@@ -27,7 +27,7 @@ export const getSocialIconType = (
     return "DISCORD";
   }
 
-  if (url.includes("x.com")) {
+  if (url.includes("x.com") || url.includes("twitter.com")) {
     return "X";
   }
 

@@ -24,15 +24,21 @@ const TabList = ({
   ...restProps
 }: ComponentProps<typeof TabsPrimitive.List>) => {
   return (
-    <TabsPrimitive.List
+    <div
+      data-slot="tab-list-container"
       className={cn(
-        "relative flex flex-row overflow-x-auto",
+        "relative",
         "before:absolute before:inset-x-0 before:bottom-0 before:h-0.5",
         "before:bg-foreground dark:before:bg-foreground/25",
         className,
       )}
-      {...restProps}
-    />
+    >
+      <TabsPrimitive.List
+        data-slot="tab-list"
+        className="flex flex-row overflow-x-auto"
+        {...restProps}
+      />
+    </div>
   );
 };
 
@@ -42,7 +48,7 @@ const TabTrigger = ({
 }: ComponentProps<typeof TabsPrimitive.Trigger>) => {
   return (
     <TabsPrimitive.Trigger
-      data-slot="tabs-trigger"
+      data-slot="tab-trigger"
       className={cn(
         "font-title text-foreground flex cursor-pointer flex-row items-center justify-center gap-x-4 border-b-4 px-12 py-3 text-base text-nowrap",
         "hover:bg-foreground/10",
@@ -62,7 +68,7 @@ const TabContent = ({
 }: ComponentProps<typeof TabsPrimitive.Content>) => {
   return (
     <TabsPrimitive.Content
-      data-slot="tabs-content"
+      data-slot="tab-content"
       className={cn("outline-none", className)}
       {...restProps}
     />
