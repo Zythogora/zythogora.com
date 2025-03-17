@@ -6,7 +6,9 @@ import { getCountry } from "@/lib/i18n/countries";
 import type {
   Brewery,
   BreweryBeer,
+  BreweryReview,
   RawBreweryBeer,
+  RawBreweryReview,
 } from "@/domain/breweries/types";
 import type { RawBrewery } from "@/domain/breweries/types";
 
@@ -41,4 +43,24 @@ export const transformRawBreweryBeerToBreweryBeer = (
   abv: rawBeer.abv,
   ibu: rawBeer.ibu ?? undefined,
   color: transformRawColorToColor(rawBeer.color),
+});
+
+export const transformRawBreweryReviewToBreweryReview = (
+  rawBreweryReview: RawBreweryReview,
+): BreweryReview => ({
+  id: rawBreweryReview.id,
+  slug: rawBreweryReview.slug,
+  globalScore: rawBreweryReview.globalScore.toNumber(),
+  beer: {
+    id: rawBreweryReview.beer.id,
+    name: rawBreweryReview.beer.name,
+    style: rawBreweryReview.beer.style.name,
+    abv: rawBreweryReview.beer.abv,
+    ibu: rawBreweryReview.beer.ibu ?? undefined,
+    color: transformRawColorToColor(rawBreweryReview.beer.color),
+  },
+  user: {
+    username: rawBreweryReview.user.username,
+  },
+  createdAt: rawBreweryReview.createdAt,
 });

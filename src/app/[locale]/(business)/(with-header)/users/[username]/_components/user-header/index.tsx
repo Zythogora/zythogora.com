@@ -44,7 +44,7 @@ const UserHeader = async ({ user }: UserHeaderProps) => {
         )}
       >
         <div>
-          <PintIcon size={20} />
+          <PintIcon size={20} className="fill-transparent! stroke-1!" />
 
           <DescriptionList
             label={t("profilePage.uniqueBeers")}
