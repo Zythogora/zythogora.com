@@ -6,7 +6,11 @@ import { getPaginatedResults } from "@/lib/pagination";
 import { prepareFullTextSearch, prepareLikeSearch } from "@/lib/prisma";
 import prisma from "@/lib/prisma";
 
-import type { BeerResult, BreweryResult } from "@/domain/search/types";
+import type {
+  BeerResult,
+  BreweryResult,
+  UserResult,
+} from "@/domain/search/types";
 import type {
   PaginatedResults,
   PaginationParams,
@@ -125,4 +129,47 @@ export const searchBreweries = async ({
   );
 
   return getPaginatedResults(breweries, breweryCount, page, limit);
+};
+
+export const searchUsers = async ({
+  search,
+  limit = 20,
+  page = 1,
+}: PaginationParams<{ search: string }>): Promise<
+  PaginatedResults<UserResult>
+> => {
+  const likeSearch = prepareLikeSearch(search);
+  const fullTextSearch = prepareFullTextSearch(search);
+
+  const [rawUsers, { _count: userCount }] = await Promise.all([
+    prisma.users.findMany({
+      where: {
+        OR: [
+          { username: { contains: likeSearch, mode: "insensitive" } },
+          { username: { search: fullTextSearch, mode: "insensitive" } },
+        ],
+      },
+      include: { _count: { select: { reviews: true } } },
+      take: limit,
+      skip: (page - 1) * limit,
+    }),
+
+    prisma.users.aggregate({
+      where: {
+        OR: [
+          { username: { contains: likeSearch, mode: "insensitive" } },
+          { username: { search: fullTextSearch, mode: "insensitive" } },
+        ],
+      },
+      _count: true,
+    }),
+  ]);
+
+  const users = rawUsers.map(({ _count, ...user }) => ({
+    id: user.id,
+    username: user.username,
+    reviewCount: _count.reviews,
+  }));
+
+  return getPaginatedResults(users, userCount, page, limit);
 };

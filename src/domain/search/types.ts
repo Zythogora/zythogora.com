@@ -23,3 +23,9 @@ export type BreweryResult = {
   country: Country;
   beerCount: number;
 };
+
+export type UserResult = {
+  id: string;
+  username: string;
+  reviewCount: number;
+};

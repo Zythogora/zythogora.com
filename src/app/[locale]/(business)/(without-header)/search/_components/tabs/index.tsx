@@ -7,14 +7,16 @@ import { SEARCH_KINDS } from "@/app/[locale]/(business)/(without-header)/search/
 import Tab from "@/app/_components/ui/tab";
 import { useRouter } from "@/lib/i18n";
 import { Routes } from "@/lib/routes";
+import { cn } from "@/lib/tailwind";
 
 import type { SearchKind } from "@/app/[locale]/(business)/(without-header)/search/types";
 
 interface SearchTabsProps {
   defaultTab: SearchKind;
+  className?: string;
 }
 
-const SearchTabs = ({ defaultTab }: SearchTabsProps) => {
+const SearchTabs = ({ defaultTab, className }: SearchTabsProps) => {
   const t = useTranslations();
 
   const router = useRouter();
@@ -30,7 +32,7 @@ const SearchTabs = ({ defaultTab }: SearchTabsProps) => {
   };
 
   return (
-    <div className="flex flex-row gap-x-3">
+    <div className={cn("flex flex-row gap-x-3", className)}>
       {SEARCH_KINDS.map((tab) => (
         <Tab
           key={tab}

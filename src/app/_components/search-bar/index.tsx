@@ -1,5 +1,6 @@
 "use client";
 
+import { SearchIcon } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useDebouncedCallback } from "use-debounce";
@@ -12,12 +13,14 @@ import { cn } from "@/lib/tailwind";
 import type { ChangeEvent, FormEvent } from "react";
 
 interface SearchBarProps {
-  initialValue?: string;
+  className?: string;
 }
 
-const SearchBar = ({ initialValue }: SearchBarProps) => {
+const SearchBar = ({ className }: SearchBarProps) => {
   const t = useTranslations();
+
   const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   const { push } = useRouterWithSearchParams();
 
@@ -37,24 +40,25 @@ const SearchBar = ({ initialValue }: SearchBarProps) => {
   };
 
   return (
-    <form onSubmit={handleSearchSubmit} className="grow">
+    <form
+      onSubmit={handleSearchSubmit}
+      className={cn("relative grow", className)}
+    >
+      <div className="absolute top-1/2 left-5 z-50 -translate-y-1/2">
+        <SearchIcon size={24} className="text-foreground size-6" />
+      </div>
+
       <Input
-        defaultValue={initialValue}
+        defaultValue={searchParams.get("search") ?? undefined}
         onChange={handleSearchChange}
         placeholder={t("searchPage.searchBarPlaceholder")}
         className={cn(
           "before:rounded-full",
-          "*:data-[slot=input]:rounded-full",
+          "*:data-[slot=input]:rounded-full *:data-[slot=input]:pl-13",
         )}
       />
     </form>
   );
-};
-
-export const SearchBarClient = () => {
-  const searchParams = useSearchParams();
-
-  return <SearchBar initialValue={searchParams.get("search") ?? undefined} />;
 };
 
 export default SearchBar;

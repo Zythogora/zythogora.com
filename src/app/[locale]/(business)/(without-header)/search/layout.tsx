@@ -1,29 +1,58 @@
-import { Suspense } from "react";
-
 import SearchTabs from "@/app/[locale]/(business)/(without-header)/search/_components/tabs";
-import SearchBar, { SearchBarClient } from "@/app/_components/search-bar";
-import UserMenu, { UserMenuTrigger } from "@/app/_components/user-menu";
+import StPatrickHatIcon from "@/app/_components/icons/st-patrick-hat";
+import SearchBar from "@/app/_components/search-bar";
+import UserMenu from "@/app/_components/user-menu";
+import { Link } from "@/lib/i18n";
+import { Routes } from "@/lib/routes";
+import { cn } from "@/lib/tailwind";
 
 import type { PropsWithChildren } from "react";
 
 const SearchLayout = ({ children }: PropsWithChildren) => {
   return (
-    <div className="flex flex-col">
-      <div className="border-foreground flex w-full flex-col gap-y-4 border-b bg-stone-50 px-8 py-6 drop-shadow dark:bg-stone-900">
-        <div className="flex flex-row items-center gap-x-6">
-          <Suspense fallback={<SearchBar />}>
-            <SearchBarClient />
-          </Suspense>
+    <div className="flex flex-col items-center">
+      <div
+        className={cn(
+          "border-foreground grid w-full items-center gap-x-6 gap-y-4 border-b px-8 py-6 drop-shadow",
+          "bg-stone-50 dark:bg-stone-900",
+          "grid-cols-[minmax(0,1fr)_auto] lg:grid-cols-[1fr_calc(var(--spacing)*224)_1fr]",
+        )}
+      >
+        <Link
+          href={Routes.HOME}
+          className={cn(
+            "relative",
+            "font-title text-2xl font-semibold tracking-wide uppercase",
+            "hidden lg:block",
+            "invisible w-0 xl:visible xl:w-fit",
+          )}
+        >
+          <span>Zythogora</span>
 
-          <Suspense fallback={<UserMenuTrigger disabled />}>
-            <UserMenu />
-          </Suspense>
-        </div>
+          <StPatrickHatIcon
+            size={24}
+            className="absolute -top-2.75 -left-2 size-6 -rotate-10"
+          />
+        </Link>
 
-        <SearchTabs defaultTab="beer" />
+        <SearchBar className="w-224 max-w-full" />
+
+        <UserMenu className="lg:justify-self-end" />
+
+        <SearchTabs
+          defaultTab="beer"
+          className="w-224 max-w-full lg:col-start-2"
+        />
       </div>
 
-      <div className="flex flex-col p-8">{children}</div>
+      <div
+        className={cn(
+          "flex w-224 max-w-full flex-col gap-y-4 p-8",
+          "**:[&_a]:focus-within:outline-primary **:[&_a]:rounded-xs **:[&_a]:focus-within:outline-3 **:[&_a]:focus-within:outline-offset-4",
+        )}
+      >
+        {children}
+      </div>
     </div>
   );
 };
