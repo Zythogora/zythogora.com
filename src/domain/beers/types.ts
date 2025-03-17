@@ -66,5 +66,4 @@ export type BeerReview = {
   servingFrom: ServingFrom;
   username: string;
   createdAt: Date;
-  hasDetails: boolean;
 };

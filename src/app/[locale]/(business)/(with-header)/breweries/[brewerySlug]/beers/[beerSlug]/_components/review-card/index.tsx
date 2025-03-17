@@ -21,19 +21,12 @@ const BeerReviewCard = async ({ review }: BeerReviewCardProps) => {
 
   const format = await getFormatter();
 
-  const Comp = review.hasDetails ? Link : "div";
-
   return (
-    // @ts-expect-error TypeScript lost the relation between Comp and its props
-    <Comp
-      {...(review.hasDetails
-        ? {
-            href: generatePath(Routes.REVIEW, {
-              username: review.username,
-              reviewSlug: review.slug,
-            }),
-          }
-        : {})}
+    <Link
+      href={generatePath(Routes.REVIEW, {
+        username: review.username,
+        reviewSlug: review.slug,
+      })}
       className="col-span-2 grid grid-cols-subgrid"
     >
       <div className="flex flex-row items-center gap-x-4">
@@ -93,9 +86,9 @@ const BeerReviewCard = async ({ review }: BeerReviewCardProps) => {
           </p>
         </div>
 
-        {review.hasDetails ? <ChevronRightIcon className="size-6" /> : null}
+        <ChevronRightIcon className="size-6" />
       </div>
-    </Comp>
+    </Link>
   );
 };
 

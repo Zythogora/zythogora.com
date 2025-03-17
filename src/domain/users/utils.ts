@@ -18,18 +18,6 @@ const tasteColumns: (keyof Reviews)[] = [
 
 const finishColumns: (keyof Reviews)[] = ["duration"];
 
-export const reviewHasDetails = (review: Reviews) => {
-  const detailColumns: (keyof Reviews)[] = [
-    "comment",
-    ...appearanceColumns,
-    ...noseColumns,
-    ...tasteColumns,
-    ...finishColumns,
-  ];
-
-  return detailColumns.some((key) => review[key]);
-};
-
 export const reviewHasAppearance = (review: Reviews) => {
   return appearanceColumns.some((key) => review[key]);
 };
