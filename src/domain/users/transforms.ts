@@ -3,7 +3,6 @@
 import { transformRawColorToColor } from "@/domain/beers/transforms";
 import {
   reviewHasAppearance,
-  reviewHasDetails,
   reviewHasFinish,
   reviewHasNose,
   reviewHasTaste,
@@ -49,7 +48,6 @@ export const transformRawUserReviewToUserReview = async (
       color: transformRawColorToColor(rawUserReview.beer.color),
     },
     createdAt: rawUserReview.createdAt,
-    hasDetails: reviewHasDetails(rawUserReview),
   };
 };
 

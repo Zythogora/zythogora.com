@@ -66,7 +66,12 @@ const UserReviewPage = async ({ params }: UserReviewPageProps) => {
   );
 
   return (
-    <div className={cn("flex flex-col", "dark:bg-background bg-stone-100")}>
+    <div
+      className={cn(
+        "flex min-h-screen flex-col",
+        "dark:bg-background bg-stone-100",
+      )}
+    >
       <div
         className={cn(
           "border-foreground w-full border-b drop-shadow",

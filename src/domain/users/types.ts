@@ -60,7 +60,6 @@ export type UserReview = {
     color: Color;
   };
   createdAt: Date;
-  hasDetails: boolean;
 };
 
 export type RawReview = Reviews & {
