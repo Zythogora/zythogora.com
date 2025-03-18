@@ -54,11 +54,11 @@ type SignUpParams = {
 };
 
 export const signUp = async ({ username, email, password }: SignUpParams) => {
-  const existingUserWithUsername = await prisma.users.findUnique({
-    where: { username },
+  const existingUserWithUsername = await prisma.users.findMany({
+    where: { username: { equals: username, mode: "insensitive" } },
   });
 
-  if (existingUserWithUsername !== null) {
+  if (existingUserWithUsername.length > 0) {
     throw new UsernameAlreadyExistsError();
   }
 
