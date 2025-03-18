@@ -18,7 +18,8 @@ import {
 } from "@/domain/beers/transforms";
 import { getCurrentUser } from "@/lib/auth";
 import { getPaginatedResults } from "@/lib/pagination";
-import prisma, { slugify } from "@/lib/prisma";
+import prisma from "@/lib/prisma";
+import { slugify } from "@/lib/prisma/utils";
 
 import type { CreateReviewData } from "@/app/[locale]/(business)/(without-header)/breweries/[brewerySlug]/beers/[beerSlug]/review/schemas";
 import type { CreateBeerData } from "@/app/[locale]/(business)/(without-header)/create/beer/schemas";

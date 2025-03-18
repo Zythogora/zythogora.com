@@ -3,8 +3,8 @@
 import { transformRawColorToColor } from "@/domain/beers/transforms";
 import { getCountry } from "@/lib/i18n/countries";
 import { getPaginatedResults } from "@/lib/pagination";
-import { prepareFullTextSearch, prepareLikeSearch } from "@/lib/prisma";
 import prisma from "@/lib/prisma";
+import { prepareFullTextSearch, prepareLikeSearch } from "@/lib/prisma/utils";
 
 import type {
   BeerResult,
