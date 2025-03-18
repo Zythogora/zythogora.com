@@ -6,6 +6,12 @@ model Users {
 
   reviews Reviews[]
 
+  friendWith   Friends[] @relation("friendships_user_a")
+  befriendedBy Friends[] @relation("friendships_user_b")
+
+  friendRequestsSent    FriendRequests[] @relation("friend_requests_requester")
+  friendRequestReceived FriendRequests[] @relation("friend_requests_addressee")
+
   createdBeers Beers[] @relation("created_beers")
   updatedBeers Beers[] @relation("updated_beers")
 
@@ -44,5 +50,58 @@ model Reviews {
 
   @@unique([slug, userId])
   @@map("reviews")
+  @@schema("public")
+}
+
+model Friendships {
+  id    String   @id @default(nanoid())
+  since DateTime @default(now())
+
+  friends Friends[]
+
+  @@map("friendships")
+  @@schema("public")
+}
+
+model Friends {
+  friendshipId String      @map("friendship_id")
+  friendship   Friendships @relation(fields: [friendshipId], references: [id], onDelete: Cascade)
+
+  userAId String @map("user_a_id")
+  userA   Users  @relation("friendships_user_a", fields: [userAId], references: [id], onDelete: Cascade)
+
+  userBId String @map("user_b_id")
+  userB   Users  @relation("friendships_user_b", fields: [userBId], references: [id], onDelete: Cascade)
+
+  @@unique([friendshipId, userAId])
+  @@unique([friendshipId, userBId])
+  @@map("friends")
+  @@schema("public")
+}
+
+enum FriendRequestStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+
+  @@map("friend_request_status")
+  @@schema("public")
+}
+
+model FriendRequests {
+  id     String              @id @default(nanoid())
+  sentAt DateTime            @default(now()) @map("sent_at")
+  status FriendRequestStatus @default(PENDING)
+
+  requesterId String @map("requester_id")
+  requester   Users  @relation("friend_requests_requester", fields: [requesterId], references: [id], onDelete: Cascade)
+
+  addresseeId String @map("addressee_id")
+  addressee   Users  @relation("friend_requests_addressee", fields: [addresseeId], references: [id], onDelete: Cascade)
+
+  updatedAt DateTime? @updatedAt @map("updated_at")
+
+  @@unique([requesterId, addresseeId])
+  @@map("friend_requests")
   @@schema("public")
 }
