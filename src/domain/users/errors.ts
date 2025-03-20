@@ -28,6 +28,12 @@ export class FriendError extends UserError {
   }
 }
 
+export class UnauthorizedFriendshipStatusCallError extends FriendError {
+  constructor() {
+    super("Unauthorized friendship status call");
+  }
+}
+
 export class UnauthorizedFriendRequestError extends FriendError {
   constructor() {
     super("Unauthorized friend request");
@@ -43,6 +49,12 @@ export class InvalidFriendRequestError extends FriendError {
 export class AlreadyFriendsError extends FriendError {
   constructor() {
     super("Already friends");
+  }
+}
+
+export class FriendRequestAcceptedError extends FriendError {
+  constructor() {
+    super("Friend request accepted");
   }
 }
 

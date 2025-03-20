@@ -2,7 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { Command } from "cmdk";
-import { Loader2Icon, SearchIcon } from "lucide-react";
+import { LoaderCircleIcon, SearchIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
@@ -119,7 +119,7 @@ const HeaderSearchBar = ({ className }: HeaderSearchBarProps) => {
             <div className="relative">
               <div className="absolute top-1/2 left-5 z-50 -translate-y-1/2">
                 {search !== "" && isPending ? (
-                  <Loader2Icon className="text-foreground-muted mb-0.5 size-[21.34px] animate-spin" />
+                  <LoaderCircleIcon className="text-foreground-muted mb-0.5 size-[21.34px] animate-spin" />
                 ) : (
                   <SearchIcon size={24} className="text-foreground size-6" />
                 )}

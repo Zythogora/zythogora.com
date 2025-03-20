@@ -5,17 +5,20 @@ import { cache } from "react";
 import {
   AlreadyFriendsError,
   AlreadySentFriendRequestError,
+  FriendRequestAcceptedError,
   FriendRequestRejectedError,
   InvalidFriendRequestError,
   UnauthorizedFriendRequestApprovalError,
   UnauthorizedFriendRequestError,
   UnauthorizedFriendRequestRejectionError,
+  UnauthorizedFriendshipStatusCallError,
   UnknownFriendRequestError,
   UnknownFriendshipError,
   UnknownReviewError,
   UnknownUserError,
 } from "@/domain/users/errors";
 import {
+  transformRawFriendRequestToFriendRequest,
   transformRawReviewToReview,
   transformRawUserReviewToUserReview,
   transformRawUserToUser,
@@ -28,7 +31,13 @@ import { getTranslationsByLocale } from "@/lib/i18n";
 import { getPaginatedResults } from "@/lib/pagination";
 import prisma, { getPrismaTransactionClient } from "@/lib/prisma";
 
-import type { UserReview, User, Review } from "@/domain/users/types";
+import type {
+  UserReview,
+  User,
+  Review,
+  FriendRequest,
+  FriendshipStatus,
+} from "@/domain/users/types";
 import type {
   PaginatedResults,
   PaginationParams,
@@ -142,6 +151,67 @@ export const getReviewByUsernameAndSlug = cache(
   },
 );
 
+export const getFriendshipStatus = async (
+  userId: string,
+): Promise<FriendshipStatus> => {
+  const user = await getCurrentUser();
+
+  if (!user) {
+    throw new UnauthorizedFriendshipStatusCallError();
+  }
+
+  const [friendship, friendRequests] = await getPrismaTransactionClient()(
+    (tx) =>
+      Promise.all([
+        tx.friends.findFirst({
+          where: { userAId: user.id, userBId: userId },
+        }),
+
+        tx.friendRequests.findMany({
+          where: {
+            OR: [
+              { requesterId: user.id, addresseeId: userId },
+              { requesterId: userId, addresseeId: user.id },
+            ],
+          },
+        }),
+      ]),
+  );
+
+  if (friendship) {
+    return "FRIENDS";
+  }
+
+  if (
+    friendRequests.some(
+      (request) =>
+        request.status === "PENDING" && request.addresseeId === userId,
+    )
+  ) {
+    return "PENDING_APPROVAL";
+  }
+
+  if (
+    friendRequests.some(
+      (request) =>
+        request.status === "PENDING" && request.addresseeId === user.id,
+    )
+  ) {
+    return "REQUEST_RECEIVED";
+  }
+
+  if (
+    friendRequests.some(
+      (request) =>
+        request.status === "REJECTED" && request.requesterId === user.id,
+    )
+  ) {
+    return "REQUEST_REJECTED";
+  }
+
+  return "NOT_FRIENDS";
+};
+
 export const sendFriendRequest = async (addresseeId: string) => {
   const user = await getCurrentUser();
 
@@ -219,27 +289,40 @@ export const sendFriendRequest = async (addresseeId: string) => {
   });
 };
 
-export const acceptFriendRequest = async (friendRequestId: string) => {
+export const acceptFriendRequest = async (
+  friendRequestId: string,
+): Promise<FriendRequest> => {
   const user = await getCurrentUser();
 
   if (!user) {
     throw new UnauthorizedFriendRequestApprovalError();
   }
 
-  await getPrismaTransactionClient()(async (tx) => {
+  return getPrismaTransactionClient()(async (tx) => {
     const friendRequest = await tx.friendRequests.findUnique({
       where: {
         id: friendRequestId,
         addresseeId: user.id,
-        status: "PENDING",
       },
+      include: { requester: true },
     });
 
     if (!friendRequest) {
       throw new UnknownFriendRequestError();
     }
 
-    await _acceptFriendRequest(friendRequestId, tx);
+    if (friendRequest.status === "ACCEPTED") {
+      return transformRawFriendRequestToFriendRequest(
+        friendRequest,
+        "ALREADY_FRIENDS",
+      );
+    }
+
+    if (friendRequest.status === "REJECTED") {
+      throw new FriendRequestRejectedError();
+    }
+
+    return _acceptFriendRequest(friendRequestId, tx);
   });
 };
 
@@ -272,7 +355,7 @@ export const acceptPreviouslyRejectedFriendRequest = async (
 const _acceptFriendRequest = async (
   friendRequestId: string,
   transaction?: PrismaTransactionClient,
-) => {
+): Promise<FriendRequest> => {
   const friendRequest = await getPrismaTransactionClient(transaction)(
     async (tx) => {
       const now = new Date();
@@ -321,6 +404,8 @@ const _acceptFriendRequest = async (
       addresseeUsername: friendRequest.addressee.username,
     },
   );
+
+  return transformRawFriendRequestToFriendRequest(friendRequest, "ACCEPTED");
 };
 
 export const rejectFriendRequest = async (friendRequestId: string) => {
@@ -334,12 +419,15 @@ export const rejectFriendRequest = async (friendRequestId: string) => {
     where: {
       id: friendRequestId,
       addresseeId: user.id,
-      status: "PENDING",
     },
   });
 
   if (!friendRequest) {
     throw new UnknownFriendRequestError();
+  }
+
+  if (friendRequest.status === "ACCEPTED") {
+    throw new FriendRequestAcceptedError();
   }
 
   await prisma.friendRequests.update({

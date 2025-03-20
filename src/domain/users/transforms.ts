@@ -16,6 +16,8 @@ import type {
   User,
   RawReview,
   Review,
+  FriendRequest,
+  RawFriendRequest,
 } from "@/domain/users/types";
 
 export const transformRawUserToUser = (rawUser: RawUser): User => {
@@ -91,3 +93,13 @@ export const transformRawReviewToReview = (rawReview: RawReview): Review => {
     hasFinish: reviewHasFinish(rawReview),
   };
 };
+
+export const transformRawFriendRequestToFriendRequest = (
+  rawFriendRequest: RawFriendRequest,
+  status: FriendRequest["status"],
+): FriendRequest => ({
+  status,
+  friend: {
+    username: rawFriendRequest.requester.username,
+  },
+});

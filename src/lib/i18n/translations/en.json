@@ -322,11 +322,41 @@
     }
   },
   "profilePage": {
-    "reviewCount": "{count, plural, =0 {0 reviews} =1 {1 review} other {# reviews}}",
-    "uniqueBeers": "Beers",
-    "uniqueBreweries": "Breweries",
-    "uniqueStyles": "Styles",
-    "uniqueCountries": "Countries"
+    "statistics": {
+      "reviewCount": "{count, plural, =0 {0 reviews} =1 {1 review} other {# reviews}}",
+      "uniqueBeers": "Beers",
+      "uniqueBreweries": "Breweries",
+      "uniqueStyles": "Styles",
+      "uniqueCountries": "Countries"
+    },
+    "friendship": {
+      "status": {
+        "FRIENDS": "Friends",
+        "PENDING_APPROVAL": "Friend request sent",
+        "REQUEST_RECEIVED": "Friend request received",
+        "REQUEST_REJECTED": "Friend request rejected"
+      },
+      "actions": {
+        "addFriend": "Add friend",
+        "acceptFriendRequest": "Accept friend request",
+        "rejectFriendRequest": "Reject friend request"
+      },
+      "toasts": {
+        "friendRequestSent": "Friend request sent",
+        "friendRequestSendingError": "Error sending friend request"
+      }
+    },
+    "menu": {
+      "shareProfile": {
+        "label": "Share profile",
+        "actions": {
+          "copyUrl": "Copy URL"
+        }
+      },
+      "removeFriend": {
+        "label": "Remove friend"
+      }
+    }
   },
   "reviewPage": {
     "metadata": {
@@ -578,6 +608,36 @@
     "errors": {
       "MIN_CREATION_YEAR_ERROR": "The creation year cannot be before the year 1000",
       "MAX_CREATION_YEAR_ERROR": "The creation year cannot be in the future"
+    }
+  },
+  "friendRequestPage": {
+    "title": {
+      "accepted": "Friend request accepted!",
+      "alreadyFriends": "You're friends!",
+      "rejected": "Friend request rejected"
+    },
+    "cta": {
+      "visitProfile": "Check {username}'s last reviews"
+    },
+    "actions": {
+      "accept": {
+        "cta": "Didn't mean to reject it?",
+        "label": "Accept friend request",
+        "rejecting": "Accepting..."
+      },
+      "reject": {
+        "cta": "Didn't mean to accept it?",
+        "label": "Reject friend request",
+        "rejecting": "Rejecting..."
+      }
+    },
+    "errors": {
+      "friendRequestAcceptingError": "Error accepting friend request",
+      "friendRequestRejectingError": "Error rejecting friend request"
+    },
+    "404": {
+      "title": "Unknown friend request",
+      "cta": "Return to the home page"
     }
   }
 }
