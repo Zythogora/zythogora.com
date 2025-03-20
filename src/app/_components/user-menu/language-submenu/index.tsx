@@ -63,7 +63,7 @@ const LanguageSubMenu = () => {
 
             {locale === selectedLocale && (
               <DropdownMenuShortcut className="ml-auto size-4">
-                <CheckIcon />
+                <CheckIcon size={16} />
               </DropdownMenuShortcut>
             )}
           </DropdownMenuItem>

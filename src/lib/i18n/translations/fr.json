@@ -319,11 +319,41 @@
     }
   },
   "profilePage": {
-    "reviewCount": "{count, plural, =0 {0 critique} =1 {1 critique} other {# critiques}}",
-    "uniqueBeers": "Bières",
-    "uniqueBreweries": "Brasseries",
-    "uniqueStyles": "Styles",
-    "uniqueCountries": "Pays"
+    "statistics": {
+      "reviewCount": "{count, plural, =0 {0 critique} =1 {1 critique} other {# critiques}}",
+      "uniqueBeers": "Bières",
+      "uniqueBreweries": "Brasseries",
+      "uniqueStyles": "Styles",
+      "uniqueCountries": "Pays"
+    },
+    "friendship": {
+      "status": {
+        "FRIENDS": "Amis",
+        "PENDING_APPROVAL": "Demande d'ami envoyée",
+        "REQUEST_RECEIVED": "Demande d'ami reçue",
+        "REQUEST_REJECTED": "Demande d'ami rejetée"
+      },
+      "actions": {
+        "addFriend": "Demander en ami",
+        "acceptFriendRequest": "Accepter la demande d'ami",
+        "rejectFriendRequest": "Rejeter la demande d'ami"
+      },
+      "toasts": {
+        "friendRequestSent": "Demande d'ami envoyée",
+        "friendRequestSendingError": "Erreur lors de l'envoi de la demande d'ami"
+      }
+    },
+    "menu": {
+      "shareProfile": {
+        "label": "Partager le profil",
+        "actions": {
+          "copyUrl": "Copier l'URL"
+        }
+      },
+      "removeFriend": {
+        "label": "Supprimer de mes amis"
+      }
+    }
   },
   "reviewPage": {
     "metadata": {
@@ -575,6 +605,36 @@
     "errors": {
       "MIN_CREATION_YEAR_ERROR": "L'année de création ne peut pas être antérieure à l'an 1000",
       "MAX_CREATION_YEAR_ERROR": "L'année de création ne peut pas être dans le futur"
+    }
+  },
+  "friendRequestPage": {
+    "title": {
+      "accepted": "Demande d'ami acceptée !",
+      "alreadyFriends": "Vous êtes amis !",
+      "rejected": "Demande d'ami rejetée"
+    },
+    "cta": {
+      "visitProfile": "Voir les dernières critiques de {username}"
+    },
+    "actions": {
+      "accept": {
+        "cta": "Vous ne vouliez pas la rejeter ?",
+        "label": "Accepter la demande d'ami",
+        "rejecting": "Acceptation en cours..."
+      },
+      "reject": {
+        "cta": "Vous ne vouliez pas l'accepter ?",
+        "label": "Rejeter la demande d'ami",
+        "rejecting": "Rejet en cours..."
+      }
+    },
+    "errors": {
+      "friendRequestAcceptingError": "Erreur lors de l'acceptation de la demande d'ami",
+      "friendRequestRejectingError": "Erreur lors du rejet de la demande d'ami"
+    },
+    "404": {
+      "title": "Demande d'ami inconnue",
+      "cta": "Retourner à l'accueil"
     }
   }
 }

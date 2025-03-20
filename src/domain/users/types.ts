@@ -11,6 +11,7 @@ import type {
   Colors,
   Duration,
   FlavorsIntensity,
+  FriendRequests,
   Haziness,
   HeadRetention,
   LabelDesign,
@@ -107,4 +108,22 @@ export type Review = {
   hasNose: boolean;
   hasTaste: boolean;
   hasFinish: boolean;
+};
+
+export type FriendshipStatus =
+  | "FRIENDS"
+  | "PENDING_APPROVAL"
+  | "REQUEST_RECEIVED"
+  | "REQUEST_REJECTED"
+  | "NOT_FRIENDS";
+
+export type RawFriendRequest = FriendRequests & {
+  requester: Users;
+};
+
+export type FriendRequest = {
+  status: "ACCEPTED" | "ALREADY_FRIENDS";
+  friend: {
+    username: string;
+  };
 };
