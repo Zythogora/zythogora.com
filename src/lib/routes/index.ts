@@ -20,6 +20,9 @@ export const Routes = {
 
   CREATE_BEER: "/create/beer",
   CREATE_BREWERY: "/create/brewery",
+
+  ACCEPT_FRIEND_REQUEST: "/friend-requests/accept",
+  DENY_FRIEND_REQUEST: "/friend-requests/deny",
 } as const;
 
 export type Path = (typeof Routes)[keyof typeof Routes];

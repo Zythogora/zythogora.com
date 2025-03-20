@@ -1,3 +1,4 @@
+import { createTranslator } from "next-intl";
 import { createNavigation } from "next-intl/navigation";
 import { defineRouting } from "next-intl/routing";
 import { getRequestConfig } from "next-intl/server";
@@ -25,3 +26,8 @@ export default getRequestConfig(async ({ requestLocale }) => {
     messages: (await import(`./translations/${locale}.json`)).default,
   };
 });
+
+export const getTranslationsByLocale = async (locale: Locale) => {
+  const messages = (await import(`./translations/${locale}.json`)).default;
+  return createTranslator({ locale, messages });
+};

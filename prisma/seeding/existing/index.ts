@@ -1,7 +1,7 @@
 import { PrismaClient, ServingFrom } from "@prisma/client";
 import { customAlphabet, nanoid } from "nanoid";
 
-import { slugify } from "@/lib/prisma";
+import { slugify } from "@/lib/prisma/utils";
 import { existing_beers } from "prisma/seeding/existing/data/beers";
 import { existing_breweries } from "prisma/seeding/existing/data/breweries";
 import { existing_colors } from "prisma/seeding/existing/data/colors";

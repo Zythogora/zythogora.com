@@ -14,7 +14,8 @@ import {
 } from "@/domain/breweries/transforms";
 import { getCurrentUser } from "@/lib/auth";
 import { getPaginatedResults } from "@/lib/pagination";
-import prisma, { slugify } from "@/lib/prisma";
+import prisma, { getPrismaTransactionClient } from "@/lib/prisma";
+import { slugify } from "@/lib/prisma/utils";
 
 import type { CreateBreweryData } from "@/app/[locale]/(business)/(without-header)/create/brewery/schemas";
 import type { Brewery, BreweryReview } from "@/domain/breweries/types";
@@ -93,10 +94,13 @@ export const getBreweryReviewsByUser = async ({
     skip: (page - 1) * limit,
   } satisfies Prisma.ReviewsFindManyArgs;
 
-  const [rawReviews, reviewCount] = await prisma.$transaction([
-    prisma.reviews.findMany(query),
-    prisma.reviews.count({ where: query.where }),
-  ]);
+  const [rawReviews, reviewCount] = await getPrismaTransactionClient()(
+    async (tx) =>
+      Promise.all([
+        tx.reviews.findMany(query),
+        tx.reviews.count({ where: query.where }),
+      ]),
+  );
 
   const reviews = rawReviews.map(transformRawBreweryReviewToBreweryReview);
 

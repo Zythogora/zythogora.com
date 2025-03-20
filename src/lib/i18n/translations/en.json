@@ -21,6 +21,23 @@
       "text3": "If you did not request this, you can safely ignore this email.",
       "button": "Reset your password",
       "buttonFallback": "If the button does not work, you can also copy and paste the following URL into your browser: <link>{resetPasswordUrl}</link>."
+    },
+    "friendRequest": {
+      "subject": "New friend request on Zythogora",
+      "preview": "{requesterUsername} wants to be your friend on Zythogora",
+      "title": "New friend request on<br></br><highlight>Zythogora</highlight>",
+      "text": "Hello {addresseeUsername}!<br></br>{requesterUsername} wants to be your friend on Zythogora!",
+      "acceptCta": "To accept this request, click the button below.",
+      "acceptButton": "Accept the request",
+      "acceptButtonFallback": "If the button does not work, you can also copy and paste the following URL into your browser: <link>{acceptFriendRequestUrl}</link>.",
+      "rejectCta": "If you do not know {requesterUsername} or do not want to accept this request, <link>click here</link>."
+    },
+    "friendRequestAccepted": {
+      "subject": "Your friend request has been accepted on Zythogora",
+      "preview": "{addresseeUsername} accepted your friend request on Zythogora",
+      "title": "You got a new friend on<br></br><highlight>Zythogora</highlight> 🍻",
+      "text": "Hello {requesterUsername}!<br></br>{addresseeUsername} accepted your friend request on Zythogora!",
+      "profileCta": "Go discover their reviews on <link>Zythogora</link>!"
     }
   },
   "common": {
