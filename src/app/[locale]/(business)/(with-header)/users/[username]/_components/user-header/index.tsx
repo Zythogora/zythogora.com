@@ -9,7 +9,10 @@ import StyleIcon from "@/app/_components/icons/style";
 import WorldIcon from "@/app/_components/icons/world";
 import DescriptionList from "@/app/_components/ui/description-list";
 import { getFriendshipStatus } from "@/domain/users";
-import { UnauthorizedFriendshipStatusCallError } from "@/domain/users/errors";
+import {
+  InvalidFriendRequestError,
+  UnauthorizedFriendshipStatusCallError,
+} from "@/domain/users/errors";
 import { cn } from "@/lib/tailwind";
 
 import type { User } from "@/domain/users/types";
@@ -23,6 +26,10 @@ const UserHeader = async ({ user }: UserHeaderProps) => {
 
   const friendshipStatus = await getFriendshipStatus(user.id).catch((error) => {
     if (error instanceof UnauthorizedFriendshipStatusCallError) {
+      return null;
+    }
+
+    if (error instanceof InvalidFriendRequestError) {
       return null;
     }
 
