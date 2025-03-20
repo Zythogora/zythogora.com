@@ -81,7 +81,7 @@ const BeerReviewCard = async ({ review }: BeerReviewCardProps) => {
         <div className="flex flex-col items-end">
           <p className="font-title text-lg">{review.globalScore} / 10</p>
 
-          <p className="text-foreground/45 text-sm text-nowrap">
+          <p className="text-foreground/62.5 text-sm text-nowrap">
             {format.relativeTime(review.createdAt)}
           </p>
         </div>

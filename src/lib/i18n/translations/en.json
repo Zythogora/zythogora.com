@@ -306,10 +306,20 @@
         }
       },
       "reviews": {
-        "title": "My reviews",
+        "title": "Reviews",
         "content": {
-          "login": "Please <link>sign in</link> to see your reviews",
-          "count": "{count, plural, =0 {0 reviews} =1 {1 review} other {# reviews}}"
+          "tabs": {
+            "myReviews": {
+              "title": "My reviews",
+              "count": "{count, plural, =0 {You have not <muted>(yet)</muted> reviewed any beers from this brewery!} =1 {1 review} other {# reviews}}"
+            },
+            "friendReviews": {
+              "title": "Friend reviews",
+              "loading": "Loading friend reviews...",
+              "count": "{count, plural, =0 {Your friends have not <muted>(yet)</muted> reviewed any beers from this brewery!} =1 {1 review} other {# reviews}}"
+            }
+          },
+          "login": "Please <link>sign in</link> to read reviews"
         }
       }
     },
