@@ -306,10 +306,20 @@
         }
       },
       "reviews": {
-        "title": "Mes critiques",
+        "title": "Critiques",
         "content": {
-          "login": "<link>Connectez-vous</link> pour voir vos critiques",
-          "count": "{count, plural, =0 {0 critique} =1 {1 critique} other {# critiques}}"
+          "tabs": {
+            "myReviews": {
+              "title": "Mes critiques",
+              "count": "{count, plural, =0 {Vous n'avez pas <muted>(encore)</muted> essayé les bières de cette brasserie !} =1 {1 critique} other {# critiques}}"
+            },
+            "friendReviews": {
+              "title": "Critiques de mes amis",
+              "loading": "Chargement des critiques de mes amis...",
+              "count": "{count, plural, =0 {Vos amis n'ont pas <muted>(encore)</muted> essayé les bières de cette brasserie !} =1 {1 critique} other {# critiques}}"
+            }
+          },
+          "login": "<link>Connectez-vous</link> pour lire les critiques"
         }
       }
     },

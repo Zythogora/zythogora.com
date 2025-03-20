@@ -107,6 +107,46 @@ export const getBreweryReviewsByUser = async ({
   return getPaginatedResults(reviews, reviewCount, page, limit);
 };
 
+interface GetBreweryFriendReviewsForUserParams {
+  userId: string;
+  brewerySlug: string;
+}
+
+export const getBreweryFriendReviewsForUser = async ({
+  userId,
+  brewerySlug,
+  limit = 10,
+  page = 1,
+}: PaginationParams<GetBreweryFriendReviewsForUserParams>): Promise<
+  PaginatedResults<BreweryReview>
+> => {
+  const query = {
+    where: {
+      user: { friendWith: { some: { userBId: userId } } },
+      beer: { brewery: { slug: brewerySlug } },
+    },
+    include: {
+      user: true,
+      beer: { include: { style: true, color: true } },
+    },
+    orderBy: { createdAt: "desc" },
+    take: limit,
+    skip: (page - 1) * limit,
+  } satisfies Prisma.ReviewsFindManyArgs;
+
+  const [rawReviews, reviewCount] = await getPrismaTransactionClient()(
+    async (tx) =>
+      Promise.all([
+        tx.reviews.findMany(query),
+        tx.reviews.count({ where: query.where }),
+      ]),
+  );
+
+  const reviews = rawReviews.map(transformRawBreweryReviewToBreweryReview);
+
+  return getPaginatedResults(reviews, reviewCount, page, limit);
+};
+
 export const createBrewery = async (data: CreateBreweryData) => {
   const user = await getCurrentUser();
   if (!user) {

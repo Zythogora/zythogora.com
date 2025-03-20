@@ -82,6 +82,7 @@ const UserMenu = ({ className }: UserMenuProps) => {
 
   const handleSignOut = async () => {
     await authClient.signOut();
+    router.refresh();
   };
 
   return (

@@ -2,25 +2,25 @@ import { ChevronRightIcon } from "lucide-react";
 import { getFormatter } from "next-intl/server";
 
 import ColoredPintIcon from "@/app/_components/icons/colored-pint";
-import CountryFlag from "@/app/_components/icons/country-flag";
 import { Link } from "@/lib/i18n";
 import { Routes } from "@/lib/routes";
 import { generatePath } from "@/lib/routes/utils";
 
-import type { UserReview } from "@/domain/users/types";
+import type { BreweryReview } from "@/domain/breweries/types";
 
-interface UserReviewCardProps {
-  username: string;
-  review: UserReview;
+interface BreweryFriendReviewCardProps {
+  review: BreweryReview;
 }
 
-const UserReviewCard = async ({ username, review }: UserReviewCardProps) => {
+const BreweryFriendReviewCard = async ({
+  review,
+}: BreweryFriendReviewCardProps) => {
   const format = await getFormatter();
 
   return (
     <Link
       href={generatePath(Routes.REVIEW, {
-        username,
+        username: review.user.username,
         reviewSlug: review.slug,
       })}
       className="col-span-2 grid grid-cols-subgrid"
@@ -35,17 +35,9 @@ const UserReviewCard = async ({ username, review }: UserReviewCardProps) => {
         <div className="flex min-w-0 flex-col">
           <p className="font-title truncate text-lg">{review.beer.name}</p>
 
-          <div className="flex flex-row items-center gap-x-1">
-            <CountryFlag
-              country={review.beer.brewery.country}
-              size={14}
-              className="size-3.5"
-            />
-
-            <p className="text-foreground/62.5 truncate text-sm">
-              {review.beer.brewery.name}
-            </p>
-          </div>
+          <p className="text-foreground/62.5 truncate text-sm">
+            {review.user.username}
+          </p>
         </div>
       </div>
 
@@ -64,4 +56,4 @@ const UserReviewCard = async ({ username, review }: UserReviewCardProps) => {
   );
 };
 
-export default UserReviewCard;
+export default BreweryFriendReviewCard;

@@ -3,7 +3,7 @@ import { getLocale } from "next-intl/server";
 
 import BreweryBeerList from "@/app/[locale]/(business)/(with-header)/breweries/[brewerySlug]/_components/brewery-beer-list";
 import BreweryCard from "@/app/[locale]/(business)/(with-header)/breweries/[brewerySlug]/_components/brewery-card";
-import BreweryReviewList from "@/app/[locale]/(business)/(with-header)/breweries/[brewerySlug]/_components/brewery-review-list";
+import BreweryReviews from "@/app/[locale]/(business)/(with-header)/breweries/[brewerySlug]/_components/brewery-reviews";
 import BreweryTabList from "@/app/[locale]/(business)/(with-header)/breweries/[brewerySlug]/_components/brewery-tab-list";
 import { brewerySearchParamsSchema } from "@/app/[locale]/(business)/(with-header)/breweries/[brewerySlug]/schemas";
 import { Tabs, TabContent } from "@/app/_components/ui/tabs";
@@ -105,7 +105,7 @@ const BreweryPage = async ({ params, searchParams }: BreweryPageProps) => {
           </TabContent>
 
           <TabContent value="reviews">
-            <BreweryReviewList
+            <BreweryReviews
               brewerySlug={brewerySlug}
               page={searchParamsResult.data.page}
             />

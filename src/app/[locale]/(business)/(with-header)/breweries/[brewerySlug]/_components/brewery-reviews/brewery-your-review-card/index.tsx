@@ -9,11 +9,13 @@ import { generatePath } from "@/lib/routes/utils";
 
 import type { BreweryReview } from "@/domain/breweries/types";
 
-interface BreweryReviewCardProps {
+interface BreweryYourReviewCardProps {
   review: BreweryReview;
 }
 
-const BreweryReviewCard = async ({ review }: BreweryReviewCardProps) => {
+const BreweryYourReviewCard = async ({
+  review,
+}: BreweryYourReviewCardProps) => {
   const t = await getTranslations();
   const format = await getFormatter();
 
@@ -53,7 +55,7 @@ const BreweryReviewCard = async ({ review }: BreweryReviewCardProps) => {
         <div className="flex flex-col items-end">
           <p className="font-title text-lg">{review.globalScore} / 10</p>
 
-          <p className="text-foreground/45 text-sm text-nowrap">
+          <p className="text-foreground/62.5 text-sm text-nowrap">
             {format.relativeTime(review.createdAt)}
           </p>
         </div>
@@ -64,4 +66,4 @@ const BreweryReviewCard = async ({ review }: BreweryReviewCardProps) => {
   );
 };
 
-export default BreweryReviewCard;
+export default BreweryYourReviewCard;
