@@ -160,6 +160,10 @@ export const getFriendshipStatus = async (
     throw new UnauthorizedFriendshipStatusCallError();
   }
 
+  if (userId === user.id) {
+    throw new InvalidFriendRequestError();
+  }
+
   const [friendship, friendRequests] = await getPrismaTransactionClient()(
     (tx) =>
       Promise.all([
