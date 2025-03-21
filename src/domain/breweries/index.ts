@@ -67,7 +67,7 @@ export const getBreweryBySlug = cache(
   },
 );
 
-interface GetBreweryReviewsByUserParams {
+interface GetBreweryReviewsParams {
   userId: string;
   brewerySlug: string;
 }
@@ -77,7 +77,7 @@ export const getBreweryReviewsByUser = async ({
   brewerySlug,
   limit = 10,
   page = 1,
-}: PaginationParams<GetBreweryReviewsByUserParams>): Promise<
+}: PaginationParams<GetBreweryReviewsParams>): Promise<
   PaginatedResults<BreweryReview>
 > => {
   const query = {
@@ -107,17 +107,12 @@ export const getBreweryReviewsByUser = async ({
   return getPaginatedResults(reviews, reviewCount, page, limit);
 };
 
-interface GetBreweryFriendReviewsForUserParams {
-  userId: string;
-  brewerySlug: string;
-}
-
 export const getBreweryFriendReviewsForUser = async ({
   userId,
   brewerySlug,
   limit = 10,
   page = 1,
-}: PaginationParams<GetBreweryFriendReviewsForUserParams>): Promise<
+}: PaginationParams<GetBreweryReviewsParams>): Promise<
   PaginatedResults<BreweryReview>
 > => {
   const query = {
