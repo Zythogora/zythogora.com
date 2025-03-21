@@ -38,6 +38,8 @@ export type Beer = {
   abv: number;
   ibu?: number;
   color: Color;
+  description?: string;
+  releaseYear?: number;
 };
 
 export type RawStyleCategory = StyleCategories & {

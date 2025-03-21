@@ -276,6 +276,10 @@
     }
   },
   "beerPage": {
+    "details": {
+      "description": "Description",
+      "releaseYear": "Release year"
+    },
     "reviews": {
       "tabs": {
         "myReviews": {
@@ -544,8 +548,8 @@
       "name": {
         "label": "Beer name"
       },
-      "releasedIn": {
-        "label": "Released in"
+      "releaseYear": {
+        "label": "Release year"
       },
       "brewery": {
         "label": "Brewery"
@@ -571,8 +575,8 @@
       "submitting": "Creating beer..."
     },
     "errors": {
-      "MIN_CREATION_YEAR_ERROR": "The creation year cannot be before the year 1000",
-      "MAX_CREATION_YEAR_ERROR": "The creation year cannot be in the future"
+      "MIN_RELEASE_YEAR_ERROR": "The release year cannot be before the year 1000",
+      "MAX_RELEASE_YEAR_ERROR": "The release year cannot be in the future"
     }
   },
   "createBreweryPage": {

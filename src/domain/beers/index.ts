@@ -179,6 +179,8 @@ export const createBeer = async (data: CreateBeerData) => {
       name: data.name,
       abv: data.abv,
       ibu: data.ibu,
+      description: data.description,
+      releaseYear: data.releaseYear,
       breweryId: data.breweryId,
       styleId: data.styleId,
       colorId: data.colorId,

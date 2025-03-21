@@ -119,7 +119,7 @@ const CreateBreweryForm = () => {
           label={t("createBreweryPage.fields.creationYear.label")}
           field={fields.creationYear}
           type="number"
-          className="col-span-2 hidden @3xl:flex"
+          className="col-span-2 col-start-1 row-start-6 @3xl:col-start-6 @3xl:row-start-1"
         />
 
         <FormCountrySelect
@@ -155,13 +155,6 @@ const CreateBreweryForm = () => {
           field={fields.description}
           rows={4}
           className="col-span-2 @3xl:col-span-7"
-        />
-
-        <FormInput
-          label={t("createBreweryPage.fields.creationYear.label")}
-          field={fields.creationYear}
-          type="number"
-          className="col-span-2 flex @3xl:hidden"
         />
 
         <FormInput

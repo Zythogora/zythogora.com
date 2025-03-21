@@ -12,13 +12,13 @@ export const createBeerSchema = z.object({
     .min(0)
     .max(100),
   ibu: z.number().min(0).optional(),
-  releasedIn: z
+  releaseYear: z
     .number()
     .min(1000, {
-      message: "createBeerPage.errors.MIN_CREATION_YEAR_ERROR",
+      message: "createBeerPage.errors.MIN_RELEASE_YEAR_ERROR",
     })
     .max(new Date().getFullYear(), {
-      message: "createBeerPage.errors.MAX_CREATION_YEAR_ERROR",
+      message: "createBeerPage.errors.MAX_RELEASE_YEAR_ERROR",
     })
     .optional(),
   description: z.string().optional(),
