@@ -120,8 +120,8 @@ const BeerPage = async ({ params, searchParams }: BeerPageProps) => {
   }
 
   return (
-    <div className="flex w-full flex-col gap-y-16">
-      <div className="isolate flex flex-col gap-y-2">
+    <div className="flex w-full flex-col gap-y-12">
+      <div className={cn("isolate flex flex-col", "gap-y-6 md:gap-y-2")}>
         <BeerCard
           name={beer.name}
           brewery={beer.brewery}
@@ -133,7 +133,10 @@ const BeerPage = async ({ params, searchParams }: BeerPageProps) => {
         />
 
         <div
-          className={cn("flex flex-row", "gap-x-2 px-6 py-4 md:gap-x-1 md:p-0")}
+          className={cn(
+            "flex flex-row",
+            "gap-x-2 px-10 py-4 md:gap-x-1 md:p-0",
+          )}
         >
           <Button
             asChild

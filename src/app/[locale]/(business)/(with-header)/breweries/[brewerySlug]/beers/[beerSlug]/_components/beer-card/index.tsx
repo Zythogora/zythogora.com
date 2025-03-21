@@ -39,8 +39,8 @@ const BeerCard = async ({
   return (
     <div
       className={cn(
-        "flex flex-col overflow-hidden drop-shadow",
-        "gap-y-6 border-b-2 p-8 md:gap-y-8 md:rounded md:border-2 md:px-12 md:py-10",
+        "flex flex-col gap-y-8 overflow-hidden drop-shadow",
+        "border-b-2 px-10 py-12 md:rounded md:border-2 md:px-12 md:py-10",
         "bg-primary-50 dark:bg-primary-800",
         className,
       )}
@@ -85,7 +85,10 @@ const BeerCard = async ({
         <DescriptionList
           label={t("common.beer.style")}
           value={style}
-          className="col-span-2 [&>dd]:truncate"
+          className={cn(
+            "col-span-2",
+            "*:data-[slot=description-details]:max-w-full *:data-[slot=description-details]:truncate",
+          )}
           title={style}
         />
 

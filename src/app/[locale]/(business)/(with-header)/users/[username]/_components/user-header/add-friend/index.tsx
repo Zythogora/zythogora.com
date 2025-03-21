@@ -38,7 +38,7 @@ const AddFriendButton = ({ friendId, className }: AddFriendButtonProps) => {
   };
 
   return (
-    <div className={cn("isolate p-6 md:p-0", className)}>
+    <div className={cn("isolate", className)}>
       <Button
         onClick={handleFriendRequest}
         disabled={isPending}
