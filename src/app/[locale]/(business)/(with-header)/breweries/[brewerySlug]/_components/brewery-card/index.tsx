@@ -73,7 +73,7 @@ const BreweryCard = ({ brewery }: BreweryCardProps) => {
         <div
           className={cn(
             "flex flex-col items-start",
-            "gap-y-6 border-b-2 p-8 md:gap-y-8 md:rounded md:border-2 md:px-12 md:py-10",
+            "gap-y-6 border-b-2 p-10 md:gap-y-8 md:rounded md:border-2 md:px-12",
             "bg-primary-50 dark:bg-primary-800",
           )}
         >

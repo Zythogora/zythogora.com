@@ -86,7 +86,7 @@ const UserReviewPage = async ({ params }: UserReviewPageProps) => {
         >
           <div
             className={cn(
-              "grid grid-cols-[max-content_auto] items-center",
+              "grid grid-cols-[auto_minmax(0,1fr)] items-center",
               "gap-x-6 md:gap-x-8",
             )}
           >
@@ -116,7 +116,7 @@ const UserReviewPage = async ({ params }: UserReviewPageProps) => {
 
               <p
                 className={cn(
-                  "gap-x-paragraph-space flex flex-row items-center",
+                  "gap-x-paragraph-space flex flex-row items-center text-nowrap",
                   "text-sm md:text-base",
                 )}
               >
@@ -127,7 +127,7 @@ const UserReviewPage = async ({ params }: UserReviewPageProps) => {
                       href={generatePath(Routes.BREWERY, {
                         brewerySlug: review.beer.brewery.slug,
                       })}
-                      className="text-primary cursor-pointer"
+                      className="text-primary cursor-pointer truncate"
                     >
                       {chunks}
                     </Link>
@@ -137,11 +137,14 @@ const UserReviewPage = async ({ params }: UserReviewPageProps) => {
             </div>
           </div>
 
-          <div className="grid grid-cols-4">
+          <div className="grid grid-cols-[repeat(4,minmax(0,1fr))] gap-x-2">
             <DescriptionList
               label={t("common.beer.style")}
               value={review.beer.style}
-              className="col-span-2"
+              className={cn(
+                "col-span-2",
+                "*:data-[slot=description-details]:max-w-full *:data-[slot=description-details]:truncate",
+              )}
             />
 
             <DescriptionList

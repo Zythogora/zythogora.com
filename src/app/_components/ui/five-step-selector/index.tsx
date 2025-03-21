@@ -82,10 +82,10 @@ const FiveStepSelector = ({
               )}
               style={
                 {
-                  "--tw-gradient-from": `color-mix(in oklab, var(--primary) ${
+                  "--tw-gradient-from": `color-mix(in oklab, var(--color-primary) ${
                     (index / (possibleValues.length - 1)) * 100
                   }%, transparent)`,
-                  "--tw-gradient-to": `color-mix(in oklab, var(--primary) ${
+                  "--tw-gradient-to": `color-mix(in oklab, var(--color-primary) ${
                     ((index + 1) / (possibleValues.length - 1)) * 100
                   }%, transparent)`,
                   "--selector-separator-index": index,

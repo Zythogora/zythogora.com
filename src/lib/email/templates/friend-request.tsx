@@ -24,7 +24,11 @@ const FriendRequestEmail = async ({
 
   return (
     <EmailTemplateLayout>
-      <Preview>{t("email.friendRequest.preview")}</Preview>
+      <Preview>
+        {t("email.friendRequest.preview", {
+          requesterUsername,
+        })}
+      </Preview>
 
       <Heading as="h1">
         {t.rich("email.friendRequest.title", {

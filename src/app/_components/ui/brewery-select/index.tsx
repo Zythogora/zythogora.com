@@ -57,7 +57,7 @@ const BrewerySelect = ({
   });
 
   useEffect(() => {
-    if (data) {
+    if (data && Array.isArray(data.results)) {
       setBreweries(data.results);
     }
   }, [data]);

@@ -41,8 +41,8 @@ const UserHeader = async ({ user }: UserHeaderProps) => {
     <div className="flex flex-col">
       <div
         className={cn(
-          "flex flex-col gap-y-8 overflow-hidden px-12 drop-shadow",
-          "border-b-2 py-14 md:rounded md:border-2 md:py-10",
+          "flex flex-col gap-y-8 overflow-hidden drop-shadow",
+          "border-b-2 px-10 py-14 md:rounded md:border-2 md:px-12 md:py-10",
           "bg-primary-50 dark:bg-primary-800",
         )}
       >
@@ -136,7 +136,7 @@ const UserHeader = async ({ user }: UserHeaderProps) => {
       </div>
 
       {friendshipStatus === "NOT_FRIENDS" ? (
-        <AddFriendButton friendId={user.id} className="flex md:hidden" />
+        <AddFriendButton friendId={user.id} className="flex p-10 md:hidden" />
       ) : null}
     </div>
   );
