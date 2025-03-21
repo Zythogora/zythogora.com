@@ -35,6 +35,8 @@ export const transformRawBeerToBeer = async (
   abv: rawBeer.abv,
   ibu: rawBeer.ibu ?? undefined,
   color: transformRawColorToColor(rawBeer.color),
+  description: rawBeer.description ?? undefined,
+  releaseYear: rawBeer.releaseYear ?? undefined,
 });
 
 export const transformRawStyleCategoryToStyleCategory = (

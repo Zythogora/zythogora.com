@@ -12,6 +12,7 @@ import FormBrewerySelect from "@/app/_components/form/brewery-select";
 import FormColorSelect from "@/app/_components/form/color-select";
 import FormInput from "@/app/_components/form/input";
 import FormStyleSelect from "@/app/_components/form/style-select";
+import FormTextarea from "@/app/_components/form/textarea";
 import QueryClientProvider from "@/app/_components/providers/query-client-provider";
 import Button from "@/app/_components/ui/button";
 import { Routes } from "@/lib/routes";
@@ -67,20 +68,15 @@ const CreateBeerForm = ({ styleCategories, colors }: CreateBeerFormProps) => {
             label={t("createBeerPage.fields.name.label")}
             field={fields.name}
             type="text"
-            // className="col-span-6 @3xl:col-span-5"
-            className="col-span-8 @3xl:col-span-7"
+            className="col-span-8 @3xl:col-span-5"
           />
 
-          {/* <FormInput
-            label={t("createBeerPage.fields.releasedIn.label")}
-            field={fields.releasedIn}
+          <FormInput
+            label={t("createBeerPage.fields.releaseYear.label")}
+            field={fields.releaseYear}
             type="number"
-            className={cn(
-              "col-span-2",
-              "*:data-[slot=label]:text-nowrap",
-              "**:data-[slot=input]:px-2 **:data-[slot=input]:text-center @3xl:**:data-[slot=input]:px-5 @3xl:**:data-[slot=input]:text-left",
-            )}
-          /> */}
+            className="col-span-8 col-start-1 row-start-6 @3xl:col-span-2 @3xl:col-start-6 @3xl:row-start-1"
+          />
 
           <FormBrewerySelect
             label={t("createBeerPage.fields.brewery.label")}
@@ -122,12 +118,12 @@ const CreateBeerForm = ({ styleCategories, colors }: CreateBeerFormProps) => {
             )}
           />
 
-          {/* <FormTextarea
+          <FormTextarea
             label={t("createBeerPage.fields.description.label")}
             field={fields.description}
             rows={4}
             className="col-span-8 @3xl:col-span-7"
-          /> */}
+          />
 
           <Button
             type="submit"

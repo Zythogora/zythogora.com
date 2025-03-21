@@ -129,6 +129,8 @@ const BeerPage = async ({ params, searchParams }: BeerPageProps) => {
           ibu={beer.ibu}
           style={beer.style}
           color={beer.color}
+          description={beer.description}
+          releaseYear={beer.releaseYear}
           className="md:rounded-t-xl md:rounded-b"
         />
 

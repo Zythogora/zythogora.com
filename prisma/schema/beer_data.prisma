@@ -1,9 +1,11 @@
 model Beers {
-  id   String @id @default(nanoid())
-  slug String @unique
-  name String
-  abv  Float
-  ibu  Int?
+  id          String  @id @default(nanoid())
+  slug        String  @unique
+  name        String
+  abv         Float
+  ibu         Int?
+  description String?
+  releaseYear Int?    @map("release_year")
 
   breweryId String    @map("brewery_id")
   brewery   Breweries @relation(fields: [breweryId], references: [id])

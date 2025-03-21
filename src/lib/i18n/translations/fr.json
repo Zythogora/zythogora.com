@@ -276,6 +276,10 @@
     }
   },
   "beerPage": {
+    "details": {
+      "description": "Description",
+      "releaseYear": "Année de sortie"
+    },
     "reviews": {
       "tabs": {
         "myReviews": {
@@ -541,8 +545,8 @@
       "name": {
         "label": "Nom de la bière"
       },
-      "releasedIn": {
-        "label": "Sortie en"
+      "releaseYear": {
+        "label": "Année de sortie"
       },
       "brewery": {
         "label": "Brasserie"
@@ -568,8 +572,8 @@
       "submitting": "Création en cours..."
     },
     "errors": {
-      "MIN_CREATION_YEAR_ERROR": "L'année de création ne peut pas être antérieure à l'an 1000",
-      "MAX_CREATION_YEAR_ERROR": "L'année de création ne peut pas être dans le futur"
+      "MIN_RELEASE_YEAR_ERROR": "L'année de sortie ne peut pas être antérieure à l'an 1000",
+      "MAX_RELEASE_YEAR_ERROR": "L'année de sortie ne peut pas être dans le futur"
     }
   },
   "createBreweryPage": {
