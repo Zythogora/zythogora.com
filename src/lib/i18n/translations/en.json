@@ -276,7 +276,20 @@
     }
   },
   "beerPage": {
-    "reviewCount": "{count, plural, =0 {No reviews yet} =1 {1 review} other {# reviews}}",
+    "reviews": {
+      "tabs": {
+        "myReviews": {
+          "title": "My reviews",
+          "count": "{count, plural, =0 {You have not <muted>(yet)</muted> tasted this beer!} =1 {1 review} other {# reviews}}"
+        },
+        "friendReviews": {
+          "title": "Friend reviews",
+          "loading": "Loading friend reviews...",
+          "count": "{count, plural, =0 {Your friends have not <muted>(yet)</muted> tasted this beer!} =1 {1 review} other {# reviews}}"
+        }
+      },
+      "login": "Please <link>sign in</link> to read reviews"
+    },
     "result": {
       "servingFrom": {
         "DRAFT": "On draught",

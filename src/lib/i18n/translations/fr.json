@@ -276,7 +276,20 @@
     }
   },
   "beerPage": {
-    "reviewCount": "{count, plural, =0 {Pas encore de critique} =1 {1 critique} other {# critiques}}",
+    "reviews": {
+      "tabs": {
+        "myReviews": {
+          "title": "Mes critiques",
+          "count": "{count, plural, =0 {Vous n'avez pas <muted>(encore)</muted> goûté cette bière !} =1 {1 critique} other {# critiques}}"
+        },
+        "friendReviews": {
+          "title": "Critiques de mes amis",
+          "loading": "Chargement des critiques de mes amis...",
+          "count": "{count, plural, =0 {Vos amis n'ont pas <muted>(encore)</muted> goûté cette bière !} =1 {1 critique} other {# critiques}}"
+        }
+      },
+      "login": "<link>Connectez-vous</link> pour lire les critiques"
+    },
     "result": {
       "servingFrom": {
         "DRAFT": "À la pression",

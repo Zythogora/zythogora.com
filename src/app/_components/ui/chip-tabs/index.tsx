@@ -1,18 +1,41 @@
 "use client";
 
 import * as TabsPrimitive from "@radix-ui/react-tabs";
+import { useSearchParams } from "next/navigation";
 
+import { usePathname, useRouter } from "@/lib/i18n";
 import { cn } from "@/lib/tailwind";
 
 import type { ComponentProps } from "react";
 
 const ChipTabs = ({
+  onValueChange,
   className,
   ...restProps
 }: ComponentProps<typeof TabsPrimitive.Root>) => {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const removePageQueryParam = () => {
+    const newSearchParams = new URLSearchParams(searchParams);
+
+    if (newSearchParams.has("page")) {
+      newSearchParams.delete("page");
+    }
+
+    router.replace(`${pathname}?${newSearchParams.toString()}`);
+  };
+
+  const handleValueChange = (value: string) => {
+    onValueChange?.(value);
+    removePageQueryParam();
+  };
+
   return (
     <TabsPrimitive.Root
       data-slot="chip-tabs"
+      onValueChange={handleValueChange}
       className={cn("flex flex-col gap-y-6", className)}
       {...restProps}
     />
