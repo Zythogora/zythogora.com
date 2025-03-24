@@ -1,7 +1,6 @@
 "use client";
 
 import HeaderSearchBar from "@/app/[locale]/(business)/(with-header)/_components/header/search-bar";
-import StPatrickHatIcon from "@/app/_components/icons/st-patrick-hat";
 import UserMenu from "@/app/_components/user-menu";
 import { Link } from "@/lib/i18n";
 import { Routes } from "@/lib/routes";
@@ -18,18 +17,12 @@ const Header = () => {
       <Link
         href={Routes.HOME}
         className={cn(
-          "relative",
           "font-title text-2xl font-semibold tracking-wide uppercase",
           "hidden md:block",
           "invisible w-0 lg:visible lg:w-fit",
         )}
       >
         <span>Zythogora</span>
-
-        <StPatrickHatIcon
-          size={24}
-          className="absolute -top-2.75 -left-2 size-6 -rotate-10"
-        />
       </Link>
 
       <HeaderSearchBar className="grow md:w-128 md:grow-0" />
