@@ -3,6 +3,7 @@
 import { LogInIcon, LogOutIcon, UserRoundPlusIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 
+import DiscordIcon from "@/app/_components/icons/social/types/discord";
 import UserIcon from "@/app/_components/icons/user";
 import Button from "@/app/_components/ui/button";
 import {
@@ -134,6 +135,23 @@ const UserMenu = ({ className }: UserMenuProps) => {
 
           <ThemeSubMenu />
         </DropdownMenuGroup>
+
+        <DropdownMenuSeparator />
+
+        <DropdownMenuItem className="items-start" asChild>
+          <a href="https://discord.gg/wejRt3kWvT" target="_blank">
+            <DiscordIcon
+              size={16}
+              className="fill-foreground mt-0.5 size-4 shrink-0"
+            />
+
+            <p className="flex flex-col">
+              {t.rich("userMenu.discord", {
+                br: () => <br />,
+              })}
+            </p>
+          </a>
+        </DropdownMenuItem>
 
         <DropdownMenuSeparator />
 

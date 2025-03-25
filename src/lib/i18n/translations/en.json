@@ -153,6 +153,7 @@
       "dark": "Dark theme",
       "system": "System theme"
     },
+    "discord": "Got feedback?<br></br>Found a bug?<br></br>Join the discord!",
     "auth": {
       "signIn": "Sign in",
       "signUp": "Sign up",
