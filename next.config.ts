@@ -5,7 +5,15 @@ import type { NextConfig } from "next";
 const withNextIntl = createNextIntlPlugin("./src/lib/i18n/index.ts");
 
 const nextConfig: NextConfig = withNextIntl({
-  /* config options here */
+  images: {
+    remotePatterns: [
+      {
+        hostname: "storage.ko-fi.com",
+        protocol: "https",
+        pathname: "/cdn/**",
+      },
+    ],
+  },
 });
 
 export default nextConfig;

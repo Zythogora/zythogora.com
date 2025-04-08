@@ -234,8 +234,41 @@
     }
   },
   "home": {
-    "title": "Bienvenue sur<br></br><highlight>Zythogora</highlight>",
-    "stPatrickWelcomeMessage": "Joyeuse <highlight>Saint-Patrick</highlight> à tous les amateurs de bières crafts !"
+    "whatsZythogora": "<highlight>Zythogora</highlight><br></br>c'est quoi ?",
+    "callouts": {
+      "search": {
+        "common": "Cherchez une",
+        "beers": "bière",
+        "breweries": "brasserie",
+        "users": "personne"
+      },
+      "createCollections": "Créez des<br></br>collections",
+      "writeReviews": "Écrivez des<br></br>critiques",
+      "shareThem": "Partagez les<br></br>à vos amis"
+    },
+    "largeCards": {
+      "first": "C'est l'application de critique de bières qui va en profondeur dans la dégustation.<br></br><br></br>De l'apparence aux arômes, en passant par le ressenti en bouche, Zythogora vous permet de décrire en détail toutes vos impressions sur les bières que vous avez goûtées.",
+      "second": "Retrouvez votre historique de dégustations, créez des listes pour regrouper vos coups de cœur, suivez les découvertes de vos amis, et bien plus encore avec Zythogora !"
+    },
+    "smallCards": {
+      "free": {
+        "title": "Gratuit<br></br>pour tous",
+        "description": "Parce que l'on souhaite que l'amour que l'on porte à la bière artisanale soit partagé par le plus grand nombre, ça n'avait pas de sens de restreindre l'utilisation de Zythogora derrière un abonnement mensuel.<br></br><br></br>Quels que soient vos moyens, vous pourrez donc gratuitement garder une trace des petites pépites que vous découvrez !"
+      },
+      "adFree": {
+        "iconPlaceholder": "PUB",
+        "title": "Sans<br></br>publicité",
+        "description": "Parce que vendre votre temps de cerveau à de grands groupes publicitaires dont le seul but est de brasser le plus d'argent possible au détriment du vivant, que faire la promotion de cette merveilleuse nouvelle bière industrielle ou de cette incroyable tireuse dernier cri, tout ça ne colle pas avec le projet et les valeurs portées par Zythogora."
+      },
+      "openSource": {
+        "title": "Open<br></br>source",
+        "description": "Parce qu'à l'heure où les algorithmes contrôlent de plus en plus d'aspects de nos vies, on est persuadé que des solutions complètement transparentes sont essentielles pour construire un futur meilleur.<br></br><br></br>Vous pouvez donc explorer le code source de Zythogora, y contribuer ou même décider de ne pas utiliser ce site et héberger votre propre version chez vous."
+      }
+    },
+    "donate": {
+      "description": "En revanche, si vous pouvez vous le permettre et que vous aimez Zythogora, vous pouvez nous faire un don pour soutenir le projet !",
+      "cta": "Faire un don sur Ko-fi"
+    }
   },
   "searchPage": {
     "metadata": {

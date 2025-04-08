@@ -26,13 +26,19 @@ import { generatePath } from "@/lib/routes/utils";
 import { cn } from "@/lib/tailwind";
 
 import type { SearchKind } from "@/app/[locale]/(business)/(without-header)/search/types";
-import type { ChangeEvent } from "react";
+import type { ChangeEvent, FocusEvent } from "react";
 
 interface HeaderSearchBarProps {
   className?: string;
+  onFocus?: VoidFunction;
+  onLeave?: VoidFunction;
 }
 
-const HeaderSearchBar = ({ className }: HeaderSearchBarProps) => {
+const HeaderSearchBar = ({
+  className,
+  onFocus,
+  onLeave,
+}: HeaderSearchBarProps) => {
   const t = useTranslations();
 
   const router = useRouter();
@@ -49,21 +55,39 @@ const HeaderSearchBar = ({ className }: HeaderSearchBarProps) => {
   useEffect(() => {
     const current = inputRef.current;
 
-    const focus = () => setInputHasFocus(true);
-    const blur = () => setInputHasFocus(false);
+    const focus = () => {
+      setInputHasFocus(true);
+      onFocus?.();
+    };
+    const blur = (e: FocusEvent<HTMLInputElement>) => {
+      setInputHasFocus(false);
+      if (e.target.value === "") {
+        setResultsVisible(false);
+      }
+    };
 
     if (current) {
       current.addEventListener("focus", focus);
-      current.addEventListener("blur", blur);
+      current.addEventListener("blur", (e) =>
+        blur(e as unknown as FocusEvent<HTMLInputElement>),
+      );
     }
 
     return () => {
       if (current) {
         current.removeEventListener("focus", focus);
-        current.removeEventListener("blur", blur);
+        current.removeEventListener("blur", (e) =>
+          blur(e as unknown as FocusEvent<HTMLInputElement>),
+        );
       }
     };
-  }, [inputRef]);
+  }, [inputRef, onFocus]);
+
+  useEffect(() => {
+    if (!resultsVisible && !inputHasFocus) {
+      onLeave?.();
+    }
+  }, [onLeave, resultsVisible, inputHasFocus]);
 
   useEffect(() => {
     // Unfocus the input if the user navigates to a new page
@@ -148,7 +172,9 @@ const HeaderSearchBar = ({ className }: HeaderSearchBarProps) => {
                   )}
                 >
                   {platform.isMac ? (
-                    <span className="flex h-4 flex-col justify-center">⌘</span>
+                    <span className="flex h-4 flex-col justify-center text-base">
+                      ⌘
+                    </span>
                   ) : (
                     <>
                       <span className="text-xs">Ctrl</span>
