@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { Suspense, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 
 import HasVerifiedEmail from "@/app/[locale]/(business)/(with-header)/_components/has-verified-email";
 import HeaderSearchBar from "@/app/[locale]/(business)/(with-header)/_components/header/search-bar";
@@ -35,6 +35,14 @@ const HomePage = () => {
     setSearchBarOpen(false);
     document.body.style.overflow = "auto";
   };
+
+  // Reset the body overflow when the page is unmounted
+  useEffect(
+    () => () => {
+      document.body.style.overflow = "auto";
+    },
+    [],
+  );
 
   return (
     <div className="relative isolate flex flex-col overflow-x-clip scroll-smooth bg-stone-50">

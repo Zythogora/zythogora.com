@@ -72,8 +72,8 @@ const ProfilePage = async ({ params, searchParams }: ProfilePageProps) => {
 
       <div
         className={cn(
-          "grid grid-cols-[minmax(0,1fr)_auto] gap-x-4 gap-y-8 pb-12",
-          "px-10 pt-6 md:px-0 md:pt-12",
+          "grid grid-cols-[minmax(0,1fr)_auto] gap-x-4 gap-y-8 py-12",
+          "px-10 md:px-0",
         )}
       >
         {reviews.results.map((review) => (
