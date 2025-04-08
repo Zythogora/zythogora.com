@@ -234,8 +234,41 @@
     }
   },
   "home": {
-    "title": "Welcome to<br></br><highlight>Zythogora</highlight>",
-    "stPatrickWelcomeMessage": "Happy <highlight>St Patrick's Day</highlight> to you, fellow craft beer lover!"
+    "whatsZythogora": "<highlight>Zythogora</highlight><br></br>what is it?",
+    "callouts": {
+      "search": {
+        "common": "Search for a",
+        "beers": "beer",
+        "breweries": "brewery",
+        "users": "person"
+      },
+      "createCollections": "Create<br></br>collections",
+      "writeReviews": "Write<br></br>reviews",
+      "shareThem": "Share them with<br></br>your friends"
+    },
+    "largeCards": {
+      "first": "It's the beer review app that goes deep into the tasting process.<br></br><br></br>From appearance and aromas to mouthfeel and duration, Zythogora allows you to describe in detail all your impressions on the beers you've tasted.",
+      "second": "Keep track of your tasting history, create lists to organize your favorites, follow your friends' discoveries, and much more with Zythogora!"
+    },
+    "smallCards": {
+      "free": {
+        "title": "Free",
+        "description": "Because we want our love of craft beer to be shared by as many people as possible, it didn't make sense to limit the use of Zythogora to a monthly subscription.<br></br><br></br>So, whatever your means, you can keep track of the little gems you discover for free!"
+      },
+      "adFree": {
+        "iconPlaceholder": "AD",
+        "title": "Ad-free",
+        "description": "Because selling your brain time to large advertising groups whose only goal is to make as much money as possible at the expense of the living world, or making the promotion of this marvellous new industrial beer or of this incredible state-of-the-art tap machine, is not in line with Zythogora's values."
+      },
+      "openSource": {
+        "title": "Open-source",
+        "description": "Because in a time when algorithms control more and more aspects of our lives, we're convinced that fully transparent solutions are essential for building a better future.<br></br><br></br>Therefore, you can explore Zythogora's source code, contribute to it, or even decide not to use this site and host your own version at home."
+      }
+    },
+    "donate": {
+      "description": "However, if you can afford it and love Zythogora, you can make a donation to support the project!",
+      "cta": "Donate on Ko-fi"
+    }
   },
   "searchPage": {
     "metadata": {
