@@ -27,6 +27,7 @@ const BeerReviewCard = async ({ review }: BeerReviewCardProps) => {
         username: review.username,
         reviewSlug: review.slug,
       })}
+      prefetch={true}
       className="col-span-2 grid grid-cols-subgrid"
     >
       <div className="flex flex-row items-center gap-x-4">

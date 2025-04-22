@@ -34,6 +34,7 @@ const BreweryBeerList = async ({
               brewerySlug,
               beerSlug: beer.slug,
             })}
+            prefetch={true}
           >
             <BreweryBeer
               name={beer.name}

@@ -1,7 +1,6 @@
 "server only";
 
 import { nanoid } from "nanoid";
-import { cache } from "react";
 
 import {
   InvalidBreweryError,
@@ -17,6 +16,7 @@ import {
   transformRawStyleCategoryToStyleCategory,
 } from "@/domain/beers/transforms";
 import { getCurrentUser } from "@/lib/auth";
+import { nextCache } from "@/lib/cache";
 import { getPaginatedResults } from "@/lib/pagination";
 import prisma, { getPrismaTransactionClient } from "@/lib/prisma";
 import { slugify } from "@/lib/prisma/utils";
@@ -35,8 +35,12 @@ import type {
 } from "@/lib/pagination/types";
 import type { Prisma } from "@prisma/client";
 
-export const getBeerBySlug = cache(
-  async (beerSlug: string, brewerySlug: string): Promise<Beer> => {
+export const getBeerBySlug = nextCache({
+  tags: ([beerSlug, brewerySlug]) => [
+    `brewery/slug:${brewerySlug}`,
+    `beer/slug:${beerSlug}`,
+  ],
+  callback: async (beerSlug: string, brewerySlug: string): Promise<Beer> => {
     if (brewerySlug.length < 4 || beerSlug.length < 4) {
       throw new InvalidBeerSlugError();
     }
@@ -81,7 +85,7 @@ export const getBeerBySlug = cache(
 
     return transformRawBeerToBeer(beer);
   },
-);
+});
 
 export const getColors = async (): Promise<Color[]> => {
   const colors = await prisma.colors.findMany();

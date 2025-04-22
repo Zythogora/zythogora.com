@@ -57,6 +57,7 @@ const Pagination = ({ current, total, className }: PaginationProps) => {
         <li>
           <Link
             href={getPageUrl(current - 1)}
+            prefetch={true}
             aria-label={t("pagination.previous")}
             aria-disabled={current === 1 ? true : undefined}
             role={current === 1 ? "link" : undefined}
@@ -82,6 +83,7 @@ const Pagination = ({ current, total, className }: PaginationProps) => {
         <li>
           <Link
             href={getPageUrl(current + 1)}
+            prefetch={true}
             aria-label={t("pagination.next")}
             aria-disabled={current === total ? true : undefined}
             role={current === total ? "link" : undefined}

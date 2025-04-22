@@ -65,7 +65,7 @@ const BeerCard = async ({
           <div className="bg-foreground absolute bottom-1.5 left-[calc(50%-theme(spacing.8))] h-1 w-16 rounded-full opacity-50" />
         ) : null}
 
-        <div className="flex flex-col gap-y-1">
+        <div className="flex w-full flex-col gap-y-1">
           <h1 className="text-left text-2xl md:text-4xl">{name}</h1>
 
           <div
@@ -90,6 +90,7 @@ const BeerCard = async ({
                     href={generatePath(Routes.BREWERY, {
                       brewerySlug: brewery.slug,
                     })}
+                    prefetch={true}
                     title={brewery.name}
                     className="text-primary cursor-pointer truncate"
                   >
@@ -101,7 +102,7 @@ const BeerCard = async ({
           </div>
         </div>
 
-        <div className="grid grid-cols-5 items-center justify-between gap-x-4">
+        <div className="grid w-full grid-cols-5 items-center justify-between gap-x-4">
           <DescriptionList
             label={t("common.beer.style")}
             value={style}
@@ -128,7 +129,9 @@ const BeerCard = async ({
         </div>
 
         {hasDetails ? (
-          <CollapsibleContent className={cn("contents", "text-xs md:text-sm")}>
+          <CollapsibleContent
+            className={cn("contents w-full", "text-xs md:text-sm")}
+          >
             {description ? (
               <DescriptionList
                 label={t("beerPage.details.description")}

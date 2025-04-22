@@ -251,6 +251,7 @@ const HeaderSearchBar = ({
                                 brewerySlug: beer.brewery.slug,
                                 beerSlug: beer.slug,
                               })}
+                              prefetch={true}
                             >
                               <BeerSearchResult
                                 name={beer.name}
@@ -282,6 +283,7 @@ const HeaderSearchBar = ({
                                 href={generatePath(Routes.BREWERY, {
                                   brewerySlug: brewery.slug,
                                 })}
+                                prefetch={true}
                               >
                                 <BrewerySearchResult
                                   key={brewery.id}
@@ -311,6 +313,7 @@ const HeaderSearchBar = ({
                                   href={generatePath(Routes.PROFILE, {
                                     username: user.username,
                                   })}
+                                  prefetch={true}
                                 >
                                   <UserSearchResult
                                     key={user.id}
@@ -337,6 +340,7 @@ const HeaderSearchBar = ({
                       >
                         <Link
                           href={`${Routes.SEARCH}?search=${search}&kind=${searchKind}`}
+                          prefetch={true}
                           className="text-primary-700 dark:text-primary underline"
                         >
                           {t(`headerSearch.${searchKind}.seeMore`, {
