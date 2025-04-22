@@ -47,6 +47,7 @@ const BreweryTab = async ({ results, count, page }: BreweryTabProps) => {
             href={generatePath(Routes.BREWERY, {
               brewerySlug: brewery.slug,
             })}
+            prefetch={true}
           >
             <BrewerySearchResult
               key={brewery.id}

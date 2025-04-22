@@ -1,7 +1,8 @@
 import { getTranslations } from "next-intl/server";
-import { Suspense } from "react";
+import { Fragment, Suspense } from "react";
 
 import BeerReviewCard from "@/app/[locale]/(business)/(with-header)/breweries/[brewerySlug]/beers/[beerSlug]/_components/beer-reviews/review-card";
+import BeerReviewCardSkeleton from "@/app/[locale]/(business)/(with-header)/breweries/[brewerySlug]/beers/[beerSlug]/_components/beer-reviews/review-card/skeleton";
 import Await from "@/app/_components/await";
 import {
   ChipTabContent,
@@ -42,7 +43,7 @@ const BeerReviews = async ({ beerId, page }: BeerReviewsProps) => {
     );
   }
 
-  const yourReviews = await getBeerReviewsByUser({
+  const yourReviewsPromise = getBeerReviewsByUser({
     userId: user.id,
     beerId,
     page,
@@ -67,32 +68,69 @@ const BeerReviews = async ({ beerId, page }: BeerReviewsProps) => {
       </ChipTabList>
 
       <ChipTabContent value="my-reviews" className="flex flex-col gap-y-4">
-        <p>
-          {t.rich("beerPage.reviews.tabs.myReviews.count", {
-            count: yourReviews.count,
-            muted: (chunks) => (
-              <span className="text-foreground/62.5 italic">{chunks}</span>
-            ),
-          })}
-        </p>
+        <Suspense
+          key={`${beerId}-your-reviews-${page}`}
+          fallback={
+            <>
+              <p>{t("beerPage.reviews.tabs.friendReviews.loading")}</p>
 
-        <div className="grid grid-cols-[minmax(0,1fr)_auto] gap-x-4 gap-y-8">
-          {yourReviews.results.map((review) => (
-            <BeerReviewCard key={review.id} review={review} />
-          ))}
+              <div className="grid grid-cols-[minmax(0,1fr)_auto] gap-x-4 gap-y-8">
+                <BeerReviewCardSkeleton />
 
-          <Pagination
-            current={yourReviews.page.current}
-            total={yourReviews.page.total}
-            className="col-span-2"
-          />
-        </div>
+                <BeerReviewCardSkeleton />
+
+                <BeerReviewCardSkeleton />
+              </div>
+            </>
+          }
+        >
+          <Await promise={yourReviewsPromise}>
+            {(reviews) => (
+              <>
+                <p>
+                  {t.rich("beerPage.reviews.tabs.myReviews.count", {
+                    count: reviews.count,
+                    muted: (chunks) => (
+                      <span className="text-foreground/62.5 italic">
+                        {chunks}
+                      </span>
+                    ),
+                  })}
+                </p>
+
+                <div className="grid grid-cols-[minmax(0,1fr)_auto] gap-x-4 gap-y-8">
+                  {reviews.results.map((review) => (
+                    <BeerReviewCard key={review.id} review={review} />
+                  ))}
+
+                  <Pagination
+                    current={reviews.page.current}
+                    total={reviews.page.total}
+                    className="col-span-2"
+                  />
+                </div>
+              </>
+            )}
+          </Await>
+        </Suspense>
       </ChipTabContent>
 
       <ChipTabContent value="friend-reviews" className="flex flex-col gap-y-4">
         <Suspense
           key={`${beerId}-friend-reviews-${page}`}
-          fallback={<p>{t("beerPage.reviews.tabs.friendReviews.loading")}</p>}
+          fallback={
+            <>
+              <p>{t("beerPage.reviews.tabs.friendReviews.loading")}</p>
+
+              <div className="grid grid-cols-[minmax(0,1fr)_auto] gap-x-4 gap-y-8">
+                <BeerReviewCardSkeleton />
+
+                <BeerReviewCardSkeleton />
+
+                <BeerReviewCardSkeleton />
+              </div>
+            </>
+          }
         >
           <Await promise={friendReviewsPromise}>
             {(reviews) => (

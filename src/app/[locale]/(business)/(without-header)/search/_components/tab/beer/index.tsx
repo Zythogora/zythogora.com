@@ -48,6 +48,7 @@ const BeerTab = async ({ results, count, page }: BeerTabProps) => {
               brewerySlug: beer.brewery.slug,
               beerSlug: beer.slug,
             })}
+            prefetch={true}
           >
             <BeerSearchResult
               name={beer.name}

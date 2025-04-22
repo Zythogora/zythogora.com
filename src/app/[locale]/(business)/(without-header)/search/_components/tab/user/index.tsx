@@ -35,6 +35,7 @@ const UserTab = async ({ results, count, page }: UserTabProps) => {
             href={generatePath(Routes.PROFILE, {
               username: user.username,
             })}
+            prefetch={true}
           >
             <UserSearchResult
               key={user.id}

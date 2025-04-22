@@ -106,6 +106,7 @@ const UserReviewPage = async ({ params }: UserReviewPageProps) => {
                   brewerySlug: review.beer.brewery.slug,
                   beerSlug: review.beer.slug,
                 })}
+                prefetch={true}
                 className={cn(
                   "text-primary font-title cursor-pointer",
                   "text-2xl md:text-4xl",
@@ -127,6 +128,7 @@ const UserReviewPage = async ({ params }: UserReviewPageProps) => {
                       href={generatePath(Routes.BREWERY, {
                         brewerySlug: review.beer.brewery.slug,
                       })}
+                      prefetch={true}
                       className="text-primary cursor-pointer truncate"
                     >
                       {chunks}
@@ -206,6 +208,7 @@ const UserReviewPage = async ({ params }: UserReviewPageProps) => {
 
             <Link
               href={generatePath(Routes.PROFILE, { username })}
+              prefetch={true}
               className={cn(
                 "text-primary cursor-pointer",
                 "text-sm md:text-base",

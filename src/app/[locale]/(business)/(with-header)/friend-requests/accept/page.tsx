@@ -87,6 +87,7 @@ const AcceptFriendRequestPage = async ({
           href={generatePath(Routes.PROFILE, {
             username: friendRequest.friend.username,
           })}
+          prefetch={true}
           className="text-primary-700 underline"
         >
           {t("friendRequestPage.cta.visitProfile", {

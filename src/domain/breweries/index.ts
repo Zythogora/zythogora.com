@@ -1,7 +1,6 @@
 "server only";
 
 import { nanoid } from "nanoid";
-import { cache } from "react";
 
 import {
   InvalidBrewerySlugError,
@@ -13,6 +12,7 @@ import {
   transformRawBreweryToBrewery,
 } from "@/domain/breweries/transforms";
 import { getCurrentUser } from "@/lib/auth";
+import { nextCache } from "@/lib/cache";
 import { getPaginatedResults } from "@/lib/pagination";
 import prisma, { getPrismaTransactionClient } from "@/lib/prisma";
 import { slugify } from "@/lib/prisma/utils";
@@ -25,8 +25,9 @@ import type {
 } from "@/lib/pagination/types";
 import type { Prisma } from "@prisma/client";
 
-export const getBreweryBySlug = cache(
-  async (brewerySlug: string): Promise<Brewery> => {
+export const getBreweryBySlug = nextCache({
+  tags: ([brewerySlug]) => [`brewery/slug:${brewerySlug}`],
+  callback: async (brewerySlug: string): Promise<Brewery> => {
     if (brewerySlug.length < 4) {
       throw new InvalidBrewerySlugError();
     }
@@ -65,7 +66,7 @@ export const getBreweryBySlug = cache(
 
     return transformRawBreweryToBrewery(brewery);
   },
-);
+});
 
 interface GetBreweryReviewsParams {
   userId: string;
