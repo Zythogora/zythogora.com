@@ -37,8 +37,15 @@ const parseArray = z.string().transform((str, ctx): string[] => {
 export const serverSideSchema = z.object({
   NODE_ENV: z.nativeEnum(NodeEnv),
   STATIC_GENERATION: z.nativeEnum(StaticGenerationMode),
-  DATABASE_URL: z.string(),
-  DIRECT_URL: z.string(),
+  DATABASE_URL: z.string().url(),
+  DIRECT_URL: z.string().url(),
+  SUPABASE_STORAGE_URL: z.string().url(),
+  S3_REGION: z.string(),
+  S3_ACCESS_KEY: z.string(),
+  S3_SECRET_KEY: z.string(),
+  GCP_PROJECT_ID: z.string(),
+  GCP_SERVICE_ACCOUNT_EMAIL: z.string().email(),
+  GCP_SERVICE_ACCOUNT_PRIVATE_KEY: z.string(),
   RESEND_API_KEY: z.string(),
   EMAIL_FROM: z.string(),
   COOKIE_PREFIX: z.string(),
@@ -47,6 +54,6 @@ export const serverSideSchema = z.object({
 });
 
 export const clientSideSchema = z.object({
-  NEXT_PUBLIC_BASE_URL: z.string(),
+  NEXT_PUBLIC_BASE_URL: z.string().url(),
   NEXT_PUBLIC_APP_NAME: z.string(),
 });

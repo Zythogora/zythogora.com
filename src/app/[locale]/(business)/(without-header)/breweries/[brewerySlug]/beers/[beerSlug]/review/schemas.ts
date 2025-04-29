@@ -101,14 +101,36 @@ export const durationValues = [
   Duration.ENDLESS,
 ] as const;
 
+export const MAX_REVIEW_PICTURE_SIZE = 20 * 1024 * 1024;
+export const ALLOWED_REVIEW_PICTURE_TYPES = [
+  "image/png",
+  "image/jpeg",
+  "image/jpg",
+];
+
 export const reviewSchema = z.object({
   beerId: z.string(),
 
-  globalScore: z.number().min(0).max(10).multipleOf(0.5),
+  globalScore: z
+    .number({
+      required_error: "form.errors.FIELD_REQUIRED",
+    })
+    .min(0)
+    .max(10)
+    .multipleOf(0.5),
   servingFrom: z.enum(servingFromValues, {
     required_error: "form.errors.FIELD_REQUIRED",
   }),
   comment: z.string().optional(),
+  picture: z
+    .custom<File>()
+    .refine((file) => ALLOWED_REVIEW_PICTURE_TYPES.includes(file.type), {
+      message: "form.errors.INVALID_FILE_TYPE",
+    })
+    .refine((file) => file.size <= MAX_REVIEW_PICTURE_SIZE, {
+      message: "form.errors.FILE_SIZE_TOO_LARGE",
+    })
+    .optional(),
 
   labelDesign: z.enum(labelDesignValues).optional(),
   haziness: z.enum(hazinessValues).optional(),

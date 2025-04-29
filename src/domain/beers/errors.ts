@@ -45,3 +45,27 @@ export class UnauthorizedBeerReviewError extends BeerReviewError {
     super("Unauthorized call to submit review");
   }
 }
+
+export class ImageOptimizationError extends BeerReviewError {
+  constructor() {
+    super("Failed to optimize image.");
+  }
+}
+
+export class ExplicitContentCheckError extends Error {
+  constructor() {
+    super("Failed to check for explicit content.");
+  }
+}
+
+export class ExplicitContentError extends BeerReviewError {
+  constructor() {
+    super("The image contains explicit content.");
+  }
+}
+
+export class FileUploadError extends BeerReviewError {
+  constructor() {
+    super("Failed to upload file.");
+  }
+}

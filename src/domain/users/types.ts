@@ -77,6 +77,7 @@ export type Review = {
   globalScore: number;
   servingFrom: ServingFrom;
   comment?: string;
+  pictureUrl?: string;
   labelDesign?: LabelDesign;
   haziness?: Haziness;
   headRetention?: HeadRetention;

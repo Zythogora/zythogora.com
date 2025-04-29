@@ -438,6 +438,15 @@ const UserReviewPage = async ({ params }: UserReviewPageProps) => {
           </div>
         ) : null}
 
+        {review.pictureUrl ? (
+          /* eslint-disable-next-line @next/next/no-img-element */
+          <img
+            src={review.pictureUrl}
+            alt={`${username} - ${review.beer.name}`}
+            className="border-foreground h-auto w-full rounded border-2 drop-shadow"
+          />
+        ) : null}
+
         <div className="isolate">
           <ShareButton
             label={t("reviewPage.actions.share")}

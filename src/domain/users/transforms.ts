@@ -60,6 +60,7 @@ export const transformRawReviewToReview = (rawReview: RawReview): Review => {
     globalScore: rawReview.globalScore.toNumber(),
     servingFrom: rawReview.servingFrom,
     comment: rawReview.comment ?? undefined,
+    pictureUrl: rawReview.pictureUrl ?? undefined,
     labelDesign: rawReview.labelDesign ?? undefined,
     haziness: rawReview.haziness ?? undefined,
     headRetention: rawReview.headRetention ?? undefined,

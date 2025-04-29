@@ -37,6 +37,21 @@ const loadConfig = () => {
       },
       availableProviders: env.AVAILABLE_PROVIDERS,
     },
+    supabase: {
+      storageUrl: env.SUPABASE_STORAGE_URL,
+    },
+    s3: {
+      region: env.S3_REGION,
+      accessKey: env.S3_ACCESS_KEY,
+      secretKey: env.S3_SECRET_KEY,
+    },
+    gcp: {
+      projectId: env.GCP_PROJECT_ID,
+      serviceAccount: {
+        email: env.GCP_SERVICE_ACCOUNT_EMAIL,
+        privateKey: env.GCP_SERVICE_ACCOUNT_PRIVATE_KEY,
+      },
+    },
   };
 };
 
