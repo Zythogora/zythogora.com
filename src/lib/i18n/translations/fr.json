@@ -78,6 +78,12 @@
       "confirmPassword": {
         "placeholder": "Confirmer le mot de passe"
       },
+      "fileUpload": {
+        "ctaImageSingle": "Déposez votre image ici ou cliquez pour parcourir vos fichiers",
+        "ctaRemoveFile": "Supprimer le fichier",
+        "description": "{allowedExtensions} (max. {maxSize})",
+        "allowedExtensions": "{extensions} ou {lastExtension}"
+      },
       "countrySelect": {
         "searchPlaceholder": "Rechercher un pays",
         "noResult": "Aucun pays trouvé"
@@ -107,6 +113,10 @@
       "PASSWORDS_DO_NOT_MATCH": "Les mots de passe ne correspondent pas",
       "URL_INVALID": "L'URL est invalide",
       "COUNTRY_CODE_INVALID": "Pays inconnu",
+      "INVALID_FILE_TYPE": "Le type de fichier est invalide",
+      "FILE_SIZE_TOO_LARGE": "La taille du fichier est trop grande",
+      "FILE_SIZE_TOO_LARGE_MULTIPLE": "Certains fichiers ont une taille trop grande",
+      "TOO_MANY_FILES": "Vous ne pouvez pas uploader autant de fichiers",
       "UNKNOWN_ERROR": "Une erreur inconnue est survenue"
     }
   },
@@ -439,6 +449,9 @@
         },
         "comment": {
           "label": "Commentaire"
+        },
+        "picture": {
+          "label": "Photo"
         }
       }
     },
@@ -571,6 +584,13 @@
       "complete": "Publier la critique",
       "saving": "Publication en cours...",
       "cancel": "Annuler"
+    },
+    "errors": {
+      "EXPLICIT_CONTENT_CHECK": "Une erreur est survenue lors de la vérification du contenu explicite",
+      "EXPLICIT_CONTENT": "La photo contient du contenu explicite et ne peut pas être publiée",
+      "IMAGE_OPTIMIZATION": "Une erreur est survenue lors du traitement de la photo",
+      "FILE_UPLOAD": "Une erreur est survenue lors du téléchargement de la photo",
+      "SOMETHING_WENT_WRONG": "Une erreur est survenue lors de la publication de la critique"
     }
   },
   "createBeerPage": {

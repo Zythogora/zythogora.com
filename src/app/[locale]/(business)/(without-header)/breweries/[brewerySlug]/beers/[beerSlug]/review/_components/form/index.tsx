@@ -9,11 +9,13 @@ import {
 import { parseWithZod } from "@conform-to/zod";
 import { getZodConstraint } from "@conform-to/zod";
 import { useTranslations } from "next-intl";
-import { useActionState } from "react";
+import { useActionState, useEffect, useTransition } from "react";
+import { toast } from "sonner";
 
 import { reviewAction } from "@/app/[locale]/(business)/(without-header)/breweries/[brewerySlug]/beers/[beerSlug]/review/actions";
 import {
   acidityValues,
+  ALLOWED_REVIEW_PICTURE_TYPES,
   aromasIntensityValues,
   bitternessValues,
   bodyStrengthValues,
@@ -23,14 +25,17 @@ import {
   hazinessValues,
   headRetentionValues,
   labelDesignValues,
+  MAX_REVIEW_PICTURE_SIZE,
   reviewSchema,
 } from "@/app/[locale]/(business)/(without-header)/breweries/[brewerySlug]/beers/[beerSlug]/review/schemas";
+import FormFileUpload from "@/app/_components/form/file-upload";
 import FormFiveStepSelector from "@/app/_components/form/five-step-selector";
 import FormGroup from "@/app/_components/form/group";
 import FormServingFromSelector from "@/app/_components/form/serving-form-selector";
 import FormSlider from "@/app/_components/form/slider";
 import FormTextarea from "@/app/_components/form/textarea";
 import Button from "@/app/_components/ui/button";
+import FormError from "@/app/_components/ui/form-error";
 import { usePathname, useRouter } from "@/lib/i18n";
 
 interface ReviewFormProps {
@@ -43,10 +48,11 @@ const ReviewForm = ({ beerId }: ReviewFormProps) => {
   const router = useRouter();
   const pathname = usePathname();
 
-  const [lastResult, action, isPending] = useActionState(
+  const [lastResult, action] = useActionState(
     reviewAction.bind(null, pathname),
     undefined,
   );
+  const [isPending, startTransition] = useTransition();
 
   const [form, fields] = useForm({
     defaultValue: { beerId },
@@ -59,6 +65,14 @@ const ReviewForm = ({ beerId }: ReviewFormProps) => {
       return parseWithZod(formData, { schema: reviewSchema });
     },
 
+    onSubmit(event, { formData }) {
+      event.preventDefault();
+
+      startTransition(() => {
+        action(formData);
+      });
+    },
+
     shouldValidate: "onBlur",
     shouldRevalidate: "onInput",
   });
@@ -66,6 +80,14 @@ const ReviewForm = ({ beerId }: ReviewFormProps) => {
   const handleCancel = () => {
     router.back();
   };
+
+  useEffect(() => {
+    if (lastResult && lastResult.status === "error" && lastResult.error) {
+      // @ts-expect-error Typescript doesn't know that the error is a message key
+      toast.error(t(Object.values(lastResult.error)[0][0]));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [lastResult]);
 
   return (
     <FormProvider context={form.context}>
@@ -98,6 +120,13 @@ const ReviewForm = ({ beerId }: ReviewFormProps) => {
             label={t("reviewPage.overall.fields.comment.label")}
             field={fields.comment}
             rows={6}
+          />
+
+          <FormFileUpload
+            label={t("reviewPage.overall.fields.picture.label")}
+            field={fields.picture}
+            maxSize={MAX_REVIEW_PICTURE_SIZE}
+            acceptedTypes={ALLOWED_REVIEW_PICTURE_TYPES}
           />
         </FormGroup>
 
@@ -200,6 +229,14 @@ const ReviewForm = ({ beerId }: ReviewFormProps) => {
               : t("createReviewPage.actions.complete")}
           </Button>
         </div>
+
+        {lastResult?.error?.[""] ? (
+          <FormError
+            id={form.errorId}
+            errors={lastResult?.error?.[""] ?? []}
+            className="my-0 h-fit"
+          />
+        ) : null}
       </form>
     </FormProvider>
   );

@@ -78,6 +78,12 @@
       "confirmPassword": {
         "placeholder": "Confirm password"
       },
+      "fileUpload": {
+        "ctaImageSingle": "Drop your image here or click to browse",
+        "ctaRemoveFile": "Remove file",
+        "description": "{allowedExtensions} (max. {maxSize})",
+        "allowedExtensions": "{extensions} or {lastExtension}"
+      },
       "countrySelect": {
         "searchPlaceholder": "Search for a country",
         "noResult": "No country found"
@@ -107,6 +113,10 @@
       "PASSWORDS_DO_NOT_MATCH": "The passwords do not match",
       "URL_INVALID": "The URL is invalid",
       "COUNTRY_CODE_INVALID": "Unknown country",
+      "INVALID_FILE_TYPE": "The file type is invalid",
+      "FILE_SIZE_TOO_LARGE": "The file size is too large",
+      "FILE_SIZE_TOO_LARGE_MULTIPLE": "Some files are too large",
+      "TOO_MANY_FILES": "You cannot upload that many files",
       "UNKNOWN_ERROR": "An unknown error occurred"
     }
   },
@@ -442,6 +452,9 @@
         },
         "comment": {
           "label": "Comment"
+        },
+        "picture": {
+          "label": "Picture"
         }
       }
     },
@@ -574,6 +587,13 @@
       "complete": "Complete review",
       "saving": "Saving review...",
       "cancel": "Cancel"
+    },
+    "errors": {
+      "EXPLICIT_CONTENT_CHECK": "An error occurred while checking for explicit content",
+      "EXPLICIT_CONTENT": "The image contains explicit content and cannot be published",
+      "IMAGE_OPTIMIZATION": "An error occurred while processing the image",
+      "FILE_UPLOAD": "An error occurred while uploading the image",
+      "SOMETHING_WENT_WRONG": "An error occurred while submitting the review"
     }
   },
   "createBeerPage": {

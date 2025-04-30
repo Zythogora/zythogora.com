@@ -9,6 +9,10 @@ import {
   UnknownBeerError,
   UnauthorizedBeerReviewError,
   UnauthorizedBeerCreationError,
+  ExplicitContentError,
+  FileUploadError,
+  ImageOptimizationError,
+  ExplicitContentCheckError,
 } from "@/domain/beers/errors";
 import {
   transformRawBeerReviewToBeerReview,
@@ -17,9 +21,12 @@ import {
   transformRawStyleCategoryToStyleCategory,
 } from "@/domain/beers/transforms";
 import { getCurrentUser } from "@/lib/auth";
+import { config } from "@/lib/config";
+import { checkImageForExplicitContent, optimizeImage } from "@/lib/images";
 import { getPaginatedResults } from "@/lib/pagination";
 import prisma, { getPrismaTransactionClient } from "@/lib/prisma";
 import { slugify } from "@/lib/prisma/utils";
+import { uploadFile } from "@/lib/storage";
 
 import type { CreateReviewData } from "@/app/[locale]/(business)/(without-header)/breweries/[brewerySlug]/beers/[beerSlug]/review/schemas";
 import type { CreateBeerData } from "@/app/[locale]/(business)/(without-header)/create/beer/schemas";
@@ -211,6 +218,55 @@ export const reviewBeer = async (
     throw new UnknownBeerError();
   }
 
+  let pictureUrl: string | null = null;
+  if (review.picture) {
+    const imageBuffer = Buffer.from(await review.picture.arrayBuffer());
+
+    const [explicitContentResult, optimizedImageResult] =
+      await Promise.allSettled([
+        checkImageForExplicitContent(imageBuffer),
+        optimizeImage(imageBuffer),
+      ]);
+
+    if (explicitContentResult.status === "rejected") {
+      console.error(
+        "Failed to check for explicit content",
+        explicitContentResult.reason,
+      );
+      throw new ExplicitContentCheckError();
+    }
+
+    if (optimizedImageResult.status === "rejected") {
+      console.error("Failed to optimize image", optimizedImageResult.reason);
+      throw new ImageOptimizationError();
+    }
+
+    const { isExplicit, detections } = explicitContentResult.value;
+    const optimizedImage = optimizedImageResult.value;
+
+    if (isExplicit) {
+      console.error(`Explicit content detected: ${JSON.stringify(detections)}`);
+      throw new ExplicitContentError();
+    }
+
+    const bucketName = "review-pictures";
+    const fileName = `${user.id}/${nanoid()}.jpg`;
+
+    try {
+      await uploadFile({
+        bucketName,
+        fileName,
+        fileBody: optimizedImage,
+        contentType: "image/jpeg",
+      });
+    } catch (error) {
+      console.error("Failed to upload image", error);
+      throw new FileUploadError();
+    }
+
+    pictureUrl = `${config.supabase.storageUrl}/object/public/${bucketName}/${fileName}`;
+  }
+
   const id = nanoid();
 
   const createdReview = await prisma.reviews.create({
@@ -219,11 +275,12 @@ export const reviewBeer = async (
       userId: user.id,
 
       id: nanoid(),
-      slug: slugify(id, beer.slug),
+      slug: slugify(id, beer.name),
 
       globalScore: review.globalScore,
       servingFrom: review.servingFrom,
       comment: review.comment,
+      pictureUrl,
 
       labelDesign: review.labelDesign,
       haziness: review.haziness,

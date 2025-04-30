@@ -28,6 +28,7 @@ model Reviews {
   globalScore          Decimal               @map("global_score") @db.Decimal(3, 1)
   servingFrom          ServingFrom           @map("serving_from")
   comment              String?
+  pictureUrl           String?               @map("picture_url")
   labelDesign          LabelDesign?          @map("label_design")
   haziness             Haziness?
   headRetention        HeadRetention?        @map("head_retention")
