@@ -274,7 +274,7 @@ export const reviewBeer = async (
       beerId,
       userId: user.id,
 
-      id: nanoid(),
+      id,
       slug: slugify(id, beer.name),
 
       globalScore: review.globalScore,
