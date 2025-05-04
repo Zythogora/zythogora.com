@@ -22,7 +22,11 @@ import {
 } from "@/domain/beers/transforms";
 import { getCurrentUser } from "@/lib/auth";
 import { config } from "@/lib/config";
-import { checkImageForExplicitContent, optimizeImage } from "@/lib/images";
+import {
+  checkImageForExplicitContent,
+  createPreviews,
+  optimizeImage,
+} from "@/lib/images";
 import { getPaginatedResults } from "@/lib/pagination";
 import prisma, { getPrismaTransactionClient } from "@/lib/prisma";
 import { slugify } from "@/lib/prisma/utils";
@@ -250,21 +254,35 @@ export const reviewBeer = async (
     }
 
     const bucketName = "review-pictures";
-    const fileName = `${user.id}/${nanoid()}.jpg`;
+    const fileId = nanoid();
+    const baseFileName = `${user.id}/${fileId}.jpg`;
 
     try {
-      await uploadFile({
-        bucketName,
-        fileName,
-        fileBody: optimizedImage,
-        contentType: "image/jpeg",
-      });
+      await Promise.all([
+        uploadFile({
+          bucketName,
+          fileName: baseFileName,
+          fileBody: optimizedImage,
+          contentType: "image/jpeg",
+        }),
+
+        Promise.all(
+          (await createPreviews(optimizedImage)).map(({ name, image }) =>
+            uploadFile({
+              bucketName,
+              fileName: `${user.id}/${fileId}_${name}.jpg`,
+              fileBody: image,
+              contentType: "image/jpeg",
+            }),
+          ),
+        ),
+      ]);
     } catch (error) {
       console.error("Failed to upload image", error);
       throw new FileUploadError();
     }
 
-    pictureUrl = `${config.supabase.storageUrl}/object/public/${bucketName}/${fileName}`;
+    pictureUrl = `${config.supabase.storageUrl}/object/public/${bucketName}/${baseFileName}`;
   }
 
   const id = nanoid();

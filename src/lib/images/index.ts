@@ -4,6 +4,8 @@ import sharp from "sharp";
 
 import { visionClient } from "@/lib/images/gcp";
 
+import type { Preview } from "@/lib/images/types";
+
 interface OptimizeImageOptions {
   maxDimension?: number;
   quality?: number;
@@ -42,4 +44,20 @@ export const checkImageForExplicitContent = async (imageBuffer: Buffer) => {
     safeSearchAnnotation.violence === "VERY_LIKELY";
 
   return { isExplicit, detections: safeSearchAnnotation };
+};
+
+export const createPreviews = async (
+  imageBuffer: Buffer,
+): Promise<Array<Preview>> => {
+  const sharpInstance = sharp(imageBuffer);
+
+  const [previewImage, twitterImage] = await Promise.all([
+    sharpInstance.resize({ width: 1200, height: 630 }).toBuffer(),
+    sharpInstance.resize({ width: 1200, height: 675 }).toBuffer(),
+  ]);
+
+  return [
+    { name: "preview", image: previewImage },
+    { name: "twitter", image: twitterImage },
+  ];
 };

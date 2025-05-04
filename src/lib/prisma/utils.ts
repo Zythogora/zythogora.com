@@ -8,7 +8,7 @@ export const slugify = (id: string, name: string) =>
       .normalize("NFD")
       .replace(/[^\x00-\x7F]/g, "")
       .replace(/[^a-zA-Z0-9\s]/g, "")
-      .slice(0, 60)
+      .slice(0, 59)
       .trim()
       .replace(/\s+/g, "-")
       .toLowerCase(),
