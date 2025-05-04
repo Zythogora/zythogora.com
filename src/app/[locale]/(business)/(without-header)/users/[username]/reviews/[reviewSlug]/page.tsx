@@ -25,6 +25,8 @@ import { Routes } from "@/lib/routes";
 import { generatePath } from "@/lib/routes/utils";
 import { cn } from "@/lib/tailwind";
 
+import type { Metadata } from "next";
+
 interface UserReviewPageProps {
   params: Promise<{
     username: string;
@@ -32,7 +34,9 @@ interface UserReviewPageProps {
   }>;
 }
 
-export async function generateMetadata({ params }: UserReviewPageProps) {
+export async function generateMetadata({
+  params,
+}: UserReviewPageProps): Promise<Metadata> {
   const t = await getTranslations();
 
   const { username, reviewSlug } = await params;
@@ -41,16 +45,38 @@ export async function generateMetadata({ params }: UserReviewPageProps) {
     () => notFound(),
   );
 
+  const title = `${review.user.username} - ${review.beer.name} | ${publicConfig.appName}`;
+  const description = t("reviewPage.metadata.description", {
+    username: review.user.username,
+    beerName: review.beer.name,
+    breweryName: review.beer.brewery.name,
+    servingFrom: review.servingFrom,
+    score: review.globalScore,
+    reviewDate: review.createdAt,
+  });
+
   return {
-    title: `${review.user.username} - ${review.beer.name} | ${publicConfig.appName}`,
-    description: t("reviewPage.metadata.description", {
-      username: review.user.username,
-      beerName: review.beer.name,
-      breweryName: review.beer.brewery.name,
-      servingFrom: review.servingFrom,
-      score: review.globalScore,
-      reviewDate: review.createdAt,
-    }),
+    title,
+    description,
+    openGraph: {
+      type: "website",
+      url: `${publicConfig.baseUrl}/${generatePath(Routes.REVIEW, { username: review.user.username, reviewSlug: review.slug })}`,
+      siteName: "Zythogora",
+      title,
+      description,
+      images: review.pictureUrl
+        ? review.pictureUrl.replace(".jpg", "_preview.jpg")
+        : undefined,
+    },
+    twitter: {
+      card: "summary_large_image",
+      site: "Zythogora",
+      title,
+      description,
+      images: review.pictureUrl
+        ? review.pictureUrl.replace(".jpg", "_twitter.jpg")
+        : undefined,
+    },
   };
 }
 
