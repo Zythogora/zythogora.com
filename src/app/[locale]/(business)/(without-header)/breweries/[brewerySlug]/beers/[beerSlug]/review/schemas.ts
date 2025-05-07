@@ -124,11 +124,27 @@ export const reviewSchema = z.object({
   comment: z.string().optional(),
   picture: z
     .custom<File>()
-    .refine((file) => ALLOWED_REVIEW_PICTURE_TYPES.includes(file.type), {
-      message: "form.errors.INVALID_FILE_TYPE",
-    })
-    .refine((file) => file.size <= MAX_REVIEW_PICTURE_SIZE, {
-      message: "form.errors.FILE_SIZE_TOO_LARGE",
+    .transform((file) => (file.size > 0 ? file : undefined))
+    .superRefine((file, ctx) => {
+      if (file && !ALLOWED_REVIEW_PICTURE_TYPES.includes(file.type)) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "form.errors.INVALID_FILE_TYPE",
+          fatal: true,
+        });
+
+        return z.NEVER;
+      }
+
+      if (file && file.size > MAX_REVIEW_PICTURE_SIZE) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "form.errors.FILE_SIZE_TOO_LARGE",
+          fatal: true,
+        });
+
+        return z.NEVER;
+      }
     })
     .optional(),
 
