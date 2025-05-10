@@ -105,7 +105,7 @@ const UserMenu = ({ className }: UserMenuProps) => {
                 {session.user.username}
               </p>
 
-              <div className="flex w-full flex-row justify-between">
+              <div className="flex w-full flex-row justify-between gap-x-4">
                 <p className="text-sm leading-none">
                   {t.rich("userMenu.user.reviews", {
                     count: session.user.reviewCount,
