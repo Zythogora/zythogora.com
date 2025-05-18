@@ -167,7 +167,8 @@
     "auth": {
       "signIn": "Sign in",
       "signUp": "Sign up",
-      "signOut": "Sign out"
+      "signOut": "Sign out",
+      "editProfile": "Edit my profile"
     }
   },
   "auth": {
@@ -418,6 +419,7 @@
       }
     },
     "menu": {
+      "editProfile": "Edit my profile",
       "shareProfile": {
         "label": "Share profile",
         "actions": {
@@ -427,6 +429,22 @@
       "removeFriend": {
         "label": "Remove friend"
       }
+    }
+  },
+  "editProfilePage": {
+    "title": "Update your profile info",
+    "actions": {
+      "update": "Save changes",
+      "updating": "Saving changes...",
+      "cancel": "Cancel"
+    },
+    "errors": {
+      "NOTHING_TO_UPDATE": "No changes on the profile",
+      "USERNAME_ALREADY_EXISTS": "This username already exists"
+    },
+    "toasts": {
+      "nothingToDo": "No changes!",
+      "success": "Your profile has been updated successfully!"
     }
   },
   "reviewPage": {

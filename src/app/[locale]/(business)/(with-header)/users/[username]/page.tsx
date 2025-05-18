@@ -2,7 +2,6 @@ import { notFound } from "next/navigation";
 import { getLocale } from "next-intl/server";
 
 import UserReviewCard from "@/app/[locale]/(business)/(with-header)/users/[username]/_components/review-card";
-import UserHeader from "@/app/[locale]/(business)/(with-header)/users/[username]/_components/user-header";
 import { profileSearchParamsSchema } from "@/app/[locale]/(business)/(with-header)/users/[username]/schemas";
 import Pagination from "@/app/_components/ui/pagination";
 import { getReviewsByUser, getUserByUsername } from "@/domain/users";
@@ -47,49 +46,28 @@ const ProfilePage = async ({ params, searchParams }: ProfilePageProps) => {
     });
   }
 
-  const user = await getUserByUsername(username).catch(() => notFound());
-
-  if (user.username !== username) {
-    redirect({
-      href: `${generatePath(Routes.PROFILE, { username: user.username })}${
-        searchParamsResult.data.page
-          ? `?page=${searchParamsResult.data.page}`
-          : ""
-      }`,
-      locale,
-    });
-  }
-
   const reviews = await getReviewsByUser({
-    userId: user.id,
+    username,
     page: searchParamsResult.data.page,
     limit: 10,
   });
 
   return (
-    <div className="flex flex-col">
-      <UserHeader user={user} />
+    <div
+      className={cn(
+        "grid grid-cols-[minmax(0,1fr)_auto] gap-x-4 gap-y-8 py-12",
+        "px-10 md:px-0",
+      )}
+    >
+      {reviews.results.map((review) => (
+        <UserReviewCard key={review.id} username={username} review={review} />
+      ))}
 
-      <div
-        className={cn(
-          "grid grid-cols-[minmax(0,1fr)_auto] gap-x-4 gap-y-8 py-12",
-          "px-10 md:px-0",
-        )}
-      >
-        {reviews.results.map((review) => (
-          <UserReviewCard
-            key={review.id}
-            username={user.username}
-            review={review}
-          />
-        ))}
-
-        <Pagination
-          current={reviews.page.current}
-          total={reviews.page.total}
-          className="col-span-2"
-        />
-      </div>
+      <Pagination
+        current={reviews.page.current}
+        total={reviews.page.total}
+        className="col-span-2"
+      />
     </div>
   );
 };

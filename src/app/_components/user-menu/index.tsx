@@ -1,6 +1,11 @@
 "use client";
 
-import { LogInIcon, LogOutIcon, UserRoundPlusIcon } from "lucide-react";
+import {
+  LogInIcon,
+  LogOutIcon,
+  UserPenIcon,
+  UserRoundPlusIcon,
+} from "lucide-react";
 import { useTranslations } from "next-intl";
 
 import DiscordIcon from "@/app/_components/icons/social/types/discord";
@@ -65,6 +70,14 @@ const UserMenu = ({ className }: UserMenuProps) => {
     if (session) {
       router.push(
         generatePath(Routes.PROFILE, { username: session.user.username }),
+      );
+    }
+  };
+
+  const handleEditProfile = () => {
+    if (session) {
+      router.push(
+        generatePath(Routes.EDIT_PROFILE, { username: session.user.username }),
       );
     }
   };
@@ -157,6 +170,15 @@ const UserMenu = ({ className }: UserMenuProps) => {
 
         {session ? (
           <DropdownMenuGroup>
+            <DropdownMenuItem
+              onClick={handleEditProfile}
+              className="flex flex-row gap-x-2"
+            >
+              <UserPenIcon className="text-foreground size-4" />
+
+              {t("userMenu.auth.editProfile")}
+            </DropdownMenuItem>
+
             <DropdownMenuItem
               onClick={handleSignOut}
               className="flex flex-row gap-x-2"

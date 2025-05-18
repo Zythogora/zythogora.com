@@ -34,7 +34,7 @@ const HomeLargeCard = ({ Icon, text, iconClassName }: HomeLargeCardProps) => {
       <p
         className={cn(
           "self-center",
-          "text-justify text-base",
+          "text-justify text-base hyphens-auto",
           "sm:text-left sm:text-lg",
           "lg:text-xl",
           "xl:col-span-2",

@@ -85,15 +85,15 @@ export const getUserByUsername = cache(
 
 export const getReviewsByUser = cache(
   async ({
-    userId,
+    username,
     limit = 20,
     page = 1,
-  }: PaginationParams<{ userId: string }>): Promise<
+  }: PaginationParams<{ username: string }>): Promise<
     PaginatedResults<UserReview>
   > => {
     const [rawReviews, reviewCount] = await Promise.all([
       prisma.reviews.findMany({
-        where: { userId },
+        where: { user: { username } },
         include: {
           beer: {
             include: {
@@ -108,7 +108,7 @@ export const getReviewsByUser = cache(
       }),
 
       prisma.reviews.count({
-        where: { userId },
+        where: { user: { username } },
       }),
     ]);
 

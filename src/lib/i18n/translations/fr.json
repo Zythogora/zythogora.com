@@ -167,7 +167,8 @@
     "auth": {
       "signIn": "Connexion",
       "signUp": "Créer un compte",
-      "signOut": "Déconnexion"
+      "signOut": "Déconnexion",
+      "editProfile": "Modifier mon profil"
     }
   },
   "auth": {
@@ -415,6 +416,7 @@
       }
     },
     "menu": {
+      "editProfile": "Modifier mon profil",
       "shareProfile": {
         "label": "Partager le profil",
         "actions": {
@@ -424,6 +426,22 @@
       "removeFriend": {
         "label": "Supprimer de mes amis"
       }
+    }
+  },
+  "editProfilePage": {
+    "title": "Modifier mon profil",
+    "actions": {
+      "update": "Enregistrer les modifications",
+      "updating": "Enregistrement en cours...",
+      "cancel": "Annuler"
+    },
+    "errors": {
+      "NOTHING_TO_UPDATE": "Aucune modification sur le profil",
+      "USERNAME_ALREADY_EXISTS": "Ce nom d'utilisateur existe déjà"
+    },
+    "toasts": {
+      "nothingToDo": "Aucune modification !",
+      "success": "Les modifications de votre profil ont été enregistrées avec succès !"
     }
   },
   "reviewPage": {

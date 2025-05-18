@@ -5,13 +5,17 @@ import {
   EmailAlreadyExistsError,
   EmailNotVerifiedError,
   InvalidTokenError,
+  NothingToUpdateError,
   PasswordTooLongError,
   PasswordTooShortError,
+  UnauthorizedProfileUpdateError,
   UnknownResetPasswordError,
   UnknownSignInError,
   UnknownSignUpError,
+  UpdateProfileUsernameAlreadyExistsError,
   UsernameAlreadyExistsError,
 } from "@/domain/auth/errors";
+import { getCurrentUser } from "@/lib/auth";
 import { auth } from "@/lib/auth/server";
 import prisma from "@/lib/prisma";
 import { Routes } from "@/lib/routes";
@@ -151,6 +155,35 @@ export const resetPassword = async ({
     console.error(error);
     throw new UnknownResetPasswordError();
   }
+};
+
+type UpdateUserParams = {
+  username?: string;
+};
+
+export const updateUser = async ({ username }: UpdateUserParams) => {
+  const currentUser = await getCurrentUser();
+
+  if (!currentUser) {
+    throw new UnauthorizedProfileUpdateError();
+  }
+
+  if (!username || currentUser.username === username) {
+    throw new NothingToUpdateError();
+  }
+
+  const existingUserWithUsername = await prisma.users.findMany({
+    where: { username: { equals: username, mode: "insensitive" } },
+  });
+
+  if (existingUserWithUsername.length > 0) {
+    throw new UpdateProfileUsernameAlreadyExistsError();
+  }
+
+  await prisma.users.update({
+    where: { id: currentUser.id },
+    data: { username },
+  });
 };
 
 export const isUserVerified = async (email: string) => {

@@ -14,6 +14,8 @@ export const Routes = {
   BEER: "/breweries/:brewerySlug/beers/:beerSlug",
 
   PROFILE: "/users/:username",
+  EDIT_PROFILE: "/users/:username/edit",
+
   REVIEW: "/users/:username/reviews/:reviewSlug",
 
   REVIEW_FORM: "/breweries/:brewerySlug/beers/:beerSlug/review",

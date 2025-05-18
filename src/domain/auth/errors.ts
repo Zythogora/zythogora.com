@@ -100,3 +100,33 @@ export class UnknownResetPasswordError extends ResetPasswordError {
     super(ResetPasswordErrorType.UNKNOWN_RESET_PASSWORD_ERROR);
   }
 }
+
+export enum UpdateProfileErrorType {
+  UNAUTHORIZED = "UNAUTHORIZED",
+  NOTHING_TO_UPDATE = "NOTHING_TO_UPDATE",
+  USERNAME_ALREADY_EXISTS = "USERNAME_ALREADY_EXISTS",
+}
+
+export class UpdateProfileError extends AuthError {
+  constructor(message: string) {
+    super(message);
+  }
+}
+
+export class UnauthorizedProfileUpdateError extends UpdateProfileError {
+  constructor() {
+    super(UpdateProfileErrorType.UNAUTHORIZED);
+  }
+}
+
+export class NothingToUpdateError extends UpdateProfileError {
+  constructor() {
+    super(UpdateProfileErrorType.NOTHING_TO_UPDATE);
+  }
+}
+
+export class UpdateProfileUsernameAlreadyExistsError extends UpdateProfileError {
+  constructor() {
+    super(UpdateProfileErrorType.USERNAME_ALREADY_EXISTS);
+  }
+}
