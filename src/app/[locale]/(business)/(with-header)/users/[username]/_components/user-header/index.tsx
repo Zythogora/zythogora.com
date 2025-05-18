@@ -13,6 +13,7 @@ import {
   InvalidFriendRequestError,
   UnauthorizedFriendshipStatusCallError,
 } from "@/domain/users/errors";
+import { getCurrentUser } from "@/lib/auth";
 import { cn } from "@/lib/tailwind";
 
 import type { User } from "@/domain/users/types";
@@ -23,6 +24,8 @@ interface UserHeaderProps {
 
 const UserHeader = async ({ user }: UserHeaderProps) => {
   const t = await getTranslations();
+
+  const currentUser = await getCurrentUser();
 
   const friendshipStatus = await getFriendshipStatus(user.id).catch((error) => {
     if (error instanceof UnauthorizedFriendshipStatusCallError) {
@@ -80,6 +83,7 @@ const UserHeader = async ({ user }: UserHeaderProps) => {
           ) : null}
 
           <UserMore
+            self={currentUser?.username === user.username}
             username={user.username}
             isFriend={friendshipStatus === "FRIENDS"}
             className="col-start-2 md:col-start-3"

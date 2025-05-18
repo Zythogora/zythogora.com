@@ -1,6 +1,11 @@
 "use client";
 
-import { EllipsisVerticalIcon, Link, Share2Icon } from "lucide-react";
+import {
+  EllipsisVerticalIcon,
+  Link,
+  Share2Icon,
+  UserPenIcon,
+} from "lucide-react";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 
@@ -14,18 +19,30 @@ import {
   DropdownMenuTrigger,
 } from "@/app/_components/ui/dropdown-menu";
 import { publicConfig } from "@/lib/config/client-config";
+import { usePathname, useRouter } from "@/lib/i18n";
 import { Routes } from "@/lib/routes";
 import { generatePath } from "@/lib/routes/utils";
 import { cn } from "@/lib/tailwind";
 
 interface UserMoreProps {
+  self: boolean;
   username: string;
   isFriend: boolean;
   className?: string;
 }
 
-const UserMore = ({ username, className }: UserMoreProps) => {
+const UserMore = ({ self, username, className }: UserMoreProps) => {
   const t = useTranslations();
+
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const isEditing =
+    pathname === generatePath(Routes.EDIT_PROFILE, { username });
+
+  if (isEditing) {
+    return null;
+  }
 
   const handleShare = () => {
     navigator.clipboard.writeText(
@@ -34,6 +51,10 @@ const UserMore = ({ username, className }: UserMoreProps) => {
       })}`,
     );
     toast.success(t("common.actions.copiedToClipboard"));
+  };
+
+  const handleEditProfile = () => {
+    router.push(generatePath(Routes.EDIT_PROFILE, { username }));
   };
 
   return (
@@ -51,6 +72,17 @@ const UserMore = ({ username, className }: UserMoreProps) => {
           "**:data-[slot=menuitem-icon]:text-foreground **:data-[slot=menuitem-icon]:size-4",
         )}
       >
+        {self ? (
+          <DropdownMenuItem
+            onClick={handleEditProfile}
+            data-slot="menuitem-with-icon"
+          >
+            <UserPenIcon data-slot="menuitem-icon" size={16} />
+
+            <span>{t("profilePage.menu.editProfile")}</span>
+          </DropdownMenuItem>
+        ) : null}
+
         <DropdownMenuSub>
           <DropdownMenuSubTrigger data-slot="menuitem-with-icon">
             <Share2Icon data-slot="menuitem-icon" size={16} />

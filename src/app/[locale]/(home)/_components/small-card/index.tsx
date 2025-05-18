@@ -33,7 +33,7 @@ const HomeSmallCard = ({ icon, title, description }: HomeSmallCardProps) => {
 
       <p
         className={cn(
-          "mt-8 self-start text-justify",
+          "mt-8 self-start text-justify hyphens-auto",
           "md:col-start-2 md:row-span-2 md:row-start-1",
           "lg:col-start-1 lg:row-span-1 lg:row-start-3",
         )}
