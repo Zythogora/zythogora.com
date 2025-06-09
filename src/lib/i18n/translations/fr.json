@@ -334,6 +334,11 @@
           "title": "Critiques de mes amis",
           "loading": "Chargement des critiques de mes amis...",
           "count": "{count, plural, =0 {Vos amis n'ont pas <muted>(encore)</muted> goûté cette bière !} =1 {1 critique} other {# critiques}}"
+        },
+        "allReviews": {
+          "title": "Toutes les critiques",
+          "loading": "Chargement de toutes les critiques...",
+          "count": "{count, plural, =0 {Aucune critique <muted>(pour l'instant)</muted> pour cette bière !} =1 {1 critique} other {# critiques}}"
         }
       },
       "login": "<link>Connectez-vous</link> pour lire les critiques"
@@ -378,6 +383,11 @@
               "title": "Critiques de mes amis",
               "loading": "Chargement des critiques de mes amis...",
               "count": "{count, plural, =0 {Vos amis n'ont pas <muted>(encore)</muted> essayé les bières de cette brasserie !} =1 {1 critique} other {# critiques}}"
+            },
+            "allReviews": {
+              "title": "Toutes les critiques",
+              "loading": "Chargement de toutes les critiques...",
+              "count": "{count, plural, =0 {Aucune critique <muted>(pour l'instant)</muted> des bières de cette brasserie !} =1 {1 critique} other {# critiques}}"
             }
           },
           "login": "<link>Connectez-vous</link> pour lire les critiques"
