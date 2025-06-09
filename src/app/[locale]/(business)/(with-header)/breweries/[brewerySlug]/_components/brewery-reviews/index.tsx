@@ -12,6 +12,7 @@ import {
 } from "@/app/_components/ui/chip-tabs";
 import Pagination from "@/app/_components/ui/pagination";
 import {
+  getAllBreweryReviews,
   getBreweryFriendReviewsForUser,
   getBreweryReviewsByUser,
 } from "@/domain/breweries";
@@ -55,6 +56,11 @@ const BreweryReviews = async ({ brewerySlug, page }: BreweryReviewsProps) => {
     page,
   });
 
+  const allReviewsPromise = getAllBreweryReviews({
+    brewerySlug,
+    page,
+  });
+
   return (
     <ChipTabs defaultValue="my-reviews">
       <ChipTabList>
@@ -64,6 +70,10 @@ const BreweryReviews = async ({ brewerySlug, page }: BreweryReviewsProps) => {
 
         <ChipTabTrigger value="friend-reviews">
           {t("breweryPage.tabs.reviews.content.tabs.friendReviews.title")}
+        </ChipTabTrigger>
+
+        <ChipTabTrigger value="all-reviews">
+          {t("breweryPage.tabs.reviews.content.tabs.allReviews.title")}
         </ChipTabTrigger>
       </ChipTabList>
 
@@ -105,6 +115,49 @@ const BreweryReviews = async ({ brewerySlug, page }: BreweryReviewsProps) => {
                 <p>
                   {t.rich(
                     "breweryPage.tabs.reviews.content.tabs.friendReviews.count",
+                    {
+                      count: reviews.count,
+                      muted: (chunks) => (
+                        <span className="text-foreground/62.5 italic">
+                          {chunks}
+                        </span>
+                      ),
+                    },
+                  )}
+                </p>
+
+                <div className="grid grid-cols-[minmax(0,1fr)_auto] gap-x-4 gap-y-8">
+                  {reviews.results.map((review) => (
+                    <BreweryFriendReviewCard key={review.id} review={review} />
+                  ))}
+
+                  <Pagination
+                    current={reviews.page.current}
+                    total={reviews.page.total}
+                    className="col-span-2"
+                  />
+                </div>
+              </>
+            )}
+          </Await>
+        </Suspense>
+      </ChipTabContent>
+
+      <ChipTabContent value="all-reviews" className="flex flex-col gap-y-4">
+        <Suspense
+          key={`${brewerySlug}-all-reviews-${page}`}
+          fallback={
+            <p>
+              {t("breweryPage.tabs.reviews.content.tabs.allReviews.loading")}
+            </p>
+          }
+        >
+          <Await promise={allReviewsPromise}>
+            {(reviews) => (
+              <>
+                <p>
+                  {t.rich(
+                    "breweryPage.tabs.reviews.content.tabs.allReviews.count",
                     {
                       count: reviews.count,
                       muted: (chunks) => (

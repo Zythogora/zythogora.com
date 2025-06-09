@@ -334,6 +334,11 @@
           "title": "Friend reviews",
           "loading": "Loading friend reviews...",
           "count": "{count, plural, =0 {Your friends have not <muted>(yet)</muted> tasted this beer!} =1 {1 review} other {# reviews}}"
+        },
+        "allReviews": {
+          "title": "All reviews",
+          "loading": "Loading all reviews...",
+          "count": "{count, plural, =0 {No reviews <muted>(yet)</muted> for this beer!} =1 {1 review} other {# reviews}}"
         }
       },
       "login": "Please <link>sign in</link> to read reviews"
@@ -378,6 +383,11 @@
               "title": "Friend reviews",
               "loading": "Loading friend reviews...",
               "count": "{count, plural, =0 {Your friends have not <muted>(yet)</muted> reviewed any beers from this brewery!} =1 {1 review} other {# reviews}}"
+            },
+            "allReviews": {
+              "title": "All reviews",
+              "loading": "Loading all reviews...",
+              "count": "{count, plural, =0 {No reviews <muted>(yet)</muted> for beers from this brewery!} =1 {1 review} other {# reviews}}"
             }
           },
           "login": "Please <link>sign in</link> to read reviews"
