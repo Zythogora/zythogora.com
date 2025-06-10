@@ -38,7 +38,6 @@ export const serverSideSchema = z.object({
   NODE_ENV: z.nativeEnum(NodeEnv),
   STATIC_GENERATION: z.nativeEnum(StaticGenerationMode),
   DATABASE_URL: z.string().url(),
-  DIRECT_URL: z.string().url(),
   SUPABASE_STORAGE_URL: z.string().url(),
   S3_REGION: z.string(),
   S3_ACCESS_KEY: z.string(),

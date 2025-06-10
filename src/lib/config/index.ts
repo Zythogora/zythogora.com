@@ -24,7 +24,6 @@ const loadConfig = () => {
     },
     database: {
       url: env.DATABASE_URL,
-      directUrl: env.DIRECT_URL,
     },
     email: {
       from: env.EMAIL_FROM,
