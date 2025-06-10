@@ -8,13 +8,11 @@ import { generatePath } from "@/lib/routes/utils";
 
 import type { BreweryReview } from "@/domain/breweries/types";
 
-interface BreweryFriendReviewCardProps {
+interface BreweryReviewCardProps {
   review: BreweryReview;
 }
 
-const BreweryFriendReviewCard = async ({
-  review,
-}: BreweryFriendReviewCardProps) => {
+const BreweryReviewCard = async ({ review }: BreweryReviewCardProps) => {
   const format = await getFormatter();
 
   return (
@@ -56,4 +54,4 @@ const BreweryFriendReviewCard = async ({
   );
 };
 
-export default BreweryFriendReviewCard;
+export default BreweryReviewCard;
