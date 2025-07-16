@@ -207,7 +207,7 @@ const UserReviewPage = async ({ params }: UserReviewPageProps) => {
               })}
             </p>
 
-            <p className={cn("text-foreground/50", "text-xs md:text-base")}>
+            <p className={cn("text-foreground/50", "text-sm md:text-base")}>
               {formatter.dateTime(review.createdAt, {
                 dateStyle: "short",
                 timeStyle: "short",

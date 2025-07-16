@@ -25,17 +25,14 @@ const DescriptionList = ({
     >
       <dt
         data-slot="description-term"
-        className={cn(
-          "font-title uppercase opacity-50",
-          "text-[10px] md:text-xs",
-        )}
+        className={cn("font-title uppercase opacity-50", "text-xs md:text-sm")}
       >
         {label}
       </dt>
 
       <dd
         data-slot="description-details"
-        className={cn("text-left", "text-xs md:text-sm")}
+        className={cn("text-left", "text-sm md:text-base")}
       >
         {value}
       </dd>

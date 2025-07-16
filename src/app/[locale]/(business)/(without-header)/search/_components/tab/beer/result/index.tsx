@@ -33,8 +33,8 @@ const BeerSearchResult = ({
     <div className="flex w-full flex-row items-center gap-x-4">
       <ColoredPintIcon color={color} size={40} className="size-10" />
 
-      <div className="flex flex-col gap-y-1 overflow-hidden">
-        <p className="font-title truncate text-lg">{name}</p>
+      <div className="flex flex-col gap-y-1.5 overflow-hidden">
+        <p className="font-title truncate text-lg leading-none">{name}</p>
 
         <div className="flex flex-row items-center gap-x-1">
           <CountryFlag

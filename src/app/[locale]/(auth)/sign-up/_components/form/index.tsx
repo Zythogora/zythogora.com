@@ -126,18 +126,18 @@ const SignUpForm = () => {
         </div>
       </div>
 
-      <div className="flex flex-col gap-y-2">
+      <div className="flex flex-col gap-y-4">
         <Button type="submit" disabled={isPending} variant="outline">
           {isPending
             ? t("auth.signUp.actions.signUpPending")
             : t("auth.signUp.actions.signUp")}
         </Button>
 
-        <div className="flex flex-row-reverse items-center justify-between">
+        <div className="mx-1 flex flex-row-reverse flex-wrap-reverse items-center justify-between gap-x-4 gap-y-1">
           <Link
             href={Routes.SIGN_IN}
             className={cn(
-              "font-title mr-1 rounded px-2 py-1 text-sm font-medium",
+              "font-title rounded font-medium",
               "focus-visible:outline-foreground",
             )}
           >

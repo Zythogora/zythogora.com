@@ -6,7 +6,7 @@ const Chip = ({ className, children, ...restProps }: ComponentProps<"p">) => {
   return (
     <p
       className={cn(
-        "bg-foreground/7.5 text-foreground/62.5 rounded-full px-2 py-1 text-xs",
+        "bg-foreground/7.5 text-foreground/62.5 rounded-full px-2 py-1 text-sm",
         className,
       )}
       {...restProps}

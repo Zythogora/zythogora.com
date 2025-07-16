@@ -123,11 +123,11 @@ const FileUpload = ({
               <div className="flex flex-col items-center justify-center px-4 py-3 text-center">
                 <ImageUpIcon className="mb-4 size-12 stroke-1" />
 
-                <p className="mb-1.5 text-sm font-medium">
+                <p className="mb-1.5 font-medium">
                   {t("form.fields.fileUpload.ctaImageSingle")}
                 </p>
 
-                <p className="text-muted-foreground text-xs">
+                <p className="text-muted-foreground text-sm">
                   {t("form.fields.fileUpload.description", {
                     allowedExtensions:
                       extensions.length === 1

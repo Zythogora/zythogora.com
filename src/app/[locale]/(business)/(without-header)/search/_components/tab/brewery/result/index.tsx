@@ -23,21 +23,19 @@ const BrewerySearchResult = ({
   const t = useTranslations();
 
   return (
-    <div className="flex grow flex-col gap-y-1">
-      <div className="flex grow flex-col">
-        <p className="font-title truncate text-lg">{name}</p>
+    <div className="flex grow flex-col gap-y-1.5">
+      <p className="font-title truncate text-lg leading-none">{name}</p>
 
-        <div className="flex flex-row gap-x-1">
-          <CountryFlag
-            country={location.country}
-            size={14}
-            className="size-3.5"
-          />
+      <div className="flex flex-row gap-x-1">
+        <CountryFlag
+          country={location.country}
+          size={14}
+          className="size-3.5"
+        />
 
-          <p className="text-foreground/62.5 text-sm leading-none">
-            {location.country.name}
-          </p>
-        </div>
+        <p className="text-foreground/62.5 text-sm leading-none">
+          {location.country.name}
+        </p>
       </div>
 
       <Chip className="w-fit truncate">

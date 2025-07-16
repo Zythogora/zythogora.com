@@ -30,7 +30,6 @@ const Input = ({ className, type, ...restProps }: ComponentProps<"input">) => {
         type={type === "password" && showPassword ? "text" : type}
         className={cn(
           "bg-background border-foreground flex w-full min-w-0 rounded border-2 px-5 py-4",
-          "text-sm md:text-base",
           "dark:bg-stone-700",
           "placeholder:text-foreground-muted placeholder:select-none",
           "disabled:bg-background-muted disabled:pointer-events-none disabled:cursor-not-allowed",
