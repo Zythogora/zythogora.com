@@ -3,9 +3,12 @@ import { Suspense } from "react";
 
 import BreweryReviewCard from "@/app/[locale]/(business)/(with-header)/breweries/[brewerySlug]/_components/brewery-reviews/brewery-review-card";
 import Await from "@/app/_components/await";
+import ReviewPictureGrid from "@/app/_components/review-picture-grid";
+import ReviewPictureGridLoader from "@/app/_components/review-picture-grid/loader";
 import { ChipTabContent } from "@/app/_components/ui/chip-tabs";
 import Pagination from "@/app/_components/ui/pagination";
 import { getAllBreweryReviews } from "@/domain/breweries";
+import { getLatestBreweryPublicPictures } from "@/domain/breweries";
 
 interface BreweryAllReviewsProps {
   brewerySlug: string;
@@ -18,6 +21,8 @@ const BreweryAllReviews = async ({
 }: BreweryAllReviewsProps) => {
   const t = await getTranslations();
 
+  const latestPicturesPromise = getLatestBreweryPublicPictures({ brewerySlug });
+
   const allReviewsPromise = getAllBreweryReviews({
     brewerySlug,
     page,
@@ -25,6 +30,15 @@ const BreweryAllReviews = async ({
 
   return (
     <ChipTabContent value="all-reviews" className="flex flex-col gap-y-4">
+      <Suspense
+        key={`${brewerySlug}-all-pictures`}
+        fallback={<ReviewPictureGridLoader />}
+      >
+        <Await promise={latestPicturesPromise}>
+          {(pictures) => <ReviewPictureGrid pictures={pictures} />}
+        </Await>
+      </Suspense>
+
       <Suspense
         key={`${brewerySlug}-all-reviews-${page}`}
         fallback={

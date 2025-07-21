@@ -1,11 +1,19 @@
 import { notFound } from "next/navigation";
 import { getLocale } from "next-intl/server";
+import { Suspense } from "react";
 
 import UserReviewCard from "@/app/[locale]/(business)/(with-header)/users/[username]/_components/review-card";
 import UserHeader from "@/app/[locale]/(business)/(with-header)/users/[username]/_components/user-header";
 import { profileSearchParamsSchema } from "@/app/[locale]/(business)/(with-header)/users/[username]/schemas";
+import Await from "@/app/_components/await";
+import ReviewPictureGrid from "@/app/_components/review-picture-grid";
+import ReviewPictureGridLoader from "@/app/_components/review-picture-grid/loader";
 import Pagination from "@/app/_components/ui/pagination";
-import { getReviewsByUser, getUserByUsername } from "@/domain/users";
+import {
+  getReviewsByUser,
+  getUserByUsername,
+  getLatestPicturesByUser,
+} from "@/domain/users";
 import { publicConfig } from "@/lib/config/client-config";
 import { redirect } from "@/lib/i18n";
 import { Routes } from "@/lib/routes";
@@ -60,6 +68,8 @@ const ProfilePage = async ({ params, searchParams }: ProfilePageProps) => {
     });
   }
 
+  const latestPicturesPromise = getLatestPicturesByUser({ userId: user.id });
+
   const reviews = await getReviewsByUser({
     userId: user.id,
     page: searchParamsResult.data.page,
@@ -67,12 +77,20 @@ const ProfilePage = async ({ params, searchParams }: ProfilePageProps) => {
   });
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col gap-y-6">
       <UserHeader user={user} />
+
+      <div className={cn("mt-4 md:-mt-1", "px-10 md:px-0")}>
+        <Suspense fallback={<ReviewPictureGridLoader />}>
+          <Await promise={latestPicturesPromise}>
+            {(pictures) => <ReviewPictureGrid pictures={pictures} />}
+          </Await>
+        </Suspense>
+      </div>
 
       <div
         className={cn(
-          "grid grid-cols-[minmax(0,1fr)_auto] gap-x-4 gap-y-8 py-12",
+          "grid grid-cols-[minmax(0,1fr)_auto] gap-x-4 gap-y-8",
           "px-10 md:px-0",
         )}
       >

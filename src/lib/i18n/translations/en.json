@@ -54,6 +54,9 @@
     },
     "actions": {
       "copiedToClipboard": "The URL has been copied to your clipboard"
+    },
+    "review": {
+      "pictureAlt": "Photo from the review by {username}"
     }
   },
   "form": {

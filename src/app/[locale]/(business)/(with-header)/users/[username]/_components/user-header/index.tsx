@@ -136,7 +136,10 @@ const UserHeader = async ({ user }: UserHeaderProps) => {
       </div>
 
       {friendshipStatus === "NOT_FRIENDS" ? (
-        <AddFriendButton friendId={user.id} className="flex p-10 md:hidden" />
+        <AddFriendButton
+          friendId={user.id}
+          className="flex px-10 pt-10 md:hidden"
+        />
       ) : null}
     </div>
   );

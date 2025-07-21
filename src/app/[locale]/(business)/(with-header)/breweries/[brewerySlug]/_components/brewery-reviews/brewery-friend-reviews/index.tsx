@@ -3,9 +3,12 @@ import { Suspense } from "react";
 
 import BreweryReviewCard from "@/app/[locale]/(business)/(with-header)/breweries/[brewerySlug]/_components/brewery-reviews/brewery-review-card";
 import Await from "@/app/_components/await";
+import ReviewPictureGrid from "@/app/_components/review-picture-grid";
+import ReviewPictureGridLoader from "@/app/_components/review-picture-grid/loader";
 import { ChipTabContent } from "@/app/_components/ui/chip-tabs";
 import Pagination from "@/app/_components/ui/pagination";
 import { getBreweryFriendReviewsForUser } from "@/domain/breweries";
+import { getLatestBreweryFriendPictures } from "@/domain/breweries";
 import { getCurrentUser } from "@/lib/auth";
 import { Link } from "@/lib/i18n";
 import { Routes } from "@/lib/routes";
@@ -42,6 +45,11 @@ const BreweryFriendReviews = async ({
     );
   }
 
+  const latestFriendPicturesPromise = getLatestBreweryFriendPictures({
+    userId: user.id,
+    brewerySlug,
+  });
+
   const friendReviewsPromise = getBreweryFriendReviewsForUser({
     userId: user.id,
     brewerySlug,
@@ -50,6 +58,15 @@ const BreweryFriendReviews = async ({
 
   return (
     <ChipTabContent value="friend-reviews" className="flex flex-col gap-y-4">
+      <Suspense
+        key={`${brewerySlug}-friend-pictures`}
+        fallback={<ReviewPictureGridLoader />}
+      >
+        <Await promise={latestFriendPicturesPromise}>
+          {(pictures) => <ReviewPictureGrid pictures={pictures} />}
+        </Await>
+      </Suspense>
+
       <Suspense
         key={`${brewerySlug}-friend-reviews-${page}`}
         fallback={
