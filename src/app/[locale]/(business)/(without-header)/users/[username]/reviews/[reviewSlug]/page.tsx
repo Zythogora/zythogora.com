@@ -468,7 +468,7 @@ const UserReviewPage = async ({ params }: UserReviewPageProps) => {
           /* eslint-disable-next-line @next/next/no-img-element */
           <img
             src={review.pictureUrl}
-            alt={`${username} - ${review.beer.name}`}
+            alt={t("common.review.pictureAlt", { username })}
             className="border-foreground h-auto w-full rounded border-2 drop-shadow"
           />
         ) : null}

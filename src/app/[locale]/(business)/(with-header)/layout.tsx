@@ -14,6 +14,7 @@ const AppWithHeaderLayout = async ({ children }: PropsWithChildren) => {
           className={cn(
             "flex grow flex-col items-center",
             "dark:bg-background bg-stone-100",
+            "pb-10",
             "md:px-16 md:py-12",
           )}
         >

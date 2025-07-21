@@ -3,9 +3,12 @@ import { Suspense } from "react";
 
 import BeerReviewCard from "@/app/[locale]/(business)/(with-header)/breweries/[brewerySlug]/beers/[beerSlug]/_components/beer-reviews/review-card";
 import Await from "@/app/_components/await";
+import ReviewPictureGrid from "@/app/_components/review-picture-grid";
+import ReviewPictureGridLoader from "@/app/_components/review-picture-grid/loader";
 import { ChipTabContent } from "@/app/_components/ui/chip-tabs";
 import Pagination from "@/app/_components/ui/pagination";
 import { getBeerFriendReviewsForUser } from "@/domain/beers";
+import { getLatestFriendPictures } from "@/domain/beers";
 import { getCurrentUser } from "@/lib/auth";
 import { Link } from "@/lib/i18n";
 import { Routes } from "@/lib/routes";
@@ -39,6 +42,11 @@ const BeerFriendReviews = async ({ beerId, page }: BeerFriendReviewsProps) => {
     );
   }
 
+  const latestFriendPicturesPromise = getLatestFriendPictures({
+    userId: user.id,
+    beerId,
+  });
+
   const friendReviewsPromise = getBeerFriendReviewsForUser({
     userId: user.id,
     beerId,
@@ -47,6 +55,15 @@ const BeerFriendReviews = async ({ beerId, page }: BeerFriendReviewsProps) => {
 
   return (
     <ChipTabContent value="friend-reviews" className="flex flex-col gap-y-4">
+      <Suspense
+        key={`${beerId}-friend-pictures`}
+        fallback={<ReviewPictureGridLoader />}
+      >
+        <Await promise={latestFriendPicturesPromise}>
+          {(pictures) => <ReviewPictureGrid pictures={pictures} />}
+        </Await>
+      </Suspense>
+
       <Suspense
         key={`${beerId}-friend-reviews-${page}`}
         fallback={<p>{t("beerPage.reviews.tabs.friendReviews.loading")}</p>}

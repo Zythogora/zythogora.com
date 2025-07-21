@@ -2,6 +2,7 @@
 
 import { cache } from "react";
 
+import { transformRawBeerReviewToBeerReviewWithPicture } from "@/domain/reviews/transforms";
 import {
   AlreadyFriendsError,
   AlreadySentFriendRequestError,
@@ -119,6 +120,25 @@ export const getReviewsByUser = cache(
     return getPaginatedResults(reviews, reviewCount, page, limit);
   },
 );
+
+export const getLatestPicturesByUser = async ({
+  userId,
+  count = 5,
+}: {
+  userId: string;
+  count?: number;
+}) => {
+  return prisma.reviews
+    .findMany({
+      where: { userId, pictureUrl: { not: null } },
+      include: { user: true },
+      orderBy: { createdAt: "desc" },
+      take: count,
+    })
+    .then((rawReviews) =>
+      rawReviews.map(transformRawBeerReviewToBeerReviewWithPicture),
+    );
+};
 
 export const getReviewByUsernameAndSlug = cache(
   async (username: string, reviewSlug: string): Promise<Review> => {

@@ -1,9 +1,13 @@
 import { getTranslations } from "next-intl/server";
+import { Suspense } from "react";
 
 import BreweryYourReviewCard from "@/app/[locale]/(business)/(with-header)/breweries/[brewerySlug]/_components/brewery-reviews/brewery-your-review-card";
+import ReviewPictureGrid from "@/app/_components/review-picture-grid";
+import ReviewPictureGridLoader from "@/app/_components/review-picture-grid/loader";
 import { ChipTabContent } from "@/app/_components/ui/chip-tabs";
 import Pagination from "@/app/_components/ui/pagination";
 import { getBreweryReviewsByUser } from "@/domain/breweries";
+import { getYourLatestBreweryPictures } from "@/domain/breweries";
 import { getCurrentUser } from "@/lib/auth";
 import { Link } from "@/lib/i18n";
 import { Routes } from "@/lib/routes";
@@ -40,6 +44,11 @@ const BreweryYourReviews = async ({
     );
   }
 
+  const yourLatestPictures = await getYourLatestBreweryPictures({
+    userId: user.id,
+    brewerySlug,
+  });
+
   const yourReviews = await getBreweryReviewsByUser({
     userId: user.id,
     brewerySlug,
@@ -48,6 +57,13 @@ const BreweryYourReviews = async ({
 
   return (
     <ChipTabContent value="my-reviews" className="flex flex-col gap-y-4">
+      <Suspense
+        key={`${brewerySlug}-your-pictures`}
+        fallback={<ReviewPictureGridLoader />}
+      >
+        <ReviewPictureGrid pictures={yourLatestPictures} />
+      </Suspense>
+
       <>
         <p>
           {t.rich("breweryPage.tabs.reviews.content.tabs.myReviews.count", {

@@ -54,6 +54,9 @@
     },
     "actions": {
       "copiedToClipboard": "L'URL a été copiée dans le presse-papiers"
+    },
+    "review": {
+      "pictureAlt": "Photo de la critique de {username}"
     }
   },
   "form": {

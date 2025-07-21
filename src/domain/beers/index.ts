@@ -20,6 +20,7 @@ import {
   transformRawColorToColor,
   transformRawStyleCategoryToStyleCategory,
 } from "@/domain/beers/transforms";
+import { transformRawBeerReviewToBeerReviewWithPicture } from "@/domain/reviews/transforms";
 import { getCurrentUser } from "@/lib/auth";
 import { config } from "@/lib/config";
 import {
@@ -143,6 +144,27 @@ export const getBeerReviewsByUser = async ({
   return getPaginatedResults(reviews, reviewCount, page, limit);
 };
 
+export const getYourLatestPictures = async ({
+  userId,
+  beerId,
+  count = 5,
+}: {
+  userId: string;
+  beerId: string;
+  count?: number;
+}) => {
+  return prisma.reviews
+    .findMany({
+      where: { userId, beerId, pictureUrl: { not: null } },
+      include: { user: true },
+      orderBy: { createdAt: "desc" },
+      take: count,
+    })
+    .then((rawReviews) =>
+      rawReviews.map(transformRawBeerReviewToBeerReviewWithPicture),
+    );
+};
+
 export const getBeerFriendReviewsForUser = async ({
   userId,
   beerId,
@@ -175,6 +197,31 @@ export const getBeerFriendReviewsForUser = async ({
   return getPaginatedResults(reviews, reviewCount, page, limit);
 };
 
+export const getLatestFriendPictures = async ({
+  userId,
+  beerId,
+  count = 5,
+}: {
+  userId: string;
+  beerId: string;
+  count?: number;
+}) => {
+  return prisma.reviews
+    .findMany({
+      where: {
+        user: { friendWith: { some: { userBId: userId } } },
+        beerId,
+        pictureUrl: { not: null },
+      },
+      include: { user: true },
+      orderBy: { createdAt: "desc" },
+      take: count,
+    })
+    .then((rawReviews) =>
+      rawReviews.map(transformRawBeerReviewToBeerReviewWithPicture),
+    );
+};
+
 export const getAllBeerReviews = async ({
   beerId,
   limit = 10,
@@ -201,6 +248,25 @@ export const getAllBeerReviews = async ({
   const reviews = rawReviews.map(transformRawBeerReviewToBeerReview);
 
   return getPaginatedResults(reviews, reviewCount, page, limit);
+};
+
+export const getLatestPublicPictures = async ({
+  beerId,
+  count = 5,
+}: {
+  beerId: string;
+  count?: number;
+}) => {
+  return prisma.reviews
+    .findMany({
+      where: { beerId, pictureUrl: { not: null } },
+      include: { user: true },
+      orderBy: { createdAt: "desc" },
+      take: count,
+    })
+    .then((rawReviews) =>
+      rawReviews.map(transformRawBeerReviewToBeerReviewWithPicture),
+    );
 };
 
 export const createBeer = async (data: CreateBeerData) => {
