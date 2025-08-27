@@ -21,7 +21,7 @@ const FormError = ({ errors, className, ...restProps }: FormErrorProps) => {
     <p
       data-slot="form-error"
       className={cn(
-        "text-destructive mt-1 -mb-1 flex h-0 flex-col pl-3 text-xs",
+        "text-destructive mt-1 -mb-1 flex h-0 flex-col pl-3 text-sm",
         className,
       )}
       {...restProps}

@@ -61,7 +61,7 @@ const SignInPage = async () => {
           <>
             <p
               className={cn(
-                "font-title flex flex-row items-center gap-x-1.5 text-xs opacity-50",
+                "font-title flex flex-row items-center gap-x-1.5 opacity-50",
                 "before:bg-foreground before:h-px before:w-4",
                 "after:bg-foreground after:h-px after:w-4",
               )}

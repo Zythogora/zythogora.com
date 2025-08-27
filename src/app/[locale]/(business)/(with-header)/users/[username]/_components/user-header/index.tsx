@@ -55,7 +55,7 @@ const UserHeader = async ({ user }: UserHeaderProps) => {
           <div className="flex flex-col md:gap-y-1">
             <h1 className="text-2xl md:text-4xl">{user.username}</h1>
 
-            <p className="text-xs md:text-sm">
+            <p className="text-sm md:text-base">
               {t("profilePage.statistics.reviewCount", {
                 count: user.reviewCount,
               })}

@@ -165,7 +165,7 @@ const HeaderSearchBar = ({
               {platform.isDetected && !inputHasFocus ? (
                 <kbd
                   className={cn(
-                    "font-title border-foreground absolute top-1/2 right-6 -translate-y-1/2 flex-row items-center rounded border-2 px-2 py-1 opacity-25",
+                    "font-title border-foreground absolute top-1/2 right-6 -translate-y-1/2 flex-row items-center rounded border-2 px-1.5 opacity-25",
                     "bg-stone-200 dark:bg-stone-800",
                     "hidden sm:flex",
                     platform.isMac ? "gap-x-1" : "gap-x-0.5",
@@ -177,13 +177,13 @@ const HeaderSearchBar = ({
                     </span>
                   ) : (
                     <>
-                      <span className="text-xs">Ctrl</span>
+                      <span>Ctrl</span>
 
-                      <span className="text-xs">+</span>
+                      <span>+</span>
                     </>
                   )}
 
-                  <span className="text-xs">K</span>
+                  <span>K</span>
                 </kbd>
               ) : null}
             </div>

@@ -140,8 +140,8 @@ const BreweryCard = ({ brewery }: BreweryCardProps) => {
           {brewery.description ? (
             <p
               ref={descriptionRef}
-              className={cn("text-left", "text-xs md:text-sm", {
-                "line-clamp-4": !isExpanded,
+              className={cn("text-left", "text-sm md:text-base", {
+                "line-clamp-3": !isExpanded,
               })}
             >
               {(() => {
@@ -160,7 +160,7 @@ const BreweryCard = ({ brewery }: BreweryCardProps) => {
 
           {hasDetails ? (
             <CollapsibleContent
-              className={cn("contents", "text-xs md:text-sm")}
+              className={cn("contents", "text-sm md:text-base")}
             >
               <div className="flex flex-col gap-y-2">
                 {brewery.websiteLink ? (

@@ -66,7 +66,7 @@ const ChipTabTrigger = ({
     <TabsPrimitive.Trigger
       data-slot="chip-tab-trigger"
       className={cn(
-        "rounded-full px-4 py-2.5 text-xs text-nowrap ring-0 outline-none",
+        "rounded-full px-4 py-2.5 text-nowrap ring-0 outline-none",
         "bg-stone-300 data-[state=active]:bg-stone-50 dark:bg-stone-500 dark:data-[state=active]:bg-stone-700",
         "not-data-[state=active]:cursor-pointer",
         "hover:inset-shadow not-data-[state=active]:hover:inset-shadow-primary data-[state=active]:focus-visible:inset-shadow-primary",

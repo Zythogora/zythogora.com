@@ -75,18 +75,18 @@ const SignInForm = () => {
         />
       </div>
 
-      <div className="flex flex-col gap-y-2">
+      <div className="flex flex-col gap-y-4">
         <Button type="submit" disabled={isPending} variant="outline">
           {isPending
             ? t("auth.signIn.actions.signInPending")
             : t("auth.signIn.actions.signIn")}
         </Button>
 
-        <div className="flex flex-row items-center justify-between">
+        <div className="mx-1 flex flex-wrap items-center justify-between gap-x-4 gap-y-1">
           <Link
             href={Routes.PASSWORD_FORGOTTEN}
             className={cn(
-              "font-title ml-1 rounded px-2 py-1 text-sm font-medium",
+              "font-title rounded font-medium",
               "focus-visible:outline-foreground",
             )}
           >
@@ -96,7 +96,7 @@ const SignInForm = () => {
           <Link
             href={Routes.SIGN_UP}
             className={cn(
-              "font-title mr-1 rounded px-2 py-1 text-sm font-medium",
+              "font-title rounded font-medium",
               "focus-visible:outline-foreground",
             )}
           >

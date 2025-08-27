@@ -12,8 +12,8 @@ const ReviewFormHeader = ({ beer, className }: ReviewFormHeaderProps) => {
   return (
     <div
       className={cn(
-        "flex flex-col items-center gap-y-6 overflow-hidden px-12 py-14 drop-shadow",
-        "border-b-2 md:rounded md:border-2",
+        "flex flex-col items-center gap-y-4 overflow-hidden px-12 drop-shadow",
+        "border-b-2 py-16 md:rounded md:border-2 md:py-20",
         "bg-primary-50 dark:bg-primary-800",
         className,
       )}
@@ -29,7 +29,7 @@ const ReviewFormHeader = ({ beer, className }: ReviewFormHeaderProps) => {
           className="size-3 @3xl:size-3.5"
         />
 
-        <p className="text-sm @3xl:text-base">{beer.brewery.name}</p>
+        <p className="text-base @3xl:text-lg">{beer.brewery.name}</p>
       </div>
     </div>
   );

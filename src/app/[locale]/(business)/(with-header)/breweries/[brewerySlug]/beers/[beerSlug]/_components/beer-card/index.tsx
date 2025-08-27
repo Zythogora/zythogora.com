@@ -80,7 +80,7 @@ const BeerCard = async ({
             <p
               className={cn(
                 "gap-x-paragraph-space flex min-w-0 flex-row text-nowrap",
-                "text-xs md:text-sm",
+                "text-sm md:text-base",
               )}
             >
               {t.rich("common.beer.brewedBy", {
@@ -128,7 +128,7 @@ const BeerCard = async ({
         </div>
 
         {hasDetails ? (
-          <CollapsibleContent className={cn("contents", "text-xs md:text-sm")}>
+          <CollapsibleContent className="contents">
             {description ? (
               <DescriptionList
                 label={t("beerPage.details.description")}

@@ -217,10 +217,7 @@ const DropdownMenuShortcut = ({
   return (
     <span
       data-slot="dropdown-menu-shortcut"
-      className={cn(
-        "text-foreground-muted ml-auto text-xs tracking-widest",
-        className,
-      )}
+      className={cn("text-foreground-muted ml-auto tracking-widest", className)}
       {...restProps}
     />
   );
