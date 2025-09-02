@@ -82,11 +82,11 @@ const SignInForm = () => {
             : t("auth.signIn.actions.signIn")}
         </Button>
 
-        <div className="flex flex-row items-center justify-between">
+        <div className="flex flex-row flex-wrap items-center justify-between">
           <Link
             href={Routes.PASSWORD_FORGOTTEN}
             className={cn(
-              "font-title ml-1 rounded px-2 py-1 text-sm font-medium",
+              "font-title mx-1 rounded px-2 py-1 text-sm font-medium",
               "focus-visible:outline-foreground",
             )}
           >
@@ -96,7 +96,7 @@ const SignInForm = () => {
           <Link
             href={Routes.SIGN_UP}
             className={cn(
-              "font-title mr-1 rounded px-2 py-1 text-sm font-medium",
+              "font-title mx-1 rounded px-2 py-1 text-sm font-medium",
               "focus-visible:outline-foreground",
             )}
           >
