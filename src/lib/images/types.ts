@@ -1,4 +1,9 @@
+export enum PreviewName {
+  PREVIEW = "preview",
+  TWITTER = "twitter",
+}
+
 export type Preview = {
-  name: string;
+  name: PreviewName;
   image: Buffer;
 };
