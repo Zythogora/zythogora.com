@@ -5,11 +5,13 @@ import { isUserVerified } from "@/domain/auth";
 import { Link, redirect } from "@/lib/i18n";
 import { Routes } from "@/lib/routes";
 
+import type { Metadata } from "next";
+
 interface SignUpEmailVerificationPageProps {
   searchParams: Promise<{ email: string }>;
 }
 
-export async function generateMetadata() {
+export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
 
   return {

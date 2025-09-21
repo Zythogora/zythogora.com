@@ -89,6 +89,7 @@ export type Review = {
   acidity?: Acidity;
   duration?: Duration;
   user: {
+    id: string;
     username: string;
   };
   beer: {

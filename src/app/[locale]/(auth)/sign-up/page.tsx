@@ -6,7 +6,9 @@ import Wave from "@/app/_components/wave";
 import { config } from "@/lib/config";
 import { cn } from "@/lib/tailwind";
 
-export async function generateMetadata() {
+import type { Metadata } from "next";
+
+export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
 
   return {

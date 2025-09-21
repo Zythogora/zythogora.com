@@ -7,8 +7,16 @@ import { useState } from "react";
 import { toast } from "sonner";
 
 import Button from "@/app/_components/ui/button";
+import {
+  Drawer,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/app/_components/ui/drawer";
 import Input from "@/app/_components/ui/input";
 import { cn } from "@/lib/tailwind";
+import { useMediaQuery } from "@/lib/tailwind/hooks";
 
 import type { ComponentProps } from "react";
 
@@ -16,6 +24,8 @@ interface ShareButtonProps
   extends Omit<ComponentProps<typeof Button>, "className"> {
   label: string;
   link: string;
+  title?: string;
+  useDrawerOnMobile?: boolean;
   triggerClassName?: string;
   contentClassName?: string;
 }
@@ -23,6 +33,8 @@ interface ShareButtonProps
 const ShareButton = ({
   label,
   link,
+  title,
+  useDrawerOnMobile = false,
   triggerClassName,
   contentClassName,
   children,
@@ -37,6 +49,39 @@ const ShareButton = ({
     toast.success(t("common.actions.copiedToClipboard"));
     setOpen(false);
   };
+
+  const isMobile = useMediaQuery("(max-width: 768px)");
+
+  if (useDrawerOnMobile && isMobile) {
+    return (
+      <Drawer>
+        <DrawerTrigger asChild>
+          <Button
+            aria-label={label}
+            title={label}
+            className={triggerClassName}
+            {...restProps}
+          >
+            {children ? children : <Share2Icon className="size-6" />}
+          </Button>
+        </DrawerTrigger>
+
+        <DrawerContent>
+          <DrawerHeader>
+            <DrawerTitle>{title ?? label}</DrawerTitle>
+          </DrawerHeader>
+
+          <div className="flex flex-row-reverse items-center gap-x-2">
+            <Button onClick={handleShare} size="icon" className="size-13">
+              <CopyIcon className="size-5" />
+            </Button>
+
+            <Input defaultValue={link} className="grow" readOnly />
+          </div>
+        </DrawerContent>
+      </Drawer>
+    );
+  }
 
   return (
     <PopoverPrimitive.Root open={open} onOpenChange={setOpen}>
