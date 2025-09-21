@@ -58,6 +58,10 @@
     },
     "review": {
       "pictureAlt": "Photo de la critique de {username}"
+    },
+    "errors": {
+      "unauthorized": "Vous devez être connecté pour effectuer cette action",
+      "forbidden": "Vous n'êtes pas autorisé à effectuer cette action"
     }
   },
   "form": {
@@ -627,7 +631,20 @@
       }
     },
     "actions": {
-      "share": "Partager"
+      "remove": {
+        "title": "Etes-vous sûr de vouloir supprimer cette critique ?",
+        "description": "Cette action est irréversible.",
+        "cancel": "Annuler",
+        "remove": "Supprimer la critique",
+        "pending": "Suppression en cours...",
+        "success": "Critique supprimée",
+        "errors": {
+          "removeNotFound": "Critique inconnue",
+          "removeUnknown": "Une erreur est survenue lors de la suppression de la critique"
+        }
+      },
+      "share": "Partager",
+      "shareTitle": "Partager la critique"
     }
   },
   "createReviewPage": {

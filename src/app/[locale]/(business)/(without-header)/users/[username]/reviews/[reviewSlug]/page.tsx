@@ -16,11 +16,13 @@ import {
   labelDesignValues,
 } from "@/app/[locale]/(business)/(without-header)/breweries/[brewerySlug]/beers/[beerSlug]/review/schemas";
 import BackButton from "@/app/[locale]/(business)/(without-header)/users/[username]/reviews/[reviewSlug]/_components/back-button";
+import DeleteReviewButton from "@/app/[locale]/(business)/(without-header)/users/[username]/reviews/[reviewSlug]/_components/delete-review-dialog";
 import ReviewFieldValue from "@/app/[locale]/(business)/(without-header)/users/[username]/reviews/[reviewSlug]/_components/field-value";
 import ShareButton from "@/app/_components/share-button";
 import DescriptionList from "@/app/_components/ui/description-list";
 import { Separator } from "@/app/_components/ui/separator";
 import { getReviewByUsernameAndSlug } from "@/domain/users";
+import { getCurrentUser } from "@/lib/auth";
 import { publicConfig } from "@/lib/config/client-config";
 import { Link } from "@/lib/i18n";
 import { Routes } from "@/lib/routes";
@@ -86,6 +88,8 @@ const UserReviewPage = async ({
   const review = await getReviewByUsernameAndSlug(username, reviewSlug).catch(
     () => notFound(),
   );
+
+  const currentUser = await getCurrentUser();
 
   return (
     <div
@@ -498,14 +502,20 @@ const UserReviewPage = async ({
           />
         ) : null}
 
-        <div className="isolate">
+        <div className="isolate flex flex-row gap-x-2">
+          {currentUser && currentUser.id === review.user.id ? (
+            <DeleteReviewButton reviewId={review.id} username={username} />
+          ) : null}
+
           <ShareButton
             label={t("reviewPage.actions.share")}
+            title={t("reviewPage.actions.shareTitle")}
             link={`${publicConfig.baseUrl}${generatePath(Routes.REVIEW, {
               username,
               reviewSlug,
             })}`}
-            contentClassName="w-[calc(var(--radix-popover-trigger-width)+theme(spacing.1))]"
+            useDrawerOnMobile
+            contentClassName="w-[calc(100vw-theme(spacing.16))] md:w-[calc(var(--radix-popover-trigger-width)+theme(spacing.1))]"
           >
             {t("reviewPage.actions.share")}
           </ShareButton>
