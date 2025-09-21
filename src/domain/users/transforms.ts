@@ -110,6 +110,7 @@ export const transformRawReviewToReview = (rawReview: RawReview): Review => {
         }
       : undefined,
     user: {
+      id: rawReview.user.id,
       username: rawReview.user.username,
     },
     beer: {
