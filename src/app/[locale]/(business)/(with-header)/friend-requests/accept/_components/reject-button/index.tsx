@@ -22,13 +22,13 @@ const RejectButton = ({ friendRequestId }: RejectButtonProps) => {
 
   const handleRejectFriendRequest = () => {
     startTransition(async () => {
-      const { success } =
+      const result =
         await rejectPreviouslyAcceptedFriendRequestAction(friendRequestId);
 
-      if (success) {
+      if (result.success) {
         push(Routes.DENY_FRIEND_REQUEST, { id: friendRequestId });
       } else {
-        toast.error(t("friendRequestPage.errors.friendRequestRejectingError"));
+        toast.error(t(result.translationKey));
       }
     });
   };

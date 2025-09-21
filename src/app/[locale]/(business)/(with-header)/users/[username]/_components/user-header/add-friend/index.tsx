@@ -24,15 +24,13 @@ const AddFriendButton = ({ friendId, className }: AddFriendButtonProps) => {
 
   const handleFriendRequest = () => {
     startTransition(async () => {
-      const { success } = await addFriend(friendId);
+      const result = await addFriend(friendId);
 
-      if (success) {
+      if (result.success) {
         toast.success(t("profilePage.friendship.toasts.friendRequestSent"));
         router.refresh();
       } else {
-        toast.error(
-          t("profilePage.friendship.toasts.friendRequestSendingError"),
-        );
+        toast.error(t(result.translationKey));
       }
     });
   };

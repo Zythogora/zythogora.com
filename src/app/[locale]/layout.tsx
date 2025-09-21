@@ -11,8 +11,8 @@ import {
 
 import { routing } from "@/lib/i18n";
 
-import type { Locale } from "@/lib/i18n";
-import type { Viewport } from "next";
+import type { Locale } from "@/lib/i18n/types";
+import type { Metadata, Viewport } from "next";
 import type { PropsWithChildren } from "react";
 
 import "@/app/globals.css";
@@ -28,11 +28,13 @@ const paragraph = Inter({
   subsets: ["latin"],
 });
 
+type RootLayoutProps = PropsWithChildren<{
+  params: Promise<{ locale: string }>;
+}>;
+
 export async function generateMetadata({
   params,
-}: {
-  params: Promise<{ locale: Locale }>;
-}) {
+}: RootLayoutProps): Promise<Metadata> {
   const t = await getTranslations({
     locale: (await params).locale,
     namespace: "metadata",
@@ -58,11 +60,7 @@ export function generateStaticParams() {
 export default async function RootLayout({
   params,
   children,
-}: Readonly<
-  PropsWithChildren<{
-    params: Promise<{ locale: Locale }>;
-  }>
->) {
+}: RootLayoutProps) {
   const { locale } = await params;
 
   if (!routing.locales.includes(locale as Locale)) {

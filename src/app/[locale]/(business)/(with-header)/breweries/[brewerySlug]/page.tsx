@@ -18,6 +18,8 @@ import { generatePath } from "@/lib/routes/utils";
 import { cn } from "@/lib/tailwind";
 import { exhaustiveCheck } from "@/lib/typescript/utils";
 
+import type { Metadata } from "next";
+
 interface BreweryPageProps {
   params: Promise<{
     brewerySlug: string;
@@ -57,7 +59,9 @@ export async function generateStaticParams(): Promise<
   });
 }
 
-export async function generateMetadata({ params }: BreweryPageProps) {
+export async function generateMetadata({
+  params,
+}: BreweryPageProps): Promise<Metadata> {
   const { brewerySlug } = await params;
 
   const brewery = await getBreweryBySlug(brewerySlug).catch(() => notFound());

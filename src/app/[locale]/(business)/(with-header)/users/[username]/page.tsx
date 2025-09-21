@@ -20,6 +20,8 @@ import { Routes } from "@/lib/routes";
 import { generatePath } from "@/lib/routes/utils";
 import { cn } from "@/lib/tailwind";
 
+import type { Metadata } from "next";
+
 interface ProfilePageProps {
   params: Promise<{
     username: string;
@@ -29,7 +31,9 @@ interface ProfilePageProps {
   }>;
 }
 
-export async function generateMetadata({ params }: ProfilePageProps) {
+export async function generateMetadata({
+  params,
+}: ProfilePageProps): Promise<Metadata> {
   const { username } = await params;
 
   const user = await getUserByUsername(username).catch(() => notFound());

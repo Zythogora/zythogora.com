@@ -14,7 +14,7 @@ import {
 } from "@/app/_components/ui/dropdown-menu";
 import { routing, usePathname, useRouter } from "@/lib/i18n";
 
-import type { Locale } from "@/lib/i18n";
+import type { Locale } from "@/lib/i18n/types";
 
 const LanguageSubMenu = () => {
   const t = useTranslations();
