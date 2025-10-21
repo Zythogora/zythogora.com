@@ -121,6 +121,7 @@ export const reviewSchema = z.object({
   servingFrom: z.enum(servingFromValues, {
     required_error: "form.errors.FIELD_REQUIRED",
   }),
+  bestBeforeDate: z.coerce.date().optional(),
   comment: z.string().optional(),
   picture: z
     .custom<File>()

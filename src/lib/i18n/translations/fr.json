@@ -81,6 +81,9 @@
       "confirmPassword": {
         "placeholder": "Confirmer le mot de passe"
       },
+      "datePicker": {
+        "ariaLabel": "Sélectionner une date"
+      },
       "fileUpload": {
         "ctaImageSingle": "Déposez votre image ici ou cliquez pour parcourir vos fichiers",
         "ctaRemoveFile": "Supprimer le fichier",
@@ -461,6 +464,10 @@
             "GROWLER": "Servie depuis un growler",
             "CASK": "Servie à la pompe"
           }
+        },
+        "bestBeforeDate": {
+          "label": "Date de durabilité minimale (DDM / DLC)",
+          "value": "DDM / DLC : {date}"
         },
         "comment": {
           "label": "Commentaire"

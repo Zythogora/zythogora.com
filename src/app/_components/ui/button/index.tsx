@@ -23,6 +23,8 @@ export const buttonVariants = cva(
         default:
           "bg-primary hover:bg-primary-400 dark:before:bg-primary-700 text-stone-950 transition-[bottom,background-color] selection:bg-stone-950/15",
         outline: "bg-background dark:bg-stone-700",
+        ghost:
+          "text-foreground before:bg-transparent hover:bottom-0 hover:before:bottom-0 focus-visible:hover:bottom-0 focus-visible:hover:before:bottom-0",
       },
       size: {
         default: "px-5 py-4",

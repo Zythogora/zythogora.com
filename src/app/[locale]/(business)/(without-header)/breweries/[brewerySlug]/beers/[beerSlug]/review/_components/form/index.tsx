@@ -8,6 +8,7 @@ import {
 } from "@conform-to/react";
 import { parseWithZod } from "@conform-to/zod";
 import { getZodConstraint } from "@conform-to/zod";
+import { ServingFrom } from "@prisma/client";
 import { useTranslations } from "next-intl";
 import { useActionState, useEffect, useTransition } from "react";
 import { toast } from "sonner";
@@ -28,6 +29,7 @@ import {
   MAX_REVIEW_PICTURE_SIZE,
   reviewSchema,
 } from "@/app/[locale]/(business)/(without-header)/breweries/[brewerySlug]/beers/[beerSlug]/review/schemas";
+import FormDatePicker from "@/app/_components/form/date-picker";
 import FormFileUpload from "@/app/_components/form/file-upload";
 import FormFiveStepSelector from "@/app/_components/form/five-step-selector";
 import FormGroup from "@/app/_components/form/group";
@@ -115,6 +117,14 @@ const ReviewForm = ({ beerId }: ReviewFormProps) => {
           />
 
           <FormServingFromSelector field={fields.servingFrom} />
+
+          {fields.servingFrom.value === ServingFrom.CAN ||
+          fields.servingFrom.value === ServingFrom.BOTTLE ? (
+            <FormDatePicker
+              label={t("reviewPage.overall.fields.bestBeforeDate.label")}
+              field={fields.bestBeforeDate}
+            />
+          ) : null}
 
           <FormTextarea
             label={t("reviewPage.overall.fields.comment.label")}

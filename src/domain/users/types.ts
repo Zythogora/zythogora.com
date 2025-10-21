@@ -76,6 +76,7 @@ export type Review = {
   slug: string;
   globalScore: number;
   servingFrom: ServingFrom;
+  bestBeforeDate?: Date;
   comment?: string;
   pictureUrl?: string;
   labelDesign?: LabelDesign;
