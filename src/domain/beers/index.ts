@@ -34,7 +34,7 @@ import { uploadFile } from "@/lib/storage";
 import { StorageBuckets } from "@/lib/storage/constants";
 import { getBucketBaseUrl } from "@/lib/storage/utils";
 
-import type { CreateReviewData } from "@/app/[locale]/(business)/(without-header)/breweries/[brewerySlug]/beers/[beerSlug]/review/schemas";
+import type { ReviewActionData } from "@/app/[locale]/(business)/(without-header)/breweries/[brewerySlug]/beers/[beerSlug]/review/schemas";
 import type { CreateBeerData } from "@/app/[locale]/(business)/(without-header)/create/beer/schemas";
 import type {
   Beer,
@@ -299,10 +299,7 @@ export const createBeer = async (data: CreateBeerData) => {
   return beer;
 };
 
-export const reviewBeer = async (
-  beerId: string,
-  review: Omit<CreateReviewData, "beerId">,
-) => {
+export const reviewBeer = async (beerId: string, review: ReviewActionData) => {
   const user = await getCurrentUser();
 
   if (!user) {

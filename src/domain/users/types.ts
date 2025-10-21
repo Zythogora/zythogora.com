@@ -1,4 +1,4 @@
-import type { Color } from "@/domain/beers/types";
+import type { Color, RawBeer } from "@/domain/beers/types";
 import type { Country } from "@/lib/i18n/countries/types";
 import type {
   Acidity,
@@ -17,7 +17,6 @@ import type {
   LabelDesign,
   Reviews,
   ServingFrom,
-  Styles,
   Users,
 } from "@prisma/client";
 
@@ -65,10 +64,7 @@ export type UserReview = {
 
 export type RawReview = Reviews & {
   user: Users;
-  beer: Beers & {
-    brewery: Breweries;
-    style: Styles;
-  };
+  beer: RawBeer;
 };
 
 export type Review = {
@@ -98,11 +94,13 @@ export type Review = {
     name: string;
     abv: number;
     ibu?: number;
+    color: Color;
     style: string;
     brewery: {
       id: string;
       slug: string;
       name: string;
+      country: Country;
     };
   };
   createdAt: Date;
