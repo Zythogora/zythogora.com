@@ -23,13 +23,17 @@ const FormServingFromSelector = ({
 }: FormServingFromSelectorProps) => {
   const t = useTranslations();
 
-  const { key, ...restInputProps } = getInputProps(field, {
+  const {
+    key,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    value,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    type,
+    ...restInputProps
+  } = getInputProps(field, {
     type: "text",
     ariaAttributes: true,
   });
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { defaultValue, value, type, ...ariaInputProps } = restInputProps;
 
   return (
     <div className={cn("group/form-component", "flex w-full flex-col gap-y-1")}>
@@ -42,7 +46,7 @@ const FormServingFromSelector = ({
       </Label>
 
       <div className="w-full">
-        <ServingFromSelector key={key} {...ariaInputProps} {...restProps} />
+        <ServingFromSelector key={key} {...restInputProps} {...restProps} />
 
         <FormError id={field.errorId} errors={field.errors} />
       </div>
