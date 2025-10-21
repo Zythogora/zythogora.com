@@ -159,7 +159,7 @@ export const getReviewByUsernameAndSlug = cache(
       },
       include: {
         user: true,
-        beer: { include: { brewery: true, style: true } },
+        beer: { include: { brewery: true, color: true, style: true } },
       },
     });
 

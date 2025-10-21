@@ -17,6 +17,7 @@ import {
 } from "@/app/[locale]/(business)/(without-header)/breweries/[brewerySlug]/beers/[beerSlug]/review/schemas";
 import BackButton from "@/app/[locale]/(business)/(without-header)/users/[username]/reviews/[reviewSlug]/_components/back-button";
 import DeleteReviewButton from "@/app/[locale]/(business)/(without-header)/users/[username]/reviews/[reviewSlug]/_components/delete-review-dialog";
+import EditButton from "@/app/[locale]/(business)/(without-header)/users/[username]/reviews/[reviewSlug]/_components/edit-button";
 import ReviewFieldValue from "@/app/[locale]/(business)/(without-header)/users/[username]/reviews/[reviewSlug]/_components/field-value";
 import ShareButton from "@/app/_components/share-button";
 import DescriptionList from "@/app/_components/ui/description-list";
@@ -519,6 +520,10 @@ const UserReviewPage = async ({
           >
             {t("reviewPage.actions.share")}
           </ShareButton>
+
+          {currentUser && currentUser.id === review.user.id ? (
+            <EditButton username={username} reviewSlug={reviewSlug} />
+          ) : null}
         </div>
       </div>
     </div>

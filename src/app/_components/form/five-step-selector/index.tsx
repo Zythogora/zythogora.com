@@ -29,7 +29,27 @@ const FormFiveStepSelector = ({
 }: FormFiveStepSelectorProps) => {
   const t = useTranslations();
 
-  const [selectedValue, setSelectedValue] = useState<string>("");
+  const {
+    key,
+    name,
+    defaultValue,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    value,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    type,
+    ...ariaInputProps
+  } = getInputProps(field, {
+    type: "number",
+    ariaAttributes: true,
+  });
+
+  const defaultValueIndex = defaultValue
+    ? possibleValues.indexOf(defaultValue)
+    : undefined;
+
+  const [selectedValue, setSelectedValue] = useState<string>(
+    defaultValue ?? "",
+  );
 
   const inputRef = useRef<HTMLInputElement>(null);
   useEffect(() => {
@@ -39,14 +59,6 @@ const FormFiveStepSelector = ({
       inputRef.current.dispatchEvent(event);
     }
   }, [selectedValue]);
-
-  const { key, name, ...restInputProps } = getInputProps(field, {
-    type: "number",
-    ariaAttributes: true,
-  });
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { defaultValue, value, type, ...ariaInputProps } = restInputProps;
 
   return (
     <div
@@ -71,6 +83,7 @@ const FormFiveStepSelector = ({
           key={key}
           {...ariaInputProps}
           {...restProps}
+          defaultValue={defaultValueIndex}
           onValueChange={(value) => setSelectedValue(possibleValues[value]!)}
         />
 

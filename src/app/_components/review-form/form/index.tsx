@@ -14,7 +14,6 @@ import { toast } from "sonner";
 
 import { ServingFrom } from "@db/enums";
 
-import { reviewAction } from "@/app/[locale]/(business)/(without-header)/breweries/[brewerySlug]/beers/[beerSlug]/review/actions";
 import {
   acidityValues,
   ALLOWED_REVIEW_PICTURE_TYPES,
@@ -30,6 +29,7 @@ import {
   MAX_REVIEW_PICTURE_SIZE,
   reviewSchema,
 } from "@/app/[locale]/(business)/(without-header)/breweries/[brewerySlug]/beers/[beerSlug]/review/schemas";
+import type { ReviewActionData } from "@/app/[locale]/(business)/(without-header)/breweries/[brewerySlug]/beers/[beerSlug]/review/schemas";
 import FormDatePicker from "@/app/_components/form/date-picker";
 import FormFileUpload from "@/app/_components/form/file-upload";
 import FormFiveStepSelector from "@/app/_components/form/five-step-selector";
@@ -40,12 +40,31 @@ import FormTextarea from "@/app/_components/form/textarea";
 import Button from "@/app/_components/ui/button";
 import FormError from "@/app/_components/ui/form-error";
 import { usePathname, useRouter } from "@/lib/i18n";
+import { Routes } from "@/lib/routes";
+import { generatePath } from "@/lib/routes/utils";
+
+import type { SubmissionResult } from "@conform-to/react";
 
 interface ReviewFormProps {
   beerId: string;
+  reviewAction: (
+    pathname: string,
+    previousState: unknown,
+    formData: FormData,
+  ) => Promise<SubmissionResult<string[]> | undefined>;
+  defaultValue?: Omit<ReviewActionData, "picture"> & { pictureUrl?: string };
+  existingReviewParams?: {
+    username: string;
+    reviewSlug: string;
+  };
 }
 
-const ReviewForm = ({ beerId }: ReviewFormProps) => {
+const ReviewForm = ({
+  beerId,
+  reviewAction,
+  defaultValue,
+  existingReviewParams,
+}: ReviewFormProps) => {
   const t = useTranslations();
 
   const router = useRouter();
@@ -59,7 +78,7 @@ const ReviewForm = ({ beerId }: ReviewFormProps) => {
   const [isCompressing, setIsCompressing] = useState(false);
 
   const [form, fields] = useForm({
-    defaultValue: { beerId },
+    defaultValue: { beerId, ...defaultValue },
 
     lastResult,
 
@@ -72,6 +91,8 @@ const ReviewForm = ({ beerId }: ReviewFormProps) => {
     onSubmit(event, { formData }) {
       event.preventDefault();
 
+      console.log(formData.get("picture"));
+
       startTransition(() => {
         action(formData);
       });
@@ -82,7 +103,16 @@ const ReviewForm = ({ beerId }: ReviewFormProps) => {
   });
 
   const handleCancel = () => {
-    router.back();
+    if (existingReviewParams) {
+      router.push(
+        generatePath(Routes.REVIEW, {
+          username: existingReviewParams.username,
+          reviewSlug: existingReviewParams.reviewSlug,
+        }),
+      );
+    } else {
+      router.back();
+    }
   };
 
   useEffect(() => {
@@ -113,7 +143,7 @@ const ReviewForm = ({ beerId }: ReviewFormProps) => {
             field={fields.globalScore}
             min={0}
             max={10}
-            defaultValue={[5]}
+            defaultValue={[defaultValue?.globalScore ?? 5]}
             step={0.5}
           />
 
@@ -138,6 +168,20 @@ const ReviewForm = ({ beerId }: ReviewFormProps) => {
             field={fields.picture}
             maxSize={MAX_REVIEW_PICTURE_SIZE}
             acceptedTypes={ALLOWED_REVIEW_PICTURE_TYPES}
+            existingPictureUrl={defaultValue?.pictureUrl}
+            initialFiles={
+              defaultValue?.pictureUrl
+                ? [
+                    {
+                      id: defaultValue.pictureUrl,
+                      name: defaultValue.pictureUrl,
+                      size: 1234,
+                      type: "image/jpeg",
+                      url: defaultValue.pictureUrl,
+                    },
+                  ]
+                : undefined
+            }
             onCompression={setIsCompressing}
           />
         </FormGroup>

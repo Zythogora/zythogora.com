@@ -1,5 +1,5 @@
 import { getInputProps, type FieldMetadata } from "@conform-to/react";
-import { useRef, useState, type ComponentProps } from "react";
+import { useEffect, useRef, useState, type ComponentProps } from "react";
 
 import FileUpload from "@/app/_components/ui/file-upload";
 import FormError from "@/app/_components/ui/form-error";
@@ -43,6 +43,17 @@ const FormFileUpload = ({
   };
 
   const { name } = getInputProps(field, { type: "file" });
+
+  // Set initial value to existing picture URL if no file is selected
+  useEffect(() => {
+    if (
+      existingPictureUrl &&
+      inputRef.current &&
+      !inputRef.current.files?.length
+    ) {
+      inputRef.current.value = existingPictureUrl;
+    }
+  }, [existingPictureUrl]);
 
   return (
     <div
