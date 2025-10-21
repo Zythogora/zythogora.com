@@ -10,7 +10,9 @@ import { redirect } from "@/lib/i18n";
 import { Routes } from "@/lib/routes";
 import { cn } from "@/lib/tailwind";
 
-export async function generateMetadata() {
+import type { Metadata } from "next";
+
+export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
 
   return {

@@ -10,6 +10,8 @@ import { searchBeers, searchBreweries, searchUsers } from "@/domain/search";
 import { redirect } from "@/lib/i18n";
 import { Routes } from "@/lib/routes";
 
+import type { Metadata } from "next";
+
 interface SearchPageProps {
   searchParams: Promise<{
     kind?: string;
@@ -18,7 +20,9 @@ interface SearchPageProps {
   }>;
 }
 
-export async function generateMetadata({ searchParams }: SearchPageProps) {
+export async function generateMetadata({
+  searchParams,
+}: SearchPageProps): Promise<Metadata> {
   const t = await getTranslations();
 
   const locale = await getLocale();

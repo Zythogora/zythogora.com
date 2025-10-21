@@ -32,12 +32,12 @@ export const signIn = async ({ email, password }: SignInParams) => {
   } catch (error) {
     if (error instanceof APIError) {
       if (
-        error.body.code === "INVALID_EMAIL" ||
-        error.body.code === "INVALID_PASSWORD" ||
-        error.body.code === "INVALID_EMAIL_OR_PASSWORD"
+        error.body?.code === "INVALID_EMAIL" ||
+        error.body?.code === "INVALID_PASSWORD" ||
+        error.body?.code === "INVALID_EMAIL_OR_PASSWORD"
       ) {
         throw new CredentialsInvalidError();
-      } else if (error.body.code === "EMAIL_NOT_VERIFIED") {
+      } else if (error.body?.code === "EMAIL_NOT_VERIFIED") {
         throw new EmailNotVerifiedError();
       }
     }
@@ -73,11 +73,11 @@ export const signUp = async ({ username, email, password }: SignUpParams) => {
     });
   } catch (error) {
     if (error instanceof APIError) {
-      if (error.body.code === "USER_ALREADY_EXISTS") {
+      if (error.body?.code === "USER_ALREADY_EXISTS") {
         throw new EmailAlreadyExistsError();
-      } else if (error.body.code === "PASSWORD_TOO_SHORT") {
+      } else if (error.body?.code === "PASSWORD_TOO_SHORT") {
         throw new PasswordTooShortError();
-      } else if (error.body.code === "PASSWORD_TOO_LONG") {
+      } else if (error.body?.code === "PASSWORD_TOO_LONG") {
         throw new PasswordTooLongError();
       }
     }
@@ -143,7 +143,7 @@ export const resetPassword = async ({
     });
   } catch (error) {
     if (error instanceof APIError) {
-      if (error.body.code === "INVALID_TOKEN") {
+      if (error.body?.code === "INVALID_TOKEN") {
         throw new InvalidTokenError();
       }
     }
