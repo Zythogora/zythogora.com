@@ -41,6 +41,13 @@ const DatePicker = ({
     [formatter],
   );
 
+  // Normalize date to midnight UTC to avoid timezone issues
+  const normalizeToMidnightUTC = useCallback((date: Date): Date => {
+    return new Date(
+      Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0, 0),
+    );
+  }, []);
+
   const [open, setOpen] = useState(false);
 
   const [inputValue, setInputValue] = useState(formatDate(value));
@@ -52,11 +59,25 @@ const DatePicker = ({
 
     const date = new Date(newValue);
     if (date && !isNaN(date.getTime())) {
-      onChange?.(date);
-      setMonth(date);
+      const utcDate = normalizeToMidnightUTC(date);
+      onChange?.(utcDate);
+      setMonth(utcDate);
     } else if (newValue === "") {
       onChange?.(undefined);
     }
+  };
+
+  const handleSelect = (date: Date | undefined) => {
+    if (date) {
+      const utcDate = normalizeToMidnightUTC(date);
+      onChange?.(utcDate);
+      setInputValue(formatDate(utcDate));
+    } else {
+      onChange?.(undefined);
+      setInputValue("");
+    }
+
+    setOpen(false);
   };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -104,11 +125,7 @@ const DatePicker = ({
             captionLayout="dropdown"
             month={month}
             onMonthChange={setMonth}
-            onSelect={(date) => {
-              onChange?.(date);
-              setInputValue(formatDate(date));
-              setOpen(false);
-            }}
+            onSelect={handleSelect}
           />
         </PopoverContent>
       </Popover>

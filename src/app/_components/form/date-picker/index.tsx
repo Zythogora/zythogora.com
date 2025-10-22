@@ -1,7 +1,7 @@
 "use client";
 
 import { getInputProps } from "@conform-to/react";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import DatePicker from "@/app/_components/ui/date-picker";
 import FormError from "@/app/_components/ui/form-error";
@@ -44,22 +44,6 @@ const FormDatePicker = ({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { type, value, ...ariaInputProps } = restInputProps;
 
-  const normalizeDateToMidnightUTC = useCallback(
-    (date: Date) =>
-      new Date(
-        Date.UTC(
-          date.getFullYear(),
-          date.getMonth(),
-          date.getDate(),
-          0,
-          0,
-          0,
-          0,
-        ),
-      ).toISOString(),
-    [],
-  );
-
   return (
     <div
       className={cn(
@@ -72,7 +56,7 @@ const FormDatePicker = ({
         ref={inputRef}
         type="hidden"
         name={name}
-        value={selectedDate ? normalizeDateToMidnightUTC(selectedDate) : ""}
+        value={selectedDate ? selectedDate.toISOString() : ""}
       />
 
       <Label htmlFor={field.id} required={field.required}>
