@@ -27,6 +27,7 @@ model Reviews {
   slug                 String
   globalScore          Decimal               @map("global_score") @db.Decimal(3, 1)
   servingFrom          ServingFrom           @map("serving_from")
+  bestBeforeDate       DateTime?             @map("best_before_date") @db.Date
   comment              String?
   pictureUrl           String?               @map("picture_url")
   labelDesign          LabelDesign?          @map("label_design")

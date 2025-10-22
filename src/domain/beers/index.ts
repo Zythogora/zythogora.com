@@ -391,6 +391,7 @@ export const reviewBeer = async (
 
       globalScore: review.globalScore,
       servingFrom: review.servingFrom,
+      bestBeforeDate: review.bestBeforeDate,
       comment: review.comment,
       pictureUrl,
 

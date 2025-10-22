@@ -1,3 +1,4 @@
+import { ServingFrom } from "@prisma/client";
 import { notFound } from "next/navigation";
 import { getFormatter, getTranslations } from "next-intl/server";
 
@@ -213,6 +214,34 @@ const UserReviewPage = async ({ params }: UserReviewPageProps) => {
                 timeStyle: "short",
               })}
             </p>
+
+            {review.servingFrom !== ServingFrom.UNKNOWN ? (
+              <p
+                className={cn(
+                  "text-foreground/50 gap-x-paragraph-space flex flex-row items-center",
+                  "text-xs md:text-base",
+                )}
+              >
+                <span>
+                  {t(
+                    `reviewPage.overall.fields.servingFrom.possibleValues.${review.servingFrom}`,
+                  )}
+                </span>
+
+                {review.bestBeforeDate ? (
+                  <span>
+                    (
+                    {t("reviewPage.overall.fields.bestBeforeDate.value", {
+                      date: formatter.dateTime(review.bestBeforeDate, {
+                        dateStyle: "medium",
+                        timeZone: "UTC",
+                      }),
+                    })}
+                    )
+                  </span>
+                ) : null}
+              </p>
+            ) : null}
           </div>
 
           {review.comment ? (

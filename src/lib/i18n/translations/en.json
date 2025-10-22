@@ -81,6 +81,9 @@
       "confirmPassword": {
         "placeholder": "Confirm password"
       },
+      "datePicker": {
+        "ariaLabel": "Select a date"
+      },
       "fileUpload": {
         "ctaImageSingle": "Drop your image here or click to browse",
         "ctaRemoveFile": "Remove file",
@@ -464,6 +467,10 @@
             "GROWLER": "Beer served from a growler",
             "CASK": "Beer served from a cask pump"
           }
+        },
+        "bestBeforeDate": {
+          "label": "Best before date (BBD / DLC)",
+          "value": "BBD / DLC: {date}"
         },
         "comment": {
           "label": "Comment"
