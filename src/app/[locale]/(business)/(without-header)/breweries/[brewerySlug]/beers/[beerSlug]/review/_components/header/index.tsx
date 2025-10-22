@@ -18,7 +18,9 @@ const ReviewFormHeader = ({ beer, className }: ReviewFormHeaderProps) => {
         className,
       )}
     >
-      <h1 className="text-3xl @3xl:text-4xl">{beer.name}</h1>
+      <h1 className={cn("text-center", "text-3xl @3xl:text-4xl")}>
+        {beer.name}
+      </h1>
 
       <div
         className={cn("flex flex-row items-center", "gap-x-1.5 @3xl:gap-x-2")}
