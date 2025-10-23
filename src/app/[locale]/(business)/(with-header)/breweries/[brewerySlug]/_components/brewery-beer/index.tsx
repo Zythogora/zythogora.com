@@ -1,4 +1,4 @@
-import { getTranslations } from "next-intl/server";
+import { getFormatter, getTranslations } from "next-intl/server";
 
 import ColoredPintIcon from "@/app/_components/icons/colored-pint";
 import Chip from "@/app/_components/ui/chip";
@@ -21,6 +21,7 @@ const BreweryBeer = async ({
   color,
 }: BreweryBeerProps) => {
   const t = await getTranslations();
+  const formatter = await getFormatter();
 
   return (
     <div className="flex w-full min-w-0 flex-row items-center gap-x-4">
@@ -33,7 +34,7 @@ const BreweryBeer = async ({
           <Chip className="truncate">{style}</Chip>
 
           <Chip className="w-fit text-nowrap">
-            {t("common.beer.abv.value", { abv })}
+            {t("common.beer.abv.value", { abv: formatter.number(abv) })}
           </Chip>
 
           {ibu ? <Chip className="w-fit text-nowrap">{ibu} IBU</Chip> : null}

@@ -17,7 +17,7 @@ const BreweryYourReviewCard = async ({
   review,
 }: BreweryYourReviewCardProps) => {
   const t = await getTranslations();
-  const format = await getFormatter();
+  const formatter = await getFormatter();
 
   return (
     <Link
@@ -41,7 +41,9 @@ const BreweryYourReviewCard = async ({
             <Chip className="truncate">{review.beer.style}</Chip>
 
             <Chip className="w-fit text-nowrap">
-              {t("common.beer.abv.value", { abv: review.beer.abv })}
+              {t("common.beer.abv.value", {
+                abv: formatter.number(review.beer.abv),
+              })}
             </Chip>
 
             {review.beer.ibu ? (
@@ -56,7 +58,7 @@ const BreweryYourReviewCard = async ({
           <p className="font-title text-lg">{review.globalScore} / 10</p>
 
           <p className="text-foreground/62.5 text-sm text-nowrap">
-            {format.relativeTime(review.createdAt)}
+            {formatter.relativeTime(review.createdAt)}
           </p>
         </div>
 

@@ -1,4 +1,4 @@
-import { getTranslations } from "next-intl/server";
+import { getFormatter, getTranslations } from "next-intl/server";
 import { Fragment } from "react";
 
 import ColoredPintIcon from "@/app/_components/icons/colored-pint";
@@ -45,6 +45,7 @@ const BeerCard = async ({
   className,
 }: BeerCardProps) => {
   const t = await getTranslations();
+  const formatter = await getFormatter();
 
   const hasDetails = description || releaseYear;
 
@@ -118,7 +119,7 @@ const BeerCard = async ({
 
           <DescriptionList
             label={t("common.beer.abv.label")}
-            value={t("common.beer.abv.value", { abv })}
+            value={t("common.beer.abv.value", { abv: formatter.number(abv) })}
             className={ibu ? "" : "col-start-5"}
           />
 

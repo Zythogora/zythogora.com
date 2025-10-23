@@ -69,14 +69,34 @@ export async function generateStaticParams(): Promise<
 }
 
 export async function generateMetadata({ params }: BeerPageProps) {
+  const t = await getTranslations();
+
   const { brewerySlug, beerSlug } = await params;
 
   const beer = await getBeerBySlug(beerSlug, brewerySlug).catch(() =>
     notFound(),
   );
 
+  const title = `${beer.name} - ${beer.brewery.name} | ${publicConfig.appName}`;
+  const description = t("beerPage.metadata.description", {
+    beerName: beer.name,
+    breweryName: beer.brewery.name,
+  });
+
   return {
-    title: `${beer.name} - ${beer.brewery.name} | ${publicConfig.appName}`,
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: "website",
+      siteName: publicConfig.appName,
+    },
+    twitter: {
+      title,
+      description,
+      card: "summary_large_image",
+    },
   };
 }
 
