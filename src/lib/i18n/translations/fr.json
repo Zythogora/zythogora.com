@@ -326,6 +326,9 @@
     }
   },
   "beerPage": {
+    "metadata": {
+      "description": "Découvrez la {beerName} de {breweryName} et venez partager votre avis sur Zythogora, l'app de référence pour la critique de bières !"
+    },
     "details": {
       "description": "Description",
       "releaseYear": "Année de sortie"
@@ -369,6 +372,9 @@
     }
   },
   "breweryPage": {
+    "metadata": {
+      "description": "Consultez le profil de la brasserie {breweryName} ({countryName}) et découvrez ses {beerCount} {beerCount, plural, =1 {bière} other {bières}} !"
+    },
     "location": "Origine",
     "creationYear": "Création",
     "tabs": {

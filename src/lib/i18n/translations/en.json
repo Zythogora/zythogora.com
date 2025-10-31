@@ -326,6 +326,9 @@
     }
   },
   "beerPage": {
+    "metadata": {
+      "description": "Discover the {beerName} from {breweryName} and come share your opinion on Zythogora, the reference app for beer reviews!"
+    },
     "details": {
       "description": "Description",
       "releaseYear": "Release year"
@@ -369,6 +372,9 @@
     }
   },
   "breweryPage": {
+    "metadata": {
+      "description": "Check the brewery profile from {breweryName} ({countryName}) and discover its {beerCount} {beerCount, plural, =1 {beer} other {beers}}!"
+    },
     "location": "Origin",
     "creationYear": "Creation",
     "tabs": {

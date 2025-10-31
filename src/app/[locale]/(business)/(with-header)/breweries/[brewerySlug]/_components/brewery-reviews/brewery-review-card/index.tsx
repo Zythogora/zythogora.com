@@ -13,7 +13,7 @@ interface BreweryReviewCardProps {
 }
 
 const BreweryReviewCard = async ({ review }: BreweryReviewCardProps) => {
-  const format = await getFormatter();
+  const formatter = await getFormatter();
 
   return (
     <Link
@@ -44,7 +44,7 @@ const BreweryReviewCard = async ({ review }: BreweryReviewCardProps) => {
           <p className="font-title text-lg">{review.globalScore} / 10</p>
 
           <p className="text-foreground/62.5 text-sm text-nowrap">
-            {format.relativeTime(review.createdAt)}
+            {formatter.relativeTime(review.createdAt)}
           </p>
         </div>
 

@@ -1,4 +1,4 @@
-import { useTranslations } from "next-intl";
+import { useFormatter, useTranslations } from "next-intl";
 
 import ColoredPintIcon from "@/app/_components/icons/colored-pint";
 import CountryFlag from "@/app/_components/icons/country-flag";
@@ -28,6 +28,7 @@ const BeerSearchResult = ({
   color,
 }: BeerSearchResultProps) => {
   const t = useTranslations();
+  const formatter = useFormatter();
 
   return (
     <div className="flex w-full flex-row items-center gap-x-4">
@@ -52,7 +53,7 @@ const BeerSearchResult = ({
           <Chip className="truncate">{style}</Chip>
 
           <Chip className="w-fit text-nowrap">
-            {t("common.beer.abv.value", { abv })}
+            {t("common.beer.abv.value", { abv: formatter.number(abv) })}
           </Chip>
 
           {ibu ? <Chip className="w-fit text-nowrap">{ibu} IBU</Chip> : null}

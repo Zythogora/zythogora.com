@@ -83,7 +83,6 @@ export async function generateMetadata({
 
 const UserReviewPage = async ({ params }: UserReviewPageProps) => {
   const t = await getTranslations();
-
   const formatter = await getFormatter();
 
   const { username, reviewSlug } = await params;
@@ -176,7 +175,9 @@ const UserReviewPage = async ({ params }: UserReviewPageProps) => {
 
             <DescriptionList
               label={t("common.beer.abv.label")}
-              value={t("common.beer.abv.value", { abv: review.beer.abv })}
+              value={t("common.beer.abv.value", {
+                abv: formatter.number(review.beer.abv),
+              })}
             />
 
             {review.beer.ibu ? (

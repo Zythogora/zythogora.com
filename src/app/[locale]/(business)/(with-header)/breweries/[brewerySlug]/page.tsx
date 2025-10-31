@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { getLocale } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 
 import BreweryBeerList from "@/app/[locale]/(business)/(with-header)/breweries/[brewerySlug]/_components/brewery-beer-list";
 import BreweryCard from "@/app/[locale]/(business)/(with-header)/breweries/[brewerySlug]/_components/brewery-card";
@@ -17,6 +17,8 @@ import { Routes } from "@/lib/routes";
 import { generatePath } from "@/lib/routes/utils";
 import { cn } from "@/lib/tailwind";
 import { exhaustiveCheck } from "@/lib/typescript/utils";
+
+import type { Metadata } from "next";
 
 interface BreweryPageProps {
   params: Promise<{
@@ -57,13 +59,36 @@ export async function generateStaticParams(): Promise<
   });
 }
 
-export async function generateMetadata({ params }: BreweryPageProps) {
+export async function generateMetadata({
+  params,
+}: BreweryPageProps): Promise<Metadata> {
+  const t = await getTranslations();
+
   const { brewerySlug } = await params;
 
   const brewery = await getBreweryBySlug(brewerySlug).catch(() => notFound());
 
+  const title = `${brewery.name} | ${publicConfig.appName}`;
+  const description = t("breweryPage.metadata.description", {
+    breweryName: brewery.name,
+    countryName: brewery.location.country.name,
+    beerCount: brewery.beers.length,
+  });
+
   return {
-    title: `${brewery.name} | ${publicConfig.appName}`,
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: "website",
+      siteName: publicConfig.appName,
+    },
+    twitter: {
+      title,
+      description,
+      card: "summary_large_image",
+    },
   };
 }
 
