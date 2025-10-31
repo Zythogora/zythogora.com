@@ -20,15 +20,35 @@ import type {
   RawFriendRequest,
 } from "@/domain/users/types";
 
+const bigIntToNumber = (value: bigint, context: string): number => {
+  if (value <= Number.MAX_SAFE_INTEGER && value >= Number.MIN_SAFE_INTEGER) {
+    return Number(value);
+  }
+
+  console.error(
+    `Value: "${value}" is out of bounds to be a Number (${context})`,
+  );
+  return 0;
+};
+
 export const transformRawUserToUser = (rawUser: RawUser): User => {
   return {
     id: rawUser.id,
     username: rawUser.username,
     reviewCount: rawUser._count.reviews,
-    uniqueBeerCount: rawUser.unique_beers,
-    uniqueBreweryCount: rawUser.unique_breweries,
-    uniqueStyleCount: rawUser.unique_styles,
-    uniqueCountryCount: rawUser.unique_countries,
+    uniqueBeerCount: bigIntToNumber(
+      rawUser.unique_beers,
+      `${rawUser.username} unique_beers`,
+    ),
+    uniqueBreweryCount: bigIntToNumber(
+      rawUser.unique_breweries,
+      "unique_breweries",
+    ),
+    uniqueStyleCount: bigIntToNumber(rawUser.unique_styles, "unique_styles"),
+    uniqueCountryCount: bigIntToNumber(
+      rawUser.unique_countries,
+      "unique_countries",
+    ),
   };
 };
 

@@ -23,10 +23,10 @@ import type {
 
 export type RawUser = Users & {
   _count: { reviews: number };
-  unique_beers: number;
-  unique_breweries: number;
-  unique_styles: number;
-  unique_countries: number;
+  unique_beers: bigint;
+  unique_breweries: bigint;
+  unique_styles: bigint;
+  unique_countries: bigint;
 };
 
 export type User = {

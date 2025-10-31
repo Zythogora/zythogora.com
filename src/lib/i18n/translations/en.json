@@ -417,6 +417,12 @@
     }
   },
   "profilePage": {
+    "metadata": {
+      "uniqueBeers": "{count, plural, =1 {1 beer} other {# beers}}",
+      "uniqueBreweries": "{count, plural, =1 {1 brewery} other {# breweries}}",
+      "uniqueStyles": "{count, plural, =1 {1 style} other {# styles}}",
+      "uniqueCountries": "{count, plural, =1 {1 country} other {# countries}}"
+    },
     "statistics": {
       "reviewCount": "{count, plural, =0 {0 reviews} =1 {1 review} other {# reviews}}",
       "uniqueBeers": "Beers",

@@ -9,6 +9,7 @@ import {
   setRequestLocale,
 } from "next-intl/server";
 
+import { publicConfig } from "@/lib/config/client-config";
 import { routing } from "@/lib/i18n";
 
 import type { Locale } from "@/lib/i18n";
@@ -38,9 +39,23 @@ export async function generateMetadata({
     namespace: "metadata",
   });
 
+  const title = t("title");
+  const description = t("description");
+
   return {
-    title: t("title"),
-    description: t("description"),
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: "website",
+      siteName: publicConfig.appName,
+    },
+    twitter: {
+      title,
+      description,
+      card: "summary_large_image",
+    },
   };
 }
 
