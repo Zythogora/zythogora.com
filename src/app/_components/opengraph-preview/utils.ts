@@ -9,7 +9,7 @@ export const previewImageTitleStyle: CSSProperties = {
 
 export const previewImageSubTitleStyle: CSSProperties = {
   fontSize: "56px",
-  lineHeight: "1.1",
+  lineHeight: "1.2",
   fontFamily: "KanitRegular",
   color: "#292524", // stone-800
 };

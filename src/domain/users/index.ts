@@ -65,10 +65,10 @@ export const getUserByUsername = cache(
         WHERE LOWER(users.username) = LOWER(${username});
       ` as Promise<
         {
-          unique_beers: number;
-          unique_breweries: number;
-          unique_styles: number;
-          unique_countries: number;
+          unique_beers: bigint;
+          unique_breweries: bigint;
+          unique_styles: bigint;
+          unique_countries: bigint;
         }[]
       >,
     ]);
