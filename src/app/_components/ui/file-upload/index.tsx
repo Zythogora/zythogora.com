@@ -3,7 +3,7 @@
 import { ImageUpIcon, XIcon } from "lucide-react";
 import mime from "mime";
 import { useTranslations } from "next-intl";
-import { useEffect, type MouseEvent } from "react";
+import { useEffect } from "react";
 
 import Button from "@/app/_components/ui/button";
 import {
@@ -12,11 +12,15 @@ import {
 } from "@/app/_components/ui/file-upload/hooks";
 import { cn } from "@/lib/tailwind";
 
+import type { FileMetadata } from "@/app/_components/ui/file-upload/hooks";
+import type { MouseEvent } from "react";
+
 interface FileUploadProps {
   onFileChange: (file: File | null) => void;
   onError: (error: string[] | undefined) => void;
   maxSize: number;
   acceptedTypes: string[];
+  initialFiles?: FileMetadata[];
 }
 
 const FileUpload = ({
@@ -24,6 +28,7 @@ const FileUpload = ({
   onError,
   maxSize,
   acceptedTypes,
+  initialFiles,
 }: FileUploadProps) => {
   const t = useTranslations();
 
@@ -40,6 +45,7 @@ const FileUpload = ({
     },
   ] = useFileUpload({
     accept: acceptedTypes.join(","),
+    initialFiles,
     maxSize,
     onFilesChange: (files) =>
       onFileChange(

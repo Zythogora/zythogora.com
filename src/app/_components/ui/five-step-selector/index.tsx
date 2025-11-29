@@ -11,20 +11,24 @@ import type { CSSProperties } from "react";
 interface FiveStepSelectorProps
   extends Omit<
     ComponentProps<typeof RadioGroup.Root>,
-    "value" | "defaultValue" | "onValueChange"
+    "defaultValue" | "onValueChange" | "value"
   > {
+  defaultValue?: number;
   onValueChange?: (value: number) => void;
   className?: string;
 }
 
 const FiveStepSelector = ({
   className,
+  defaultValue,
   onValueChange,
   ...restProps
 }: FiveStepSelectorProps) => {
   const possibleValues = useMemo(() => [...Array(5)].map((_, i) => i), []);
 
-  const [selectedValue, setSelectedValue] = useState<number | undefined>();
+  const [selectedValue, setSelectedValue] = useState<number | undefined>(
+    defaultValue,
+  );
 
   const handleValueChange = (value: string) => {
     const parsedValue = Number(value);
@@ -37,6 +41,7 @@ const FiveStepSelector = ({
       data-slot="selector"
       {...restProps}
       value={`${selectedValue}`}
+      defaultValue={`${defaultValue}`}
       onValueChange={handleValueChange}
       loop={false}
       className={cn(
