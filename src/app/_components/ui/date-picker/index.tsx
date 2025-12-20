@@ -1,5 +1,6 @@
 "use client";
 
+import { addYears } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 import { useFormatter, useTranslations } from "next-intl";
 import {
@@ -19,8 +20,10 @@ import {
   PopoverTrigger,
 } from "@/app/_components/ui/popover";
 
-interface DatePickerProps
-  extends Omit<ComponentProps<typeof Input>, "value" | "onChange"> {
+interface DatePickerProps extends Omit<
+  ComponentProps<typeof Input>,
+  "value" | "onChange"
+> {
   value?: Date;
   onChange?: (date: Date | undefined) => void;
 }
@@ -126,6 +129,7 @@ const DatePicker = ({
             month={month}
             onMonthChange={setMonth}
             onSelect={handleSelect}
+            endMonth={addYears(new Date(), 100)}
           />
         </PopoverContent>
       </Popover>
