@@ -1,9 +1,15 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaPg } from "@prisma/adapter-pg";
 import { nanoid } from "nanoid";
+
+import { PrismaClient } from "@db/client";
+
+import { config } from "@/lib/config";
 
 import { new_styles } from "./data/styles";
 
-const prisma = new PrismaClient();
+const prisma = new PrismaClient({
+  adapter: new PrismaPg({ connectionString: config.database.url }),
+});
 
 async function main() {
   await prisma.$transaction(async (tx) => {

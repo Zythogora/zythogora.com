@@ -1,7 +1,6 @@
 import CountryFlag from "@/app/_components/icons/country-flag";
-import { cn } from "@/lib/tailwind";
-
 import type { Beer } from "@/domain/beers/types";
+import { cn } from "@/lib/tailwind";
 
 interface ReviewFormHeaderProps {
   beer: Beer;

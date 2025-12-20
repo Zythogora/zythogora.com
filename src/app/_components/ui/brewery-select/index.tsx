@@ -15,16 +15,17 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/app/_components/ui/popover";
+import type { BreweryResult } from "@/domain/search/types";
 import { Link, useRouter } from "@/lib/i18n";
 import { Routes } from "@/lib/routes";
 import { cn } from "@/lib/tailwind";
 
-import type { BreweryResult } from "@/domain/search/types";
 import type { getSelectProps } from "@conform-to/react";
 import type { ComponentProps } from "react";
 
 interface BrewerySelectProps
-  extends Partial<ReturnType<typeof getSelectProps>>,
+  extends
+    Partial<ReturnType<typeof getSelectProps>>,
     Pick<ComponentProps<"input">, "placeholder" | "disabled" | "className"> {
   onChange?: (value: BreweryResult) => void;
   searchPlaceholder?: string;

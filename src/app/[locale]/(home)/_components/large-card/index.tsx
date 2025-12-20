@@ -1,6 +1,6 @@
+import type { IconProps } from "@/app/_components/icons/types";
 import { cn } from "@/lib/tailwind";
 
-import type { IconProps } from "@/app/_components/icons/types";
 import type { ReactNode } from "react";
 
 interface HomeLargeCardProps {

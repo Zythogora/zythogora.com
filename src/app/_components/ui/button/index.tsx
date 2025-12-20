@@ -1,5 +1,5 @@
-import * as Slot from "@radix-ui/react-slot";
 import { cva } from "class-variance-authority";
+import { Slot } from "radix-ui";
 
 import { cn } from "@/lib/tailwind";
 
@@ -39,8 +39,7 @@ export const buttonVariants = cva(
 );
 
 interface ButtonProps
-  extends ComponentProps<"button">,
-    VariantProps<typeof buttonVariants> {
+  extends ComponentProps<"button">, VariantProps<typeof buttonVariants> {
   asChild?: boolean;
 }
 

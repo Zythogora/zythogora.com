@@ -11,8 +11,9 @@ import { cn } from "@/lib/tailwind";
 
 import type { FieldMetadata } from "@conform-to/react";
 
-interface FormFiveStepSelectorProps
-  extends ComponentProps<typeof FiveStepSelector> {
+interface FormFiveStepSelectorProps extends ComponentProps<
+  typeof FiveStepSelector
+> {
   field: FieldMetadata;
   group: "overall" | "appearance" | "nose" | "taste" | "finish";
   possibleValues: readonly [string, string, string, string, string];
@@ -59,17 +60,10 @@ const FormFiveStepSelector = ({
 
       <Label htmlFor={field.id} required={field.required}>
         {selectedValue
-          ? `${t(
-              // @ts-expect-error The possible values cannot be typed
-              `reviewPage.${group}.fields.${field.name}.label`,
-            )}: ${t(
-              // @ts-expect-error The possible values cannot be typed
+          ? `${t(`reviewPage.${group}.fields.${field.name}.label`)}: ${t(
               `reviewPage.${group}.fields.${field.name}.possibleValues.${selectedValue}`,
             )}`
-          : t(
-              // @ts-expect-error The possible values cannot be typed
-              `reviewPage.${group}.fields.${field.name}.label`,
-            )}
+          : t(`reviewPage.${group}.fields.${field.name}.label`)}
       </Label>
 
       <div className="w-full">

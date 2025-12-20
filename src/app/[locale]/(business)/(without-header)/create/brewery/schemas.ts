@@ -23,7 +23,12 @@ export const createBrewerySchema = z
     websiteLink: zUrl.optional(),
     socialLinks: z.array(
       z.object({
-        name: z.string({ required_error: "form.errors.FIELD_REQUIRED" }),
+        name: z.string({
+          error: (issue) =>
+            issue.input === undefined
+              ? "form.errors.FIELD_REQUIRED"
+              : "form.errors.STRING_INVALID",
+        }),
         url: zUrl,
       }),
     ),

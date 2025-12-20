@@ -1,11 +1,10 @@
 import { getTranslations } from "next-intl/server";
 
 import BreweryBeer from "@/app/[locale]/(business)/(with-header)/breweries/[brewerySlug]/_components/brewery-beer";
+import type { BreweryBeer as BreweryBeerType } from "@/domain/breweries/types";
 import { Link } from "@/lib/i18n";
 import { Routes } from "@/lib/routes";
 import { generatePath } from "@/lib/routes/utils";
-
-import type { BreweryBeer as BreweryBeerType } from "@/domain/breweries/types";
 
 interface BreweryBeerListProps {
   brewerySlug: string;

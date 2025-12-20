@@ -3,7 +3,6 @@ import { getLocale } from "next-intl/server";
 
 import { routing } from "@/lib/i18n";
 import { UnknownCountryCodeError } from "@/lib/i18n/countries/errors";
-
 import type { Country } from "@/lib/i18n/countries/types";
 
 for (const locale of routing.locales) {

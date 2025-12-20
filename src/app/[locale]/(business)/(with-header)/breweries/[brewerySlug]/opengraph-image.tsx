@@ -16,7 +16,11 @@ interface Props {
 export async function generateImageMetadata({ params }: Props) {
   const { brewerySlug } = await params;
 
-  const brewery = await getBreweryBySlug(brewerySlug).catch(() => notFound());
+  const brewery = await getBreweryBySlug(brewerySlug).catch(() => null);
+
+  if (!brewery) {
+    return [];
+  }
 
   return [
     getOpengraphPreviewMetadata({

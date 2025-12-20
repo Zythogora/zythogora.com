@@ -1,4 +1,4 @@
-import type { Reviews } from "@prisma/client";
+import type { Reviews } from "@db/client";
 
 const appearanceColumns: (keyof Reviews)[] = [
   "labelDesign",

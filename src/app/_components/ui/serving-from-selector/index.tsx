@@ -1,5 +1,6 @@
-import { ServingFrom } from "@prisma/client";
-import * as RadioGroup from "@radix-ui/react-radio-group";
+import { RadioGroup } from "radix-ui";
+
+import { ServingFrom } from "@db/enums";
 
 import { servingFromValues } from "@/app/[locale]/(business)/(without-header)/breweries/[brewerySlug]/beers/[beerSlug]/review/schemas";
 import ServingFromBottleIcon from "@/app/_components/icons/serving-from/bottle";
@@ -62,8 +63,9 @@ const ServingFromIcon = ({ size, type, className }: ServingFromIconProps) => {
   }
 };
 
-interface ServingFromSelectorProps
-  extends ComponentProps<typeof RadioGroup.Root> {
+interface ServingFromSelectorProps extends ComponentProps<
+  typeof RadioGroup.Root
+> {
   className?: string;
 }
 

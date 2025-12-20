@@ -4,7 +4,6 @@ import { useTranslations } from "next-intl";
 
 import CountryFlag from "@/app/_components/icons/country-flag";
 import Chip from "@/app/_components/ui/chip";
-
 import type { Country } from "@/lib/i18n/countries/types";
 
 interface BrewerySearchResultProps {

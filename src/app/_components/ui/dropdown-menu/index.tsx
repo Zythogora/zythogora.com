@@ -1,7 +1,7 @@
 "use client";
 
-import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu";
 import { CheckIcon, ChevronRightIcon, CircleIcon } from "lucide-react";
+import { DropdownMenu as DropdownMenuPrimitive } from "radix-ui";
 
 import { cn } from "@/lib/tailwind";
 
@@ -72,8 +72,9 @@ const DropdownMenuGroup = (props: DropdownMenuGroupProps) => {
   );
 };
 
-export interface DropdownMenuItemProps
-  extends ComponentProps<typeof DropdownMenuPrimitive.Item> {
+export interface DropdownMenuItemProps extends ComponentProps<
+  typeof DropdownMenuPrimitive.Item
+> {
   inset?: boolean;
   variant?: "default" | "destructive";
 }
@@ -171,8 +172,9 @@ const DropdownMenuRadioItem = ({
   );
 };
 
-export interface DropdownMenuLabelProps
-  extends ComponentProps<typeof DropdownMenuPrimitive.Label> {
+export interface DropdownMenuLabelProps extends ComponentProps<
+  typeof DropdownMenuPrimitive.Label
+> {
   inset?: boolean;
 }
 
@@ -234,8 +236,9 @@ const DropdownMenuSub = (props: DropdownMenuSubProps) => {
   return <DropdownMenuPrimitive.Sub data-slot="dropdown-menu-sub" {...props} />;
 };
 
-export interface DropdownMenuSubTriggerProps
-  extends ComponentProps<typeof DropdownMenuPrimitive.SubTrigger> {
+export interface DropdownMenuSubTriggerProps extends ComponentProps<
+  typeof DropdownMenuPrimitive.SubTrigger
+> {
   inset?: boolean;
 }
 

@@ -1,10 +1,9 @@
 import { getTranslations } from "next-intl/server";
 
+import type { SearchKind } from "@/app/[locale]/(business)/(without-header)/search/types";
 import NotFoundIllustration from "@/app/_components/ui/not-found-illustration";
 import { Link } from "@/lib/i18n";
 import { Routes } from "@/lib/routes";
-
-import type { SearchKind } from "@/app/[locale]/(business)/(without-header)/search/types";
 
 const BreweryNotFound = async () => {
   const t = await getTranslations();

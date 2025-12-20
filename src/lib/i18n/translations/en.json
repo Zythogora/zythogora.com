@@ -112,6 +112,9 @@
     },
     "errors": {
       "FIELD_REQUIRED": "This field is required",
+      "STRING_INVALID": "The value must be a string",
+      "NUMBER_INVALID": "The value must be a number",
+      "ENUM_INVALID": "The value is unknown",
       "EMAIL_INVALID": "The email is invalid",
       "PHONE_NUMBER_INVALID": "The phone number does not match the selected country or has no international prefix",
       "PASSWORD_TOO_SHORT": "The password has to be at least 8 characters long",

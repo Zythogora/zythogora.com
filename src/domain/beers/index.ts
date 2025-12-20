@@ -3,6 +3,10 @@
 import { nanoid } from "nanoid";
 import { cache } from "react";
 
+import type { Prisma } from "@db/client";
+
+import type { CreateReviewData } from "@/app/[locale]/(business)/(without-header)/breweries/[brewerySlug]/beers/[beerSlug]/review/schemas";
+import type { CreateBeerData } from "@/app/[locale]/(business)/(without-header)/create/beer/schemas";
 import {
   InvalidBreweryError,
   InvalidBeerSlugError,
@@ -20,6 +24,12 @@ import {
   transformRawColorToColor,
   transformRawStyleCategoryToStyleCategory,
 } from "@/domain/beers/transforms";
+import type {
+  Beer,
+  BeerReview,
+  Color,
+  StyleCategory,
+} from "@/domain/beers/types";
 import { transformRawBeerReviewToBeerReviewWithPicture } from "@/domain/reviews/transforms";
 import { getCurrentUser } from "@/lib/auth";
 import { config } from "@/lib/config";
@@ -29,23 +39,13 @@ import {
   optimizeImage,
 } from "@/lib/images";
 import { getPaginatedResults } from "@/lib/pagination";
-import prisma, { getPrismaTransactionClient } from "@/lib/prisma";
-import { slugify } from "@/lib/prisma/utils";
-import { uploadFile } from "@/lib/storage";
-
-import type { CreateReviewData } from "@/app/[locale]/(business)/(without-header)/breweries/[brewerySlug]/beers/[beerSlug]/review/schemas";
-import type { CreateBeerData } from "@/app/[locale]/(business)/(without-header)/create/beer/schemas";
-import type {
-  Beer,
-  BeerReview,
-  Color,
-  StyleCategory,
-} from "@/domain/beers/types";
 import type {
   PaginatedResults,
   PaginationParams,
 } from "@/lib/pagination/types";
-import type { Prisma } from "@prisma/client";
+import prisma, { getPrismaTransactionClient } from "@/lib/prisma";
+import { slugify } from "@/lib/prisma/utils";
+import { uploadFile } from "@/lib/storage";
 
 export const getBeerBySlug = cache(
   async (beerSlug: string, brewerySlug: string): Promise<Beer> => {

@@ -1,7 +1,7 @@
 "use client";
 
 import { getFormProps, getInputProps, useForm } from "@conform-to/react";
-import { getZodConstraint, parseWithZod } from "@conform-to/zod";
+import { getZodConstraint, parseWithZod } from "@conform-to/zod/v4";
 import { useLocale, useTranslations } from "next-intl";
 import { useActionState, useEffect, useTransition } from "react";
 import { toast } from "sonner";

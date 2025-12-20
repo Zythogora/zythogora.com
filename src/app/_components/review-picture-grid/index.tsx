@@ -1,12 +1,11 @@
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 
+import type { ReviewWithPicture } from "@/domain/reviews/types";
 import { Link } from "@/lib/i18n";
 import { Routes } from "@/lib/routes";
 import { generatePath } from "@/lib/routes/utils";
 import { cn } from "@/lib/tailwind";
-
-import type { ReviewWithPicture } from "@/domain/reviews/types";
 
 interface ReviewPictureGridProps {
   pictures: ReviewWithPicture[];

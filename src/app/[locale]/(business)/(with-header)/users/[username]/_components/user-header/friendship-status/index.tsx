@@ -9,9 +9,8 @@ import { ClockFadingIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 import Chip from "@/app/_components/ui/chip";
-import { cn } from "@/lib/tailwind";
-
 import type { FriendshipStatus as FriendshipStatusValues } from "@/domain/users/types";
+import { cn } from "@/lib/tailwind";
 
 interface FriendshipStatusProps {
   status: Exclude<FriendshipStatusValues, "NOT_FRIENDS">;

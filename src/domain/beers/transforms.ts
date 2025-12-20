@@ -1,7 +1,5 @@
 "server only";
 
-import { getCountry } from "@/lib/i18n/countries";
-
 import type {
   Beer,
   BeerReview,
@@ -12,6 +10,7 @@ import type {
   RawStyleCategory,
   StyleCategory,
 } from "@/domain/beers/types";
+import { getCountry } from "@/lib/i18n/countries";
 
 export const transformRawColorToColor = (rawColor: RawColor): Color => ({
   id: rawColor.id,

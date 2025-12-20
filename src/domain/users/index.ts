@@ -24,14 +24,6 @@ import {
   transformRawUserReviewToUserReview,
   transformRawUserToUser,
 } from "@/domain/users/transforms";
-import { getCurrentUser } from "@/lib/auth";
-import { sendEmail } from "@/lib/email";
-import FriendRequestEmail from "@/lib/email/templates/friend-request";
-import FriendRequestAcceptedEmail from "@/lib/email/templates/friend-request-accepted";
-import { getTranslationsByLocale } from "@/lib/i18n";
-import { getPaginatedResults } from "@/lib/pagination";
-import prisma, { getPrismaTransactionClient } from "@/lib/prisma";
-
 import type {
   UserReview,
   User,
@@ -39,10 +31,17 @@ import type {
   FriendRequest,
   FriendshipStatus,
 } from "@/domain/users/types";
+import { getCurrentUser } from "@/lib/auth";
+import { sendEmail } from "@/lib/email";
+import FriendRequestEmail from "@/lib/email/templates/friend-request";
+import FriendRequestAcceptedEmail from "@/lib/email/templates/friend-request-accepted";
+import { getTranslationsByLocale } from "@/lib/i18n";
+import { getPaginatedResults } from "@/lib/pagination";
 import type {
   PaginatedResults,
   PaginationParams,
 } from "@/lib/pagination/types";
+import prisma, { getPrismaTransactionClient } from "@/lib/prisma";
 import type { PrismaTransactionClient } from "@/lib/prisma/types";
 
 export const getUserByUsername = cache(

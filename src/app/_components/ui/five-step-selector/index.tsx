@@ -1,6 +1,6 @@
 "use client";
 
-import * as RadioGroup from "@radix-ui/react-radio-group";
+import { RadioGroup } from "radix-ui";
 import { Fragment, useMemo, useState } from "react";
 
 import { cn } from "@/lib/tailwind";
@@ -8,11 +8,10 @@ import { cn } from "@/lib/tailwind";
 import type { ComponentProps } from "react";
 import type { CSSProperties } from "react";
 
-interface FiveStepSelectorProps
-  extends Omit<
-    ComponentProps<typeof RadioGroup.Root>,
-    "value" | "defaultValue" | "onValueChange"
-  > {
+interface FiveStepSelectorProps extends Omit<
+  ComponentProps<typeof RadioGroup.Root>,
+  "value" | "defaultValue" | "onValueChange"
+> {
   onValueChange?: (value: number) => void;
   className?: string;
 }

@@ -1,3 +1,5 @@
+import { z } from "zod";
+
 import {
   Acidity,
   AromasIntensity,
@@ -10,8 +12,7 @@ import {
   HeadRetention,
   LabelDesign,
   ServingFrom,
-} from "@prisma/client";
-import { z } from "zod";
+} from "@db/enums";
 
 export const servingFromValues = [
   ServingFrom.DRAFT,
@@ -113,13 +114,19 @@ export const reviewSchema = z.object({
 
   globalScore: z
     .number({
-      required_error: "form.errors.FIELD_REQUIRED",
+      error: (issue) =>
+        issue.input === undefined
+          ? "form.errors.FIELD_REQUIRED"
+          : "form.errors.NUMBER_INVALID",
     })
     .min(0)
     .max(10)
     .multipleOf(0.5),
   servingFrom: z.enum(servingFromValues, {
-    required_error: "form.errors.FIELD_REQUIRED",
+    error: (issue) =>
+      issue.input === undefined
+        ? "form.errors.FIELD_REQUIRED"
+        : "form.errors.ENUM_INVALID",
   }),
   bestBeforeDate: z.coerce.date().optional(),
   comment: z.string().optional(),

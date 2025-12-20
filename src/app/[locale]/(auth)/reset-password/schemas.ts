@@ -9,7 +9,10 @@ export const resetPasswordSchema = z
       tooLong: "form.errors.PASSWORD_TOO_LONG",
     }),
     confirmPassword: z.string({
-      required_error: "form.errors.FIELD_REQUIRED",
+      error: (issue) =>
+        issue.input === undefined
+          ? "form.errors.FIELD_REQUIRED"
+          : "form.errors.STRING_INVALID",
     }),
     token: z.string(),
   })

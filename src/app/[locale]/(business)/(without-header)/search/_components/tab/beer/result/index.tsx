@@ -3,7 +3,6 @@ import { useFormatter, useTranslations } from "next-intl";
 import ColoredPintIcon from "@/app/_components/icons/colored-pint";
 import CountryFlag from "@/app/_components/icons/country-flag";
 import Chip from "@/app/_components/ui/chip";
-
 import type { Color } from "@/domain/beers/types";
 import type { Country } from "@/lib/i18n/countries/types";
 

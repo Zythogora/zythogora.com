@@ -6,12 +6,13 @@ import {
   getInputProps,
   useForm,
 } from "@conform-to/react";
-import { parseWithZod } from "@conform-to/zod";
-import { getZodConstraint } from "@conform-to/zod";
-import { ServingFrom } from "@prisma/client";
+import { parseWithZod } from "@conform-to/zod/v4";
+import { getZodConstraint } from "@conform-to/zod/v4";
 import { useTranslations } from "next-intl";
 import { useActionState, useEffect, useTransition } from "react";
 import { toast } from "sonner";
+
+import { ServingFrom } from "@db/enums";
 
 import { reviewAction } from "@/app/[locale]/(business)/(without-header)/breweries/[brewerySlug]/beers/[beerSlug]/review/actions";
 import {
@@ -88,7 +89,6 @@ const ReviewForm = ({ beerId }: ReviewFormProps) => {
       // @ts-expect-error Typescript doesn't know that the error is a message key
       toast.error(t(Object.values(lastResult.error)[0][0]));
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lastResult]);
 
   return (

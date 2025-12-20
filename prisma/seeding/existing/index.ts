@@ -1,7 +1,8 @@
-import { PrismaClient, ServingFrom } from "@prisma/client";
+import { PrismaPg } from "@prisma/adapter-pg";
 import { customAlphabet, nanoid } from "nanoid";
 
-import { slugify } from "@/lib/prisma/utils";
+import { PrismaClient, ServingFrom } from "@db/client";
+
 import { existing_beers } from "prisma/seeding/existing/data/beers";
 import { existing_breweries } from "prisma/seeding/existing/data/breweries";
 import { existing_colors } from "prisma/seeding/existing/data/colors";
@@ -9,7 +10,12 @@ import { existing_reviews } from "prisma/seeding/existing/data/reviews";
 import { existing_styles } from "prisma/seeding/existing/data/styles";
 import { existingUsers } from "prisma/seeding/existing/data/users";
 
-const prisma = new PrismaClient();
+import { config } from "@/lib/config";
+import { slugify } from "@/lib/prisma/utils";
+
+const prisma = new PrismaClient({
+  adapter: new PrismaPg({ connectionString: config.database.url }),
+});
 
 async function main() {
   await prisma.$transaction(

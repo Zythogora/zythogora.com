@@ -1,9 +1,8 @@
 import Image from "next/image";
 
-import { cn } from "@/lib/tailwind";
-
 import type { IconProps } from "@/app/_components/icons/types";
 import type { Country } from "@/lib/i18n/countries/types";
+import { cn } from "@/lib/tailwind";
 
 interface CountryFlagProps extends IconProps {
   country: Country;

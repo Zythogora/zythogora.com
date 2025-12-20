@@ -3,11 +3,10 @@ import { getInputProps } from "@conform-to/react";
 import { XIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 
+import type { CreateBreweryData } from "@/app/[locale]/(business)/(without-header)/create/brewery/schemas";
 import FormError from "@/app/_components/ui/form-error";
 import Input from "@/app/_components/ui/input";
 import { cn } from "@/lib/tailwind";
-
-import type { CreateBreweryData } from "@/app/[locale]/(business)/(without-header)/create/brewery/schemas";
 
 export const emptySocialLinkValue = {
   name: "",

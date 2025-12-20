@@ -20,7 +20,11 @@ interface Props {
 export async function generateImageMetadata({ params }: Props) {
   const { username } = await params;
 
-  const user = await getUserByUsername(username).catch(() => notFound());
+  const user = await getUserByUsername(username).catch(() => null);
+
+  if (!user) {
+    return [];
+  }
 
   return [
     getOpengraphPreviewMetadata({

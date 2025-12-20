@@ -17,6 +17,8 @@ import { generatePath } from "@/lib/routes/utils";
 import { cn } from "@/lib/tailwind";
 import { exhaustiveCheck } from "@/lib/typescript/utils";
 
+import type { Metadata } from "next";
+
 interface BeerPageProps {
   params: Promise<{
     brewerySlug: string;
@@ -68,7 +70,9 @@ export async function generateStaticParams(): Promise<
   });
 }
 
-export async function generateMetadata({ params }: BeerPageProps) {
+export async function generateMetadata({
+  params,
+}: BeerPageProps): Promise<Metadata> {
   const t = await getTranslations();
 
   const { brewerySlug, beerSlug } = await params;

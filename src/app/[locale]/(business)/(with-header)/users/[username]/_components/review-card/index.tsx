@@ -3,11 +3,10 @@ import { getFormatter } from "next-intl/server";
 
 import ColoredPintIcon from "@/app/_components/icons/colored-pint";
 import CountryFlag from "@/app/_components/icons/country-flag";
+import type { UserReview } from "@/domain/users/types";
 import { Link } from "@/lib/i18n";
 import { Routes } from "@/lib/routes";
 import { generatePath } from "@/lib/routes/utils";
-
-import type { UserReview } from "@/domain/users/types";
 
 interface UserReviewCardProps {
   username: string;

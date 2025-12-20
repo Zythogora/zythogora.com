@@ -1,6 +1,6 @@
 "use client";
 
-import * as SliderPrimitive from "@radix-ui/react-slider";
+import { Slider as SliderPrimitive } from "radix-ui";
 import { useMemo } from "react";
 
 import { cn } from "@/lib/tailwind";
@@ -10,7 +10,8 @@ import type { ComponentProps } from "react";
 type BaseSliderProps = ComponentProps<typeof SliderPrimitive.Root>;
 
 interface SliderProps
-  extends Omit<BaseSliderProps, "min" | "max" | "step">,
+  extends
+    Omit<BaseSliderProps, "min" | "max" | "step">,
     Required<Pick<BaseSliderProps, "min" | "max" | "step">> {}
 
 const Slider = ({ className, ...restProps }: SliderProps) => {

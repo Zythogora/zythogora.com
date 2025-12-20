@@ -2,7 +2,6 @@ import { getFormatter, getTranslations } from "next-intl/server";
 
 import ColoredPintIcon from "@/app/_components/icons/colored-pint";
 import Chip from "@/app/_components/ui/chip";
-
 import type { Color } from "@/domain/beers/types";
 
 interface BreweryBeerProps {

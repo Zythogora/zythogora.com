@@ -13,14 +13,15 @@ import {
   PopoverTrigger,
 } from "@/app/_components/ui/popover";
 import countries from "@/lib/i18n/countries";
+import type { Country } from "@/lib/i18n/countries/types";
 import { cn } from "@/lib/tailwind";
 
-import type { Country } from "@/lib/i18n/countries/types";
 import type { getSelectProps } from "@conform-to/react";
 import type { ComponentProps } from "react";
 
 interface CountrySelectProps
-  extends Partial<ReturnType<typeof getSelectProps>>,
+  extends
+    Partial<ReturnType<typeof getSelectProps>>,
     Pick<ComponentProps<"input">, "placeholder" | "disabled" | "className"> {
   onChange?: (value: Country) => void;
   searchPlaceholder?: string;

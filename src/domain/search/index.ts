@@ -1,20 +1,19 @@
 "server only";
 
 import { transformRawColorToColor } from "@/domain/beers/transforms";
-import { getCountry } from "@/lib/i18n/countries";
-import { getPaginatedResults } from "@/lib/pagination";
-import prisma from "@/lib/prisma";
-import { prepareFullTextSearch, prepareLikeSearch } from "@/lib/prisma/utils";
-
 import type {
   BeerResult,
   BreweryResult,
   UserResult,
 } from "@/domain/search/types";
+import { getCountry } from "@/lib/i18n/countries";
+import { getPaginatedResults } from "@/lib/pagination";
 import type {
   PaginatedResults,
   PaginationParams,
 } from "@/lib/pagination/types";
+import prisma from "@/lib/prisma";
+import { prepareFullTextSearch, prepareLikeSearch } from "@/lib/prisma/utils";
 
 export const searchBeers = async ({
   search,

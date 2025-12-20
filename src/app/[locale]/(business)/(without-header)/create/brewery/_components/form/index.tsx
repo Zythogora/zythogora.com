@@ -1,8 +1,8 @@
 "use client";
 
 import { FormProvider, getFormProps, useForm } from "@conform-to/react";
-import { parseWithZod } from "@conform-to/zod";
-import { getZodConstraint } from "@conform-to/zod";
+import { parseWithZod } from "@conform-to/zod/v4";
+import { getZodConstraint } from "@conform-to/zod/v4";
 import { PlusIcon } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";

@@ -1,6 +1,7 @@
-import { ServingFrom } from "@prisma/client";
 import { notFound } from "next/navigation";
 import { getFormatter, getTranslations } from "next-intl/server";
+
+import { ServingFrom } from "@db/client";
 
 import {
   acidityValues,
@@ -495,7 +496,6 @@ const UserReviewPage = async ({ params }: UserReviewPageProps) => {
         ) : null}
 
         {review.pictureUrl ? (
-          /* eslint-disable-next-line @next/next/no-img-element */
           <img
             src={review.pictureUrl}
             alt={t("common.review.pictureAlt", { username })}
