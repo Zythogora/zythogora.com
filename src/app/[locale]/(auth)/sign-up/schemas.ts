@@ -6,7 +6,7 @@ import { zPassword } from "@/lib/validator";
 export const signUpSchema = z
   .object({
     username: z
-      .string({ required_error: "form.errors.FIELD_REQUIRED" })
+      .string({ error: "form.errors.FIELD_REQUIRED" })
       .min(3, { message: "auth.signUp.errors.USERNAME_TOO_SHORT" })
       .max(25, { message: "auth.signUp.errors.USERNAME_TOO_LONG" })
       .regex(/^[a-zA-Z0-9_]+$/, {
@@ -18,7 +18,10 @@ export const signUpSchema = z
       tooLong: "form.errors.PASSWORD_TOO_LONG",
     }),
     confirmPassword: z.string({
-      required_error: "form.errors.FIELD_REQUIRED",
+      error: (issue) =>
+        issue.input === undefined
+          ? "form.errors.FIELD_REQUIRED"
+          : "form.errors.STRING_INVALID",
     }),
   })
   .refine((data) => data.password === data.confirmPassword, {

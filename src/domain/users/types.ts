@@ -1,5 +1,3 @@
-import type { Color } from "@/domain/beers/types";
-import type { Country } from "@/lib/i18n/countries/types";
 import type {
   Acidity,
   AromasIntensity,
@@ -19,7 +17,10 @@ import type {
   ServingFrom,
   Styles,
   Users,
-} from "@prisma/client";
+} from "@db/client";
+
+import type { Color } from "@/domain/beers/types";
+import type { Country } from "@/lib/i18n/countries/types";
 
 export type RawUser = Users & {
   _count: { reviews: number };

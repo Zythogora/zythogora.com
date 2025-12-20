@@ -1,4 +1,3 @@
-import type { Country } from "@/lib/i18n/countries/types";
 import type {
   Beers,
   Breweries,
@@ -8,7 +7,9 @@ import type {
   StyleCategories,
   Styles as RawStyles,
   Users,
-} from "@prisma/client";
+} from "@db/client";
+
+import type { Country } from "@/lib/i18n/countries/types";
 
 export type RawColor = Colors;
 

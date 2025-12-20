@@ -2,11 +2,10 @@ import { getTranslations } from "next-intl/server";
 
 import UserSearchResult from "@/app/[locale]/(business)/(without-header)/search/_components/tab/user/result";
 import Pagination from "@/app/_components/ui/pagination";
+import type { UserResult } from "@/domain/search/types";
 import { Link } from "@/lib/i18n";
 import { Routes } from "@/lib/routes";
 import { generatePath } from "@/lib/routes/utils";
-
-import type { UserResult } from "@/domain/search/types";
 
 interface UserTabProps {
   results: UserResult[];

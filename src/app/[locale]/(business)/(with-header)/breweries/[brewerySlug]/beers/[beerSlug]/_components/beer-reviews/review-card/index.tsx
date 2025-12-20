@@ -6,11 +6,10 @@ import ServingFromCanIcon from "@/app/_components/icons/serving-from/can";
 import ServingFromCaskIcon from "@/app/_components/icons/serving-from/cask";
 import ServingFromDraftIcon from "@/app/_components/icons/serving-from/draft";
 import ServingFromGrowlerIcon from "@/app/_components/icons/serving-from/growler";
+import type { BeerReview } from "@/domain/beers/types";
 import { Link } from "@/lib/i18n";
 import { Routes } from "@/lib/routes";
 import { generatePath } from "@/lib/routes/utils";
-
-import type { BeerReview } from "@/domain/beers/types";
 
 interface BeerReviewCardProps {
   review: BeerReview;

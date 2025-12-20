@@ -1,8 +1,8 @@
 import SparkleIcon from "@/app/_components/icons/sparkle";
-import { cn } from "@/lib/tailwind";
-
 import type { IconProps } from "@/app/_components/icons/types";
 import type { Color } from "@/domain/beers/types";
+import { cn } from "@/lib/tailwind";
+
 import type { CSSProperties } from "react";
 
 interface ColoredPintProps extends IconProps {

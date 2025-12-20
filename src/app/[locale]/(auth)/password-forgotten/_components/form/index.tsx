@@ -2,8 +2,8 @@
 
 import { useForm } from "@conform-to/react";
 import { getFormProps } from "@conform-to/react";
-import { parseWithZod } from "@conform-to/zod";
-import { getZodConstraint } from "@conform-to/zod";
+import { parseWithZod } from "@conform-to/zod/v4";
+import { getZodConstraint } from "@conform-to/zod/v4";
 import { useTranslations } from "next-intl";
 import { useActionState, useState, useTransition } from "react";
 

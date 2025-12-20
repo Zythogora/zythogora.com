@@ -4,7 +4,6 @@ import { useLocale } from "next-intl";
 
 import countries from "@/lib/i18n/countries";
 import { UnknownCountryCodeError } from "@/lib/i18n/countries/errors";
-
 import type { Country } from "@/lib/i18n/countries/types";
 
 export const useCountryCode = () => {

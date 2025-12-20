@@ -9,13 +9,12 @@ import {
   CollapsibleTrigger,
 } from "@/app/_components/ui/collapsible";
 import DescriptionList from "@/app/_components/ui/description-list";
+import type { Color } from "@/domain/beers/types";
 import { Link } from "@/lib/i18n";
+import type { Country } from "@/lib/i18n/countries/types";
 import { Routes } from "@/lib/routes";
 import { generatePath } from "@/lib/routes/utils";
 import { cn } from "@/lib/tailwind";
-
-import type { Color } from "@/domain/beers/types";
-import type { Country } from "@/lib/i18n/countries/types";
 
 interface BeerCardProps {
   name: string;

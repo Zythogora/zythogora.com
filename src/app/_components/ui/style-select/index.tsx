@@ -11,14 +11,15 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/app/_components/ui/popover";
+import type { Style, StyleCategory } from "@/domain/beers/types";
 import { cn } from "@/lib/tailwind";
 
-import type { Style, StyleCategory } from "@/domain/beers/types";
 import type { getSelectProps } from "@conform-to/react";
 import type { ComponentProps } from "react";
 
 interface StyleSelectProps
-  extends Partial<ReturnType<typeof getSelectProps>>,
+  extends
+    Partial<ReturnType<typeof getSelectProps>>,
     Pick<ComponentProps<"input">, "placeholder" | "disabled" | "className"> {
   styleCategories: StyleCategory[];
   onChange?: (value: Style) => void;

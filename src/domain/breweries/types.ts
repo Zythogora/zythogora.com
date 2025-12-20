@@ -1,5 +1,3 @@
-import type { Color } from "@/domain/beers/types";
-import type { Country } from "@/lib/i18n/countries/types";
 import type {
   Beers,
   Breweries,
@@ -7,7 +5,10 @@ import type {
   Reviews,
   Styles,
   Users,
-} from "@prisma/client";
+} from "@db/client";
+
+import type { Color } from "@/domain/beers/types";
+import type { Country } from "@/lib/i18n/countries/types";
 
 export type RawBrewery = Breweries & {
   beers: RawBreweryBeer[];

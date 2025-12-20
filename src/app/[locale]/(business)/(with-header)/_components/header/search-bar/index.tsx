@@ -12,6 +12,7 @@ import BeerSearchResult from "@/app/[locale]/(business)/(without-header)/search/
 import BrewerySearchResult from "@/app/[locale]/(business)/(without-header)/search/_components/tab/brewery/result";
 import UserSearchResult from "@/app/[locale]/(business)/(without-header)/search/_components/tab/user/result";
 import { SEARCH_KINDS } from "@/app/[locale]/(business)/(without-header)/search/types";
+import type { SearchKind } from "@/app/[locale]/(business)/(without-header)/search/types";
 import Input from "@/app/_components/ui/input";
 import {
   Popover,
@@ -25,7 +26,6 @@ import { Routes } from "@/lib/routes";
 import { generatePath } from "@/lib/routes/utils";
 import { cn } from "@/lib/tailwind";
 
-import type { SearchKind } from "@/app/[locale]/(business)/(without-header)/search/types";
 import type { ChangeEvent, FocusEvent } from "react";
 
 interface HeaderSearchBarProps {

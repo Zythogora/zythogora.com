@@ -18,7 +18,7 @@ export async function generateImageMetadata() {
 }
 
 export default async function Image() {
-  const t = await getTranslations("metadata");
+  const t = await getTranslations();
 
   return OpengraphPreview({
     children: (
@@ -52,7 +52,7 @@ export default async function Image() {
             textOverflow: "ellipsis",
           }}
         >
-          {t("description")}
+          {t("metadata.description")}
         </p>
       </div>
     ),

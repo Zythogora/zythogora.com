@@ -1,6 +1,6 @@
 "use server";
 
-import { parseWithZod } from "@conform-to/zod";
+import { parseWithZod } from "@conform-to/zod/v4";
 
 import { passwordForgottenSchema } from "@/app/[locale]/(auth)/password-forgotten/schemas";
 import { passwordForgotten } from "@/domain/auth";

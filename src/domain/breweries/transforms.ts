@@ -1,8 +1,6 @@
 "server only";
 
 import { transformRawColorToColor } from "@/domain/beers/transforms";
-import { getCountry } from "@/lib/i18n/countries";
-
 import type {
   Brewery,
   BreweryBeer,
@@ -11,6 +9,7 @@ import type {
   RawBreweryReview,
 } from "@/domain/breweries/types";
 import type { RawBrewery } from "@/domain/breweries/types";
+import { getCountry } from "@/lib/i18n/countries";
 
 export const transformRawBreweryToBrewery = async (
   rawBrewery: RawBrewery,

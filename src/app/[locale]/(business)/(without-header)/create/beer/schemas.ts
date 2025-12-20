@@ -8,7 +8,12 @@ export const createBeerSchema = z.object({
   styleId: zRequiredString,
   colorId: zRequiredString,
   abv: z
-    .number({ required_error: "form.errors.FIELD_REQUIRED" })
+    .number({
+      error: (issue) =>
+        issue.input === undefined
+          ? "form.errors.FIELD_REQUIRED"
+          : "form.errors.NUMBER_INVALID",
+    })
     .min(0)
     .max(100),
   ibu: z.number().min(0).optional(),

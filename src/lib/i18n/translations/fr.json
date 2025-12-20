@@ -112,6 +112,9 @@
     },
     "errors": {
       "FIELD_REQUIRED": "Ce champ est requis",
+      "STRING_INVALID": "La valeur doit être une chaîne de caractères",
+      "NUMBER_INVALID": "La valeur doit être un nombre",
+      "ENUM_INVALID": "La valeur est inconnue",
       "EMAIL_INVALID": "L'email est invalide",
       "PHONE_NUMBER_INVALID": "Le numéro de téléphone ne correspond pas au pays sélectionné ou n'a pas d'indicatif international",
       "PASSWORD_TOO_SHORT": "Le mot de passe doit contenir au moins 8 caractères",

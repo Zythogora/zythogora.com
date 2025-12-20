@@ -1,6 +1,6 @@
 "use server";
 
-import { parseWithZod } from "@conform-to/zod";
+import { parseWithZod } from "@conform-to/zod/v4";
 import { getLocale } from "next-intl/server";
 
 import { createBeer } from "@/domain/beers";

@@ -6,9 +6,9 @@ import { useEffect, useRef, useState } from "react";
 import ColorSelect from "@/app/_components/ui/color-select";
 import FormError from "@/app/_components/ui/form-error";
 import Label from "@/app/_components/ui/label";
+import type { Color } from "@/domain/beers/types";
 import { cn } from "@/lib/tailwind";
 
-import type { Color } from "@/domain/beers/types";
 
 interface FormColorSelectProps {
   label: string;

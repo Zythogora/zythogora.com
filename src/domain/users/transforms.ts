@@ -1,14 +1,6 @@
 "server only";
 
 import { transformRawColorToColor } from "@/domain/beers/transforms";
-import {
-  reviewHasAppearance,
-  reviewHasFinish,
-  reviewHasNose,
-  reviewHasTaste,
-} from "@/domain/users/utils";
-import { getCountry } from "@/lib/i18n/countries";
-
 import type {
   RawUserReview,
   RawUser,
@@ -19,6 +11,13 @@ import type {
   FriendRequest,
   RawFriendRequest,
 } from "@/domain/users/types";
+import {
+  reviewHasAppearance,
+  reviewHasFinish,
+  reviewHasNose,
+  reviewHasTaste,
+} from "@/domain/users/utils";
+import { getCountry } from "@/lib/i18n/countries";
 
 const bigIntToNumber = (value: bigint, context: string): number => {
   if (value <= Number.MAX_SAFE_INTEGER && value >= Number.MIN_SAFE_INTEGER) {

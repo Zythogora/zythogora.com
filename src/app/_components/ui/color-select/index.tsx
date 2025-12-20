@@ -12,14 +12,15 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/app/_components/ui/popover";
+import type { Color } from "@/domain/beers/types";
 import { cn } from "@/lib/tailwind";
 
-import type { Color } from "@/domain/beers/types";
 import type { getSelectProps } from "@conform-to/react";
 import type { ComponentProps } from "react";
 
 interface ColorSelectProps
-  extends Partial<ReturnType<typeof getSelectProps>>,
+  extends
+    Partial<ReturnType<typeof getSelectProps>>,
     Pick<ComponentProps<"input">, "placeholder" | "disabled" | "className"> {
   colors: Color[];
   onChange?: (value: Color) => void;

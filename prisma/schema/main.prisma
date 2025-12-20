@@ -1,6 +1,7 @@
 generator client {
-  provider        = "prisma-client-js"
-  previewFeatures = ["prismaSchemaFolder", "multiSchema", "fullTextSearchPostgres"]
+  provider        = "prisma-client"
+  output          = "./generated"
+  previewFeatures = ["fullTextSearchPostgres"]
 }
 
 generator json {
@@ -8,8 +9,6 @@ generator json {
 }
 
 datasource db {
-  provider  = "postgresql"
-  url       = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
-  schemas   = ["public", "authentication", "beer_data"]
+  provider = "postgresql"
+  schemas  = ["public", "authentication", "beer_data"]
 }

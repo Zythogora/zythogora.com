@@ -2,11 +2,10 @@ import { ChevronRightIcon } from "lucide-react";
 import { getFormatter } from "next-intl/server";
 
 import ColoredPintIcon from "@/app/_components/icons/colored-pint";
+import type { BreweryReview } from "@/domain/breweries/types";
 import { Link } from "@/lib/i18n";
 import { Routes } from "@/lib/routes";
 import { generatePath } from "@/lib/routes/utils";
-
-import type { BreweryReview } from "@/domain/breweries/types";
 
 interface BreweryReviewCardProps {
   review: BreweryReview;

@@ -13,9 +13,8 @@ import {
   InvalidFriendRequestError,
   UnauthorizedFriendshipStatusCallError,
 } from "@/domain/users/errors";
-import { cn } from "@/lib/tailwind";
-
 import type { User } from "@/domain/users/types";
+import { cn } from "@/lib/tailwind";
 
 interface UserHeaderProps {
   user: User;

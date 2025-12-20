@@ -2,12 +2,11 @@ import { getTranslations } from "next-intl/server";
 
 import BrewerySearchResult from "@/app/[locale]/(business)/(without-header)/search/_components/tab/brewery/result";
 import Pagination from "@/app/_components/ui/pagination";
+import type { BreweryResult } from "@/domain/search/types";
 import { Link } from "@/lib/i18n";
 import { Routes } from "@/lib/routes";
 import { generatePath } from "@/lib/routes/utils";
 import { cn } from "@/lib/tailwind";
-
-import type { BreweryResult } from "@/domain/search/types";
 
 interface BreweryTabProps {
   results: BreweryResult[];

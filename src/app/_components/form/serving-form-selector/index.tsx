@@ -4,12 +4,12 @@ import { getInputProps } from "@conform-to/react";
 import { useTranslations } from "next-intl";
 import { type ComponentProps } from "react";
 
+import type { servingFromValues } from "@/app/[locale]/(business)/(without-header)/breweries/[brewerySlug]/beers/[beerSlug]/review/schemas";
 import FormError from "@/app/_components/ui/form-error";
 import Label from "@/app/_components/ui/label";
 import ServingFromSelector from "@/app/_components/ui/serving-from-selector";
 import { cn } from "@/lib/tailwind";
 
-import type { servingFromValues } from "@/app/[locale]/(business)/(without-header)/breweries/[brewerySlug]/beers/[beerSlug]/review/schemas";
 import type { FieldMetadata } from "@conform-to/react";
 
 interface FormServingFromSelectorProps

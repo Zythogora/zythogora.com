@@ -1,8 +1,8 @@
 "use client";
 
-import * as PopoverPrimitive from "@radix-ui/react-popover";
 import { CopyIcon, Share2Icon } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { Popover as PopoverPrimitive } from "radix-ui";
 import { useState } from "react";
 import { toast } from "sonner";
 
@@ -12,8 +12,10 @@ import { cn } from "@/lib/tailwind";
 
 import type { ComponentProps } from "react";
 
-interface ShareButtonProps
-  extends Omit<ComponentProps<typeof Button>, "className"> {
+interface ShareButtonProps extends Omit<
+  ComponentProps<typeof Button>,
+  "className"
+> {
   label: string;
   link: string;
   triggerClassName?: string;

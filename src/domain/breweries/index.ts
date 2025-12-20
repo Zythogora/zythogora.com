@@ -3,6 +3,9 @@
 import { nanoid } from "nanoid";
 import { cache } from "react";
 
+import type { Prisma } from "@db/client";
+
+import type { CreateBreweryData } from "@/app/[locale]/(business)/(without-header)/create/brewery/schemas";
 import {
   InvalidBrewerySlugError,
   UnauthorizedBreweryCreationError,
@@ -12,19 +15,16 @@ import {
   transformRawBreweryReviewToBreweryReview,
   transformRawBreweryToBrewery,
 } from "@/domain/breweries/transforms";
+import type { Brewery, BreweryReview } from "@/domain/breweries/types";
 import { transformRawBeerReviewToBeerReviewWithPicture } from "@/domain/reviews/transforms";
 import { getCurrentUser } from "@/lib/auth";
 import { getPaginatedResults } from "@/lib/pagination";
-import prisma, { getPrismaTransactionClient } from "@/lib/prisma";
-import { slugify } from "@/lib/prisma/utils";
-
-import type { CreateBreweryData } from "@/app/[locale]/(business)/(without-header)/create/brewery/schemas";
-import type { Brewery, BreweryReview } from "@/domain/breweries/types";
 import type {
   PaginatedResults,
   PaginationParams,
 } from "@/lib/pagination/types";
-import type { Prisma } from "@prisma/client";
+import prisma, { getPrismaTransactionClient } from "@/lib/prisma";
+import { slugify } from "@/lib/prisma/utils";
 
 export const getBreweryBySlug = cache(
   async (brewerySlug: string): Promise<Brewery> => {

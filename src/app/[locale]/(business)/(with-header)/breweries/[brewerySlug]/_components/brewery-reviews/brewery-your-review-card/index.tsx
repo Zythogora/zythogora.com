@@ -3,11 +3,10 @@ import { getFormatter, getTranslations } from "next-intl/server";
 
 import ColoredPintIcon from "@/app/_components/icons/colored-pint";
 import Chip from "@/app/_components/ui/chip";
+import type { BreweryReview } from "@/domain/breweries/types";
 import { Link } from "@/lib/i18n";
 import { Routes } from "@/lib/routes";
 import { generatePath } from "@/lib/routes/utils";
-
-import type { BreweryReview } from "@/domain/breweries/types";
 
 interface BreweryYourReviewCardProps {
   review: BreweryReview;

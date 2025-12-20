@@ -102,7 +102,6 @@ const FileUpload = ({
 
             {files[0] ? (
               <div className="absolute inset-1 flex items-center justify-center overflow-hidden rounded-sm">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={files[0].preview}
                   alt={files[0].file.name}
@@ -127,18 +126,20 @@ const FileUpload = ({
                   {t("form.fields.fileUpload.ctaImageSingle")}
                 </p>
 
-                <p className="text-muted-foreground text-xs">
-                  {t("form.fields.fileUpload.description", {
-                    allowedExtensions:
-                      extensions.length === 1
-                        ? extensions[0]
-                        : t("form.fields.fileUpload.allowedExtensions", {
-                            extensions: extensions.slice(0, -1).join(", "),
-                            lastExtension: extensions[extensions.length - 1],
-                          }),
-                    maxSize: formatBytes(maxSize),
-                  })}
-                </p>
+                {extensions.length > 0 ? (
+                  <p className="text-muted-foreground text-xs">
+                    {t("form.fields.fileUpload.description", {
+                      allowedExtensions:
+                        extensions.length === 1
+                          ? extensions[0]!
+                          : t("form.fields.fileUpload.allowedExtensions", {
+                              extensions: extensions.slice(0, -1).join(", "),
+                              lastExtension: extensions[extensions.length - 1]!,
+                            }),
+                      maxSize: formatBytes(maxSize),
+                    })}
+                  </p>
+                ) : null}
               </div>
             )}
           </div>

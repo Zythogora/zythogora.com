@@ -15,10 +15,10 @@ import {
   CollapsibleTrigger,
 } from "@/app/_components/ui/collapsible";
 import DescriptionList from "@/app/_components/ui/description-list";
+import type { Brewery } from "@/domain/breweries/types";
 import { cn } from "@/lib/tailwind";
 import { useMediaQuery } from "@/lib/tailwind/hooks";
 
-import type { Brewery } from "@/domain/breweries/types";
 
 interface BreweryCardProps {
   brewery: Brewery;

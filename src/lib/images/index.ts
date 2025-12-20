@@ -3,7 +3,6 @@
 import sharp from "sharp";
 
 import { visionClient } from "@/lib/images/gcp";
-
 import type { Preview } from "@/lib/images/types";
 
 interface OptimizeImageOptions {

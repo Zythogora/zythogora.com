@@ -4,12 +4,11 @@ import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 
 import { SEARCH_KINDS } from "@/app/[locale]/(business)/(without-header)/search/types";
+import type { SearchKind } from "@/app/[locale]/(business)/(without-header)/search/types";
 import Tab from "@/app/_components/ui/tab";
 import { useRouter } from "@/lib/i18n";
 import { Routes } from "@/lib/routes";
 import { cn } from "@/lib/tailwind";
-
-import type { SearchKind } from "@/app/[locale]/(business)/(without-header)/search/types";
 
 interface SearchTabsProps {
   defaultTab: SearchKind;

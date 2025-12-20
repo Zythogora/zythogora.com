@@ -1,8 +1,7 @@
 "use server";
 
-import { searchBeers, searchBreweries, searchUsers } from "@/domain/search";
-
 import type { SearchKind } from "@/app/[locale]/(business)/(without-header)/search/types";
+import { searchBeers, searchBreweries, searchUsers } from "@/domain/search";
 import type { PaginatedResults } from "@/lib/pagination/types";
 
 export const searchAction = async (search: string) => {

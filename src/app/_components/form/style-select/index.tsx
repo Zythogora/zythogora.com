@@ -6,9 +6,9 @@ import { useEffect, useRef, useState } from "react";
 import FormError from "@/app/_components/ui/form-error";
 import Label from "@/app/_components/ui/label";
 import StyleSelect from "@/app/_components/ui/style-select";
+import type { StyleCategory } from "@/domain/beers/types";
 import { cn } from "@/lib/tailwind";
 
-import type { StyleCategory } from "@/domain/beers/types";
 
 interface FormStyleSelectProps {
   label: string;

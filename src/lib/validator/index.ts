@@ -3,15 +3,24 @@ import { z } from "zod";
 import { countryCodes } from "@/lib/i18n/countries";
 
 export const zRequiredString = z
-  .string({ required_error: "form.errors.FIELD_REQUIRED" })
+  .string({
+    error: (issue) =>
+      issue.input === undefined
+        ? "form.errors.FIELD_REQUIRED"
+        : "form.errors.STRING_INVALID",
+  })
   .regex(/^(?!\s*$).+/, {
     message: "form.errors.FIELD_REQUIRED",
   })
   .trim();
 
 export const zEmail = z
-  .string({ required_error: "form.errors.FIELD_REQUIRED" })
-  .email({ message: "form.errors.EMAIL_INVALID" })
+  .email({
+    error: (issue) =>
+      issue.input === undefined
+        ? "form.errors.FIELD_REQUIRED"
+        : "form.errors.EMAIL_INVALID",
+  })
   .trim();
 
 export const zPassword = ({
@@ -22,13 +31,23 @@ export const zPassword = ({
   tooLong: string;
 }) =>
   z
-    .string({ required_error: "form.errors.FIELD_REQUIRED" })
+    .string({
+      error: (issue) =>
+        issue.input === undefined
+          ? "form.errors.FIELD_REQUIRED"
+          : "form.errors.STRING_INVALID",
+    })
     .trim()
     .min(8, { message: tooShort })
     .max(1024, { message: tooLong });
 
 export const zUrl = z
-  .string({ required_error: "form.errors.FIELD_REQUIRED" })
+  .string({
+    error: (issue) =>
+      issue.input === undefined
+        ? "form.errors.FIELD_REQUIRED"
+        : "form.errors.STRING_INVALID",
+  })
   .regex(/^[^\s\.]+\.\S{2,}$/, {
     message: "form.errors.URL_INVALID",
   })

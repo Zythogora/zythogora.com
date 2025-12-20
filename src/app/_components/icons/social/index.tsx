@@ -1,4 +1,5 @@
 import LinkIcon from "@/app/_components/icons/link";
+import type { SupportedSocialIcons } from "@/app/_components/icons/social/types";
 import BlueskyIcon from "@/app/_components/icons/social/types/bluesky";
 import DiscordIcon from "@/app/_components/icons/social/types/discord";
 import FacebookIcon from "@/app/_components/icons/social/types/facebook";
@@ -6,10 +7,8 @@ import InstagramIcon from "@/app/_components/icons/social/types/instagram";
 import TikTokIcon from "@/app/_components/icons/social/types/tiktok";
 import XIcon from "@/app/_components/icons/social/types/x";
 import YouTubeIcon from "@/app/_components/icons/social/types/youtube";
-import { exhaustiveCheck } from "@/lib/typescript/utils";
-
-import type { SupportedSocialIcons } from "@/app/_components/icons/social/types";
 import type { IconProps } from "@/app/_components/icons/types";
+import { exhaustiveCheck } from "@/lib/typescript/utils";
 
 interface SocialIconProps extends IconProps {
   type?: SupportedSocialIcons;
