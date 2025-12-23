@@ -49,8 +49,8 @@ const UserWorldMapCountry = ({
       className={cn(
         "cursor-pointer stroke-white stroke-[0.5px] transition-colors duration-300 ease-in-out outline-none",
         "focus:fill-primary/80 focus:stroke-primary-foreground",
-        "data-[visited=false]:fill-neutral-200 data-[visited=false]:hover:fill-neutral-300",
-        "data-[visited=true]:fill-primary data-[visited=true]:hover:fill-[color-mix(in_oklab,var(--color-primary-500),var(--color-primary-600))]",
+        "data-[visited=false]:fill-neutral-200 data-[visited=false]:hover:fill-neutral-300 dark:data-[visited=false]:fill-neutral-600 dark:data-[visited=false]:hover:fill-neutral-500",
+        "data-[visited=true]:fill-primary dark:data-[visited=true]:hover:fill-primary-300 data-[visited=true]:hover:fill-[color-mix(in_oklab,var(--color-primary-500),var(--color-primary-600))]",
       )}
     />
   );

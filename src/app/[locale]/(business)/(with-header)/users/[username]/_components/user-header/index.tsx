@@ -23,6 +23,7 @@ import {
   UnauthorizedFriendshipStatusCallError,
 } from "@/domain/users/errors";
 import type { User, UserCountryStats } from "@/domain/users/types";
+import { getCurrentUser } from "@/lib/auth";
 import { cn } from "@/lib/tailwind";
 
 interface UserHeaderProps {
@@ -32,6 +33,8 @@ interface UserHeaderProps {
 
 const UserHeader = async ({ user, visitedCountries }: UserHeaderProps) => {
   const t = await getTranslations();
+
+  const currentUser = await getCurrentUser();
 
   const friendshipStatus = await getFriendshipStatus(user.id).catch((error) => {
     if (error instanceof UnauthorizedFriendshipStatusCallError) {
@@ -160,11 +163,15 @@ const UserHeader = async ({ user, visitedCountries }: UserHeaderProps) => {
             <ResponsiveDialogContent className="md:w-3/5 md:max-w-none">
               <ResponsiveDialogHeader>
                 <ResponsiveDialogTitle>
-                  {t("profilePage.worldMap.title")}
+                  {currentUser?.id === user.id
+                    ? t("profilePage.worldMap.yours.title")
+                    : t("profilePage.worldMap.others.title", {
+                        username: user.username,
+                      })}
                 </ResponsiveDialogTitle>
               </ResponsiveDialogHeader>
 
-              <UserWorldMap stats={visitedCountries} />
+              <UserWorldMap username={user.username} stats={visitedCountries} />
             </ResponsiveDialogContent>
           </ResponsiveDialog>
         </div>

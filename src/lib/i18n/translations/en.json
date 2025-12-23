@@ -435,8 +435,14 @@
       "uniqueCountries": "Countries"
     },
     "worldMap": {
-      "title": "Your beer passport",
-      "notVisitedCountry": "You have not tasted any beer from this country yet.",
+      "yours": {
+        "title": "Your beer passport",
+        "notVisitedCountry": "You have not tasted any beer from this country yet."
+      },
+      "others": {
+        "title": "{username}'s beer passport",
+        "notVisitedCountry": "{username} has not tasted any beer from this country yet."
+      },
       "failedToLoadMap": "An error occurred while loading the map."
     },
     "friendship": {

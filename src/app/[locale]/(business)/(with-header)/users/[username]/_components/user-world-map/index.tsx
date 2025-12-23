@@ -23,6 +23,7 @@ import {
   HoverCardTrigger,
 } from "@/app/_components/ui/hover-card";
 import type { UserCountryStats } from "@/domain/users/types";
+import { authClient } from "@/lib/auth/client";
 import { useCountryCode } from "@/lib/i18n/countries/hooks";
 import { cn } from "@/lib/tailwind";
 import { useMediaQuery } from "@/lib/tailwind/hooks";
@@ -31,11 +32,14 @@ const MAP_WIDTH = 800;
 const MAP_HEIGHT = 500;
 
 interface UserWorldMapProps {
+  username: string;
   stats: UserCountryStats[];
 }
 
-const UserWorldMap = ({ stats }: UserWorldMapProps) => {
+const UserWorldMap = ({ username, stats }: UserWorldMapProps) => {
   const t = useTranslations();
+
+  const { data: session } = authClient.useSession();
 
   const isMobile = useMediaQuery("(max-width: 768px)");
 
@@ -48,7 +52,12 @@ const UserWorldMap = ({ stats }: UserWorldMapProps) => {
         (acc, stat) => {
           const numeric = countries.alpha2ToAlpha3(stat.countryCode);
           if (numeric) {
-            acc[numeric] = stat;
+            // Kosovo is represented as XKX in the ISO 3166-1 alpha-3 standard but
+            // the library uses XKK which is the Unicode version of it.
+            // https://github.com/michaelwittig/node-i18n-iso-countries/pull/365
+            // We normalize to XKX to match the world map data format.
+            const normalizedCode = numeric === "XKK" ? "XKX" : numeric;
+            acc[normalizedCode] = stat;
           }
           return acc;
         },
@@ -85,7 +94,7 @@ const UserWorldMap = ({ stats }: UserWorldMapProps) => {
     return () => {
       svg.on(".zoom", null);
     };
-  }, [worldData]);
+  }, [worldData, isMobile]);
 
   const pathGenerator: GeoPath = geoPath().projection(
     geoWinkel3()
@@ -183,7 +192,11 @@ const UserWorldMap = ({ stats }: UserWorldMapProps) => {
                   "text-xs md:text-sm",
                 )}
               >
-                {t("profilePage.worldMap.notVisitedCountry")}
+                {session?.user?.username === username
+                  ? t("profilePage.worldMap.yours.notVisitedCountry")
+                  : t("profilePage.worldMap.others.notVisitedCountry", {
+                      username,
+                    })}
               </p>
             )}
           </HoverCardContent>
