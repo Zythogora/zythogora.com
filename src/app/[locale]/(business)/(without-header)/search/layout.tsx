@@ -28,19 +28,19 @@ const SearchLayout = ({ children }: PropsWithChildren) => {
           <span>Zythogora</span>
         </Link>
 
-        <SearchBar className="w-224 max-w-full" />
+        <SearchBar className="w-4xl max-w-full" />
 
         <UserMenu className="lg:justify-self-end" />
 
         <SearchTabs
           defaultTab="beer"
-          className="w-224 max-w-full lg:col-start-2"
+          className="w-4xl max-w-full lg:col-start-2"
         />
       </div>
 
       <div
         className={cn(
-          "flex w-224 max-w-full flex-col gap-y-4 p-8",
+          "flex w-4xl max-w-full flex-col gap-y-4 p-8",
           "**:[&_a]:focus-within:outline-primary **:[&_a]:rounded-xs **:[&_a]:focus-within:outline-3 **:[&_a]:focus-within:outline-offset-4",
         )}
       >

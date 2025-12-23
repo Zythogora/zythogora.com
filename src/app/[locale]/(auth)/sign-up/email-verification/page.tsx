@@ -1,15 +1,12 @@
 import { MailCheckIcon } from "lucide-react";
 import { getLocale, getTranslations } from "next-intl/server";
 
+import { emailVerificationSearchParamsSchema } from "@/app/[locale]/(auth)/sign-up/email-verification/schemas";
 import { isUserVerified } from "@/domain/auth";
 import { Link, redirect } from "@/lib/i18n";
 import { Routes } from "@/lib/routes";
 
 import type { Metadata } from "next";
-
-interface SignUpEmailVerificationPageProps {
-  searchParams: Promise<{ email: string }>;
-}
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations();
@@ -21,14 +18,19 @@ export async function generateMetadata(): Promise<Metadata> {
 
 const SignUpEmailVerificationPage = async ({
   searchParams,
-}: SignUpEmailVerificationPageProps) => {
+}: PageProps<"/[locale]/sign-up/email-verification">) => {
   const t = await getTranslations();
   const locale = await getLocale();
 
-  const { email } = await searchParams;
-  if (!email) {
-    redirect({ href: Routes.HOME, locale });
+  const searchParamsResult = emailVerificationSearchParamsSchema.safeParse(
+    await searchParams,
+  );
+
+  if (!searchParamsResult.success) {
+    return redirect({ href: Routes.HOME, locale });
   }
+
+  const { email } = searchParamsResult.data;
 
   const isVerified = await isUserVerified(email);
   if (isVerified === null || isVerified) {

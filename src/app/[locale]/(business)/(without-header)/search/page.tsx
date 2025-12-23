@@ -12,17 +12,9 @@ import { Routes } from "@/lib/routes";
 
 import type { Metadata } from "next";
 
-interface SearchPageProps {
-  searchParams: Promise<{
-    kind?: string;
-    search?: string;
-    page?: string;
-  }>;
-}
-
 export async function generateMetadata({
   searchParams,
-}: SearchPageProps): Promise<Metadata> {
+}: PageProps<"/[locale]/search">): Promise<Metadata> {
   const t = await getTranslations();
 
   const locale = await getLocale();
@@ -45,7 +37,7 @@ export async function generateMetadata({
   };
 }
 
-const SearchPage = async ({ searchParams }: SearchPageProps) => {
+const SearchPage = async ({ searchParams }: PageProps<"/[locale]/search">) => {
   const t = await getTranslations();
 
   const locale = await getLocale();

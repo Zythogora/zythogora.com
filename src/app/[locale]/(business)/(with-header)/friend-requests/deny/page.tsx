@@ -13,15 +13,9 @@ import { redirect } from "@/lib/i18n";
 import { Routes } from "@/lib/routes";
 import { generatePath } from "@/lib/routes/utils";
 
-interface RejectFriendRequestPageProps {
-  searchParams: Promise<{
-    id: string;
-  }>;
-}
-
 const RejectFriendRequestPage = async ({
   searchParams,
-}: RejectFriendRequestPageProps) => {
+}: PageProps<"/[locale]/friend-requests/deny">) => {
   const t = await getTranslations();
 
   const locale = await getLocale();

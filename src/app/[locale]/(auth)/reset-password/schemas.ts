@@ -20,3 +20,14 @@ export const resetPasswordSchema = z
     message: "form.errors.PASSWORDS_DO_NOT_MATCH",
     path: ["confirmPassword"],
   });
+
+export const resetPasswordSearchParamsSchema = z.union([
+  z.object({
+    token: z.string(),
+    error: z.string().optional(),
+  }),
+  z.object({
+    token: z.string().optional(),
+    error: z.string(),
+  }),
+]);
