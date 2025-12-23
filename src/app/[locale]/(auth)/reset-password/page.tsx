@@ -40,6 +40,32 @@ const ResetPasswordPage = async ({
     return redirect({ href: Routes.HOME, locale });
   }
 
+  if (searchParamsResult.data.error) {
+    return (
+      <div className="mx-auto flex h-screen w-full flex-col items-center justify-center gap-y-12 p-12 md:w-3xl">
+        <div className="flex w-full flex-col gap-y-4">
+          <h1 className="text-[40px] leading-none font-semibold">
+            {t("auth.resetPassword.title")}
+          </h1>
+
+          <p>
+            {t.rich("auth.resetPassword.actions.requestNewToken", {
+              br: () => <br />,
+              link: (chunks) => (
+                <Link
+                  href={Routes.PASSWORD_FORGOTTEN}
+                  className="text-primary-700 underline"
+                >
+                  {chunks}
+                </Link>
+              ),
+            })}
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   if (searchParamsResult.data.token) {
     return (
       <div className="mx-auto flex h-screen w-full flex-col items-center justify-center gap-y-12 p-12 md:w-3xl">
@@ -56,29 +82,9 @@ const ResetPasswordPage = async ({
     );
   }
 
-  return (
-    <div className="mx-auto flex h-screen w-full flex-col items-center justify-center gap-y-12 p-12 md:w-3xl">
-      <div className="flex w-full flex-col gap-y-4">
-        <h1 className="text-[40px] leading-none font-semibold">
-          {t("auth.resetPassword.title")}
-        </h1>
-
-        <p>
-          {t.rich("auth.resetPassword.actions.requestNewToken", {
-            br: () => <br />,
-            link: (chunks) => (
-              <Link
-                href={Routes.PASSWORD_FORGOTTEN}
-                className="text-primary-700 underline"
-              >
-                {chunks}
-              </Link>
-            ),
-          })}
-        </p>
-      </div>
-    </div>
-  );
+  // This should never happen
+  console.error("No token or error");
+  redirect({ href: Routes.HOME, locale });
 };
 
 export default ResetPasswordPage;
