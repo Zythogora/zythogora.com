@@ -13,6 +13,7 @@ import {
   getReviewsByUser,
   getUserByUsername,
   getLatestPicturesByUser,
+  getUserVisitedCountries,
 } from "@/domain/users";
 import { publicConfig } from "@/lib/config/client-config";
 import { redirect } from "@/lib/i18n";
@@ -74,15 +75,18 @@ const ProfilePage = async ({ params, searchParams }: ProfilePageProps) => {
 
   const latestPicturesPromise = getLatestPicturesByUser({ userId: user.id });
 
-  const reviews = await getReviewsByUser({
-    userId: user.id,
-    page: searchParamsResult.data.page,
-    limit: 10,
-  });
+  const [reviews, visitedCountries] = await Promise.all([
+    getReviewsByUser({
+      userId: user.id,
+      page: searchParamsResult.data.page,
+      limit: 10,
+    }),
+    getUserVisitedCountries(user.id),
+  ]);
 
   return (
     <div className="flex flex-col gap-y-6">
-      <UserHeader user={user} />
+      <UserHeader user={user} visitedCountries={visitedCountries} />
 
       <div className={cn("mt-4 md:-mt-1", "px-10 md:px-0")}>
         <Suspense fallback={<ReviewPictureGridLoader />}>

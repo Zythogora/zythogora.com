@@ -43,6 +43,7 @@
   "common": {
     "or": "OR",
     "back": "Back",
+    "close": "Close",
     "beer": {
       "brewedBy": "Brewed by <link>{brewery}</link>",
       "style": "Style",
@@ -432,6 +433,11 @@
       "uniqueBreweries": "Breweries",
       "uniqueStyles": "Styles",
       "uniqueCountries": "Countries"
+    },
+    "worldMap": {
+      "title": "Your beer passport",
+      "notVisitedCountry": "You have not tasted any beer from this country yet.",
+      "failedToLoadMap": "An error occurred while loading the map."
     },
     "friendship": {
       "status": {

@@ -30,6 +30,7 @@ import type {
   Review,
   FriendRequest,
   FriendshipStatus,
+  UserCountryStats,
 } from "@/domain/users/types";
 import { getCurrentUser } from "@/lib/auth";
 import { sendEmail } from "@/lib/email";
@@ -169,6 +170,38 @@ export const getReviewByUsernameAndSlug = cache(
     return transformRawReviewToReview(review);
   },
 );
+
+export const getUserVisitedCountries = async (
+  userId: string,
+): Promise<Array<UserCountryStats>> => {
+  const breweries = await prisma.breweries.findMany({
+    select: {
+      countryAlpha2Code: true,
+      beers: {
+        select: { id: true },
+        where: { reviews: { some: { userId } } },
+      },
+    },
+    where: { beers: { some: { reviews: { some: { userId } } } } },
+  });
+
+  const statsMap = breweries.reduce(
+    (acc, curr) => {
+      const countryCode = curr.countryAlpha2Code;
+      if (!acc[countryCode]) {
+        acc[countryCode] = { countryCode, breweries: 0, beers: 0 };
+      }
+
+      acc[countryCode].breweries += 1;
+      acc[countryCode].beers += curr.beers.length;
+
+      return acc;
+    },
+    {} as Record<string, UserCountryStats>,
+  );
+
+  return Object.values(statsMap);
+};
 
 export const getFriendshipStatus = async (
   userId: string,

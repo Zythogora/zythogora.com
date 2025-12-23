@@ -113,6 +113,12 @@ export type Review = {
   hasFinish: boolean;
 };
 
+export type UserCountryStats = {
+  countryCode: string;
+  breweries: number;
+  beers: number;
+};
+
 export type FriendshipStatus =
   | "FRIENDS"
   | "PENDING_APPROVAL"

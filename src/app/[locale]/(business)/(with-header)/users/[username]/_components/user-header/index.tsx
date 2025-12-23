@@ -1,26 +1,36 @@
+import { InfoIcon } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 
 import AddFriendButton from "@/app/[locale]/(business)/(with-header)/users/[username]/_components/user-header/add-friend";
 import FriendshipStatus from "@/app/[locale]/(business)/(with-header)/users/[username]/_components/user-header/friendship-status";
 import UserMore from "@/app/[locale]/(business)/(with-header)/users/[username]/_components/user-header/more";
+import UserWorldMap from "@/app/[locale]/(business)/(with-header)/users/[username]/_components/user-world-map";
 import BreweryIcon from "@/app/_components/icons/brewery";
 import PintIcon from "@/app/_components/icons/pint";
 import StyleIcon from "@/app/_components/icons/style";
 import WorldIcon from "@/app/_components/icons/world";
 import DescriptionList from "@/app/_components/ui/description-list";
+import {
+  ResponsiveDialog,
+  ResponsiveDialogContent,
+  ResponsiveDialogHeader,
+  ResponsiveDialogTitle,
+  ResponsiveDialogTrigger,
+} from "@/app/_components/ui/responsive-dialog";
 import { getFriendshipStatus } from "@/domain/users";
 import {
   InvalidFriendRequestError,
   UnauthorizedFriendshipStatusCallError,
 } from "@/domain/users/errors";
-import type { User } from "@/domain/users/types";
+import type { User, UserCountryStats } from "@/domain/users/types";
 import { cn } from "@/lib/tailwind";
 
 interface UserHeaderProps {
   user: User;
+  visitedCountries: UserCountryStats[];
 }
 
-const UserHeader = async ({ user }: UserHeaderProps) => {
+const UserHeader = async ({ user, visitedCountries }: UserHeaderProps) => {
   const t = await getTranslations();
 
   const friendshipStatus = await getFriendshipStatus(user.id).catch((error) => {
@@ -123,14 +133,40 @@ const UserHeader = async ({ user }: UserHeaderProps) => {
             />
           </div>
 
-          <div>
-            <WorldIcon size={20} />
+          <ResponsiveDialog>
+            <ResponsiveDialogTrigger className="cursor-pointer">
+              <WorldIcon size={20} />
 
-            <DescriptionList
-              label={t("profilePage.statistics.uniqueCountries")}
-              value={user.uniqueCountryCount}
-            />
-          </div>
+              <DescriptionList
+                label={t("profilePage.statistics.uniqueCountries")}
+                value={
+                  <>
+                    <span>{user.uniqueCountryCount}</span>
+                    <InfoIcon
+                      className={cn(
+                        "mt-0.25 fill-transparent! stroke-[2.5]! opacity-50",
+                        "size-2.5! md:size-3!",
+                      )}
+                    />
+                  </>
+                }
+                className={cn(
+                  "*:data-[slot=description-details]:flex *:data-[slot=description-details]:flex-row *:data-[slot=description-details]:items-center",
+                  "*:data-[slot=description-details]:gap-x-1.5 md:*:data-[slot=description-details]:gap-x-2",
+                )}
+              />
+            </ResponsiveDialogTrigger>
+
+            <ResponsiveDialogContent className="md:w-3/5 md:max-w-none">
+              <ResponsiveDialogHeader>
+                <ResponsiveDialogTitle>
+                  {t("profilePage.worldMap.title")}
+                </ResponsiveDialogTitle>
+              </ResponsiveDialogHeader>
+
+              <UserWorldMap stats={visitedCountries} />
+            </ResponsiveDialogContent>
+          </ResponsiveDialog>
         </div>
       </div>
 
