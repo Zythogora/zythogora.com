@@ -13,15 +13,9 @@ import { Link, redirect } from "@/lib/i18n";
 import { Routes } from "@/lib/routes";
 import { generatePath } from "@/lib/routes/utils";
 
-interface AcceptFriendRequestPageProps {
-  searchParams: Promise<{
-    id: string;
-  }>;
-}
-
 const AcceptFriendRequestPage = async ({
   searchParams,
-}: AcceptFriendRequestPageProps) => {
+}: PageProps<"/[locale]/friend-requests/accept">) => {
   const t = await getTranslations();
 
   const locale = await getLocale();

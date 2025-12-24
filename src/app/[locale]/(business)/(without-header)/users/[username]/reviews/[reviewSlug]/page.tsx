@@ -29,16 +29,9 @@ import { cn } from "@/lib/tailwind";
 
 import type { Metadata } from "next";
 
-interface UserReviewPageProps {
-  params: Promise<{
-    username: string;
-    reviewSlug: string;
-  }>;
-}
-
 export async function generateMetadata({
   params,
-}: UserReviewPageProps): Promise<Metadata> {
+}: PageProps<"/[locale]/users/[username]/reviews/[reviewSlug]">): Promise<Metadata> {
   const t = await getTranslations();
 
   const { username, reviewSlug } = await params;
@@ -82,7 +75,9 @@ export async function generateMetadata({
   };
 }
 
-const UserReviewPage = async ({ params }: UserReviewPageProps) => {
+const UserReviewPage = async ({
+  params,
+}: PageProps<"/[locale]/users/[username]/reviews/[reviewSlug]">) => {
   const t = await getTranslations();
   const formatter = await getFormatter();
 
@@ -108,7 +103,7 @@ const UserReviewPage = async ({ params }: UserReviewPageProps) => {
         <div
           className={cn(
             "mx-auto flex flex-col px-8 py-12",
-            "w-full gap-y-6 md:w-192 md:gap-y-8",
+            "w-full gap-y-6 md:w-3xl md:gap-y-8",
           )}
         >
           <div
@@ -164,7 +159,7 @@ const UserReviewPage = async ({ params }: UserReviewPageProps) => {
             </div>
           </div>
 
-          <div className="grid grid-cols-[repeat(4,minmax(0,1fr))] gap-x-2">
+          <div className="grid grid-cols-4 gap-x-2">
             <DescriptionList
               label={t("common.beer.style")}
               value={review.beer.style}
@@ -194,7 +189,7 @@ const UserReviewPage = async ({ params }: UserReviewPageProps) => {
       <div
         className={cn(
           "mx-auto flex flex-col gap-y-12 px-8 py-12",
-          "w-full md:w-192",
+          "w-full md:w-3xl",
         )}
       >
         <div

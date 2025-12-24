@@ -2,6 +2,7 @@ import { headers } from "next/headers";
 import { getLocale, getTranslations } from "next-intl/server";
 
 import ResetPasswordForm from "@/app/[locale]/(auth)/reset-password/_components/form";
+import { resetPasswordSearchParamsSchema } from "@/app/[locale]/(auth)/reset-password/schemas";
 import { auth } from "@/lib/auth/server";
 import { Link, redirect } from "@/lib/i18n";
 import { Routes } from "@/lib/routes";
@@ -16,14 +17,9 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-interface ResetPasswordPageProps {
-  searchParams: Promise<{
-    token?: string;
-    error?: string;
-  }>;
-}
-
-const ResetPasswordPage = async ({ searchParams }: ResetPasswordPageProps) => {
+const ResetPasswordPage = async ({
+  searchParams,
+}: PageProps<"/[locale]/reset-password">) => {
   const t = await getTranslations();
 
   const locale = await getLocale();
@@ -36,15 +32,17 @@ const ResetPasswordPage = async ({ searchParams }: ResetPasswordPageProps) => {
     redirect({ href: Routes.HOME, locale });
   }
 
-  const { token, error } = await searchParams;
+  const searchParamsResult = resetPasswordSearchParamsSchema.safeParse(
+    await searchParams,
+  );
 
-  if (!token && !error) {
+  if (!searchParamsResult.success) {
     return redirect({ href: Routes.HOME, locale });
   }
 
-  if (error) {
+  if (searchParamsResult.data.error) {
     return (
-      <div className="mx-auto flex h-screen w-full flex-col items-center justify-center gap-y-12 p-12 md:w-128">
+      <div className="mx-auto flex h-screen w-full flex-col items-center justify-center gap-y-12 p-12 md:w-3xl">
         <div className="flex w-full flex-col gap-y-4">
           <h1 className="text-[40px] leading-none font-semibold">
             {t("auth.resetPassword.title")}
@@ -68,9 +66,9 @@ const ResetPasswordPage = async ({ searchParams }: ResetPasswordPageProps) => {
     );
   }
 
-  if (token) {
+  if (searchParamsResult.data.token) {
     return (
-      <div className="mx-auto flex h-screen w-full flex-col items-center justify-center gap-y-12 p-12 md:w-128">
+      <div className="mx-auto flex h-screen w-full flex-col items-center justify-center gap-y-12 p-12 md:w-3xl">
         <div className="flex w-full flex-col gap-y-4">
           <h1 className="text-[40px] leading-none font-semibold">
             {t("auth.resetPassword.title")}
@@ -79,7 +77,7 @@ const ResetPasswordPage = async ({ searchParams }: ResetPasswordPageProps) => {
           <p>{t("auth.resetPassword.description")}</p>
         </div>
 
-        <ResetPasswordForm token={token} />
+        <ResetPasswordForm token={searchParamsResult.data.token} />
       </div>
     );
   }

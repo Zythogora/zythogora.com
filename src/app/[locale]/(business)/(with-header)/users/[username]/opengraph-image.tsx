@@ -13,11 +13,9 @@ import {
 } from "@/app/_components/opengraph-preview/utils";
 import { getUserByUsername } from "@/domain/users";
 
-interface Props {
-  params: Promise<{ username: string }>;
-}
-
-export async function generateImageMetadata({ params }: Props) {
+export async function generateImageMetadata({
+  params,
+}: PageProps<"/[locale]/users/[username]">) {
   const { username } = await params;
 
   const user = await getUserByUsername(username).catch(() => null);
@@ -34,7 +32,9 @@ export async function generateImageMetadata({ params }: Props) {
   ];
 }
 
-export default async function Image({ params }: Props) {
+export default async function Image({
+  params,
+}: PageProps<"/[locale]/users/[username]">) {
   const t = await getTranslations();
 
   const { username } = await params;

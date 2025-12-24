@@ -22,18 +22,9 @@ import { cn } from "@/lib/tailwind";
 
 import type { Metadata } from "next";
 
-interface ProfilePageProps {
-  params: Promise<{
-    username: string;
-  }>;
-  searchParams: Promise<{
-    page?: string;
-  }>;
-}
-
 export async function generateMetadata({
   params,
-}: ProfilePageProps): Promise<Metadata> {
+}: PageProps<"/[locale]/users/[username]">): Promise<Metadata> {
   const { username } = await params;
 
   const user = await getUserByUsername(username).catch(() => notFound());
@@ -43,7 +34,10 @@ export async function generateMetadata({
   };
 }
 
-const ProfilePage = async ({ params, searchParams }: ProfilePageProps) => {
+const ProfilePage = async ({
+  params,
+  searchParams,
+}: PageProps<"/[locale]/users/[username]">) => {
   const locale = await getLocale();
 
   const { username } = await params;

@@ -10,14 +10,9 @@ import { Routes } from "@/lib/routes";
 import { generatePath } from "@/lib/routes/utils";
 import { cn } from "@/lib/tailwind";
 
-interface ReviewPageProps {
-  params: Promise<{
-    brewerySlug: string;
-    beerSlug: string;
-  }>;
-}
-
-const ReviewPage = async ({ params }: ReviewPageProps) => {
+const ReviewPage = async ({
+  params,
+}: PageProps<"/[locale]/breweries/[brewerySlug]/beers/[beerSlug]/review">) => {
   const locale = await getLocale();
 
   const { brewerySlug, beerSlug } = await params;
@@ -57,7 +52,7 @@ const ReviewPage = async ({ params }: ReviewPageProps) => {
       <div
         className={cn(
           "flex w-fit flex-col gap-y-8",
-          "w-full @3xl:w-192 @3xl:pt-8",
+          "w-full @3xl:w-3xl @3xl:pt-8",
         )}
       >
         <ReviewFormHeader beer={beer} />

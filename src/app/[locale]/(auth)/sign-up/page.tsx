@@ -41,7 +41,7 @@ const SignUpPage = async () => {
       >
         <Wave className="fill-primary absolute top-[calc(-5%+10px)] z-50 h-1/20" />
 
-        <div className="flex w-full flex-col items-end gap-y-2 md:w-128">
+        <div className="flex w-full flex-col items-end gap-y-2 md:w-lg">
           <SignUpForm />
         </div>
 

@@ -73,7 +73,7 @@ const ResetPasswordForm = ({ token }: ResetPasswordFormProps) => {
                   "flex flex-col rounded-[7px] *:-m-px",
                   "focus-within:outline-3 focus-within:outline-offset-1",
                   "focus-within:outline-primary-700 dark:focus-within:outline-primary-100",
-                  "before:bg-foreground relative before:absolute before:inset-[-1px] before:bottom-[-3px] before:z-[-1] before:rounded",
+                  "before:bg-foreground relative before:absolute before:-inset-px before:bottom-[-3px] before:z-[-1] before:rounded",
                   "**:data-[slot=input-container]:rounded-none **:data-[slot=input-container]:focus-within:z-50!",
                   "**:data-[slot=input-container]:before:bottom-0",
                   "not-focus-within:**:data-[slot=input-container]:last-of-type:before:-bottom-0.5!",

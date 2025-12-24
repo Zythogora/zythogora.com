@@ -19,18 +19,15 @@ import { exhaustiveCheck } from "@/lib/typescript/utils";
 
 import type { Metadata } from "next";
 
-interface BeerPageProps {
-  params: Promise<{
-    brewerySlug: string;
-    beerSlug: string;
-  }>;
-  searchParams: Promise<{
-    page?: string;
-  }>;
-}
-
 export async function generateStaticParams(): Promise<
-  Awaited<BeerPageProps["params"]>[]
+  Array<
+    Omit<
+      Awaited<
+        PageProps<"/[locale]/breweries/[brewerySlug]/beers/[beerSlug]">["params"]
+      >,
+      "locale"
+    >
+  >
 > {
   if (config.next.staticGeneration === StaticGenerationMode.NONE) {
     // There's a bug in Next.js that crashes dynamic routes when using
@@ -72,7 +69,7 @@ export async function generateStaticParams(): Promise<
 
 export async function generateMetadata({
   params,
-}: BeerPageProps): Promise<Metadata> {
+}: PageProps<"/[locale]/breweries/[brewerySlug]/beers/[beerSlug]">): Promise<Metadata> {
   const t = await getTranslations();
 
   const { brewerySlug, beerSlug } = await params;
@@ -104,7 +101,10 @@ export async function generateMetadata({
   };
 }
 
-const BeerPage = async ({ params, searchParams }: BeerPageProps) => {
+const BeerPage = async ({
+  params,
+  searchParams,
+}: PageProps<"/[locale]/breweries/[brewerySlug]/beers/[beerSlug]">) => {
   const t = await getTranslations();
 
   const locale = await getLocale();

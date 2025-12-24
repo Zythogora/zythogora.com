@@ -9,14 +9,9 @@ import {
 } from "@/app/_components/opengraph-preview/utils";
 import { getBeerBySlug } from "@/domain/beers";
 
-interface Props {
-  params: Promise<{
-    brewerySlug: string;
-    beerSlug: string;
-  }>;
-}
-
-export async function generateImageMetadata({ params }: Props) {
+export async function generateImageMetadata({
+  params,
+}: PageProps<"/[locale]/breweries/[brewerySlug]/beers/[beerSlug]">) {
   const { brewerySlug, beerSlug } = await params;
 
   const beer = await getBeerBySlug(beerSlug, brewerySlug).catch(() => null);
@@ -33,7 +28,9 @@ export async function generateImageMetadata({ params }: Props) {
   ];
 }
 
-export default async function Image({ params }: Props) {
+export default async function Image({
+  params,
+}: PageProps<"/[locale]/breweries/[brewerySlug]/beers/[beerSlug]">) {
   const t = await getTranslations();
   const formatter = await getFormatter();
 

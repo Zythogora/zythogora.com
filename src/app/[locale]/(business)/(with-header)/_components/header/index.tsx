@@ -25,7 +25,7 @@ const Header = () => {
         <span>Zythogora</span>
       </Link>
 
-      <HeaderSearchBar className="grow md:w-128 md:grow-0" />
+      <HeaderSearchBar className="grow md:w-lg md:grow-0" />
 
       <UserMenu className="md:justify-self-end" />
     </div>
