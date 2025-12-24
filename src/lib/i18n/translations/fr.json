@@ -43,6 +43,7 @@
   "common": {
     "or": "OU",
     "back": "Retour",
+    "close": "Fermer",
     "beer": {
       "brewedBy": "Brassée par <link>{brewery}</link>",
       "style": "Style",
@@ -429,6 +430,17 @@
       "uniqueBreweries": "Brasseries",
       "uniqueStyles": "Styles",
       "uniqueCountries": "Pays"
+    },
+    "worldMap": {
+      "yours": {
+        "title": "Votre passeport bière",
+        "notVisitedCountry": "Vous n'avez goûté aucune bière de ce pays pour l'instant."
+      },
+      "others": {
+        "title": "Passeport bière de {username}",
+        "notVisitedCountry": "{username} n'a pas encore goûté de bière de ce pays."
+      },
+      "failedToLoadMap": "Une erreur est survenue lors du chargement de la carte."
     },
     "friendship": {
       "status": {

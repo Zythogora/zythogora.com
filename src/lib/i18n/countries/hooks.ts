@@ -11,7 +11,10 @@ export const useCountryCode = () => {
 
   return {
     getCountry: (code: string): Country => {
-      const name = countries.getName(code, locale);
+      // Kosovo is represented as XKX in the ISO 3166-1 alpha-3 standard but
+      // the library uses XKK which is the Unicode version of it.
+      // https://github.com/michaelwittig/node-i18n-iso-countries/pull/365
+      const name = countries.getName(code === "XKX" ? "XKK" : code, locale);
 
       if (name === undefined) {
         throw new UnknownCountryCodeError(code);
