@@ -58,6 +58,10 @@
     },
     "review": {
       "pictureAlt": "Photo from the review by {username}"
+    },
+    "errors": {
+      "unauthorized": "You must be logged in to perform this action",
+      "forbidden": "You are not authorized to perform this action"
     }
   },
   "form": {
@@ -630,7 +634,20 @@
       }
     },
     "actions": {
-      "share": "Share"
+      "remove": {
+        "title": "Are you sure you want to remove this review?",
+        "description": "This action cannot be undone.",
+        "cancel": "Cancel",
+        "remove": "Remove review",
+        "pending": "Removing review...",
+        "success": "Review removed",
+        "errors": {
+          "removeNotFound": "Review not found",
+          "removeUnknown": "An error occurred while removing the review"
+        }
+      },
+      "share": "Share",
+      "shareTitle": "Share review"
     }
   },
   "createReviewPage": {

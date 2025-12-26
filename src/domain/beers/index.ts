@@ -32,7 +32,6 @@ import type {
 } from "@/domain/beers/types";
 import { transformRawBeerReviewToBeerReviewWithPicture } from "@/domain/reviews/transforms";
 import { getCurrentUser } from "@/lib/auth";
-import { config } from "@/lib/config";
 import {
   checkImageForExplicitContent,
   createPreviews,
@@ -46,6 +45,8 @@ import type {
 import prisma, { getPrismaTransactionClient } from "@/lib/prisma";
 import { slugify } from "@/lib/prisma/utils";
 import { uploadFile } from "@/lib/storage";
+import { StorageBuckets } from "@/lib/storage/constants";
+import { getBucketBaseUrl } from "@/lib/storage/utils";
 
 export const getBeerBySlug = cache(
   async (beerSlug: string, brewerySlug: string): Promise<Beer> => {
@@ -347,28 +348,25 @@ export const reviewBeer = async (
       throw new ExplicitContentError();
     }
 
-    const bucketName = "review-pictures";
     const fileId = nanoid();
     const baseFileName = `${user.id}/${fileId}.jpg`;
 
     try {
       await Promise.all([
         uploadFile({
-          bucketName,
+          bucketName: StorageBuckets.REVIEW_PICTURES,
           fileName: baseFileName,
           fileBody: optimizedImage,
           contentType: "image/jpeg",
         }),
-
-        Promise.all(
-          (await createPreviews(optimizedImage)).map(({ name, image }) =>
+        ...Object.entries(await createPreviews(optimizedImage)).map(
+          ([name, image]) =>
             uploadFile({
-              bucketName,
+              bucketName: StorageBuckets.REVIEW_PICTURES,
               fileName: `${user.id}/${fileId}_${name}.jpg`,
               fileBody: image,
               contentType: "image/jpeg",
             }),
-          ),
         ),
       ]);
     } catch (error) {
@@ -376,7 +374,7 @@ export const reviewBeer = async (
       throw new FileUploadError();
     }
 
-    pictureUrl = `${config.supabase.storageUrl}/object/public/${bucketName}/${baseFileName}`;
+    pictureUrl = `${getBucketBaseUrl(StorageBuckets.REVIEW_PICTURES)}${baseFileName}`;
   }
 
   const id = nanoid();

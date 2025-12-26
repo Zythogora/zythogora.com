@@ -22,13 +22,13 @@ const AcceptButton = ({ friendRequestId }: AcceptButtonProps) => {
 
   const handleAcceptFriendRequest = () => {
     startTransition(async () => {
-      const { success } =
+      const result =
         await acceptPreviouslyRejectedFriendRequestAction(friendRequestId);
 
-      if (success) {
+      if (result.success) {
         push(Routes.ACCEPT_FRIEND_REQUEST, { id: friendRequestId });
       } else {
-        toast.error(t("friendRequestPage.errors.friendRequestAcceptingError"));
+        toast.error(t(result.translationKey));
       }
     });
   };

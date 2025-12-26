@@ -3,7 +3,7 @@
 import sharp from "sharp";
 
 import { visionClient } from "@/lib/images/gcp";
-import type { Preview } from "@/lib/images/types";
+import { PreviewName } from "@/lib/images/types";
 
 interface OptimizeImageOptions {
   maxDimension?: number;
@@ -47,7 +47,7 @@ export const checkImageForExplicitContent = async (imageBuffer: Buffer) => {
 
 export const createPreviews = async (
   imageBuffer: Buffer,
-): Promise<Array<Preview>> => {
+): Promise<Record<PreviewName, Buffer>> => {
   const sharpInstance = sharp(imageBuffer);
 
   const [previewImage, twitterImage] = await Promise.all([
@@ -55,8 +55,8 @@ export const createPreviews = async (
     sharpInstance.resize({ width: 1200, height: 675 }).toBuffer(),
   ]);
 
-  return [
-    { name: "preview", image: previewImage },
-    { name: "twitter", image: twitterImage },
-  ];
+  return {
+    [PreviewName.PREVIEW]: previewImage,
+    [PreviewName.TWITTER]: twitterImage,
+  };
 };
