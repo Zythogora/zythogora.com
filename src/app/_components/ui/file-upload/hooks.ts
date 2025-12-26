@@ -1,7 +1,9 @@
 "use client";
 
+import imageCompression from "browser-image-compression";
 import {
   useCallback,
+  useEffect,
   useRef,
   useState,
   type ChangeEvent,
@@ -33,12 +35,16 @@ export type FileUploadOptions = {
   initialFiles?: FileMetadata[];
   onFilesChange?: (files: FileWithPreview[]) => void; // Callback when files change
   onFilesAdded?: (addedFiles: FileWithPreview[]) => void; // Callback when new files are added
+  onError?: (errors: string[] | undefined) => void; // Callback when errors change
+  onCompression?: (isCompressing: boolean) => void; // Callback when compression state changes
 };
 
 export type FileUploadState = {
   files: FileWithPreview[];
   isDragging: boolean;
   errors: string[];
+  isCompressing: boolean;
+  compressionProgress: number;
 };
 
 export type FileUploadActions = {
@@ -70,6 +76,8 @@ export const useFileUpload = (
     initialFiles = [],
     onFilesChange,
     onFilesAdded,
+    onError,
+    onCompression,
   } = options;
 
   const [state, setState] = useState<FileUploadState>({
@@ -80,6 +88,8 @@ export const useFileUpload = (
     })),
     isDragging: false,
     errors: [],
+    isCompressing: false,
+    compressionProgress: 0,
   });
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -168,7 +178,7 @@ export const useFileUpload = (
   }, [onFilesChange]);
 
   const addFiles = useCallback(
-    (newFiles: FileList | File[]) => {
+    async (newFiles: FileList | File[]) => {
       if (!newFiles || newFiles.length === 0) {
         return;
       }
@@ -195,21 +205,9 @@ export const useFileUpload = (
         return;
       }
 
-      const validFiles: FileWithPreview[] = [];
-
+      // Filter and validate files first
+      const filesToProcess: File[] = [];
       newFilesArray.forEach((file) => {
-        // // Check for duplicates
-        // const isDuplicate = state.files.some(
-        //   (existingFile) =>
-        //     existingFile.file.name === file.name &&
-        //     existingFile.file.size === file.size,
-        // );
-
-        // // Skip duplicate files silently
-        // if (isDuplicate) {
-        //   return;
-        // }
-
         // Check file size
         if (file.size > maxSize) {
           errors.push(
@@ -224,15 +222,75 @@ export const useFileUpload = (
         if (error) {
           errors.push(error);
         } else {
+          filesToProcess.push(file);
+        }
+      });
+
+      if (errors.length > 0 && filesToProcess.length === 0) {
+        setState((prev) => ({
+          ...prev,
+          errors,
+        }));
+        return;
+      }
+
+      // Check if any files are images that need compression
+      const imageFiles = filesToProcess.filter((file) =>
+        file.type.startsWith("image/"),
+      );
+
+      if (imageFiles.length > 0) {
+        setState((prev) => ({
+          ...prev,
+          isCompressing: true,
+          compressionProgress: 0,
+        }));
+      }
+
+      const validFiles: FileWithPreview[] = [];
+
+      // Process files (compress images, keep others as-is)
+      for (const file of filesToProcess) {
+        if (file.type.startsWith("image/")) {
+          try {
+            const compressedFile = await imageCompression(file, {
+              maxSizeMB: 2,
+              maxIteration: 5,
+              maxWidthOrHeight: 1200,
+              alwaysKeepResolution: true,
+              preserveExif: true,
+              onProgress: (progress: number) => {
+                setState((prev) => ({
+                  ...prev,
+                  compressionProgress: progress,
+                }));
+              },
+            });
+
+            // Preserve original file name and metadata by creating a new File with the original name
+            const processedFile = new File([compressedFile], file.name, {
+              type: compressedFile.type,
+              lastModified: file.lastModified,
+            });
+
+            validFiles.push({
+              file: processedFile,
+              id: generateUniqueId(processedFile),
+              preview: URL.createObjectURL(processedFile),
+            });
+          } catch {
+            errors.push("form.errors.FILE_PROCESSING_ERROR");
+          }
+        } else {
           validFiles.push({
             file,
             id: generateUniqueId(file),
             preview: createPreview(file),
           });
         }
-      });
+      }
 
-      // Only update state if we have valid files to add
+      // Update state with processed files
       if (validFiles.length > 0) {
         // Call the onFilesAdded callback with the newly added valid files
         onFilesAdded?.(validFiles);
@@ -246,12 +304,16 @@ export const useFileUpload = (
             ...prev,
             files: newFiles,
             errors,
+            isCompressing: false,
+            compressionProgress: 0,
           };
         });
       } else if (errors.length > 0) {
         setState((prev) => ({
           ...prev,
           errors,
+          isCompressing: false,
+          compressionProgress: 0,
         }));
       }
 
@@ -381,6 +443,20 @@ export const useFileUpload = (
     },
     [accept, multiple, handleFileChange],
   );
+
+  // Notify parent components of error state changes
+  useEffect(() => {
+    if (state.errors.length > 0) {
+      onError?.(state.errors);
+    } else {
+      onError?.(undefined);
+    }
+  }, [onError, state.errors]);
+
+  // Notify parent components of compression state changes
+  useEffect(() => {
+    onCompression?.(state.isCompressing);
+  }, [onCompression, state.isCompressing]);
 
   return [
     state,

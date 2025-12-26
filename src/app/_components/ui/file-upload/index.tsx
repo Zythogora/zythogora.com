@@ -3,13 +3,14 @@
 import { ImageUpIcon, XIcon } from "lucide-react";
 import mime from "mime";
 import { useTranslations } from "next-intl";
-import { useEffect, type MouseEvent } from "react";
+import { type MouseEvent } from "react";
 
 import Button from "@/app/_components/ui/button";
 import {
   formatBytes,
   useFileUpload,
 } from "@/app/_components/ui/file-upload/hooks";
+import Progress from "@/app/_components/ui/progress";
 import { cn } from "@/lib/tailwind";
 
 interface FileUploadProps {
@@ -17,6 +18,7 @@ interface FileUploadProps {
   onError: (error: string[] | undefined) => void;
   maxSize: number;
   acceptedTypes: string[];
+  onCompression?: (isCompressing: boolean) => void;
 }
 
 const FileUpload = ({
@@ -24,11 +26,12 @@ const FileUpload = ({
   onError,
   maxSize,
   acceptedTypes,
+  onCompression,
 }: FileUploadProps) => {
   const t = useTranslations();
 
   const [
-    { files, isDragging, errors },
+    { files, isDragging, isCompressing, compressionProgress },
     {
       handleDragEnter,
       handleDragLeave,
@@ -47,6 +50,8 @@ const FileUpload = ({
           ? files[0]!.file
           : null,
       ),
+    onError,
+    onCompression,
   });
 
   const extensions = Array.from(
@@ -56,14 +61,6 @@ const FileUpload = ({
         .filter((ext) => ext),
     ),
   );
-
-  useEffect(() => {
-    if (errors.length > 0) {
-      onError(errors);
-    } else {
-      onError(undefined);
-    }
-  }, [onError, errors]);
 
   const handleRemoveFile = (event: MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
@@ -85,6 +82,7 @@ const FileUpload = ({
           onDrop={handleDrop}
           data-dragging={isDragging || undefined}
           variant="outline"
+          disabled={isCompressing}
         >
           <div
             className={cn(
@@ -98,6 +96,7 @@ const FileUpload = ({
               {...getInputProps()}
               className="sr-only"
               aria-label={t("form.fields.fileUpload.ctaImageSingle")}
+              disabled={isCompressing}
             />
 
             {files[0] ? (
@@ -108,15 +107,37 @@ const FileUpload = ({
                   className="size-full object-contain"
                 />
 
-                <Button
-                  onClick={handleRemoveFile}
-                  aria-label={t("form.fields.fileUpload.ctaRemoveFile")}
-                  variant="outline"
-                  size="icon"
-                  className="border-foreground absolute top-4 right-4 size-8 rounded-full border-2 before:rounded-full"
-                >
-                  <XIcon className="size-4 stroke-3" aria-hidden="true" />
-                </Button>
+                {isCompressing ? (
+                  <div className="absolute inset-0 flex w-fit flex-col items-center justify-center gap-y-1">
+                    <p className="mb-1 text-sm">
+                      {t("form.fields.fileUpload.optimizing")}
+                    </p>
+
+                    <Progress value={compressionProgress} />
+
+                    <p className="text-xs">{compressionProgress.toFixed(0)}%</p>
+                  </div>
+                ) : (
+                  <Button
+                    onClick={handleRemoveFile}
+                    aria-label={t("form.fields.fileUpload.ctaRemoveFile")}
+                    variant="outline"
+                    size="icon"
+                    className="border-foreground absolute top-4 right-4 size-8 rounded-full border-2 before:rounded-full"
+                  >
+                    <XIcon className="size-4 stroke-3" aria-hidden="true" />
+                  </Button>
+                )}
+              </div>
+            ) : isCompressing ? (
+              <div className="flex w-fit flex-col items-center justify-center gap-y-1">
+                <p className="mb-1 text-sm">
+                  {t("form.fields.fileUpload.optimizing")}
+                </p>
+
+                <Progress value={compressionProgress} />
+
+                <p className="text-xs">{compressionProgress.toFixed(0)}%</p>
               </div>
             ) : (
               <div className="flex flex-col items-center justify-center px-4 py-3 text-center">

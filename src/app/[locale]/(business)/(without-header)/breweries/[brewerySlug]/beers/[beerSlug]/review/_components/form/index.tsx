@@ -9,7 +9,7 @@ import {
 import { parseWithZod } from "@conform-to/zod/v4";
 import { getZodConstraint } from "@conform-to/zod/v4";
 import { useTranslations } from "next-intl";
-import { useActionState, useEffect, useTransition } from "react";
+import { useActionState, useEffect, useTransition, useState } from "react";
 import { toast } from "sonner";
 
 import { ServingFrom } from "@db/enums";
@@ -56,6 +56,7 @@ const ReviewForm = ({ beerId }: ReviewFormProps) => {
     undefined,
   );
   const [isPending, startTransition] = useTransition();
+  const [isCompressing, setIsCompressing] = useState(false);
 
   const [form, fields] = useForm({
     defaultValue: { beerId },
@@ -137,6 +138,7 @@ const ReviewForm = ({ beerId }: ReviewFormProps) => {
             field={fields.picture}
             maxSize={MAX_REVIEW_PICTURE_SIZE}
             acceptedTypes={ALLOWED_REVIEW_PICTURE_TYPES}
+            onCompression={setIsCompressing}
           />
         </FormGroup>
 
@@ -223,7 +225,7 @@ const ReviewForm = ({ beerId }: ReviewFormProps) => {
             type="reset"
             onClick={handleCancel}
             variant="outline"
-            disabled={isPending}
+            disabled={isPending || isCompressing}
             className="col-span-3 row-start-2 @md:col-span-1 @md:row-start-auto"
           >
             {t("createReviewPage.actions.cancel")}
@@ -231,7 +233,7 @@ const ReviewForm = ({ beerId }: ReviewFormProps) => {
 
           <Button
             type="submit"
-            disabled={isPending}
+            disabled={isPending || isCompressing}
             className="col-span-3 @md:col-span-2"
           >
             {isPending

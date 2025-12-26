@@ -6,17 +6,21 @@ import FormError from "@/app/_components/ui/form-error";
 import Label from "@/app/_components/ui/label";
 import { cn } from "@/lib/tailwind";
 
-interface FormFileUploadProps
-  extends Omit<ComponentProps<typeof FileUpload>, "onFileChange" | "onError"> {
+interface FormFileUploadProps extends Omit<
+  ComponentProps<typeof FileUpload>,
+  "onFileChange" | "onError"
+> {
   label: string;
   field: FieldMetadata;
   className?: string;
+  onCompression?: (isCompressing: boolean) => void;
 }
 
 const FormFileUpload = ({
   label,
   field,
   className,
+  onCompression,
   ...restProps
 }: FormFileUploadProps) => {
   const [errors, setErrors] = useState<string[] | undefined>();
@@ -60,6 +64,7 @@ const FormFileUpload = ({
         <FileUpload
           onFileChange={handleFileChange}
           onError={setErrors}
+          onCompression={onCompression}
           {...restProps}
         />
 

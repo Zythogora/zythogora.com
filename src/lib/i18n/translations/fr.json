@@ -89,7 +89,8 @@
         "ctaImageSingle": "Déposez votre image ici ou cliquez pour parcourir vos fichiers",
         "ctaRemoveFile": "Supprimer le fichier",
         "description": "{allowedExtensions} (max. {maxSize})",
-        "allowedExtensions": "{extensions} ou {lastExtension}"
+        "allowedExtensions": "{extensions} ou {lastExtension}",
+        "optimizing": "Optimisation de l'image..."
       },
       "countrySelect": {
         "searchPlaceholder": "Rechercher un pays",
@@ -126,6 +127,7 @@
       "INVALID_FILE_TYPE": "Le type de fichier est invalide",
       "FILE_SIZE_TOO_LARGE": "La taille du fichier est trop grande",
       "FILE_SIZE_TOO_LARGE_MULTIPLE": "Certains fichiers ont une taille trop grande",
+      "FILE_PROCESSING_ERROR": "La compression de votre image a échoué, veuillez réessayer avec une autre image",
       "TOO_MANY_FILES": "Vous ne pouvez pas uploader autant de fichiers",
       "UNKNOWN_ERROR": "Une erreur inconnue est survenue"
     }
