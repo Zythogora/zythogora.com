@@ -506,6 +506,9 @@
         },
         "picture": {
           "label": "Picture"
+        },
+        "price": {
+          "label": "Price"
         }
       }
     },
@@ -673,6 +676,12 @@
       },
       "description": {
         "label": "Description"
+      },
+      "organic": {
+        "label": "Organic"
+      },
+      "barrelAged": {
+        "label": "Barrel-aged"
       }
     },
     "actions": {

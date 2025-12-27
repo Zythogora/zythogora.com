@@ -1,14 +1,21 @@
 import { getFormatter, getTranslations } from "next-intl/server";
 import { Fragment } from "react";
 
+import BarrelsIcon from "@/app/_components/icons/barrels";
 import ColoredPintIcon from "@/app/_components/icons/colored-pint";
 import CountryFlag from "@/app/_components/icons/country-flag";
+import OrganicIcon from "@/app/_components/icons/organic";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/app/_components/ui/collapsible";
 import DescriptionList from "@/app/_components/ui/description-list";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/app/_components/ui/tooltip";
 import type { Color } from "@/domain/beers/types";
 import { Link } from "@/lib/i18n";
 import type { Country } from "@/lib/i18n/countries/types";
@@ -27,6 +34,8 @@ interface BeerCardProps {
   abv: number;
   ibu?: number;
   color: Color;
+  organic: boolean;
+  barrelAged: boolean;
   description?: string;
   releaseYear?: number;
   className?: string;
@@ -39,6 +48,8 @@ const BeerCard = async ({
   abv,
   ibu,
   color,
+  organic,
+  barrelAged,
   description,
   releaseYear,
   className,
@@ -62,11 +73,51 @@ const BeerCard = async ({
         )}
       >
         {hasDetails ? (
-          <div className="bg-foreground absolute bottom-1.5 left-[calc(50%-theme(spacing.8))] h-1 w-16 rounded-full opacity-50" />
+          <div className="bg-foreground absolute bottom-1.5 left-[calc(50%-(--spacing(8)))] h-1 w-16 rounded-full opacity-50" />
         ) : null}
 
         <div className="flex flex-col gap-y-1">
-          <h1 className="text-left text-2xl md:text-4xl">{name}</h1>
+          <div
+            className={cn("flex flex-row items-center", "gap-x-2 md:gap-x-3")}
+          >
+            <h1 className="grow text-left text-2xl md:text-4xl">{name}</h1>
+
+            {organic ? (
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <OrganicIcon
+                    size={28}
+                    className={cn(
+                      "size-5 md:size-7",
+                      "fill-[oklch(0.45_0.15_150)] dark:fill-[oklch(0.7_0.15_150)]",
+                    )}
+                  />
+                </TooltipTrigger>
+
+                <TooltipContent side="bottom">
+                  {t("createBeerPage.fields.organic.label")}
+                </TooltipContent>
+              </Tooltip>
+            ) : null}
+
+            {barrelAged ? (
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <BarrelsIcon
+                    size={28}
+                    className={cn(
+                      "size-5 md:size-7",
+                      "fill-[oklch(0.35_0.085_45)] dark:fill-[oklch(0.7_0.085_45)]",
+                    )}
+                  />
+                </TooltipTrigger>
+
+                <TooltipContent side="bottom">
+                  {t("createBeerPage.fields.barrelAged.label")}
+                </TooltipContent>
+              </Tooltip>
+            ) : null}
+          </div>
 
           <div
             className={cn("flex flex-row items-center", "gap-x-1.5 md:gap-x-2")}

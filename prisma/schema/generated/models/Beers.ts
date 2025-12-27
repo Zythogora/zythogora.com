@@ -48,6 +48,8 @@ export type BeersMinAggregateOutputType = {
   ibu: number | null
   description: string | null
   releaseYear: number | null
+  organic: boolean | null
+  barrelAged: boolean | null
   breweryId: string | null
   styleId: string | null
   colorId: string | null
@@ -65,6 +67,8 @@ export type BeersMaxAggregateOutputType = {
   ibu: number | null
   description: string | null
   releaseYear: number | null
+  organic: boolean | null
+  barrelAged: boolean | null
   breweryId: string | null
   styleId: string | null
   colorId: string | null
@@ -82,6 +86,8 @@ export type BeersCountAggregateOutputType = {
   ibu: number
   description: number
   releaseYear: number
+  organic: number
+  barrelAged: number
   breweryId: number
   styleId: number
   colorId: number
@@ -113,6 +119,8 @@ export type BeersMinAggregateInputType = {
   ibu?: true
   description?: true
   releaseYear?: true
+  organic?: true
+  barrelAged?: true
   breweryId?: true
   styleId?: true
   colorId?: true
@@ -130,6 +138,8 @@ export type BeersMaxAggregateInputType = {
   ibu?: true
   description?: true
   releaseYear?: true
+  organic?: true
+  barrelAged?: true
   breweryId?: true
   styleId?: true
   colorId?: true
@@ -147,6 +157,8 @@ export type BeersCountAggregateInputType = {
   ibu?: true
   description?: true
   releaseYear?: true
+  organic?: true
+  barrelAged?: true
   breweryId?: true
   styleId?: true
   colorId?: true
@@ -251,6 +263,8 @@ export type BeersGroupByOutputType = {
   ibu: number | null
   description: string | null
   releaseYear: number | null
+  organic: boolean
+  barrelAged: boolean
   breweryId: string
   styleId: string
   colorId: string
@@ -291,6 +305,8 @@ export type BeersWhereInput = {
   ibu?: Prisma.IntNullableFilter<"Beers"> | number | null
   description?: Prisma.StringNullableFilter<"Beers"> | string | null
   releaseYear?: Prisma.IntNullableFilter<"Beers"> | number | null
+  organic?: Prisma.BoolFilter<"Beers"> | boolean
+  barrelAged?: Prisma.BoolFilter<"Beers"> | boolean
   breweryId?: Prisma.StringFilter<"Beers"> | string
   styleId?: Prisma.StringFilter<"Beers"> | string
   colorId?: Prisma.StringFilter<"Beers"> | string
@@ -314,6 +330,8 @@ export type BeersOrderByWithRelationInput = {
   ibu?: Prisma.SortOrderInput | Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   releaseYear?: Prisma.SortOrderInput | Prisma.SortOrder
+  organic?: Prisma.SortOrder
+  barrelAged?: Prisma.SortOrder
   breweryId?: Prisma.SortOrder
   styleId?: Prisma.SortOrder
   colorId?: Prisma.SortOrder
@@ -342,6 +360,8 @@ export type BeersWhereUniqueInput = Prisma.AtLeast<{
   ibu?: Prisma.IntNullableFilter<"Beers"> | number | null
   description?: Prisma.StringNullableFilter<"Beers"> | string | null
   releaseYear?: Prisma.IntNullableFilter<"Beers"> | number | null
+  organic?: Prisma.BoolFilter<"Beers"> | boolean
+  barrelAged?: Prisma.BoolFilter<"Beers"> | boolean
   breweryId?: Prisma.StringFilter<"Beers"> | string
   styleId?: Prisma.StringFilter<"Beers"> | string
   colorId?: Prisma.StringFilter<"Beers"> | string
@@ -365,6 +385,8 @@ export type BeersOrderByWithAggregationInput = {
   ibu?: Prisma.SortOrderInput | Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   releaseYear?: Prisma.SortOrderInput | Prisma.SortOrder
+  organic?: Prisma.SortOrder
+  barrelAged?: Prisma.SortOrder
   breweryId?: Prisma.SortOrder
   styleId?: Prisma.SortOrder
   colorId?: Prisma.SortOrder
@@ -390,6 +412,8 @@ export type BeersScalarWhereWithAggregatesInput = {
   ibu?: Prisma.IntNullableWithAggregatesFilter<"Beers"> | number | null
   description?: Prisma.StringNullableWithAggregatesFilter<"Beers"> | string | null
   releaseYear?: Prisma.IntNullableWithAggregatesFilter<"Beers"> | number | null
+  organic?: Prisma.BoolWithAggregatesFilter<"Beers"> | boolean
+  barrelAged?: Prisma.BoolWithAggregatesFilter<"Beers"> | boolean
   breweryId?: Prisma.StringWithAggregatesFilter<"Beers"> | string
   styleId?: Prisma.StringWithAggregatesFilter<"Beers"> | string
   colorId?: Prisma.StringWithAggregatesFilter<"Beers"> | string
@@ -407,6 +431,8 @@ export type BeersCreateInput = {
   ibu?: number | null
   description?: string | null
   releaseYear?: number | null
+  organic?: boolean
+  barrelAged?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   brewery: Prisma.BreweriesCreateNestedOneWithoutBeersInput
@@ -425,6 +451,8 @@ export type BeersUncheckedCreateInput = {
   ibu?: number | null
   description?: string | null
   releaseYear?: number | null
+  organic?: boolean
+  barrelAged?: boolean
   breweryId: string
   styleId: string
   colorId: string
@@ -443,6 +471,8 @@ export type BeersUpdateInput = {
   ibu?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   releaseYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  organic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  barrelAged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   brewery?: Prisma.BreweriesUpdateOneRequiredWithoutBeersNestedInput
@@ -461,6 +491,8 @@ export type BeersUncheckedUpdateInput = {
   ibu?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   releaseYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  organic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  barrelAged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   breweryId?: Prisma.StringFieldUpdateOperationsInput | string
   styleId?: Prisma.StringFieldUpdateOperationsInput | string
   colorId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -479,6 +511,8 @@ export type BeersCreateManyInput = {
   ibu?: number | null
   description?: string | null
   releaseYear?: number | null
+  organic?: boolean
+  barrelAged?: boolean
   breweryId: string
   styleId: string
   colorId: string
@@ -496,6 +530,8 @@ export type BeersUpdateManyMutationInput = {
   ibu?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   releaseYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  organic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  barrelAged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -508,6 +544,8 @@ export type BeersUncheckedUpdateManyInput = {
   ibu?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   releaseYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  organic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  barrelAged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   breweryId?: Prisma.StringFieldUpdateOperationsInput | string
   styleId?: Prisma.StringFieldUpdateOperationsInput | string
   colorId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -536,6 +574,8 @@ export type BeersCountOrderByAggregateInput = {
   ibu?: Prisma.SortOrder
   description?: Prisma.SortOrder
   releaseYear?: Prisma.SortOrder
+  organic?: Prisma.SortOrder
+  barrelAged?: Prisma.SortOrder
   breweryId?: Prisma.SortOrder
   styleId?: Prisma.SortOrder
   colorId?: Prisma.SortOrder
@@ -559,6 +599,8 @@ export type BeersMaxOrderByAggregateInput = {
   ibu?: Prisma.SortOrder
   description?: Prisma.SortOrder
   releaseYear?: Prisma.SortOrder
+  organic?: Prisma.SortOrder
+  barrelAged?: Prisma.SortOrder
   breweryId?: Prisma.SortOrder
   styleId?: Prisma.SortOrder
   colorId?: Prisma.SortOrder
@@ -576,6 +618,8 @@ export type BeersMinOrderByAggregateInput = {
   ibu?: Prisma.SortOrder
   description?: Prisma.SortOrder
   releaseYear?: Prisma.SortOrder
+  organic?: Prisma.SortOrder
+  barrelAged?: Prisma.SortOrder
   breweryId?: Prisma.SortOrder
   styleId?: Prisma.SortOrder
   colorId?: Prisma.SortOrder
@@ -854,6 +898,8 @@ export type BeersCreateWithoutBreweryInput = {
   ibu?: number | null
   description?: string | null
   releaseYear?: number | null
+  organic?: boolean
+  barrelAged?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   style: Prisma.StylesCreateNestedOneWithoutBeersInput
@@ -871,6 +917,8 @@ export type BeersUncheckedCreateWithoutBreweryInput = {
   ibu?: number | null
   description?: string | null
   releaseYear?: number | null
+  organic?: boolean
+  barrelAged?: boolean
   styleId: string
   colorId: string
   createdAt?: Date | string
@@ -917,6 +965,8 @@ export type BeersScalarWhereInput = {
   ibu?: Prisma.IntNullableFilter<"Beers"> | number | null
   description?: Prisma.StringNullableFilter<"Beers"> | string | null
   releaseYear?: Prisma.IntNullableFilter<"Beers"> | number | null
+  organic?: Prisma.BoolFilter<"Beers"> | boolean
+  barrelAged?: Prisma.BoolFilter<"Beers"> | boolean
   breweryId?: Prisma.StringFilter<"Beers"> | string
   styleId?: Prisma.StringFilter<"Beers"> | string
   colorId?: Prisma.StringFilter<"Beers"> | string
@@ -934,6 +984,8 @@ export type BeersCreateWithoutStyleInput = {
   ibu?: number | null
   description?: string | null
   releaseYear?: number | null
+  organic?: boolean
+  barrelAged?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   brewery: Prisma.BreweriesCreateNestedOneWithoutBeersInput
@@ -951,6 +1003,8 @@ export type BeersUncheckedCreateWithoutStyleInput = {
   ibu?: number | null
   description?: string | null
   releaseYear?: number | null
+  organic?: boolean
+  barrelAged?: boolean
   breweryId: string
   colorId: string
   createdAt?: Date | string
@@ -994,6 +1048,8 @@ export type BeersCreateWithoutColorInput = {
   ibu?: number | null
   description?: string | null
   releaseYear?: number | null
+  organic?: boolean
+  barrelAged?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   brewery: Prisma.BreweriesCreateNestedOneWithoutBeersInput
@@ -1011,6 +1067,8 @@ export type BeersUncheckedCreateWithoutColorInput = {
   ibu?: number | null
   description?: string | null
   releaseYear?: number | null
+  organic?: boolean
+  barrelAged?: boolean
   breweryId: string
   styleId: string
   createdAt?: Date | string
@@ -1054,6 +1112,8 @@ export type BeersCreateWithoutCreatedByUserInput = {
   ibu?: number | null
   description?: string | null
   releaseYear?: number | null
+  organic?: boolean
+  barrelAged?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   brewery: Prisma.BreweriesCreateNestedOneWithoutBeersInput
@@ -1071,6 +1131,8 @@ export type BeersUncheckedCreateWithoutCreatedByUserInput = {
   ibu?: number | null
   description?: string | null
   releaseYear?: number | null
+  organic?: boolean
+  barrelAged?: boolean
   breweryId: string
   styleId: string
   colorId: string
@@ -1098,6 +1160,8 @@ export type BeersCreateWithoutUpdatedByUserInput = {
   ibu?: number | null
   description?: string | null
   releaseYear?: number | null
+  organic?: boolean
+  barrelAged?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   brewery: Prisma.BreweriesCreateNestedOneWithoutBeersInput
@@ -1115,6 +1179,8 @@ export type BeersUncheckedCreateWithoutUpdatedByUserInput = {
   ibu?: number | null
   description?: string | null
   releaseYear?: number | null
+  organic?: boolean
+  barrelAged?: boolean
   breweryId: string
   styleId: string
   colorId: string
@@ -1174,6 +1240,8 @@ export type BeersCreateWithoutReviewsInput = {
   ibu?: number | null
   description?: string | null
   releaseYear?: number | null
+  organic?: boolean
+  barrelAged?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   brewery: Prisma.BreweriesCreateNestedOneWithoutBeersInput
@@ -1191,6 +1259,8 @@ export type BeersUncheckedCreateWithoutReviewsInput = {
   ibu?: number | null
   description?: string | null
   releaseYear?: number | null
+  organic?: boolean
+  barrelAged?: boolean
   breweryId: string
   styleId: string
   colorId: string
@@ -1224,6 +1294,8 @@ export type BeersUpdateWithoutReviewsInput = {
   ibu?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   releaseYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  organic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  barrelAged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   brewery?: Prisma.BreweriesUpdateOneRequiredWithoutBeersNestedInput
@@ -1241,6 +1313,8 @@ export type BeersUncheckedUpdateWithoutReviewsInput = {
   ibu?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   releaseYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  organic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  barrelAged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   breweryId?: Prisma.StringFieldUpdateOperationsInput | string
   styleId?: Prisma.StringFieldUpdateOperationsInput | string
   colorId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1258,6 +1332,8 @@ export type BeersCreateManyBreweryInput = {
   ibu?: number | null
   description?: string | null
   releaseYear?: number | null
+  organic?: boolean
+  barrelAged?: boolean
   styleId: string
   colorId: string
   createdAt?: Date | string
@@ -1274,6 +1350,8 @@ export type BeersUpdateWithoutBreweryInput = {
   ibu?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   releaseYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  organic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  barrelAged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   style?: Prisma.StylesUpdateOneRequiredWithoutBeersNestedInput
@@ -1291,6 +1369,8 @@ export type BeersUncheckedUpdateWithoutBreweryInput = {
   ibu?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   releaseYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  organic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  barrelAged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   styleId?: Prisma.StringFieldUpdateOperationsInput | string
   colorId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1308,6 +1388,8 @@ export type BeersUncheckedUpdateManyWithoutBreweryInput = {
   ibu?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   releaseYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  organic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  barrelAged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   styleId?: Prisma.StringFieldUpdateOperationsInput | string
   colorId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1324,6 +1406,8 @@ export type BeersCreateManyStyleInput = {
   ibu?: number | null
   description?: string | null
   releaseYear?: number | null
+  organic?: boolean
+  barrelAged?: boolean
   breweryId: string
   colorId: string
   createdAt?: Date | string
@@ -1340,6 +1424,8 @@ export type BeersUpdateWithoutStyleInput = {
   ibu?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   releaseYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  organic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  barrelAged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   brewery?: Prisma.BreweriesUpdateOneRequiredWithoutBeersNestedInput
@@ -1357,6 +1443,8 @@ export type BeersUncheckedUpdateWithoutStyleInput = {
   ibu?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   releaseYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  organic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  barrelAged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   breweryId?: Prisma.StringFieldUpdateOperationsInput | string
   colorId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1374,6 +1462,8 @@ export type BeersUncheckedUpdateManyWithoutStyleInput = {
   ibu?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   releaseYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  organic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  barrelAged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   breweryId?: Prisma.StringFieldUpdateOperationsInput | string
   colorId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1390,6 +1480,8 @@ export type BeersCreateManyColorInput = {
   ibu?: number | null
   description?: string | null
   releaseYear?: number | null
+  organic?: boolean
+  barrelAged?: boolean
   breweryId: string
   styleId: string
   createdAt?: Date | string
@@ -1406,6 +1498,8 @@ export type BeersUpdateWithoutColorInput = {
   ibu?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   releaseYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  organic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  barrelAged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   brewery?: Prisma.BreweriesUpdateOneRequiredWithoutBeersNestedInput
@@ -1423,6 +1517,8 @@ export type BeersUncheckedUpdateWithoutColorInput = {
   ibu?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   releaseYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  organic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  barrelAged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   breweryId?: Prisma.StringFieldUpdateOperationsInput | string
   styleId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1440,6 +1536,8 @@ export type BeersUncheckedUpdateManyWithoutColorInput = {
   ibu?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   releaseYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  organic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  barrelAged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   breweryId?: Prisma.StringFieldUpdateOperationsInput | string
   styleId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1456,6 +1554,8 @@ export type BeersCreateManyCreatedByUserInput = {
   ibu?: number | null
   description?: string | null
   releaseYear?: number | null
+  organic?: boolean
+  barrelAged?: boolean
   breweryId: string
   styleId: string
   colorId: string
@@ -1472,6 +1572,8 @@ export type BeersCreateManyUpdatedByUserInput = {
   ibu?: number | null
   description?: string | null
   releaseYear?: number | null
+  organic?: boolean
+  barrelAged?: boolean
   breweryId: string
   styleId: string
   colorId: string
@@ -1488,6 +1590,8 @@ export type BeersUpdateWithoutCreatedByUserInput = {
   ibu?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   releaseYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  organic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  barrelAged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   brewery?: Prisma.BreweriesUpdateOneRequiredWithoutBeersNestedInput
@@ -1505,6 +1609,8 @@ export type BeersUncheckedUpdateWithoutCreatedByUserInput = {
   ibu?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   releaseYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  organic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  barrelAged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   breweryId?: Prisma.StringFieldUpdateOperationsInput | string
   styleId?: Prisma.StringFieldUpdateOperationsInput | string
   colorId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1522,6 +1628,8 @@ export type BeersUncheckedUpdateManyWithoutCreatedByUserInput = {
   ibu?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   releaseYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  organic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  barrelAged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   breweryId?: Prisma.StringFieldUpdateOperationsInput | string
   styleId?: Prisma.StringFieldUpdateOperationsInput | string
   colorId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1538,6 +1646,8 @@ export type BeersUpdateWithoutUpdatedByUserInput = {
   ibu?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   releaseYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  organic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  barrelAged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   brewery?: Prisma.BreweriesUpdateOneRequiredWithoutBeersNestedInput
@@ -1555,6 +1665,8 @@ export type BeersUncheckedUpdateWithoutUpdatedByUserInput = {
   ibu?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   releaseYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  organic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  barrelAged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   breweryId?: Prisma.StringFieldUpdateOperationsInput | string
   styleId?: Prisma.StringFieldUpdateOperationsInput | string
   colorId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1572,6 +1684,8 @@ export type BeersUncheckedUpdateManyWithoutUpdatedByUserInput = {
   ibu?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   releaseYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  organic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  barrelAged?: Prisma.BoolFieldUpdateOperationsInput | boolean
   breweryId?: Prisma.StringFieldUpdateOperationsInput | string
   styleId?: Prisma.StringFieldUpdateOperationsInput | string
   colorId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1619,6 +1733,8 @@ export type BeersSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   ibu?: boolean
   description?: boolean
   releaseYear?: boolean
+  organic?: boolean
+  barrelAged?: boolean
   breweryId?: boolean
   styleId?: boolean
   colorId?: boolean
@@ -1643,6 +1759,8 @@ export type BeersSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   ibu?: boolean
   description?: boolean
   releaseYear?: boolean
+  organic?: boolean
+  barrelAged?: boolean
   breweryId?: boolean
   styleId?: boolean
   colorId?: boolean
@@ -1665,6 +1783,8 @@ export type BeersSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   ibu?: boolean
   description?: boolean
   releaseYear?: boolean
+  organic?: boolean
+  barrelAged?: boolean
   breweryId?: boolean
   styleId?: boolean
   colorId?: boolean
@@ -1687,6 +1807,8 @@ export type BeersSelectScalar = {
   ibu?: boolean
   description?: boolean
   releaseYear?: boolean
+  organic?: boolean
+  barrelAged?: boolean
   breweryId?: boolean
   styleId?: boolean
   colorId?: boolean
@@ -1696,7 +1818,7 @@ export type BeersSelectScalar = {
   updatedBy?: boolean
 }
 
-export type BeersOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "slug" | "name" | "abv" | "ibu" | "description" | "releaseYear" | "breweryId" | "styleId" | "colorId" | "createdAt" | "createdBy" | "updatedAt" | "updatedBy", ExtArgs["result"]["beers"]>
+export type BeersOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "slug" | "name" | "abv" | "ibu" | "description" | "releaseYear" | "organic" | "barrelAged" | "breweryId" | "styleId" | "colorId" | "createdAt" | "createdBy" | "updatedAt" | "updatedBy", ExtArgs["result"]["beers"]>
 export type BeersInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   brewery?: boolean | Prisma.BreweriesDefaultArgs<ExtArgs>
   style?: boolean | Prisma.StylesDefaultArgs<ExtArgs>
@@ -1739,6 +1861,8 @@ export type $BeersPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     ibu: number | null
     description: string | null
     releaseYear: number | null
+    organic: boolean
+    barrelAged: boolean
     breweryId: string
     styleId: string
     colorId: string
@@ -2182,6 +2306,8 @@ export interface BeersFieldRefs {
   readonly ibu: Prisma.FieldRef<"Beers", 'Int'>
   readonly description: Prisma.FieldRef<"Beers", 'String'>
   readonly releaseYear: Prisma.FieldRef<"Beers", 'Int'>
+  readonly organic: Prisma.FieldRef<"Beers", 'Boolean'>
+  readonly barrelAged: Prisma.FieldRef<"Beers", 'Boolean'>
   readonly breweryId: Prisma.FieldRef<"Beers", 'String'>
   readonly styleId: Prisma.FieldRef<"Beers", 'String'>
   readonly colorId: Prisma.FieldRef<"Beers", 'String'>

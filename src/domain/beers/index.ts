@@ -286,6 +286,8 @@ export const createBeer = async (data: CreateBeerData) => {
       ibu: data.ibu,
       description: data.description,
       releaseYear: data.releaseYear,
+      organic: data.organic,
+      barrelAged: data.barrelAged,
       breweryId: data.breweryId,
       styleId: data.styleId,
       colorId: data.colorId,
@@ -408,6 +410,8 @@ export const reviewBeer = async (
       acidity: review.acidity,
 
       duration: review.duration,
+
+      price: review.price,
     },
     include: { beer: { include: { brewery: true } } },
   });

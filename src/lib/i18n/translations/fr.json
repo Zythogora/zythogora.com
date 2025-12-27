@@ -503,6 +503,9 @@
         },
         "picture": {
           "label": "Photo"
+        },
+        "price": {
+          "label": "Prix"
         }
       }
     },
@@ -670,6 +673,12 @@
       },
       "description": {
         "label": "Description"
+      },
+      "organic": {
+        "label": "Bio"
+      },
+      "barrelAged": {
+        "label": "Vieillie en fût"
       }
     },
     "actions": {

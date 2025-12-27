@@ -27,6 +27,14 @@ export const createBeerSchema = z.object({
     })
     .optional(),
   description: z.string().optional(),
+  organic: z.preprocess(
+    (val) => val === "on" || val === true,
+    z.boolean().default(false),
+  ),
+  barrelAged: z.preprocess(
+    (val) => val === "on" || val === true,
+    z.boolean().default(false),
+  ),
 });
 
 export type CreateBeerData = z.infer<typeof createBeerSchema>;

@@ -91,6 +91,7 @@ export const transformRawReviewToReview = (rawReview: RawReview): Review => {
     bitterness: rawReview.bitterness ?? undefined,
     acidity: rawReview.acidity ?? undefined,
     duration: rawReview.duration ?? undefined,
+    price: rawReview.price ? rawReview.price.toNumber() : undefined,
     user: {
       username: rawReview.user.username,
     },

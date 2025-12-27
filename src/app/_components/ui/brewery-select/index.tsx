@@ -29,6 +29,7 @@ interface BrewerySelectProps
     Pick<ComponentProps<"input">, "placeholder" | "disabled" | "className"> {
   onChange?: (value: BreweryResult) => void;
   searchPlaceholder?: string;
+  popoverId?: string;
 }
 
 const BrewerySelect = ({
@@ -36,6 +37,7 @@ const BrewerySelect = ({
   placeholder,
   searchPlaceholder,
   className,
+  popoverId,
   ...restProps
 }: BrewerySelectProps) => {
   const t = useTranslations();
@@ -68,6 +70,8 @@ const BrewerySelect = ({
     300,
   );
 
+  const contentId = popoverId ? `${popoverId}-content` : undefined;
+
   return (
     <>
       <Popover open={open} onOpenChange={setOpen}>
@@ -77,6 +81,7 @@ const BrewerySelect = ({
             data-slot="brewery-select-trigger"
             variant="outline"
             aria-expanded={open}
+            aria-controls={contentId}
             role="combobox"
             value={selectedBrewery?.id}
             className={cn(
@@ -108,10 +113,11 @@ const BrewerySelect = ({
         </PopoverTrigger>
 
         <PopoverContent
+          id={contentId}
           align="start"
           alignOffset={-2}
           sideOffset={8}
-          className="w-full max-w-[calc(100vw-theme(spacing.16))] min-w-[calc(var(--radix-popper-anchor-width)+theme(spacing.1))] p-0"
+          className="w-full max-w-[calc(100vw-(--spacing(16)))] min-w-[calc(var(--radix-popper-anchor-width)+(--spacing(1)))] p-0"
         >
           <Command data-slot="color-select" shouldFilter={false}>
             <div
@@ -142,8 +148,8 @@ const BrewerySelect = ({
                 "scroll-py-1 overflow-x-hidden overflow-y-auto rounded",
                 "max-h-72 md:max-h-80",
                 "bg-background dark:bg-stone-700",
-                "*:[&[cmdk-list-sizer]]:p-2",
-                "**:[&[cmdk-empty]]:px-3 **:[&[cmdk-empty]]:py-2",
+                "*:[[cmdk-list-sizer]]:p-2",
+                "**:[[cmdk-empty]]:px-3 **:[[cmdk-empty]]:py-2",
               )}
             >
               {isPending && search === "" ? (

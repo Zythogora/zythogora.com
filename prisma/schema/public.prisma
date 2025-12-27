@@ -40,6 +40,7 @@ model Reviews {
   bitterness           Bitterness?
   acidity              Acidity?
   duration             Duration?
+  price                Decimal?              @map("price") @db.Decimal(7, 2)
 
   beerId String @map("beer_id")
   beer   Beers  @relation(fields: [beerId], references: [id])

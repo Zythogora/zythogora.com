@@ -169,6 +169,16 @@ export const reviewSchema = z.object({
   acidity: z.enum(acidityValues).optional(),
 
   duration: z.enum(durationValues).optional(),
+
+  price: z
+    .number({
+      error: (issue) =>
+        issue.input === undefined
+          ? "form.errors.FIELD_REQUIRED"
+          : "form.errors.NUMBER_INVALID",
+    })
+    .min(0)
+    .optional(),
 });
 
 export type CreateReviewData = z.infer<typeof reviewSchema>;

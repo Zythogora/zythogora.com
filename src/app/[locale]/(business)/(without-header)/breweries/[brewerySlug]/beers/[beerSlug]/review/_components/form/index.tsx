@@ -34,6 +34,7 @@ import FormDatePicker from "@/app/_components/form/date-picker";
 import FormFileUpload from "@/app/_components/form/file-upload";
 import FormFiveStepSelector from "@/app/_components/form/five-step-selector";
 import FormGroup from "@/app/_components/form/group";
+import FormInput from "@/app/_components/form/input";
 import FormServingFromSelector from "@/app/_components/form/serving-form-selector";
 import FormSlider from "@/app/_components/form/slider";
 import FormTextarea from "@/app/_components/form/textarea";
@@ -219,6 +220,12 @@ const ReviewForm = ({ beerId }: ReviewFormProps) => {
             possibleValues={durationValues}
           />
         </FormGroup>
+
+        <FormInput
+          label={t("reviewPage.overall.fields.price.label")}
+          field={fields.price}
+          type="number"
+        />
 
         <div className="grid w-full grid-cols-3 gap-4">
           <Button

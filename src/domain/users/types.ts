@@ -90,6 +90,7 @@ export type Review = {
   bitterness?: Bitterness;
   acidity?: Acidity;
   duration?: Duration;
+  price?: number;
   user: {
     username: string;
   };
