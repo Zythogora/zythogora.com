@@ -13,6 +13,7 @@ import type {
   Haziness,
   HeadRetention,
   LabelDesign,
+  PurchaseLocations,
   Reviews,
   ServingFrom,
   Styles,
@@ -70,6 +71,7 @@ export type RawReview = Reviews & {
     brewery: Breweries;
     style: Styles;
   };
+  purchaseLocation: PurchaseLocations | null;
 };
 
 export type Review = {
@@ -91,6 +93,9 @@ export type Review = {
   acidity?: Acidity;
   duration?: Duration;
   price?: number;
+  purchaseLocation?: Omit<PurchaseLocations, "additionalInformation"> & {
+    additionalInformation?: string;
+  };
   user: {
     username: string;
   };

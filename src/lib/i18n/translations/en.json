@@ -512,6 +512,11 @@
           "label": "Best before date (BBD / DLC)",
           "value": "BBD / DLC: {date}"
         },
+        "purchaseInformation": {
+          "priceAndLocation": "Purchased for ${price} {purchaseType, select, ONLINE {on <link>{location}</link>} other {at {location}}}",
+          "priceOnly": "Purchased for ${price}",
+          "locationOnly": "Purchased {purchaseType, select, ONLINE {on <link>{location}</link>} other {at {location}}}"
+        },
         "comment": {
           "label": "Comment"
         },

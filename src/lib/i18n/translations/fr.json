@@ -509,6 +509,11 @@
           "label": "Date de durabilité minimale (DDM / DLC)",
           "value": "DDM / DLC : {date}"
         },
+        "purchaseInformation": {
+          "priceAndLocation": "Achetée {price}€ {purchaseType, select, ONLINE {sur <link>{location}</link>} other {à {location}}}",
+          "priceOnly": "Achetée {price}€",
+          "locationOnly": "Achetée {purchaseType, select, ONLINE {sur <link>{location}</link>} other {à {location}}}"
+        },
         "comment": {
           "label": "Commentaire"
         },
