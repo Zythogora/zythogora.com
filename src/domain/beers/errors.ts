@@ -69,3 +69,9 @@ export class FileUploadError extends BeerReviewError {
     super("Failed to upload file.");
   }
 }
+
+export class UnknownPurchaseLocationError extends BeerReviewError {
+  constructor() {
+    super("Unknown purchase location");
+  }
+}

@@ -119,3 +119,11 @@ enum Duration {
   @@map("duration")
   @@schema("public")
 }
+
+enum PurchaseType {
+  PHYSICAL_LOCATION
+  ONLINE
+
+  @@map("purchase_type")
+  @@schema("public")
+}

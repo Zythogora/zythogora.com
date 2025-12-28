@@ -42,6 +42,9 @@ model Reviews {
   duration             Duration?
   price                Decimal?              @map("price") @db.Decimal(7, 2)
 
+  purchaseLocationId String?            @map("purchase_location_id")
+  purchaseLocation   PurchaseLocations? @relation(fields: [purchaseLocationId], references: [id], onDelete: SetNull)
+
   beerId String @map("beer_id")
   beer   Beers  @relation(fields: [beerId], references: [id])
 
@@ -53,6 +56,18 @@ model Reviews {
 
   @@unique([slug, userId])
   @@map("reviews")
+  @@schema("public")
+}
+
+model PurchaseLocations {
+  id                    String       @id @default(nanoid())
+  type                  PurchaseType
+  description           String
+  additionalInformation String?      @map("additional_information")
+
+  reviews Reviews[]
+
+  @@map("purchase_locations")
   @@schema("public")
 }
 

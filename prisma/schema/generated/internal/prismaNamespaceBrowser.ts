@@ -63,6 +63,7 @@ export const ModelName = {
   Colors: 'Colors',
   Users: 'Users',
   Reviews: 'Reviews',
+  PurchaseLocations: 'PurchaseLocations',
   Friendships: 'Friendships',
   Friends: 'Friends',
   FriendRequests: 'FriendRequests'
@@ -258,6 +259,7 @@ export const ReviewsScalarFieldEnum = {
   acidity: 'acidity',
   duration: 'duration',
   price: 'price',
+  purchaseLocationId: 'purchaseLocationId',
   beerId: 'beerId',
   userId: 'userId',
   createdAt: 'createdAt',
@@ -265,6 +267,16 @@ export const ReviewsScalarFieldEnum = {
 } as const
 
 export type ReviewsScalarFieldEnum = (typeof ReviewsScalarFieldEnum)[keyof typeof ReviewsScalarFieldEnum]
+
+
+export const PurchaseLocationsScalarFieldEnum = {
+  id: 'id',
+  type: 'type',
+  description: 'description',
+  additionalInformation: 'additionalInformation'
+} as const
+
+export type PurchaseLocationsScalarFieldEnum = (typeof PurchaseLocationsScalarFieldEnum)[keyof typeof PurchaseLocationsScalarFieldEnum]
 
 
 export const FriendshipsScalarFieldEnum = {
@@ -446,11 +458,21 @@ export const ReviewsOrderByRelevanceFieldEnum = {
   slug: 'slug',
   comment: 'comment',
   pictureUrl: 'pictureUrl',
+  purchaseLocationId: 'purchaseLocationId',
   beerId: 'beerId',
   userId: 'userId'
 } as const
 
 export type ReviewsOrderByRelevanceFieldEnum = (typeof ReviewsOrderByRelevanceFieldEnum)[keyof typeof ReviewsOrderByRelevanceFieldEnum]
+
+
+export const PurchaseLocationsOrderByRelevanceFieldEnum = {
+  id: 'id',
+  description: 'description',
+  additionalInformation: 'additionalInformation'
+} as const
+
+export type PurchaseLocationsOrderByRelevanceFieldEnum = (typeof PurchaseLocationsOrderByRelevanceFieldEnum)[keyof typeof PurchaseLocationsOrderByRelevanceFieldEnum]
 
 
 export const FriendshipsOrderByRelevanceFieldEnum = {

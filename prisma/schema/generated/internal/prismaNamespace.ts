@@ -396,6 +396,7 @@ export const ModelName = {
   Colors: 'Colors',
   Users: 'Users',
   Reviews: 'Reviews',
+  PurchaseLocations: 'PurchaseLocations',
   Friendships: 'Friendships',
   Friends: 'Friends',
   FriendRequests: 'FriendRequests'
@@ -414,7 +415,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "betterAuthUsers" | "sessions" | "accounts" | "verifications" | "beers" | "breweries" | "styleCategories" | "styles" | "legacyStyles" | "colors" | "users" | "reviews" | "friendships" | "friends" | "friendRequests"
+    modelProps: "betterAuthUsers" | "sessions" | "accounts" | "verifications" | "beers" | "breweries" | "styleCategories" | "styles" | "legacyStyles" | "colors" | "users" | "reviews" | "purchaseLocations" | "friendships" | "friends" | "friendRequests"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1306,6 +1307,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    PurchaseLocations: {
+      payload: Prisma.$PurchaseLocationsPayload<ExtArgs>
+      fields: Prisma.PurchaseLocationsFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PurchaseLocationsFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PurchaseLocationsPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PurchaseLocationsFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PurchaseLocationsPayload>
+        }
+        findFirst: {
+          args: Prisma.PurchaseLocationsFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PurchaseLocationsPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PurchaseLocationsFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PurchaseLocationsPayload>
+        }
+        findMany: {
+          args: Prisma.PurchaseLocationsFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PurchaseLocationsPayload>[]
+        }
+        create: {
+          args: Prisma.PurchaseLocationsCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PurchaseLocationsPayload>
+        }
+        createMany: {
+          args: Prisma.PurchaseLocationsCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.PurchaseLocationsCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PurchaseLocationsPayload>[]
+        }
+        delete: {
+          args: Prisma.PurchaseLocationsDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PurchaseLocationsPayload>
+        }
+        update: {
+          args: Prisma.PurchaseLocationsUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PurchaseLocationsPayload>
+        }
+        deleteMany: {
+          args: Prisma.PurchaseLocationsDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PurchaseLocationsUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.PurchaseLocationsUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PurchaseLocationsPayload>[]
+        }
+        upsert: {
+          args: Prisma.PurchaseLocationsUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PurchaseLocationsPayload>
+        }
+        aggregate: {
+          args: Prisma.PurchaseLocationsAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePurchaseLocations>
+        }
+        groupBy: {
+          args: Prisma.PurchaseLocationsGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PurchaseLocationsGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PurchaseLocationsCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PurchaseLocationsCountAggregateOutputType> | number
+        }
+      }
+    }
     Friendships: {
       payload: Prisma.$FriendshipsPayload<ExtArgs>
       fields: Prisma.FriendshipsFieldRefs
@@ -1741,6 +1816,7 @@ export const ReviewsScalarFieldEnum = {
   acidity: 'acidity',
   duration: 'duration',
   price: 'price',
+  purchaseLocationId: 'purchaseLocationId',
   beerId: 'beerId',
   userId: 'userId',
   createdAt: 'createdAt',
@@ -1748,6 +1824,16 @@ export const ReviewsScalarFieldEnum = {
 } as const
 
 export type ReviewsScalarFieldEnum = (typeof ReviewsScalarFieldEnum)[keyof typeof ReviewsScalarFieldEnum]
+
+
+export const PurchaseLocationsScalarFieldEnum = {
+  id: 'id',
+  type: 'type',
+  description: 'description',
+  additionalInformation: 'additionalInformation'
+} as const
+
+export type PurchaseLocationsScalarFieldEnum = (typeof PurchaseLocationsScalarFieldEnum)[keyof typeof PurchaseLocationsScalarFieldEnum]
 
 
 export const FriendshipsScalarFieldEnum = {
@@ -1929,11 +2015,21 @@ export const ReviewsOrderByRelevanceFieldEnum = {
   slug: 'slug',
   comment: 'comment',
   pictureUrl: 'pictureUrl',
+  purchaseLocationId: 'purchaseLocationId',
   beerId: 'beerId',
   userId: 'userId'
 } as const
 
 export type ReviewsOrderByRelevanceFieldEnum = (typeof ReviewsOrderByRelevanceFieldEnum)[keyof typeof ReviewsOrderByRelevanceFieldEnum]
+
+
+export const PurchaseLocationsOrderByRelevanceFieldEnum = {
+  id: 'id',
+  description: 'description',
+  additionalInformation: 'additionalInformation'
+} as const
+
+export type PurchaseLocationsOrderByRelevanceFieldEnum = (typeof PurchaseLocationsOrderByRelevanceFieldEnum)[keyof typeof PurchaseLocationsOrderByRelevanceFieldEnum]
 
 
 export const FriendshipsOrderByRelevanceFieldEnum = {
@@ -2213,6 +2309,20 @@ export type ListEnumDurationFieldRefInput<$PrismaModel> = FieldRefInputType<$Pri
 
 
 /**
+ * Reference to a field of type 'PurchaseType'
+ */
+export type EnumPurchaseTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PurchaseType'>
+    
+
+
+/**
+ * Reference to a field of type 'PurchaseType[]'
+ */
+export type ListEnumPurchaseTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PurchaseType[]'>
+    
+
+
+/**
  * Reference to a field of type 'FriendRequestStatus'
  */
 export type EnumFriendRequestStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FriendRequestStatus'>
@@ -2332,6 +2442,7 @@ export type GlobalOmitConfig = {
   colors?: Prisma.ColorsOmit
   users?: Prisma.UsersOmit
   reviews?: Prisma.ReviewsOmit
+  purchaseLocations?: Prisma.PurchaseLocationsOmit
   friendships?: Prisma.FriendshipsOmit
   friends?: Prisma.FriendsOmit
   friendRequests?: Prisma.FriendRequestsOmit

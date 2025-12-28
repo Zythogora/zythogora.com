@@ -110,6 +110,17 @@
       "colorSelect": {
         "searchPlaceholder": "Search for a color",
         "noResult": "No color found"
+      },
+      "purchaseType": {
+        "label": "Purchase type",
+        "physicalLocation": "Location",
+        "online": "Online"
+      },
+      "purchaseLocation": {
+        "searchPlaceholder": "Search for a purchase location",
+        "noResult": "No purchase location found",
+        "pending": "Searching...",
+        "attribution": "Powered by Google Maps"
       }
     },
     "errors": {
@@ -632,6 +643,9 @@
         }
       }
     },
+    "other": {
+      "title": "Additional information"
+    },
     "actions": {
       "share": "Share"
     }
@@ -647,6 +661,7 @@
       "EXPLICIT_CONTENT": "The image contains explicit content and cannot be published",
       "IMAGE_OPTIMIZATION": "An error occurred while processing the image",
       "FILE_UPLOAD": "An error occurred while uploading the image",
+      "UNKNOWN_PURCHASE_LOCATION": "The purchase location is unknown",
       "SOMETHING_WENT_WRONG": "An error occurred while submitting the review"
     }
   },

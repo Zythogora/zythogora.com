@@ -110,6 +110,17 @@
       "colorSelect": {
         "searchPlaceholder": "Rechercher une couleur",
         "noResult": "Aucune couleur trouvée"
+      },
+      "purchaseType": {
+        "label": "Lieu d'achat",
+        "physicalLocation": "Point de vente",
+        "online": "En ligne"
+      },
+      "purchaseLocation": {
+        "searchPlaceholder": "Rechercher un point de vente",
+        "noResult": "Aucun point de vente trouvé",
+        "pending": "Recherche...",
+        "attribution": "Données fournies par Google Maps"
       }
     },
     "errors": {
@@ -629,6 +640,9 @@
         }
       }
     },
+    "other": {
+      "title": "Informations complémentaires"
+    },
     "actions": {
       "share": "Partager"
     }
@@ -644,6 +658,7 @@
       "EXPLICIT_CONTENT": "La photo contient du contenu explicite et ne peut pas être publiée",
       "IMAGE_OPTIMIZATION": "Une erreur est survenue lors du traitement de la photo",
       "FILE_UPLOAD": "Une erreur est survenue lors du téléchargement de la photo",
+      "UNKNOWN_PURCHASE_LOCATION": "Le point de vente est inconnu",
       "SOMETHING_WENT_WRONG": "Une erreur est survenue lors de la publication de la critique"
     }
   },

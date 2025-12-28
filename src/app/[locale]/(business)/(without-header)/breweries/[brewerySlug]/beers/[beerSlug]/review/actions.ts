@@ -10,6 +10,7 @@ import {
   ExplicitContentError,
   FileUploadError,
   ImageOptimizationError,
+  UnknownPurchaseLocationError,
 } from "@/domain/beers/errors";
 import { getCurrentUser } from "@/lib/auth";
 import { redirect } from "@/lib/i18n";
@@ -44,12 +45,10 @@ export const reviewAction = async (
     });
   }
 
-  const { beerId, ...review } = submission.value;
-
   let createdReview;
 
   try {
-    createdReview = await reviewBeer(beerId, review);
+    createdReview = await reviewBeer(submission.value.beerId, submission.value);
   } catch (error) {
     if (error instanceof ExplicitContentCheckError) {
       return submission.reply({
@@ -83,6 +82,17 @@ export const reviewAction = async (
         resetForm: false,
         fieldErrors: {
           picture: ["createReviewPage.errors.FILE_UPLOAD"],
+        },
+      });
+    }
+
+    if (error instanceof UnknownPurchaseLocationError) {
+      return submission.reply({
+        resetForm: false,
+        fieldErrors: {
+          purchaseLocationId: [
+            "createReviewPage.errors.UNKNOWN_PURCHASE_LOCATION",
+          ],
         },
       });
     }
