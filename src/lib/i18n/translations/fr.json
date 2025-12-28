@@ -96,6 +96,9 @@
         "searchPlaceholder": "Rechercher un pays",
         "noResult": "Aucun pays trouvé"
       },
+      "currencySelect": {
+        "noResult": "Aucune devise trouvée"
+      },
       "brewerySelect": {
         "searchPlaceholder": "Rechercher une brasserie",
         "noResult": "Aucune brasserie trouvée",
@@ -127,6 +130,8 @@
       "FIELD_REQUIRED": "Ce champ est requis",
       "STRING_INVALID": "La valeur doit être une chaîne de caractères",
       "NUMBER_INVALID": "La valeur doit être un nombre",
+      "NEGATIVE_PRICE": "Le prix ne peut pas être négatif",
+      "PRICE_TOO_HIGH": "Le prix ne peut pas être supérieur à 9 999 999 999,99",
       "ENUM_INVALID": "La valeur est inconnue",
       "EMAIL_INVALID": "L'email est invalide",
       "PHONE_NUMBER_INVALID": "Le numéro de téléphone ne correspond pas au pays sélectionné ou n'a pas d'indicatif international",
@@ -510,8 +515,8 @@
           "value": "DDM / DLC : {date}"
         },
         "purchaseInformation": {
-          "priceAndLocation": "Achetée {price}€ {purchaseType, select, ONLINE {sur <link>{location}</link>} other {à {location}}}",
-          "priceOnly": "Achetée {price}€",
+          "priceAndLocation": "Achetée {price} {purchaseType, select, ONLINE {sur <link>{location}</link>} other {à {location}}}",
+          "priceOnly": "Achetée {price}",
           "locationOnly": "Achetée {purchaseType, select, ONLINE {sur <link>{location}</link>} other {à {location}}}"
         },
         "comment": {

@@ -92,7 +92,6 @@ export type Review = {
   bitterness?: Bitterness;
   acidity?: Acidity;
   duration?: Duration;
-  price?: number;
   purchaseLocation?: Omit<PurchaseLocations, "additionalInformation"> & {
     additionalInformation?: string;
   };
@@ -117,7 +116,10 @@ export type Review = {
   hasNose: boolean;
   hasTaste: boolean;
   hasFinish: boolean;
-};
+} & (
+  | { price: undefined; priceCurrency: undefined }
+  | { price: number; priceCurrency: string }
+);
 
 export type UserCountryStats = {
   countryCode: string;

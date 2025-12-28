@@ -8,7 +8,7 @@ import {
 } from "@conform-to/react";
 import { parseWithZod } from "@conform-to/zod/v4";
 import { getZodConstraint } from "@conform-to/zod/v4";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useActionState, useEffect, useState, useTransition } from "react";
 import { toast } from "sonner";
 
@@ -38,13 +38,14 @@ import FormFiveStepSelector from "@/app/_components/form/five-step-selector";
 import FormGroup from "@/app/_components/form/group";
 import FormInput from "@/app/_components/form/input";
 import FormLabeledSwitch from "@/app/_components/form/labeled-switch";
+import FormPriceInput from "@/app/_components/form/price-input";
 import FormServingFromSelector from "@/app/_components/form/serving-form-selector";
 import FormSlider from "@/app/_components/form/slider";
 import FormTextarea from "@/app/_components/form/textarea";
 import QueryClientProvider from "@/app/_components/providers/query-client-provider";
 import Button from "@/app/_components/ui/button";
 import FormError from "@/app/_components/ui/form-error";
-import { usePathname, useRouter } from "@/lib/i18n";
+import { usePathname, useRouter, type Locale } from "@/lib/i18n";
 
 interface ReviewFormProps {
   beerId: string;
@@ -52,6 +53,7 @@ interface ReviewFormProps {
 
 const ReviewForm = ({ beerId }: ReviewFormProps) => {
   const t = useTranslations();
+  const locale = useLocale() as Locale;
 
   const router = useRouter();
   const pathname = usePathname();
@@ -65,11 +67,18 @@ const ReviewForm = ({ beerId }: ReviewFormProps) => {
   const { getSessionToken } = useGoogleAutocompleteSession();
 
   const [form, fields] = useForm({
-    defaultValue: { beerId, googlePlacesSessionToken: getSessionToken() },
+    defaultValue: {
+      beerId,
+      googlePlacesSessionToken: getSessionToken(),
+      priceCurrency: { fr: "EUR", en: "USD" }[locale],
+    },
 
     lastResult,
 
-    constraint: getZodConstraint(reviewSchema),
+    constraint: {
+      ...getZodConstraint(reviewSchema),
+      purchaseType: { required: false },
+    },
 
     onValidate({ formData }) {
       return parseWithZod(formData, { schema: reviewSchema });
@@ -244,9 +253,9 @@ const ReviewForm = ({ beerId }: ReviewFormProps) => {
           <FormGroup
             formId={form.id}
             label={t("reviewPage.other.title")}
-            className="grid grid-cols-1 items-end gap-x-12 @3xl:grid-cols-4"
+            className="grid grid-cols-1 items-end gap-x-12 @3xl:grid-cols-3"
           >
-            <div className="flex flex-col gap-y-1 @3xl:col-span-3">
+            <div className="flex flex-col gap-y-1 @3xl:col-span-2">
               <FormLabeledSwitch
                 label={t("form.fields.purchaseType.label")}
                 field={fields.purchaseType}
@@ -276,15 +285,14 @@ const ReviewForm = ({ beerId }: ReviewFormProps) => {
               ) : null}
             </div>
 
-            <FormInput
+            <FormPriceInput
               label={t("reviewPage.overall.fields.price.label")}
-              field={fields.price}
-              type="number"
-              className="@3xl:col-span-1"
+              priceField={fields.price}
+              currencyField={fields.priceCurrency}
             />
           </FormGroup>
 
-          <div className="grid w-full grid-cols-3 gap-4">
+          <div className="grid w-full grid-cols-3 gap-x-12 gap-y-4">
             <Button
               type="reset"
               onClick={handleCancel}

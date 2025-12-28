@@ -259,6 +259,7 @@ export const ReviewsScalarFieldEnum = {
   acidity: 'acidity',
   duration: 'duration',
   price: 'price',
+  priceCurrency: 'priceCurrency',
   purchaseLocationId: 'purchaseLocationId',
   beerId: 'beerId',
   userId: 'userId',
@@ -458,6 +459,7 @@ export const ReviewsOrderByRelevanceFieldEnum = {
   slug: 'slug',
   comment: 'comment',
   pictureUrl: 'pictureUrl',
+  priceCurrency: 'priceCurrency',
   purchaseLocationId: 'purchaseLocationId',
   beerId: 'beerId',
   userId: 'userId'

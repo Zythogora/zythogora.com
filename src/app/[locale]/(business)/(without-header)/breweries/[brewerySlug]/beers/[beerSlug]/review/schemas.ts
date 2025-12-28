@@ -176,15 +176,17 @@ const reviewBaseSchema = z.object({
 
   duration: z.enum(durationValues).optional(),
 
-  price: z
+  price: z.coerce
     .number({
       error: (issue) =>
         issue.input === undefined
           ? "form.errors.FIELD_REQUIRED"
           : "form.errors.NUMBER_INVALID",
     })
-    .min(0)
+    .min(0, { error: "form.errors.NEGATIVE_PRICE" })
+    .max(9_999_999_999.99, { error: "form.errors.PRICE_TOO_HIGH" })
     .optional(),
+  priceCurrency: z.string(),
 });
 
 const reviewPhysicalLocationSchema = z.object({

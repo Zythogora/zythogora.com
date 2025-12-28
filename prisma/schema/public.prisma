@@ -40,7 +40,8 @@ model Reviews {
   bitterness           Bitterness?
   acidity              Acidity?
   duration             Duration?
-  price                Decimal?              @map("price") @db.Decimal(7, 2)
+  price                Decimal?              @map("price") @db.Decimal(12, 2)
+  priceCurrency        String?               @map("price_currency") @db.Char(3)
 
   purchaseLocationId String?            @map("purchase_location_id")
   purchaseLocation   PurchaseLocations? @relation(fields: [purchaseLocationId], references: [id], onDelete: SetNull)

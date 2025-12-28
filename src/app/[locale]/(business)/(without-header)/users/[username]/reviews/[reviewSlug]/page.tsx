@@ -264,7 +264,10 @@ const UserReviewPage = async ({
                   ? t.rich(
                       "reviewPage.overall.fields.purchaseInformation.priceAndLocation",
                       {
-                        price: formatter.number(review.price),
+                        price: formatter.number(review.price, {
+                          style: "currency",
+                          currency: review.priceCurrency,
+                        }),
                         location: getFormattedPurchaseLocation(
                           review.purchaseLocation,
                         ),
@@ -300,7 +303,12 @@ const UserReviewPage = async ({
                     : review.price
                       ? t(
                           "reviewPage.overall.fields.purchaseInformation.priceOnly",
-                          { price: formatter.number(review.price) },
+                          {
+                            price: formatter.number(review.price, {
+                              style: "currency",
+                              currency: review.priceCurrency,
+                            }),
+                          },
                         )
                       : null}
               </p>

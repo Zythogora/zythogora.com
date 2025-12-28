@@ -96,6 +96,9 @@
         "searchPlaceholder": "Search for a country",
         "noResult": "No country found"
       },
+      "currencySelect": {
+        "noResult": "No currency found"
+      },
       "brewerySelect": {
         "searchPlaceholder": "Search for a brewery",
         "noResult": "No brewery found",
@@ -127,6 +130,8 @@
       "FIELD_REQUIRED": "This field is required",
       "STRING_INVALID": "The value must be a string",
       "NUMBER_INVALID": "The value must be a number",
+      "NEGATIVE_PRICE": "The price cannot be negative",
+      "PRICE_TOO_HIGH": "The price cannot be greater than 9.999.999.999,99",
       "ENUM_INVALID": "The value is unknown",
       "EMAIL_INVALID": "The email is invalid",
       "PHONE_NUMBER_INVALID": "The phone number does not match the selected country or has no international prefix",
@@ -513,8 +518,8 @@
           "value": "BBD / DLC: {date}"
         },
         "purchaseInformation": {
-          "priceAndLocation": "Purchased for ${price} {purchaseType, select, ONLINE {on <link>{location}</link>} other {at {location}}}",
-          "priceOnly": "Purchased for ${price}",
+          "priceAndLocation": "Purchased for {price} {purchaseType, select, ONLINE {on <link>{location}</link>} other {at {location}}}",
+          "priceOnly": "Purchased for {price}",
           "locationOnly": "Purchased {purchaseType, select, ONLINE {on <link>{location}</link>} other {at {location}}}"
         },
         "comment": {

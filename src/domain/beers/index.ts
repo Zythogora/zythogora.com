@@ -427,6 +427,7 @@ export const reviewBeer = async (beerId: string, review: CreateReviewData) => {
 
       purchaseLocationId: purchaseLocation?.id,
       price: review.price,
+      priceCurrency: review.price ? review.priceCurrency : undefined,
     },
     include: { beer: { include: { brewery: true } } },
   });
