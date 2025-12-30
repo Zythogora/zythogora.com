@@ -16,7 +16,7 @@ import { redirect } from "@/lib/i18n";
 import { Routes } from "@/lib/routes";
 import { generatePath } from "@/lib/routes/utils";
 
-export const reviewAction = async (
+export const publishReviewAction = async (
   pathname: string,
   previousState: unknown,
   formData: FormData,

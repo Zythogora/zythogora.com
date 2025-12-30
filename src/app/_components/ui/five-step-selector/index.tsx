@@ -10,20 +10,24 @@ import type { CSSProperties } from "react";
 
 interface FiveStepSelectorProps extends Omit<
   ComponentProps<typeof RadioGroup.Root>,
-  "value" | "defaultValue" | "onValueChange"
+  "defaultValue" | "onValueChange" | "value"
 > {
+  defaultValue?: number;
   onValueChange?: (value: number) => void;
   className?: string;
 }
 
 const FiveStepSelector = ({
   className,
+  defaultValue,
   onValueChange,
   ...restProps
 }: FiveStepSelectorProps) => {
   const possibleValues = useMemo(() => [...Array(5)].map((_, i) => i), []);
 
-  const [selectedValue, setSelectedValue] = useState<number | undefined>();
+  const [selectedValue, setSelectedValue] = useState<number | undefined>(
+    defaultValue,
+  );
 
   const handleValueChange = (value: string) => {
     const parsedValue = Number(value);
@@ -36,12 +40,13 @@ const FiveStepSelector = ({
       data-slot="selector"
       {...restProps}
       value={`${selectedValue}`}
+      defaultValue={`${defaultValue}`}
       onValueChange={handleValueChange}
       loop={false}
       className={cn(
         "border-foreground relative flex h-12 w-full grow touch-none items-center justify-between gap-x-2 rounded-full border-2 p-3 pl-5 select-none",
         "bg-background dark:bg-stone-700",
-        "data-[disabled]:opacity-50",
+        "data-disabled:opacity-50",
         "before:bg-foreground before:absolute before:inset-0 before:-bottom-1 before:z-[-1] before:rounded-full",
         "has-focus-visible:outline-primary! has-focus-visible:outline-3!",
         className,
@@ -55,7 +60,7 @@ const FiveStepSelector = ({
               selectedValue ? possibleValue <= selectedValue : false
             }
             className={cn(
-              "size-[calc(theme(spacing.2)+theme(spacing.1)*var(--selector-step-index))] shrink-0 cursor-pointer rounded-full",
+              "size-[calc(--spacing(2)+(--spacing(1))*var(--selector-step-index))] shrink-0 cursor-pointer rounded-full",
               "bg-foreground/10 data-[state=checked]:bg-primary data-[progress-checked=true]:bg-primary",
               "hover:outline-foreground hover:outline-3",
               "focus-visible:outline-foreground focus-visible:outline-3",
@@ -77,7 +82,7 @@ const FiveStepSelector = ({
               }
               className={cn(
                 "h-[calc(2px+0.75px*var(--selector-separator-index))] grow rounded-full",
-                "data-[progress-checked=false]:bg-foreground/10 from-transparent to-transparent data-[progress-checked=true]:bg-gradient-to-r",
+                "data-[progress-checked=false]:bg-foreground/10 from-transparent to-transparent data-[progress-checked=true]:bg-linear-to-r",
               )}
               style={
                 {

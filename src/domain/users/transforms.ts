@@ -1,6 +1,9 @@
 "server only";
 
-import { transformRawColorToColor } from "@/domain/beers/transforms";
+import {
+  transformRawBeerToBeer,
+  transformRawColorToColor,
+} from "@/domain/beers/transforms";
 import type {
   RawUserReview,
   RawUser,
@@ -72,7 +75,9 @@ export const transformRawUserReviewToUserReview = async (
   };
 };
 
-export const transformRawReviewToReview = (rawReview: RawReview): Review => {
+export const transformRawReviewToReview = async (
+  rawReview: RawReview,
+): Promise<Review> => {
   return {
     id: rawReview.id,
     slug: rawReview.slug,
@@ -95,19 +100,7 @@ export const transformRawReviewToReview = (rawReview: RawReview): Review => {
       id: rawReview.user.id,
       username: rawReview.user.username,
     },
-    beer: {
-      id: rawReview.beer.id,
-      slug: rawReview.beer.slug,
-      name: rawReview.beer.name,
-      abv: rawReview.beer.abv,
-      ibu: rawReview.beer.ibu ?? undefined,
-      style: rawReview.beer.style.name,
-      brewery: {
-        id: rawReview.beer.brewery.id,
-        slug: rawReview.beer.brewery.slug,
-        name: rawReview.beer.brewery.name,
-      },
-    },
+    beer: await transformRawBeerToBeer(rawReview.beer),
     createdAt: rawReview.createdAt,
     hasAppearance: reviewHasAppearance(rawReview),
     hasNose: reviewHasNose(rawReview),

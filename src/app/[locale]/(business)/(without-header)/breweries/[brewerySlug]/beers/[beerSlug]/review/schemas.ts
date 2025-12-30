@@ -171,4 +171,4 @@ export const reviewSchema = z.object({
   duration: z.enum(durationValues).optional(),
 });
 
-export type CreateReviewData = z.infer<typeof reviewSchema>;
+export type ReviewActionData = Omit<z.infer<typeof reviewSchema>, "beerId">;
