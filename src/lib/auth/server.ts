@@ -86,6 +86,13 @@ export const auth = betterAuth({
     cookiePrefix: config.auth.cookiePrefix,
   },
 
+  socialProviders: {
+    google: {
+      clientId: config.auth.google.clientId,
+      clientSecret: config.auth.google.clientSecret,
+    },
+  },
+
   // Email/Password provider
   emailAndPassword: {
     enabled: true,

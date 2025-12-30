@@ -51,6 +51,8 @@ export const serverSideSchema = z.object({
   COOKIE_PREFIX: z.string(),
   HASH_PEPPER_SECRET: z.string(),
   AVAILABLE_PROVIDERS: parseArray,
+  GOOGLE_CLIENT_ID: z.string(),
+  GOOGLE_CLIENT_SECRET: z.string(),
 });
 
 export const clientSideSchema = z.object({

@@ -36,6 +36,10 @@ const loadConfig = () => {
         pepper: env.HASH_PEPPER_SECRET,
       },
       availableProviders: env.AVAILABLE_PROVIDERS,
+      google: {
+        clientId: env.GOOGLE_CLIENT_ID,
+        clientSecret: env.GOOGLE_CLIENT_SECRET,
+      },
     },
     supabase: {
       storageUrl: env.SUPABASE_STORAGE_URL,
