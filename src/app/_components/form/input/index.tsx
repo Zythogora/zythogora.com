@@ -9,7 +9,7 @@ import { cn } from "@/lib/tailwind";
 import type { FieldMetadata } from "@conform-to/react";
 
 interface FormInputProps {
-  label: string;
+  label?: string;
   type: Parameters<typeof getInputProps>[1]["type"];
   field: FieldMetadata;
   placeholder?: string;
@@ -29,9 +29,11 @@ const FormInput = ({
     <div
       className={cn("group/form-component", "flex flex-col gap-y-1", className)}
     >
-      <Label htmlFor={field.id} required={field.required}>
-        {label}
-      </Label>
+      {label ? (
+        <Label htmlFor={field.id} required={field.required}>
+          {label}
+        </Label>
+      ) : null}
 
       <div>
         <Input

@@ -3,7 +3,7 @@
 import { nanoid } from "nanoid";
 import { cache } from "react";
 
-import type { Prisma } from "@db/client";
+import { PurchaseType, type Prisma } from "@db/client";
 
 import type { CreateReviewData } from "@/app/[locale]/(business)/(without-header)/breweries/[brewerySlug]/beers/[beerSlug]/review/schemas";
 import type { CreateBeerData } from "@/app/[locale]/(business)/(without-header)/create/beer/schemas";
@@ -17,6 +17,7 @@ import {
   FileUploadError,
   ImageOptimizationError,
   ExplicitContentCheckError,
+  UnknownPurchaseLocationError,
 } from "@/domain/beers/errors";
 import {
   transformRawBeerReviewToBeerReview,
@@ -30,6 +31,7 @@ import type {
   Color,
   StyleCategory,
 } from "@/domain/beers/types";
+import { getOrCreatePurchaseLocation } from "@/domain/reviews";
 import { transformRawBeerReviewToBeerReviewWithPicture } from "@/domain/reviews/transforms";
 import { getCurrentUser } from "@/lib/auth";
 import { config } from "@/lib/config";
@@ -43,6 +45,7 @@ import type {
   PaginatedResults,
   PaginationParams,
 } from "@/lib/pagination/types";
+import { UnknownPlaceError } from "@/lib/places/errors";
 import prisma, { getPrismaTransactionClient } from "@/lib/prisma";
 import { slugify } from "@/lib/prisma/utils";
 import { uploadFile } from "@/lib/storage";
@@ -286,6 +289,8 @@ export const createBeer = async (data: CreateBeerData) => {
       ibu: data.ibu,
       description: data.description,
       releaseYear: data.releaseYear,
+      organic: data.organic,
+      barrelAged: data.barrelAged,
       breweryId: data.breweryId,
       styleId: data.styleId,
       colorId: data.colorId,
@@ -298,10 +303,7 @@ export const createBeer = async (data: CreateBeerData) => {
   return beer;
 };
 
-export const reviewBeer = async (
-  beerId: string,
-  review: Omit<CreateReviewData, "beerId">,
-) => {
+export const reviewBeer = async (review: CreateReviewData) => {
   const user = await getCurrentUser();
 
   if (!user) {
@@ -309,7 +311,7 @@ export const reviewBeer = async (
   }
 
   const beer = await prisma.beers.findUnique({
-    where: { id: beerId },
+    where: { id: review.beerId },
   });
 
   if (!beer) {
@@ -379,11 +381,26 @@ export const reviewBeer = async (
     pictureUrl = `${config.supabase.storageUrl}/object/public/${bucketName}/${baseFileName}`;
   }
 
+  const purchaseLocation = await getOrCreatePurchaseLocation(
+    review,
+    user.id,
+  ).catch((error) => {
+    if (error instanceof UnknownPlaceError) {
+      console.error(
+        `Unknown purchase location: ${review.purchaseType === PurchaseType.PHYSICAL_LOCATION ? review.purchaseLocationId : ""}`,
+      );
+      throw new UnknownPurchaseLocationError();
+    }
+
+    console.error("Unknown error getting purchase location", error);
+    return undefined;
+  });
+
   const id = nanoid();
 
   const createdReview = await prisma.reviews.create({
     data: {
-      beerId,
+      beerId: review.beerId,
       userId: user.id,
 
       id,
@@ -408,6 +425,11 @@ export const reviewBeer = async (
       acidity: review.acidity,
 
       duration: review.duration,
+
+      purchaseLocationId: purchaseLocation?.id,
+      price: review.price,
+      priceCurrency:
+        review.price != undefined ? review.priceCurrency : undefined,
     },
     include: { beer: { include: { brewery: true } } },
   });

@@ -25,6 +25,7 @@ interface ColorSelectProps
   colors: Color[];
   onChange?: (value: Color) => void;
   searchPlaceholder?: string;
+  popoverId?: string;
 }
 
 const ColorSelect = ({
@@ -33,12 +34,15 @@ const ColorSelect = ({
   placeholder,
   searchPlaceholder,
   className,
+  popoverId,
   ...restProps
 }: ColorSelectProps) => {
   const t = useTranslations();
 
   const [open, setOpen] = useState(false);
   const [selectedColor, setSelectedColor] = useState<Color | null>(null);
+
+  const contentId = popoverId ? `${popoverId}-content` : undefined;
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -50,6 +54,7 @@ const ColorSelect = ({
           aria-expanded={open}
           role="combobox"
           value={selectedColor?.id}
+          aria-controls={contentId}
           className={cn(
             "group/color-select-trigger font-medium",
             "justify-between pr-4",
@@ -81,10 +86,11 @@ const ColorSelect = ({
       </PopoverTrigger>
 
       <PopoverContent
+        id={contentId}
         align="start"
         alignOffset={-2}
         sideOffset={8}
-        className="w-full max-w-[calc(100vw-theme(spacing.16))] min-w-[calc(var(--radix-popper-anchor-width)+theme(spacing.1))] p-0"
+        className="w-full max-w-[calc(100vw-(--spacing(16)))] min-w-[calc(var(--radix-popper-anchor-width)+(--spacing(1)))] p-0"
       >
         <Command
           data-slot="color-select"
@@ -127,7 +133,7 @@ const ColorSelect = ({
               "scroll-py-1 overflow-x-hidden overflow-y-auto rounded",
               "max-h-48",
               "bg-background dark:bg-stone-700",
-              "*:[&[cmdk-list-sizer]]:p-2",
+              "*:[[cmdk-list-sizer]]:p-2",
             )}
           >
             <Command.Empty className={cn("px-3 py-2", "text-sm md:text-base")}>

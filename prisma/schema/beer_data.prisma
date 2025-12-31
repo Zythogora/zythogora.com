@@ -6,6 +6,8 @@ model Beers {
   ibu         Int?
   description String?
   releaseYear Int?    @map("release_year")
+  organic     Boolean @default(false)
+  barrelAged  Boolean @default(false) @map("barrel_aged")
 
   breweryId String    @map("brewery_id")
   brewery   Breweries @relation(fields: [breweryId], references: [id])

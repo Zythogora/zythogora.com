@@ -96,6 +96,9 @@
         "searchPlaceholder": "Rechercher un pays",
         "noResult": "Aucun pays trouvé"
       },
+      "currencySelect": {
+        "noResult": "Aucune devise trouvée"
+      },
       "brewerySelect": {
         "searchPlaceholder": "Rechercher une brasserie",
         "noResult": "Aucune brasserie trouvée",
@@ -110,12 +113,25 @@
       "colorSelect": {
         "searchPlaceholder": "Rechercher une couleur",
         "noResult": "Aucune couleur trouvée"
+      },
+      "purchaseType": {
+        "label": "Lieu d'achat",
+        "physicalLocation": "Point de vente",
+        "online": "En ligne"
+      },
+      "purchaseLocation": {
+        "searchPlaceholder": "Rechercher un point de vente",
+        "noResult": "Aucun point de vente trouvé",
+        "pending": "Recherche...",
+        "attribution": "Données fournies par Google Maps"
       }
     },
     "errors": {
       "FIELD_REQUIRED": "Ce champ est requis",
       "STRING_INVALID": "La valeur doit être une chaîne de caractères",
       "NUMBER_INVALID": "La valeur doit être un nombre",
+      "NEGATIVE_PRICE": "Le prix ne peut pas être négatif",
+      "PRICE_TOO_HIGH": "Le prix ne peut pas être supérieur à 9 999 999 999,99",
       "ENUM_INVALID": "La valeur est inconnue",
       "EMAIL_INVALID": "L'email est invalide",
       "PHONE_NUMBER_INVALID": "Le numéro de téléphone ne correspond pas au pays sélectionné ou n'a pas d'indicatif international",
@@ -498,11 +514,19 @@
           "label": "Date de durabilité minimale (DDM / DLC)",
           "value": "DDM / DLC : {date}"
         },
+        "purchaseInformation": {
+          "priceAndLocation": "Achetée {price} {purchaseType, select, ONLINE {sur <link>{location}</link>} other {à {location}}}",
+          "priceOnly": "Achetée {price}",
+          "locationOnly": "Achetée {purchaseType, select, ONLINE {sur <link>{location}</link>} other {à {location}}}"
+        },
         "comment": {
           "label": "Commentaire"
         },
         "picture": {
           "label": "Photo"
+        },
+        "price": {
+          "label": "Prix"
         }
       }
     },
@@ -626,6 +650,9 @@
         }
       }
     },
+    "other": {
+      "title": "Informations complémentaires"
+    },
     "actions": {
       "share": "Partager"
     }
@@ -641,6 +668,7 @@
       "EXPLICIT_CONTENT": "La photo contient du contenu explicite et ne peut pas être publiée",
       "IMAGE_OPTIMIZATION": "Une erreur est survenue lors du traitement de la photo",
       "FILE_UPLOAD": "Une erreur est survenue lors du téléchargement de la photo",
+      "UNKNOWN_PURCHASE_LOCATION": "Le point de vente est inconnu",
       "SOMETHING_WENT_WRONG": "Une erreur est survenue lors de la publication de la critique"
     }
   },
@@ -670,6 +698,12 @@
       },
       "description": {
         "label": "Description"
+      },
+      "organic": {
+        "label": "Bio"
+      },
+      "barrelAged": {
+        "label": "Vieillie en fût"
       }
     },
     "actions": {

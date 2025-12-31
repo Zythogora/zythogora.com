@@ -30,10 +30,12 @@ export type AggregateReviews = {
 
 export type ReviewsAvgAggregateOutputType = {
   globalScore: runtime.Decimal | null
+  price: runtime.Decimal | null
 }
 
 export type ReviewsSumAggregateOutputType = {
   globalScore: runtime.Decimal | null
+  price: runtime.Decimal | null
 }
 
 export type ReviewsMinAggregateOutputType = {
@@ -54,6 +56,9 @@ export type ReviewsMinAggregateOutputType = {
   bitterness: $Enums.Bitterness | null
   acidity: $Enums.Acidity | null
   duration: $Enums.Duration | null
+  price: runtime.Decimal | null
+  priceCurrency: string | null
+  purchaseLocationId: string | null
   beerId: string | null
   userId: string | null
   createdAt: Date | null
@@ -78,6 +83,9 @@ export type ReviewsMaxAggregateOutputType = {
   bitterness: $Enums.Bitterness | null
   acidity: $Enums.Acidity | null
   duration: $Enums.Duration | null
+  price: runtime.Decimal | null
+  priceCurrency: string | null
+  purchaseLocationId: string | null
   beerId: string | null
   userId: string | null
   createdAt: Date | null
@@ -102,6 +110,9 @@ export type ReviewsCountAggregateOutputType = {
   bitterness: number
   acidity: number
   duration: number
+  price: number
+  priceCurrency: number
+  purchaseLocationId: number
   beerId: number
   userId: number
   createdAt: number
@@ -112,10 +123,12 @@ export type ReviewsCountAggregateOutputType = {
 
 export type ReviewsAvgAggregateInputType = {
   globalScore?: true
+  price?: true
 }
 
 export type ReviewsSumAggregateInputType = {
   globalScore?: true
+  price?: true
 }
 
 export type ReviewsMinAggregateInputType = {
@@ -136,6 +149,9 @@ export type ReviewsMinAggregateInputType = {
   bitterness?: true
   acidity?: true
   duration?: true
+  price?: true
+  priceCurrency?: true
+  purchaseLocationId?: true
   beerId?: true
   userId?: true
   createdAt?: true
@@ -160,6 +176,9 @@ export type ReviewsMaxAggregateInputType = {
   bitterness?: true
   acidity?: true
   duration?: true
+  price?: true
+  priceCurrency?: true
+  purchaseLocationId?: true
   beerId?: true
   userId?: true
   createdAt?: true
@@ -184,6 +203,9 @@ export type ReviewsCountAggregateInputType = {
   bitterness?: true
   acidity?: true
   duration?: true
+  price?: true
+  priceCurrency?: true
+  purchaseLocationId?: true
   beerId?: true
   userId?: true
   createdAt?: true
@@ -295,6 +317,9 @@ export type ReviewsGroupByOutputType = {
   bitterness: $Enums.Bitterness | null
   acidity: $Enums.Acidity | null
   duration: $Enums.Duration | null
+  price: runtime.Decimal | null
+  priceCurrency: string | null
+  purchaseLocationId: string | null
   beerId: string
   userId: string
   createdAt: Date
@@ -342,10 +367,14 @@ export type ReviewsWhereInput = {
   bitterness?: Prisma.EnumBitternessNullableFilter<"Reviews"> | $Enums.Bitterness | null
   acidity?: Prisma.EnumAcidityNullableFilter<"Reviews"> | $Enums.Acidity | null
   duration?: Prisma.EnumDurationNullableFilter<"Reviews"> | $Enums.Duration | null
+  price?: Prisma.DecimalNullableFilter<"Reviews"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceCurrency?: Prisma.StringNullableFilter<"Reviews"> | string | null
+  purchaseLocationId?: Prisma.StringNullableFilter<"Reviews"> | string | null
   beerId?: Prisma.StringFilter<"Reviews"> | string
   userId?: Prisma.StringFilter<"Reviews"> | string
   createdAt?: Prisma.DateTimeFilter<"Reviews"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Reviews"> | Date | string
+  purchaseLocation?: Prisma.XOR<Prisma.PurchaseLocationsNullableScalarRelationFilter, Prisma.PurchaseLocationsWhereInput> | null
   beer?: Prisma.XOR<Prisma.BeersScalarRelationFilter, Prisma.BeersWhereInput>
   user?: Prisma.XOR<Prisma.UsersScalarRelationFilter, Prisma.UsersWhereInput>
 }
@@ -368,10 +397,14 @@ export type ReviewsOrderByWithRelationInput = {
   bitterness?: Prisma.SortOrderInput | Prisma.SortOrder
   acidity?: Prisma.SortOrderInput | Prisma.SortOrder
   duration?: Prisma.SortOrderInput | Prisma.SortOrder
+  price?: Prisma.SortOrderInput | Prisma.SortOrder
+  priceCurrency?: Prisma.SortOrderInput | Prisma.SortOrder
+  purchaseLocationId?: Prisma.SortOrderInput | Prisma.SortOrder
   beerId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  purchaseLocation?: Prisma.PurchaseLocationsOrderByWithRelationInput
   beer?: Prisma.BeersOrderByWithRelationInput
   user?: Prisma.UsersOrderByWithRelationInput
   _relevance?: Prisma.ReviewsOrderByRelevanceInput
@@ -399,10 +432,14 @@ export type ReviewsWhereUniqueInput = Prisma.AtLeast<{
   bitterness?: Prisma.EnumBitternessNullableFilter<"Reviews"> | $Enums.Bitterness | null
   acidity?: Prisma.EnumAcidityNullableFilter<"Reviews"> | $Enums.Acidity | null
   duration?: Prisma.EnumDurationNullableFilter<"Reviews"> | $Enums.Duration | null
+  price?: Prisma.DecimalNullableFilter<"Reviews"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceCurrency?: Prisma.StringNullableFilter<"Reviews"> | string | null
+  purchaseLocationId?: Prisma.StringNullableFilter<"Reviews"> | string | null
   beerId?: Prisma.StringFilter<"Reviews"> | string
   userId?: Prisma.StringFilter<"Reviews"> | string
   createdAt?: Prisma.DateTimeFilter<"Reviews"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Reviews"> | Date | string
+  purchaseLocation?: Prisma.XOR<Prisma.PurchaseLocationsNullableScalarRelationFilter, Prisma.PurchaseLocationsWhereInput> | null
   beer?: Prisma.XOR<Prisma.BeersScalarRelationFilter, Prisma.BeersWhereInput>
   user?: Prisma.XOR<Prisma.UsersScalarRelationFilter, Prisma.UsersWhereInput>
 }, "id" | "slug_userId">
@@ -425,6 +462,9 @@ export type ReviewsOrderByWithAggregationInput = {
   bitterness?: Prisma.SortOrderInput | Prisma.SortOrder
   acidity?: Prisma.SortOrderInput | Prisma.SortOrder
   duration?: Prisma.SortOrderInput | Prisma.SortOrder
+  price?: Prisma.SortOrderInput | Prisma.SortOrder
+  priceCurrency?: Prisma.SortOrderInput | Prisma.SortOrder
+  purchaseLocationId?: Prisma.SortOrderInput | Prisma.SortOrder
   beerId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -457,6 +497,9 @@ export type ReviewsScalarWhereWithAggregatesInput = {
   bitterness?: Prisma.EnumBitternessNullableWithAggregatesFilter<"Reviews"> | $Enums.Bitterness | null
   acidity?: Prisma.EnumAcidityNullableWithAggregatesFilter<"Reviews"> | $Enums.Acidity | null
   duration?: Prisma.EnumDurationNullableWithAggregatesFilter<"Reviews"> | $Enums.Duration | null
+  price?: Prisma.DecimalNullableWithAggregatesFilter<"Reviews"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceCurrency?: Prisma.StringNullableWithAggregatesFilter<"Reviews"> | string | null
+  purchaseLocationId?: Prisma.StringNullableWithAggregatesFilter<"Reviews"> | string | null
   beerId?: Prisma.StringWithAggregatesFilter<"Reviews"> | string
   userId?: Prisma.StringWithAggregatesFilter<"Reviews"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Reviews"> | Date | string
@@ -481,8 +524,11 @@ export type ReviewsCreateInput = {
   bitterness?: $Enums.Bitterness | null
   acidity?: $Enums.Acidity | null
   duration?: $Enums.Duration | null
+  price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceCurrency?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  purchaseLocation?: Prisma.PurchaseLocationsCreateNestedOneWithoutReviewsInput
   beer: Prisma.BeersCreateNestedOneWithoutReviewsInput
   user: Prisma.UsersCreateNestedOneWithoutReviewsInput
 }
@@ -505,6 +551,9 @@ export type ReviewsUncheckedCreateInput = {
   bitterness?: $Enums.Bitterness | null
   acidity?: $Enums.Acidity | null
   duration?: $Enums.Duration | null
+  price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceCurrency?: string | null
+  purchaseLocationId?: string | null
   beerId: string
   userId: string
   createdAt?: Date | string
@@ -529,8 +578,11 @@ export type ReviewsUpdateInput = {
   bitterness?: Prisma.NullableEnumBitternessFieldUpdateOperationsInput | $Enums.Bitterness | null
   acidity?: Prisma.NullableEnumAcidityFieldUpdateOperationsInput | $Enums.Acidity | null
   duration?: Prisma.NullableEnumDurationFieldUpdateOperationsInput | $Enums.Duration | null
+  price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  purchaseLocation?: Prisma.PurchaseLocationsUpdateOneWithoutReviewsNestedInput
   beer?: Prisma.BeersUpdateOneRequiredWithoutReviewsNestedInput
   user?: Prisma.UsersUpdateOneRequiredWithoutReviewsNestedInput
 }
@@ -553,6 +605,9 @@ export type ReviewsUncheckedUpdateInput = {
   bitterness?: Prisma.NullableEnumBitternessFieldUpdateOperationsInput | $Enums.Bitterness | null
   acidity?: Prisma.NullableEnumAcidityFieldUpdateOperationsInput | $Enums.Acidity | null
   duration?: Prisma.NullableEnumDurationFieldUpdateOperationsInput | $Enums.Duration | null
+  price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  purchaseLocationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   beerId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -577,6 +632,9 @@ export type ReviewsCreateManyInput = {
   bitterness?: $Enums.Bitterness | null
   acidity?: $Enums.Acidity | null
   duration?: $Enums.Duration | null
+  price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceCurrency?: string | null
+  purchaseLocationId?: string | null
   beerId: string
   userId: string
   createdAt?: Date | string
@@ -601,6 +659,8 @@ export type ReviewsUpdateManyMutationInput = {
   bitterness?: Prisma.NullableEnumBitternessFieldUpdateOperationsInput | $Enums.Bitterness | null
   acidity?: Prisma.NullableEnumAcidityFieldUpdateOperationsInput | $Enums.Acidity | null
   duration?: Prisma.NullableEnumDurationFieldUpdateOperationsInput | $Enums.Duration | null
+  price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -623,6 +683,9 @@ export type ReviewsUncheckedUpdateManyInput = {
   bitterness?: Prisma.NullableEnumBitternessFieldUpdateOperationsInput | $Enums.Bitterness | null
   acidity?: Prisma.NullableEnumAcidityFieldUpdateOperationsInput | $Enums.Acidity | null
   duration?: Prisma.NullableEnumDurationFieldUpdateOperationsInput | $Enums.Duration | null
+  price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  purchaseLocationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   beerId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -668,6 +731,9 @@ export type ReviewsCountOrderByAggregateInput = {
   bitterness?: Prisma.SortOrder
   acidity?: Prisma.SortOrder
   duration?: Prisma.SortOrder
+  price?: Prisma.SortOrder
+  priceCurrency?: Prisma.SortOrder
+  purchaseLocationId?: Prisma.SortOrder
   beerId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -676,6 +742,7 @@ export type ReviewsCountOrderByAggregateInput = {
 
 export type ReviewsAvgOrderByAggregateInput = {
   globalScore?: Prisma.SortOrder
+  price?: Prisma.SortOrder
 }
 
 export type ReviewsMaxOrderByAggregateInput = {
@@ -696,6 +763,9 @@ export type ReviewsMaxOrderByAggregateInput = {
   bitterness?: Prisma.SortOrder
   acidity?: Prisma.SortOrder
   duration?: Prisma.SortOrder
+  price?: Prisma.SortOrder
+  priceCurrency?: Prisma.SortOrder
+  purchaseLocationId?: Prisma.SortOrder
   beerId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -720,6 +790,9 @@ export type ReviewsMinOrderByAggregateInput = {
   bitterness?: Prisma.SortOrder
   acidity?: Prisma.SortOrder
   duration?: Prisma.SortOrder
+  price?: Prisma.SortOrder
+  priceCurrency?: Prisma.SortOrder
+  purchaseLocationId?: Prisma.SortOrder
   beerId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -728,6 +801,7 @@ export type ReviewsMinOrderByAggregateInput = {
 
 export type ReviewsSumOrderByAggregateInput = {
   globalScore?: Prisma.SortOrder
+  price?: Prisma.SortOrder
 }
 
 export type ReviewsCreateNestedManyWithoutBeerInput = {
@@ -866,6 +940,56 @@ export type NullableEnumDurationFieldUpdateOperationsInput = {
   set?: $Enums.Duration | null
 }
 
+export type NullableDecimalFieldUpdateOperationsInput = {
+  set?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  increment?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  decrement?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  multiply?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
+}
+
+export type ReviewsCreateNestedManyWithoutPurchaseLocationInput = {
+  create?: Prisma.XOR<Prisma.ReviewsCreateWithoutPurchaseLocationInput, Prisma.ReviewsUncheckedCreateWithoutPurchaseLocationInput> | Prisma.ReviewsCreateWithoutPurchaseLocationInput[] | Prisma.ReviewsUncheckedCreateWithoutPurchaseLocationInput[]
+  connectOrCreate?: Prisma.ReviewsCreateOrConnectWithoutPurchaseLocationInput | Prisma.ReviewsCreateOrConnectWithoutPurchaseLocationInput[]
+  createMany?: Prisma.ReviewsCreateManyPurchaseLocationInputEnvelope
+  connect?: Prisma.ReviewsWhereUniqueInput | Prisma.ReviewsWhereUniqueInput[]
+}
+
+export type ReviewsUncheckedCreateNestedManyWithoutPurchaseLocationInput = {
+  create?: Prisma.XOR<Prisma.ReviewsCreateWithoutPurchaseLocationInput, Prisma.ReviewsUncheckedCreateWithoutPurchaseLocationInput> | Prisma.ReviewsCreateWithoutPurchaseLocationInput[] | Prisma.ReviewsUncheckedCreateWithoutPurchaseLocationInput[]
+  connectOrCreate?: Prisma.ReviewsCreateOrConnectWithoutPurchaseLocationInput | Prisma.ReviewsCreateOrConnectWithoutPurchaseLocationInput[]
+  createMany?: Prisma.ReviewsCreateManyPurchaseLocationInputEnvelope
+  connect?: Prisma.ReviewsWhereUniqueInput | Prisma.ReviewsWhereUniqueInput[]
+}
+
+export type ReviewsUpdateManyWithoutPurchaseLocationNestedInput = {
+  create?: Prisma.XOR<Prisma.ReviewsCreateWithoutPurchaseLocationInput, Prisma.ReviewsUncheckedCreateWithoutPurchaseLocationInput> | Prisma.ReviewsCreateWithoutPurchaseLocationInput[] | Prisma.ReviewsUncheckedCreateWithoutPurchaseLocationInput[]
+  connectOrCreate?: Prisma.ReviewsCreateOrConnectWithoutPurchaseLocationInput | Prisma.ReviewsCreateOrConnectWithoutPurchaseLocationInput[]
+  upsert?: Prisma.ReviewsUpsertWithWhereUniqueWithoutPurchaseLocationInput | Prisma.ReviewsUpsertWithWhereUniqueWithoutPurchaseLocationInput[]
+  createMany?: Prisma.ReviewsCreateManyPurchaseLocationInputEnvelope
+  set?: Prisma.ReviewsWhereUniqueInput | Prisma.ReviewsWhereUniqueInput[]
+  disconnect?: Prisma.ReviewsWhereUniqueInput | Prisma.ReviewsWhereUniqueInput[]
+  delete?: Prisma.ReviewsWhereUniqueInput | Prisma.ReviewsWhereUniqueInput[]
+  connect?: Prisma.ReviewsWhereUniqueInput | Prisma.ReviewsWhereUniqueInput[]
+  update?: Prisma.ReviewsUpdateWithWhereUniqueWithoutPurchaseLocationInput | Prisma.ReviewsUpdateWithWhereUniqueWithoutPurchaseLocationInput[]
+  updateMany?: Prisma.ReviewsUpdateManyWithWhereWithoutPurchaseLocationInput | Prisma.ReviewsUpdateManyWithWhereWithoutPurchaseLocationInput[]
+  deleteMany?: Prisma.ReviewsScalarWhereInput | Prisma.ReviewsScalarWhereInput[]
+}
+
+export type ReviewsUncheckedUpdateManyWithoutPurchaseLocationNestedInput = {
+  create?: Prisma.XOR<Prisma.ReviewsCreateWithoutPurchaseLocationInput, Prisma.ReviewsUncheckedCreateWithoutPurchaseLocationInput> | Prisma.ReviewsCreateWithoutPurchaseLocationInput[] | Prisma.ReviewsUncheckedCreateWithoutPurchaseLocationInput[]
+  connectOrCreate?: Prisma.ReviewsCreateOrConnectWithoutPurchaseLocationInput | Prisma.ReviewsCreateOrConnectWithoutPurchaseLocationInput[]
+  upsert?: Prisma.ReviewsUpsertWithWhereUniqueWithoutPurchaseLocationInput | Prisma.ReviewsUpsertWithWhereUniqueWithoutPurchaseLocationInput[]
+  createMany?: Prisma.ReviewsCreateManyPurchaseLocationInputEnvelope
+  set?: Prisma.ReviewsWhereUniqueInput | Prisma.ReviewsWhereUniqueInput[]
+  disconnect?: Prisma.ReviewsWhereUniqueInput | Prisma.ReviewsWhereUniqueInput[]
+  delete?: Prisma.ReviewsWhereUniqueInput | Prisma.ReviewsWhereUniqueInput[]
+  connect?: Prisma.ReviewsWhereUniqueInput | Prisma.ReviewsWhereUniqueInput[]
+  update?: Prisma.ReviewsUpdateWithWhereUniqueWithoutPurchaseLocationInput | Prisma.ReviewsUpdateWithWhereUniqueWithoutPurchaseLocationInput[]
+  updateMany?: Prisma.ReviewsUpdateManyWithWhereWithoutPurchaseLocationInput | Prisma.ReviewsUpdateManyWithWhereWithoutPurchaseLocationInput[]
+  deleteMany?: Prisma.ReviewsScalarWhereInput | Prisma.ReviewsScalarWhereInput[]
+}
+
 export type ReviewsCreateWithoutBeerInput = {
   id?: string
   slug: string
@@ -884,8 +1008,11 @@ export type ReviewsCreateWithoutBeerInput = {
   bitterness?: $Enums.Bitterness | null
   acidity?: $Enums.Acidity | null
   duration?: $Enums.Duration | null
+  price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceCurrency?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  purchaseLocation?: Prisma.PurchaseLocationsCreateNestedOneWithoutReviewsInput
   user: Prisma.UsersCreateNestedOneWithoutReviewsInput
 }
 
@@ -907,6 +1034,9 @@ export type ReviewsUncheckedCreateWithoutBeerInput = {
   bitterness?: $Enums.Bitterness | null
   acidity?: $Enums.Acidity | null
   duration?: $Enums.Duration | null
+  price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceCurrency?: string | null
+  purchaseLocationId?: string | null
   userId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -959,6 +1089,9 @@ export type ReviewsScalarWhereInput = {
   bitterness?: Prisma.EnumBitternessNullableFilter<"Reviews"> | $Enums.Bitterness | null
   acidity?: Prisma.EnumAcidityNullableFilter<"Reviews"> | $Enums.Acidity | null
   duration?: Prisma.EnumDurationNullableFilter<"Reviews"> | $Enums.Duration | null
+  price?: Prisma.DecimalNullableFilter<"Reviews"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceCurrency?: Prisma.StringNullableFilter<"Reviews"> | string | null
+  purchaseLocationId?: Prisma.StringNullableFilter<"Reviews"> | string | null
   beerId?: Prisma.StringFilter<"Reviews"> | string
   userId?: Prisma.StringFilter<"Reviews"> | string
   createdAt?: Prisma.DateTimeFilter<"Reviews"> | Date | string
@@ -983,8 +1116,11 @@ export type ReviewsCreateWithoutUserInput = {
   bitterness?: $Enums.Bitterness | null
   acidity?: $Enums.Acidity | null
   duration?: $Enums.Duration | null
+  price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceCurrency?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  purchaseLocation?: Prisma.PurchaseLocationsCreateNestedOneWithoutReviewsInput
   beer: Prisma.BeersCreateNestedOneWithoutReviewsInput
 }
 
@@ -1006,6 +1142,9 @@ export type ReviewsUncheckedCreateWithoutUserInput = {
   bitterness?: $Enums.Bitterness | null
   acidity?: $Enums.Acidity | null
   duration?: $Enums.Duration | null
+  price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceCurrency?: string | null
+  purchaseLocationId?: string | null
   beerId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1037,6 +1176,84 @@ export type ReviewsUpdateManyWithWhereWithoutUserInput = {
   data: Prisma.XOR<Prisma.ReviewsUpdateManyMutationInput, Prisma.ReviewsUncheckedUpdateManyWithoutUserInput>
 }
 
+export type ReviewsCreateWithoutPurchaseLocationInput = {
+  id?: string
+  slug: string
+  globalScore: runtime.Decimal | runtime.DecimalJsLike | number | string
+  servingFrom: $Enums.ServingFrom
+  bestBeforeDate?: Date | string | null
+  comment?: string | null
+  pictureUrl?: string | null
+  labelDesign?: $Enums.LabelDesign | null
+  haziness?: $Enums.Haziness | null
+  headRetention?: $Enums.HeadRetention | null
+  aromasIntensity?: $Enums.AromasIntensity | null
+  flavorsIntensity?: $Enums.FlavorsIntensity | null
+  bodyStrength?: $Enums.BodyStrength | null
+  carbonationIntensity?: $Enums.CarbonationIntensity | null
+  bitterness?: $Enums.Bitterness | null
+  acidity?: $Enums.Acidity | null
+  duration?: $Enums.Duration | null
+  price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceCurrency?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  beer: Prisma.BeersCreateNestedOneWithoutReviewsInput
+  user: Prisma.UsersCreateNestedOneWithoutReviewsInput
+}
+
+export type ReviewsUncheckedCreateWithoutPurchaseLocationInput = {
+  id?: string
+  slug: string
+  globalScore: runtime.Decimal | runtime.DecimalJsLike | number | string
+  servingFrom: $Enums.ServingFrom
+  bestBeforeDate?: Date | string | null
+  comment?: string | null
+  pictureUrl?: string | null
+  labelDesign?: $Enums.LabelDesign | null
+  haziness?: $Enums.Haziness | null
+  headRetention?: $Enums.HeadRetention | null
+  aromasIntensity?: $Enums.AromasIntensity | null
+  flavorsIntensity?: $Enums.FlavorsIntensity | null
+  bodyStrength?: $Enums.BodyStrength | null
+  carbonationIntensity?: $Enums.CarbonationIntensity | null
+  bitterness?: $Enums.Bitterness | null
+  acidity?: $Enums.Acidity | null
+  duration?: $Enums.Duration | null
+  price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceCurrency?: string | null
+  beerId: string
+  userId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type ReviewsCreateOrConnectWithoutPurchaseLocationInput = {
+  where: Prisma.ReviewsWhereUniqueInput
+  create: Prisma.XOR<Prisma.ReviewsCreateWithoutPurchaseLocationInput, Prisma.ReviewsUncheckedCreateWithoutPurchaseLocationInput>
+}
+
+export type ReviewsCreateManyPurchaseLocationInputEnvelope = {
+  data: Prisma.ReviewsCreateManyPurchaseLocationInput | Prisma.ReviewsCreateManyPurchaseLocationInput[]
+  skipDuplicates?: boolean
+}
+
+export type ReviewsUpsertWithWhereUniqueWithoutPurchaseLocationInput = {
+  where: Prisma.ReviewsWhereUniqueInput
+  update: Prisma.XOR<Prisma.ReviewsUpdateWithoutPurchaseLocationInput, Prisma.ReviewsUncheckedUpdateWithoutPurchaseLocationInput>
+  create: Prisma.XOR<Prisma.ReviewsCreateWithoutPurchaseLocationInput, Prisma.ReviewsUncheckedCreateWithoutPurchaseLocationInput>
+}
+
+export type ReviewsUpdateWithWhereUniqueWithoutPurchaseLocationInput = {
+  where: Prisma.ReviewsWhereUniqueInput
+  data: Prisma.XOR<Prisma.ReviewsUpdateWithoutPurchaseLocationInput, Prisma.ReviewsUncheckedUpdateWithoutPurchaseLocationInput>
+}
+
+export type ReviewsUpdateManyWithWhereWithoutPurchaseLocationInput = {
+  where: Prisma.ReviewsScalarWhereInput
+  data: Prisma.XOR<Prisma.ReviewsUpdateManyMutationInput, Prisma.ReviewsUncheckedUpdateManyWithoutPurchaseLocationInput>
+}
+
 export type ReviewsCreateManyBeerInput = {
   id?: string
   slug: string
@@ -1055,6 +1272,9 @@ export type ReviewsCreateManyBeerInput = {
   bitterness?: $Enums.Bitterness | null
   acidity?: $Enums.Acidity | null
   duration?: $Enums.Duration | null
+  price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceCurrency?: string | null
+  purchaseLocationId?: string | null
   userId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1078,8 +1298,11 @@ export type ReviewsUpdateWithoutBeerInput = {
   bitterness?: Prisma.NullableEnumBitternessFieldUpdateOperationsInput | $Enums.Bitterness | null
   acidity?: Prisma.NullableEnumAcidityFieldUpdateOperationsInput | $Enums.Acidity | null
   duration?: Prisma.NullableEnumDurationFieldUpdateOperationsInput | $Enums.Duration | null
+  price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  purchaseLocation?: Prisma.PurchaseLocationsUpdateOneWithoutReviewsNestedInput
   user?: Prisma.UsersUpdateOneRequiredWithoutReviewsNestedInput
 }
 
@@ -1101,6 +1324,9 @@ export type ReviewsUncheckedUpdateWithoutBeerInput = {
   bitterness?: Prisma.NullableEnumBitternessFieldUpdateOperationsInput | $Enums.Bitterness | null
   acidity?: Prisma.NullableEnumAcidityFieldUpdateOperationsInput | $Enums.Acidity | null
   duration?: Prisma.NullableEnumDurationFieldUpdateOperationsInput | $Enums.Duration | null
+  price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  purchaseLocationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1124,6 +1350,9 @@ export type ReviewsUncheckedUpdateManyWithoutBeerInput = {
   bitterness?: Prisma.NullableEnumBitternessFieldUpdateOperationsInput | $Enums.Bitterness | null
   acidity?: Prisma.NullableEnumAcidityFieldUpdateOperationsInput | $Enums.Acidity | null
   duration?: Prisma.NullableEnumDurationFieldUpdateOperationsInput | $Enums.Duration | null
+  price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  purchaseLocationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1147,6 +1376,9 @@ export type ReviewsCreateManyUserInput = {
   bitterness?: $Enums.Bitterness | null
   acidity?: $Enums.Acidity | null
   duration?: $Enums.Duration | null
+  price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceCurrency?: string | null
+  purchaseLocationId?: string | null
   beerId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1170,8 +1402,11 @@ export type ReviewsUpdateWithoutUserInput = {
   bitterness?: Prisma.NullableEnumBitternessFieldUpdateOperationsInput | $Enums.Bitterness | null
   acidity?: Prisma.NullableEnumAcidityFieldUpdateOperationsInput | $Enums.Acidity | null
   duration?: Prisma.NullableEnumDurationFieldUpdateOperationsInput | $Enums.Duration | null
+  price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  purchaseLocation?: Prisma.PurchaseLocationsUpdateOneWithoutReviewsNestedInput
   beer?: Prisma.BeersUpdateOneRequiredWithoutReviewsNestedInput
 }
 
@@ -1193,6 +1428,9 @@ export type ReviewsUncheckedUpdateWithoutUserInput = {
   bitterness?: Prisma.NullableEnumBitternessFieldUpdateOperationsInput | $Enums.Bitterness | null
   acidity?: Prisma.NullableEnumAcidityFieldUpdateOperationsInput | $Enums.Acidity | null
   duration?: Prisma.NullableEnumDurationFieldUpdateOperationsInput | $Enums.Duration | null
+  price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  purchaseLocationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   beerId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1216,7 +1454,114 @@ export type ReviewsUncheckedUpdateManyWithoutUserInput = {
   bitterness?: Prisma.NullableEnumBitternessFieldUpdateOperationsInput | $Enums.Bitterness | null
   acidity?: Prisma.NullableEnumAcidityFieldUpdateOperationsInput | $Enums.Acidity | null
   duration?: Prisma.NullableEnumDurationFieldUpdateOperationsInput | $Enums.Duration | null
+  price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  purchaseLocationId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   beerId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type ReviewsCreateManyPurchaseLocationInput = {
+  id?: string
+  slug: string
+  globalScore: runtime.Decimal | runtime.DecimalJsLike | number | string
+  servingFrom: $Enums.ServingFrom
+  bestBeforeDate?: Date | string | null
+  comment?: string | null
+  pictureUrl?: string | null
+  labelDesign?: $Enums.LabelDesign | null
+  haziness?: $Enums.Haziness | null
+  headRetention?: $Enums.HeadRetention | null
+  aromasIntensity?: $Enums.AromasIntensity | null
+  flavorsIntensity?: $Enums.FlavorsIntensity | null
+  bodyStrength?: $Enums.BodyStrength | null
+  carbonationIntensity?: $Enums.CarbonationIntensity | null
+  bitterness?: $Enums.Bitterness | null
+  acidity?: $Enums.Acidity | null
+  duration?: $Enums.Duration | null
+  price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceCurrency?: string | null
+  beerId: string
+  userId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type ReviewsUpdateWithoutPurchaseLocationInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  globalScore?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  servingFrom?: Prisma.EnumServingFromFieldUpdateOperationsInput | $Enums.ServingFrom
+  bestBeforeDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  comment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pictureUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  labelDesign?: Prisma.NullableEnumLabelDesignFieldUpdateOperationsInput | $Enums.LabelDesign | null
+  haziness?: Prisma.NullableEnumHazinessFieldUpdateOperationsInput | $Enums.Haziness | null
+  headRetention?: Prisma.NullableEnumHeadRetentionFieldUpdateOperationsInput | $Enums.HeadRetention | null
+  aromasIntensity?: Prisma.NullableEnumAromasIntensityFieldUpdateOperationsInput | $Enums.AromasIntensity | null
+  flavorsIntensity?: Prisma.NullableEnumFlavorsIntensityFieldUpdateOperationsInput | $Enums.FlavorsIntensity | null
+  bodyStrength?: Prisma.NullableEnumBodyStrengthFieldUpdateOperationsInput | $Enums.BodyStrength | null
+  carbonationIntensity?: Prisma.NullableEnumCarbonationIntensityFieldUpdateOperationsInput | $Enums.CarbonationIntensity | null
+  bitterness?: Prisma.NullableEnumBitternessFieldUpdateOperationsInput | $Enums.Bitterness | null
+  acidity?: Prisma.NullableEnumAcidityFieldUpdateOperationsInput | $Enums.Acidity | null
+  duration?: Prisma.NullableEnumDurationFieldUpdateOperationsInput | $Enums.Duration | null
+  price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  beer?: Prisma.BeersUpdateOneRequiredWithoutReviewsNestedInput
+  user?: Prisma.UsersUpdateOneRequiredWithoutReviewsNestedInput
+}
+
+export type ReviewsUncheckedUpdateWithoutPurchaseLocationInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  globalScore?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  servingFrom?: Prisma.EnumServingFromFieldUpdateOperationsInput | $Enums.ServingFrom
+  bestBeforeDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  comment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pictureUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  labelDesign?: Prisma.NullableEnumLabelDesignFieldUpdateOperationsInput | $Enums.LabelDesign | null
+  haziness?: Prisma.NullableEnumHazinessFieldUpdateOperationsInput | $Enums.Haziness | null
+  headRetention?: Prisma.NullableEnumHeadRetentionFieldUpdateOperationsInput | $Enums.HeadRetention | null
+  aromasIntensity?: Prisma.NullableEnumAromasIntensityFieldUpdateOperationsInput | $Enums.AromasIntensity | null
+  flavorsIntensity?: Prisma.NullableEnumFlavorsIntensityFieldUpdateOperationsInput | $Enums.FlavorsIntensity | null
+  bodyStrength?: Prisma.NullableEnumBodyStrengthFieldUpdateOperationsInput | $Enums.BodyStrength | null
+  carbonationIntensity?: Prisma.NullableEnumCarbonationIntensityFieldUpdateOperationsInput | $Enums.CarbonationIntensity | null
+  bitterness?: Prisma.NullableEnumBitternessFieldUpdateOperationsInput | $Enums.Bitterness | null
+  acidity?: Prisma.NullableEnumAcidityFieldUpdateOperationsInput | $Enums.Acidity | null
+  duration?: Prisma.NullableEnumDurationFieldUpdateOperationsInput | $Enums.Duration | null
+  price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  beerId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type ReviewsUncheckedUpdateManyWithoutPurchaseLocationInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  globalScore?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  servingFrom?: Prisma.EnumServingFromFieldUpdateOperationsInput | $Enums.ServingFrom
+  bestBeforeDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  comment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pictureUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  labelDesign?: Prisma.NullableEnumLabelDesignFieldUpdateOperationsInput | $Enums.LabelDesign | null
+  haziness?: Prisma.NullableEnumHazinessFieldUpdateOperationsInput | $Enums.Haziness | null
+  headRetention?: Prisma.NullableEnumHeadRetentionFieldUpdateOperationsInput | $Enums.HeadRetention | null
+  aromasIntensity?: Prisma.NullableEnumAromasIntensityFieldUpdateOperationsInput | $Enums.AromasIntensity | null
+  flavorsIntensity?: Prisma.NullableEnumFlavorsIntensityFieldUpdateOperationsInput | $Enums.FlavorsIntensity | null
+  bodyStrength?: Prisma.NullableEnumBodyStrengthFieldUpdateOperationsInput | $Enums.BodyStrength | null
+  carbonationIntensity?: Prisma.NullableEnumCarbonationIntensityFieldUpdateOperationsInput | $Enums.CarbonationIntensity | null
+  bitterness?: Prisma.NullableEnumBitternessFieldUpdateOperationsInput | $Enums.Bitterness | null
+  acidity?: Prisma.NullableEnumAcidityFieldUpdateOperationsInput | $Enums.Acidity | null
+  duration?: Prisma.NullableEnumDurationFieldUpdateOperationsInput | $Enums.Duration | null
+  price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  priceCurrency?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  beerId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1241,10 +1586,14 @@ export type ReviewsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   bitterness?: boolean
   acidity?: boolean
   duration?: boolean
+  price?: boolean
+  priceCurrency?: boolean
+  purchaseLocationId?: boolean
   beerId?: boolean
   userId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  purchaseLocation?: boolean | Prisma.Reviews$purchaseLocationArgs<ExtArgs>
   beer?: boolean | Prisma.BeersDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UsersDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["reviews"]>
@@ -1267,10 +1616,14 @@ export type ReviewsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   bitterness?: boolean
   acidity?: boolean
   duration?: boolean
+  price?: boolean
+  priceCurrency?: boolean
+  purchaseLocationId?: boolean
   beerId?: boolean
   userId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  purchaseLocation?: boolean | Prisma.Reviews$purchaseLocationArgs<ExtArgs>
   beer?: boolean | Prisma.BeersDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UsersDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["reviews"]>
@@ -1293,10 +1646,14 @@ export type ReviewsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   bitterness?: boolean
   acidity?: boolean
   duration?: boolean
+  price?: boolean
+  priceCurrency?: boolean
+  purchaseLocationId?: boolean
   beerId?: boolean
   userId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  purchaseLocation?: boolean | Prisma.Reviews$purchaseLocationArgs<ExtArgs>
   beer?: boolean | Prisma.BeersDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UsersDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["reviews"]>
@@ -1319,22 +1676,28 @@ export type ReviewsSelectScalar = {
   bitterness?: boolean
   acidity?: boolean
   duration?: boolean
+  price?: boolean
+  priceCurrency?: boolean
+  purchaseLocationId?: boolean
   beerId?: boolean
   userId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type ReviewsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "slug" | "globalScore" | "servingFrom" | "bestBeforeDate" | "comment" | "pictureUrl" | "labelDesign" | "haziness" | "headRetention" | "aromasIntensity" | "flavorsIntensity" | "bodyStrength" | "carbonationIntensity" | "bitterness" | "acidity" | "duration" | "beerId" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["reviews"]>
+export type ReviewsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "slug" | "globalScore" | "servingFrom" | "bestBeforeDate" | "comment" | "pictureUrl" | "labelDesign" | "haziness" | "headRetention" | "aromasIntensity" | "flavorsIntensity" | "bodyStrength" | "carbonationIntensity" | "bitterness" | "acidity" | "duration" | "price" | "priceCurrency" | "purchaseLocationId" | "beerId" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["reviews"]>
 export type ReviewsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  purchaseLocation?: boolean | Prisma.Reviews$purchaseLocationArgs<ExtArgs>
   beer?: boolean | Prisma.BeersDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UsersDefaultArgs<ExtArgs>
 }
 export type ReviewsIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  purchaseLocation?: boolean | Prisma.Reviews$purchaseLocationArgs<ExtArgs>
   beer?: boolean | Prisma.BeersDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UsersDefaultArgs<ExtArgs>
 }
 export type ReviewsIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  purchaseLocation?: boolean | Prisma.Reviews$purchaseLocationArgs<ExtArgs>
   beer?: boolean | Prisma.BeersDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UsersDefaultArgs<ExtArgs>
 }
@@ -1342,6 +1705,7 @@ export type ReviewsIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
 export type $ReviewsPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Reviews"
   objects: {
+    purchaseLocation: Prisma.$PurchaseLocationsPayload<ExtArgs> | null
     beer: Prisma.$BeersPayload<ExtArgs>
     user: Prisma.$UsersPayload<ExtArgs>
   }
@@ -1363,6 +1727,9 @@ export type $ReviewsPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     bitterness: $Enums.Bitterness | null
     acidity: $Enums.Acidity | null
     duration: $Enums.Duration | null
+    price: runtime.Decimal | null
+    priceCurrency: string | null
+    purchaseLocationId: string | null
     beerId: string
     userId: string
     createdAt: Date
@@ -1761,6 +2128,7 @@ readonly fields: ReviewsFieldRefs;
  */
 export interface Prisma__ReviewsClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  purchaseLocation<T extends Prisma.Reviews$purchaseLocationArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Reviews$purchaseLocationArgs<ExtArgs>>): Prisma.Prisma__PurchaseLocationsClient<runtime.Types.Result.GetResult<Prisma.$PurchaseLocationsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   beer<T extends Prisma.BeersDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BeersDefaultArgs<ExtArgs>>): Prisma.Prisma__BeersClient<runtime.Types.Result.GetResult<Prisma.$BeersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   user<T extends Prisma.UsersDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UsersDefaultArgs<ExtArgs>>): Prisma.Prisma__UsersClient<runtime.Types.Result.GetResult<Prisma.$UsersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
@@ -1809,6 +2177,9 @@ export interface ReviewsFieldRefs {
   readonly bitterness: Prisma.FieldRef<"Reviews", 'Bitterness'>
   readonly acidity: Prisma.FieldRef<"Reviews", 'Acidity'>
   readonly duration: Prisma.FieldRef<"Reviews", 'Duration'>
+  readonly price: Prisma.FieldRef<"Reviews", 'Decimal'>
+  readonly priceCurrency: Prisma.FieldRef<"Reviews", 'String'>
+  readonly purchaseLocationId: Prisma.FieldRef<"Reviews", 'String'>
   readonly beerId: Prisma.FieldRef<"Reviews", 'String'>
   readonly userId: Prisma.FieldRef<"Reviews", 'String'>
   readonly createdAt: Prisma.FieldRef<"Reviews", 'DateTime'>
@@ -2206,6 +2577,25 @@ export type ReviewsDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Limit how many Reviews to delete.
    */
   limit?: number
+}
+
+/**
+ * Reviews.purchaseLocation
+ */
+export type Reviews$purchaseLocationArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PurchaseLocations
+   */
+  select?: Prisma.PurchaseLocationsSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PurchaseLocations
+   */
+  omit?: Prisma.PurchaseLocationsOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PurchaseLocationsInclude<ExtArgs> | null
+  where?: Prisma.PurchaseLocationsWhereInput
 }
 
 /**

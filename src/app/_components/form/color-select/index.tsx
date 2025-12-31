@@ -9,7 +9,6 @@ import Label from "@/app/_components/ui/label";
 import type { Color } from "@/domain/beers/types";
 import { cn } from "@/lib/tailwind";
 
-
 interface FormColorSelectProps {
   label: string;
   field: FieldMetadata;
@@ -57,6 +56,7 @@ const FormColorSelect = ({
           {...restSelectProps}
           name={name}
           key={key}
+          popoverId={`${field.id}-popover`}
           colors={colors}
           onChange={(value) => setSelectedColorId(value.id)}
           disabled={disabled}

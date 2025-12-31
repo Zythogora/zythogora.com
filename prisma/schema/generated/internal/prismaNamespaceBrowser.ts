@@ -63,6 +63,7 @@ export const ModelName = {
   Colors: 'Colors',
   Users: 'Users',
   Reviews: 'Reviews',
+  PurchaseLocations: 'PurchaseLocations',
   Friendships: 'Friendships',
   Friends: 'Friends',
   FriendRequests: 'FriendRequests'
@@ -150,6 +151,8 @@ export const BeersScalarFieldEnum = {
   ibu: 'ibu',
   description: 'description',
   releaseYear: 'releaseYear',
+  organic: 'organic',
+  barrelAged: 'barrelAged',
   breweryId: 'breweryId',
   styleId: 'styleId',
   colorId: 'colorId',
@@ -255,6 +258,9 @@ export const ReviewsScalarFieldEnum = {
   bitterness: 'bitterness',
   acidity: 'acidity',
   duration: 'duration',
+  price: 'price',
+  priceCurrency: 'priceCurrency',
+  purchaseLocationId: 'purchaseLocationId',
   beerId: 'beerId',
   userId: 'userId',
   createdAt: 'createdAt',
@@ -262,6 +268,20 @@ export const ReviewsScalarFieldEnum = {
 } as const
 
 export type ReviewsScalarFieldEnum = (typeof ReviewsScalarFieldEnum)[keyof typeof ReviewsScalarFieldEnum]
+
+
+export const PurchaseLocationsScalarFieldEnum = {
+  id: 'id',
+  type: 'type',
+  description: 'description',
+  additionalInformation: 'additionalInformation',
+  createdAt: 'createdAt',
+  createdBy: 'createdBy',
+  updatedAt: 'updatedAt',
+  updatedBy: 'updatedBy'
+} as const
+
+export type PurchaseLocationsScalarFieldEnum = (typeof PurchaseLocationsScalarFieldEnum)[keyof typeof PurchaseLocationsScalarFieldEnum]
 
 
 export const FriendshipsScalarFieldEnum = {
@@ -443,11 +463,24 @@ export const ReviewsOrderByRelevanceFieldEnum = {
   slug: 'slug',
   comment: 'comment',
   pictureUrl: 'pictureUrl',
+  priceCurrency: 'priceCurrency',
+  purchaseLocationId: 'purchaseLocationId',
   beerId: 'beerId',
   userId: 'userId'
 } as const
 
 export type ReviewsOrderByRelevanceFieldEnum = (typeof ReviewsOrderByRelevanceFieldEnum)[keyof typeof ReviewsOrderByRelevanceFieldEnum]
+
+
+export const PurchaseLocationsOrderByRelevanceFieldEnum = {
+  id: 'id',
+  description: 'description',
+  additionalInformation: 'additionalInformation',
+  createdBy: 'createdBy',
+  updatedBy: 'updatedBy'
+} as const
+
+export type PurchaseLocationsOrderByRelevanceFieldEnum = (typeof PurchaseLocationsOrderByRelevanceFieldEnum)[keyof typeof PurchaseLocationsOrderByRelevanceFieldEnum]
 
 
 export const FriendshipsOrderByRelevanceFieldEnum = {

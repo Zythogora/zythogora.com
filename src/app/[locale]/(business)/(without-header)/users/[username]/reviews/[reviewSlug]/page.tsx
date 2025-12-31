@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { getFormatter, getTranslations } from "next-intl/server";
 
-import { ServingFrom } from "@db/client";
+import { PurchaseType, ServingFrom } from "@db/client";
 
 import {
   acidityValues,
@@ -21,6 +21,7 @@ import ShareButton from "@/app/_components/share-button";
 import DescriptionList from "@/app/_components/ui/description-list";
 import { Separator } from "@/app/_components/ui/separator";
 import { getReviewByUsernameAndSlug } from "@/domain/users";
+import type { Review } from "@/domain/users/types";
 import { publicConfig } from "@/lib/config/client-config";
 import { Link } from "@/lib/i18n";
 import { Routes } from "@/lib/routes";
@@ -86,6 +87,22 @@ const UserReviewPage = async ({
   const review = await getReviewByUsernameAndSlug(username, reviewSlug).catch(
     () => notFound(),
   );
+
+  const getFormattedPurchaseLocation = (
+    purchaseLocation: NonNullable<Review["purchaseLocation"]>,
+  ) => {
+    if (purchaseLocation.type === PurchaseType.PHYSICAL_LOCATION) {
+      return purchaseLocation.additionalInformation
+        ? `${purchaseLocation.description} (${purchaseLocation.additionalInformation})`
+        : purchaseLocation.description;
+    }
+
+    try {
+      return new URL(purchaseLocation.description).hostname;
+    } catch {
+      return purchaseLocation.description;
+    }
+  };
 
   return (
     <div
@@ -237,6 +254,67 @@ const UserReviewPage = async ({
                     )
                   </span>
                 ) : null}
+              </p>
+            ) : null}
+
+            {review.price || review.purchaseLocation ? (
+              <p
+                className={cn(
+                  "text-foreground/50 gap-x-paragraph-space flex flex-row items-center",
+                  "text-xs md:text-base",
+                )}
+              >
+                {review.price && review.purchaseLocation
+                  ? t.rich(
+                      "reviewPage.overall.fields.purchaseInformation.priceAndLocation",
+                      {
+                        price: formatter.number(review.price, {
+                          style: "currency",
+                          currency: review.priceCurrency,
+                        }),
+                        location: getFormattedPurchaseLocation(
+                          review.purchaseLocation,
+                        ),
+                        purchaseType: review.purchaseLocation.type,
+                        link: (chunks) => (
+                          <Link
+                            href={review.purchaseLocation!.description}
+                            className="text-primary cursor-pointer"
+                          >
+                            {chunks}
+                          </Link>
+                        ),
+                      },
+                    )
+                  : review.purchaseLocation
+                    ? t.rich(
+                        "reviewPage.overall.fields.purchaseInformation.locationOnly",
+                        {
+                          location: getFormattedPurchaseLocation(
+                            review.purchaseLocation,
+                          ),
+                          purchaseType: review.purchaseLocation.type,
+                          link: (chunks) => (
+                            <Link
+                              href={review.purchaseLocation!.description}
+                              className="text-primary cursor-pointer"
+                            >
+                              {chunks}
+                            </Link>
+                          ),
+                        },
+                      )
+                    : review.price
+                      ? t(
+                          "reviewPage.overall.fields.purchaseInformation.priceOnly",
+                          {
+                            price: formatter.number(review.price, {
+                              style: "currency",
+                              currency: review.priceCurrency,
+                            }),
+                          },
+                        )
+                      : null}
               </p>
             ) : null}
           </div>
