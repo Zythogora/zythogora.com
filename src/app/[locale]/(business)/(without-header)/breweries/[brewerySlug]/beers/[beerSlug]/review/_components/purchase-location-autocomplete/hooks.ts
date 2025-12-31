@@ -1,6 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { nanoid } from "nanoid";
+import { useCallback, useState, useRef } from "react";
+
+const SESSION_TIMEOUT = 180_000; // 3 minutes
 
 type GoogleAutocompleteSession = {
   token: string;
@@ -8,28 +11,38 @@ type GoogleAutocompleteSession = {
 };
 
 export const useGoogleAutocompleteSession = () => {
+  const generateToken = useCallback(() => {
+    return crypto?.randomUUID ? crypto.randomUUID() : nanoid();
+  }, []);
+
   const [session, setSession] = useState<GoogleAutocompleteSession>({
-    token: crypto.randomUUID(),
+    token: generateToken(),
     generatedAt: new Date(),
   });
 
-  const getSessionToken = () => {
-    const now = new Date();
+  const sessionRef = useRef<GoogleAutocompleteSession>(session);
 
-    // If the session is older than 3 minutes, generate a new one
-    if (now.getTime() - session.generatedAt.getTime() > 180_000) {
+  const getSessionToken = useCallback(() => {
+    const now = new Date();
+    const currentSession = sessionRef.current;
+
+    if (
+      now.getTime() - currentSession.generatedAt.getTime() >
+      SESSION_TIMEOUT
+    ) {
       const newSession = {
-        token: crypto.randomUUID(),
+        token: generateToken(),
         generatedAt: now,
       };
 
+      sessionRef.current = newSession;
       setSession(newSession);
 
       return newSession.token;
     }
 
-    return session.token;
-  };
+    return currentSession.token;
+  }, []);
 
   return { getSessionToken };
 };

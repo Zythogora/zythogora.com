@@ -48,7 +48,7 @@ export const reviewAction = async (
   let createdReview;
 
   try {
-    createdReview = await reviewBeer(submission.value.beerId, submission.value);
+    createdReview = await reviewBeer(submission.value);
   } catch (error) {
     if (error instanceof ExplicitContentCheckError) {
       return submission.reply({

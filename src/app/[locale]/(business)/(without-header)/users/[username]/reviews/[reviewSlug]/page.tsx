@@ -97,7 +97,11 @@ const UserReviewPage = async ({
         : purchaseLocation.description;
     }
 
-    return new URL(purchaseLocation.description).hostname;
+    try {
+      return new URL(purchaseLocation.description).hostname;
+    } catch {
+      return purchaseLocation.description;
+    }
   };
 
   return (

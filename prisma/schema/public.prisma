@@ -18,6 +18,9 @@ model Users {
   createdBreweries Breweries[] @relation("created_breweries")
   updatedBreweries Breweries[] @relation("updated_breweries")
 
+  createdPurchaseLocations PurchaseLocations[] @relation("created_purchase_locations")
+  updatedPurchaseLocations PurchaseLocations[] @relation("updated_purchase_locations")
+
   @@map("users")
   @@schema("public")
 }
@@ -65,6 +68,13 @@ model PurchaseLocations {
   type                  PurchaseType
   description           String
   additionalInformation String?      @map("additional_information")
+
+  createdAt     DateTime @default(now()) @map("created_at")
+  createdBy     String   @map("created_by")
+  createdByUser Users    @relation("created_purchase_locations", fields: [createdBy], references: [id])
+  updatedAt     DateTime @default(now()) @updatedAt @map("updated_at")
+  updatedBy     String   @map("updated_by")
+  updatedByUser Users    @relation("updated_purchase_locations", fields: [updatedBy], references: [id])
 
   reviews Reviews[]
 

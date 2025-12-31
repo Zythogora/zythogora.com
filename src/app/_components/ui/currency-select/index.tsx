@@ -67,7 +67,7 @@ const CurrencySelect = ({
   const [selectedCurrency, setSelectedCurrency] = useState<Currency | null>(
     () => {
       if (defaultValue) {
-        const currency = currencies.find((c) => c.code === defaultValue);
+        const currency = CURRENCY_LIST.find((c) => c.code === defaultValue);
         return currency
           ? { code: currency.code, currency: currency.currency }
           : null;

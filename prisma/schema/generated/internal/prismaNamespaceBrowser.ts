@@ -274,7 +274,11 @@ export const PurchaseLocationsScalarFieldEnum = {
   id: 'id',
   type: 'type',
   description: 'description',
-  additionalInformation: 'additionalInformation'
+  additionalInformation: 'additionalInformation',
+  createdAt: 'createdAt',
+  createdBy: 'createdBy',
+  updatedAt: 'updatedAt',
+  updatedBy: 'updatedBy'
 } as const
 
 export type PurchaseLocationsScalarFieldEnum = (typeof PurchaseLocationsScalarFieldEnum)[keyof typeof PurchaseLocationsScalarFieldEnum]
@@ -471,7 +475,9 @@ export type ReviewsOrderByRelevanceFieldEnum = (typeof ReviewsOrderByRelevanceFi
 export const PurchaseLocationsOrderByRelevanceFieldEnum = {
   id: 'id',
   description: 'description',
-  additionalInformation: 'additionalInformation'
+  additionalInformation: 'additionalInformation',
+  createdBy: 'createdBy',
+  updatedBy: 'updatedBy'
 } as const
 
 export type PurchaseLocationsOrderByRelevanceFieldEnum = (typeof PurchaseLocationsOrderByRelevanceFieldEnum)[keyof typeof PurchaseLocationsOrderByRelevanceFieldEnum]

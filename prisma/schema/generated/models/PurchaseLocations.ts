@@ -31,6 +31,10 @@ export type PurchaseLocationsMinAggregateOutputType = {
   type: $Enums.PurchaseType | null
   description: string | null
   additionalInformation: string | null
+  createdAt: Date | null
+  createdBy: string | null
+  updatedAt: Date | null
+  updatedBy: string | null
 }
 
 export type PurchaseLocationsMaxAggregateOutputType = {
@@ -38,6 +42,10 @@ export type PurchaseLocationsMaxAggregateOutputType = {
   type: $Enums.PurchaseType | null
   description: string | null
   additionalInformation: string | null
+  createdAt: Date | null
+  createdBy: string | null
+  updatedAt: Date | null
+  updatedBy: string | null
 }
 
 export type PurchaseLocationsCountAggregateOutputType = {
@@ -45,6 +53,10 @@ export type PurchaseLocationsCountAggregateOutputType = {
   type: number
   description: number
   additionalInformation: number
+  createdAt: number
+  createdBy: number
+  updatedAt: number
+  updatedBy: number
   _all: number
 }
 
@@ -54,6 +66,10 @@ export type PurchaseLocationsMinAggregateInputType = {
   type?: true
   description?: true
   additionalInformation?: true
+  createdAt?: true
+  createdBy?: true
+  updatedAt?: true
+  updatedBy?: true
 }
 
 export type PurchaseLocationsMaxAggregateInputType = {
@@ -61,6 +77,10 @@ export type PurchaseLocationsMaxAggregateInputType = {
   type?: true
   description?: true
   additionalInformation?: true
+  createdAt?: true
+  createdBy?: true
+  updatedAt?: true
+  updatedBy?: true
 }
 
 export type PurchaseLocationsCountAggregateInputType = {
@@ -68,6 +88,10 @@ export type PurchaseLocationsCountAggregateInputType = {
   type?: true
   description?: true
   additionalInformation?: true
+  createdAt?: true
+  createdBy?: true
+  updatedAt?: true
+  updatedBy?: true
   _all?: true
 }
 
@@ -148,6 +172,10 @@ export type PurchaseLocationsGroupByOutputType = {
   type: $Enums.PurchaseType
   description: string
   additionalInformation: string | null
+  createdAt: Date
+  createdBy: string
+  updatedAt: Date
+  updatedBy: string
   _count: PurchaseLocationsCountAggregateOutputType | null
   _min: PurchaseLocationsMinAggregateOutputType | null
   _max: PurchaseLocationsMaxAggregateOutputType | null
@@ -176,6 +204,12 @@ export type PurchaseLocationsWhereInput = {
   type?: Prisma.EnumPurchaseTypeFilter<"PurchaseLocations"> | $Enums.PurchaseType
   description?: Prisma.StringFilter<"PurchaseLocations"> | string
   additionalInformation?: Prisma.StringNullableFilter<"PurchaseLocations"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"PurchaseLocations"> | Date | string
+  createdBy?: Prisma.StringFilter<"PurchaseLocations"> | string
+  updatedAt?: Prisma.DateTimeFilter<"PurchaseLocations"> | Date | string
+  updatedBy?: Prisma.StringFilter<"PurchaseLocations"> | string
+  createdByUser?: Prisma.XOR<Prisma.UsersScalarRelationFilter, Prisma.UsersWhereInput>
+  updatedByUser?: Prisma.XOR<Prisma.UsersScalarRelationFilter, Prisma.UsersWhereInput>
   reviews?: Prisma.ReviewsListRelationFilter
 }
 
@@ -184,6 +218,12 @@ export type PurchaseLocationsOrderByWithRelationInput = {
   type?: Prisma.SortOrder
   description?: Prisma.SortOrder
   additionalInformation?: Prisma.SortOrderInput | Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+  updatedBy?: Prisma.SortOrder
+  createdByUser?: Prisma.UsersOrderByWithRelationInput
+  updatedByUser?: Prisma.UsersOrderByWithRelationInput
   reviews?: Prisma.ReviewsOrderByRelationAggregateInput
   _relevance?: Prisma.PurchaseLocationsOrderByRelevanceInput
 }
@@ -196,6 +236,12 @@ export type PurchaseLocationsWhereUniqueInput = Prisma.AtLeast<{
   type?: Prisma.EnumPurchaseTypeFilter<"PurchaseLocations"> | $Enums.PurchaseType
   description?: Prisma.StringFilter<"PurchaseLocations"> | string
   additionalInformation?: Prisma.StringNullableFilter<"PurchaseLocations"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"PurchaseLocations"> | Date | string
+  createdBy?: Prisma.StringFilter<"PurchaseLocations"> | string
+  updatedAt?: Prisma.DateTimeFilter<"PurchaseLocations"> | Date | string
+  updatedBy?: Prisma.StringFilter<"PurchaseLocations"> | string
+  createdByUser?: Prisma.XOR<Prisma.UsersScalarRelationFilter, Prisma.UsersWhereInput>
+  updatedByUser?: Prisma.XOR<Prisma.UsersScalarRelationFilter, Prisma.UsersWhereInput>
   reviews?: Prisma.ReviewsListRelationFilter
 }, "id">
 
@@ -204,6 +250,10 @@ export type PurchaseLocationsOrderByWithAggregationInput = {
   type?: Prisma.SortOrder
   description?: Prisma.SortOrder
   additionalInformation?: Prisma.SortOrderInput | Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+  updatedBy?: Prisma.SortOrder
   _count?: Prisma.PurchaseLocationsCountOrderByAggregateInput
   _max?: Prisma.PurchaseLocationsMaxOrderByAggregateInput
   _min?: Prisma.PurchaseLocationsMinOrderByAggregateInput
@@ -217,6 +267,10 @@ export type PurchaseLocationsScalarWhereWithAggregatesInput = {
   type?: Prisma.EnumPurchaseTypeWithAggregatesFilter<"PurchaseLocations"> | $Enums.PurchaseType
   description?: Prisma.StringWithAggregatesFilter<"PurchaseLocations"> | string
   additionalInformation?: Prisma.StringNullableWithAggregatesFilter<"PurchaseLocations"> | string | null
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"PurchaseLocations"> | Date | string
+  createdBy?: Prisma.StringWithAggregatesFilter<"PurchaseLocations"> | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"PurchaseLocations"> | Date | string
+  updatedBy?: Prisma.StringWithAggregatesFilter<"PurchaseLocations"> | string
 }
 
 export type PurchaseLocationsCreateInput = {
@@ -224,6 +278,10 @@ export type PurchaseLocationsCreateInput = {
   type: $Enums.PurchaseType
   description: string
   additionalInformation?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  createdByUser: Prisma.UsersCreateNestedOneWithoutCreatedPurchaseLocationsInput
+  updatedByUser: Prisma.UsersCreateNestedOneWithoutUpdatedPurchaseLocationsInput
   reviews?: Prisma.ReviewsCreateNestedManyWithoutPurchaseLocationInput
 }
 
@@ -232,6 +290,10 @@ export type PurchaseLocationsUncheckedCreateInput = {
   type: $Enums.PurchaseType
   description: string
   additionalInformation?: string | null
+  createdAt?: Date | string
+  createdBy: string
+  updatedAt?: Date | string
+  updatedBy: string
   reviews?: Prisma.ReviewsUncheckedCreateNestedManyWithoutPurchaseLocationInput
 }
 
@@ -240,6 +302,10 @@ export type PurchaseLocationsUpdateInput = {
   type?: Prisma.EnumPurchaseTypeFieldUpdateOperationsInput | $Enums.PurchaseType
   description?: Prisma.StringFieldUpdateOperationsInput | string
   additionalInformation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdByUser?: Prisma.UsersUpdateOneRequiredWithoutCreatedPurchaseLocationsNestedInput
+  updatedByUser?: Prisma.UsersUpdateOneRequiredWithoutUpdatedPurchaseLocationsNestedInput
   reviews?: Prisma.ReviewsUpdateManyWithoutPurchaseLocationNestedInput
 }
 
@@ -248,6 +314,10 @@ export type PurchaseLocationsUncheckedUpdateInput = {
   type?: Prisma.EnumPurchaseTypeFieldUpdateOperationsInput | $Enums.PurchaseType
   description?: Prisma.StringFieldUpdateOperationsInput | string
   additionalInformation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdBy?: Prisma.StringFieldUpdateOperationsInput | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedBy?: Prisma.StringFieldUpdateOperationsInput | string
   reviews?: Prisma.ReviewsUncheckedUpdateManyWithoutPurchaseLocationNestedInput
 }
 
@@ -256,6 +326,10 @@ export type PurchaseLocationsCreateManyInput = {
   type: $Enums.PurchaseType
   description: string
   additionalInformation?: string | null
+  createdAt?: Date | string
+  createdBy: string
+  updatedAt?: Date | string
+  updatedBy: string
 }
 
 export type PurchaseLocationsUpdateManyMutationInput = {
@@ -263,6 +337,8 @@ export type PurchaseLocationsUpdateManyMutationInput = {
   type?: Prisma.EnumPurchaseTypeFieldUpdateOperationsInput | $Enums.PurchaseType
   description?: Prisma.StringFieldUpdateOperationsInput | string
   additionalInformation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type PurchaseLocationsUncheckedUpdateManyInput = {
@@ -270,6 +346,20 @@ export type PurchaseLocationsUncheckedUpdateManyInput = {
   type?: Prisma.EnumPurchaseTypeFieldUpdateOperationsInput | $Enums.PurchaseType
   description?: Prisma.StringFieldUpdateOperationsInput | string
   additionalInformation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdBy?: Prisma.StringFieldUpdateOperationsInput | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedBy?: Prisma.StringFieldUpdateOperationsInput | string
+}
+
+export type PurchaseLocationsListRelationFilter = {
+  every?: Prisma.PurchaseLocationsWhereInput
+  some?: Prisma.PurchaseLocationsWhereInput
+  none?: Prisma.PurchaseLocationsWhereInput
+}
+
+export type PurchaseLocationsOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
 }
 
 export type PurchaseLocationsNullableScalarRelationFilter = {
@@ -288,6 +378,10 @@ export type PurchaseLocationsCountOrderByAggregateInput = {
   type?: Prisma.SortOrder
   description?: Prisma.SortOrder
   additionalInformation?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+  updatedBy?: Prisma.SortOrder
 }
 
 export type PurchaseLocationsMaxOrderByAggregateInput = {
@@ -295,6 +389,10 @@ export type PurchaseLocationsMaxOrderByAggregateInput = {
   type?: Prisma.SortOrder
   description?: Prisma.SortOrder
   additionalInformation?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+  updatedBy?: Prisma.SortOrder
 }
 
 export type PurchaseLocationsMinOrderByAggregateInput = {
@@ -302,6 +400,94 @@ export type PurchaseLocationsMinOrderByAggregateInput = {
   type?: Prisma.SortOrder
   description?: Prisma.SortOrder
   additionalInformation?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+  updatedBy?: Prisma.SortOrder
+}
+
+export type PurchaseLocationsCreateNestedManyWithoutCreatedByUserInput = {
+  create?: Prisma.XOR<Prisma.PurchaseLocationsCreateWithoutCreatedByUserInput, Prisma.PurchaseLocationsUncheckedCreateWithoutCreatedByUserInput> | Prisma.PurchaseLocationsCreateWithoutCreatedByUserInput[] | Prisma.PurchaseLocationsUncheckedCreateWithoutCreatedByUserInput[]
+  connectOrCreate?: Prisma.PurchaseLocationsCreateOrConnectWithoutCreatedByUserInput | Prisma.PurchaseLocationsCreateOrConnectWithoutCreatedByUserInput[]
+  createMany?: Prisma.PurchaseLocationsCreateManyCreatedByUserInputEnvelope
+  connect?: Prisma.PurchaseLocationsWhereUniqueInput | Prisma.PurchaseLocationsWhereUniqueInput[]
+}
+
+export type PurchaseLocationsCreateNestedManyWithoutUpdatedByUserInput = {
+  create?: Prisma.XOR<Prisma.PurchaseLocationsCreateWithoutUpdatedByUserInput, Prisma.PurchaseLocationsUncheckedCreateWithoutUpdatedByUserInput> | Prisma.PurchaseLocationsCreateWithoutUpdatedByUserInput[] | Prisma.PurchaseLocationsUncheckedCreateWithoutUpdatedByUserInput[]
+  connectOrCreate?: Prisma.PurchaseLocationsCreateOrConnectWithoutUpdatedByUserInput | Prisma.PurchaseLocationsCreateOrConnectWithoutUpdatedByUserInput[]
+  createMany?: Prisma.PurchaseLocationsCreateManyUpdatedByUserInputEnvelope
+  connect?: Prisma.PurchaseLocationsWhereUniqueInput | Prisma.PurchaseLocationsWhereUniqueInput[]
+}
+
+export type PurchaseLocationsUncheckedCreateNestedManyWithoutCreatedByUserInput = {
+  create?: Prisma.XOR<Prisma.PurchaseLocationsCreateWithoutCreatedByUserInput, Prisma.PurchaseLocationsUncheckedCreateWithoutCreatedByUserInput> | Prisma.PurchaseLocationsCreateWithoutCreatedByUserInput[] | Prisma.PurchaseLocationsUncheckedCreateWithoutCreatedByUserInput[]
+  connectOrCreate?: Prisma.PurchaseLocationsCreateOrConnectWithoutCreatedByUserInput | Prisma.PurchaseLocationsCreateOrConnectWithoutCreatedByUserInput[]
+  createMany?: Prisma.PurchaseLocationsCreateManyCreatedByUserInputEnvelope
+  connect?: Prisma.PurchaseLocationsWhereUniqueInput | Prisma.PurchaseLocationsWhereUniqueInput[]
+}
+
+export type PurchaseLocationsUncheckedCreateNestedManyWithoutUpdatedByUserInput = {
+  create?: Prisma.XOR<Prisma.PurchaseLocationsCreateWithoutUpdatedByUserInput, Prisma.PurchaseLocationsUncheckedCreateWithoutUpdatedByUserInput> | Prisma.PurchaseLocationsCreateWithoutUpdatedByUserInput[] | Prisma.PurchaseLocationsUncheckedCreateWithoutUpdatedByUserInput[]
+  connectOrCreate?: Prisma.PurchaseLocationsCreateOrConnectWithoutUpdatedByUserInput | Prisma.PurchaseLocationsCreateOrConnectWithoutUpdatedByUserInput[]
+  createMany?: Prisma.PurchaseLocationsCreateManyUpdatedByUserInputEnvelope
+  connect?: Prisma.PurchaseLocationsWhereUniqueInput | Prisma.PurchaseLocationsWhereUniqueInput[]
+}
+
+export type PurchaseLocationsUpdateManyWithoutCreatedByUserNestedInput = {
+  create?: Prisma.XOR<Prisma.PurchaseLocationsCreateWithoutCreatedByUserInput, Prisma.PurchaseLocationsUncheckedCreateWithoutCreatedByUserInput> | Prisma.PurchaseLocationsCreateWithoutCreatedByUserInput[] | Prisma.PurchaseLocationsUncheckedCreateWithoutCreatedByUserInput[]
+  connectOrCreate?: Prisma.PurchaseLocationsCreateOrConnectWithoutCreatedByUserInput | Prisma.PurchaseLocationsCreateOrConnectWithoutCreatedByUserInput[]
+  upsert?: Prisma.PurchaseLocationsUpsertWithWhereUniqueWithoutCreatedByUserInput | Prisma.PurchaseLocationsUpsertWithWhereUniqueWithoutCreatedByUserInput[]
+  createMany?: Prisma.PurchaseLocationsCreateManyCreatedByUserInputEnvelope
+  set?: Prisma.PurchaseLocationsWhereUniqueInput | Prisma.PurchaseLocationsWhereUniqueInput[]
+  disconnect?: Prisma.PurchaseLocationsWhereUniqueInput | Prisma.PurchaseLocationsWhereUniqueInput[]
+  delete?: Prisma.PurchaseLocationsWhereUniqueInput | Prisma.PurchaseLocationsWhereUniqueInput[]
+  connect?: Prisma.PurchaseLocationsWhereUniqueInput | Prisma.PurchaseLocationsWhereUniqueInput[]
+  update?: Prisma.PurchaseLocationsUpdateWithWhereUniqueWithoutCreatedByUserInput | Prisma.PurchaseLocationsUpdateWithWhereUniqueWithoutCreatedByUserInput[]
+  updateMany?: Prisma.PurchaseLocationsUpdateManyWithWhereWithoutCreatedByUserInput | Prisma.PurchaseLocationsUpdateManyWithWhereWithoutCreatedByUserInput[]
+  deleteMany?: Prisma.PurchaseLocationsScalarWhereInput | Prisma.PurchaseLocationsScalarWhereInput[]
+}
+
+export type PurchaseLocationsUpdateManyWithoutUpdatedByUserNestedInput = {
+  create?: Prisma.XOR<Prisma.PurchaseLocationsCreateWithoutUpdatedByUserInput, Prisma.PurchaseLocationsUncheckedCreateWithoutUpdatedByUserInput> | Prisma.PurchaseLocationsCreateWithoutUpdatedByUserInput[] | Prisma.PurchaseLocationsUncheckedCreateWithoutUpdatedByUserInput[]
+  connectOrCreate?: Prisma.PurchaseLocationsCreateOrConnectWithoutUpdatedByUserInput | Prisma.PurchaseLocationsCreateOrConnectWithoutUpdatedByUserInput[]
+  upsert?: Prisma.PurchaseLocationsUpsertWithWhereUniqueWithoutUpdatedByUserInput | Prisma.PurchaseLocationsUpsertWithWhereUniqueWithoutUpdatedByUserInput[]
+  createMany?: Prisma.PurchaseLocationsCreateManyUpdatedByUserInputEnvelope
+  set?: Prisma.PurchaseLocationsWhereUniqueInput | Prisma.PurchaseLocationsWhereUniqueInput[]
+  disconnect?: Prisma.PurchaseLocationsWhereUniqueInput | Prisma.PurchaseLocationsWhereUniqueInput[]
+  delete?: Prisma.PurchaseLocationsWhereUniqueInput | Prisma.PurchaseLocationsWhereUniqueInput[]
+  connect?: Prisma.PurchaseLocationsWhereUniqueInput | Prisma.PurchaseLocationsWhereUniqueInput[]
+  update?: Prisma.PurchaseLocationsUpdateWithWhereUniqueWithoutUpdatedByUserInput | Prisma.PurchaseLocationsUpdateWithWhereUniqueWithoutUpdatedByUserInput[]
+  updateMany?: Prisma.PurchaseLocationsUpdateManyWithWhereWithoutUpdatedByUserInput | Prisma.PurchaseLocationsUpdateManyWithWhereWithoutUpdatedByUserInput[]
+  deleteMany?: Prisma.PurchaseLocationsScalarWhereInput | Prisma.PurchaseLocationsScalarWhereInput[]
+}
+
+export type PurchaseLocationsUncheckedUpdateManyWithoutCreatedByUserNestedInput = {
+  create?: Prisma.XOR<Prisma.PurchaseLocationsCreateWithoutCreatedByUserInput, Prisma.PurchaseLocationsUncheckedCreateWithoutCreatedByUserInput> | Prisma.PurchaseLocationsCreateWithoutCreatedByUserInput[] | Prisma.PurchaseLocationsUncheckedCreateWithoutCreatedByUserInput[]
+  connectOrCreate?: Prisma.PurchaseLocationsCreateOrConnectWithoutCreatedByUserInput | Prisma.PurchaseLocationsCreateOrConnectWithoutCreatedByUserInput[]
+  upsert?: Prisma.PurchaseLocationsUpsertWithWhereUniqueWithoutCreatedByUserInput | Prisma.PurchaseLocationsUpsertWithWhereUniqueWithoutCreatedByUserInput[]
+  createMany?: Prisma.PurchaseLocationsCreateManyCreatedByUserInputEnvelope
+  set?: Prisma.PurchaseLocationsWhereUniqueInput | Prisma.PurchaseLocationsWhereUniqueInput[]
+  disconnect?: Prisma.PurchaseLocationsWhereUniqueInput | Prisma.PurchaseLocationsWhereUniqueInput[]
+  delete?: Prisma.PurchaseLocationsWhereUniqueInput | Prisma.PurchaseLocationsWhereUniqueInput[]
+  connect?: Prisma.PurchaseLocationsWhereUniqueInput | Prisma.PurchaseLocationsWhereUniqueInput[]
+  update?: Prisma.PurchaseLocationsUpdateWithWhereUniqueWithoutCreatedByUserInput | Prisma.PurchaseLocationsUpdateWithWhereUniqueWithoutCreatedByUserInput[]
+  updateMany?: Prisma.PurchaseLocationsUpdateManyWithWhereWithoutCreatedByUserInput | Prisma.PurchaseLocationsUpdateManyWithWhereWithoutCreatedByUserInput[]
+  deleteMany?: Prisma.PurchaseLocationsScalarWhereInput | Prisma.PurchaseLocationsScalarWhereInput[]
+}
+
+export type PurchaseLocationsUncheckedUpdateManyWithoutUpdatedByUserNestedInput = {
+  create?: Prisma.XOR<Prisma.PurchaseLocationsCreateWithoutUpdatedByUserInput, Prisma.PurchaseLocationsUncheckedCreateWithoutUpdatedByUserInput> | Prisma.PurchaseLocationsCreateWithoutUpdatedByUserInput[] | Prisma.PurchaseLocationsUncheckedCreateWithoutUpdatedByUserInput[]
+  connectOrCreate?: Prisma.PurchaseLocationsCreateOrConnectWithoutUpdatedByUserInput | Prisma.PurchaseLocationsCreateOrConnectWithoutUpdatedByUserInput[]
+  upsert?: Prisma.PurchaseLocationsUpsertWithWhereUniqueWithoutUpdatedByUserInput | Prisma.PurchaseLocationsUpsertWithWhereUniqueWithoutUpdatedByUserInput[]
+  createMany?: Prisma.PurchaseLocationsCreateManyUpdatedByUserInputEnvelope
+  set?: Prisma.PurchaseLocationsWhereUniqueInput | Prisma.PurchaseLocationsWhereUniqueInput[]
+  disconnect?: Prisma.PurchaseLocationsWhereUniqueInput | Prisma.PurchaseLocationsWhereUniqueInput[]
+  delete?: Prisma.PurchaseLocationsWhereUniqueInput | Prisma.PurchaseLocationsWhereUniqueInput[]
+  connect?: Prisma.PurchaseLocationsWhereUniqueInput | Prisma.PurchaseLocationsWhereUniqueInput[]
+  update?: Prisma.PurchaseLocationsUpdateWithWhereUniqueWithoutUpdatedByUserInput | Prisma.PurchaseLocationsUpdateWithWhereUniqueWithoutUpdatedByUserInput[]
+  updateMany?: Prisma.PurchaseLocationsUpdateManyWithWhereWithoutUpdatedByUserInput | Prisma.PurchaseLocationsUpdateManyWithWhereWithoutUpdatedByUserInput[]
+  deleteMany?: Prisma.PurchaseLocationsScalarWhereInput | Prisma.PurchaseLocationsScalarWhereInput[]
 }
 
 export type PurchaseLocationsCreateNestedOneWithoutReviewsInput = {
@@ -324,11 +510,125 @@ export type EnumPurchaseTypeFieldUpdateOperationsInput = {
   set?: $Enums.PurchaseType
 }
 
+export type PurchaseLocationsCreateWithoutCreatedByUserInput = {
+  id?: string
+  type: $Enums.PurchaseType
+  description: string
+  additionalInformation?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  updatedByUser: Prisma.UsersCreateNestedOneWithoutUpdatedPurchaseLocationsInput
+  reviews?: Prisma.ReviewsCreateNestedManyWithoutPurchaseLocationInput
+}
+
+export type PurchaseLocationsUncheckedCreateWithoutCreatedByUserInput = {
+  id?: string
+  type: $Enums.PurchaseType
+  description: string
+  additionalInformation?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  updatedBy: string
+  reviews?: Prisma.ReviewsUncheckedCreateNestedManyWithoutPurchaseLocationInput
+}
+
+export type PurchaseLocationsCreateOrConnectWithoutCreatedByUserInput = {
+  where: Prisma.PurchaseLocationsWhereUniqueInput
+  create: Prisma.XOR<Prisma.PurchaseLocationsCreateWithoutCreatedByUserInput, Prisma.PurchaseLocationsUncheckedCreateWithoutCreatedByUserInput>
+}
+
+export type PurchaseLocationsCreateManyCreatedByUserInputEnvelope = {
+  data: Prisma.PurchaseLocationsCreateManyCreatedByUserInput | Prisma.PurchaseLocationsCreateManyCreatedByUserInput[]
+  skipDuplicates?: boolean
+}
+
+export type PurchaseLocationsCreateWithoutUpdatedByUserInput = {
+  id?: string
+  type: $Enums.PurchaseType
+  description: string
+  additionalInformation?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  createdByUser: Prisma.UsersCreateNestedOneWithoutCreatedPurchaseLocationsInput
+  reviews?: Prisma.ReviewsCreateNestedManyWithoutPurchaseLocationInput
+}
+
+export type PurchaseLocationsUncheckedCreateWithoutUpdatedByUserInput = {
+  id?: string
+  type: $Enums.PurchaseType
+  description: string
+  additionalInformation?: string | null
+  createdAt?: Date | string
+  createdBy: string
+  updatedAt?: Date | string
+  reviews?: Prisma.ReviewsUncheckedCreateNestedManyWithoutPurchaseLocationInput
+}
+
+export type PurchaseLocationsCreateOrConnectWithoutUpdatedByUserInput = {
+  where: Prisma.PurchaseLocationsWhereUniqueInput
+  create: Prisma.XOR<Prisma.PurchaseLocationsCreateWithoutUpdatedByUserInput, Prisma.PurchaseLocationsUncheckedCreateWithoutUpdatedByUserInput>
+}
+
+export type PurchaseLocationsCreateManyUpdatedByUserInputEnvelope = {
+  data: Prisma.PurchaseLocationsCreateManyUpdatedByUserInput | Prisma.PurchaseLocationsCreateManyUpdatedByUserInput[]
+  skipDuplicates?: boolean
+}
+
+export type PurchaseLocationsUpsertWithWhereUniqueWithoutCreatedByUserInput = {
+  where: Prisma.PurchaseLocationsWhereUniqueInput
+  update: Prisma.XOR<Prisma.PurchaseLocationsUpdateWithoutCreatedByUserInput, Prisma.PurchaseLocationsUncheckedUpdateWithoutCreatedByUserInput>
+  create: Prisma.XOR<Prisma.PurchaseLocationsCreateWithoutCreatedByUserInput, Prisma.PurchaseLocationsUncheckedCreateWithoutCreatedByUserInput>
+}
+
+export type PurchaseLocationsUpdateWithWhereUniqueWithoutCreatedByUserInput = {
+  where: Prisma.PurchaseLocationsWhereUniqueInput
+  data: Prisma.XOR<Prisma.PurchaseLocationsUpdateWithoutCreatedByUserInput, Prisma.PurchaseLocationsUncheckedUpdateWithoutCreatedByUserInput>
+}
+
+export type PurchaseLocationsUpdateManyWithWhereWithoutCreatedByUserInput = {
+  where: Prisma.PurchaseLocationsScalarWhereInput
+  data: Prisma.XOR<Prisma.PurchaseLocationsUpdateManyMutationInput, Prisma.PurchaseLocationsUncheckedUpdateManyWithoutCreatedByUserInput>
+}
+
+export type PurchaseLocationsScalarWhereInput = {
+  AND?: Prisma.PurchaseLocationsScalarWhereInput | Prisma.PurchaseLocationsScalarWhereInput[]
+  OR?: Prisma.PurchaseLocationsScalarWhereInput[]
+  NOT?: Prisma.PurchaseLocationsScalarWhereInput | Prisma.PurchaseLocationsScalarWhereInput[]
+  id?: Prisma.StringFilter<"PurchaseLocations"> | string
+  type?: Prisma.EnumPurchaseTypeFilter<"PurchaseLocations"> | $Enums.PurchaseType
+  description?: Prisma.StringFilter<"PurchaseLocations"> | string
+  additionalInformation?: Prisma.StringNullableFilter<"PurchaseLocations"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"PurchaseLocations"> | Date | string
+  createdBy?: Prisma.StringFilter<"PurchaseLocations"> | string
+  updatedAt?: Prisma.DateTimeFilter<"PurchaseLocations"> | Date | string
+  updatedBy?: Prisma.StringFilter<"PurchaseLocations"> | string
+}
+
+export type PurchaseLocationsUpsertWithWhereUniqueWithoutUpdatedByUserInput = {
+  where: Prisma.PurchaseLocationsWhereUniqueInput
+  update: Prisma.XOR<Prisma.PurchaseLocationsUpdateWithoutUpdatedByUserInput, Prisma.PurchaseLocationsUncheckedUpdateWithoutUpdatedByUserInput>
+  create: Prisma.XOR<Prisma.PurchaseLocationsCreateWithoutUpdatedByUserInput, Prisma.PurchaseLocationsUncheckedCreateWithoutUpdatedByUserInput>
+}
+
+export type PurchaseLocationsUpdateWithWhereUniqueWithoutUpdatedByUserInput = {
+  where: Prisma.PurchaseLocationsWhereUniqueInput
+  data: Prisma.XOR<Prisma.PurchaseLocationsUpdateWithoutUpdatedByUserInput, Prisma.PurchaseLocationsUncheckedUpdateWithoutUpdatedByUserInput>
+}
+
+export type PurchaseLocationsUpdateManyWithWhereWithoutUpdatedByUserInput = {
+  where: Prisma.PurchaseLocationsScalarWhereInput
+  data: Prisma.XOR<Prisma.PurchaseLocationsUpdateManyMutationInput, Prisma.PurchaseLocationsUncheckedUpdateManyWithoutUpdatedByUserInput>
+}
+
 export type PurchaseLocationsCreateWithoutReviewsInput = {
   id?: string
   type: $Enums.PurchaseType
   description: string
   additionalInformation?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  createdByUser: Prisma.UsersCreateNestedOneWithoutCreatedPurchaseLocationsInput
+  updatedByUser: Prisma.UsersCreateNestedOneWithoutUpdatedPurchaseLocationsInput
 }
 
 export type PurchaseLocationsUncheckedCreateWithoutReviewsInput = {
@@ -336,6 +636,10 @@ export type PurchaseLocationsUncheckedCreateWithoutReviewsInput = {
   type: $Enums.PurchaseType
   description: string
   additionalInformation?: string | null
+  createdAt?: Date | string
+  createdBy: string
+  updatedAt?: Date | string
+  updatedBy: string
 }
 
 export type PurchaseLocationsCreateOrConnectWithoutReviewsInput = {
@@ -359,6 +663,10 @@ export type PurchaseLocationsUpdateWithoutReviewsInput = {
   type?: Prisma.EnumPurchaseTypeFieldUpdateOperationsInput | $Enums.PurchaseType
   description?: Prisma.StringFieldUpdateOperationsInput | string
   additionalInformation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdByUser?: Prisma.UsersUpdateOneRequiredWithoutCreatedPurchaseLocationsNestedInput
+  updatedByUser?: Prisma.UsersUpdateOneRequiredWithoutUpdatedPurchaseLocationsNestedInput
 }
 
 export type PurchaseLocationsUncheckedUpdateWithoutReviewsInput = {
@@ -366,6 +674,94 @@ export type PurchaseLocationsUncheckedUpdateWithoutReviewsInput = {
   type?: Prisma.EnumPurchaseTypeFieldUpdateOperationsInput | $Enums.PurchaseType
   description?: Prisma.StringFieldUpdateOperationsInput | string
   additionalInformation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdBy?: Prisma.StringFieldUpdateOperationsInput | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedBy?: Prisma.StringFieldUpdateOperationsInput | string
+}
+
+export type PurchaseLocationsCreateManyCreatedByUserInput = {
+  id?: string
+  type: $Enums.PurchaseType
+  description: string
+  additionalInformation?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  updatedBy: string
+}
+
+export type PurchaseLocationsCreateManyUpdatedByUserInput = {
+  id?: string
+  type: $Enums.PurchaseType
+  description: string
+  additionalInformation?: string | null
+  createdAt?: Date | string
+  createdBy: string
+  updatedAt?: Date | string
+}
+
+export type PurchaseLocationsUpdateWithoutCreatedByUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumPurchaseTypeFieldUpdateOperationsInput | $Enums.PurchaseType
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  additionalInformation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedByUser?: Prisma.UsersUpdateOneRequiredWithoutUpdatedPurchaseLocationsNestedInput
+  reviews?: Prisma.ReviewsUpdateManyWithoutPurchaseLocationNestedInput
+}
+
+export type PurchaseLocationsUncheckedUpdateWithoutCreatedByUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumPurchaseTypeFieldUpdateOperationsInput | $Enums.PurchaseType
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  additionalInformation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedBy?: Prisma.StringFieldUpdateOperationsInput | string
+  reviews?: Prisma.ReviewsUncheckedUpdateManyWithoutPurchaseLocationNestedInput
+}
+
+export type PurchaseLocationsUncheckedUpdateManyWithoutCreatedByUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumPurchaseTypeFieldUpdateOperationsInput | $Enums.PurchaseType
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  additionalInformation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedBy?: Prisma.StringFieldUpdateOperationsInput | string
+}
+
+export type PurchaseLocationsUpdateWithoutUpdatedByUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumPurchaseTypeFieldUpdateOperationsInput | $Enums.PurchaseType
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  additionalInformation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdByUser?: Prisma.UsersUpdateOneRequiredWithoutCreatedPurchaseLocationsNestedInput
+  reviews?: Prisma.ReviewsUpdateManyWithoutPurchaseLocationNestedInput
+}
+
+export type PurchaseLocationsUncheckedUpdateWithoutUpdatedByUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumPurchaseTypeFieldUpdateOperationsInput | $Enums.PurchaseType
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  additionalInformation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdBy?: Prisma.StringFieldUpdateOperationsInput | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  reviews?: Prisma.ReviewsUncheckedUpdateManyWithoutPurchaseLocationNestedInput
+}
+
+export type PurchaseLocationsUncheckedUpdateManyWithoutUpdatedByUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumPurchaseTypeFieldUpdateOperationsInput | $Enums.PurchaseType
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  additionalInformation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdBy?: Prisma.StringFieldUpdateOperationsInput | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -404,6 +800,12 @@ export type PurchaseLocationsSelect<ExtArgs extends runtime.Types.Extensions.Int
   type?: boolean
   description?: boolean
   additionalInformation?: boolean
+  createdAt?: boolean
+  createdBy?: boolean
+  updatedAt?: boolean
+  updatedBy?: boolean
+  createdByUser?: boolean | Prisma.UsersDefaultArgs<ExtArgs>
+  updatedByUser?: boolean | Prisma.UsersDefaultArgs<ExtArgs>
   reviews?: boolean | Prisma.PurchaseLocations$reviewsArgs<ExtArgs>
   _count?: boolean | Prisma.PurchaseLocationsCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["purchaseLocations"]>
@@ -413,6 +815,12 @@ export type PurchaseLocationsSelectCreateManyAndReturn<ExtArgs extends runtime.T
   type?: boolean
   description?: boolean
   additionalInformation?: boolean
+  createdAt?: boolean
+  createdBy?: boolean
+  updatedAt?: boolean
+  updatedBy?: boolean
+  createdByUser?: boolean | Prisma.UsersDefaultArgs<ExtArgs>
+  updatedByUser?: boolean | Prisma.UsersDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["purchaseLocations"]>
 
 export type PurchaseLocationsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -420,6 +828,12 @@ export type PurchaseLocationsSelectUpdateManyAndReturn<ExtArgs extends runtime.T
   type?: boolean
   description?: boolean
   additionalInformation?: boolean
+  createdAt?: boolean
+  createdBy?: boolean
+  updatedAt?: boolean
+  updatedBy?: boolean
+  createdByUser?: boolean | Prisma.UsersDefaultArgs<ExtArgs>
+  updatedByUser?: boolean | Prisma.UsersDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["purchaseLocations"]>
 
 export type PurchaseLocationsSelectScalar = {
@@ -427,19 +841,33 @@ export type PurchaseLocationsSelectScalar = {
   type?: boolean
   description?: boolean
   additionalInformation?: boolean
+  createdAt?: boolean
+  createdBy?: boolean
+  updatedAt?: boolean
+  updatedBy?: boolean
 }
 
-export type PurchaseLocationsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "type" | "description" | "additionalInformation", ExtArgs["result"]["purchaseLocations"]>
+export type PurchaseLocationsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "type" | "description" | "additionalInformation" | "createdAt" | "createdBy" | "updatedAt" | "updatedBy", ExtArgs["result"]["purchaseLocations"]>
 export type PurchaseLocationsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  createdByUser?: boolean | Prisma.UsersDefaultArgs<ExtArgs>
+  updatedByUser?: boolean | Prisma.UsersDefaultArgs<ExtArgs>
   reviews?: boolean | Prisma.PurchaseLocations$reviewsArgs<ExtArgs>
   _count?: boolean | Prisma.PurchaseLocationsCountOutputTypeDefaultArgs<ExtArgs>
 }
-export type PurchaseLocationsIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
-export type PurchaseLocationsIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type PurchaseLocationsIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  createdByUser?: boolean | Prisma.UsersDefaultArgs<ExtArgs>
+  updatedByUser?: boolean | Prisma.UsersDefaultArgs<ExtArgs>
+}
+export type PurchaseLocationsIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  createdByUser?: boolean | Prisma.UsersDefaultArgs<ExtArgs>
+  updatedByUser?: boolean | Prisma.UsersDefaultArgs<ExtArgs>
+}
 
 export type $PurchaseLocationsPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "PurchaseLocations"
   objects: {
+    createdByUser: Prisma.$UsersPayload<ExtArgs>
+    updatedByUser: Prisma.$UsersPayload<ExtArgs>
     reviews: Prisma.$ReviewsPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -447,6 +875,10 @@ export type $PurchaseLocationsPayload<ExtArgs extends runtime.Types.Extensions.I
     type: $Enums.PurchaseType
     description: string
     additionalInformation: string | null
+    createdAt: Date
+    createdBy: string
+    updatedAt: Date
+    updatedBy: string
   }, ExtArgs["result"]["purchaseLocations"]>
   composites: {}
 }
@@ -841,6 +1273,8 @@ readonly fields: PurchaseLocationsFieldRefs;
  */
 export interface Prisma__PurchaseLocationsClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  createdByUser<T extends Prisma.UsersDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UsersDefaultArgs<ExtArgs>>): Prisma.Prisma__UsersClient<runtime.Types.Result.GetResult<Prisma.$UsersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  updatedByUser<T extends Prisma.UsersDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UsersDefaultArgs<ExtArgs>>): Prisma.Prisma__UsersClient<runtime.Types.Result.GetResult<Prisma.$UsersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   reviews<T extends Prisma.PurchaseLocations$reviewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PurchaseLocations$reviewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReviewsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -875,6 +1309,10 @@ export interface PurchaseLocationsFieldRefs {
   readonly type: Prisma.FieldRef<"PurchaseLocations", 'PurchaseType'>
   readonly description: Prisma.FieldRef<"PurchaseLocations", 'String'>
   readonly additionalInformation: Prisma.FieldRef<"PurchaseLocations", 'String'>
+  readonly createdAt: Prisma.FieldRef<"PurchaseLocations", 'DateTime'>
+  readonly createdBy: Prisma.FieldRef<"PurchaseLocations", 'String'>
+  readonly updatedAt: Prisma.FieldRef<"PurchaseLocations", 'DateTime'>
+  readonly updatedBy: Prisma.FieldRef<"PurchaseLocations", 'String'>
 }
     
 
@@ -1124,6 +1562,10 @@ export type PurchaseLocationsCreateManyAndReturnArgs<ExtArgs extends runtime.Typ
    */
   data: Prisma.PurchaseLocationsCreateManyInput | Prisma.PurchaseLocationsCreateManyInput[]
   skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PurchaseLocationsIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1194,6 +1636,10 @@ export type PurchaseLocationsUpdateManyAndReturnArgs<ExtArgs extends runtime.Typ
    * Limit how many PurchaseLocations to update.
    */
   limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PurchaseLocationsIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**

@@ -131,7 +131,7 @@
       "STRING_INVALID": "The value must be a string",
       "NUMBER_INVALID": "The value must be a number",
       "NEGATIVE_PRICE": "The price cannot be negative",
-      "PRICE_TOO_HIGH": "The price cannot be greater than 9.999.999.999,99",
+      "PRICE_TOO_HIGH": "The price cannot be greater than 9,999,999,999.99",
       "ENUM_INVALID": "The value is unknown",
       "EMAIL_INVALID": "The email is invalid",
       "PHONE_NUMBER_INVALID": "The phone number does not match the selected country or has no international prefix",

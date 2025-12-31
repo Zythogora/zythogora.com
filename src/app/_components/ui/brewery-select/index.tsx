@@ -104,8 +104,8 @@ const BrewerySelect = ({
               size={24}
               className={cn(
                 "shrink-0 transition-transform duration-300",
-                "group-aria-expanded/color-select-trigger:-scale-y-100",
-                "group-aria-invalid/color-select-trigger:text-destructive",
+                "group-aria-expanded/brewery-select-trigger:-scale-y-100",
+                "group-aria-invalid/brewery-select-trigger:text-destructive",
               )}
               aria-hidden="true"
             />
@@ -119,9 +119,9 @@ const BrewerySelect = ({
           sideOffset={8}
           className="w-full max-w-[calc(100vw-(--spacing(16)))] min-w-[calc(var(--radix-popper-anchor-width)+(--spacing(1)))] p-0"
         >
-          <Command data-slot="color-select" shouldFilter={false}>
+          <Command data-slot="brewery-select" shouldFilter={false}>
             <div
-              data-slot="color-select-input-container"
+              data-slot="brewery-select-input-container"
               className={cn(
                 "flex items-center gap-x-3 rounded-t border-b-2 px-5 py-4 drop-shadow",
                 "bg-background dark:bg-stone-700",
@@ -130,7 +130,7 @@ const BrewerySelect = ({
               <SearchIcon className="size-5 shrink-0" />
 
               <Command.Input
-                data-slot="color-select-input"
+                data-slot="brewery-select-input"
                 placeholder={searchPlaceholder}
                 onValueChange={debouncedSearch}
                 className={cn(
@@ -143,7 +143,7 @@ const BrewerySelect = ({
             </div>
 
             <Command.List
-              data-slot="color-select-list"
+              data-slot="brewery-select-list"
               className={cn(
                 "scroll-py-1 overflow-x-hidden overflow-y-auto rounded",
                 "max-h-72 md:max-h-80",

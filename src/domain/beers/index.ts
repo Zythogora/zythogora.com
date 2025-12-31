@@ -303,7 +303,7 @@ export const createBeer = async (data: CreateBeerData) => {
   return beer;
 };
 
-export const reviewBeer = async (beerId: string, review: CreateReviewData) => {
+export const reviewBeer = async (review: CreateReviewData) => {
   const user = await getCurrentUser();
 
   if (!user) {
@@ -311,7 +311,7 @@ export const reviewBeer = async (beerId: string, review: CreateReviewData) => {
   }
 
   const beer = await prisma.beers.findUnique({
-    where: { id: beerId },
+    where: { id: review.beerId },
   });
 
   if (!beer) {
@@ -381,25 +381,26 @@ export const reviewBeer = async (beerId: string, review: CreateReviewData) => {
     pictureUrl = `${config.supabase.storageUrl}/object/public/${bucketName}/${baseFileName}`;
   }
 
-  const purchaseLocation = await getOrCreatePurchaseLocation(review).catch(
-    (error) => {
-      if (error instanceof UnknownPlaceError) {
-        console.error(
-          `Unknown purchase location: ${review.purchaseType === PurchaseType.PHYSICAL_LOCATION ? review.purchaseLocationId : ""}`,
-        );
-        throw new UnknownPurchaseLocationError();
-      }
+  const purchaseLocation = await getOrCreatePurchaseLocation(
+    review,
+    user.id,
+  ).catch((error) => {
+    if (error instanceof UnknownPlaceError) {
+      console.error(
+        `Unknown purchase location: ${review.purchaseType === PurchaseType.PHYSICAL_LOCATION ? review.purchaseLocationId : ""}`,
+      );
+      throw new UnknownPurchaseLocationError();
+    }
 
-      console.error("Unknown error getting purchase location", error);
-      return undefined;
-    },
-  );
+    console.error("Unknown error getting purchase location", error);
+    return undefined;
+  });
 
   const id = nanoid();
 
   const createdReview = await prisma.reviews.create({
     data: {
-      beerId,
+      beerId: review.beerId,
       userId: user.id,
 
       id,
@@ -427,7 +428,8 @@ export const reviewBeer = async (beerId: string, review: CreateReviewData) => {
 
       purchaseLocationId: purchaseLocation?.id,
       price: review.price,
-      priceCurrency: review.price ? review.priceCurrency : undefined,
+      priceCurrency:
+        review.price != undefined ? review.priceCurrency : undefined,
     },
     include: { beer: { include: { brewery: true } } },
   });

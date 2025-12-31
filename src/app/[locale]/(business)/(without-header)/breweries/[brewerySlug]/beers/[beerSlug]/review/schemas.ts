@@ -218,12 +218,9 @@ const reviewWithPurchaseTypeSchema = z.discriminatedUnion("purchaseType", [
   }),
 ]);
 
-export type ReviewPurchaseTypeData = z.infer<
-  z.ZodDiscriminatedUnion<
-    [typeof reviewPhysicalLocationSchema, typeof reviewOnlineSchema],
-    "purchaseType"
-  >
->;
+export type ReviewPurchaseTypeData =
+  | z.infer<typeof reviewPhysicalLocationSchema>
+  | z.infer<typeof reviewOnlineSchema>;
 
 export const reviewSchema = reviewWithPurchaseTypeSchema;
 
