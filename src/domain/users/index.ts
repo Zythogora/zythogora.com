@@ -160,6 +160,7 @@ export const getReviewByUsernameAndSlug = cache(
       include: {
         user: true,
         beer: { include: { brewery: true, style: true } },
+        purchaseLocation: true,
       },
     });
 

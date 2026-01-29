@@ -1,3 +1,5 @@
+import { Suspense } from "react";
+
 import Header from "@/app/[locale]/(business)/(with-header)/_components/header";
 import QueryClientProvider from "@/app/_components/providers/query-client-provider";
 import { cn } from "@/lib/tailwind";
@@ -8,7 +10,9 @@ const AppWithHeaderLayout = async ({ children }: PropsWithChildren) => {
   return (
     <QueryClientProvider>
       <div className="flex min-h-screen flex-col">
-        <Header />
+        <Suspense>
+          <Header />
+        </Suspense>
 
         <div
           className={cn(

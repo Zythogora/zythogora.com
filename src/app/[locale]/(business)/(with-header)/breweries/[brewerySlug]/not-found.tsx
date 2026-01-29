@@ -1,12 +1,13 @@
-import { getTranslations } from "next-intl/server";
+"use client";
+import { useTranslations } from "next-intl";
 
 import type { SearchKind } from "@/app/[locale]/(business)/(without-header)/search/types";
 import NotFoundIllustration from "@/app/_components/ui/not-found-illustration";
 import { Link } from "@/lib/i18n";
 import { Routes } from "@/lib/routes";
 
-const BreweryNotFound = async () => {
-  const t = await getTranslations();
+const BreweryNotFound = () => {
+  const t = useTranslations();
 
   return (
     <div className="flex h-screen flex-col items-center justify-center px-8">

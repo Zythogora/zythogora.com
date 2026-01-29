@@ -18,6 +18,9 @@ model Users {
   createdBreweries Breweries[] @relation("created_breweries")
   updatedBreweries Breweries[] @relation("updated_breweries")
 
+  createdPurchaseLocations PurchaseLocations[] @relation("created_purchase_locations")
+  updatedPurchaseLocations PurchaseLocations[] @relation("updated_purchase_locations")
+
   @@map("users")
   @@schema("public")
 }
@@ -40,6 +43,11 @@ model Reviews {
   bitterness           Bitterness?
   acidity              Acidity?
   duration             Duration?
+  price                Decimal?              @map("price") @db.Decimal(12, 2)
+  priceCurrency        String?               @map("price_currency") @db.Char(3)
+
+  purchaseLocationId String?            @map("purchase_location_id")
+  purchaseLocation   PurchaseLocations? @relation(fields: [purchaseLocationId], references: [id], onDelete: SetNull)
 
   beerId String @map("beer_id")
   beer   Beers  @relation(fields: [beerId], references: [id])
@@ -52,6 +60,25 @@ model Reviews {
 
   @@unique([slug, userId])
   @@map("reviews")
+  @@schema("public")
+}
+
+model PurchaseLocations {
+  id                    String       @id @default(nanoid())
+  type                  PurchaseType
+  description           String
+  additionalInformation String?      @map("additional_information")
+
+  createdAt     DateTime @default(now()) @map("created_at")
+  createdBy     String   @map("created_by")
+  createdByUser Users    @relation("created_purchase_locations", fields: [createdBy], references: [id])
+  updatedAt     DateTime @default(now()) @updatedAt @map("updated_at")
+  updatedBy     String   @map("updated_by")
+  updatedByUser Users    @relation("updated_purchase_locations", fields: [updatedBy], references: [id])
+
+  reviews Reviews[]
+
+  @@map("purchase_locations")
   @@schema("public")
 }
 

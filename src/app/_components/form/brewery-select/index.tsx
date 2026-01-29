@@ -58,6 +58,7 @@ const FormBrewerySelect = ({
           {...restSelectProps}
           name={name}
           key={key}
+          popoverId={`${field.id}-popover`}
           onChange={(value) => setSelectedBreweryId(value.id)}
           disabled={disabled}
           placeholder={placeholder}

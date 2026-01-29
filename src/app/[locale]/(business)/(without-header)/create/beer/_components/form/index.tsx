@@ -9,6 +9,7 @@ import { useActionState, useTransition } from "react";
 import { createBeerAction } from "@/app/[locale]/(business)/(without-header)/create/beer/actions";
 import { createBeerSchema } from "@/app/[locale]/(business)/(without-header)/create/beer/schemas";
 import FormBrewerySelect from "@/app/_components/form/brewery-select";
+import FormCheckbox from "@/app/_components/form/checkbox";
 import FormColorSelect from "@/app/_components/form/color-select";
 import FormInput from "@/app/_components/form/input";
 import FormStyleSelect from "@/app/_components/form/style-select";
@@ -34,6 +35,7 @@ const CreateBeerForm = ({ styleCategories, colors }: CreateBeerFormProps) => {
   const [isPending, startTransition] = useTransition();
 
   const [form, fields] = useForm({
+    id: "create-beer-form",
     lastResult,
 
     constraint: getZodConstraint(createBeerSchema),
@@ -60,7 +62,7 @@ const CreateBeerForm = ({ styleCategories, colors }: CreateBeerFormProps) => {
           {...getFormProps(form)}
           className={cn(
             "grid gap-x-6 gap-y-8",
-            "w-full grid-cols-8 @3xl:w-192 @3xl:grid-cols-7",
+            "w-full grid-cols-8 @3xl:w-3xl @3xl:grid-cols-7",
           )}
         >
           <FormInput
@@ -122,6 +124,18 @@ const CreateBeerForm = ({ styleCategories, colors }: CreateBeerFormProps) => {
             field={fields.description}
             rows={4}
             className="col-span-8 @3xl:col-span-7"
+          />
+
+          <FormCheckbox
+            label={t("createBeerPage.fields.organic.label")}
+            field={fields.organic}
+            className="col-span-8 @3xl:col-span-3"
+          />
+
+          <FormCheckbox
+            label={t("createBeerPage.fields.barrelAged.label")}
+            field={fields.barrelAged}
+            className="col-span-8 @3xl:col-span-4"
           />
 
           <Button

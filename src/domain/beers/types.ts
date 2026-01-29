@@ -39,6 +39,8 @@ export type Beer = {
   abv: number;
   ibu?: number;
   color: Color;
+  organic: boolean;
+  barrelAged: boolean;
   description?: string;
   releaseYear?: number;
 };

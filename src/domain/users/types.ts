@@ -13,6 +13,7 @@ import type {
   Haziness,
   HeadRetention,
   LabelDesign,
+  PurchaseLocations,
   Reviews,
   ServingFrom,
   Styles,
@@ -70,6 +71,7 @@ export type RawReview = Reviews & {
     brewery: Breweries;
     style: Styles;
   };
+  purchaseLocation: PurchaseLocations | null;
 };
 
 export type Review = {
@@ -90,6 +92,16 @@ export type Review = {
   bitterness?: Bitterness;
   acidity?: Acidity;
   duration?: Duration;
+  purchaseLocation?: Omit<
+    PurchaseLocations,
+    | "additionalInformation"
+    | "createdAt"
+    | "createdBy"
+    | "updatedAt"
+    | "updatedBy"
+  > & {
+    additionalInformation?: string;
+  };
   user: {
     username: string;
   };
@@ -111,7 +123,10 @@ export type Review = {
   hasNose: boolean;
   hasTaste: boolean;
   hasFinish: boolean;
-};
+} & (
+  | { price: undefined; priceCurrency: undefined }
+  | { price: number; priceCurrency: string }
+);
 
 export type UserCountryStats = {
   countryCode: string;

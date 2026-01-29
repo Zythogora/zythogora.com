@@ -11,6 +11,7 @@ import {
   Haziness,
   HeadRetention,
   LabelDesign,
+  PurchaseType,
   ServingFrom,
 } from "@db/enums";
 
@@ -109,7 +110,12 @@ export const ALLOWED_REVIEW_PICTURE_TYPES = [
   "image/jpg",
 ];
 
-export const reviewSchema = z.object({
+export const purchaseTypeValues = [
+  PurchaseType.PHYSICAL_LOCATION,
+  PurchaseType.ONLINE,
+] as const;
+
+const reviewBaseSchema = z.object({
   beerId: z.string(),
 
   globalScore: z
@@ -169,6 +175,53 @@ export const reviewSchema = z.object({
   acidity: z.enum(acidityValues).optional(),
 
   duration: z.enum(durationValues).optional(),
+
+  price: z.coerce
+    .number({
+      error: (issue) =>
+        issue.input === undefined
+          ? "form.errors.FIELD_REQUIRED"
+          : "form.errors.NUMBER_INVALID",
+    })
+    .min(0, { error: "form.errors.NEGATIVE_PRICE" })
+    .max(9_999_999_999.99, { error: "form.errors.PRICE_TOO_HIGH" })
+    .optional(),
+  priceCurrency: z.string(),
 });
+
+const reviewPhysicalLocationSchema = z.object({
+  purchaseType: z.literal(PurchaseType.PHYSICAL_LOCATION),
+  googlePlacesSessionToken: z.string(),
+  purchaseLocationId: z.string().optional(),
+});
+
+const reviewOnlineSchema = z.object({
+  purchaseType: z.literal(PurchaseType.ONLINE),
+  purchaseStoreUrl: z
+    .url({
+      error: (issue) =>
+        issue.input === undefined
+          ? "form.errors.FIELD_REQUIRED"
+          : "form.errors.URL_INVALID",
+    })
+    .optional(),
+});
+
+const reviewWithPurchaseTypeSchema = z.discriminatedUnion("purchaseType", [
+  z.object({
+    ...reviewBaseSchema.shape,
+    ...reviewPhysicalLocationSchema.shape,
+  }),
+  z.object({
+    ...reviewBaseSchema.shape,
+    ...reviewOnlineSchema.shape,
+  }),
+]);
+
+export type ReviewPurchaseTypeData =
+  | z.infer<typeof reviewPhysicalLocationSchema>
+  | z.infer<typeof reviewOnlineSchema>;
+
+export const reviewSchema = reviewWithPurchaseTypeSchema;
 
 export type CreateReviewData = z.infer<typeof reviewSchema>;

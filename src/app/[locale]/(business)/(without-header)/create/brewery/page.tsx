@@ -1,15 +1,17 @@
 import { headers } from "next/headers";
-import { getLocale, getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import CreateBreweryForm from "@/app/[locale]/(business)/(without-header)/create/brewery/_components/form";
 import { auth } from "@/lib/auth/server";
 import { redirect } from "@/lib/i18n";
 import { Routes } from "@/lib/routes";
 
-const CreateBreweryPage = async () => {
-  const t = await getTranslations();
-
-  const locale = await getLocale();
+const CreateBreweryPage = async ({
+  params,
+}: PageProps<"/[locale]/create/brewery">) => {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations({ locale });
 
   const session = await auth.api.getSession({
     headers: await headers(),

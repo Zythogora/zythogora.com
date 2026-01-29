@@ -32,12 +32,11 @@ export async function generateImageMetadata({
   ];
 }
 
-export default async function Image({
+export default async function OpenGraphImage({
   params,
 }: PageProps<"/[locale]/users/[username]">) {
-  const t = await getTranslations();
-
-  const { username } = await params;
+  const { locale, username } = await params;
+  const t = await getTranslations({ locale });
 
   const user = await getUserByUsername(username).catch(() => notFound());
 

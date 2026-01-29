@@ -138,3 +138,11 @@ export const Duration = {
 } as const
 
 export type Duration = (typeof Duration)[keyof typeof Duration]
+
+
+export const PurchaseType = {
+  PHYSICAL_LOCATION: 'PHYSICAL_LOCATION',
+  ONLINE: 'ONLINE'
+} as const
+
+export type PurchaseType = (typeof PurchaseType)[keyof typeof PurchaseType]

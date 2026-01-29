@@ -1,5 +1,5 @@
 import { headers } from "next/headers";
-import { getLocale, getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import PasswordForgottenForm from "@/app/[locale]/(auth)/password-forgotten/_components/form";
 import { passwordForgottenSearchParamsSchema } from "@/app/[locale]/(auth)/password-forgotten/schemas";
@@ -9,8 +9,11 @@ import { Routes } from "@/lib/routes";
 
 import type { Metadata } from "next";
 
-export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations();
+export async function generateMetadata({
+  params,
+}: PageProps<"/[locale]/password-forgotten">): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale });
 
   return {
     title: t("auth.passwordForgotten.metadata.title"),
@@ -18,11 +21,12 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const PasswordForgottenPage = async ({
+  params,
   searchParams,
 }: PageProps<"/[locale]/password-forgotten">) => {
-  const t = await getTranslations();
-
-  const locale = await getLocale();
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations({ locale });
 
   const session = await auth.api.getSession({
     headers: await headers(),

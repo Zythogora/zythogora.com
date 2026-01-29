@@ -1,5 +1,4 @@
 import { notFound } from "next/navigation";
-import { getLocale } from "next-intl/server";
 import { Suspense } from "react";
 
 import UserReviewCard from "@/app/[locale]/(business)/(with-header)/users/[username]/_components/review-card";
@@ -39,9 +38,7 @@ const ProfilePage = async ({
   params,
   searchParams,
 }: PageProps<"/[locale]/users/[username]">) => {
-  const locale = await getLocale();
-
-  const { username } = await params;
+  const { locale, username } = await params;
 
   const searchParamsResult = profileSearchParamsSchema.safeParse(
     await searchParams,

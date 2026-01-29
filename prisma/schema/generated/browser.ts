@@ -78,6 +78,11 @@ export type Users = Prisma.UsersModel
  */
 export type Reviews = Prisma.ReviewsModel
 /**
+ * Model PurchaseLocations
+ * 
+ */
+export type PurchaseLocations = Prisma.PurchaseLocationsModel
+/**
  * Model Friendships
  * 
  */

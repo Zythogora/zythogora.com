@@ -24,6 +24,7 @@ interface StyleSelectProps
   styleCategories: StyleCategory[];
   onChange?: (value: Style) => void;
   searchPlaceholder?: string;
+  popoverId?: string;
 }
 
 const StyleSelect = ({
@@ -32,12 +33,15 @@ const StyleSelect = ({
   placeholder,
   searchPlaceholder,
   className,
+  popoverId,
   ...restProps
 }: StyleSelectProps) => {
   const t = useTranslations();
 
   const [open, setOpen] = useState(false);
   const [selectedStyle, setSelectedStyle] = useState<Style | null>(null);
+
+  const contentId = popoverId ? `${popoverId}-content` : undefined;
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -47,6 +51,7 @@ const StyleSelect = ({
           data-slot="style-select-trigger"
           variant="outline"
           aria-expanded={open}
+          aria-controls={contentId}
           role="combobox"
           value={selectedStyle?.id}
           className={cn(
@@ -78,10 +83,11 @@ const StyleSelect = ({
       </PopoverTrigger>
 
       <PopoverContent
+        id={contentId}
         align="start"
         alignOffset={-2}
         sideOffset={8}
-        className="w-full max-w-[calc(100vw-theme(spacing.16))] min-w-[calc(var(--radix-popper-anchor-width)+theme(spacing.1))] p-0"
+        className="w-full max-w-[calc(100vw-(--spacing(16)))] min-w-[calc(var(--radix-popper-anchor-width)+(--spacing(1)))] p-0"
       >
         <Command
           data-slot="style-select"
@@ -125,9 +131,9 @@ const StyleSelect = ({
               "scroll-py-1 overflow-x-hidden overflow-y-auto rounded",
               "max-h-64 md:max-h-72",
               "bg-background dark:bg-stone-700",
-              "*:[&[cmdk-list-sizer]]:flex *:[&[cmdk-list-sizer]]:flex-col *:[&[cmdk-list-sizer]]:gap-y-1 *:[&[cmdk-list-sizer]]:p-2",
-              "**:[&[cmdk-group-heading]]:text-foreground-muted **:[&[cmdk-group-heading]]:pb-1",
-              "**:[&[cmdk-group-heading]]:text-sm md:**:[&[cmdk-group-heading]]:text-base",
+              "*:[[cmdk-list-sizer]]:flex *:[[cmdk-list-sizer]]:flex-col *:[[cmdk-list-sizer]]:gap-y-1 *:[[cmdk-list-sizer]]:p-2",
+              "**:[[cmdk-group-heading]]:text-foreground-muted **:[[cmdk-group-heading]]:pb-1",
+              "**:[[cmdk-group-heading]]:text-sm md:**:[[cmdk-group-heading]]:text-base",
             )}
           >
             <Command.Empty className={cn("px-3 py-2", "text-sm md:text-base")}>

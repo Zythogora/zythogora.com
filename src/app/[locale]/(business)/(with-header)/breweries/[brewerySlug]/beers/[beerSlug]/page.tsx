@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { getLocale, getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import BeerCard from "@/app/[locale]/(business)/(with-header)/breweries/[brewerySlug]/beers/[beerSlug]/_components/beer-card";
 import BeerReviews from "@/app/[locale]/(business)/(with-header)/breweries/[brewerySlug]/beers/[beerSlug]/_components/beer-reviews";
@@ -70,9 +70,9 @@ export async function generateStaticParams(): Promise<
 export async function generateMetadata({
   params,
 }: PageProps<"/[locale]/breweries/[brewerySlug]/beers/[beerSlug]">): Promise<Metadata> {
-  const t = await getTranslations();
+  const { beerSlug, brewerySlug, locale } = await params;
 
-  const { brewerySlug, beerSlug } = await params;
+  const t = await getTranslations({ locale });
 
   const beer = await getBeerBySlug(beerSlug, brewerySlug).catch(() =>
     notFound(),
@@ -105,9 +105,9 @@ const BeerPage = async ({
   params,
   searchParams,
 }: PageProps<"/[locale]/breweries/[brewerySlug]/beers/[beerSlug]">) => {
-  const t = await getTranslations();
-
-  const locale = await getLocale();
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations({ locale });
 
   const { brewerySlug, beerSlug } = await params;
 
@@ -153,6 +153,8 @@ const BeerPage = async ({
           ibu={beer.ibu}
           style={beer.style}
           color={beer.color}
+          organic={beer.organic}
+          barrelAged={beer.barrelAged}
           description={beer.description}
           releaseYear={beer.releaseYear}
           className="md:rounded-t-xl md:rounded-b"

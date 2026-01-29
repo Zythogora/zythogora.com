@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { getLocale, getTranslations } from "next-intl/server";
+import { getLocale, getTranslations, setRequestLocale } from "next-intl/server";
 
 import BreweryBeerList from "@/app/[locale]/(business)/(with-header)/breweries/[brewerySlug]/_components/brewery-beer-list";
 import BreweryCard from "@/app/[locale]/(business)/(with-header)/breweries/[brewerySlug]/_components/brewery-card";
@@ -58,7 +58,9 @@ export async function generateStaticParams(): Promise<
 export async function generateMetadata({
   params,
 }: PageProps<"/[locale]/breweries/[brewerySlug]">): Promise<Metadata> {
-  const t = await getTranslations();
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations({ locale });
 
   const { brewerySlug } = await params;
 

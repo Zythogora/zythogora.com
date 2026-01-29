@@ -9,7 +9,6 @@ import StyleSelect from "@/app/_components/ui/style-select";
 import type { StyleCategory } from "@/domain/beers/types";
 import { cn } from "@/lib/tailwind";
 
-
 interface FormStyleSelectProps {
   label: string;
   field: FieldMetadata;
@@ -57,6 +56,7 @@ const FormStyleSelect = ({
           {...restSelectProps}
           name={name}
           key={key}
+          popoverId={`${field.id}-popover`}
           styleCategories={styleCategories}
           onChange={(value) => setSelectedStyleId(value.id)}
           disabled={disabled}

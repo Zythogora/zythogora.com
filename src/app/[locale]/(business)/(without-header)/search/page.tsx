@@ -1,4 +1,4 @@
-import { getLocale, getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Suspense } from "react";
 
 import BeerTab from "@/app/[locale]/(business)/(without-header)/search/_components/tab/beer";
@@ -13,11 +13,11 @@ import { Routes } from "@/lib/routes";
 import type { Metadata } from "next";
 
 export async function generateMetadata({
+  params,
   searchParams,
 }: PageProps<"/[locale]/search">): Promise<Metadata> {
-  const t = await getTranslations();
-
-  const locale = await getLocale();
+  const { locale } = await params;
+  const t = await getTranslations({ locale });
 
   const searchParamsResult = searchParamsSchema.safeParse(await searchParams);
 
@@ -37,10 +37,13 @@ export async function generateMetadata({
   };
 }
 
-const SearchPage = async ({ searchParams }: PageProps<"/[locale]/search">) => {
-  const t = await getTranslations();
-
-  const locale = await getLocale();
+const SearchPage = async ({
+  params,
+  searchParams,
+}: PageProps<"/[locale]/search">) => {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations({ locale });
 
   const searchParamsResult = searchParamsSchema.safeParse(await searchParams);
 

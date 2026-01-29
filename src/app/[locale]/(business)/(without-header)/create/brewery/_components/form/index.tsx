@@ -13,6 +13,7 @@ import SocialLink, {
 } from "@/app/[locale]/(business)/(without-header)/create/brewery/_components/social-link";
 import { createBreweryAction } from "@/app/[locale]/(business)/(without-header)/create/brewery/actions";
 import {
+  createBreweryConstraintSchema,
   createBrewerySchema,
   type CreateBreweryData,
 } from "@/app/[locale]/(business)/(without-header)/create/brewery/schemas";
@@ -45,7 +46,7 @@ const CreateBreweryForm = () => {
 
     lastResult,
 
-    constraint: getZodConstraint(createBrewerySchema),
+    constraint: getZodConstraint(createBreweryConstraintSchema),
 
     onValidate({ formData }) {
       // Remove empty social links

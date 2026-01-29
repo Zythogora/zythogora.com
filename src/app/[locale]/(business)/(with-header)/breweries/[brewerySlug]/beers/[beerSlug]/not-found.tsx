@@ -1,11 +1,13 @@
-import { getTranslations } from "next-intl/server";
+"use client";
+
+import { useTranslations } from "next-intl";
 
 import NotFoundIllustration from "@/app/_components/ui/not-found-illustration";
 import { Link } from "@/lib/i18n";
 import { Routes } from "@/lib/routes";
 
-const BeerNotFound = async () => {
-  const t = await getTranslations();
+const BeerNotFound = () => {
+  const t = useTranslations();
 
   return (
     <div className="flex h-screen flex-col items-center justify-center px-8">

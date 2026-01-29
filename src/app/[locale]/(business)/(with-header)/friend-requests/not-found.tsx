@@ -1,10 +1,12 @@
-import { getTranslations } from "next-intl/server";
+"use client";
+
+import { useTranslations } from "next-intl";
 
 import { Link } from "@/lib/i18n";
 import { Routes } from "@/lib/routes";
 
-const FriendRequestNotFound = async () => {
-  const t = await getTranslations();
+const FriendRequestNotFound = () => {
+  const t = useTranslations();
 
   return (
     <>

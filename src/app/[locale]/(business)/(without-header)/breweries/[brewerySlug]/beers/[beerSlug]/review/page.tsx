@@ -1,5 +1,4 @@
 import { notFound } from "next/navigation";
-import { getLocale } from "next-intl/server";
 
 import ReviewForm from "@/app/[locale]/(business)/(without-header)/breweries/[brewerySlug]/beers/[beerSlug]/review/_components/form";
 import ReviewFormHeader from "@/app/[locale]/(business)/(without-header)/breweries/[brewerySlug]/beers/[beerSlug]/review/_components/header";
@@ -13,9 +12,7 @@ import { cn } from "@/lib/tailwind";
 const ReviewPage = async ({
   params,
 }: PageProps<"/[locale]/breweries/[brewerySlug]/beers/[beerSlug]/review">) => {
-  const locale = await getLocale();
-
-  const { brewerySlug, beerSlug } = await params;
+  const { beerSlug, brewerySlug, locale } = await params;
 
   const beer = await getBeerBySlug(beerSlug, brewerySlug).catch(() =>
     notFound(),

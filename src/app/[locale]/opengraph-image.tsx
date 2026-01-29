@@ -17,8 +17,11 @@ export async function generateImageMetadata() {
   ];
 }
 
-export default async function Image() {
-  const t = await getTranslations();
+export default async function OpenGraphImage({
+  params,
+}: PageProps<"/[locale]">) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale });
 
   return OpengraphPreview({
     children: (
