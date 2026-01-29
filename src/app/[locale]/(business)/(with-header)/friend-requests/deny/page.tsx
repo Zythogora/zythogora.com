@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
-import { getLocale, getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { Suspense } from "react";
 
 import AcceptButton from "@/app/[locale]/(business)/(with-header)/friend-requests/deny/_components/accept-button";
 import { friendRequestSearchParamsSchema } from "@/app/[locale]/(business)/(with-header)/friend-requests/schemas";
@@ -14,11 +15,12 @@ import { Routes } from "@/lib/routes";
 import { generatePath } from "@/lib/routes/utils";
 
 const RejectFriendRequestPage = async ({
+  params,
   searchParams,
 }: PageProps<"/[locale]/friend-requests/deny">) => {
-  const t = await getTranslations();
-
-  const locale = await getLocale();
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations({ locale });
 
   const searchParamsResult = friendRequestSearchParamsSchema.safeParse(
     await searchParams,
@@ -72,7 +74,9 @@ const RejectFriendRequestPage = async ({
       <div className="flex flex-col items-center gap-y-4">
         <p>{t("friendRequestPage.actions.accept.cta")}</p>
 
-        <AcceptButton friendRequestId={friendRequestId} />
+        <Suspense>
+          <AcceptButton friendRequestId={friendRequestId} />
+        </Suspense>
       </div>
     </>
   );

@@ -2,6 +2,8 @@ import { getTranslations } from "next-intl/server";
 import { Suspense } from "react";
 
 import BeerReviewCard from "@/app/[locale]/(business)/(with-header)/breweries/[brewerySlug]/beers/[beerSlug]/_components/beer-reviews/review-card";
+import BeerReviewCardLoader from "@/app/[locale]/(business)/(with-header)/breweries/[brewerySlug]/beers/[beerSlug]/_components/beer-reviews/review-card/loader";
+import Await from "@/app/_components/await";
 import ReviewPictureGrid from "@/app/_components/review-picture-grid";
 import ReviewPictureGridLoader from "@/app/_components/review-picture-grid/loader";
 import { ChipTabContent } from "@/app/_components/ui/chip-tabs";
@@ -41,12 +43,12 @@ const BeerYourReviews = async ({ beerId, page }: BeerYourReviewsProps) => {
     );
   }
 
-  const yourLatestPictures = await getYourLatestPictures({
+  const yourLatestPicturesPromise = getYourLatestPictures({
     userId: user.id,
     beerId,
   });
 
-  const yourReviews = await getBeerReviewsByUser({
+  const yourReviewsPromise = getBeerReviewsByUser({
     userId: user.id,
     beerId,
     page,
@@ -58,31 +60,55 @@ const BeerYourReviews = async ({ beerId, page }: BeerYourReviewsProps) => {
         key={`${beerId}-your-pictures`}
         fallback={<ReviewPictureGridLoader />}
       >
-        <ReviewPictureGrid pictures={yourLatestPictures} />
+        <Await promise={yourLatestPicturesPromise}>
+          {(pictures) => <ReviewPictureGrid pictures={pictures} />}
+        </Await>
       </Suspense>
 
-      <>
-        <p>
-          {t.rich("beerPage.reviews.tabs.myReviews.count", {
-            count: yourReviews.count,
-            muted: (chunks) => (
-              <span className="text-foreground/62.5 italic">{chunks}</span>
-            ),
-          })}
-        </p>
+      <Suspense
+        key={`${beerId}-your-reviews-count`}
+        fallback={
+          <div className="bg-foreground/25 my-1 h-4 w-24 animate-pulse rounded-full" />
+        }
+      >
+        <Await promise={yourReviewsPromise}>
+          {(yourReviews) => (
+            <p>
+              {t.rich("beerPage.reviews.tabs.myReviews.count", {
+                count: yourReviews.count,
+                muted: (chunks) => (
+                  <span className="text-foreground/62.5 italic">{chunks}</span>
+                ),
+              })}
+            </p>
+          )}
+        </Await>
+      </Suspense>
 
-        <div className="grid grid-cols-[minmax(0,1fr)_auto] gap-x-4 gap-y-8">
-          {yourReviews.results.map((review) => (
-            <BeerReviewCard key={review.id} review={review} />
+      <div className="grid grid-cols-[minmax(0,1fr)_auto] gap-x-4 gap-y-8">
+        <Suspense
+          key={`${beerId}-your-reviews-page-${page}`}
+          fallback={Array.from({ length: 10 }).map((_, index) => (
+            <BeerReviewCardLoader key={index} />
           ))}
+        >
+          <Await promise={yourReviewsPromise}>
+            {(yourReviews) => (
+              <>
+                {yourReviews.results.map((review) => (
+                  <BeerReviewCard key={review.id} review={review} />
+                ))}
 
-          <Pagination
-            current={yourReviews.page.current}
-            total={yourReviews.page.total}
-            className="col-span-2"
-          />
-        </div>
-      </>
+                <Pagination
+                  current={yourReviews.page.current}
+                  total={yourReviews.page.total}
+                  className="col-span-2"
+                />
+              </>
+            )}
+          </Await>
+        </Suspense>
+      </div>
     </ChipTabContent>
   );
 };

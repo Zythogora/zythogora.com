@@ -3,7 +3,7 @@ import { z } from "zod";
 
 import { zCountryCode, zEmail, zRequiredString, zUrl } from "@/lib/validator";
 
-export const createBrewerySchema = z
+const createBreweryBaseSchema = z
   .object({
     name: zRequiredString,
     country: zCountryCode,
@@ -52,19 +52,24 @@ export const createBrewerySchema = z
       }
     }
     return z.NEVER;
-  })
-  .transform((data) => {
-    if (data.contactPhoneNumber) {
-      return {
-        ...data,
-        contactPhoneNumber: parsePhoneNumberWithError(
-          data.contactPhoneNumber,
-          data.country as CountryCode,
-        ).formatInternational(),
-      };
-    }
-
-    return data;
   });
+
+// Schema for constraints (without transform) - getZodConstraint doesn't support transforms
+export const createBreweryConstraintSchema = createBreweryBaseSchema;
+
+// Full schema with transform for validation
+export const createBrewerySchema = createBreweryBaseSchema.transform((data) => {
+  if (data.contactPhoneNumber) {
+    return {
+      ...data,
+      contactPhoneNumber: parsePhoneNumberWithError(
+        data.contactPhoneNumber,
+        data.country as CountryCode,
+      ).formatInternational(),
+    };
+  }
+
+  return data;
+});
 
 export type CreateBreweryData = z.infer<typeof createBrewerySchema>;

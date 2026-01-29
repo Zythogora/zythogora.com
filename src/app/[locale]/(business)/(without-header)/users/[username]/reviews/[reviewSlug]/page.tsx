@@ -1,5 +1,9 @@
 import { notFound } from "next/navigation";
-import { getFormatter, getTranslations } from "next-intl/server";
+import {
+  getFormatter,
+  getTranslations,
+  setRequestLocale,
+} from "next-intl/server";
 
 import { PurchaseType, ServingFrom } from "@db/client";
 
@@ -33,9 +37,8 @@ import type { Metadata } from "next";
 export async function generateMetadata({
   params,
 }: PageProps<"/[locale]/users/[username]/reviews/[reviewSlug]">): Promise<Metadata> {
-  const t = await getTranslations();
-
-  const { username, reviewSlug } = await params;
+  const { locale, username, reviewSlug } = await params;
+  const t = await getTranslations({ locale });
 
   const review = await getReviewByUsernameAndSlug(username, reviewSlug).catch(
     () => notFound(),
@@ -79,10 +82,11 @@ export async function generateMetadata({
 const UserReviewPage = async ({
   params,
 }: PageProps<"/[locale]/users/[username]/reviews/[reviewSlug]">) => {
-  const t = await getTranslations();
-  const formatter = await getFormatter();
+  const { locale, username, reviewSlug } = await params;
 
-  const { username, reviewSlug } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations({ locale });
+  const formatter = await getFormatter({ locale });
 
   const review = await getReviewByUsernameAndSlug(username, reviewSlug).catch(
     () => notFound(),

@@ -1,4 +1,4 @@
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import SignInProviders from "@/app/[locale]/(auth)/_components/providers";
 import SignUpForm from "@/app/[locale]/(auth)/sign-up/_components/form";
@@ -8,16 +8,21 @@ import { cn } from "@/lib/tailwind";
 
 import type { Metadata } from "next";
 
-export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations();
+export async function generateMetadata({
+  params,
+}: PageProps<"/[locale]/sign-up">): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale });
 
   return {
     title: t("auth.signUp.metadata.title"),
   };
 }
 
-const SignUpPage = async () => {
-  const t = await getTranslations();
+const SignUpPage = async ({ params }: PageProps<"/[locale]/sign-up">) => {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations({ locale });
 
   const availableProviders = config.auth.availableProviders;
 

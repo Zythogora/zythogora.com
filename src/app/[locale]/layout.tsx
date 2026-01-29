@@ -31,9 +31,7 @@ const paragraph = Inter({
 
 export async function generateMetadata({
   params,
-}: {
-  params: Promise<{ locale: string }>;
-}): Promise<Metadata> {
+}: PageProps<"/[locale]">): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale });
 
@@ -41,6 +39,14 @@ export async function generateMetadata({
   const description = t("metadata.description");
 
   return {
+    metadataBase: new URL(publicConfig.baseUrl),
+    alternates: {
+      canonical: "/",
+      languages: {
+        fr: "/fr",
+        en: "/en",
+      },
+    },
     title,
     description,
     openGraph: {

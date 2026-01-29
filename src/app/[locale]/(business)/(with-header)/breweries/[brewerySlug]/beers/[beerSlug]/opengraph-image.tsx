@@ -28,11 +28,12 @@ export async function generateImageMetadata({
   ];
 }
 
-export default async function Image({
+export default async function OpenGraphImage({
   params,
 }: PageProps<"/[locale]/breweries/[brewerySlug]/beers/[beerSlug]">) {
-  const t = await getTranslations();
-  const formatter = await getFormatter();
+  const { locale } = await params;
+  const t = await getTranslations({ locale });
+  const formatter = await getFormatter({ locale });
 
   const { brewerySlug, beerSlug } = await params;
 
