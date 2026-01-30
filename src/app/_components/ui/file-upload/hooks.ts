@@ -1,6 +1,7 @@
 "use client";
 
-import imageCompression from "browser-image-compression";
+import { encode as encodeJpeg } from "@jsquash/jpeg";
+import resize from "@jsquash/resize";
 import {
   useCallback,
   useEffect,
@@ -12,6 +13,64 @@ import {
 } from "react";
 
 import type React from "react";
+
+async function compressImage(
+  file: File,
+  options: {
+    maxWidthOrHeight?: number;
+    quality?: number;
+    onProgress?: (progress: number) => void;
+  },
+): Promise<File | null> {
+  const { maxWidthOrHeight = 1000, quality = 80, onProgress } = options;
+
+  const isPng = file.type === "image/png";
+  const isJpeg = file.type === "image/jpeg" || file.type === "image/jpg";
+
+  if (!isPng && !isJpeg) {
+    return null;
+  }
+
+  onProgress?.(10);
+
+  const bitmap = await createImageBitmap(file);
+  onProgress?.(20);
+
+  const canvas = new OffscreenCanvas(bitmap.width, bitmap.height);
+  const ctx = canvas.getContext("2d");
+  if (ctx === null) {
+    bitmap.close();
+    return null;
+  }
+
+  ctx.drawImage(bitmap, 0, 0);
+  let imageData = ctx.getImageData(0, 0, bitmap.width, bitmap.height);
+  bitmap.close();
+  onProgress?.(40);
+
+  const { width, height } = imageData;
+  if (width > maxWidthOrHeight || height > maxWidthOrHeight) {
+    const scale = maxWidthOrHeight / Math.max(width, height);
+    imageData = await resize(imageData, {
+      width: Math.round(width * scale),
+      height: Math.round(height * scale),
+    });
+  }
+  onProgress?.(70);
+
+  const compressedBuffer = await encodeJpeg(imageData, { quality });
+  onProgress?.(90);
+
+  const compressedFile = new File(
+    [compressedBuffer],
+    isPng ? file.name.replace(/\.png$/i, ".jpg") : file.name,
+    { type: "image/jpeg", lastModified: file.lastModified },
+  );
+
+  onProgress?.(100);
+
+  return compressedFile;
+}
 
 export type FileMetadata = {
   name: string;
@@ -253,12 +312,9 @@ export const useFileUpload = (
       for (const file of filesToProcess) {
         if (file.type.startsWith("image/")) {
           try {
-            const compressedFile = await imageCompression(file, {
-              maxSizeMB: 2,
-              maxIteration: 5,
-              maxWidthOrHeight: 1200,
-              alwaysKeepResolution: true,
-              preserveExif: true,
+            const compressedFile = await compressImage(file, {
+              maxWidthOrHeight: 2400,
+              quality: 80,
               onProgress: (progress: number) => {
                 setState((prev) => ({
                   ...prev,
@@ -267,11 +323,7 @@ export const useFileUpload = (
               },
             });
 
-            // Preserve original file name and metadata by creating a new File with the original name
-            const processedFile = new File([compressedFile], file.name, {
-              type: compressedFile.type,
-              lastModified: file.lastModified,
-            });
+            const processedFile = compressedFile ?? file;
 
             validFiles.push({
               file: processedFile,
