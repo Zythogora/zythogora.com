@@ -4,40 +4,62 @@ import { getFormProps, useForm } from "@conform-to/react";
 import { getZodConstraint, parseWithZod } from "@conform-to/zod/v4";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { useActionState, useTransition } from "react";
+import { useState } from "react";
 
-import { signInAction } from "@/app/[locale]/(auth)/sign-in/actions";
 import { signInSchema } from "@/app/[locale]/(auth)/sign-in/schemas";
 import FormInput from "@/app/_components/form/input";
 import Button from "@/app/_components/ui/button";
 import FormError from "@/app/_components/ui/form-error";
-import { Link } from "@/lib/i18n";
+import { authClient } from "@/lib/auth/client";
+import { Link, useRouter } from "@/lib/i18n";
 import { Routes } from "@/lib/routes";
+import { getSafeRedirectUrl } from "@/lib/routes/redirect";
 import { cn } from "@/lib/tailwind";
 
 const SignInForm = () => {
   const t = useTranslations();
+  const router = useRouter();
 
   const searchParams = useSearchParams();
-  const redirectUrl = searchParams.get("redirect") ?? Routes.HOME;
+  const redirectUrl = getSafeRedirectUrl(searchParams.get("redirect"));
 
-  const [lastResult, action] = useActionState(signInAction, undefined);
-  const [isPending, startTransition] = useTransition();
+  const [isPending, setIsPending] = useState(false);
+  const [formError, setFormError] = useState<string | null>(null);
 
   const [form, fields] = useForm({
-    lastResult,
-
     constraint: getZodConstraint(signInSchema),
 
     onValidate({ formData }) {
       return parseWithZod(formData, { schema: signInSchema });
     },
 
-    onSubmit(event, { formData }) {
+    async onSubmit(event, { formData }) {
       event.preventDefault();
-      startTransition(() => {
-        action(formData);
-      });
+
+      const submission = parseWithZod(formData, { schema: signInSchema });
+      if (submission.status !== "success") {
+        return submission.reply();
+      }
+
+      setIsPending(true);
+      setFormError(null);
+
+      const { error } = await authClient.signIn.email(submission.value);
+
+      if (error) {
+        setIsPending(false);
+
+        if (error.code === "INVALID_EMAIL_OR_PASSWORD") {
+          setFormError("auth.signIn.errors.CREDENTIALS_INVALID");
+        } else if (error.code === "EMAIL_NOT_VERIFIED") {
+          setFormError("auth.signIn.errors.EMAIL_NOT_VERIFIED");
+        } else {
+          setFormError("form.errors.UNKNOWN_ERROR");
+        }
+        return;
+      }
+
+      router.push(redirectUrl);
     },
 
     shouldValidate: "onBlur",
@@ -55,8 +77,6 @@ const SignInForm = () => {
         "**:data-[slot=form-error]:text-red-900",
       )}
     >
-      <input type="hidden" name="redirectUrl" value={redirectUrl} />
-
       <div className="flex flex-col gap-y-8">
         <FormInput
           label={t("form.fields.email.label")}
@@ -104,10 +124,10 @@ const SignInForm = () => {
           </Link>
         </div>
 
-        {lastResult?.error?.[""] ? (
+        {formError ? (
           <FormError
             id={form.errorId}
-            errors={lastResult?.error?.[""] ?? []}
+            errors={[formError]}
             className="my-0 h-fit"
           />
         ) : null}

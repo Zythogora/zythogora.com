@@ -5,40 +5,6 @@ export class AuthError extends Error {
   }
 }
 
-export class SignInError extends AuthError {
-  constructor(message: string) {
-    super(message);
-    this.name = "SignInError";
-  }
-}
-
-export enum SignInErrorType {
-  CREDENTIALS_INVALID = "CREDENTIALS_INVALID",
-  EMAIL_NOT_VERIFIED = "EMAIL_NOT_VERIFIED",
-  UNKNOWN_SIGN_IN_ERROR = "UNKNOWN_SIGN_IN_ERROR",
-}
-
-export class CredentialsInvalidError extends SignInError {
-  constructor() {
-    super(SignInErrorType.CREDENTIALS_INVALID);
-    this.name = "CredentialsInvalidError";
-  }
-}
-
-export class EmailNotVerifiedError extends SignInError {
-  constructor() {
-    super(SignInErrorType.EMAIL_NOT_VERIFIED);
-    this.name = "EmailNotVerifiedError";
-  }
-}
-
-export class UnknownSignInError extends SignInError {
-  constructor() {
-    super(SignInErrorType.UNKNOWN_SIGN_IN_ERROR);
-    this.name = "UnknownSignInError";
-  }
-}
-
 export class SignUpError extends AuthError {
   constructor(message: string) {
     super(message);

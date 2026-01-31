@@ -269,6 +269,9 @@
       "errors": {
         "INVALID_TOKEN": "Le token est invalide ou a expiré"
       }
+    },
+    "signOut": {
+      "success": "Vous avez été déconnecté."
     }
   },
   "home": {
