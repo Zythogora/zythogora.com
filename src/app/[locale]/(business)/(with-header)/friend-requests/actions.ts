@@ -10,9 +10,8 @@ import {
   UnknownFriendRequestError,
   UnknownFriendshipError,
 } from "@/domain/users/errors";
-import { getCurrentUser } from "@/lib/auth";
-
 import type { ActionResult } from "@/lib/action/types";
+import { getCurrentUser } from "@/lib/auth";
 
 export const rejectPreviouslyAcceptedFriendRequestAction = async (
   friendRequestId: string,

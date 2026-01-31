@@ -117,6 +117,8 @@ export const purchaseTypeValues = [
 
 const reviewBaseSchema = z.object({
   beerId: z.string(),
+  reviewId: z.string().optional(),
+  removePicture: z.coerce.boolean().optional(),
 
   globalScore: z
     .number({
@@ -224,4 +226,4 @@ export type ReviewPurchaseTypeData =
 
 export const reviewSchema = reviewWithPurchaseTypeSchema;
 
-export type CreateReviewData = z.infer<typeof reviewSchema>;
+export type ReviewActionData = z.infer<typeof reviewSchema>;

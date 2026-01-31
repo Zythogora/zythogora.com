@@ -1,6 +1,5 @@
-import enMessages from "@/lib/i18n/translations/en.json";
-
 import type { routing } from "@/lib/i18n";
+import enMessages from "@/lib/i18n/translations/en.json";
 
 export type Locale = (typeof routing.locales)[number];
 

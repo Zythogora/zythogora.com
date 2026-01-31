@@ -1,9 +1,8 @@
 "use server";
 
 import { deleteReview, getReviewById } from "@/domain/reviews";
-import { getCurrentUser } from "@/lib/auth";
-
 import type { ActionResult } from "@/lib/action/types";
+import { getCurrentUser } from "@/lib/auth";
 
 export const deleteReviewAction = async (
   reviewId: string,

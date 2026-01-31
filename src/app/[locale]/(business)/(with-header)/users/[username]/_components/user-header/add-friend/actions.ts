@@ -1,9 +1,8 @@
 "use server";
 
 import { sendFriendRequest } from "@/domain/users";
-import { getCurrentUser } from "@/lib/auth";
-
 import type { ActionResult } from "@/lib/action/types";
+import { getCurrentUser } from "@/lib/auth";
 
 export const addFriend = async (
   userId: string,

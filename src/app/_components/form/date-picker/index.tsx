@@ -25,7 +25,12 @@ const FormDatePicker = ({
   disabled,
   className,
 }: FormDatePickerProps) => {
-  const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
+  const initialDate = field.initialValue
+    ? new Date(field.initialValue as string)
+    : undefined;
+  const [selectedDate, setSelectedDate] = useState<Date | undefined>(
+    initialDate && !isNaN(initialDate.getTime()) ? initialDate : undefined,
+  );
 
   const inputRef = useRef<HTMLInputElement>(null);
   useEffect(() => {
@@ -42,7 +47,7 @@ const FormDatePicker = ({
   });
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { type, value, ...ariaInputProps } = restInputProps;
+  const { type, value, defaultValue, ...ariaInputProps } = restInputProps;
 
   return (
     <div

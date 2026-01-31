@@ -3,22 +3,26 @@
 import { ImageUpIcon, XIcon } from "lucide-react";
 import mime from "mime";
 import { useTranslations } from "next-intl";
-import { type MouseEvent } from "react";
 
 import Button from "@/app/_components/ui/button";
 import {
   formatBytes,
   useFileUpload,
 } from "@/app/_components/ui/file-upload/hooks";
+import type { FileMetadata } from "@/app/_components/ui/file-upload/hooks";
 import Progress from "@/app/_components/ui/progress";
 import { cn } from "@/lib/tailwind";
+
+import type { MouseEvent } from "react";
 
 interface FileUploadProps {
   onFileChange: (file: File | null) => void;
   onError: (error: string[] | undefined) => void;
   maxSize: number;
   acceptedTypes: string[];
+  initialFiles?: FileMetadata[];
   onCompression?: (isCompressing: boolean) => void;
+  onRemove?: () => void;
 }
 
 const FileUpload = ({
@@ -26,7 +30,9 @@ const FileUpload = ({
   onError,
   maxSize,
   acceptedTypes,
+  initialFiles,
   onCompression,
+  onRemove,
 }: FileUploadProps) => {
   const t = useTranslations();
 
@@ -43,6 +49,7 @@ const FileUpload = ({
     },
   ] = useFileUpload({
     accept: acceptedTypes.join(","),
+    initialFiles,
     maxSize,
     onFilesChange: (files) =>
       onFileChange(
@@ -67,6 +74,7 @@ const FileUpload = ({
 
     if (files[0]) {
       removeFile(files[0].id);
+      onRemove?.();
     }
   };
 
