@@ -21,12 +21,14 @@ import { cn } from "@/lib/tailwind";
 interface PurchaseLocationAutocompleteProps {
   field: FieldMetadata;
   getSessionToken: () => string;
+  defaultLocationLabel?: string;
   className?: string;
 }
 
 const PurchaseLocationAutocomplete = ({
   field,
   getSessionToken,
+  defaultLocationLabel,
   className,
 }: PurchaseLocationAutocompleteProps) => {
   const t = useTranslations();
@@ -37,6 +39,8 @@ const PurchaseLocationAutocomplete = ({
 
   const [selectedLocation, setSelectedLocation] =
     useState<AutocompleteLocation | null>(null);
+
+  const hasInitialValue = !!field.initialValue && !selectedLocation;
 
   const { isPending, data } = useQuery({
     queryFn: async () => {
@@ -78,7 +82,10 @@ const PurchaseLocationAutocomplete = ({
         ref={inputRef}
         type="hidden"
         name={name}
-        value={selectedLocation?.placeId ?? ""}
+        value={
+          selectedLocation?.placeId ??
+          (hasInitialValue ? (field.initialValue as string) : "")
+        }
       />
 
       <Popover open={open} onOpenChange={setOpen}>
@@ -104,6 +111,10 @@ const PurchaseLocationAutocomplete = ({
                 <p className="truncate">
                   {selectedLocation.mainText} ({selectedLocation.secondaryText})
                 </p>
+              </div>
+            ) : hasInitialValue && defaultLocationLabel ? (
+              <div className="flex min-w-0 flex-row items-center gap-x-3">
+                <p className="truncate">{defaultLocationLabel}</p>
               </div>
             ) : (
               <span />

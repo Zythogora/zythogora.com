@@ -5,7 +5,7 @@ import { cache } from "react";
 
 import { PurchaseType, type Prisma } from "@db/client";
 
-import type { CreateReviewData } from "@/app/[locale]/(business)/(without-header)/breweries/[brewerySlug]/beers/[beerSlug]/review/schemas";
+import type { ReviewActionData } from "@/app/[locale]/(business)/(without-header)/breweries/[brewerySlug]/beers/[beerSlug]/review/schemas";
 import type { CreateBeerData } from "@/app/[locale]/(business)/(without-header)/create/beer/schemas";
 import {
   InvalidBreweryError,
@@ -304,7 +304,7 @@ export const createBeer = async (data: CreateBeerData) => {
   return beer;
 };
 
-export const reviewBeer = async (review: CreateReviewData) => {
+export const reviewBeer = async (review: ReviewActionData) => {
   const user = await getCurrentUser();
 
   if (!user) {

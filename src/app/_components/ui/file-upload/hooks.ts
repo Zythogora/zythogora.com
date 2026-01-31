@@ -31,6 +31,15 @@ async function compressImage(
     return null;
   }
 
+  // Feature guard: check for browser support before using these APIs
+  if (
+    typeof createImageBitmap !== "function" ||
+    typeof OffscreenCanvas === "undefined"
+  ) {
+    onProgress?.(100);
+    return null;
+  }
+
   onProgress?.(10);
 
   const bitmap = await createImageBitmap(file);

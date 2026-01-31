@@ -16,7 +16,6 @@ import { PurchaseType, ServingFrom } from "@db/enums";
 
 import PurchaseLocationAutocomplete from "@/app/[locale]/(business)/(without-header)/breweries/[brewerySlug]/beers/[beerSlug]/review/_components/purchase-location-autocomplete";
 import { useGoogleAutocompleteSession } from "@/app/[locale]/(business)/(without-header)/breweries/[brewerySlug]/beers/[beerSlug]/review/_components/purchase-location-autocomplete/hooks";
-import { reviewAction } from "@/app/[locale]/(business)/(without-header)/breweries/[brewerySlug]/beers/[beerSlug]/review/actions";
 import {
   acidityValues,
   ALLOWED_REVIEW_PICTURE_TYPES,
@@ -43,15 +42,36 @@ import FormServingFromSelector from "@/app/_components/form/serving-form-selecto
 import FormSlider from "@/app/_components/form/slider";
 import FormTextarea from "@/app/_components/form/textarea";
 import QueryClientProvider from "@/app/_components/providers/query-client-provider";
+import type { ReviewFormDefaultValue } from "@/app/_components/review-form/types";
 import Button from "@/app/_components/ui/button";
 import FormError from "@/app/_components/ui/form-error";
-import { usePathname, useRouter, type Locale } from "@/lib/i18n";
+import { usePathname, useRouter } from "@/lib/i18n";
+import type { Locale } from "@/lib/i18n/types";
+import { Routes } from "@/lib/routes";
+import { generatePath } from "@/lib/routes/utils";
+
+import type { SubmissionResult } from "@conform-to/react";
 
 interface ReviewFormProps {
   beerId: string;
+  reviewAction: (
+    pathname: string,
+    previousState: unknown,
+    formData: FormData,
+  ) => Promise<SubmissionResult<string[]> | undefined>;
+  defaultValue?: ReviewFormDefaultValue;
+  existingReviewParams?: {
+    username: string;
+    reviewSlug: string;
+  };
 }
 
-const ReviewForm = ({ beerId }: ReviewFormProps) => {
+const ReviewForm = ({
+  beerId,
+  reviewAction,
+  defaultValue,
+  existingReviewParams,
+}: ReviewFormProps) => {
   const t = useTranslations();
   const locale = useLocale() as Locale;
 
@@ -64,13 +84,19 @@ const ReviewForm = ({ beerId }: ReviewFormProps) => {
   );
   const [isPending, startTransition] = useTransition();
   const [isCompressing, setIsCompressing] = useState(false);
+  const [removePicture, setRemovePicture] = useState(false);
   const { getSessionToken } = useGoogleAutocompleteSession();
 
-  const [form, fields] = useForm({
+  const [form, rawFields] = useForm({
     defaultValue: {
       beerId,
       googlePlacesSessionToken: getSessionToken(),
       priceCurrency: { fr: "EUR", en: "USD" }[locale],
+      ...defaultValue,
+      bestBeforeDate: defaultValue?.bestBeforeDate
+        ? defaultValue.bestBeforeDate.toISOString().split("T")[0]
+        : undefined,
+      price: defaultValue?.price?.toString(),
     },
 
     lastResult,
@@ -88,7 +114,9 @@ const ReviewForm = ({ beerId }: ReviewFormProps) => {
       event.preventDefault();
 
       // Update session token in formData before submission if physical location is selected
-      if (fields.purchaseType.value === PurchaseType.PHYSICAL_LOCATION) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const f = rawFields as any;
+      if (f.purchaseType.value === PurchaseType.PHYSICAL_LOCATION) {
         const currentToken = getSessionToken();
         formData.set("googlePlacesSessionToken", currentToken);
       }
@@ -102,8 +130,21 @@ const ReviewForm = ({ beerId }: ReviewFormProps) => {
     shouldRevalidate: "onInput",
   });
 
+  // Cast fields to any to access all schema fields including discriminated union fields
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const fields = rawFields as any;
+
   const handleCancel = () => {
-    router.back();
+    if (existingReviewParams) {
+      router.push(
+        generatePath(Routes.REVIEW, {
+          username: existingReviewParams.username,
+          reviewSlug: existingReviewParams.reviewSlug,
+        }),
+      );
+    } else {
+      router.back();
+    }
   };
 
   useEffect(() => {
@@ -129,13 +170,22 @@ const ReviewForm = ({ beerId }: ReviewFormProps) => {
             key={fields.beerId.key}
           />
 
-          <input
-            {...getInputProps(fields.googlePlacesSessionToken, {
-              type: "hidden",
-              ariaAttributes: false,
-            })}
-            key={fields.googlePlacesSessionToken.key}
-          />
+          {defaultValue?.reviewId ? (
+            <>
+              <input
+                {...getInputProps(fields.reviewId, {
+                  type: "hidden",
+                  ariaAttributes: false,
+                })}
+                key={fields.reviewId.key}
+              />
+              <input
+                type="hidden"
+                name="removePicture"
+                value={removePicture ? "true" : "false"}
+              />
+            </>
+          ) : null}
 
           <FormGroup formId={form.id} label={t("reviewPage.overall.title")}>
             <FormSlider
@@ -143,8 +193,16 @@ const ReviewForm = ({ beerId }: ReviewFormProps) => {
               field={fields.globalScore}
               min={0}
               max={10}
-              defaultValue={[5]}
+              defaultValue={[defaultValue?.globalScore ?? 5]}
               step={0.5}
+            />
+
+            <input
+              {...getInputProps(fields.googlePlacesSessionToken, {
+                type: "hidden",
+                ariaAttributes: false,
+              })}
+              key={fields.googlePlacesSessionToken.key}
             />
 
             <FormServingFromSelector field={fields.servingFrom} />
@@ -168,7 +226,25 @@ const ReviewForm = ({ beerId }: ReviewFormProps) => {
               field={fields.picture}
               maxSize={MAX_REVIEW_PICTURE_SIZE}
               acceptedTypes={ALLOWED_REVIEW_PICTURE_TYPES}
+              initialFiles={
+                defaultValue?.pictureUrl
+                  ? [
+                      {
+                        id: defaultValue.pictureUrl,
+                        name: defaultValue.pictureUrl,
+                        size: 1234,
+                        type: "image/jpeg",
+                        url: defaultValue.pictureUrl,
+                      },
+                    ]
+                  : undefined
+              }
               onCompression={setIsCompressing}
+              onRemove={
+                defaultValue?.pictureUrl
+                  ? () => setRemovePicture(true)
+                  : undefined
+              }
             />
           </FormGroup>
 
@@ -275,6 +351,7 @@ const ReviewForm = ({ beerId }: ReviewFormProps) => {
                 <PurchaseLocationAutocomplete
                   field={fields.purchaseLocationId}
                   getSessionToken={getSessionToken}
+                  defaultLocationLabel={defaultValue?.purchaseLocationLabel}
                 />
               ) : fields.purchaseType.value === PurchaseType.ONLINE ? (
                 <FormInput

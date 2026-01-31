@@ -16,11 +16,10 @@ import type {
   PurchaseLocations,
   Reviews,
   ServingFrom,
-  Styles,
   Users,
 } from "@db/client";
 
-import type { Color } from "@/domain/beers/types";
+import type { Color, RawBeer } from "@/domain/beers/types";
 import type { Country } from "@/lib/i18n/countries/types";
 
 export type RawUser = Users & {
@@ -67,10 +66,7 @@ export type UserReview = {
 
 export type RawReview = Reviews & {
   user: Users;
-  beer: Beers & {
-    brewery: Breweries;
-    style: Styles;
-  };
+  beer: RawBeer;
   purchaseLocation: PurchaseLocations | null;
 };
 
@@ -112,11 +108,15 @@ export type Review = {
     name: string;
     abv: number;
     ibu?: number;
+    color: Color;
     style: string;
+    organic: boolean;
+    barrelAged: boolean;
     brewery: {
       id: string;
       slug: string;
       name: string;
+      country: Country;
     };
   };
   createdAt: Date;

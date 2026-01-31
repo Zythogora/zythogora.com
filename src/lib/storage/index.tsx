@@ -7,7 +7,6 @@ import {
 } from "@aws-sdk/client-s3";
 
 import { config } from "@/lib/config";
-
 import type { StorageBuckets } from "@/lib/storage/constants";
 
 const s3 = new S3Client({

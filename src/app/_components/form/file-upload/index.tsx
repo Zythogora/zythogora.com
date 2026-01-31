@@ -14,6 +14,7 @@ interface FormFileUploadProps extends Omit<
   field: FieldMetadata;
   className?: string;
   onCompression?: (isCompressing: boolean) => void;
+  onRemove?: () => void;
 }
 
 const FormFileUpload = ({
@@ -21,6 +22,7 @@ const FormFileUpload = ({
   field,
   className,
   onCompression,
+  onRemove,
   ...restProps
 }: FormFileUploadProps) => {
   const [errors, setErrors] = useState<string[] | undefined>();
@@ -44,6 +46,9 @@ const FormFileUpload = ({
 
   const { name } = getInputProps(field, { type: "file" });
 
+  // Note: existingPictureUrl is only used for visual display via initialFiles prop
+  // File inputs cannot have their value set to a URL for security reasons
+
   return (
     <div
       className={cn("group/form-component", "flex flex-col gap-y-1", className)}
@@ -65,6 +70,7 @@ const FormFileUpload = ({
           onFileChange={handleFileChange}
           onError={setErrors}
           onCompression={onCompression}
+          onRemove={onRemove}
           {...restProps}
         />
 

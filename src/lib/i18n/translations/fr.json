@@ -692,6 +692,18 @@
       "SOMETHING_WENT_WRONG": "Une erreur est survenue lors de la publication de la critique"
     }
   },
+  "editReviewPage": {
+    "errors": {
+      "EXPLICIT_CONTENT_CHECK": "Une erreur est survenue lors de la vérification du contenu explicite",
+      "EXPLICIT_CONTENT": "La photo contient du contenu explicite et ne peut pas être publiée",
+      "IMAGE_OPTIMIZATION": "Une erreur est survenue lors du traitement de la photo",
+      "FILE_UPLOAD": "Une erreur est survenue lors du téléchargement de la photo",
+      "UNKNOWN_PURCHASE_LOCATION": "Le point de vente est inconnu",
+      "REVIEW_NOT_FOUND": "La critique n'a pas été trouvée",
+      "FORBIDDEN": "Vous n'êtes pas autorisé à modifier cette critique",
+      "SOMETHING_WENT_WRONG": "Une erreur est survenue lors de la mise à jour de la critique"
+    }
+  },
   "createBeerPage": {
     "title": "Ajouter une nouvelle bière",
     "fields": {

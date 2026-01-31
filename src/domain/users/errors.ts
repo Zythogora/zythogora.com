@@ -26,6 +26,13 @@ export class UnknownReviewError extends ReviewError {
   }
 }
 
+export class ForbiddenReviewEditError extends ReviewError {
+  constructor() {
+    super("Forbidden review edit");
+    this.name = "ForbiddenReviewEditError";
+  }
+}
+
 export class FriendError extends UserError {
   constructor(message: string) {
     super(message);
