@@ -103,6 +103,7 @@ export type Review = {
     additionalInformation?: string;
   };
   user: {
+    id: string;
     username: string;
   };
   beer: {
