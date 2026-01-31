@@ -2,6 +2,7 @@
 
 import { LogInIcon, LogOutIcon, UserRoundPlusIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { toast } from "sonner";
 
 import DiscordIcon from "@/app/_components/icons/social/types/discord";
 import UserIcon from "@/app/_components/icons/user";
@@ -79,6 +80,7 @@ const UserMenu = ({ className }: UserMenuProps) => {
 
   const handleSignOut = async () => {
     await authClient.signOut();
+    toast.success(t("auth.signOut.success"));
     router.refresh();
   };
 

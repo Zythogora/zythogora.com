@@ -23,13 +23,14 @@ import FormTextarea from "@/app/_components/form/textarea";
 import Button from "@/app/_components/ui/button";
 import Label from "@/app/_components/ui/label";
 import { Routes } from "@/lib/routes";
+import { getSafeRedirectUrl } from "@/lib/routes/redirect";
 import { cn } from "@/lib/tailwind";
 
 const CreateBreweryForm = () => {
   const t = useTranslations();
 
   const searchParams = useSearchParams();
-  const redirectUrl = searchParams.get("redirect") ?? null;
+  const redirectUrl = getSafeRedirectUrl(searchParams.get("redirect"), null);
 
   const [socialLinks, setSocialLinks] = useState<
     CreateBreweryData["socialLinks"]

@@ -8,5 +8,4 @@ export const signInSchema = z.object({
     tooShort: "auth.signIn.errors.PASSWORD_INVALID",
     tooLong: "auth.signIn.errors.PASSWORD_INVALID",
   }),
-  redirectUrl: z.string(),
 });
