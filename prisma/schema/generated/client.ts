@@ -119,3 +119,13 @@ export type Friends = Prisma.FriendsModel
  * 
  */
 export type FriendRequests = Prisma.FriendRequestsModel
+/**
+ * Model StorageLocations
+ * 
+ */
+export type StorageLocations = Prisma.StorageLocationsModel
+/**
+ * Model CellarItems
+ * 
+ */
+export type CellarItems = Prisma.CellarItemsModel

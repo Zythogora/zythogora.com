@@ -320,6 +320,7 @@ export type BeersWhereInput = {
   createdByUser?: Prisma.XOR<Prisma.UsersScalarRelationFilter, Prisma.UsersWhereInput>
   updatedByUser?: Prisma.XOR<Prisma.UsersScalarRelationFilter, Prisma.UsersWhereInput>
   reviews?: Prisma.ReviewsListRelationFilter
+  cellarItems?: Prisma.CellarItemsListRelationFilter
 }
 
 export type BeersOrderByWithRelationInput = {
@@ -345,6 +346,7 @@ export type BeersOrderByWithRelationInput = {
   createdByUser?: Prisma.UsersOrderByWithRelationInput
   updatedByUser?: Prisma.UsersOrderByWithRelationInput
   reviews?: Prisma.ReviewsOrderByRelationAggregateInput
+  cellarItems?: Prisma.CellarItemsOrderByRelationAggregateInput
   _relevance?: Prisma.BeersOrderByRelevanceInput
 }
 
@@ -375,6 +377,7 @@ export type BeersWhereUniqueInput = Prisma.AtLeast<{
   createdByUser?: Prisma.XOR<Prisma.UsersScalarRelationFilter, Prisma.UsersWhereInput>
   updatedByUser?: Prisma.XOR<Prisma.UsersScalarRelationFilter, Prisma.UsersWhereInput>
   reviews?: Prisma.ReviewsListRelationFilter
+  cellarItems?: Prisma.CellarItemsListRelationFilter
 }, "id" | "slug" | "name_breweryId">
 
 export type BeersOrderByWithAggregationInput = {
@@ -441,6 +444,7 @@ export type BeersCreateInput = {
   createdByUser: Prisma.UsersCreateNestedOneWithoutCreatedBeersInput
   updatedByUser: Prisma.UsersCreateNestedOneWithoutUpdatedBeersInput
   reviews?: Prisma.ReviewsCreateNestedManyWithoutBeerInput
+  cellarItems?: Prisma.CellarItemsCreateNestedManyWithoutBeerInput
 }
 
 export type BeersUncheckedCreateInput = {
@@ -461,6 +465,7 @@ export type BeersUncheckedCreateInput = {
   updatedAt?: Date | string
   updatedBy: string
   reviews?: Prisma.ReviewsUncheckedCreateNestedManyWithoutBeerInput
+  cellarItems?: Prisma.CellarItemsUncheckedCreateNestedManyWithoutBeerInput
 }
 
 export type BeersUpdateInput = {
@@ -481,6 +486,7 @@ export type BeersUpdateInput = {
   createdByUser?: Prisma.UsersUpdateOneRequiredWithoutCreatedBeersNestedInput
   updatedByUser?: Prisma.UsersUpdateOneRequiredWithoutUpdatedBeersNestedInput
   reviews?: Prisma.ReviewsUpdateManyWithoutBeerNestedInput
+  cellarItems?: Prisma.CellarItemsUpdateManyWithoutBeerNestedInput
 }
 
 export type BeersUncheckedUpdateInput = {
@@ -501,6 +507,7 @@ export type BeersUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.StringFieldUpdateOperationsInput | string
   reviews?: Prisma.ReviewsUncheckedUpdateManyWithoutBeerNestedInput
+  cellarItems?: Prisma.CellarItemsUncheckedUpdateManyWithoutBeerNestedInput
 }
 
 export type BeersCreateManyInput = {
@@ -890,6 +897,20 @@ export type BeersUpdateOneRequiredWithoutReviewsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.BeersUpdateToOneWithWhereWithoutReviewsInput, Prisma.BeersUpdateWithoutReviewsInput>, Prisma.BeersUncheckedUpdateWithoutReviewsInput>
 }
 
+export type BeersCreateNestedOneWithoutCellarItemsInput = {
+  create?: Prisma.XOR<Prisma.BeersCreateWithoutCellarItemsInput, Prisma.BeersUncheckedCreateWithoutCellarItemsInput>
+  connectOrCreate?: Prisma.BeersCreateOrConnectWithoutCellarItemsInput
+  connect?: Prisma.BeersWhereUniqueInput
+}
+
+export type BeersUpdateOneRequiredWithoutCellarItemsNestedInput = {
+  create?: Prisma.XOR<Prisma.BeersCreateWithoutCellarItemsInput, Prisma.BeersUncheckedCreateWithoutCellarItemsInput>
+  connectOrCreate?: Prisma.BeersCreateOrConnectWithoutCellarItemsInput
+  upsert?: Prisma.BeersUpsertWithoutCellarItemsInput
+  connect?: Prisma.BeersWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BeersUpdateToOneWithWhereWithoutCellarItemsInput, Prisma.BeersUpdateWithoutCellarItemsInput>, Prisma.BeersUncheckedUpdateWithoutCellarItemsInput>
+}
+
 export type BeersCreateWithoutBreweryInput = {
   id?: string
   slug: string
@@ -907,6 +928,7 @@ export type BeersCreateWithoutBreweryInput = {
   createdByUser: Prisma.UsersCreateNestedOneWithoutCreatedBeersInput
   updatedByUser: Prisma.UsersCreateNestedOneWithoutUpdatedBeersInput
   reviews?: Prisma.ReviewsCreateNestedManyWithoutBeerInput
+  cellarItems?: Prisma.CellarItemsCreateNestedManyWithoutBeerInput
 }
 
 export type BeersUncheckedCreateWithoutBreweryInput = {
@@ -926,6 +948,7 @@ export type BeersUncheckedCreateWithoutBreweryInput = {
   updatedAt?: Date | string
   updatedBy: string
   reviews?: Prisma.ReviewsUncheckedCreateNestedManyWithoutBeerInput
+  cellarItems?: Prisma.CellarItemsUncheckedCreateNestedManyWithoutBeerInput
 }
 
 export type BeersCreateOrConnectWithoutBreweryInput = {
@@ -993,6 +1016,7 @@ export type BeersCreateWithoutStyleInput = {
   createdByUser: Prisma.UsersCreateNestedOneWithoutCreatedBeersInput
   updatedByUser: Prisma.UsersCreateNestedOneWithoutUpdatedBeersInput
   reviews?: Prisma.ReviewsCreateNestedManyWithoutBeerInput
+  cellarItems?: Prisma.CellarItemsCreateNestedManyWithoutBeerInput
 }
 
 export type BeersUncheckedCreateWithoutStyleInput = {
@@ -1012,6 +1036,7 @@ export type BeersUncheckedCreateWithoutStyleInput = {
   updatedAt?: Date | string
   updatedBy: string
   reviews?: Prisma.ReviewsUncheckedCreateNestedManyWithoutBeerInput
+  cellarItems?: Prisma.CellarItemsUncheckedCreateNestedManyWithoutBeerInput
 }
 
 export type BeersCreateOrConnectWithoutStyleInput = {
@@ -1057,6 +1082,7 @@ export type BeersCreateWithoutColorInput = {
   createdByUser: Prisma.UsersCreateNestedOneWithoutCreatedBeersInput
   updatedByUser: Prisma.UsersCreateNestedOneWithoutUpdatedBeersInput
   reviews?: Prisma.ReviewsCreateNestedManyWithoutBeerInput
+  cellarItems?: Prisma.CellarItemsCreateNestedManyWithoutBeerInput
 }
 
 export type BeersUncheckedCreateWithoutColorInput = {
@@ -1076,6 +1102,7 @@ export type BeersUncheckedCreateWithoutColorInput = {
   updatedAt?: Date | string
   updatedBy: string
   reviews?: Prisma.ReviewsUncheckedCreateNestedManyWithoutBeerInput
+  cellarItems?: Prisma.CellarItemsUncheckedCreateNestedManyWithoutBeerInput
 }
 
 export type BeersCreateOrConnectWithoutColorInput = {
@@ -1121,6 +1148,7 @@ export type BeersCreateWithoutCreatedByUserInput = {
   color: Prisma.ColorsCreateNestedOneWithoutBeersInput
   updatedByUser: Prisma.UsersCreateNestedOneWithoutUpdatedBeersInput
   reviews?: Prisma.ReviewsCreateNestedManyWithoutBeerInput
+  cellarItems?: Prisma.CellarItemsCreateNestedManyWithoutBeerInput
 }
 
 export type BeersUncheckedCreateWithoutCreatedByUserInput = {
@@ -1140,6 +1168,7 @@ export type BeersUncheckedCreateWithoutCreatedByUserInput = {
   updatedAt?: Date | string
   updatedBy: string
   reviews?: Prisma.ReviewsUncheckedCreateNestedManyWithoutBeerInput
+  cellarItems?: Prisma.CellarItemsUncheckedCreateNestedManyWithoutBeerInput
 }
 
 export type BeersCreateOrConnectWithoutCreatedByUserInput = {
@@ -1169,6 +1198,7 @@ export type BeersCreateWithoutUpdatedByUserInput = {
   color: Prisma.ColorsCreateNestedOneWithoutBeersInput
   createdByUser: Prisma.UsersCreateNestedOneWithoutCreatedBeersInput
   reviews?: Prisma.ReviewsCreateNestedManyWithoutBeerInput
+  cellarItems?: Prisma.CellarItemsCreateNestedManyWithoutBeerInput
 }
 
 export type BeersUncheckedCreateWithoutUpdatedByUserInput = {
@@ -1188,6 +1218,7 @@ export type BeersUncheckedCreateWithoutUpdatedByUserInput = {
   createdBy: string
   updatedAt?: Date | string
   reviews?: Prisma.ReviewsUncheckedCreateNestedManyWithoutBeerInput
+  cellarItems?: Prisma.CellarItemsUncheckedCreateNestedManyWithoutBeerInput
 }
 
 export type BeersCreateOrConnectWithoutUpdatedByUserInput = {
@@ -1249,6 +1280,7 @@ export type BeersCreateWithoutReviewsInput = {
   color: Prisma.ColorsCreateNestedOneWithoutBeersInput
   createdByUser: Prisma.UsersCreateNestedOneWithoutCreatedBeersInput
   updatedByUser: Prisma.UsersCreateNestedOneWithoutUpdatedBeersInput
+  cellarItems?: Prisma.CellarItemsCreateNestedManyWithoutBeerInput
 }
 
 export type BeersUncheckedCreateWithoutReviewsInput = {
@@ -1268,6 +1300,7 @@ export type BeersUncheckedCreateWithoutReviewsInput = {
   createdBy: string
   updatedAt?: Date | string
   updatedBy: string
+  cellarItems?: Prisma.CellarItemsUncheckedCreateNestedManyWithoutBeerInput
 }
 
 export type BeersCreateOrConnectWithoutReviewsInput = {
@@ -1303,6 +1336,7 @@ export type BeersUpdateWithoutReviewsInput = {
   color?: Prisma.ColorsUpdateOneRequiredWithoutBeersNestedInput
   createdByUser?: Prisma.UsersUpdateOneRequiredWithoutCreatedBeersNestedInput
   updatedByUser?: Prisma.UsersUpdateOneRequiredWithoutUpdatedBeersNestedInput
+  cellarItems?: Prisma.CellarItemsUpdateManyWithoutBeerNestedInput
 }
 
 export type BeersUncheckedUpdateWithoutReviewsInput = {
@@ -1322,6 +1356,103 @@ export type BeersUncheckedUpdateWithoutReviewsInput = {
   createdBy?: Prisma.StringFieldUpdateOperationsInput | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.StringFieldUpdateOperationsInput | string
+  cellarItems?: Prisma.CellarItemsUncheckedUpdateManyWithoutBeerNestedInput
+}
+
+export type BeersCreateWithoutCellarItemsInput = {
+  id?: string
+  slug: string
+  name: string
+  abv: number
+  ibu?: number | null
+  description?: string | null
+  releaseYear?: number | null
+  organic?: boolean
+  barrelAged?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  brewery: Prisma.BreweriesCreateNestedOneWithoutBeersInput
+  style: Prisma.StylesCreateNestedOneWithoutBeersInput
+  color: Prisma.ColorsCreateNestedOneWithoutBeersInput
+  createdByUser: Prisma.UsersCreateNestedOneWithoutCreatedBeersInput
+  updatedByUser: Prisma.UsersCreateNestedOneWithoutUpdatedBeersInput
+  reviews?: Prisma.ReviewsCreateNestedManyWithoutBeerInput
+}
+
+export type BeersUncheckedCreateWithoutCellarItemsInput = {
+  id?: string
+  slug: string
+  name: string
+  abv: number
+  ibu?: number | null
+  description?: string | null
+  releaseYear?: number | null
+  organic?: boolean
+  barrelAged?: boolean
+  breweryId: string
+  styleId: string
+  colorId: string
+  createdAt?: Date | string
+  createdBy: string
+  updatedAt?: Date | string
+  updatedBy: string
+  reviews?: Prisma.ReviewsUncheckedCreateNestedManyWithoutBeerInput
+}
+
+export type BeersCreateOrConnectWithoutCellarItemsInput = {
+  where: Prisma.BeersWhereUniqueInput
+  create: Prisma.XOR<Prisma.BeersCreateWithoutCellarItemsInput, Prisma.BeersUncheckedCreateWithoutCellarItemsInput>
+}
+
+export type BeersUpsertWithoutCellarItemsInput = {
+  update: Prisma.XOR<Prisma.BeersUpdateWithoutCellarItemsInput, Prisma.BeersUncheckedUpdateWithoutCellarItemsInput>
+  create: Prisma.XOR<Prisma.BeersCreateWithoutCellarItemsInput, Prisma.BeersUncheckedCreateWithoutCellarItemsInput>
+  where?: Prisma.BeersWhereInput
+}
+
+export type BeersUpdateToOneWithWhereWithoutCellarItemsInput = {
+  where?: Prisma.BeersWhereInput
+  data: Prisma.XOR<Prisma.BeersUpdateWithoutCellarItemsInput, Prisma.BeersUncheckedUpdateWithoutCellarItemsInput>
+}
+
+export type BeersUpdateWithoutCellarItemsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  abv?: Prisma.FloatFieldUpdateOperationsInput | number
+  ibu?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  releaseYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  organic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  barrelAged?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  brewery?: Prisma.BreweriesUpdateOneRequiredWithoutBeersNestedInput
+  style?: Prisma.StylesUpdateOneRequiredWithoutBeersNestedInput
+  color?: Prisma.ColorsUpdateOneRequiredWithoutBeersNestedInput
+  createdByUser?: Prisma.UsersUpdateOneRequiredWithoutCreatedBeersNestedInput
+  updatedByUser?: Prisma.UsersUpdateOneRequiredWithoutUpdatedBeersNestedInput
+  reviews?: Prisma.ReviewsUpdateManyWithoutBeerNestedInput
+}
+
+export type BeersUncheckedUpdateWithoutCellarItemsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  abv?: Prisma.FloatFieldUpdateOperationsInput | number
+  ibu?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  releaseYear?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  organic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  barrelAged?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  breweryId?: Prisma.StringFieldUpdateOperationsInput | string
+  styleId?: Prisma.StringFieldUpdateOperationsInput | string
+  colorId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdBy?: Prisma.StringFieldUpdateOperationsInput | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedBy?: Prisma.StringFieldUpdateOperationsInput | string
+  reviews?: Prisma.ReviewsUncheckedUpdateManyWithoutBeerNestedInput
 }
 
 export type BeersCreateManyBreweryInput = {
@@ -1359,6 +1490,7 @@ export type BeersUpdateWithoutBreweryInput = {
   createdByUser?: Prisma.UsersUpdateOneRequiredWithoutCreatedBeersNestedInput
   updatedByUser?: Prisma.UsersUpdateOneRequiredWithoutUpdatedBeersNestedInput
   reviews?: Prisma.ReviewsUpdateManyWithoutBeerNestedInput
+  cellarItems?: Prisma.CellarItemsUpdateManyWithoutBeerNestedInput
 }
 
 export type BeersUncheckedUpdateWithoutBreweryInput = {
@@ -1378,6 +1510,7 @@ export type BeersUncheckedUpdateWithoutBreweryInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.StringFieldUpdateOperationsInput | string
   reviews?: Prisma.ReviewsUncheckedUpdateManyWithoutBeerNestedInput
+  cellarItems?: Prisma.CellarItemsUncheckedUpdateManyWithoutBeerNestedInput
 }
 
 export type BeersUncheckedUpdateManyWithoutBreweryInput = {
@@ -1433,6 +1566,7 @@ export type BeersUpdateWithoutStyleInput = {
   createdByUser?: Prisma.UsersUpdateOneRequiredWithoutCreatedBeersNestedInput
   updatedByUser?: Prisma.UsersUpdateOneRequiredWithoutUpdatedBeersNestedInput
   reviews?: Prisma.ReviewsUpdateManyWithoutBeerNestedInput
+  cellarItems?: Prisma.CellarItemsUpdateManyWithoutBeerNestedInput
 }
 
 export type BeersUncheckedUpdateWithoutStyleInput = {
@@ -1452,6 +1586,7 @@ export type BeersUncheckedUpdateWithoutStyleInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.StringFieldUpdateOperationsInput | string
   reviews?: Prisma.ReviewsUncheckedUpdateManyWithoutBeerNestedInput
+  cellarItems?: Prisma.CellarItemsUncheckedUpdateManyWithoutBeerNestedInput
 }
 
 export type BeersUncheckedUpdateManyWithoutStyleInput = {
@@ -1507,6 +1642,7 @@ export type BeersUpdateWithoutColorInput = {
   createdByUser?: Prisma.UsersUpdateOneRequiredWithoutCreatedBeersNestedInput
   updatedByUser?: Prisma.UsersUpdateOneRequiredWithoutUpdatedBeersNestedInput
   reviews?: Prisma.ReviewsUpdateManyWithoutBeerNestedInput
+  cellarItems?: Prisma.CellarItemsUpdateManyWithoutBeerNestedInput
 }
 
 export type BeersUncheckedUpdateWithoutColorInput = {
@@ -1526,6 +1662,7 @@ export type BeersUncheckedUpdateWithoutColorInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.StringFieldUpdateOperationsInput | string
   reviews?: Prisma.ReviewsUncheckedUpdateManyWithoutBeerNestedInput
+  cellarItems?: Prisma.CellarItemsUncheckedUpdateManyWithoutBeerNestedInput
 }
 
 export type BeersUncheckedUpdateManyWithoutColorInput = {
@@ -1599,6 +1736,7 @@ export type BeersUpdateWithoutCreatedByUserInput = {
   color?: Prisma.ColorsUpdateOneRequiredWithoutBeersNestedInput
   updatedByUser?: Prisma.UsersUpdateOneRequiredWithoutUpdatedBeersNestedInput
   reviews?: Prisma.ReviewsUpdateManyWithoutBeerNestedInput
+  cellarItems?: Prisma.CellarItemsUpdateManyWithoutBeerNestedInput
 }
 
 export type BeersUncheckedUpdateWithoutCreatedByUserInput = {
@@ -1618,6 +1756,7 @@ export type BeersUncheckedUpdateWithoutCreatedByUserInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.StringFieldUpdateOperationsInput | string
   reviews?: Prisma.ReviewsUncheckedUpdateManyWithoutBeerNestedInput
+  cellarItems?: Prisma.CellarItemsUncheckedUpdateManyWithoutBeerNestedInput
 }
 
 export type BeersUncheckedUpdateManyWithoutCreatedByUserInput = {
@@ -1655,6 +1794,7 @@ export type BeersUpdateWithoutUpdatedByUserInput = {
   color?: Prisma.ColorsUpdateOneRequiredWithoutBeersNestedInput
   createdByUser?: Prisma.UsersUpdateOneRequiredWithoutCreatedBeersNestedInput
   reviews?: Prisma.ReviewsUpdateManyWithoutBeerNestedInput
+  cellarItems?: Prisma.CellarItemsUpdateManyWithoutBeerNestedInput
 }
 
 export type BeersUncheckedUpdateWithoutUpdatedByUserInput = {
@@ -1674,6 +1814,7 @@ export type BeersUncheckedUpdateWithoutUpdatedByUserInput = {
   createdBy?: Prisma.StringFieldUpdateOperationsInput | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reviews?: Prisma.ReviewsUncheckedUpdateManyWithoutBeerNestedInput
+  cellarItems?: Prisma.CellarItemsUncheckedUpdateManyWithoutBeerNestedInput
 }
 
 export type BeersUncheckedUpdateManyWithoutUpdatedByUserInput = {
@@ -1701,10 +1842,12 @@ export type BeersUncheckedUpdateManyWithoutUpdatedByUserInput = {
 
 export type BeersCountOutputType = {
   reviews: number
+  cellarItems: number
 }
 
 export type BeersCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   reviews?: boolean | BeersCountOutputTypeCountReviewsArgs
+  cellarItems?: boolean | BeersCountOutputTypeCountCellarItemsArgs
 }
 
 /**
@@ -1722,6 +1865,13 @@ export type BeersCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extens
  */
 export type BeersCountOutputTypeCountReviewsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.ReviewsWhereInput
+}
+
+/**
+ * BeersCountOutputType without action
+ */
+export type BeersCountOutputTypeCountCellarItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CellarItemsWhereInput
 }
 
 
@@ -1748,6 +1898,7 @@ export type BeersSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   createdByUser?: boolean | Prisma.UsersDefaultArgs<ExtArgs>
   updatedByUser?: boolean | Prisma.UsersDefaultArgs<ExtArgs>
   reviews?: boolean | Prisma.Beers$reviewsArgs<ExtArgs>
+  cellarItems?: boolean | Prisma.Beers$cellarItemsArgs<ExtArgs>
   _count?: boolean | Prisma.BeersCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["beers"]>
 
@@ -1826,6 +1977,7 @@ export type BeersInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   createdByUser?: boolean | Prisma.UsersDefaultArgs<ExtArgs>
   updatedByUser?: boolean | Prisma.UsersDefaultArgs<ExtArgs>
   reviews?: boolean | Prisma.Beers$reviewsArgs<ExtArgs>
+  cellarItems?: boolean | Prisma.Beers$cellarItemsArgs<ExtArgs>
   _count?: boolean | Prisma.BeersCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type BeersIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1852,6 +2004,7 @@ export type $BeersPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     createdByUser: Prisma.$UsersPayload<ExtArgs>
     updatedByUser: Prisma.$UsersPayload<ExtArgs>
     reviews: Prisma.$ReviewsPayload<ExtArgs>[]
+    cellarItems: Prisma.$CellarItemsPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2270,6 +2423,7 @@ export interface Prisma__BeersClient<T, Null = never, ExtArgs extends runtime.Ty
   createdByUser<T extends Prisma.UsersDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UsersDefaultArgs<ExtArgs>>): Prisma.Prisma__UsersClient<runtime.Types.Result.GetResult<Prisma.$UsersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   updatedByUser<T extends Prisma.UsersDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UsersDefaultArgs<ExtArgs>>): Prisma.Prisma__UsersClient<runtime.Types.Result.GetResult<Prisma.$UsersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   reviews<T extends Prisma.Beers$reviewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Beers$reviewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReviewsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  cellarItems<T extends Prisma.Beers$cellarItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Beers$cellarItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CellarItemsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2732,6 +2886,30 @@ export type Beers$reviewsArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   distinct?: Prisma.ReviewsScalarFieldEnum | Prisma.ReviewsScalarFieldEnum[]
+}
+
+/**
+ * Beers.cellarItems
+ */
+export type Beers$cellarItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CellarItems
+   */
+  select?: Prisma.CellarItemsSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CellarItems
+   */
+  omit?: Prisma.CellarItemsOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CellarItemsInclude<ExtArgs> | null
+  where?: Prisma.CellarItemsWhereInput
+  orderBy?: Prisma.CellarItemsOrderByWithRelationInput | Prisma.CellarItemsOrderByWithRelationInput[]
+  cursor?: Prisma.CellarItemsWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CellarItemsScalarFieldEnum | Prisma.CellarItemsScalarFieldEnum[]
 }
 
 /**

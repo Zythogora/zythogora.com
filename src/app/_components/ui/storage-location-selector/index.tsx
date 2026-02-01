@@ -18,7 +18,8 @@ import type { getSelectProps } from "@conform-to/react";
 import type { ComponentProps } from "react";
 
 interface StorageLocationSelectorProps
-  extends Partial<ReturnType<typeof getSelectProps>>,
+  extends
+    Partial<ReturnType<typeof getSelectProps>>,
     Pick<ComponentProps<"input">, "placeholder" | "disabled" | "className"> {
   locations: StorageLocation[];
   selectedLocationId?: string | null;
@@ -46,7 +47,9 @@ const StorageLocationSelector = ({
   );
 
   const handleCreateNew = async () => {
-    if (!newLocationName.trim() || !onCreateNew) return;
+    if (!newLocationName.trim() || !onCreateNew) {
+      return;
+    }
 
     setIsCreating(true);
     try {
@@ -101,7 +104,7 @@ const StorageLocationSelector = ({
         align="start"
         alignOffset={-2}
         sideOffset={8}
-        className="w-full max-w-[calc(100vw-theme(spacing.16))] min-w-[calc(var(--radix-popper-anchor-width)+theme(spacing.1))] p-0"
+        className="w-full max-w-[calc(100vw-(--spacing(16)))] min-w-[calc(var(--radix-popper-anchor-width)+(--spacing(1)))] p-0"
       >
         <Command data-slot="storage-location-selector">
           <Command.List
@@ -114,7 +117,7 @@ const StorageLocationSelector = ({
             )}
           >
             {locations.length === 0 ? (
-              <div className={cn("px-3 py-2 text-foreground-muted", "text-sm")}>
+              <div className={cn("text-foreground-muted px-3 py-2", "text-sm")}>
                 {t("cellar.form.storageLocation.noLocations")}
               </div>
             ) : (
@@ -129,7 +132,7 @@ const StorageLocationSelector = ({
                   }}
                   className={cn(
                     "flex min-w-0 flex-row items-center gap-x-3 rounded px-3 py-2 select-none",
-                    "text-sm text-foreground-muted italic",
+                    "text-foreground-muted text-sm italic",
                     "data-[selected=true]:outline-primary data-[selected=true]:outline-3 data-[selected=true]:-outline-offset-3",
                   )}
                 >
@@ -184,10 +187,10 @@ const StorageLocationSelector = ({
                 onChange={(e) => setNewLocationName(e.target.value)}
                 placeholder={t("cellar.form.storageLocation.addNewPlaceholder")}
                 className={cn(
-                  "flex-1 rounded px-2 py-1.5 outline-hidden",
+                  "min-w-0 flex-1 rounded px-2 py-1.5 outline-hidden",
                   "text-sm",
                   "bg-transparent",
-                  "border border-foreground/20 focus:border-primary",
+                  "border-foreground/20 focus:border-primary border",
                   "placeholder:text-foreground-muted",
                 )}
                 onKeyDown={(e) => {

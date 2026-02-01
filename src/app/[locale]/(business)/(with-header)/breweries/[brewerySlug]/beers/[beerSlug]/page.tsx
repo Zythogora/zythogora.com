@@ -4,19 +4,15 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import BeerCard from "@/app/[locale]/(business)/(with-header)/breweries/[brewerySlug]/beers/[beerSlug]/_components/beer-card";
 import BeerReviews from "@/app/[locale]/(business)/(with-header)/breweries/[brewerySlug]/beers/[beerSlug]/_components/beer-reviews";
 import { beerPageSearchParamsSchema } from "@/app/[locale]/(business)/(with-header)/breweries/[brewerySlug]/beers/[beerSlug]/schemas";
-import {
-  addToCellarAction,
-  createStorageLocationAction,
-} from "@/app/[locale]/(business)/(with-header)/users/[username]/cellar/actions";
 import AddToCellarModal from "@/app/_components/add-to-cellar-modal";
 import ShareButton from "@/app/_components/share-button";
 import Button from "@/app/_components/ui/button";
 import { getBeerBySlug } from "@/domain/beers";
 import { getStorageLocationsByUser } from "@/domain/storage-locations";
+import { getCurrentUser } from "@/lib/auth";
 import { config } from "@/lib/config";
 import { publicConfig } from "@/lib/config/client-config";
 import { StaticGenerationMode } from "@/lib/config/types";
-import { getCurrentUser } from "@/lib/auth";
 import { Link, redirect } from "@/lib/i18n";
 import prisma from "@/lib/prisma";
 import { Routes } from "@/lib/routes";
@@ -137,9 +133,7 @@ const BeerPage = async ({
     getCurrentUser(),
   ]);
 
-  const storageLocations = user
-    ? await getStorageLocationsByUser(user.id)
-    : [];
+  const storageLocations = user ? await getStorageLocationsByUser(user.id) : [];
 
   if (beer.brewery.slug !== brewerySlug || beer.slug !== beerSlug) {
     redirect({
@@ -182,9 +176,7 @@ const BeerPage = async ({
             asChild
             className={cn(
               "grow",
-              user
-                ? "md:rounded-tl-md md:rounded-bl-[14px] md:before:rounded-tl md:before:rounded-bl-xl"
-                : "md:rounded-t-md md:rounded-bl-[14px] md:before:rounded-t md:before:rounded-bl-xl",
+              "md:rounded-tl-md md:rounded-bl-[14px] md:before:rounded-tl md:before:rounded-bl-xl",
             )}
           >
             <Link
@@ -202,8 +194,6 @@ const BeerPage = async ({
               beerId={beer.id}
               beerName={`${beer.name} - ${beer.brewery.name}`}
               storageLocations={storageLocations}
-              addToCellarAction={addToCellarAction}
-              createStorageLocationAction={createStorageLocationAction}
             />
           )}
 
@@ -217,9 +207,7 @@ const BeerPage = async ({
             })}`}
             triggerClassName={cn(
               "shrink-0",
-              user
-                ? "md:rounded-tr-md md:rounded-br-[14px] md:before:rounded-tr md:before:rounded-br-xl"
-                : "md:rounded-t-md md:rounded-br-[14px] md:before:rounded-t md:before:rounded-br-xl",
+              "md:rounded-tr-md md:rounded-br-[14px] md:before:rounded-tr md:before:rounded-br-xl",
             )}
           />
         </div>

@@ -855,6 +855,9 @@
       "purchasePrice": {
         "label": "Prix d'achat"
       },
+      "purchaseLocation": {
+        "label": "Lieu d'achat"
+      },
       "errors": {
         "QUANTITY_MIN": "La quantité doit être d'au moins 1",
         "SOMETHING_WENT_WRONG": "Une erreur s'est produite. Veuillez réessayer."

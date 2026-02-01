@@ -858,6 +858,9 @@
       "purchasePrice": {
         "label": "Purchase price"
       },
+      "purchaseLocation": {
+        "label": "Purchase location"
+      },
       "errors": {
         "QUANTITY_MIN": "Quantity must be at least 1",
         "SOMETHING_WENT_WRONG": "Something went wrong. Please try again."

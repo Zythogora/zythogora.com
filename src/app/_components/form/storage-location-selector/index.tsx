@@ -2,7 +2,7 @@
 
 import { getSelectProps } from "@conform-to/react";
 import { useTranslations } from "next-intl";
-import { useEffect, useRef, type ComponentProps } from "react";
+import { useRef, type ComponentProps } from "react";
 
 import FormError from "@/app/_components/ui/form-error";
 import Label from "@/app/_components/ui/label";
@@ -12,20 +12,18 @@ import { cn } from "@/lib/tailwind";
 
 import type { FieldMetadata } from "@conform-to/react";
 
-interface FormStorageLocationSelectorProps
-  extends Omit<
-    ComponentProps<typeof StorageLocationSelector>,
-    "onChange" | "selectedLocationId"
-  > {
+interface FormStorageLocationSelectorProps extends Omit<
+  ComponentProps<typeof StorageLocationSelector>,
+  "onChange" | "selectedLocationId"
+> {
   field: FieldMetadata;
-  label?: string;
 }
 
 const FormStorageLocationSelector = ({
   field,
-  label,
   locations,
   onCreateNew,
+  className,
   ...restProps
 }: FormStorageLocationSelectorProps) => {
   const t = useTranslations();
@@ -44,10 +42,14 @@ const FormStorageLocationSelector = ({
 
   return (
     <div
-      className={cn("group/form-component", "flex w-full flex-col gap-y-1")}
+      className={cn(
+        "group/form-component",
+        "flex w-full flex-col gap-y-1",
+        className,
+      )}
     >
       <Label htmlFor={field.id} required={field.required}>
-        {label ?? t("cellar.form.storageLocation.label")}
+        {t("cellar.form.storageLocation.label")}
       </Label>
 
       <input ref={inputRef} type="hidden" name={name} defaultValue="" />

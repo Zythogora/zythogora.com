@@ -33,6 +33,7 @@ export const addToCellarSchema = z.object({
   storageLocationId: z.string().optional(),
   storageLocationName: z.string().optional(),
   purchaseLocationId: z.string().optional(),
+  googlePlacesSessionToken: z.string().optional(),
 });
 
 export const adjustQuantitySchema = z.object({

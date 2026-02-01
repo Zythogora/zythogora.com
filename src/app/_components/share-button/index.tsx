@@ -52,7 +52,7 @@ const ShareButton = ({
           )}
           {...restProps}
         >
-          {children ? children : <Share2Icon className="size-6" />}
+          {children ? children : <Share2Icon size={24} className="size-6" />}
         </Button>
       </PopoverPrimitive.Trigger>
 

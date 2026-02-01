@@ -4,22 +4,24 @@ import { getInputProps } from "@conform-to/react";
 import { useTranslations } from "next-intl";
 import { type ComponentProps } from "react";
 
-import FormError from "@/app/_components/ui/form-error";
-import Label from "@/app/_components/ui/label";
 import CellarServingFormatSelector, {
   type CellarServingFormat,
 } from "@/app/_components/ui/cellar-serving-format-selector";
+import FormError from "@/app/_components/ui/form-error";
+import Label from "@/app/_components/ui/label";
 import { cn } from "@/lib/tailwind";
 
 import type { FieldMetadata } from "@conform-to/react";
 
-interface FormCellarServingFormatSelectorProps
-  extends ComponentProps<typeof CellarServingFormatSelector> {
+interface FormCellarServingFormatSelectorProps extends ComponentProps<
+  typeof CellarServingFormatSelector
+> {
   field: FieldMetadata;
 }
 
 const FormCellarServingFormatSelector = ({
   field,
+  className,
   ...restProps
 }: FormCellarServingFormatSelectorProps) => {
   const t = useTranslations();
@@ -34,7 +36,11 @@ const FormCellarServingFormatSelector = ({
 
   return (
     <div
-      className={cn("group/form-component", "flex w-full flex-col gap-y-1")}
+      className={cn(
+        "group/form-component",
+        "flex w-full flex-col gap-y-1",
+        className,
+      )}
     >
       <Label htmlFor={field.id} required={field.required}>
         {field.value

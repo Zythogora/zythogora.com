@@ -399,7 +399,9 @@ export const ModelName = {
   PurchaseLocations: 'PurchaseLocations',
   Friendships: 'Friendships',
   Friends: 'Friends',
-  FriendRequests: 'FriendRequests'
+  FriendRequests: 'FriendRequests',
+  StorageLocations: 'StorageLocations',
+  CellarItems: 'CellarItems'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -415,7 +417,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "betterAuthUsers" | "sessions" | "accounts" | "verifications" | "beers" | "breweries" | "styleCategories" | "styles" | "legacyStyles" | "colors" | "users" | "reviews" | "purchaseLocations" | "friendships" | "friends" | "friendRequests"
+    modelProps: "betterAuthUsers" | "sessions" | "accounts" | "verifications" | "beers" | "breweries" | "styleCategories" | "styles" | "legacyStyles" | "colors" | "users" | "reviews" | "purchaseLocations" | "friendships" | "friends" | "friendRequests" | "storageLocations" | "cellarItems"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1603,6 +1605,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    StorageLocations: {
+      payload: Prisma.$StorageLocationsPayload<ExtArgs>
+      fields: Prisma.StorageLocationsFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.StorageLocationsFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StorageLocationsPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.StorageLocationsFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StorageLocationsPayload>
+        }
+        findFirst: {
+          args: Prisma.StorageLocationsFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StorageLocationsPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.StorageLocationsFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StorageLocationsPayload>
+        }
+        findMany: {
+          args: Prisma.StorageLocationsFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StorageLocationsPayload>[]
+        }
+        create: {
+          args: Prisma.StorageLocationsCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StorageLocationsPayload>
+        }
+        createMany: {
+          args: Prisma.StorageLocationsCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.StorageLocationsCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StorageLocationsPayload>[]
+        }
+        delete: {
+          args: Prisma.StorageLocationsDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StorageLocationsPayload>
+        }
+        update: {
+          args: Prisma.StorageLocationsUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StorageLocationsPayload>
+        }
+        deleteMany: {
+          args: Prisma.StorageLocationsDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.StorageLocationsUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.StorageLocationsUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StorageLocationsPayload>[]
+        }
+        upsert: {
+          args: Prisma.StorageLocationsUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StorageLocationsPayload>
+        }
+        aggregate: {
+          args: Prisma.StorageLocationsAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateStorageLocations>
+        }
+        groupBy: {
+          args: Prisma.StorageLocationsGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.StorageLocationsGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.StorageLocationsCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.StorageLocationsCountAggregateOutputType> | number
+        }
+      }
+    }
+    CellarItems: {
+      payload: Prisma.$CellarItemsPayload<ExtArgs>
+      fields: Prisma.CellarItemsFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CellarItemsFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CellarItemsPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CellarItemsFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CellarItemsPayload>
+        }
+        findFirst: {
+          args: Prisma.CellarItemsFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CellarItemsPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CellarItemsFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CellarItemsPayload>
+        }
+        findMany: {
+          args: Prisma.CellarItemsFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CellarItemsPayload>[]
+        }
+        create: {
+          args: Prisma.CellarItemsCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CellarItemsPayload>
+        }
+        createMany: {
+          args: Prisma.CellarItemsCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CellarItemsCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CellarItemsPayload>[]
+        }
+        delete: {
+          args: Prisma.CellarItemsDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CellarItemsPayload>
+        }
+        update: {
+          args: Prisma.CellarItemsUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CellarItemsPayload>
+        }
+        deleteMany: {
+          args: Prisma.CellarItemsDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CellarItemsUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CellarItemsUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CellarItemsPayload>[]
+        }
+        upsert: {
+          args: Prisma.CellarItemsUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CellarItemsPayload>
+        }
+        aggregate: {
+          args: Prisma.CellarItemsAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCellarItems>
+        }
+        groupBy: {
+          args: Prisma.CellarItemsGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CellarItemsGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CellarItemsCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CellarItemsCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1870,6 +2020,35 @@ export const FriendRequestsScalarFieldEnum = {
 export type FriendRequestsScalarFieldEnum = (typeof FriendRequestsScalarFieldEnum)[keyof typeof FriendRequestsScalarFieldEnum]
 
 
+export const StorageLocationsScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  userId: 'userId',
+  createdAt: 'createdAt'
+} as const
+
+export type StorageLocationsScalarFieldEnum = (typeof StorageLocationsScalarFieldEnum)[keyof typeof StorageLocationsScalarFieldEnum]
+
+
+export const CellarItemsScalarFieldEnum = {
+  id: 'id',
+  quantity: 'quantity',
+  servingFormat: 'servingFormat',
+  bestBeforeDate: 'bestBeforeDate',
+  purchaseDate: 'purchaseDate',
+  purchasePrice: 'purchasePrice',
+  purchaseCurrency: 'purchaseCurrency',
+  purchaseLocationId: 'purchaseLocationId',
+  storageLocationId: 'storageLocationId',
+  userId: 'userId',
+  beerId: 'beerId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CellarItemsScalarFieldEnum = (typeof CellarItemsScalarFieldEnum)[keyof typeof CellarItemsScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -2063,6 +2242,27 @@ export const FriendRequestsOrderByRelevanceFieldEnum = {
 } as const
 
 export type FriendRequestsOrderByRelevanceFieldEnum = (typeof FriendRequestsOrderByRelevanceFieldEnum)[keyof typeof FriendRequestsOrderByRelevanceFieldEnum]
+
+
+export const StorageLocationsOrderByRelevanceFieldEnum = {
+  id: 'id',
+  name: 'name',
+  userId: 'userId'
+} as const
+
+export type StorageLocationsOrderByRelevanceFieldEnum = (typeof StorageLocationsOrderByRelevanceFieldEnum)[keyof typeof StorageLocationsOrderByRelevanceFieldEnum]
+
+
+export const CellarItemsOrderByRelevanceFieldEnum = {
+  id: 'id',
+  purchaseCurrency: 'purchaseCurrency',
+  purchaseLocationId: 'purchaseLocationId',
+  storageLocationId: 'storageLocationId',
+  userId: 'userId',
+  beerId: 'beerId'
+} as const
+
+export type CellarItemsOrderByRelevanceFieldEnum = (typeof CellarItemsOrderByRelevanceFieldEnum)[keyof typeof CellarItemsOrderByRelevanceFieldEnum]
 
 
 
@@ -2454,6 +2654,8 @@ export type GlobalOmitConfig = {
   friendships?: Prisma.FriendshipsOmit
   friends?: Prisma.FriendsOmit
   friendRequests?: Prisma.FriendRequestsOmit
+  storageLocations?: Prisma.StorageLocationsOmit
+  cellarItems?: Prisma.CellarItemsOmit
 }
 
 /* Types for Logging */

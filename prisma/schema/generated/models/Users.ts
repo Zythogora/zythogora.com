@@ -172,6 +172,8 @@ export type UsersWhereInput = {
   updatedBreweries?: Prisma.BreweriesListRelationFilter
   createdPurchaseLocations?: Prisma.PurchaseLocationsListRelationFilter
   updatedPurchaseLocations?: Prisma.PurchaseLocationsListRelationFilter
+  storageLocations?: Prisma.StorageLocationsListRelationFilter
+  cellarItems?: Prisma.CellarItemsListRelationFilter
 }
 
 export type UsersOrderByWithRelationInput = {
@@ -189,6 +191,8 @@ export type UsersOrderByWithRelationInput = {
   updatedBreweries?: Prisma.BreweriesOrderByRelationAggregateInput
   createdPurchaseLocations?: Prisma.PurchaseLocationsOrderByRelationAggregateInput
   updatedPurchaseLocations?: Prisma.PurchaseLocationsOrderByRelationAggregateInput
+  storageLocations?: Prisma.StorageLocationsOrderByRelationAggregateInput
+  cellarItems?: Prisma.CellarItemsOrderByRelationAggregateInput
   _relevance?: Prisma.UsersOrderByRelevanceInput
 }
 
@@ -210,6 +214,8 @@ export type UsersWhereUniqueInput = Prisma.AtLeast<{
   updatedBreweries?: Prisma.BreweriesListRelationFilter
   createdPurchaseLocations?: Prisma.PurchaseLocationsListRelationFilter
   updatedPurchaseLocations?: Prisma.PurchaseLocationsListRelationFilter
+  storageLocations?: Prisma.StorageLocationsListRelationFilter
+  cellarItems?: Prisma.CellarItemsListRelationFilter
 }, "id" | "username">
 
 export type UsersOrderByWithAggregationInput = {
@@ -242,6 +248,8 @@ export type UsersCreateInput = {
   updatedBreweries?: Prisma.BreweriesCreateNestedManyWithoutUpdatedByUserInput
   createdPurchaseLocations?: Prisma.PurchaseLocationsCreateNestedManyWithoutCreatedByUserInput
   updatedPurchaseLocations?: Prisma.PurchaseLocationsCreateNestedManyWithoutUpdatedByUserInput
+  storageLocations?: Prisma.StorageLocationsCreateNestedManyWithoutUserInput
+  cellarItems?: Prisma.CellarItemsCreateNestedManyWithoutUserInput
 }
 
 export type UsersUncheckedCreateInput = {
@@ -258,6 +266,8 @@ export type UsersUncheckedCreateInput = {
   updatedBreweries?: Prisma.BreweriesUncheckedCreateNestedManyWithoutUpdatedByUserInput
   createdPurchaseLocations?: Prisma.PurchaseLocationsUncheckedCreateNestedManyWithoutCreatedByUserInput
   updatedPurchaseLocations?: Prisma.PurchaseLocationsUncheckedCreateNestedManyWithoutUpdatedByUserInput
+  storageLocations?: Prisma.StorageLocationsUncheckedCreateNestedManyWithoutUserInput
+  cellarItems?: Prisma.CellarItemsUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UsersUpdateInput = {
@@ -274,6 +284,8 @@ export type UsersUpdateInput = {
   updatedBreweries?: Prisma.BreweriesUpdateManyWithoutUpdatedByUserNestedInput
   createdPurchaseLocations?: Prisma.PurchaseLocationsUpdateManyWithoutCreatedByUserNestedInput
   updatedPurchaseLocations?: Prisma.PurchaseLocationsUpdateManyWithoutUpdatedByUserNestedInput
+  storageLocations?: Prisma.StorageLocationsUpdateManyWithoutUserNestedInput
+  cellarItems?: Prisma.CellarItemsUpdateManyWithoutUserNestedInput
 }
 
 export type UsersUncheckedUpdateInput = {
@@ -290,6 +302,8 @@ export type UsersUncheckedUpdateInput = {
   updatedBreweries?: Prisma.BreweriesUncheckedUpdateManyWithoutUpdatedByUserNestedInput
   createdPurchaseLocations?: Prisma.PurchaseLocationsUncheckedUpdateManyWithoutCreatedByUserNestedInput
   updatedPurchaseLocations?: Prisma.PurchaseLocationsUncheckedUpdateManyWithoutUpdatedByUserNestedInput
+  storageLocations?: Prisma.StorageLocationsUncheckedUpdateManyWithoutUserNestedInput
+  cellarItems?: Prisma.CellarItemsUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UsersCreateManyInput = {
@@ -523,6 +537,34 @@ export type UsersUpdateOneRequiredWithoutFriendRequestReceivedNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UsersUpdateToOneWithWhereWithoutFriendRequestReceivedInput, Prisma.UsersUpdateWithoutFriendRequestReceivedInput>, Prisma.UsersUncheckedUpdateWithoutFriendRequestReceivedInput>
 }
 
+export type UsersCreateNestedOneWithoutStorageLocationsInput = {
+  create?: Prisma.XOR<Prisma.UsersCreateWithoutStorageLocationsInput, Prisma.UsersUncheckedCreateWithoutStorageLocationsInput>
+  connectOrCreate?: Prisma.UsersCreateOrConnectWithoutStorageLocationsInput
+  connect?: Prisma.UsersWhereUniqueInput
+}
+
+export type UsersUpdateOneRequiredWithoutStorageLocationsNestedInput = {
+  create?: Prisma.XOR<Prisma.UsersCreateWithoutStorageLocationsInput, Prisma.UsersUncheckedCreateWithoutStorageLocationsInput>
+  connectOrCreate?: Prisma.UsersCreateOrConnectWithoutStorageLocationsInput
+  upsert?: Prisma.UsersUpsertWithoutStorageLocationsInput
+  connect?: Prisma.UsersWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UsersUpdateToOneWithWhereWithoutStorageLocationsInput, Prisma.UsersUpdateWithoutStorageLocationsInput>, Prisma.UsersUncheckedUpdateWithoutStorageLocationsInput>
+}
+
+export type UsersCreateNestedOneWithoutCellarItemsInput = {
+  create?: Prisma.XOR<Prisma.UsersCreateWithoutCellarItemsInput, Prisma.UsersUncheckedCreateWithoutCellarItemsInput>
+  connectOrCreate?: Prisma.UsersCreateOrConnectWithoutCellarItemsInput
+  connect?: Prisma.UsersWhereUniqueInput
+}
+
+export type UsersUpdateOneRequiredWithoutCellarItemsNestedInput = {
+  create?: Prisma.XOR<Prisma.UsersCreateWithoutCellarItemsInput, Prisma.UsersUncheckedCreateWithoutCellarItemsInput>
+  connectOrCreate?: Prisma.UsersCreateOrConnectWithoutCellarItemsInput
+  upsert?: Prisma.UsersUpsertWithoutCellarItemsInput
+  connect?: Prisma.UsersWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UsersUpdateToOneWithWhereWithoutCellarItemsInput, Prisma.UsersUpdateWithoutCellarItemsInput>, Prisma.UsersUncheckedUpdateWithoutCellarItemsInput>
+}
+
 export type UsersCreateWithoutBetterAuthUserInput = {
   username: string
   reviews?: Prisma.ReviewsCreateNestedManyWithoutUserInput
@@ -536,6 +578,8 @@ export type UsersCreateWithoutBetterAuthUserInput = {
   updatedBreweries?: Prisma.BreweriesCreateNestedManyWithoutUpdatedByUserInput
   createdPurchaseLocations?: Prisma.PurchaseLocationsCreateNestedManyWithoutCreatedByUserInput
   updatedPurchaseLocations?: Prisma.PurchaseLocationsCreateNestedManyWithoutUpdatedByUserInput
+  storageLocations?: Prisma.StorageLocationsCreateNestedManyWithoutUserInput
+  cellarItems?: Prisma.CellarItemsCreateNestedManyWithoutUserInput
 }
 
 export type UsersUncheckedCreateWithoutBetterAuthUserInput = {
@@ -551,6 +595,8 @@ export type UsersUncheckedCreateWithoutBetterAuthUserInput = {
   updatedBreweries?: Prisma.BreweriesUncheckedCreateNestedManyWithoutUpdatedByUserInput
   createdPurchaseLocations?: Prisma.PurchaseLocationsUncheckedCreateNestedManyWithoutCreatedByUserInput
   updatedPurchaseLocations?: Prisma.PurchaseLocationsUncheckedCreateNestedManyWithoutUpdatedByUserInput
+  storageLocations?: Prisma.StorageLocationsUncheckedCreateNestedManyWithoutUserInput
+  cellarItems?: Prisma.CellarItemsUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UsersCreateOrConnectWithoutBetterAuthUserInput = {
@@ -582,6 +628,8 @@ export type UsersUpdateWithoutBetterAuthUserInput = {
   updatedBreweries?: Prisma.BreweriesUpdateManyWithoutUpdatedByUserNestedInput
   createdPurchaseLocations?: Prisma.PurchaseLocationsUpdateManyWithoutCreatedByUserNestedInput
   updatedPurchaseLocations?: Prisma.PurchaseLocationsUpdateManyWithoutUpdatedByUserNestedInput
+  storageLocations?: Prisma.StorageLocationsUpdateManyWithoutUserNestedInput
+  cellarItems?: Prisma.CellarItemsUpdateManyWithoutUserNestedInput
 }
 
 export type UsersUncheckedUpdateWithoutBetterAuthUserInput = {
@@ -597,6 +645,8 @@ export type UsersUncheckedUpdateWithoutBetterAuthUserInput = {
   updatedBreweries?: Prisma.BreweriesUncheckedUpdateManyWithoutUpdatedByUserNestedInput
   createdPurchaseLocations?: Prisma.PurchaseLocationsUncheckedUpdateManyWithoutCreatedByUserNestedInput
   updatedPurchaseLocations?: Prisma.PurchaseLocationsUncheckedUpdateManyWithoutUpdatedByUserNestedInput
+  storageLocations?: Prisma.StorageLocationsUncheckedUpdateManyWithoutUserNestedInput
+  cellarItems?: Prisma.CellarItemsUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UsersCreateWithoutCreatedBeersInput = {
@@ -612,6 +662,8 @@ export type UsersCreateWithoutCreatedBeersInput = {
   updatedBreweries?: Prisma.BreweriesCreateNestedManyWithoutUpdatedByUserInput
   createdPurchaseLocations?: Prisma.PurchaseLocationsCreateNestedManyWithoutCreatedByUserInput
   updatedPurchaseLocations?: Prisma.PurchaseLocationsCreateNestedManyWithoutUpdatedByUserInput
+  storageLocations?: Prisma.StorageLocationsCreateNestedManyWithoutUserInput
+  cellarItems?: Prisma.CellarItemsCreateNestedManyWithoutUserInput
 }
 
 export type UsersUncheckedCreateWithoutCreatedBeersInput = {
@@ -627,6 +679,8 @@ export type UsersUncheckedCreateWithoutCreatedBeersInput = {
   updatedBreweries?: Prisma.BreweriesUncheckedCreateNestedManyWithoutUpdatedByUserInput
   createdPurchaseLocations?: Prisma.PurchaseLocationsUncheckedCreateNestedManyWithoutCreatedByUserInput
   updatedPurchaseLocations?: Prisma.PurchaseLocationsUncheckedCreateNestedManyWithoutUpdatedByUserInput
+  storageLocations?: Prisma.StorageLocationsUncheckedCreateNestedManyWithoutUserInput
+  cellarItems?: Prisma.CellarItemsUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UsersCreateOrConnectWithoutCreatedBeersInput = {
@@ -647,6 +701,8 @@ export type UsersCreateWithoutUpdatedBeersInput = {
   updatedBreweries?: Prisma.BreweriesCreateNestedManyWithoutUpdatedByUserInput
   createdPurchaseLocations?: Prisma.PurchaseLocationsCreateNestedManyWithoutCreatedByUserInput
   updatedPurchaseLocations?: Prisma.PurchaseLocationsCreateNestedManyWithoutUpdatedByUserInput
+  storageLocations?: Prisma.StorageLocationsCreateNestedManyWithoutUserInput
+  cellarItems?: Prisma.CellarItemsCreateNestedManyWithoutUserInput
 }
 
 export type UsersUncheckedCreateWithoutUpdatedBeersInput = {
@@ -662,6 +718,8 @@ export type UsersUncheckedCreateWithoutUpdatedBeersInput = {
   updatedBreweries?: Prisma.BreweriesUncheckedCreateNestedManyWithoutUpdatedByUserInput
   createdPurchaseLocations?: Prisma.PurchaseLocationsUncheckedCreateNestedManyWithoutCreatedByUserInput
   updatedPurchaseLocations?: Prisma.PurchaseLocationsUncheckedCreateNestedManyWithoutUpdatedByUserInput
+  storageLocations?: Prisma.StorageLocationsUncheckedCreateNestedManyWithoutUserInput
+  cellarItems?: Prisma.CellarItemsUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UsersCreateOrConnectWithoutUpdatedBeersInput = {
@@ -693,6 +751,8 @@ export type UsersUpdateWithoutCreatedBeersInput = {
   updatedBreweries?: Prisma.BreweriesUpdateManyWithoutUpdatedByUserNestedInput
   createdPurchaseLocations?: Prisma.PurchaseLocationsUpdateManyWithoutCreatedByUserNestedInput
   updatedPurchaseLocations?: Prisma.PurchaseLocationsUpdateManyWithoutUpdatedByUserNestedInput
+  storageLocations?: Prisma.StorageLocationsUpdateManyWithoutUserNestedInput
+  cellarItems?: Prisma.CellarItemsUpdateManyWithoutUserNestedInput
 }
 
 export type UsersUncheckedUpdateWithoutCreatedBeersInput = {
@@ -708,6 +768,8 @@ export type UsersUncheckedUpdateWithoutCreatedBeersInput = {
   updatedBreweries?: Prisma.BreweriesUncheckedUpdateManyWithoutUpdatedByUserNestedInput
   createdPurchaseLocations?: Prisma.PurchaseLocationsUncheckedUpdateManyWithoutCreatedByUserNestedInput
   updatedPurchaseLocations?: Prisma.PurchaseLocationsUncheckedUpdateManyWithoutUpdatedByUserNestedInput
+  storageLocations?: Prisma.StorageLocationsUncheckedUpdateManyWithoutUserNestedInput
+  cellarItems?: Prisma.CellarItemsUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UsersUpsertWithoutUpdatedBeersInput = {
@@ -734,6 +796,8 @@ export type UsersUpdateWithoutUpdatedBeersInput = {
   updatedBreweries?: Prisma.BreweriesUpdateManyWithoutUpdatedByUserNestedInput
   createdPurchaseLocations?: Prisma.PurchaseLocationsUpdateManyWithoutCreatedByUserNestedInput
   updatedPurchaseLocations?: Prisma.PurchaseLocationsUpdateManyWithoutUpdatedByUserNestedInput
+  storageLocations?: Prisma.StorageLocationsUpdateManyWithoutUserNestedInput
+  cellarItems?: Prisma.CellarItemsUpdateManyWithoutUserNestedInput
 }
 
 export type UsersUncheckedUpdateWithoutUpdatedBeersInput = {
@@ -749,6 +813,8 @@ export type UsersUncheckedUpdateWithoutUpdatedBeersInput = {
   updatedBreweries?: Prisma.BreweriesUncheckedUpdateManyWithoutUpdatedByUserNestedInput
   createdPurchaseLocations?: Prisma.PurchaseLocationsUncheckedUpdateManyWithoutCreatedByUserNestedInput
   updatedPurchaseLocations?: Prisma.PurchaseLocationsUncheckedUpdateManyWithoutUpdatedByUserNestedInput
+  storageLocations?: Prisma.StorageLocationsUncheckedUpdateManyWithoutUserNestedInput
+  cellarItems?: Prisma.CellarItemsUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UsersCreateWithoutCreatedBreweriesInput = {
@@ -764,6 +830,8 @@ export type UsersCreateWithoutCreatedBreweriesInput = {
   updatedBreweries?: Prisma.BreweriesCreateNestedManyWithoutUpdatedByUserInput
   createdPurchaseLocations?: Prisma.PurchaseLocationsCreateNestedManyWithoutCreatedByUserInput
   updatedPurchaseLocations?: Prisma.PurchaseLocationsCreateNestedManyWithoutUpdatedByUserInput
+  storageLocations?: Prisma.StorageLocationsCreateNestedManyWithoutUserInput
+  cellarItems?: Prisma.CellarItemsCreateNestedManyWithoutUserInput
 }
 
 export type UsersUncheckedCreateWithoutCreatedBreweriesInput = {
@@ -779,6 +847,8 @@ export type UsersUncheckedCreateWithoutCreatedBreweriesInput = {
   updatedBreweries?: Prisma.BreweriesUncheckedCreateNestedManyWithoutUpdatedByUserInput
   createdPurchaseLocations?: Prisma.PurchaseLocationsUncheckedCreateNestedManyWithoutCreatedByUserInput
   updatedPurchaseLocations?: Prisma.PurchaseLocationsUncheckedCreateNestedManyWithoutUpdatedByUserInput
+  storageLocations?: Prisma.StorageLocationsUncheckedCreateNestedManyWithoutUserInput
+  cellarItems?: Prisma.CellarItemsUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UsersCreateOrConnectWithoutCreatedBreweriesInput = {
@@ -799,6 +869,8 @@ export type UsersCreateWithoutUpdatedBreweriesInput = {
   createdBreweries?: Prisma.BreweriesCreateNestedManyWithoutCreatedByUserInput
   createdPurchaseLocations?: Prisma.PurchaseLocationsCreateNestedManyWithoutCreatedByUserInput
   updatedPurchaseLocations?: Prisma.PurchaseLocationsCreateNestedManyWithoutUpdatedByUserInput
+  storageLocations?: Prisma.StorageLocationsCreateNestedManyWithoutUserInput
+  cellarItems?: Prisma.CellarItemsCreateNestedManyWithoutUserInput
 }
 
 export type UsersUncheckedCreateWithoutUpdatedBreweriesInput = {
@@ -814,6 +886,8 @@ export type UsersUncheckedCreateWithoutUpdatedBreweriesInput = {
   createdBreweries?: Prisma.BreweriesUncheckedCreateNestedManyWithoutCreatedByUserInput
   createdPurchaseLocations?: Prisma.PurchaseLocationsUncheckedCreateNestedManyWithoutCreatedByUserInput
   updatedPurchaseLocations?: Prisma.PurchaseLocationsUncheckedCreateNestedManyWithoutUpdatedByUserInput
+  storageLocations?: Prisma.StorageLocationsUncheckedCreateNestedManyWithoutUserInput
+  cellarItems?: Prisma.CellarItemsUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UsersCreateOrConnectWithoutUpdatedBreweriesInput = {
@@ -845,6 +919,8 @@ export type UsersUpdateWithoutCreatedBreweriesInput = {
   updatedBreweries?: Prisma.BreweriesUpdateManyWithoutUpdatedByUserNestedInput
   createdPurchaseLocations?: Prisma.PurchaseLocationsUpdateManyWithoutCreatedByUserNestedInput
   updatedPurchaseLocations?: Prisma.PurchaseLocationsUpdateManyWithoutUpdatedByUserNestedInput
+  storageLocations?: Prisma.StorageLocationsUpdateManyWithoutUserNestedInput
+  cellarItems?: Prisma.CellarItemsUpdateManyWithoutUserNestedInput
 }
 
 export type UsersUncheckedUpdateWithoutCreatedBreweriesInput = {
@@ -860,6 +936,8 @@ export type UsersUncheckedUpdateWithoutCreatedBreweriesInput = {
   updatedBreweries?: Prisma.BreweriesUncheckedUpdateManyWithoutUpdatedByUserNestedInput
   createdPurchaseLocations?: Prisma.PurchaseLocationsUncheckedUpdateManyWithoutCreatedByUserNestedInput
   updatedPurchaseLocations?: Prisma.PurchaseLocationsUncheckedUpdateManyWithoutUpdatedByUserNestedInput
+  storageLocations?: Prisma.StorageLocationsUncheckedUpdateManyWithoutUserNestedInput
+  cellarItems?: Prisma.CellarItemsUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UsersUpsertWithoutUpdatedBreweriesInput = {
@@ -886,6 +964,8 @@ export type UsersUpdateWithoutUpdatedBreweriesInput = {
   createdBreweries?: Prisma.BreweriesUpdateManyWithoutCreatedByUserNestedInput
   createdPurchaseLocations?: Prisma.PurchaseLocationsUpdateManyWithoutCreatedByUserNestedInput
   updatedPurchaseLocations?: Prisma.PurchaseLocationsUpdateManyWithoutUpdatedByUserNestedInput
+  storageLocations?: Prisma.StorageLocationsUpdateManyWithoutUserNestedInput
+  cellarItems?: Prisma.CellarItemsUpdateManyWithoutUserNestedInput
 }
 
 export type UsersUncheckedUpdateWithoutUpdatedBreweriesInput = {
@@ -901,6 +981,8 @@ export type UsersUncheckedUpdateWithoutUpdatedBreweriesInput = {
   createdBreweries?: Prisma.BreweriesUncheckedUpdateManyWithoutCreatedByUserNestedInput
   createdPurchaseLocations?: Prisma.PurchaseLocationsUncheckedUpdateManyWithoutCreatedByUserNestedInput
   updatedPurchaseLocations?: Prisma.PurchaseLocationsUncheckedUpdateManyWithoutUpdatedByUserNestedInput
+  storageLocations?: Prisma.StorageLocationsUncheckedUpdateManyWithoutUserNestedInput
+  cellarItems?: Prisma.CellarItemsUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UsersCreateWithoutReviewsInput = {
@@ -916,6 +998,8 @@ export type UsersCreateWithoutReviewsInput = {
   updatedBreweries?: Prisma.BreweriesCreateNestedManyWithoutUpdatedByUserInput
   createdPurchaseLocations?: Prisma.PurchaseLocationsCreateNestedManyWithoutCreatedByUserInput
   updatedPurchaseLocations?: Prisma.PurchaseLocationsCreateNestedManyWithoutUpdatedByUserInput
+  storageLocations?: Prisma.StorageLocationsCreateNestedManyWithoutUserInput
+  cellarItems?: Prisma.CellarItemsCreateNestedManyWithoutUserInput
 }
 
 export type UsersUncheckedCreateWithoutReviewsInput = {
@@ -931,6 +1015,8 @@ export type UsersUncheckedCreateWithoutReviewsInput = {
   updatedBreweries?: Prisma.BreweriesUncheckedCreateNestedManyWithoutUpdatedByUserInput
   createdPurchaseLocations?: Prisma.PurchaseLocationsUncheckedCreateNestedManyWithoutCreatedByUserInput
   updatedPurchaseLocations?: Prisma.PurchaseLocationsUncheckedCreateNestedManyWithoutUpdatedByUserInput
+  storageLocations?: Prisma.StorageLocationsUncheckedCreateNestedManyWithoutUserInput
+  cellarItems?: Prisma.CellarItemsUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UsersCreateOrConnectWithoutReviewsInput = {
@@ -962,6 +1048,8 @@ export type UsersUpdateWithoutReviewsInput = {
   updatedBreweries?: Prisma.BreweriesUpdateManyWithoutUpdatedByUserNestedInput
   createdPurchaseLocations?: Prisma.PurchaseLocationsUpdateManyWithoutCreatedByUserNestedInput
   updatedPurchaseLocations?: Prisma.PurchaseLocationsUpdateManyWithoutUpdatedByUserNestedInput
+  storageLocations?: Prisma.StorageLocationsUpdateManyWithoutUserNestedInput
+  cellarItems?: Prisma.CellarItemsUpdateManyWithoutUserNestedInput
 }
 
 export type UsersUncheckedUpdateWithoutReviewsInput = {
@@ -977,6 +1065,8 @@ export type UsersUncheckedUpdateWithoutReviewsInput = {
   updatedBreweries?: Prisma.BreweriesUncheckedUpdateManyWithoutUpdatedByUserNestedInput
   createdPurchaseLocations?: Prisma.PurchaseLocationsUncheckedUpdateManyWithoutCreatedByUserNestedInput
   updatedPurchaseLocations?: Prisma.PurchaseLocationsUncheckedUpdateManyWithoutUpdatedByUserNestedInput
+  storageLocations?: Prisma.StorageLocationsUncheckedUpdateManyWithoutUserNestedInput
+  cellarItems?: Prisma.CellarItemsUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UsersCreateWithoutCreatedPurchaseLocationsInput = {
@@ -992,6 +1082,8 @@ export type UsersCreateWithoutCreatedPurchaseLocationsInput = {
   createdBreweries?: Prisma.BreweriesCreateNestedManyWithoutCreatedByUserInput
   updatedBreweries?: Prisma.BreweriesCreateNestedManyWithoutUpdatedByUserInput
   updatedPurchaseLocations?: Prisma.PurchaseLocationsCreateNestedManyWithoutUpdatedByUserInput
+  storageLocations?: Prisma.StorageLocationsCreateNestedManyWithoutUserInput
+  cellarItems?: Prisma.CellarItemsCreateNestedManyWithoutUserInput
 }
 
 export type UsersUncheckedCreateWithoutCreatedPurchaseLocationsInput = {
@@ -1007,6 +1099,8 @@ export type UsersUncheckedCreateWithoutCreatedPurchaseLocationsInput = {
   createdBreweries?: Prisma.BreweriesUncheckedCreateNestedManyWithoutCreatedByUserInput
   updatedBreweries?: Prisma.BreweriesUncheckedCreateNestedManyWithoutUpdatedByUserInput
   updatedPurchaseLocations?: Prisma.PurchaseLocationsUncheckedCreateNestedManyWithoutUpdatedByUserInput
+  storageLocations?: Prisma.StorageLocationsUncheckedCreateNestedManyWithoutUserInput
+  cellarItems?: Prisma.CellarItemsUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UsersCreateOrConnectWithoutCreatedPurchaseLocationsInput = {
@@ -1027,6 +1121,8 @@ export type UsersCreateWithoutUpdatedPurchaseLocationsInput = {
   createdBreweries?: Prisma.BreweriesCreateNestedManyWithoutCreatedByUserInput
   updatedBreweries?: Prisma.BreweriesCreateNestedManyWithoutUpdatedByUserInput
   createdPurchaseLocations?: Prisma.PurchaseLocationsCreateNestedManyWithoutCreatedByUserInput
+  storageLocations?: Prisma.StorageLocationsCreateNestedManyWithoutUserInput
+  cellarItems?: Prisma.CellarItemsCreateNestedManyWithoutUserInput
 }
 
 export type UsersUncheckedCreateWithoutUpdatedPurchaseLocationsInput = {
@@ -1042,6 +1138,8 @@ export type UsersUncheckedCreateWithoutUpdatedPurchaseLocationsInput = {
   createdBreweries?: Prisma.BreweriesUncheckedCreateNestedManyWithoutCreatedByUserInput
   updatedBreweries?: Prisma.BreweriesUncheckedCreateNestedManyWithoutUpdatedByUserInput
   createdPurchaseLocations?: Prisma.PurchaseLocationsUncheckedCreateNestedManyWithoutCreatedByUserInput
+  storageLocations?: Prisma.StorageLocationsUncheckedCreateNestedManyWithoutUserInput
+  cellarItems?: Prisma.CellarItemsUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UsersCreateOrConnectWithoutUpdatedPurchaseLocationsInput = {
@@ -1073,6 +1171,8 @@ export type UsersUpdateWithoutCreatedPurchaseLocationsInput = {
   createdBreweries?: Prisma.BreweriesUpdateManyWithoutCreatedByUserNestedInput
   updatedBreweries?: Prisma.BreweriesUpdateManyWithoutUpdatedByUserNestedInput
   updatedPurchaseLocations?: Prisma.PurchaseLocationsUpdateManyWithoutUpdatedByUserNestedInput
+  storageLocations?: Prisma.StorageLocationsUpdateManyWithoutUserNestedInput
+  cellarItems?: Prisma.CellarItemsUpdateManyWithoutUserNestedInput
 }
 
 export type UsersUncheckedUpdateWithoutCreatedPurchaseLocationsInput = {
@@ -1088,6 +1188,8 @@ export type UsersUncheckedUpdateWithoutCreatedPurchaseLocationsInput = {
   createdBreweries?: Prisma.BreweriesUncheckedUpdateManyWithoutCreatedByUserNestedInput
   updatedBreweries?: Prisma.BreweriesUncheckedUpdateManyWithoutUpdatedByUserNestedInput
   updatedPurchaseLocations?: Prisma.PurchaseLocationsUncheckedUpdateManyWithoutUpdatedByUserNestedInput
+  storageLocations?: Prisma.StorageLocationsUncheckedUpdateManyWithoutUserNestedInput
+  cellarItems?: Prisma.CellarItemsUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UsersUpsertWithoutUpdatedPurchaseLocationsInput = {
@@ -1114,6 +1216,8 @@ export type UsersUpdateWithoutUpdatedPurchaseLocationsInput = {
   createdBreweries?: Prisma.BreweriesUpdateManyWithoutCreatedByUserNestedInput
   updatedBreweries?: Prisma.BreweriesUpdateManyWithoutUpdatedByUserNestedInput
   createdPurchaseLocations?: Prisma.PurchaseLocationsUpdateManyWithoutCreatedByUserNestedInput
+  storageLocations?: Prisma.StorageLocationsUpdateManyWithoutUserNestedInput
+  cellarItems?: Prisma.CellarItemsUpdateManyWithoutUserNestedInput
 }
 
 export type UsersUncheckedUpdateWithoutUpdatedPurchaseLocationsInput = {
@@ -1129,6 +1233,8 @@ export type UsersUncheckedUpdateWithoutUpdatedPurchaseLocationsInput = {
   createdBreweries?: Prisma.BreweriesUncheckedUpdateManyWithoutCreatedByUserNestedInput
   updatedBreweries?: Prisma.BreweriesUncheckedUpdateManyWithoutUpdatedByUserNestedInput
   createdPurchaseLocations?: Prisma.PurchaseLocationsUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  storageLocations?: Prisma.StorageLocationsUncheckedUpdateManyWithoutUserNestedInput
+  cellarItems?: Prisma.CellarItemsUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UsersCreateWithoutFriendWithInput = {
@@ -1144,6 +1250,8 @@ export type UsersCreateWithoutFriendWithInput = {
   updatedBreweries?: Prisma.BreweriesCreateNestedManyWithoutUpdatedByUserInput
   createdPurchaseLocations?: Prisma.PurchaseLocationsCreateNestedManyWithoutCreatedByUserInput
   updatedPurchaseLocations?: Prisma.PurchaseLocationsCreateNestedManyWithoutUpdatedByUserInput
+  storageLocations?: Prisma.StorageLocationsCreateNestedManyWithoutUserInput
+  cellarItems?: Prisma.CellarItemsCreateNestedManyWithoutUserInput
 }
 
 export type UsersUncheckedCreateWithoutFriendWithInput = {
@@ -1159,6 +1267,8 @@ export type UsersUncheckedCreateWithoutFriendWithInput = {
   updatedBreweries?: Prisma.BreweriesUncheckedCreateNestedManyWithoutUpdatedByUserInput
   createdPurchaseLocations?: Prisma.PurchaseLocationsUncheckedCreateNestedManyWithoutCreatedByUserInput
   updatedPurchaseLocations?: Prisma.PurchaseLocationsUncheckedCreateNestedManyWithoutUpdatedByUserInput
+  storageLocations?: Prisma.StorageLocationsUncheckedCreateNestedManyWithoutUserInput
+  cellarItems?: Prisma.CellarItemsUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UsersCreateOrConnectWithoutFriendWithInput = {
@@ -1179,6 +1289,8 @@ export type UsersCreateWithoutBefriendedByInput = {
   updatedBreweries?: Prisma.BreweriesCreateNestedManyWithoutUpdatedByUserInput
   createdPurchaseLocations?: Prisma.PurchaseLocationsCreateNestedManyWithoutCreatedByUserInput
   updatedPurchaseLocations?: Prisma.PurchaseLocationsCreateNestedManyWithoutUpdatedByUserInput
+  storageLocations?: Prisma.StorageLocationsCreateNestedManyWithoutUserInput
+  cellarItems?: Prisma.CellarItemsCreateNestedManyWithoutUserInput
 }
 
 export type UsersUncheckedCreateWithoutBefriendedByInput = {
@@ -1194,6 +1306,8 @@ export type UsersUncheckedCreateWithoutBefriendedByInput = {
   updatedBreweries?: Prisma.BreweriesUncheckedCreateNestedManyWithoutUpdatedByUserInput
   createdPurchaseLocations?: Prisma.PurchaseLocationsUncheckedCreateNestedManyWithoutCreatedByUserInput
   updatedPurchaseLocations?: Prisma.PurchaseLocationsUncheckedCreateNestedManyWithoutUpdatedByUserInput
+  storageLocations?: Prisma.StorageLocationsUncheckedCreateNestedManyWithoutUserInput
+  cellarItems?: Prisma.CellarItemsUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UsersCreateOrConnectWithoutBefriendedByInput = {
@@ -1225,6 +1339,8 @@ export type UsersUpdateWithoutFriendWithInput = {
   updatedBreweries?: Prisma.BreweriesUpdateManyWithoutUpdatedByUserNestedInput
   createdPurchaseLocations?: Prisma.PurchaseLocationsUpdateManyWithoutCreatedByUserNestedInput
   updatedPurchaseLocations?: Prisma.PurchaseLocationsUpdateManyWithoutUpdatedByUserNestedInput
+  storageLocations?: Prisma.StorageLocationsUpdateManyWithoutUserNestedInput
+  cellarItems?: Prisma.CellarItemsUpdateManyWithoutUserNestedInput
 }
 
 export type UsersUncheckedUpdateWithoutFriendWithInput = {
@@ -1240,6 +1356,8 @@ export type UsersUncheckedUpdateWithoutFriendWithInput = {
   updatedBreweries?: Prisma.BreweriesUncheckedUpdateManyWithoutUpdatedByUserNestedInput
   createdPurchaseLocations?: Prisma.PurchaseLocationsUncheckedUpdateManyWithoutCreatedByUserNestedInput
   updatedPurchaseLocations?: Prisma.PurchaseLocationsUncheckedUpdateManyWithoutUpdatedByUserNestedInput
+  storageLocations?: Prisma.StorageLocationsUncheckedUpdateManyWithoutUserNestedInput
+  cellarItems?: Prisma.CellarItemsUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UsersUpsertWithoutBefriendedByInput = {
@@ -1266,6 +1384,8 @@ export type UsersUpdateWithoutBefriendedByInput = {
   updatedBreweries?: Prisma.BreweriesUpdateManyWithoutUpdatedByUserNestedInput
   createdPurchaseLocations?: Prisma.PurchaseLocationsUpdateManyWithoutCreatedByUserNestedInput
   updatedPurchaseLocations?: Prisma.PurchaseLocationsUpdateManyWithoutUpdatedByUserNestedInput
+  storageLocations?: Prisma.StorageLocationsUpdateManyWithoutUserNestedInput
+  cellarItems?: Prisma.CellarItemsUpdateManyWithoutUserNestedInput
 }
 
 export type UsersUncheckedUpdateWithoutBefriendedByInput = {
@@ -1281,6 +1401,8 @@ export type UsersUncheckedUpdateWithoutBefriendedByInput = {
   updatedBreweries?: Prisma.BreweriesUncheckedUpdateManyWithoutUpdatedByUserNestedInput
   createdPurchaseLocations?: Prisma.PurchaseLocationsUncheckedUpdateManyWithoutCreatedByUserNestedInput
   updatedPurchaseLocations?: Prisma.PurchaseLocationsUncheckedUpdateManyWithoutUpdatedByUserNestedInput
+  storageLocations?: Prisma.StorageLocationsUncheckedUpdateManyWithoutUserNestedInput
+  cellarItems?: Prisma.CellarItemsUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UsersCreateWithoutFriendRequestsSentInput = {
@@ -1296,6 +1418,8 @@ export type UsersCreateWithoutFriendRequestsSentInput = {
   updatedBreweries?: Prisma.BreweriesCreateNestedManyWithoutUpdatedByUserInput
   createdPurchaseLocations?: Prisma.PurchaseLocationsCreateNestedManyWithoutCreatedByUserInput
   updatedPurchaseLocations?: Prisma.PurchaseLocationsCreateNestedManyWithoutUpdatedByUserInput
+  storageLocations?: Prisma.StorageLocationsCreateNestedManyWithoutUserInput
+  cellarItems?: Prisma.CellarItemsCreateNestedManyWithoutUserInput
 }
 
 export type UsersUncheckedCreateWithoutFriendRequestsSentInput = {
@@ -1311,6 +1435,8 @@ export type UsersUncheckedCreateWithoutFriendRequestsSentInput = {
   updatedBreweries?: Prisma.BreweriesUncheckedCreateNestedManyWithoutUpdatedByUserInput
   createdPurchaseLocations?: Prisma.PurchaseLocationsUncheckedCreateNestedManyWithoutCreatedByUserInput
   updatedPurchaseLocations?: Prisma.PurchaseLocationsUncheckedCreateNestedManyWithoutUpdatedByUserInput
+  storageLocations?: Prisma.StorageLocationsUncheckedCreateNestedManyWithoutUserInput
+  cellarItems?: Prisma.CellarItemsUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UsersCreateOrConnectWithoutFriendRequestsSentInput = {
@@ -1331,6 +1457,8 @@ export type UsersCreateWithoutFriendRequestReceivedInput = {
   updatedBreweries?: Prisma.BreweriesCreateNestedManyWithoutUpdatedByUserInput
   createdPurchaseLocations?: Prisma.PurchaseLocationsCreateNestedManyWithoutCreatedByUserInput
   updatedPurchaseLocations?: Prisma.PurchaseLocationsCreateNestedManyWithoutUpdatedByUserInput
+  storageLocations?: Prisma.StorageLocationsCreateNestedManyWithoutUserInput
+  cellarItems?: Prisma.CellarItemsCreateNestedManyWithoutUserInput
 }
 
 export type UsersUncheckedCreateWithoutFriendRequestReceivedInput = {
@@ -1346,6 +1474,8 @@ export type UsersUncheckedCreateWithoutFriendRequestReceivedInput = {
   updatedBreweries?: Prisma.BreweriesUncheckedCreateNestedManyWithoutUpdatedByUserInput
   createdPurchaseLocations?: Prisma.PurchaseLocationsUncheckedCreateNestedManyWithoutCreatedByUserInput
   updatedPurchaseLocations?: Prisma.PurchaseLocationsUncheckedCreateNestedManyWithoutUpdatedByUserInput
+  storageLocations?: Prisma.StorageLocationsUncheckedCreateNestedManyWithoutUserInput
+  cellarItems?: Prisma.CellarItemsUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UsersCreateOrConnectWithoutFriendRequestReceivedInput = {
@@ -1377,6 +1507,8 @@ export type UsersUpdateWithoutFriendRequestsSentInput = {
   updatedBreweries?: Prisma.BreweriesUpdateManyWithoutUpdatedByUserNestedInput
   createdPurchaseLocations?: Prisma.PurchaseLocationsUpdateManyWithoutCreatedByUserNestedInput
   updatedPurchaseLocations?: Prisma.PurchaseLocationsUpdateManyWithoutUpdatedByUserNestedInput
+  storageLocations?: Prisma.StorageLocationsUpdateManyWithoutUserNestedInput
+  cellarItems?: Prisma.CellarItemsUpdateManyWithoutUserNestedInput
 }
 
 export type UsersUncheckedUpdateWithoutFriendRequestsSentInput = {
@@ -1392,6 +1524,8 @@ export type UsersUncheckedUpdateWithoutFriendRequestsSentInput = {
   updatedBreweries?: Prisma.BreweriesUncheckedUpdateManyWithoutUpdatedByUserNestedInput
   createdPurchaseLocations?: Prisma.PurchaseLocationsUncheckedUpdateManyWithoutCreatedByUserNestedInput
   updatedPurchaseLocations?: Prisma.PurchaseLocationsUncheckedUpdateManyWithoutUpdatedByUserNestedInput
+  storageLocations?: Prisma.StorageLocationsUncheckedUpdateManyWithoutUserNestedInput
+  cellarItems?: Prisma.CellarItemsUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UsersUpsertWithoutFriendRequestReceivedInput = {
@@ -1418,6 +1552,8 @@ export type UsersUpdateWithoutFriendRequestReceivedInput = {
   updatedBreweries?: Prisma.BreweriesUpdateManyWithoutUpdatedByUserNestedInput
   createdPurchaseLocations?: Prisma.PurchaseLocationsUpdateManyWithoutCreatedByUserNestedInput
   updatedPurchaseLocations?: Prisma.PurchaseLocationsUpdateManyWithoutUpdatedByUserNestedInput
+  storageLocations?: Prisma.StorageLocationsUpdateManyWithoutUserNestedInput
+  cellarItems?: Prisma.CellarItemsUpdateManyWithoutUserNestedInput
 }
 
 export type UsersUncheckedUpdateWithoutFriendRequestReceivedInput = {
@@ -1433,6 +1569,176 @@ export type UsersUncheckedUpdateWithoutFriendRequestReceivedInput = {
   updatedBreweries?: Prisma.BreweriesUncheckedUpdateManyWithoutUpdatedByUserNestedInput
   createdPurchaseLocations?: Prisma.PurchaseLocationsUncheckedUpdateManyWithoutCreatedByUserNestedInput
   updatedPurchaseLocations?: Prisma.PurchaseLocationsUncheckedUpdateManyWithoutUpdatedByUserNestedInput
+  storageLocations?: Prisma.StorageLocationsUncheckedUpdateManyWithoutUserNestedInput
+  cellarItems?: Prisma.CellarItemsUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UsersCreateWithoutStorageLocationsInput = {
+  username: string
+  betterAuthUser: Prisma.BetterAuthUsersCreateNestedOneWithoutUserInput
+  reviews?: Prisma.ReviewsCreateNestedManyWithoutUserInput
+  friendWith?: Prisma.FriendsCreateNestedManyWithoutUserAInput
+  befriendedBy?: Prisma.FriendsCreateNestedManyWithoutUserBInput
+  friendRequestsSent?: Prisma.FriendRequestsCreateNestedManyWithoutRequesterInput
+  friendRequestReceived?: Prisma.FriendRequestsCreateNestedManyWithoutAddresseeInput
+  createdBeers?: Prisma.BeersCreateNestedManyWithoutCreatedByUserInput
+  updatedBeers?: Prisma.BeersCreateNestedManyWithoutUpdatedByUserInput
+  createdBreweries?: Prisma.BreweriesCreateNestedManyWithoutCreatedByUserInput
+  updatedBreweries?: Prisma.BreweriesCreateNestedManyWithoutUpdatedByUserInput
+  createdPurchaseLocations?: Prisma.PurchaseLocationsCreateNestedManyWithoutCreatedByUserInput
+  updatedPurchaseLocations?: Prisma.PurchaseLocationsCreateNestedManyWithoutUpdatedByUserInput
+  cellarItems?: Prisma.CellarItemsCreateNestedManyWithoutUserInput
+}
+
+export type UsersUncheckedCreateWithoutStorageLocationsInput = {
+  id: string
+  username: string
+  reviews?: Prisma.ReviewsUncheckedCreateNestedManyWithoutUserInput
+  friendWith?: Prisma.FriendsUncheckedCreateNestedManyWithoutUserAInput
+  befriendedBy?: Prisma.FriendsUncheckedCreateNestedManyWithoutUserBInput
+  friendRequestsSent?: Prisma.FriendRequestsUncheckedCreateNestedManyWithoutRequesterInput
+  friendRequestReceived?: Prisma.FriendRequestsUncheckedCreateNestedManyWithoutAddresseeInput
+  createdBeers?: Prisma.BeersUncheckedCreateNestedManyWithoutCreatedByUserInput
+  updatedBeers?: Prisma.BeersUncheckedCreateNestedManyWithoutUpdatedByUserInput
+  createdBreweries?: Prisma.BreweriesUncheckedCreateNestedManyWithoutCreatedByUserInput
+  updatedBreweries?: Prisma.BreweriesUncheckedCreateNestedManyWithoutUpdatedByUserInput
+  createdPurchaseLocations?: Prisma.PurchaseLocationsUncheckedCreateNestedManyWithoutCreatedByUserInput
+  updatedPurchaseLocations?: Prisma.PurchaseLocationsUncheckedCreateNestedManyWithoutUpdatedByUserInput
+  cellarItems?: Prisma.CellarItemsUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UsersCreateOrConnectWithoutStorageLocationsInput = {
+  where: Prisma.UsersWhereUniqueInput
+  create: Prisma.XOR<Prisma.UsersCreateWithoutStorageLocationsInput, Prisma.UsersUncheckedCreateWithoutStorageLocationsInput>
+}
+
+export type UsersUpsertWithoutStorageLocationsInput = {
+  update: Prisma.XOR<Prisma.UsersUpdateWithoutStorageLocationsInput, Prisma.UsersUncheckedUpdateWithoutStorageLocationsInput>
+  create: Prisma.XOR<Prisma.UsersCreateWithoutStorageLocationsInput, Prisma.UsersUncheckedCreateWithoutStorageLocationsInput>
+  where?: Prisma.UsersWhereInput
+}
+
+export type UsersUpdateToOneWithWhereWithoutStorageLocationsInput = {
+  where?: Prisma.UsersWhereInput
+  data: Prisma.XOR<Prisma.UsersUpdateWithoutStorageLocationsInput, Prisma.UsersUncheckedUpdateWithoutStorageLocationsInput>
+}
+
+export type UsersUpdateWithoutStorageLocationsInput = {
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  betterAuthUser?: Prisma.BetterAuthUsersUpdateOneRequiredWithoutUserNestedInput
+  reviews?: Prisma.ReviewsUpdateManyWithoutUserNestedInput
+  friendWith?: Prisma.FriendsUpdateManyWithoutUserANestedInput
+  befriendedBy?: Prisma.FriendsUpdateManyWithoutUserBNestedInput
+  friendRequestsSent?: Prisma.FriendRequestsUpdateManyWithoutRequesterNestedInput
+  friendRequestReceived?: Prisma.FriendRequestsUpdateManyWithoutAddresseeNestedInput
+  createdBeers?: Prisma.BeersUpdateManyWithoutCreatedByUserNestedInput
+  updatedBeers?: Prisma.BeersUpdateManyWithoutUpdatedByUserNestedInput
+  createdBreweries?: Prisma.BreweriesUpdateManyWithoutCreatedByUserNestedInput
+  updatedBreweries?: Prisma.BreweriesUpdateManyWithoutUpdatedByUserNestedInput
+  createdPurchaseLocations?: Prisma.PurchaseLocationsUpdateManyWithoutCreatedByUserNestedInput
+  updatedPurchaseLocations?: Prisma.PurchaseLocationsUpdateManyWithoutUpdatedByUserNestedInput
+  cellarItems?: Prisma.CellarItemsUpdateManyWithoutUserNestedInput
+}
+
+export type UsersUncheckedUpdateWithoutStorageLocationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  reviews?: Prisma.ReviewsUncheckedUpdateManyWithoutUserNestedInput
+  friendWith?: Prisma.FriendsUncheckedUpdateManyWithoutUserANestedInput
+  befriendedBy?: Prisma.FriendsUncheckedUpdateManyWithoutUserBNestedInput
+  friendRequestsSent?: Prisma.FriendRequestsUncheckedUpdateManyWithoutRequesterNestedInput
+  friendRequestReceived?: Prisma.FriendRequestsUncheckedUpdateManyWithoutAddresseeNestedInput
+  createdBeers?: Prisma.BeersUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  updatedBeers?: Prisma.BeersUncheckedUpdateManyWithoutUpdatedByUserNestedInput
+  createdBreweries?: Prisma.BreweriesUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  updatedBreweries?: Prisma.BreweriesUncheckedUpdateManyWithoutUpdatedByUserNestedInput
+  createdPurchaseLocations?: Prisma.PurchaseLocationsUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  updatedPurchaseLocations?: Prisma.PurchaseLocationsUncheckedUpdateManyWithoutUpdatedByUserNestedInput
+  cellarItems?: Prisma.CellarItemsUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UsersCreateWithoutCellarItemsInput = {
+  username: string
+  betterAuthUser: Prisma.BetterAuthUsersCreateNestedOneWithoutUserInput
+  reviews?: Prisma.ReviewsCreateNestedManyWithoutUserInput
+  friendWith?: Prisma.FriendsCreateNestedManyWithoutUserAInput
+  befriendedBy?: Prisma.FriendsCreateNestedManyWithoutUserBInput
+  friendRequestsSent?: Prisma.FriendRequestsCreateNestedManyWithoutRequesterInput
+  friendRequestReceived?: Prisma.FriendRequestsCreateNestedManyWithoutAddresseeInput
+  createdBeers?: Prisma.BeersCreateNestedManyWithoutCreatedByUserInput
+  updatedBeers?: Prisma.BeersCreateNestedManyWithoutUpdatedByUserInput
+  createdBreweries?: Prisma.BreweriesCreateNestedManyWithoutCreatedByUserInput
+  updatedBreweries?: Prisma.BreweriesCreateNestedManyWithoutUpdatedByUserInput
+  createdPurchaseLocations?: Prisma.PurchaseLocationsCreateNestedManyWithoutCreatedByUserInput
+  updatedPurchaseLocations?: Prisma.PurchaseLocationsCreateNestedManyWithoutUpdatedByUserInput
+  storageLocations?: Prisma.StorageLocationsCreateNestedManyWithoutUserInput
+}
+
+export type UsersUncheckedCreateWithoutCellarItemsInput = {
+  id: string
+  username: string
+  reviews?: Prisma.ReviewsUncheckedCreateNestedManyWithoutUserInput
+  friendWith?: Prisma.FriendsUncheckedCreateNestedManyWithoutUserAInput
+  befriendedBy?: Prisma.FriendsUncheckedCreateNestedManyWithoutUserBInput
+  friendRequestsSent?: Prisma.FriendRequestsUncheckedCreateNestedManyWithoutRequesterInput
+  friendRequestReceived?: Prisma.FriendRequestsUncheckedCreateNestedManyWithoutAddresseeInput
+  createdBeers?: Prisma.BeersUncheckedCreateNestedManyWithoutCreatedByUserInput
+  updatedBeers?: Prisma.BeersUncheckedCreateNestedManyWithoutUpdatedByUserInput
+  createdBreweries?: Prisma.BreweriesUncheckedCreateNestedManyWithoutCreatedByUserInput
+  updatedBreweries?: Prisma.BreweriesUncheckedCreateNestedManyWithoutUpdatedByUserInput
+  createdPurchaseLocations?: Prisma.PurchaseLocationsUncheckedCreateNestedManyWithoutCreatedByUserInput
+  updatedPurchaseLocations?: Prisma.PurchaseLocationsUncheckedCreateNestedManyWithoutUpdatedByUserInput
+  storageLocations?: Prisma.StorageLocationsUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UsersCreateOrConnectWithoutCellarItemsInput = {
+  where: Prisma.UsersWhereUniqueInput
+  create: Prisma.XOR<Prisma.UsersCreateWithoutCellarItemsInput, Prisma.UsersUncheckedCreateWithoutCellarItemsInput>
+}
+
+export type UsersUpsertWithoutCellarItemsInput = {
+  update: Prisma.XOR<Prisma.UsersUpdateWithoutCellarItemsInput, Prisma.UsersUncheckedUpdateWithoutCellarItemsInput>
+  create: Prisma.XOR<Prisma.UsersCreateWithoutCellarItemsInput, Prisma.UsersUncheckedCreateWithoutCellarItemsInput>
+  where?: Prisma.UsersWhereInput
+}
+
+export type UsersUpdateToOneWithWhereWithoutCellarItemsInput = {
+  where?: Prisma.UsersWhereInput
+  data: Prisma.XOR<Prisma.UsersUpdateWithoutCellarItemsInput, Prisma.UsersUncheckedUpdateWithoutCellarItemsInput>
+}
+
+export type UsersUpdateWithoutCellarItemsInput = {
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  betterAuthUser?: Prisma.BetterAuthUsersUpdateOneRequiredWithoutUserNestedInput
+  reviews?: Prisma.ReviewsUpdateManyWithoutUserNestedInput
+  friendWith?: Prisma.FriendsUpdateManyWithoutUserANestedInput
+  befriendedBy?: Prisma.FriendsUpdateManyWithoutUserBNestedInput
+  friendRequestsSent?: Prisma.FriendRequestsUpdateManyWithoutRequesterNestedInput
+  friendRequestReceived?: Prisma.FriendRequestsUpdateManyWithoutAddresseeNestedInput
+  createdBeers?: Prisma.BeersUpdateManyWithoutCreatedByUserNestedInput
+  updatedBeers?: Prisma.BeersUpdateManyWithoutUpdatedByUserNestedInput
+  createdBreweries?: Prisma.BreweriesUpdateManyWithoutCreatedByUserNestedInput
+  updatedBreweries?: Prisma.BreweriesUpdateManyWithoutUpdatedByUserNestedInput
+  createdPurchaseLocations?: Prisma.PurchaseLocationsUpdateManyWithoutCreatedByUserNestedInput
+  updatedPurchaseLocations?: Prisma.PurchaseLocationsUpdateManyWithoutUpdatedByUserNestedInput
+  storageLocations?: Prisma.StorageLocationsUpdateManyWithoutUserNestedInput
+}
+
+export type UsersUncheckedUpdateWithoutCellarItemsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  reviews?: Prisma.ReviewsUncheckedUpdateManyWithoutUserNestedInput
+  friendWith?: Prisma.FriendsUncheckedUpdateManyWithoutUserANestedInput
+  befriendedBy?: Prisma.FriendsUncheckedUpdateManyWithoutUserBNestedInput
+  friendRequestsSent?: Prisma.FriendRequestsUncheckedUpdateManyWithoutRequesterNestedInput
+  friendRequestReceived?: Prisma.FriendRequestsUncheckedUpdateManyWithoutAddresseeNestedInput
+  createdBeers?: Prisma.BeersUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  updatedBeers?: Prisma.BeersUncheckedUpdateManyWithoutUpdatedByUserNestedInput
+  createdBreweries?: Prisma.BreweriesUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  updatedBreweries?: Prisma.BreweriesUncheckedUpdateManyWithoutUpdatedByUserNestedInput
+  createdPurchaseLocations?: Prisma.PurchaseLocationsUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  updatedPurchaseLocations?: Prisma.PurchaseLocationsUncheckedUpdateManyWithoutUpdatedByUserNestedInput
+  storageLocations?: Prisma.StorageLocationsUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -1452,6 +1758,8 @@ export type UsersCountOutputType = {
   updatedBreweries: number
   createdPurchaseLocations: number
   updatedPurchaseLocations: number
+  storageLocations: number
+  cellarItems: number
 }
 
 export type UsersCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1466,6 +1774,8 @@ export type UsersCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.
   updatedBreweries?: boolean | UsersCountOutputTypeCountUpdatedBreweriesArgs
   createdPurchaseLocations?: boolean | UsersCountOutputTypeCountCreatedPurchaseLocationsArgs
   updatedPurchaseLocations?: boolean | UsersCountOutputTypeCountUpdatedPurchaseLocationsArgs
+  storageLocations?: boolean | UsersCountOutputTypeCountStorageLocationsArgs
+  cellarItems?: boolean | UsersCountOutputTypeCountCellarItemsArgs
 }
 
 /**
@@ -1555,6 +1865,20 @@ export type UsersCountOutputTypeCountUpdatedPurchaseLocationsArgs<ExtArgs extend
   where?: Prisma.PurchaseLocationsWhereInput
 }
 
+/**
+ * UsersCountOutputType without action
+ */
+export type UsersCountOutputTypeCountStorageLocationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.StorageLocationsWhereInput
+}
+
+/**
+ * UsersCountOutputType without action
+ */
+export type UsersCountOutputTypeCountCellarItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CellarItemsWhereInput
+}
+
 
 export type UsersSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1571,6 +1895,8 @@ export type UsersSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   updatedBreweries?: boolean | Prisma.Users$updatedBreweriesArgs<ExtArgs>
   createdPurchaseLocations?: boolean | Prisma.Users$createdPurchaseLocationsArgs<ExtArgs>
   updatedPurchaseLocations?: boolean | Prisma.Users$updatedPurchaseLocationsArgs<ExtArgs>
+  storageLocations?: boolean | Prisma.Users$storageLocationsArgs<ExtArgs>
+  cellarItems?: boolean | Prisma.Users$cellarItemsArgs<ExtArgs>
   _count?: boolean | Prisma.UsersCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["users"]>
 
@@ -1605,6 +1931,8 @@ export type UsersInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   updatedBreweries?: boolean | Prisma.Users$updatedBreweriesArgs<ExtArgs>
   createdPurchaseLocations?: boolean | Prisma.Users$createdPurchaseLocationsArgs<ExtArgs>
   updatedPurchaseLocations?: boolean | Prisma.Users$updatedPurchaseLocationsArgs<ExtArgs>
+  storageLocations?: boolean | Prisma.Users$storageLocationsArgs<ExtArgs>
+  cellarItems?: boolean | Prisma.Users$cellarItemsArgs<ExtArgs>
   _count?: boolean | Prisma.UsersCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UsersIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1629,6 +1957,8 @@ export type $UsersPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     updatedBreweries: Prisma.$BreweriesPayload<ExtArgs>[]
     createdPurchaseLocations: Prisma.$PurchaseLocationsPayload<ExtArgs>[]
     updatedPurchaseLocations: Prisma.$PurchaseLocationsPayload<ExtArgs>[]
+    storageLocations: Prisma.$StorageLocationsPayload<ExtArgs>[]
+    cellarItems: Prisma.$CellarItemsPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2039,6 +2369,8 @@ export interface Prisma__UsersClient<T, Null = never, ExtArgs extends runtime.Ty
   updatedBreweries<T extends Prisma.Users$updatedBreweriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Users$updatedBreweriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BreweriesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   createdPurchaseLocations<T extends Prisma.Users$createdPurchaseLocationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Users$createdPurchaseLocationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PurchaseLocationsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   updatedPurchaseLocations<T extends Prisma.Users$updatedPurchaseLocationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Users$updatedPurchaseLocationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PurchaseLocationsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  storageLocations<T extends Prisma.Users$storageLocationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Users$storageLocationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StorageLocationsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  cellarItems<T extends Prisma.Users$cellarItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Users$cellarItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CellarItemsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2727,6 +3059,54 @@ export type Users$updatedPurchaseLocationsArgs<ExtArgs extends runtime.Types.Ext
   take?: number
   skip?: number
   distinct?: Prisma.PurchaseLocationsScalarFieldEnum | Prisma.PurchaseLocationsScalarFieldEnum[]
+}
+
+/**
+ * Users.storageLocations
+ */
+export type Users$storageLocationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the StorageLocations
+   */
+  select?: Prisma.StorageLocationsSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the StorageLocations
+   */
+  omit?: Prisma.StorageLocationsOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.StorageLocationsInclude<ExtArgs> | null
+  where?: Prisma.StorageLocationsWhereInput
+  orderBy?: Prisma.StorageLocationsOrderByWithRelationInput | Prisma.StorageLocationsOrderByWithRelationInput[]
+  cursor?: Prisma.StorageLocationsWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.StorageLocationsScalarFieldEnum | Prisma.StorageLocationsScalarFieldEnum[]
+}
+
+/**
+ * Users.cellarItems
+ */
+export type Users$cellarItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CellarItems
+   */
+  select?: Prisma.CellarItemsSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CellarItems
+   */
+  omit?: Prisma.CellarItemsOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CellarItemsInclude<ExtArgs> | null
+  where?: Prisma.CellarItemsWhereInput
+  orderBy?: Prisma.CellarItemsOrderByWithRelationInput | Prisma.CellarItemsOrderByWithRelationInput[]
+  cursor?: Prisma.CellarItemsWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CellarItemsScalarFieldEnum | Prisma.CellarItemsScalarFieldEnum[]
 }
 
 /**
