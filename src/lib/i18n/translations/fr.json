@@ -805,5 +805,65 @@
       "title": "Demande d'ami inconnue",
       "cta": "Retourner à l'accueil"
     }
+  },
+  "cellar": {
+    "title": "Ma Cave",
+    "empty": "Votre cave est vide. Ajoutez des bières pour commencer !",
+    "stats": {
+      "totalItems": "Total d'articles",
+      "uniqueBeers": "Bières uniques",
+      "expiringSoon": "Expirent bientôt",
+      "totalValue": "Valeur totale"
+    },
+    "filters": {
+      "allLocations": "Tous les emplacements",
+      "allFormats": "Tous les formats",
+      "allDates": "Toutes les dates",
+      "expiring30Days": "Expire dans 30 jours",
+      "expiring60Days": "Expire dans 60 jours",
+      "expiring90Days": "Expire dans 90 jours"
+    },
+    "item": {
+      "expired": "Expiré",
+      "expiresIn": "{days, plural, =1 {Expire dans 1 jour} other {Expire dans # jours}}",
+      "openAndReview": "Ouvrir et Noter"
+    },
+    "form": {
+      "servingFormat": {
+        "label": "Format de service",
+        "values": {
+          "BOTTLE": "Bouteille",
+          "CAN": "Canette"
+        }
+      },
+      "storageLocation": {
+        "label": "Emplacement de stockage",
+        "placeholder": "Sélectionner un emplacement",
+        "none": "Aucun emplacement",
+        "noLocations": "Aucun emplacement enregistré",
+        "addNewPlaceholder": "Nom du nouvel emplacement..."
+      },
+      "quantity": {
+        "label": "Quantité"
+      },
+      "bestBeforeDate": {
+        "label": "Date de péremption"
+      },
+      "purchaseDate": {
+        "label": "Date d'achat"
+      },
+      "purchasePrice": {
+        "label": "Prix d'achat"
+      },
+      "errors": {
+        "QUANTITY_MIN": "La quantité doit être d'au moins 1",
+        "SOMETHING_WENT_WRONG": "Une erreur s'est produite. Veuillez réessayer."
+      }
+    },
+    "addToCellar": {
+      "title": "Ajouter à la Cave",
+      "submit": "Ajouter à la Cave",
+      "submitting": "Ajout en cours..."
+    }
   }
 }

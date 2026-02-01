@@ -808,5 +808,65 @@
       "title": "Unknown friend request",
       "cta": "Return to the home page"
     }
+  },
+  "cellar": {
+    "title": "My Cellar",
+    "empty": "Your cellar is empty. Add some beers to get started!",
+    "stats": {
+      "totalItems": "Total items",
+      "uniqueBeers": "Unique beers",
+      "expiringSoon": "Expiring soon",
+      "totalValue": "Total value"
+    },
+    "filters": {
+      "allLocations": "All locations",
+      "allFormats": "All formats",
+      "allDates": "All dates",
+      "expiring30Days": "Expiring in 30 days",
+      "expiring60Days": "Expiring in 60 days",
+      "expiring90Days": "Expiring in 90 days"
+    },
+    "item": {
+      "expired": "Expired",
+      "expiresIn": "{days, plural, =1 {Expires in 1 day} other {Expires in # days}}",
+      "openAndReview": "Open & Review"
+    },
+    "form": {
+      "servingFormat": {
+        "label": "Serving format",
+        "values": {
+          "BOTTLE": "Bottle",
+          "CAN": "Can"
+        }
+      },
+      "storageLocation": {
+        "label": "Storage location",
+        "placeholder": "Select a location",
+        "none": "No location",
+        "noLocations": "No locations yet",
+        "addNewPlaceholder": "New location name..."
+      },
+      "quantity": {
+        "label": "Quantity"
+      },
+      "bestBeforeDate": {
+        "label": "Best before date"
+      },
+      "purchaseDate": {
+        "label": "Purchase date"
+      },
+      "purchasePrice": {
+        "label": "Purchase price"
+      },
+      "errors": {
+        "QUANTITY_MIN": "Quantity must be at least 1",
+        "SOMETHING_WENT_WRONG": "Something went wrong. Please try again."
+      }
+    },
+    "addToCellar": {
+      "title": "Add to Cellar",
+      "submit": "Add to Cellar",
+      "submitting": "Adding..."
+    }
   }
 }

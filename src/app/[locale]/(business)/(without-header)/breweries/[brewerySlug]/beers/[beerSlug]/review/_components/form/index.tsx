@@ -49,9 +49,17 @@ import { usePathname, useRouter, type Locale } from "@/lib/i18n";
 
 interface ReviewFormProps {
   beerId: string;
+  cellarItemId?: string;
+  defaultServingFrom?: ServingFrom;
+  defaultBestBeforeDate?: Date;
 }
 
-const ReviewForm = ({ beerId }: ReviewFormProps) => {
+const ReviewForm = ({
+  beerId,
+  cellarItemId,
+  defaultServingFrom,
+  defaultBestBeforeDate,
+}: ReviewFormProps) => {
   const t = useTranslations();
   const locale = useLocale() as Locale;
 
@@ -69,6 +77,9 @@ const ReviewForm = ({ beerId }: ReviewFormProps) => {
   const [form, fields] = useForm({
     defaultValue: {
       beerId,
+      cellarItemId,
+      servingFrom: defaultServingFrom,
+      bestBeforeDate: defaultBestBeforeDate?.toISOString().split("T")[0],
       googlePlacesSessionToken: getSessionToken(),
       priceCurrency: { fr: "EUR", en: "USD" }[locale],
     },
@@ -128,6 +139,16 @@ const ReviewForm = ({ beerId }: ReviewFormProps) => {
             })}
             key={fields.beerId.key}
           />
+
+          {cellarItemId && (
+            <input
+              {...getInputProps(fields.cellarItemId, {
+                type: "hidden",
+                ariaAttributes: false,
+              })}
+              key={fields.cellarItemId.key}
+            />
+          )}
 
           <input
             {...getInputProps(fields.googlePlacesSessionToken, {
