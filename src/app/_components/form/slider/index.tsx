@@ -46,15 +46,26 @@ const FormSlider = ({
       )}
     >
       <Label htmlFor={field.id} required={field.required}>
-        {`${label}: ${selectedValue}/${max}`}
+        {selectedValue !== undefined
+          ? `${label}: ${selectedValue}/${restProps.max}`
+          : label}
       </Label>
 
       <div className="w-full">
+        <input
+          key={key}
+          id={field.id}
+          name={name}
+          value={selectedValue ?? ""}
+          readOnly
+          aria-hidden="true"
+          tabIndex={-1}
+          className="sr-only"
+        />
+
         <Slider
           {...ariaInputProps}
           {...restProps}
-          name={name}
-          key={key}
           onValueChange={(value) => setSelectedValue(value[0]?.toString())}
         />
 

@@ -143,7 +143,6 @@ const ReviewForm = ({ beerId }: ReviewFormProps) => {
               field={fields.globalScore}
               min={0}
               max={10}
-              defaultValue={[5]}
               step={0.5}
             />
 
