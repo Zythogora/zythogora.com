@@ -1,7 +1,5 @@
 "use client";
 
-import { encode as encodeJpeg } from "@jsquash/jpeg";
-import resize from "@jsquash/resize";
 import {
   useCallback,
   useEffect,
@@ -33,36 +31,50 @@ async function compressImage(
 
   onProgress?.(10);
 
-  const bitmap = await createImageBitmap(file);
+  const originalBitmap = await createImageBitmap(file);
+  const { width, height } = originalBitmap;
+  originalBitmap.close();
   onProgress?.(20);
 
-  const canvas = new OffscreenCanvas(bitmap.width, bitmap.height);
+  let targetWidth = width;
+  let targetHeight = height;
+  if (width > maxWidthOrHeight || height > maxWidthOrHeight) {
+    const scale = maxWidthOrHeight / Math.max(width, height);
+    targetWidth = Math.round(width * scale);
+    targetHeight = Math.round(height * scale);
+  }
+  onProgress?.(30);
+
+  const resizedBitmap = await createImageBitmap(file, {
+    resizeWidth: targetWidth,
+    resizeHeight: targetHeight,
+    resizeQuality: "high",
+  });
+  onProgress?.(60);
+
+  const canvas = document.createElement("canvas");
+  canvas.width = targetWidth;
+  canvas.height = targetHeight;
   const ctx = canvas.getContext("2d");
-  if (ctx === null) {
-    bitmap.close();
+  if (!ctx) {
+    resizedBitmap.close();
+    return null;
+  }
+  ctx.drawImage(resizedBitmap, 0, 0);
+  resizedBitmap.close();
+  onProgress?.(70);
+
+  const blob = await new Promise<Blob | null>((resolve) =>
+    canvas.toBlob((b) => resolve(b), "image/jpeg", quality / 100),
+  );
+  onProgress?.(90);
+
+  if (!blob) {
     return null;
   }
 
-  ctx.drawImage(bitmap, 0, 0);
-  let imageData = ctx.getImageData(0, 0, bitmap.width, bitmap.height);
-  bitmap.close();
-  onProgress?.(40);
-
-  const { width, height } = imageData;
-  if (width > maxWidthOrHeight || height > maxWidthOrHeight) {
-    const scale = maxWidthOrHeight / Math.max(width, height);
-    imageData = await resize(imageData, {
-      width: Math.round(width * scale),
-      height: Math.round(height * scale),
-    });
-  }
-  onProgress?.(70);
-
-  const compressedBuffer = await encodeJpeg(imageData, { quality });
-  onProgress?.(90);
-
   const compressedFile = new File(
-    [compressedBuffer],
+    [blob],
     isPng ? file.name.replace(/\.png$/i, ".jpg") : file.name,
     { type: "image/jpeg", lastModified: file.lastModified },
   );
