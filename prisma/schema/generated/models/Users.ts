@@ -189,7 +189,6 @@ export type UsersOrderByWithRelationInput = {
   updatedBreweries?: Prisma.BreweriesOrderByRelationAggregateInput
   createdPurchaseLocations?: Prisma.PurchaseLocationsOrderByRelationAggregateInput
   updatedPurchaseLocations?: Prisma.PurchaseLocationsOrderByRelationAggregateInput
-  _relevance?: Prisma.UsersOrderByRelevanceInput
 }
 
 export type UsersWhereUniqueInput = Prisma.AtLeast<{
@@ -314,12 +313,6 @@ export type UsersNullableScalarRelationFilter = {
 export type UsersScalarRelationFilter = {
   is?: Prisma.UsersWhereInput
   isNot?: Prisma.UsersWhereInput
-}
-
-export type UsersOrderByRelevanceInput = {
-  fields: Prisma.UsersOrderByRelevanceFieldEnum | Prisma.UsersOrderByRelevanceFieldEnum[]
-  sort: Prisma.SortOrder
-  search: string
 }
 
 export type UsersCountOrderByAggregateInput = {

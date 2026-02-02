@@ -250,7 +250,6 @@ export type ColorsOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   beers?: Prisma.BeersOrderByRelationAggregateInput
-  _relevance?: Prisma.ColorsOrderByRelevanceInput
 }
 
 export type ColorsWhereUniqueInput = Prisma.AtLeast<{
@@ -372,12 +371,6 @@ export type ColorsUncheckedUpdateManyInput = {
 export type ColorsScalarRelationFilter = {
   is?: Prisma.ColorsWhereInput
   isNot?: Prisma.ColorsWhereInput
-}
-
-export type ColorsOrderByRelevanceInput = {
-  fields: Prisma.ColorsOrderByRelevanceFieldEnum | Prisma.ColorsOrderByRelevanceFieldEnum[]
-  sort: Prisma.SortOrder
-  search: string
 }
 
 export type ColorsCountOrderByAggregateInput = {

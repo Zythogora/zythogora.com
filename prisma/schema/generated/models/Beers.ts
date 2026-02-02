@@ -345,7 +345,6 @@ export type BeersOrderByWithRelationInput = {
   createdByUser?: Prisma.UsersOrderByWithRelationInput
   updatedByUser?: Prisma.UsersOrderByWithRelationInput
   reviews?: Prisma.ReviewsOrderByRelationAggregateInput
-  _relevance?: Prisma.BeersOrderByRelevanceInput
 }
 
 export type BeersWhereUniqueInput = Prisma.AtLeast<{
@@ -553,12 +552,6 @@ export type BeersUncheckedUpdateManyInput = {
   createdBy?: Prisma.StringFieldUpdateOperationsInput | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.StringFieldUpdateOperationsInput | string
-}
-
-export type BeersOrderByRelevanceInput = {
-  fields: Prisma.BeersOrderByRelevanceFieldEnum | Prisma.BeersOrderByRelevanceFieldEnum[]
-  sort: Prisma.SortOrder
-  search: string
 }
 
 export type BeersNameBreweryIdCompoundUniqueInput = {

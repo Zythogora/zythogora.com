@@ -336,7 +336,6 @@ export type BreweriesOrderByWithRelationInput = {
   createdByUser?: Prisma.UsersOrderByWithRelationInput
   updatedByUser?: Prisma.UsersOrderByWithRelationInput
   beers?: Prisma.BeersOrderByRelationAggregateInput
-  _relevance?: Prisma.BreweriesOrderByRelevanceInput
 }
 
 export type BreweriesWhereUniqueInput = Prisma.AtLeast<{
@@ -573,12 +572,6 @@ export type JsonNullableListFilterBase<$PrismaModel = never> = {
   hasEvery?: runtime.InputJsonValue[] | Prisma.ListJsonFieldRefInput<$PrismaModel>
   hasSome?: runtime.InputJsonValue[] | Prisma.ListJsonFieldRefInput<$PrismaModel>
   isEmpty?: boolean
-}
-
-export type BreweriesOrderByRelevanceInput = {
-  fields: Prisma.BreweriesOrderByRelevanceFieldEnum | Prisma.BreweriesOrderByRelevanceFieldEnum[]
-  sort: Prisma.SortOrder
-  search: string
 }
 
 export type BreweriesCountOrderByAggregateInput = {

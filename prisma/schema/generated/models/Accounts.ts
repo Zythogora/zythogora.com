@@ -266,7 +266,6 @@ export type AccountsOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   user?: Prisma.BetterAuthUsersOrderByWithRelationInput
-  _relevance?: Prisma.AccountsOrderByRelevanceInput
 }
 
 export type AccountsWhereUniqueInput = Prisma.AtLeast<{
@@ -446,12 +445,6 @@ export type AccountsListRelationFilter = {
 
 export type AccountsOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
-}
-
-export type AccountsOrderByRelevanceInput = {
-  fields: Prisma.AccountsOrderByRelevanceFieldEnum | Prisma.AccountsOrderByRelevanceFieldEnum[]
-  sort: Prisma.SortOrder
-  search: string
 }
 
 export type AccountsCountOrderByAggregateInput = {

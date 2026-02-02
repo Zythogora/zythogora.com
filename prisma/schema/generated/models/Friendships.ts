@@ -167,7 +167,6 @@ export type FriendshipsOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   since?: Prisma.SortOrder
   friends?: Prisma.FriendsOrderByRelationAggregateInput
-  _relevance?: Prisma.FriendshipsOrderByRelevanceInput
 }
 
 export type FriendshipsWhereUniqueInput = Prisma.AtLeast<{
@@ -232,12 +231,6 @@ export type FriendshipsUpdateManyMutationInput = {
 export type FriendshipsUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   since?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type FriendshipsOrderByRelevanceInput = {
-  fields: Prisma.FriendshipsOrderByRelevanceFieldEnum | Prisma.FriendshipsOrderByRelevanceFieldEnum[]
-  sort: Prisma.SortOrder
-  search: string
 }
 
 export type FriendshipsCountOrderByAggregateInput = {

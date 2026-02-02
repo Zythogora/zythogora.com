@@ -205,7 +205,6 @@ export type FriendRequestsOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   requester?: Prisma.UsersOrderByWithRelationInput
   addressee?: Prisma.UsersOrderByWithRelationInput
-  _relevance?: Prisma.FriendRequestsOrderByRelevanceInput
 }
 
 export type FriendRequestsWhereUniqueInput = Prisma.AtLeast<{
@@ -316,12 +315,6 @@ export type FriendRequestsListRelationFilter = {
 
 export type FriendRequestsOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
-}
-
-export type FriendRequestsOrderByRelevanceInput = {
-  fields: Prisma.FriendRequestsOrderByRelevanceFieldEnum | Prisma.FriendRequestsOrderByRelevanceFieldEnum[]
-  sort: Prisma.SortOrder
-  search: string
 }
 
 export type FriendRequestsRequesterIdAddresseeIdCompoundUniqueInput = {

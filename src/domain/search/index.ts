@@ -35,32 +35,23 @@ export const searchBeers = async ({
 
   const offset = (page - 1) * limit;
 
-  // Query 1: Get IDs with scores and total count using trigram search
   const searchResults = await prisma.$queryRaw<SearchResultWithScore[]>`
     SELECT
       b.id,
       GREATEST(
-        -- Exact match on beer name (highest priority)
         CASE WHEN f_unaccent(lower(b.name)) = f_unaccent(lower(${trimmed})) THEN 100.0 ELSE 0 END,
-        -- Exact match on brewery name
         CASE WHEN f_unaccent(lower(br.name)) = f_unaccent(lower(${trimmed})) THEN 80.0 ELSE 0 END,
-        -- Beer name starts with search term
         CASE WHEN f_unaccent(lower(b.name)) LIKE f_unaccent(lower(${trimmed})) || '%' THEN 60.0 ELSE 0 END,
-        -- Brewery name starts with search term
         CASE WHEN f_unaccent(lower(br.name)) LIKE f_unaccent(lower(${trimmed})) || '%' THEN 50.0 ELSE 0 END,
-        -- Trigram similarity on beer name
         similarity(f_unaccent(lower(b.name)), f_unaccent(lower(${trimmed}))) * 40,
-        -- Trigram similarity on brewery name
         similarity(f_unaccent(lower(br.name)), f_unaccent(lower(${trimmed}))) * 30
       ) as score,
       COUNT(*) OVER() as total_count
     FROM beer_data.beers b
     JOIN beer_data.breweries br ON b.brewery_id = br.id
     WHERE
-      -- Trigram similarity filter (uses GIN index)
       f_unaccent(lower(b.name)) % f_unaccent(lower(${trimmed}))
       OR f_unaccent(lower(br.name)) % f_unaccent(lower(${trimmed}))
-      -- Partial matches (LIKE with trigram index)
       OR f_unaccent(lower(b.name)) LIKE '%' || f_unaccent(lower(${trimmed})) || '%'
       OR f_unaccent(lower(br.name)) LIKE '%' || f_unaccent(lower(${trimmed})) || '%'
     ORDER BY score DESC, b.name ASC
@@ -68,15 +59,14 @@ export const searchBeers = async ({
     OFFSET ${offset}
   `;
 
-  const firstResult = searchResults[0];
+  const firstResult = searchResults.at(0);
   if (!firstResult) {
     return getPaginatedResults([], 0, page, limit);
   }
 
   const ids = searchResults.map((r) => r.id);
-  const total = Number(firstResult.total_count);
+  const beerCount = Number(firstResult.total_count);
 
-  // Query 2: Get full objects with Prisma (type-safe)
   const rawBeers = await prisma.beers.findMany({
     where: { id: { in: ids } },
     include: {
@@ -107,7 +97,7 @@ export const searchBeers = async ({
     })),
   );
 
-  return getPaginatedResults(beers, total, page, limit);
+  return getPaginatedResults(beers, beerCount, page, limit);
 };
 
 export const searchBreweries = async ({
@@ -125,39 +115,32 @@ export const searchBreweries = async ({
 
   const offset = (page - 1) * limit;
 
-  // Query 1: Get IDs with scores and total count using trigram search
   const searchResults = await prisma.$queryRaw<SearchResultWithScore[]>`
     SELECT
       br.id,
       GREATEST(
-        -- Exact match (highest priority)
         CASE WHEN f_unaccent(lower(br.name)) = f_unaccent(lower(${trimmed})) THEN 100.0 ELSE 0 END,
-        -- Starts with search term
         CASE WHEN f_unaccent(lower(br.name)) LIKE f_unaccent(lower(${trimmed})) || '%' THEN 70.0 ELSE 0 END,
-        -- Trigram similarity
         similarity(f_unaccent(lower(br.name)), f_unaccent(lower(${trimmed}))) * 50
       ) as score,
       COUNT(*) OVER() as total_count
     FROM beer_data.breweries br
     WHERE
-      -- Trigram similarity filter (uses GIN index)
       f_unaccent(lower(br.name)) % f_unaccent(lower(${trimmed}))
-      -- Partial matches (LIKE with trigram index)
       OR f_unaccent(lower(br.name)) LIKE '%' || f_unaccent(lower(${trimmed})) || '%'
     ORDER BY score DESC, br.name ASC
     LIMIT ${limit}
     OFFSET ${offset}
   `;
 
-  const firstResult = searchResults[0];
+  const firstResult = searchResults.at(0);
   if (!firstResult) {
     return getPaginatedResults([], 0, page, limit);
   }
 
   const ids = searchResults.map((r) => r.id);
-  const total = Number(firstResult.total_count);
+  const breweryCount = Number(firstResult.total_count);
 
-  // Query 2: Get full objects with Prisma (type-safe)
   const rawBreweries = await prisma.breweries.findMany({
     where: { id: { in: ids } },
     include: {
@@ -179,7 +162,7 @@ export const searchBreweries = async ({
     })),
   );
 
-  return getPaginatedResults(breweries, total, page, limit);
+  return getPaginatedResults(breweries, breweryCount, page, limit);
 };
 
 export const searchUsers = async ({
@@ -197,39 +180,32 @@ export const searchUsers = async ({
 
   const offset = (page - 1) * limit;
 
-  // Query 1: Get IDs with scores and total count using trigram search
   const searchResults = await prisma.$queryRaw<SearchResultWithScore[]>`
     SELECT
       u.id,
       GREATEST(
-        -- Exact match (highest priority)
         CASE WHEN f_unaccent(lower(u.username)) = f_unaccent(lower(${trimmed})) THEN 100.0 ELSE 0 END,
-        -- Starts with search term
         CASE WHEN f_unaccent(lower(u.username)) LIKE f_unaccent(lower(${trimmed})) || '%' THEN 70.0 ELSE 0 END,
-        -- Trigram similarity
         similarity(f_unaccent(lower(u.username)), f_unaccent(lower(${trimmed}))) * 50
       ) as score,
       COUNT(*) OVER() as total_count
     FROM public.users u
     WHERE
-      -- Trigram similarity filter (uses GIN index)
       f_unaccent(lower(u.username)) % f_unaccent(lower(${trimmed}))
-      -- Partial matches (LIKE with trigram index)
       OR f_unaccent(lower(u.username)) LIKE '%' || f_unaccent(lower(${trimmed})) || '%'
     ORDER BY score DESC, u.username ASC
     LIMIT ${limit}
     OFFSET ${offset}
   `;
 
-  const firstResult = searchResults[0];
+  const firstResult = searchResults.at(0);
   if (!firstResult) {
     return getPaginatedResults([], 0, page, limit);
   }
 
   const ids = searchResults.map((r) => r.id);
-  const total = Number(firstResult.total_count);
+  const userCount = Number(firstResult.total_count);
 
-  // Query 2: Get full objects with Prisma (type-safe)
   const rawUsers = await prisma.users.findMany({
     where: { id: { in: ids } },
     include: { _count: { select: { reviews: true } } },
@@ -245,5 +221,5 @@ export const searchUsers = async ({
     reviewCount: _count.reviews,
   }));
 
-  return getPaginatedResults(users, total, page, limit);
+  return getPaginatedResults(users, userCount, page, limit);
 };
