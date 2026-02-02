@@ -20,6 +20,10 @@ interface SearchResultWithScore {
   total_count: bigint;
 }
 
+// Escape LIKE wildcard characters (%, _, \)
+const escapeLikePattern = (str: string) =>
+  str.replace(/\\/g, "\\\\").replace(/%/g, "\\%").replace(/_/g, "\\_");
+
 export const searchBeers = async ({
   search,
   limit = 20,
@@ -33,6 +37,7 @@ export const searchBeers = async ({
     return getPaginatedResults([], 0, page, limit);
   }
 
+  const escaped = escapeLikePattern(trimmed);
   const offset = (page - 1) * limit;
 
   const searchResults = await prisma.$queryRaw<SearchResultWithScore[]>`
@@ -41,8 +46,8 @@ export const searchBeers = async ({
       GREATEST(
         CASE WHEN f_unaccent(lower(b.name)) = f_unaccent(lower(${trimmed})) THEN 100.0 ELSE 0 END,
         CASE WHEN f_unaccent(lower(br.name)) = f_unaccent(lower(${trimmed})) THEN 80.0 ELSE 0 END,
-        CASE WHEN f_unaccent(lower(b.name)) LIKE f_unaccent(lower(${trimmed})) || '%' THEN 60.0 ELSE 0 END,
-        CASE WHEN f_unaccent(lower(br.name)) LIKE f_unaccent(lower(${trimmed})) || '%' THEN 50.0 ELSE 0 END,
+        CASE WHEN f_unaccent(lower(b.name)) LIKE f_unaccent(lower(${escaped})) || '%' THEN 60.0 ELSE 0 END,
+        CASE WHEN f_unaccent(lower(br.name)) LIKE f_unaccent(lower(${escaped})) || '%' THEN 50.0 ELSE 0 END,
         similarity(f_unaccent(lower(b.name)), f_unaccent(lower(${trimmed}))) * 40,
         similarity(f_unaccent(lower(br.name)), f_unaccent(lower(${trimmed}))) * 30
       ) as score,
@@ -52,8 +57,8 @@ export const searchBeers = async ({
     WHERE
       f_unaccent(lower(b.name)) % f_unaccent(lower(${trimmed}))
       OR f_unaccent(lower(br.name)) % f_unaccent(lower(${trimmed}))
-      OR f_unaccent(lower(b.name)) LIKE '%' || f_unaccent(lower(${trimmed})) || '%'
-      OR f_unaccent(lower(br.name)) LIKE '%' || f_unaccent(lower(${trimmed})) || '%'
+      OR f_unaccent(lower(b.name)) LIKE '%' || f_unaccent(lower(${escaped})) || '%'
+      OR f_unaccent(lower(br.name)) LIKE '%' || f_unaccent(lower(${escaped})) || '%'
     ORDER BY score DESC, b.name ASC
     LIMIT ${limit}
     OFFSET ${offset}
@@ -113,6 +118,7 @@ export const searchBreweries = async ({
     return getPaginatedResults([], 0, page, limit);
   }
 
+  const escaped = escapeLikePattern(trimmed);
   const offset = (page - 1) * limit;
 
   const searchResults = await prisma.$queryRaw<SearchResultWithScore[]>`
@@ -120,14 +126,14 @@ export const searchBreweries = async ({
       br.id,
       GREATEST(
         CASE WHEN f_unaccent(lower(br.name)) = f_unaccent(lower(${trimmed})) THEN 100.0 ELSE 0 END,
-        CASE WHEN f_unaccent(lower(br.name)) LIKE f_unaccent(lower(${trimmed})) || '%' THEN 70.0 ELSE 0 END,
+        CASE WHEN f_unaccent(lower(br.name)) LIKE f_unaccent(lower(${escaped})) || '%' THEN 70.0 ELSE 0 END,
         similarity(f_unaccent(lower(br.name)), f_unaccent(lower(${trimmed}))) * 50
       ) as score,
       COUNT(*) OVER() as total_count
     FROM beer_data.breweries br
     WHERE
       f_unaccent(lower(br.name)) % f_unaccent(lower(${trimmed}))
-      OR f_unaccent(lower(br.name)) LIKE '%' || f_unaccent(lower(${trimmed})) || '%'
+      OR f_unaccent(lower(br.name)) LIKE '%' || f_unaccent(lower(${escaped})) || '%'
     ORDER BY score DESC, br.name ASC
     LIMIT ${limit}
     OFFSET ${offset}
@@ -178,6 +184,7 @@ export const searchUsers = async ({
     return getPaginatedResults([], 0, page, limit);
   }
 
+  const escaped = escapeLikePattern(trimmed);
   const offset = (page - 1) * limit;
 
   const searchResults = await prisma.$queryRaw<SearchResultWithScore[]>`
@@ -185,14 +192,14 @@ export const searchUsers = async ({
       u.id,
       GREATEST(
         CASE WHEN f_unaccent(lower(u.username)) = f_unaccent(lower(${trimmed})) THEN 100.0 ELSE 0 END,
-        CASE WHEN f_unaccent(lower(u.username)) LIKE f_unaccent(lower(${trimmed})) || '%' THEN 70.0 ELSE 0 END,
+        CASE WHEN f_unaccent(lower(u.username)) LIKE f_unaccent(lower(${escaped})) || '%' THEN 70.0 ELSE 0 END,
         similarity(f_unaccent(lower(u.username)), f_unaccent(lower(${trimmed}))) * 50
       ) as score,
       COUNT(*) OVER() as total_count
     FROM public.users u
     WHERE
       f_unaccent(lower(u.username)) % f_unaccent(lower(${trimmed}))
-      OR f_unaccent(lower(u.username)) LIKE '%' || f_unaccent(lower(${trimmed})) || '%'
+      OR f_unaccent(lower(u.username)) LIKE '%' || f_unaccent(lower(${escaped})) || '%'
     ORDER BY score DESC, u.username ASC
     LIMIT ${limit}
     OFFSET ${offset}
