@@ -211,6 +211,7 @@ export type PurchaseLocationsWhereInput = {
   createdByUser?: Prisma.XOR<Prisma.UsersScalarRelationFilter, Prisma.UsersWhereInput>
   updatedByUser?: Prisma.XOR<Prisma.UsersScalarRelationFilter, Prisma.UsersWhereInput>
   reviews?: Prisma.ReviewsListRelationFilter
+  cellarItems?: Prisma.CellarItemsListRelationFilter
 }
 
 export type PurchaseLocationsOrderByWithRelationInput = {
@@ -225,6 +226,7 @@ export type PurchaseLocationsOrderByWithRelationInput = {
   createdByUser?: Prisma.UsersOrderByWithRelationInput
   updatedByUser?: Prisma.UsersOrderByWithRelationInput
   reviews?: Prisma.ReviewsOrderByRelationAggregateInput
+  cellarItems?: Prisma.CellarItemsOrderByRelationAggregateInput
   _relevance?: Prisma.PurchaseLocationsOrderByRelevanceInput
 }
 
@@ -243,6 +245,7 @@ export type PurchaseLocationsWhereUniqueInput = Prisma.AtLeast<{
   createdByUser?: Prisma.XOR<Prisma.UsersScalarRelationFilter, Prisma.UsersWhereInput>
   updatedByUser?: Prisma.XOR<Prisma.UsersScalarRelationFilter, Prisma.UsersWhereInput>
   reviews?: Prisma.ReviewsListRelationFilter
+  cellarItems?: Prisma.CellarItemsListRelationFilter
 }, "id">
 
 export type PurchaseLocationsOrderByWithAggregationInput = {
@@ -283,6 +286,7 @@ export type PurchaseLocationsCreateInput = {
   createdByUser: Prisma.UsersCreateNestedOneWithoutCreatedPurchaseLocationsInput
   updatedByUser: Prisma.UsersCreateNestedOneWithoutUpdatedPurchaseLocationsInput
   reviews?: Prisma.ReviewsCreateNestedManyWithoutPurchaseLocationInput
+  cellarItems?: Prisma.CellarItemsCreateNestedManyWithoutPurchaseLocationInput
 }
 
 export type PurchaseLocationsUncheckedCreateInput = {
@@ -295,6 +299,7 @@ export type PurchaseLocationsUncheckedCreateInput = {
   updatedAt?: Date | string
   updatedBy: string
   reviews?: Prisma.ReviewsUncheckedCreateNestedManyWithoutPurchaseLocationInput
+  cellarItems?: Prisma.CellarItemsUncheckedCreateNestedManyWithoutPurchaseLocationInput
 }
 
 export type PurchaseLocationsUpdateInput = {
@@ -307,6 +312,7 @@ export type PurchaseLocationsUpdateInput = {
   createdByUser?: Prisma.UsersUpdateOneRequiredWithoutCreatedPurchaseLocationsNestedInput
   updatedByUser?: Prisma.UsersUpdateOneRequiredWithoutUpdatedPurchaseLocationsNestedInput
   reviews?: Prisma.ReviewsUpdateManyWithoutPurchaseLocationNestedInput
+  cellarItems?: Prisma.CellarItemsUpdateManyWithoutPurchaseLocationNestedInput
 }
 
 export type PurchaseLocationsUncheckedUpdateInput = {
@@ -319,6 +325,7 @@ export type PurchaseLocationsUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.StringFieldUpdateOperationsInput | string
   reviews?: Prisma.ReviewsUncheckedUpdateManyWithoutPurchaseLocationNestedInput
+  cellarItems?: Prisma.CellarItemsUncheckedUpdateManyWithoutPurchaseLocationNestedInput
 }
 
 export type PurchaseLocationsCreateManyInput = {
@@ -510,6 +517,22 @@ export type EnumPurchaseTypeFieldUpdateOperationsInput = {
   set?: $Enums.PurchaseType
 }
 
+export type PurchaseLocationsCreateNestedOneWithoutCellarItemsInput = {
+  create?: Prisma.XOR<Prisma.PurchaseLocationsCreateWithoutCellarItemsInput, Prisma.PurchaseLocationsUncheckedCreateWithoutCellarItemsInput>
+  connectOrCreate?: Prisma.PurchaseLocationsCreateOrConnectWithoutCellarItemsInput
+  connect?: Prisma.PurchaseLocationsWhereUniqueInput
+}
+
+export type PurchaseLocationsUpdateOneWithoutCellarItemsNestedInput = {
+  create?: Prisma.XOR<Prisma.PurchaseLocationsCreateWithoutCellarItemsInput, Prisma.PurchaseLocationsUncheckedCreateWithoutCellarItemsInput>
+  connectOrCreate?: Prisma.PurchaseLocationsCreateOrConnectWithoutCellarItemsInput
+  upsert?: Prisma.PurchaseLocationsUpsertWithoutCellarItemsInput
+  disconnect?: Prisma.PurchaseLocationsWhereInput | boolean
+  delete?: Prisma.PurchaseLocationsWhereInput | boolean
+  connect?: Prisma.PurchaseLocationsWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.PurchaseLocationsUpdateToOneWithWhereWithoutCellarItemsInput, Prisma.PurchaseLocationsUpdateWithoutCellarItemsInput>, Prisma.PurchaseLocationsUncheckedUpdateWithoutCellarItemsInput>
+}
+
 export type PurchaseLocationsCreateWithoutCreatedByUserInput = {
   id?: string
   type: $Enums.PurchaseType
@@ -519,6 +542,7 @@ export type PurchaseLocationsCreateWithoutCreatedByUserInput = {
   updatedAt?: Date | string
   updatedByUser: Prisma.UsersCreateNestedOneWithoutUpdatedPurchaseLocationsInput
   reviews?: Prisma.ReviewsCreateNestedManyWithoutPurchaseLocationInput
+  cellarItems?: Prisma.CellarItemsCreateNestedManyWithoutPurchaseLocationInput
 }
 
 export type PurchaseLocationsUncheckedCreateWithoutCreatedByUserInput = {
@@ -530,6 +554,7 @@ export type PurchaseLocationsUncheckedCreateWithoutCreatedByUserInput = {
   updatedAt?: Date | string
   updatedBy: string
   reviews?: Prisma.ReviewsUncheckedCreateNestedManyWithoutPurchaseLocationInput
+  cellarItems?: Prisma.CellarItemsUncheckedCreateNestedManyWithoutPurchaseLocationInput
 }
 
 export type PurchaseLocationsCreateOrConnectWithoutCreatedByUserInput = {
@@ -551,6 +576,7 @@ export type PurchaseLocationsCreateWithoutUpdatedByUserInput = {
   updatedAt?: Date | string
   createdByUser: Prisma.UsersCreateNestedOneWithoutCreatedPurchaseLocationsInput
   reviews?: Prisma.ReviewsCreateNestedManyWithoutPurchaseLocationInput
+  cellarItems?: Prisma.CellarItemsCreateNestedManyWithoutPurchaseLocationInput
 }
 
 export type PurchaseLocationsUncheckedCreateWithoutUpdatedByUserInput = {
@@ -562,6 +588,7 @@ export type PurchaseLocationsUncheckedCreateWithoutUpdatedByUserInput = {
   createdBy: string
   updatedAt?: Date | string
   reviews?: Prisma.ReviewsUncheckedCreateNestedManyWithoutPurchaseLocationInput
+  cellarItems?: Prisma.CellarItemsUncheckedCreateNestedManyWithoutPurchaseLocationInput
 }
 
 export type PurchaseLocationsCreateOrConnectWithoutUpdatedByUserInput = {
@@ -629,6 +656,7 @@ export type PurchaseLocationsCreateWithoutReviewsInput = {
   updatedAt?: Date | string
   createdByUser: Prisma.UsersCreateNestedOneWithoutCreatedPurchaseLocationsInput
   updatedByUser: Prisma.UsersCreateNestedOneWithoutUpdatedPurchaseLocationsInput
+  cellarItems?: Prisma.CellarItemsCreateNestedManyWithoutPurchaseLocationInput
 }
 
 export type PurchaseLocationsUncheckedCreateWithoutReviewsInput = {
@@ -640,6 +668,7 @@ export type PurchaseLocationsUncheckedCreateWithoutReviewsInput = {
   createdBy: string
   updatedAt?: Date | string
   updatedBy: string
+  cellarItems?: Prisma.CellarItemsUncheckedCreateNestedManyWithoutPurchaseLocationInput
 }
 
 export type PurchaseLocationsCreateOrConnectWithoutReviewsInput = {
@@ -667,6 +696,7 @@ export type PurchaseLocationsUpdateWithoutReviewsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdByUser?: Prisma.UsersUpdateOneRequiredWithoutCreatedPurchaseLocationsNestedInput
   updatedByUser?: Prisma.UsersUpdateOneRequiredWithoutUpdatedPurchaseLocationsNestedInput
+  cellarItems?: Prisma.CellarItemsUpdateManyWithoutPurchaseLocationNestedInput
 }
 
 export type PurchaseLocationsUncheckedUpdateWithoutReviewsInput = {
@@ -678,6 +708,71 @@ export type PurchaseLocationsUncheckedUpdateWithoutReviewsInput = {
   createdBy?: Prisma.StringFieldUpdateOperationsInput | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.StringFieldUpdateOperationsInput | string
+  cellarItems?: Prisma.CellarItemsUncheckedUpdateManyWithoutPurchaseLocationNestedInput
+}
+
+export type PurchaseLocationsCreateWithoutCellarItemsInput = {
+  id?: string
+  type: $Enums.PurchaseType
+  description: string
+  additionalInformation?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  createdByUser: Prisma.UsersCreateNestedOneWithoutCreatedPurchaseLocationsInput
+  updatedByUser: Prisma.UsersCreateNestedOneWithoutUpdatedPurchaseLocationsInput
+  reviews?: Prisma.ReviewsCreateNestedManyWithoutPurchaseLocationInput
+}
+
+export type PurchaseLocationsUncheckedCreateWithoutCellarItemsInput = {
+  id?: string
+  type: $Enums.PurchaseType
+  description: string
+  additionalInformation?: string | null
+  createdAt?: Date | string
+  createdBy: string
+  updatedAt?: Date | string
+  updatedBy: string
+  reviews?: Prisma.ReviewsUncheckedCreateNestedManyWithoutPurchaseLocationInput
+}
+
+export type PurchaseLocationsCreateOrConnectWithoutCellarItemsInput = {
+  where: Prisma.PurchaseLocationsWhereUniqueInput
+  create: Prisma.XOR<Prisma.PurchaseLocationsCreateWithoutCellarItemsInput, Prisma.PurchaseLocationsUncheckedCreateWithoutCellarItemsInput>
+}
+
+export type PurchaseLocationsUpsertWithoutCellarItemsInput = {
+  update: Prisma.XOR<Prisma.PurchaseLocationsUpdateWithoutCellarItemsInput, Prisma.PurchaseLocationsUncheckedUpdateWithoutCellarItemsInput>
+  create: Prisma.XOR<Prisma.PurchaseLocationsCreateWithoutCellarItemsInput, Prisma.PurchaseLocationsUncheckedCreateWithoutCellarItemsInput>
+  where?: Prisma.PurchaseLocationsWhereInput
+}
+
+export type PurchaseLocationsUpdateToOneWithWhereWithoutCellarItemsInput = {
+  where?: Prisma.PurchaseLocationsWhereInput
+  data: Prisma.XOR<Prisma.PurchaseLocationsUpdateWithoutCellarItemsInput, Prisma.PurchaseLocationsUncheckedUpdateWithoutCellarItemsInput>
+}
+
+export type PurchaseLocationsUpdateWithoutCellarItemsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumPurchaseTypeFieldUpdateOperationsInput | $Enums.PurchaseType
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  additionalInformation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdByUser?: Prisma.UsersUpdateOneRequiredWithoutCreatedPurchaseLocationsNestedInput
+  updatedByUser?: Prisma.UsersUpdateOneRequiredWithoutUpdatedPurchaseLocationsNestedInput
+  reviews?: Prisma.ReviewsUpdateManyWithoutPurchaseLocationNestedInput
+}
+
+export type PurchaseLocationsUncheckedUpdateWithoutCellarItemsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumPurchaseTypeFieldUpdateOperationsInput | $Enums.PurchaseType
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  additionalInformation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdBy?: Prisma.StringFieldUpdateOperationsInput | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedBy?: Prisma.StringFieldUpdateOperationsInput | string
+  reviews?: Prisma.ReviewsUncheckedUpdateManyWithoutPurchaseLocationNestedInput
 }
 
 export type PurchaseLocationsCreateManyCreatedByUserInput = {
@@ -709,6 +804,7 @@ export type PurchaseLocationsUpdateWithoutCreatedByUserInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedByUser?: Prisma.UsersUpdateOneRequiredWithoutUpdatedPurchaseLocationsNestedInput
   reviews?: Prisma.ReviewsUpdateManyWithoutPurchaseLocationNestedInput
+  cellarItems?: Prisma.CellarItemsUpdateManyWithoutPurchaseLocationNestedInput
 }
 
 export type PurchaseLocationsUncheckedUpdateWithoutCreatedByUserInput = {
@@ -720,6 +816,7 @@ export type PurchaseLocationsUncheckedUpdateWithoutCreatedByUserInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.StringFieldUpdateOperationsInput | string
   reviews?: Prisma.ReviewsUncheckedUpdateManyWithoutPurchaseLocationNestedInput
+  cellarItems?: Prisma.CellarItemsUncheckedUpdateManyWithoutPurchaseLocationNestedInput
 }
 
 export type PurchaseLocationsUncheckedUpdateManyWithoutCreatedByUserInput = {
@@ -741,6 +838,7 @@ export type PurchaseLocationsUpdateWithoutUpdatedByUserInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdByUser?: Prisma.UsersUpdateOneRequiredWithoutCreatedPurchaseLocationsNestedInput
   reviews?: Prisma.ReviewsUpdateManyWithoutPurchaseLocationNestedInput
+  cellarItems?: Prisma.CellarItemsUpdateManyWithoutPurchaseLocationNestedInput
 }
 
 export type PurchaseLocationsUncheckedUpdateWithoutUpdatedByUserInput = {
@@ -752,6 +850,7 @@ export type PurchaseLocationsUncheckedUpdateWithoutUpdatedByUserInput = {
   createdBy?: Prisma.StringFieldUpdateOperationsInput | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reviews?: Prisma.ReviewsUncheckedUpdateManyWithoutPurchaseLocationNestedInput
+  cellarItems?: Prisma.CellarItemsUncheckedUpdateManyWithoutPurchaseLocationNestedInput
 }
 
 export type PurchaseLocationsUncheckedUpdateManyWithoutUpdatedByUserInput = {
@@ -771,10 +870,12 @@ export type PurchaseLocationsUncheckedUpdateManyWithoutUpdatedByUserInput = {
 
 export type PurchaseLocationsCountOutputType = {
   reviews: number
+  cellarItems: number
 }
 
 export type PurchaseLocationsCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   reviews?: boolean | PurchaseLocationsCountOutputTypeCountReviewsArgs
+  cellarItems?: boolean | PurchaseLocationsCountOutputTypeCountCellarItemsArgs
 }
 
 /**
@@ -794,6 +895,13 @@ export type PurchaseLocationsCountOutputTypeCountReviewsArgs<ExtArgs extends run
   where?: Prisma.ReviewsWhereInput
 }
 
+/**
+ * PurchaseLocationsCountOutputType without action
+ */
+export type PurchaseLocationsCountOutputTypeCountCellarItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CellarItemsWhereInput
+}
+
 
 export type PurchaseLocationsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -807,6 +915,7 @@ export type PurchaseLocationsSelect<ExtArgs extends runtime.Types.Extensions.Int
   createdByUser?: boolean | Prisma.UsersDefaultArgs<ExtArgs>
   updatedByUser?: boolean | Prisma.UsersDefaultArgs<ExtArgs>
   reviews?: boolean | Prisma.PurchaseLocations$reviewsArgs<ExtArgs>
+  cellarItems?: boolean | Prisma.PurchaseLocations$cellarItemsArgs<ExtArgs>
   _count?: boolean | Prisma.PurchaseLocationsCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["purchaseLocations"]>
 
@@ -852,6 +961,7 @@ export type PurchaseLocationsInclude<ExtArgs extends runtime.Types.Extensions.In
   createdByUser?: boolean | Prisma.UsersDefaultArgs<ExtArgs>
   updatedByUser?: boolean | Prisma.UsersDefaultArgs<ExtArgs>
   reviews?: boolean | Prisma.PurchaseLocations$reviewsArgs<ExtArgs>
+  cellarItems?: boolean | Prisma.PurchaseLocations$cellarItemsArgs<ExtArgs>
   _count?: boolean | Prisma.PurchaseLocationsCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type PurchaseLocationsIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -869,6 +979,7 @@ export type $PurchaseLocationsPayload<ExtArgs extends runtime.Types.Extensions.I
     createdByUser: Prisma.$UsersPayload<ExtArgs>
     updatedByUser: Prisma.$UsersPayload<ExtArgs>
     reviews: Prisma.$ReviewsPayload<ExtArgs>[]
+    cellarItems: Prisma.$CellarItemsPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1276,6 +1387,7 @@ export interface Prisma__PurchaseLocationsClient<T, Null = never, ExtArgs extend
   createdByUser<T extends Prisma.UsersDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UsersDefaultArgs<ExtArgs>>): Prisma.Prisma__UsersClient<runtime.Types.Result.GetResult<Prisma.$UsersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   updatedByUser<T extends Prisma.UsersDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UsersDefaultArgs<ExtArgs>>): Prisma.Prisma__UsersClient<runtime.Types.Result.GetResult<Prisma.$UsersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   reviews<T extends Prisma.PurchaseLocations$reviewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PurchaseLocations$reviewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReviewsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  cellarItems<T extends Prisma.PurchaseLocations$cellarItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PurchaseLocations$cellarItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CellarItemsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1730,6 +1842,30 @@ export type PurchaseLocations$reviewsArgs<ExtArgs extends runtime.Types.Extensio
   take?: number
   skip?: number
   distinct?: Prisma.ReviewsScalarFieldEnum | Prisma.ReviewsScalarFieldEnum[]
+}
+
+/**
+ * PurchaseLocations.cellarItems
+ */
+export type PurchaseLocations$cellarItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CellarItems
+   */
+  select?: Prisma.CellarItemsSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CellarItems
+   */
+  omit?: Prisma.CellarItemsOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CellarItemsInclude<ExtArgs> | null
+  where?: Prisma.CellarItemsWhereInput
+  orderBy?: Prisma.CellarItemsOrderByWithRelationInput | Prisma.CellarItemsOrderByWithRelationInput[]
+  cursor?: Prisma.CellarItemsWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CellarItemsScalarFieldEnum | Prisma.CellarItemsScalarFieldEnum[]
 }
 
 /**

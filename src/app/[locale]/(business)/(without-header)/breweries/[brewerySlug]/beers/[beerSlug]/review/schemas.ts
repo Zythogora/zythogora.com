@@ -15,6 +15,12 @@ import {
   ServingFrom,
 } from "@db/enums";
 
+export const reviewPageSearchParamsSchema = z.object({
+  fromCellar: z.string().optional(),
+  servingFrom: z.nativeEnum(ServingFrom).optional(),
+  bestBefore: z.coerce.date().optional(),
+});
+
 export const servingFromValues = [
   ServingFrom.DRAFT,
   ServingFrom.BOTTLE,
@@ -117,6 +123,7 @@ export const purchaseTypeValues = [
 
 const reviewBaseSchema = z.object({
   beerId: z.string(),
+  cellarItemId: z.string().optional(),
 
   globalScore: z
     .number({

@@ -66,7 +66,9 @@ export const ModelName = {
   PurchaseLocations: 'PurchaseLocations',
   Friendships: 'Friendships',
   Friends: 'Friends',
-  FriendRequests: 'FriendRequests'
+  FriendRequests: 'FriendRequests',
+  StorageLocations: 'StorageLocations',
+  CellarItems: 'CellarItems'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -313,6 +315,35 @@ export const FriendRequestsScalarFieldEnum = {
 export type FriendRequestsScalarFieldEnum = (typeof FriendRequestsScalarFieldEnum)[keyof typeof FriendRequestsScalarFieldEnum]
 
 
+export const StorageLocationsScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  userId: 'userId',
+  createdAt: 'createdAt'
+} as const
+
+export type StorageLocationsScalarFieldEnum = (typeof StorageLocationsScalarFieldEnum)[keyof typeof StorageLocationsScalarFieldEnum]
+
+
+export const CellarItemsScalarFieldEnum = {
+  id: 'id',
+  quantity: 'quantity',
+  servingFormat: 'servingFormat',
+  bestBeforeDate: 'bestBeforeDate',
+  purchaseDate: 'purchaseDate',
+  purchasePrice: 'purchasePrice',
+  purchaseCurrency: 'purchaseCurrency',
+  purchaseLocationId: 'purchaseLocationId',
+  storageLocationId: 'storageLocationId',
+  userId: 'userId',
+  beerId: 'beerId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CellarItemsScalarFieldEnum = (typeof CellarItemsScalarFieldEnum)[keyof typeof CellarItemsScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -506,4 +537,25 @@ export const FriendRequestsOrderByRelevanceFieldEnum = {
 } as const
 
 export type FriendRequestsOrderByRelevanceFieldEnum = (typeof FriendRequestsOrderByRelevanceFieldEnum)[keyof typeof FriendRequestsOrderByRelevanceFieldEnum]
+
+
+export const StorageLocationsOrderByRelevanceFieldEnum = {
+  id: 'id',
+  name: 'name',
+  userId: 'userId'
+} as const
+
+export type StorageLocationsOrderByRelevanceFieldEnum = (typeof StorageLocationsOrderByRelevanceFieldEnum)[keyof typeof StorageLocationsOrderByRelevanceFieldEnum]
+
+
+export const CellarItemsOrderByRelevanceFieldEnum = {
+  id: 'id',
+  purchaseCurrency: 'purchaseCurrency',
+  purchaseLocationId: 'purchaseLocationId',
+  storageLocationId: 'storageLocationId',
+  userId: 'userId',
+  beerId: 'beerId'
+} as const
+
+export type CellarItemsOrderByRelevanceFieldEnum = (typeof CellarItemsOrderByRelevanceFieldEnum)[keyof typeof CellarItemsOrderByRelevanceFieldEnum]
 

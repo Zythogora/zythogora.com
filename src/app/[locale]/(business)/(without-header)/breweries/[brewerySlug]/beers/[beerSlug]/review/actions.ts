@@ -1,6 +1,7 @@
 "use server";
 
 import { parseWithZod } from "@conform-to/zod/v4";
+import { revalidatePath } from "next/cache";
 import { getLocale } from "next-intl/server";
 
 import { reviewSchema } from "@/app/[locale]/(business)/(without-header)/breweries/[brewerySlug]/beers/[beerSlug]/review/schemas";
@@ -12,6 +13,7 @@ import {
   ImageOptimizationError,
   UnknownPurchaseLocationError,
 } from "@/domain/beers/errors";
+import { adjustCellarItemQuantity } from "@/domain/cellar";
 import { getCurrentUser } from "@/lib/auth";
 import { redirect } from "@/lib/i18n";
 import { Routes } from "@/lib/routes";
@@ -26,7 +28,7 @@ export const reviewAction = async (
 
   const user = await getCurrentUser();
   if (!user) {
-    redirect({
+    return redirect({
       href: {
         pathname: Routes.SIGN_IN,
         query: { redirect: pathname },
@@ -45,10 +47,23 @@ export const reviewAction = async (
     });
   }
 
+  const { cellarItemId } = submission.value;
+
   let createdReview;
 
   try {
     createdReview = await reviewBeer(submission.value);
+
+    if (cellarItemId) {
+      try {
+        await adjustCellarItemQuantity(cellarItemId, -1);
+        revalidatePath(
+          generatePath(Routes.CELLAR, { username: user.username }),
+        );
+      } catch {
+        console.error("Failed to decrement cellar item quantity");
+      }
+    }
   } catch (error) {
     if (error instanceof ExplicitContentCheckError) {
       return submission.reply({
