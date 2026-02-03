@@ -216,7 +216,6 @@ export type BetterAuthUsersOrderByWithRelationInput = {
   sessions?: Prisma.SessionsOrderByRelationAggregateInput
   accounts?: Prisma.AccountsOrderByRelationAggregateInput
   user?: Prisma.UsersOrderByWithRelationInput
-  _relevance?: Prisma.BetterAuthUsersOrderByRelevanceInput
 }
 
 export type BetterAuthUsersWhereUniqueInput = Prisma.AtLeast<{
@@ -341,12 +340,6 @@ export type BetterAuthUsersUncheckedUpdateManyInput = {
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type BetterAuthUsersOrderByRelevanceInput = {
-  fields: Prisma.BetterAuthUsersOrderByRelevanceFieldEnum | Prisma.BetterAuthUsersOrderByRelevanceFieldEnum[]
-  sort: Prisma.SortOrder
-  search: string
 }
 
 export type BetterAuthUsersCountOrderByAggregateInput = {

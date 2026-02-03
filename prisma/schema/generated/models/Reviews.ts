@@ -407,7 +407,6 @@ export type ReviewsOrderByWithRelationInput = {
   purchaseLocation?: Prisma.PurchaseLocationsOrderByWithRelationInput
   beer?: Prisma.BeersOrderByWithRelationInput
   user?: Prisma.UsersOrderByWithRelationInput
-  _relevance?: Prisma.ReviewsOrderByRelevanceInput
 }
 
 export type ReviewsWhereUniqueInput = Prisma.AtLeast<{
@@ -700,12 +699,6 @@ export type ReviewsListRelationFilter = {
 
 export type ReviewsOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
-}
-
-export type ReviewsOrderByRelevanceInput = {
-  fields: Prisma.ReviewsOrderByRelevanceFieldEnum | Prisma.ReviewsOrderByRelevanceFieldEnum[]
-  sort: Prisma.SortOrder
-  search: string
 }
 
 export type ReviewsSlugUserIdCompoundUniqueInput = {

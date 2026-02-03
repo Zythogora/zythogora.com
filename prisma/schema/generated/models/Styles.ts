@@ -196,7 +196,6 @@ export type StylesOrderByWithRelationInput = {
   categoryId?: Prisma.SortOrder
   category?: Prisma.StyleCategoriesOrderByWithRelationInput
   Beers?: Prisma.BeersOrderByRelationAggregateInput
-  _relevance?: Prisma.StylesOrderByRelevanceInput
 }
 
 export type StylesWhereUniqueInput = Prisma.AtLeast<{
@@ -306,12 +305,6 @@ export type StylesListRelationFilter = {
 
 export type StylesOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
-}
-
-export type StylesOrderByRelevanceInput = {
-  fields: Prisma.StylesOrderByRelevanceFieldEnum | Prisma.StylesOrderByRelevanceFieldEnum[]
-  sort: Prisma.SortOrder
-  search: string
 }
 
 export type StylesCountOrderByAggregateInput = {

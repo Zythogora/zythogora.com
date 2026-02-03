@@ -183,7 +183,6 @@ export type LegacyStylesOrderByWithRelationInput = {
   name?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  _relevance?: Prisma.LegacyStylesOrderByRelevanceInput
 }
 
 export type LegacyStylesWhereUniqueInput = Prisma.AtLeast<{
@@ -263,12 +262,6 @@ export type LegacyStylesUncheckedUpdateManyInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type LegacyStylesOrderByRelevanceInput = {
-  fields: Prisma.LegacyStylesOrderByRelevanceFieldEnum | Prisma.LegacyStylesOrderByRelevanceFieldEnum[]
-  sort: Prisma.SortOrder
-  search: string
 }
 
 export type LegacyStylesCountOrderByAggregateInput = {

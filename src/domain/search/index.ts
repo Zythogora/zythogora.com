@@ -13,7 +13,16 @@ import type {
   PaginationParams,
 } from "@/lib/pagination/types";
 import prisma from "@/lib/prisma";
-import { prepareFullTextSearch, prepareLikeSearch } from "@/lib/prisma/utils";
+
+interface SearchResultWithScore {
+  id: string;
+  score: number;
+  total_count: bigint;
+}
+
+// Escape LIKE wildcard characters (%, _, \)
+const escapeLikePattern = (str: string) =>
+  str.replace(/\\/g, "\\\\").replace(/%/g, "\\%").replace(/_/g, "\\_");
 
 export const searchBeers = async ({
   search,
@@ -22,44 +31,59 @@ export const searchBeers = async ({
 }: PaginationParams<{ search: string }>): Promise<
   PaginatedResults<BeerResult>
 > => {
-  const likeSearch = prepareLikeSearch(search);
-  const fullTextSearch = prepareFullTextSearch(search);
+  const trimmed = search.trim();
 
-  const [rawBeers, { _count: beerCount }] = await Promise.all([
-    prisma.beers.findMany({
-      where: {
-        OR: [
-          { name: { contains: likeSearch, mode: "insensitive" } },
-          { name: { search: fullTextSearch, mode: "insensitive" } },
-          { brewery: { name: { contains: likeSearch, mode: "insensitive" } } },
-          {
-            brewery: { name: { search: fullTextSearch, mode: "insensitive" } },
-          },
-        ],
-      },
-      include: {
-        brewery: true,
-        style: true,
-        color: true,
-      },
-      take: limit,
-      skip: (page - 1) * limit,
-    }),
+  if (!trimmed) {
+    return getPaginatedResults([], 0, page, limit);
+  }
 
-    prisma.beers.aggregate({
-      where: {
-        OR: [
-          { name: { contains: likeSearch, mode: "insensitive" } },
-          { name: { search: fullTextSearch, mode: "insensitive" } },
-          { brewery: { name: { contains: likeSearch, mode: "insensitive" } } },
-          {
-            brewery: { name: { search: fullTextSearch, mode: "insensitive" } },
-          },
-        ],
-      },
-      _count: true,
-    }),
-  ]);
+  const escaped = escapeLikePattern(trimmed);
+  const offset = (page - 1) * limit;
+
+  const searchResults = await prisma.$queryRaw<SearchResultWithScore[]>`
+    SELECT
+      b.id,
+      GREATEST(
+        CASE WHEN f_unaccent(lower(b.name)) = f_unaccent(lower(${trimmed})) THEN 100.0 ELSE 0 END,
+        CASE WHEN f_unaccent(lower(br.name)) = f_unaccent(lower(${trimmed})) THEN 80.0 ELSE 0 END,
+        CASE WHEN f_unaccent(lower(b.name)) LIKE f_unaccent(lower(${escaped})) || '%' THEN 60.0 ELSE 0 END,
+        CASE WHEN f_unaccent(lower(br.name)) LIKE f_unaccent(lower(${escaped})) || '%' THEN 50.0 ELSE 0 END,
+        similarity(f_unaccent(lower(b.name)), f_unaccent(lower(${trimmed}))) * 40,
+        similarity(f_unaccent(lower(br.name)), f_unaccent(lower(${trimmed}))) * 30
+      ) as score,
+      COUNT(*) OVER() as total_count
+    FROM beer_data.beers b
+    JOIN beer_data.breweries br ON b.brewery_id = br.id
+    WHERE
+      f_unaccent(lower(b.name)) % f_unaccent(lower(${trimmed}))
+      OR f_unaccent(lower(br.name)) % f_unaccent(lower(${trimmed}))
+      OR f_unaccent(lower(b.name)) LIKE '%' || f_unaccent(lower(${escaped})) || '%'
+      OR f_unaccent(lower(br.name)) LIKE '%' || f_unaccent(lower(${escaped})) || '%'
+    ORDER BY score DESC, b.name ASC
+    LIMIT ${limit}
+    OFFSET ${offset}
+  `;
+
+  const firstResult = searchResults.at(0);
+  if (!firstResult) {
+    return getPaginatedResults([], 0, page, limit);
+  }
+
+  const ids = searchResults.map((r) => r.id);
+  const beerCount = Number(firstResult.total_count);
+
+  const rawBeers = await prisma.beers.findMany({
+    where: { id: { in: ids } },
+    include: {
+      brewery: true,
+      style: true,
+      color: true,
+    },
+  });
+
+  // Re-sort to preserve relevance order
+  const idToIndex = new Map(ids.map((id, i) => [id, i]));
+  rawBeers.sort((a, b) => idToIndex.get(a.id)! - idToIndex.get(b.id)!);
 
   const beers = await Promise.all(
     rawBeers.map(async ({ brewery, style, color, ...beer }) => ({
@@ -88,34 +112,51 @@ export const searchBreweries = async ({
 }: PaginationParams<{ search: string }>): Promise<
   PaginatedResults<BreweryResult>
 > => {
-  const likeSearch = prepareLikeSearch(search);
-  const fullTextSearch = prepareFullTextSearch(search);
+  const trimmed = search.trim();
 
-  const [rawBreweries, { _count: breweryCount }] = await Promise.all([
-    prisma.breweries.findMany({
-      where: {
-        OR: [
-          { name: { contains: likeSearch, mode: "insensitive" } },
-          { name: { search: fullTextSearch, mode: "insensitive" } },
-        ],
-      },
-      include: {
-        _count: { select: { beers: true } },
-      },
-      take: limit,
-      skip: (page - 1) * limit,
-    }),
+  if (!trimmed) {
+    return getPaginatedResults([], 0, page, limit);
+  }
 
-    prisma.breweries.aggregate({
-      where: {
-        OR: [
-          { name: { contains: likeSearch, mode: "insensitive" } },
-          { name: { search: fullTextSearch, mode: "insensitive" } },
-        ],
-      },
-      _count: true,
-    }),
-  ]);
+  const escaped = escapeLikePattern(trimmed);
+  const offset = (page - 1) * limit;
+
+  const searchResults = await prisma.$queryRaw<SearchResultWithScore[]>`
+    SELECT
+      br.id,
+      GREATEST(
+        CASE WHEN f_unaccent(lower(br.name)) = f_unaccent(lower(${trimmed})) THEN 100.0 ELSE 0 END,
+        CASE WHEN f_unaccent(lower(br.name)) LIKE f_unaccent(lower(${escaped})) || '%' THEN 70.0 ELSE 0 END,
+        similarity(f_unaccent(lower(br.name)), f_unaccent(lower(${trimmed}))) * 50
+      ) as score,
+      COUNT(*) OVER() as total_count
+    FROM beer_data.breweries br
+    WHERE
+      f_unaccent(lower(br.name)) % f_unaccent(lower(${trimmed}))
+      OR f_unaccent(lower(br.name)) LIKE '%' || f_unaccent(lower(${escaped})) || '%'
+    ORDER BY score DESC, br.name ASC
+    LIMIT ${limit}
+    OFFSET ${offset}
+  `;
+
+  const firstResult = searchResults.at(0);
+  if (!firstResult) {
+    return getPaginatedResults([], 0, page, limit);
+  }
+
+  const ids = searchResults.map((r) => r.id);
+  const breweryCount = Number(firstResult.total_count);
+
+  const rawBreweries = await prisma.breweries.findMany({
+    where: { id: { in: ids } },
+    include: {
+      _count: { select: { beers: true } },
+    },
+  });
+
+  // Re-sort to preserve relevance order
+  const idToIndex = new Map(ids.map((id, i) => [id, i]));
+  rawBreweries.sort((a, b) => idToIndex.get(a.id)! - idToIndex.get(b.id)!);
 
   const breweries = await Promise.all(
     rawBreweries.map(async ({ _count, ...brewery }) => ({
@@ -137,32 +178,49 @@ export const searchUsers = async ({
 }: PaginationParams<{ search: string }>): Promise<
   PaginatedResults<UserResult>
 > => {
-  const likeSearch = prepareLikeSearch(search);
-  const fullTextSearch = prepareFullTextSearch(search);
+  const trimmed = search.trim();
 
-  const [rawUsers, { _count: userCount }] = await Promise.all([
-    prisma.users.findMany({
-      where: {
-        OR: [
-          { username: { contains: likeSearch, mode: "insensitive" } },
-          { username: { search: fullTextSearch, mode: "insensitive" } },
-        ],
-      },
-      include: { _count: { select: { reviews: true } } },
-      take: limit,
-      skip: (page - 1) * limit,
-    }),
+  if (!trimmed) {
+    return getPaginatedResults([], 0, page, limit);
+  }
 
-    prisma.users.aggregate({
-      where: {
-        OR: [
-          { username: { contains: likeSearch, mode: "insensitive" } },
-          { username: { search: fullTextSearch, mode: "insensitive" } },
-        ],
-      },
-      _count: true,
-    }),
-  ]);
+  const escaped = escapeLikePattern(trimmed);
+  const offset = (page - 1) * limit;
+
+  const searchResults = await prisma.$queryRaw<SearchResultWithScore[]>`
+    SELECT
+      u.id,
+      GREATEST(
+        CASE WHEN f_unaccent(lower(u.username)) = f_unaccent(lower(${trimmed})) THEN 100.0 ELSE 0 END,
+        CASE WHEN f_unaccent(lower(u.username)) LIKE f_unaccent(lower(${escaped})) || '%' THEN 70.0 ELSE 0 END,
+        similarity(f_unaccent(lower(u.username)), f_unaccent(lower(${trimmed}))) * 50
+      ) as score,
+      COUNT(*) OVER() as total_count
+    FROM public.users u
+    WHERE
+      f_unaccent(lower(u.username)) % f_unaccent(lower(${trimmed}))
+      OR f_unaccent(lower(u.username)) LIKE '%' || f_unaccent(lower(${escaped})) || '%'
+    ORDER BY score DESC, u.username ASC
+    LIMIT ${limit}
+    OFFSET ${offset}
+  `;
+
+  const firstResult = searchResults.at(0);
+  if (!firstResult) {
+    return getPaginatedResults([], 0, page, limit);
+  }
+
+  const ids = searchResults.map((r) => r.id);
+  const userCount = Number(firstResult.total_count);
+
+  const rawUsers = await prisma.users.findMany({
+    where: { id: { in: ids } },
+    include: { _count: { select: { reviews: true } } },
+  });
+
+  // Re-sort to preserve relevance order
+  const idToIndex = new Map(ids.map((id, i) => [id, i]));
+  rawUsers.sort((a, b) => idToIndex.get(a.id)! - idToIndex.get(b.id)!);
 
   const users = rawUsers.map(({ _count, ...user }) => ({
     id: user.id,

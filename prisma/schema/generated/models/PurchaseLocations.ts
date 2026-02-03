@@ -225,7 +225,6 @@ export type PurchaseLocationsOrderByWithRelationInput = {
   createdByUser?: Prisma.UsersOrderByWithRelationInput
   updatedByUser?: Prisma.UsersOrderByWithRelationInput
   reviews?: Prisma.ReviewsOrderByRelationAggregateInput
-  _relevance?: Prisma.PurchaseLocationsOrderByRelevanceInput
 }
 
 export type PurchaseLocationsWhereUniqueInput = Prisma.AtLeast<{
@@ -365,12 +364,6 @@ export type PurchaseLocationsOrderByRelationAggregateInput = {
 export type PurchaseLocationsNullableScalarRelationFilter = {
   is?: Prisma.PurchaseLocationsWhereInput | null
   isNot?: Prisma.PurchaseLocationsWhereInput | null
-}
-
-export type PurchaseLocationsOrderByRelevanceInput = {
-  fields: Prisma.PurchaseLocationsOrderByRelevanceFieldEnum | Prisma.PurchaseLocationsOrderByRelevanceFieldEnum[]
-  sort: Prisma.SortOrder
-  search: string
 }
 
 export type PurchaseLocationsCountOrderByAggregateInput = {

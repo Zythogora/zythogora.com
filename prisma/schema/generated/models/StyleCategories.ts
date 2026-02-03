@@ -185,7 +185,6 @@ export type StyleCategoriesOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   styles?: Prisma.StylesOrderByRelationAggregateInput
-  _relevance?: Prisma.StyleCategoriesOrderByRelevanceInput
 }
 
 export type StyleCategoriesWhereUniqueInput = Prisma.AtLeast<{
@@ -270,12 +269,6 @@ export type StyleCategoriesUncheckedUpdateManyInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type StyleCategoriesOrderByRelevanceInput = {
-  fields: Prisma.StyleCategoriesOrderByRelevanceFieldEnum | Prisma.StyleCategoriesOrderByRelevanceFieldEnum[]
-  sort: Prisma.SortOrder
-  search: string
 }
 
 export type StyleCategoriesCountOrderByAggregateInput = {

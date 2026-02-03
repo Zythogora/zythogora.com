@@ -180,7 +180,6 @@ export type FriendsOrderByWithRelationInput = {
   friendship?: Prisma.FriendshipsOrderByWithRelationInput
   userA?: Prisma.UsersOrderByWithRelationInput
   userB?: Prisma.UsersOrderByWithRelationInput
-  _relevance?: Prisma.FriendsOrderByRelevanceInput
 }
 
 export type FriendsWhereUniqueInput = Prisma.AtLeast<{
@@ -263,12 +262,6 @@ export type FriendsListRelationFilter = {
 
 export type FriendsOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
-}
-
-export type FriendsOrderByRelevanceInput = {
-  fields: Prisma.FriendsOrderByRelevanceFieldEnum | Prisma.FriendsOrderByRelevanceFieldEnum[]
-  sort: Prisma.SortOrder
-  search: string
 }
 
 export type FriendsFriendshipIdUserAIdCompoundUniqueInput = {
