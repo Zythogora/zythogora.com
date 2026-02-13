@@ -12,6 +12,7 @@ import {
 import { publicConfig } from "@/lib/config/client-config";
 import { routing } from "@/lib/i18n";
 import type { Locale } from "@/lib/i18n";
+import { getAlternates } from "@/lib/seo";
 
 import type { Metadata, Viewport } from "next";
 import type { PropsWithChildren } from "react";
@@ -40,13 +41,7 @@ export async function generateMetadata({
 
   return {
     metadataBase: new URL(publicConfig.baseUrl),
-    alternates: {
-      canonical: "/",
-      languages: {
-        fr: "/fr",
-        en: "/en",
-      },
-    },
+    alternates: getAlternates("/"),
     title,
     description,
     openGraph: {

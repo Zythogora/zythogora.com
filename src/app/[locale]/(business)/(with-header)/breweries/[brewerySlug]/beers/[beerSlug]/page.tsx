@@ -14,6 +14,7 @@ import { Link, redirect } from "@/lib/i18n";
 import prisma from "@/lib/prisma";
 import { Routes } from "@/lib/routes";
 import { generatePath } from "@/lib/routes/utils";
+import { getAlternates } from "@/lib/seo";
 import { cn } from "@/lib/tailwind";
 import { exhaustiveCheck } from "@/lib/typescript/utils";
 
@@ -87,6 +88,12 @@ export async function generateMetadata({
   return {
     title,
     description,
+    alternates: getAlternates(
+      generatePath(Routes.BEER, {
+        brewerySlug: beer.brewery.slug,
+        beerSlug: beer.slug,
+      }),
+    ),
     openGraph: {
       title,
       description,

@@ -18,6 +18,7 @@ import { publicConfig } from "@/lib/config/client-config";
 import { redirect } from "@/lib/i18n";
 import { Routes } from "@/lib/routes";
 import { generatePath } from "@/lib/routes/utils";
+import { getAlternates } from "@/lib/seo";
 import { cn } from "@/lib/tailwind";
 
 import type { Metadata } from "next";
@@ -31,6 +32,9 @@ export async function generateMetadata({
 
   return {
     title: `${user.username} | ${publicConfig.appName}`,
+    alternates: getAlternates(
+      generatePath(Routes.PROFILE, { username: user.username }),
+    ),
   };
 }
 

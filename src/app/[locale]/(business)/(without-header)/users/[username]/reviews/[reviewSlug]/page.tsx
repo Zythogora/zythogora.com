@@ -30,6 +30,7 @@ import { publicConfig } from "@/lib/config/client-config";
 import { Link } from "@/lib/i18n";
 import { Routes } from "@/lib/routes";
 import { generatePath } from "@/lib/routes/utils";
+import { getAlternates } from "@/lib/seo";
 import { cn } from "@/lib/tailwind";
 
 import type { Metadata } from "next";
@@ -54,12 +55,18 @@ export async function generateMetadata({
     reviewDate: review.createdAt,
   });
 
+  const reviewPath = generatePath(Routes.REVIEW, {
+    username: review.user.username,
+    reviewSlug: review.slug,
+  });
+
   return {
     title,
     description,
+    alternates: getAlternates(reviewPath),
     openGraph: {
       type: "website",
-      url: `${publicConfig.baseUrl}/${generatePath(Routes.REVIEW, { username: review.user.username, reviewSlug: review.slug })}`,
+      url: `${publicConfig.baseUrl}${reviewPath}`,
       siteName: "Zythogora",
       title,
       description,

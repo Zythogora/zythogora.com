@@ -1,4 +1,4 @@
-"server only";
+import "server-only";
 
 import { transformRawColorToColor } from "@/domain/beers/transforms";
 import type {
