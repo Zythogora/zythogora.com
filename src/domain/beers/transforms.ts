@@ -58,6 +58,8 @@ export const transformRawBeerReviewToBeerReview = (
   slug: rawBeerReview.slug,
   globalScore: rawBeerReview.globalScore.toNumber(),
   servingFrom: rawBeerReview.servingFrom,
+  comment: rawBeerReview.comment ?? undefined,
+  pictureUrl: rawBeerReview.pictureUrl ?? undefined,
   username: rawBeerReview.user.username,
   createdAt: rawBeerReview.createdAt,
 });

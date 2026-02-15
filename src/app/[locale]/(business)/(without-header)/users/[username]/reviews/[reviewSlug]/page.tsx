@@ -21,6 +21,7 @@ import {
 } from "@/app/[locale]/(business)/(without-header)/breweries/[brewerySlug]/beers/[beerSlug]/review/schemas";
 import BackButton from "@/app/[locale]/(business)/(without-header)/users/[username]/reviews/[reviewSlug]/_components/back-button";
 import ReviewFieldValue from "@/app/[locale]/(business)/(without-header)/users/[username]/reviews/[reviewSlug]/_components/field-value";
+import JsonLd from "@/app/_components/json-ld";
 import ShareButton from "@/app/_components/share-button";
 import DescriptionList from "@/app/_components/ui/description-list";
 import { Separator } from "@/app/_components/ui/separator";
@@ -30,10 +31,11 @@ import { publicConfig } from "@/lib/config/client-config";
 import { Link } from "@/lib/i18n";
 import { Routes } from "@/lib/routes";
 import { generatePath } from "@/lib/routes/utils";
-import { getAlternates } from "@/lib/seo";
+import { getAbsoluteUrl, getAlternates } from "@/lib/seo";
 import { cn } from "@/lib/tailwind";
 
 import type { Metadata } from "next";
+import type { Review as ReviewJsonLd, WithContext } from "schema-dts";
 
 export async function generateMetadata({
   params,
@@ -66,7 +68,7 @@ export async function generateMetadata({
     alternates: getAlternates(reviewPath),
     openGraph: {
       type: "website",
-      url: `${publicConfig.baseUrl}${reviewPath}`,
+      url: getAbsoluteUrl(reviewPath),
       siteName: "Zythogora",
       title,
       description,
@@ -122,6 +124,80 @@ const UserReviewPage = async ({
         "dark:bg-background bg-stone-100",
       )}
     >
+      <JsonLd
+        data={
+          {
+            "@context": "https://schema.org",
+            "@type": "Review",
+            "@id": getAbsoluteUrl(
+              generatePath(Routes.REVIEW, {
+                username: review.user.username,
+                reviewSlug: review.slug,
+              }),
+            ),
+            url: getAbsoluteUrl(
+              generatePath(Routes.REVIEW, {
+                username: review.user.username,
+                reviewSlug: review.slug,
+              }),
+            ),
+            itemReviewed: {
+              "@type": "Product",
+              "@id": getAbsoluteUrl(
+                generatePath(Routes.BEER, {
+                  brewerySlug: review.beer.brewery.slug,
+                  beerSlug: review.beer.slug,
+                }),
+              ),
+              url: getAbsoluteUrl(
+                generatePath(Routes.BEER, {
+                  brewerySlug: review.beer.brewery.slug,
+                  beerSlug: review.beer.slug,
+                }),
+              ),
+              name: review.beer.name,
+              brand: {
+                "@type": "Brewery",
+                "@id": getAbsoluteUrl(
+                  generatePath(Routes.BREWERY, {
+                    brewerySlug: review.beer.brewery.slug,
+                  }),
+                ),
+                url: getAbsoluteUrl(
+                  generatePath(Routes.BREWERY, {
+                    brewerySlug: review.beer.brewery.slug,
+                  }),
+                ),
+                name: review.beer.brewery.name,
+              },
+            },
+            author: {
+              "@type": "Person",
+              "@id": getAbsoluteUrl(
+                generatePath(Routes.PROFILE, {
+                  username: review.user.username,
+                }),
+              ),
+              url: getAbsoluteUrl(
+                generatePath(Routes.PROFILE, {
+                  username: review.user.username,
+                }),
+              ),
+              name: review.user.username,
+            },
+            reviewRating: {
+              "@type": "Rating",
+              ratingValue: review.globalScore,
+              bestRating: 10,
+              worstRating: 0,
+            },
+            ...(review.pictureUrl ? { image: review.pictureUrl } : {}),
+            ...(review.comment ? { reviewBody: review.comment } : {}),
+            datePublished: review.createdAt.toISOString(),
+          } satisfies WithContext<ReviewJsonLd>
+        }
+      />
+
       <div
         className={cn(
           "border-foreground w-full border-b drop-shadow",
@@ -590,10 +666,12 @@ const UserReviewPage = async ({
         <div className="isolate">
           <ShareButton
             label={t("reviewPage.actions.share")}
-            link={`${publicConfig.baseUrl}${generatePath(Routes.REVIEW, {
-              username,
-              reviewSlug,
-            })}`}
+            link={getAbsoluteUrl(
+              generatePath(Routes.REVIEW, {
+                username,
+                reviewSlug,
+              }),
+            )}
             contentClassName="w-[calc(var(--radix-popover-trigger-width)+theme(spacing.1))]"
           >
             {t("reviewPage.actions.share")}

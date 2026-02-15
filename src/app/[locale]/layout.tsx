@@ -9,13 +9,15 @@ import {
   setRequestLocale,
 } from "next-intl/server";
 
+import JsonLd from "@/app/_components/json-ld";
 import { publicConfig } from "@/lib/config/client-config";
 import { routing } from "@/lib/i18n";
 import type { Locale } from "@/lib/i18n";
-import { getAlternates } from "@/lib/seo";
+import { getAbsoluteUrl, getAlternates } from "@/lib/seo";
 
 import type { Metadata, Viewport } from "next";
 import type { PropsWithChildren } from "react";
+import type { WebSite as WebSiteJsonLd, WithContext } from "schema-dts";
 
 import "@/app/globals.css";
 
@@ -86,6 +88,33 @@ export default async function RootLayout({
   return (
     <html lang={locale} suppressHydrationWarning>
       <body className={`${title.variable} ${paragraph.variable} antialiased`}>
+        <JsonLd
+          data={
+            {
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: publicConfig.appName,
+              url: publicConfig.baseUrl,
+              potentialAction: {
+                "@type": "SearchAction",
+                target: getAbsoluteUrl("/search?search={search}&kind={kind}"),
+                // @ts-expect-error - Input constraints support has not been released yet
+                "search-input": {
+                  "@type": "PropertyValueSpecification",
+                  valueName: "search",
+                  valueRequired: true,
+                },
+                "kind-input": {
+                  "@type": "PropertyValueSpecification",
+                  valueName: "kind",
+                  valuePattern: "^{beer|brewery|user}$",
+                  defaultValue: "beer",
+                },
+              },
+            } satisfies WithContext<WebSiteJsonLd>
+          }
+        />
+
         <NextIntlClientProvider messages={messages}>
           {children}
         </NextIntlClientProvider>

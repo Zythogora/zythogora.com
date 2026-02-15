@@ -2,8 +2,8 @@ import { generateSitemaps as generateBeerSitemaps } from "@/app/beers/sitemap";
 import { generateSitemaps as generateBrewerySitemaps } from "@/app/breweries/sitemap";
 import { generateSitemaps as generateReviewSitemaps } from "@/app/reviews/sitemap";
 import { generateSitemaps as generateUserSitemaps } from "@/app/users/sitemap";
-import { publicConfig } from "@/lib/config/client-config";
 import prisma from "@/lib/prisma";
+import { getAbsoluteUrl } from "@/lib/seo";
 
 export const dynamic = "force-static";
 
@@ -47,7 +47,7 @@ const getSitemaps = (
   return ids
     .map(
       ({ id }) => `<sitemap>
-    <loc>${publicConfig.baseUrl}/${path}/sitemap/${id}.xml</loc>
+    <loc>${getAbsoluteUrl(`/${path}/sitemap/${id}.xml`)}</loc>
     <lastmod>${lastModified}</lastmod>
   </sitemap>`,
     )
@@ -60,7 +60,7 @@ export const GET = async () => {
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <sitemapindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/siteindex.xsd">
   <sitemap>
-    <loc>${publicConfig.baseUrl}/sitemap.xml</loc>
+    <loc>${getAbsoluteUrl("/sitemap.xml")}</loc>
     <lastmod>${lastModified}</lastmod>
   </sitemap>
   ${getSitemaps(await generateBeerSitemaps(), "beers", (await getLastModifiedBeer()) ?? lastModified)}

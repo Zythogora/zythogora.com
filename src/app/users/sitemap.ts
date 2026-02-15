@@ -1,6 +1,5 @@
-import { publicConfig } from "@/lib/config/client-config";
 import prisma from "@/lib/prisma";
-import { getAlternates, URLS_PER_SITEMAP } from "@/lib/seo";
+import { getAbsoluteUrl, getAlternates, URLS_PER_SITEMAP } from "@/lib/seo";
 
 import type { MetadataRoute } from "next";
 
@@ -12,8 +11,6 @@ export const generateSitemaps = async () => {
 };
 
 const sitemap = async ({ id = 0 }): Promise<MetadataRoute.Sitemap> => {
-  const baseUrl = publicConfig.baseUrl;
-
   const skip = Number(id) * URLS_PER_SITEMAP;
 
   const users = await prisma.users.findMany({
@@ -27,7 +24,7 @@ const sitemap = async ({ id = 0 }): Promise<MetadataRoute.Sitemap> => {
     const path = `/users/${user.username}`;
 
     return {
-      url: `${baseUrl}${path}`,
+      url: getAbsoluteUrl(path),
       lastModified: user.betterAuthUser.updatedAt,
       changeFrequency: "daily",
       priority: 0.7,

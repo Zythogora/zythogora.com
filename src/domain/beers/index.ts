@@ -48,6 +48,7 @@ import type {
 import { UnknownPlaceError } from "@/lib/places/errors";
 import prisma, { getPrismaTransactionClient } from "@/lib/prisma";
 import { slugify } from "@/lib/prisma/utils";
+import { transformRawStatsToAggregateRating } from "@/lib/seo/transforms";
 import { uploadFile } from "@/lib/storage";
 
 export const getBeerBySlug = cache(
@@ -97,6 +98,19 @@ export const getBeerBySlug = cache(
     return transformRawBeerToBeer(beer);
   },
 );
+
+export const getBeerAggregateRatingById = async (beerId: string) => {
+  const result = await prisma.reviews.aggregate({
+    where: { beerId },
+    _avg: { globalScore: true },
+    _count: true,
+  });
+
+  return transformRawStatsToAggregateRating({
+    count: result._count,
+    average: result._avg.globalScore,
+  });
+};
 
 export const getColors = async (): Promise<Color[]> => {
   const colors = await prisma.colors.findMany();

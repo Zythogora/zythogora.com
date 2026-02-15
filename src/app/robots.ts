@@ -1,4 +1,4 @@
-import { publicConfig } from "@/lib/config/client-config";
+import { getAbsoluteUrl } from "@/lib/seo";
 
 import type { MetadataRoute } from "next";
 
@@ -18,7 +18,7 @@ const robots = async (): Promise<MetadataRoute.Robots> => {
         ],
       },
     ],
-    sitemap: `${publicConfig.baseUrl}/sitemap_index.xml`,
+    sitemap: getAbsoluteUrl("/sitemap_index.xml"),
   };
 };
 

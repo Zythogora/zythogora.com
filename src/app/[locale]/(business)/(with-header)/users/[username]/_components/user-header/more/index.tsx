@@ -13,9 +13,9 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/app/_components/ui/dropdown-menu";
-import { publicConfig } from "@/lib/config/client-config";
 import { Routes } from "@/lib/routes";
 import { generatePath } from "@/lib/routes/utils";
+import { getAbsoluteUrl } from "@/lib/seo";
 import { cn } from "@/lib/tailwind";
 
 interface UserMoreProps {
@@ -29,9 +29,7 @@ const UserMore = ({ username, className }: UserMoreProps) => {
 
   const handleShare = () => {
     navigator.clipboard.writeText(
-      `${publicConfig.baseUrl}${generatePath(Routes.PROFILE, {
-        username,
-      })}`,
+      getAbsoluteUrl(generatePath(Routes.PROFILE, { username })),
     );
     toast.success(t("common.actions.copiedToClipboard"));
   };

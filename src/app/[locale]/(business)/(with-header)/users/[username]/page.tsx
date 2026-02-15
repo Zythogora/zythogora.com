@@ -5,6 +5,7 @@ import UserReviewCard from "@/app/[locale]/(business)/(with-header)/users/[usern
 import UserHeader from "@/app/[locale]/(business)/(with-header)/users/[username]/_components/user-header";
 import { profileSearchParamsSchema } from "@/app/[locale]/(business)/(with-header)/users/[username]/schemas";
 import Await from "@/app/_components/await";
+import JsonLd from "@/app/_components/json-ld";
 import ReviewPictureGrid from "@/app/_components/review-picture-grid";
 import ReviewPictureGridLoader from "@/app/_components/review-picture-grid/loader";
 import Pagination from "@/app/_components/ui/pagination";
@@ -18,10 +19,11 @@ import { publicConfig } from "@/lib/config/client-config";
 import { redirect } from "@/lib/i18n";
 import { Routes } from "@/lib/routes";
 import { generatePath } from "@/lib/routes/utils";
-import { getAlternates } from "@/lib/seo";
+import { getAbsoluteUrl, getAlternates } from "@/lib/seo";
 import { cn } from "@/lib/tailwind";
 
 import type { Metadata } from "next";
+import type { Person as PersonJsonLd, WithContext } from "schema-dts";
 
 export async function generateMetadata({
   params,
@@ -81,6 +83,23 @@ const ProfilePage = async ({
 
   return (
     <div className="flex flex-col gap-y-6">
+      <JsonLd
+        data={
+          {
+            "@context": "https://schema.org",
+            "@type": "Person",
+            "@id": getAbsoluteUrl(generatePath(Routes.PROFILE, { username: user.username })),
+            url: getAbsoluteUrl(generatePath(Routes.PROFILE, { username: user.username })),
+            name: user.username,
+            interactionStatistic: {
+              "@type": "InteractionCounter",
+              interactionType: { "@type": "WriteAction" },
+              userInteractionCount: user.reviewCount,
+            },
+          } satisfies WithContext<PersonJsonLd>
+        }
+      />
+
       <UserHeader user={user} visitedCountries={visitedCountries} />
 
       <div className={cn("mt-4 md:-mt-1", "px-10 md:px-0")}>

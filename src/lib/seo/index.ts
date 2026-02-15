@@ -3,10 +3,16 @@ import { routing } from "@/lib/i18n";
 
 export const URLS_PER_SITEMAP = 50000;
 
+export const getAbsoluteUrl = (path: string) => {
+  if (path === "/") {
+    return publicConfig.baseUrl;
+  }
+
+  return `${publicConfig.baseUrl}${path}`;
+};
+
 export const getAlternates = (path: string) => {
-  const baseUrl = publicConfig.baseUrl;
-  const canonicalPath =
-    path === "/" ? baseUrl : `${baseUrl}${path}`;
+  const canonicalPath = getAbsoluteUrl(path);
 
   return {
     canonical: canonicalPath,
@@ -16,7 +22,7 @@ export const getAlternates = (path: string) => {
           locale,
           locale === routing.defaultLocale
             ? canonicalPath
-            : `${baseUrl}/${locale}${path}`,
+            : getAbsoluteUrl(`/${locale}${path}`),
         ]),
       ),
       "x-default": canonicalPath,

@@ -63,8 +63,11 @@ export type BreweryReview = {
   id: string;
   slug: string;
   globalScore: number;
+  comment?: string;
+  pictureUrl?: string;
   beer: {
     id: string;
+    slug: string;
     name: string;
     style: string;
     abv: number;
