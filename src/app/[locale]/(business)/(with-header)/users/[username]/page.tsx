@@ -27,7 +27,7 @@ import type { Metadata } from "next";
 export async function generateMetadata({
   params,
 }: PageProps<"/[locale]/users/[username]">): Promise<Metadata> {
-  const { username } = await params;
+  const { locale, username } = await params;
 
   const user = await getUserByUsername(username).catch(() => notFound());
 
@@ -35,6 +35,7 @@ export async function generateMetadata({
     title: `${user.username} | ${publicConfig.appName}`,
     alternates: getAlternates(
       generatePath(Routes.PROFILE, { username: user.username }),
+      locale,
     ),
   };
 }

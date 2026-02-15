@@ -80,6 +80,7 @@ export async function generateMetadata({
     description,
     alternates: getAlternates(
       generatePath(Routes.BREWERY, { brewerySlug: brewery.slug }),
+      locale,
     ),
     openGraph: {
       title,

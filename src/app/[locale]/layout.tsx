@@ -43,7 +43,7 @@ export async function generateMetadata({
 
   return {
     metadataBase: new URL(publicConfig.baseUrl),
-    alternates: getAlternates("/"),
+    alternates: getAlternates("/", locale),
     title,
     description,
     openGraph: {

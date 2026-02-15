@@ -94,6 +94,7 @@ export async function generateMetadata({
         brewerySlug: beer.brewery.slug,
         beerSlug: beer.slug,
       }),
+      locale,
     ),
     openGraph: {
       title,

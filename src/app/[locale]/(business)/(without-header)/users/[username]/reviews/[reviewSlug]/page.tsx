@@ -64,7 +64,7 @@ export async function generateMetadata({
   return {
     title,
     description,
-    alternates: getAlternates(reviewPath),
+    alternates: getAlternates(reviewPath, locale),
     openGraph: {
       type: "website",
       url: getAbsoluteUrl(reviewPath),

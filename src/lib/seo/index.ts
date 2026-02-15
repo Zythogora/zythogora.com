@@ -17,21 +17,25 @@ export const getAbsoluteUrl = (path: string) => {
   return `${baseUrl}/${path}`;
 };
 
-export const getAlternates = (path: string) => {
-  const canonicalPath = getAbsoluteUrl(path);
+export const getAlternates = (path: string, locale?: string) => {
+  const defaultLocalePath = getAbsoluteUrl(path);
+  const canonicalPath =
+    locale && locale !== routing.defaultLocale
+      ? getAbsoluteUrl(`/${locale}${path}`)
+      : defaultLocalePath;
 
   return {
     canonical: canonicalPath,
     languages: {
       ...Object.fromEntries(
-        routing.locales.map((locale) => [
-          locale,
-          locale === routing.defaultLocale
-            ? canonicalPath
-            : getAbsoluteUrl(`/${locale}${path}`),
+        routing.locales.map((l) => [
+          l,
+          l === routing.defaultLocale
+            ? defaultLocalePath
+            : getAbsoluteUrl(`/${l}${path}`),
         ]),
       ),
-      "x-default": canonicalPath,
+      "x-default": defaultLocalePath,
     },
   };
 };
