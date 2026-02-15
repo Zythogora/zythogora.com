@@ -10,11 +10,11 @@ import ReviewPictureGrid from "@/app/_components/review-picture-grid";
 import ReviewPictureGridLoader from "@/app/_components/review-picture-grid/loader";
 import Pagination from "@/app/_components/ui/pagination";
 import {
-  getReviewsByUser,
-  getUserByUsername,
-  getLatestPicturesByUser,
-  getUserVisitedCountries,
-} from "@/domain/users";
+  getCachedReviewsByUser,
+  getCachedUserByUsername,
+  getCachedLatestPicturesByUser,
+  getCachedUserVisitedCountries,
+} from "@/domain/users/cache";
 import { publicConfig } from "@/lib/config/client-config";
 import { redirect } from "@/lib/i18n";
 import { Routes } from "@/lib/routes";
@@ -29,7 +29,7 @@ export async function generateMetadata({
 }: PageProps<"/[locale]/users/[username]">): Promise<Metadata> {
   const { username } = await params;
 
-  const user = await getUserByUsername(username).catch(() => notFound());
+  const user = await getCachedUserByUsername(username).catch(() => notFound());
 
   return {
     title: `${user.username} | ${publicConfig.appName}`,
@@ -56,7 +56,7 @@ const ProfilePage = async ({
     });
   }
 
-  const user = await getUserByUsername(username).catch(() => notFound());
+  const user = await getCachedUserByUsername(username).catch(() => notFound());
 
   if (user.username !== username) {
     redirect({
@@ -69,15 +69,21 @@ const ProfilePage = async ({
     });
   }
 
-  const latestPicturesPromise = getLatestPicturesByUser({ userId: user.id });
+  const latestPicturesPromise = getCachedLatestPicturesByUser(
+    { userId: user.id },
+    user.username,
+  );
 
   const [reviews, visitedCountries] = await Promise.all([
-    getReviewsByUser({
-      userId: user.id,
-      page: searchParamsResult.data.page,
-      limit: 10,
-    }),
-    getUserVisitedCountries(user.id),
+    getCachedReviewsByUser(
+      {
+        userId: user.id,
+        page: searchParamsResult.data.page,
+        limit: 10,
+      },
+      user.username,
+    ),
+    getCachedUserVisitedCountries(user.id, user.username),
   ]);
 
   return (

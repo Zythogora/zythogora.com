@@ -25,7 +25,7 @@ import ReviewJsonLd from "@/app/[locale]/(business)/(without-header)/users/[user
 import ShareButton from "@/app/_components/share-button";
 import DescriptionList from "@/app/_components/ui/description-list";
 import { Separator } from "@/app/_components/ui/separator";
-import { getReviewByUsernameAndSlug } from "@/domain/users";
+import { getCachedReviewByUsernameAndSlug } from "@/domain/users/cache";
 import type { Review } from "@/domain/users/types";
 import { publicConfig } from "@/lib/config/client-config";
 import { Link } from "@/lib/i18n";
@@ -42,7 +42,7 @@ export async function generateMetadata({
   const { locale, username, reviewSlug } = await params;
   const t = await getTranslations({ locale });
 
-  const review = await getReviewByUsernameAndSlug(username, reviewSlug).catch(
+  const review = await getCachedReviewByUsernameAndSlug(username, reviewSlug).catch(
     () => notFound(),
   );
 
@@ -96,7 +96,7 @@ const UserReviewPage = async ({
   const t = await getTranslations({ locale });
   const formatter = await getFormatter({ locale });
 
-  const review = await getReviewByUsernameAndSlug(username, reviewSlug).catch(
+  const review = await getCachedReviewByUsernameAndSlug(username, reviewSlug).catch(
     () => notFound(),
   );
 
