@@ -97,19 +97,11 @@ export default async function RootLayout({
               url: publicConfig.baseUrl,
               potentialAction: {
                 "@type": "SearchAction",
-                target: getAbsoluteUrl("/search?search={search}&kind={kind}"),
-                // @ts-expect-error - Input constraints support has not been released yet
-                "search-input": {
-                  "@type": "PropertyValueSpecification",
-                  valueName: "search",
-                  valueRequired: true,
-                },
-                "kind-input": {
-                  "@type": "PropertyValueSpecification",
-                  valueName: "kind",
-                  valuePattern: "^(beer|brewery|user)$",
-                  defaultValue: "beer",
-                },
+                target: getAbsoluteUrl(
+                  "/search?search={search_term_string}",
+                ),
+                // @ts-expect-error - query-input is not typed in schema-dts
+                "query-input": "required name=search_term_string",
               },
             } satisfies WithContext<WebSiteJsonLd>
           }

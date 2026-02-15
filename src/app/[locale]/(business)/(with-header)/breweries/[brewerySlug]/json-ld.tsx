@@ -69,28 +69,6 @@ const BreweryJsonLd = async ({ brewery }: BreweryJsonLdProps) => {
                 reviewSlug: review.slug,
               }),
             ),
-            itemReviewed: {
-              "@type": "Product",
-              "@id": getAbsoluteUrl(
-                generatePath(Routes.BEER, {
-                  brewerySlug: brewery.slug,
-                  beerSlug: review.beer.slug,
-                }),
-              ),
-              url: getAbsoluteUrl(
-                generatePath(Routes.BEER, {
-                  brewerySlug: brewery.slug,
-                  beerSlug: review.beer.slug,
-                }),
-              ),
-              name: review.beer.name,
-              brand: {
-                "@type": "Brewery",
-                "@id": breweryUrl,
-                url: breweryUrl,
-                name: brewery.name,
-              },
-            },
             author: {
               "@type": "Person",
               "@id": getAbsoluteUrl(

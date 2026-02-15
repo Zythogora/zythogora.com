@@ -85,12 +85,6 @@ const BeerJsonLd = async ({ beer }: BeerJsonLdProps) => {
                 reviewSlug: review.slug,
               }),
             ),
-            itemReviewed: {
-              "@type": "Product",
-              "@id": beerUrl,
-              url: beerUrl,
-              name: beer.name,
-            },
             author: {
               "@type": "Person",
               "@id": getAbsoluteUrl(

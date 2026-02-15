@@ -18,10 +18,12 @@ export const getAbsoluteUrl = (path: string) => {
 };
 
 export const getAlternates = (path: string, locale?: string) => {
-  const defaultLocalePath = getAbsoluteUrl(path);
+  const normalizedPath = path === "/" ? "" : path;
+
+  const defaultLocalePath = getAbsoluteUrl(normalizedPath);
   const canonicalPath =
     locale && locale !== routing.defaultLocale
-      ? getAbsoluteUrl(`/${locale}${path}`)
+      ? getAbsoluteUrl(`/${locale}${normalizedPath}`)
       : defaultLocalePath;
 
   return {
@@ -32,7 +34,7 @@ export const getAlternates = (path: string, locale?: string) => {
           l,
           l === routing.defaultLocale
             ? defaultLocalePath
-            : getAbsoluteUrl(`/${l}${path}`),
+            : getAbsoluteUrl(`/${l}${normalizedPath}`),
         ]),
       ),
       "x-default": defaultLocalePath,

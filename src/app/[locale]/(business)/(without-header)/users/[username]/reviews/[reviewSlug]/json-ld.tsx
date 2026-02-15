@@ -1,4 +1,5 @@
 import JsonLd from "@/app/_components/json-ld";
+import { getBeerAggregateRatingById } from "@/domain/beers";
 import type { Review } from "@/domain/users/types";
 import { Routes } from "@/lib/routes";
 import { generatePath } from "@/lib/routes/utils";
@@ -10,7 +11,8 @@ interface ReviewJsonLdProps {
   review: Review;
 }
 
-const ReviewJsonLd = ({ review }: ReviewJsonLdProps) => {
+const ReviewJsonLd = async ({ review }: ReviewJsonLdProps) => {
+  const aggregateRating = await getBeerAggregateRatingById(review.beer.id);
   const reviewUrl = getAbsoluteUrl(
     generatePath(Routes.REVIEW, {
       username: review.user.username,
@@ -49,6 +51,7 @@ const ReviewJsonLd = ({ review }: ReviewJsonLdProps) => {
         url: breweryUrl,
         name: review.beer.brewery.name,
       },
+      ...(aggregateRating ? { aggregateRating } : {}),
     },
     author: {
       "@type": "Person",
