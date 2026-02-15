@@ -48,11 +48,9 @@ export const checkImageForExplicitContent = async (imageBuffer: Buffer) => {
 export const createPreviews = async (
   imageBuffer: Buffer,
 ): Promise<Array<Preview>> => {
-  const sharpInstance = sharp(imageBuffer);
-
   const [previewImage, twitterImage] = await Promise.all([
-    sharpInstance.resize({ width: 1200, height: 630 }).toBuffer(),
-    sharpInstance.resize({ width: 1200, height: 675 }).toBuffer(),
+    sharp(imageBuffer).resize({ width: 1200, height: 630 }).toBuffer(),
+    sharp(imageBuffer).resize({ width: 1200, height: 675 }).toBuffer(),
   ]);
 
   return [

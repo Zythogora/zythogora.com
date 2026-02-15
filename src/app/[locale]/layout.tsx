@@ -107,7 +107,7 @@ export default async function RootLayout({
                 "kind-input": {
                   "@type": "PropertyValueSpecification",
                   valueName: "kind",
-                  valuePattern: "^{beer|brewery|user}$",
+                  valuePattern: "^(beer|brewery|user)$",
                   defaultValue: "beer",
                 },
               },

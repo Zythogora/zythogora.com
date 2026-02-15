@@ -10,10 +10,16 @@ export const transformRawStatsToAggregateRating = ({
 }: RawStats): Pick<
   AggregateRating,
   "@type" | "reviewCount" | "ratingValue" | "worstRating" | "bestRating"
-> => ({
-  "@type": "AggregateRating",
-  reviewCount: count,
-  ...(average ? { ratingValue: Number(average.toFixed(2)) } : {}),
-  worstRating: 0,
-  bestRating: 10,
-});
+> | null => {
+  if (count === 0 || !average) {
+    return null;
+  }
+
+  return {
+    "@type": "AggregateRating",
+    reviewCount: count,
+    ratingValue: Number(average.toFixed(2)),
+    worstRating: 0,
+    bestRating: 10,
+  };
+};

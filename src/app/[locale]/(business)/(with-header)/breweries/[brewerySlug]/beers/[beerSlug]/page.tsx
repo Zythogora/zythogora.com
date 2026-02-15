@@ -3,15 +3,11 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import BeerCard from "@/app/[locale]/(business)/(with-header)/breweries/[brewerySlug]/beers/[beerSlug]/_components/beer-card";
 import BeerReviews from "@/app/[locale]/(business)/(with-header)/breweries/[brewerySlug]/beers/[beerSlug]/_components/beer-reviews";
+import BeerJsonLd from "@/app/[locale]/(business)/(with-header)/breweries/[brewerySlug]/beers/[beerSlug]/json-ld";
 import { beerPageSearchParamsSchema } from "@/app/[locale]/(business)/(with-header)/breweries/[brewerySlug]/beers/[beerSlug]/schemas";
-import JsonLd from "@/app/_components/json-ld";
 import ShareButton from "@/app/_components/share-button";
 import Button from "@/app/_components/ui/button";
-import {
-  getAllBeerReviews,
-  getBeerAggregateRatingById,
-  getBeerBySlug,
-} from "@/domain/beers";
+import { getBeerBySlug } from "@/domain/beers";
 import { config } from "@/lib/config";
 import { publicConfig } from "@/lib/config/client-config";
 import { StaticGenerationMode } from "@/lib/config/types";
@@ -24,7 +20,6 @@ import { cn } from "@/lib/tailwind";
 import { exhaustiveCheck } from "@/lib/typescript/utils";
 
 import type { Metadata } from "next";
-import type { Product as ProductJsonLd, WithContext } from "schema-dts";
 
 export async function generateStaticParams(): Promise<
   Array<
@@ -156,198 +151,72 @@ const BeerPage = async ({
     });
   }
 
-  const [aggregateRating, latestReviews] = await Promise.all([
-    getBeerAggregateRatingById(beer.id),
-    getAllBeerReviews({ beerId: beer.id, limit: 5, page: 1 }),
-  ]);
-
   return (
-    <div className="flex w-full flex-col gap-y-12">
-      <JsonLd
-        data={
-          {
-            "@context": "https://schema.org",
-            "@type": "Product",
-            "@id": getAbsoluteUrl(
-              generatePath(Routes.BEER, {
-                brewerySlug: beer.brewery.slug,
-                beerSlug: beer.slug,
-              }),
-            ),
-            url: getAbsoluteUrl(
-              generatePath(Routes.BEER, {
-                brewerySlug: beer.brewery.slug,
-                beerSlug: beer.slug,
-              }),
-            ),
-            name: beer.name,
-            ...(beer.description && { description: beer.description }),
-            ...(aggregateRating.reviewCount ? { aggregateRating } : {}),
-            brand: {
-              "@type": "Brewery",
-              "@id": getAbsoluteUrl(
-                generatePath(Routes.BREWERY, {
-                  brewerySlug: beer.brewery.slug,
-                }),
-              ),
-              url: getAbsoluteUrl(
-                generatePath(Routes.BREWERY, {
-                  brewerySlug: beer.brewery.slug,
-                }),
-              ),
-              name: beer.brewery.name,
-            },
-            category: "Beer",
-            ...(beer.abv > 0
-              ? { hasAdultConsideration: "AlcoholConsideration" }
-              : {}),
-            color: beer.color.name,
-            additionalProperty: [
-              {
-                "@type": "PropertyValue",
-                name: "Style",
-                description: "Beer style",
-                value: beer.style,
-              },
-              {
-                "@type": "PropertyValue",
-                name: "ABV",
-                description: "Alcohol by volume",
-                value: beer.abv,
-              },
-              ...(beer.ibu
-                ? [
-                    {
-                      "@type": "PropertyValue" as const,
-                      name: "IBU",
-                      description: "International Bitterness Units",
-                      value: beer.ibu,
-                    },
-                  ]
-                : []),
-            ],
-            ...(latestReviews.results.length > 0
-              ? {
-                  review: latestReviews.results.map((review) => ({
-                    "@type": "Review",
-                    "@id": getAbsoluteUrl(
-                      generatePath(Routes.REVIEW, {
-                        username: review.username,
-                        reviewSlug: review.slug,
-                      }),
-                    ),
-                    url: getAbsoluteUrl(
-                      generatePath(Routes.REVIEW, {
-                        username: review.username,
-                        reviewSlug: review.slug,
-                      }),
-                    ),
-                    itemReviewed: {
-                      "@type": "Product",
-                      "@id": getAbsoluteUrl(
-                        generatePath(Routes.BEER, {
-                          brewerySlug: beer.brewery.slug,
-                          beerSlug: beer.slug,
-                        }),
-                      ),
-                      url: getAbsoluteUrl(
-                        generatePath(Routes.BEER, {
-                          brewerySlug: beer.brewery.slug,
-                          beerSlug: beer.slug,
-                        }),
-                      ),
-                      name: beer.name,
-                    },
-                    author: {
-                      "@type": "Person",
-                      "@id": getAbsoluteUrl(
-                        generatePath(Routes.PROFILE, {
-                          username: review.username,
-                        }),
-                      ),
-                      url: getAbsoluteUrl(
-                        generatePath(Routes.PROFILE, {
-                          username: review.username,
-                        }),
-                      ),
-                      name: review.username,
-                    },
-                    reviewRating: {
-                      "@type": "Rating",
-                      ratingValue: review.globalScore,
-                      worstRating: 0,
-                      bestRating: 10,
-                    },
-                    ...(review.pictureUrl ? { image: review.pictureUrl } : {}),
-                    ...(review.comment ? { reviewBody: review.comment } : {}),
-                    datePublished: review.createdAt.toISOString(),
-                  })),
-                }
-              : {}),
-          } satisfies WithContext<ProductJsonLd>
-        }
-      />
+    <>
+      <BeerJsonLd beer={beer} />
 
-      <div className={cn("isolate flex flex-col", "gap-y-6 md:gap-y-2")}>
-        <BeerCard
-          name={beer.name}
-          brewery={beer.brewery}
-          abv={beer.abv}
-          ibu={beer.ibu}
-          style={beer.style}
-          color={beer.color}
-          organic={beer.organic}
-          barrelAged={beer.barrelAged}
-          description={beer.description}
-          releaseYear={beer.releaseYear}
-          className="md:rounded-t-xl md:rounded-b"
-        />
+      <div className="flex w-full flex-col gap-y-12">
+        <div className={cn("isolate flex flex-col", "gap-y-6 md:gap-y-2")}>
+          <BeerCard
+            name={beer.name}
+            brewery={beer.brewery}
+            abv={beer.abv}
+            ibu={beer.ibu}
+            style={beer.style}
+            color={beer.color}
+            organic={beer.organic}
+            barrelAged={beer.barrelAged}
+            description={beer.description}
+            releaseYear={beer.releaseYear}
+            className="md:rounded-t-xl md:rounded-b"
+          />
 
-        <div
-          className={cn(
-            "flex flex-row",
-            "gap-x-2 px-10 py-4 md:gap-x-1 md:p-0",
-          )}
-        >
-          <Button
-            asChild
+          <div
             className={cn(
-              "grow",
-              "md:rounded-t-md md:rounded-bl-[14px] md:before:rounded-t md:before:rounded-bl-xl",
+              "flex flex-row",
+              "gap-x-2 px-10 py-4 md:gap-x-1 md:p-0",
             )}
           >
-            <Link
-              href={generatePath(Routes.REVIEW_FORM, {
-                brewerySlug: beer.brewery.slug,
-                beerSlug: beer.slug,
-              })}
+            <Button
+              asChild
+              className={cn(
+                "grow",
+                "md:rounded-t-md md:rounded-bl-[14px] md:before:rounded-t md:before:rounded-bl-xl",
+              )}
             >
-              {t("beerPage.actions.review")}
-            </Link>
-          </Button>
+              <Link
+                href={generatePath(Routes.REVIEW_FORM, {
+                  brewerySlug: beer.brewery.slug,
+                  beerSlug: beer.slug,
+                })}
+              >
+                {t("beerPage.actions.review")}
+              </Link>
+            </Button>
 
-          <ShareButton
-            size="icon"
-            variant="outline"
-            label={t("beerPage.actions.share")}
-            link={getAbsoluteUrl(
-              generatePath(Routes.BEER, {
-                brewerySlug: beer.brewery.slug.slice(0, 4),
-                beerSlug: beer.slug.slice(0, 4),
-              }),
-            )}
-            triggerClassName={cn(
-              "shrink-0",
-              "md:rounded-t-md md:rounded-br-[14px] md:before:rounded-t md:before:rounded-br-xl",
-            )}
-          />
+            <ShareButton
+              size="icon"
+              variant="outline"
+              label={t("beerPage.actions.share")}
+              link={getAbsoluteUrl(
+                generatePath(Routes.BEER, {
+                  brewerySlug: beer.brewery.slug.slice(0, 4),
+                  beerSlug: beer.slug.slice(0, 4),
+                }),
+              )}
+              triggerClassName={cn(
+                "shrink-0",
+                "md:rounded-t-md md:rounded-br-[14px] md:before:rounded-t md:before:rounded-br-xl",
+              )}
+            />
+          </div>
+        </div>
+
+        <div className="px-10 md:px-0">
+          <BeerReviews beerId={beer.id} page={searchParamsResult.data.page} />
         </div>
       </div>
-
-      <div className="px-10 md:px-0">
-        <BeerReviews beerId={beer.id} page={searchParamsResult.data.page} />
-      </div>
-    </div>
+    </>
   );
 };
 

@@ -5,14 +5,10 @@ import BreweryBeerList from "@/app/[locale]/(business)/(with-header)/breweries/[
 import BreweryCard from "@/app/[locale]/(business)/(with-header)/breweries/[brewerySlug]/_components/brewery-card";
 import BreweryReviews from "@/app/[locale]/(business)/(with-header)/breweries/[brewerySlug]/_components/brewery-reviews";
 import BreweryTabList from "@/app/[locale]/(business)/(with-header)/breweries/[brewerySlug]/_components/brewery-tab-list";
+import BreweryJsonLd from "@/app/[locale]/(business)/(with-header)/breweries/[brewerySlug]/json-ld";
 import { brewerySearchParamsSchema } from "@/app/[locale]/(business)/(with-header)/breweries/[brewerySlug]/schemas";
-import JsonLd from "@/app/_components/json-ld";
 import { Tabs, TabContent } from "@/app/_components/ui/tabs";
-import {
-  getAllBreweryReviews,
-  getBreweryBySlug,
-  getBreweryAggregateRatingById,
-} from "@/domain/breweries";
+import { getBreweryBySlug } from "@/domain/breweries";
 import { config } from "@/lib/config";
 import { publicConfig } from "@/lib/config/client-config";
 import { StaticGenerationMode } from "@/lib/config/types";
@@ -20,12 +16,11 @@ import { redirect } from "@/lib/i18n";
 import prisma from "@/lib/prisma";
 import { Routes } from "@/lib/routes";
 import { generatePath } from "@/lib/routes/utils";
-import { getAbsoluteUrl, getAlternates } from "@/lib/seo";
+import { getAlternates } from "@/lib/seo";
 import { cn } from "@/lib/tailwind";
 import { exhaustiveCheck } from "@/lib/typescript/utils";
 
 import type { Metadata } from "next";
-import type { Brewery as BreweryJsonLd, WithContext } from "schema-dts";
 
 export async function generateStaticParams(): Promise<
   Array<
@@ -128,145 +123,34 @@ const BreweryPage = async ({
     });
   }
 
-  const [aggregateRating, latestReviews] = await Promise.all([
-    getBreweryAggregateRatingById(brewery.id),
-    getAllBreweryReviews({ brewerySlug: brewery.slug, limit: 5, page: 1 }),
-  ]);
-
   return (
-    <div className={cn("flex w-full flex-col", "gap-y-16 md:gap-y-12")}>
-      <JsonLd
-        data={
-          {
-            "@context": "https://schema.org",
-            "@type": "Brewery",
-            "@id": getAbsoluteUrl(
-              generatePath(Routes.BREWERY, { brewerySlug: brewery.slug }),
-            ),
-            url: getAbsoluteUrl(
-              generatePath(Routes.BREWERY, { brewerySlug: brewery.slug }),
-            ),
-            name: brewery.name,
-            ...(brewery.description
-              ? { description: brewery.description }
-              : {}),
-            ...(aggregateRating.reviewCount ? { aggregateRating } : {}),
-            address: {
-              "@type": "PostalAddress",
-              addressCountry: brewery.location.country.code,
-              ...(brewery.location.state
-                ? { addressRegion: brewery.location.state }
-                : {}),
-              ...(brewery.location.city
-                ? { addressLocality: brewery.location.city }
-                : {}),
-              ...(brewery.location.address
-                ? { streetAddress: brewery.location.address }
-                : {}),
-            },
-            ...(brewery.creationYear
-              ? { foundingDate: String(brewery.creationYear) }
-              : {}),
-            ...(brewery.contactEmail ? { email: brewery.contactEmail } : {}),
-            ...(brewery.contactPhoneNumber
-              ? { telephone: brewery.contactPhoneNumber }
-              : {}),
-            ...(brewery.websiteLink ? { sameAs: brewery.websiteLink } : {}),
-            ...(latestReviews.results.length > 0
-              ? {
-                  review: latestReviews.results.map((review) => ({
-                    "@type": "Review",
-                    "@id": getAbsoluteUrl(
-                      generatePath(Routes.REVIEW, {
-                        username: review.user.username,
-                        reviewSlug: review.slug,
-                      }),
-                    ),
-                    url: getAbsoluteUrl(
-                      generatePath(Routes.REVIEW, {
-                        username: review.user.username,
-                        reviewSlug: review.slug,
-                      }),
-                    ),
-                    itemReviewed: {
-                      "@type": "Product",
-                      "@id": getAbsoluteUrl(
-                        generatePath(Routes.BEER, {
-                          brewerySlug: brewery.slug,
-                          beerSlug: review.beer.slug,
-                        }),
-                      ),
-                      url: getAbsoluteUrl(
-                        generatePath(Routes.BEER, {
-                          brewerySlug: brewery.slug,
-                          beerSlug: review.beer.slug,
-                        }),
-                      ),
-                      name: review.beer.name,
-                      brand: {
-                        "@type": "Brewery",
-                        "@id": getAbsoluteUrl(
-                          generatePath(Routes.BREWERY, {
-                            brewerySlug: brewery.slug,
-                          }),
-                        ),
-                        url: getAbsoluteUrl(
-                          generatePath(Routes.BREWERY, {
-                            brewerySlug: brewery.slug,
-                          }),
-                        ),
-                        name: brewery.name,
-                      },
-                    },
-                    author: {
-                      "@type": "Person",
-                      "@id": getAbsoluteUrl(
-                        generatePath(Routes.PROFILE, {
-                          username: review.user.username,
-                        }),
-                      ),
-                      url: getAbsoluteUrl(
-                        generatePath(Routes.PROFILE, {
-                          username: review.user.username,
-                        }),
-                      ),
-                      name: review.user.username,
-                    },
-                    reviewRating: {
-                      "@type": "Rating",
-                      ratingValue: review.globalScore,
-                      worstRating: 0,
-                      bestRating: 10,
-                    },
-                    ...(review.pictureUrl ? { image: review.pictureUrl } : {}),
-                    ...(review.comment ? { reviewBody: review.comment } : {}),
-                    datePublished: review.createdAt.toISOString(),
-                  })),
-                }
-              : {}),
-          } satisfies WithContext<BreweryJsonLd>
-        }
-      />
+    <>
+      <BreweryJsonLd brewery={brewery} />
 
-      <BreweryCard brewery={brewery} />
+      <div className={cn("flex w-full flex-col", "gap-y-16 md:gap-y-12")}>
+        <BreweryCard brewery={brewery} />
 
-      <div className="px-10 md:px-0">
-        <Tabs defaultValue={searchParamsResult.data.tab}>
-          <BreweryTabList brewerySlug={brewerySlug} />
+        <div className="px-10 md:px-0">
+          <Tabs defaultValue={searchParamsResult.data.tab}>
+            <BreweryTabList brewerySlug={brewerySlug} />
 
-          <TabContent value="beers">
-            <BreweryBeerList brewerySlug={brewerySlug} beers={brewery.beers} />
-          </TabContent>
+            <TabContent value="beers">
+              <BreweryBeerList
+                brewerySlug={brewerySlug}
+                beers={brewery.beers}
+              />
+            </TabContent>
 
-          <TabContent value="reviews">
-            <BreweryReviews
-              brewerySlug={brewerySlug}
-              page={searchParamsResult.data.page}
-            />
-          </TabContent>
-        </Tabs>
+            <TabContent value="reviews">
+              <BreweryReviews
+                brewerySlug={brewerySlug}
+                page={searchParamsResult.data.page}
+              />
+            </TabContent>
+          </Tabs>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -3,9 +3,9 @@ import { Suspense } from "react";
 
 import UserReviewCard from "@/app/[locale]/(business)/(with-header)/users/[username]/_components/review-card";
 import UserHeader from "@/app/[locale]/(business)/(with-header)/users/[username]/_components/user-header";
+import UserJsonLd from "@/app/[locale]/(business)/(with-header)/users/[username]/json-ld";
 import { profileSearchParamsSchema } from "@/app/[locale]/(business)/(with-header)/users/[username]/schemas";
 import Await from "@/app/_components/await";
-import JsonLd from "@/app/_components/json-ld";
 import ReviewPictureGrid from "@/app/_components/review-picture-grid";
 import ReviewPictureGridLoader from "@/app/_components/review-picture-grid/loader";
 import Pagination from "@/app/_components/ui/pagination";
@@ -19,11 +19,10 @@ import { publicConfig } from "@/lib/config/client-config";
 import { redirect } from "@/lib/i18n";
 import { Routes } from "@/lib/routes";
 import { generatePath } from "@/lib/routes/utils";
-import { getAbsoluteUrl, getAlternates } from "@/lib/seo";
+import { getAlternates } from "@/lib/seo";
 import { cn } from "@/lib/tailwind";
 
 import type { Metadata } from "next";
-import type { Person as PersonJsonLd, WithContext } from "schema-dts";
 
 export async function generateMetadata({
   params,
@@ -82,55 +81,42 @@ const ProfilePage = async ({
   ]);
 
   return (
-    <div className="flex flex-col gap-y-6">
-      <JsonLd
-        data={
-          {
-            "@context": "https://schema.org",
-            "@type": "Person",
-            "@id": getAbsoluteUrl(generatePath(Routes.PROFILE, { username: user.username })),
-            url: getAbsoluteUrl(generatePath(Routes.PROFILE, { username: user.username })),
-            name: user.username,
-            interactionStatistic: {
-              "@type": "InteractionCounter",
-              interactionType: { "@type": "WriteAction" },
-              userInteractionCount: user.reviewCount,
-            },
-          } satisfies WithContext<PersonJsonLd>
-        }
-      />
+    <>
+      <UserJsonLd user={user} />
 
-      <UserHeader user={user} visitedCountries={visitedCountries} />
+      <div className="flex flex-col gap-y-6">
+        <UserHeader user={user} visitedCountries={visitedCountries} />
 
-      <div className={cn("mt-4 md:-mt-1", "px-10 md:px-0")}>
-        <Suspense fallback={<ReviewPictureGridLoader />}>
-          <Await promise={latestPicturesPromise}>
-            {(pictures) => <ReviewPictureGrid pictures={pictures} />}
-          </Await>
-        </Suspense>
-      </div>
+        <div className={cn("mt-4 md:-mt-1", "px-10 md:px-0")}>
+          <Suspense fallback={<ReviewPictureGridLoader />}>
+            <Await promise={latestPicturesPromise}>
+              {(pictures) => <ReviewPictureGrid pictures={pictures} />}
+            </Await>
+          </Suspense>
+        </div>
 
-      <div
-        className={cn(
-          "grid grid-cols-[minmax(0,1fr)_auto] gap-x-4 gap-y-8",
-          "px-10 md:px-0",
-        )}
-      >
-        {reviews.results.map((review) => (
-          <UserReviewCard
-            key={review.id}
-            username={user.username}
-            review={review}
+        <div
+          className={cn(
+            "grid grid-cols-[minmax(0,1fr)_auto] gap-x-4 gap-y-8",
+            "px-10 md:px-0",
+          )}
+        >
+          {reviews.results.map((review) => (
+            <UserReviewCard
+              key={review.id}
+              username={user.username}
+              review={review}
+            />
+          ))}
+
+          <Pagination
+            current={reviews.page.current}
+            total={reviews.page.total}
+            className="col-span-2"
           />
-        ))}
-
-        <Pagination
-          current={reviews.page.current}
-          total={reviews.page.total}
-          className="col-span-2"
-        />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

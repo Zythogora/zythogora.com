@@ -17,11 +17,11 @@ const OpengraphPreview = async ({
   waveColor = "#FFAA00", // brand-500
 }: OpengraphPreviewProps) => {
   const [kanitRegular, kanitSemiBold] = await Promise.all([
-    await fetch(new URL(getAbsoluteUrl("/fonts/Kanit-Regular.ttf"))).then(
-      (res) => res.arrayBuffer(),
+    fetch(new URL(getAbsoluteUrl("/fonts/Kanit-Regular.ttf"))).then((res) =>
+      res.arrayBuffer(),
     ),
-    await fetch(new URL(getAbsoluteUrl("/fonts/Kanit-SemiBold.ttf"))).then(
-      (res) => res.arrayBuffer(),
+    fetch(new URL(getAbsoluteUrl("/fonts/Kanit-SemiBold.ttf"))).then((res) =>
+      res.arrayBuffer(),
     ),
   ]);
 
