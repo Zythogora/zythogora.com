@@ -739,6 +739,14 @@
       "address": {
         "label": "Adresse"
       },
+      "addressSearch": {
+        "label": "Rechercher une adresse",
+        "placeholder": "Rechercher une adresse pour pré-remplir",
+        "searchPlaceholder": "Tapez une adresse...",
+        "noResult": "Aucune adresse trouvée",
+        "pending": "Recherche en cours...",
+        "attribution": "Powered by Google Maps"
+      },
       "description": {
         "label": "Description"
       },

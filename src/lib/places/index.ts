@@ -4,8 +4,15 @@ import { unstable_cache } from "next/cache";
 
 import { UnknownPlaceError } from "@/lib/places/errors";
 import { placesClient } from "@/lib/places/gcp";
-import { transformAutocompletePlacesSuggestionToAutocompleteLocation } from "@/lib/places/transforms";
-import type { AutocompleteLocation, Place } from "@/lib/places/types";
+import {
+  transformAddressComponentsToPlaceAddressDetails,
+  transformAutocompletePlacesSuggestionToAutocompleteLocation,
+} from "@/lib/places/transforms";
+import type {
+  AutocompleteLocation,
+  Place,
+  PlaceAddressDetails,
+} from "@/lib/places/types";
 
 const getAutocompleteSuggestionsUncached = async (
   input: string,
@@ -71,3 +78,37 @@ export const getPlaceDetails = unstable_cache(getPlaceDetailsUncached, [], {
   revalidate: CACHE_REVALIDATE,
   tags: [GOOGLE_PLACES_CACHE_TAG],
 });
+
+const getPlaceAddressDetailsUncached = async (
+  placeId: string,
+  sessionToken: string,
+): Promise<PlaceAddressDetails> => {
+  const [response] = await placesClient.getPlace(
+    {
+      name: `places/${placeId}`,
+      sessionToken,
+    },
+    {
+      otherArgs: {
+        headers: {
+          "X-Goog-Fieldmask": "id,addressComponents,shortFormattedAddress",
+        },
+      },
+    },
+  );
+
+  if (!response.addressComponents) {
+    throw new UnknownPlaceError();
+  }
+
+  return transformAddressComponentsToPlaceAddressDetails(
+    response.addressComponents,
+    response.shortFormattedAddress ?? null,
+  );
+};
+
+export const getPlaceAddressDetails = unstable_cache(
+  getPlaceAddressDetailsUncached,
+  [],
+  { revalidate: CACHE_REVALIDATE, tags: [GOOGLE_PLACES_CACHE_TAG] },
+);

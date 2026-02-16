@@ -15,7 +15,7 @@ import { toast } from "sonner";
 import { PurchaseType, ServingFrom } from "@db/enums";
 
 import PurchaseLocationAutocomplete from "@/app/[locale]/(business)/(without-header)/breweries/[brewerySlug]/beers/[beerSlug]/review/_components/purchase-location-autocomplete";
-import { useGoogleAutocompleteSession } from "@/app/[locale]/(business)/(without-header)/breweries/[brewerySlug]/beers/[beerSlug]/review/_components/purchase-location-autocomplete/hooks";
+import { useGoogleAutocompleteSession } from "@/lib/places/hooks";
 import { reviewAction } from "@/app/[locale]/(business)/(without-header)/breweries/[brewerySlug]/beers/[beerSlug]/review/actions";
 import {
   acidityValues,

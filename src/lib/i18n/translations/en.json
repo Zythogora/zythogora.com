@@ -742,6 +742,14 @@
       "address": {
         "label": "Address"
       },
+      "addressSearch": {
+        "label": "Search address",
+        "placeholder": "Search for an address to auto-fill",
+        "searchPlaceholder": "Type an address...",
+        "noResult": "No address found",
+        "pending": "Searching...",
+        "attribution": "Powered by Google Maps"
+      },
       "description": {
         "label": "Description"
       },

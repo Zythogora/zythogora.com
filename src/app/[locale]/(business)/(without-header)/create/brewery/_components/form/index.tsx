@@ -6,8 +6,9 @@ import { getZodConstraint } from "@conform-to/zod/v4";
 import { PlusIcon } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { useActionState, useState, useTransition } from "react";
+import { useActionState, useRef, useState, useTransition } from "react";
 
+import AddressAutocomplete from "@/app/[locale]/(business)/(without-header)/create/brewery/_components/address-autocomplete";
 import SocialLink, {
   emptySocialLinkValue,
 } from "@/app/[locale]/(business)/(without-header)/create/brewery/_components/social-link";
@@ -20,8 +21,11 @@ import {
 import FormCountrySelect from "@/app/_components/form/country-select";
 import FormInput from "@/app/_components/form/input";
 import FormTextarea from "@/app/_components/form/textarea";
+import QueryClientProvider from "@/app/_components/providers/query-client-provider";
 import Button from "@/app/_components/ui/button";
 import Label from "@/app/_components/ui/label";
+import { useGoogleAutocompleteSession } from "@/lib/places/hooks";
+import type { PlaceAddressDetails } from "@/lib/places/types";
 import { Routes } from "@/lib/routes";
 import { getSafeRedirectUrl } from "@/lib/routes/redirect";
 import { cn } from "@/lib/tailwind";
@@ -31,6 +35,11 @@ const CreateBreweryForm = () => {
 
   const searchParams = useSearchParams();
   const redirectUrl = getSafeRedirectUrl(searchParams.get("redirect"), null);
+
+  const { getSessionToken } = useGoogleAutocompleteSession();
+
+  const formRef = useRef<HTMLFormElement>(null);
+  const [countryCode, setCountryCode] = useState<string | undefined>(undefined);
 
   const [socialLinks, setSocialLinks] = useState<
     CreateBreweryData["socialLinks"]
@@ -101,132 +110,177 @@ const CreateBreweryForm = () => {
     }
   };
 
+  const handleAddressSelect = (addressDetails: PlaceAddressDetails) => {
+    if (addressDetails.country) {
+      setCountryCode(addressDetails.country);
+    }
+
+    const setInputValue = (fieldName: string, value: string) => {
+      const input = formRef.current?.elements.namedItem(
+        fieldName,
+      ) as HTMLInputElement | null;
+      if (input) {
+        const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
+          HTMLInputElement.prototype,
+          "value",
+        )?.set;
+        nativeInputValueSetter?.call(input, value);
+        input.dispatchEvent(new Event("input", { bubbles: true }));
+      }
+    };
+
+    if (addressDetails.state) {
+      setInputValue(fields.state.name, addressDetails.state);
+    }
+    if (addressDetails.city) {
+      setInputValue(fields.city.name, addressDetails.city);
+    }
+    if (addressDetails.address) {
+      setInputValue(fields.address.name, addressDetails.address);
+    }
+  };
+
   return (
-    <FormProvider context={form.context}>
-      <form
-        {...getFormProps(form)}
-        className={cn(
-          "grid gap-x-6 gap-y-8",
-          "w-full grid-cols-2 @3xl:w-192 @3xl:grid-cols-7",
-        )}
-      >
-        <FormInput
-          label={t("createBreweryPage.fields.name.label")}
-          field={fields.name}
-          type="text"
-          className="col-span-2 @3xl:col-span-5"
-        />
-
-        <FormInput
-          label={t("createBreweryPage.fields.creationYear.label")}
-          field={fields.creationYear}
-          type="number"
-          className="col-span-2 col-start-1 row-start-6 @3xl:col-start-6 @3xl:row-start-1"
-        />
-
-        <FormCountrySelect
-          label={t("createBreweryPage.fields.country.label")}
-          field={fields.country}
-          searchPlaceholder={t("form.fields.countrySelect.searchPlaceholder")}
-          className="col-span-2 @3xl:col-span-3"
-        />
-
-        <FormInput
-          label={t("createBreweryPage.fields.state.label")}
-          field={fields.state}
-          type="text"
-          className="@3xl:col-span-2"
-        />
-
-        <FormInput
-          label={t("createBreweryPage.fields.city.label")}
-          field={fields.city}
-          type="text"
-          className="@3xl:col-span-2"
-        />
-
-        <FormInput
-          label={t("createBreweryPage.fields.address.label")}
-          field={fields.address}
-          type="text"
-          className="col-span-2 @3xl:col-span-7"
-        />
-
-        <FormTextarea
-          label={t("createBreweryPage.fields.description.label")}
-          field={fields.description}
-          rows={4}
-          className="col-span-2 @3xl:col-span-7"
-        />
-
-        <FormInput
-          label={t("createBreweryPage.fields.websiteLink.label")}
-          field={fields.websiteLink}
-          type="text"
-          className="col-span-2 @3xl:col-span-7"
-        />
-
-        <div className="col-span-2 flex flex-col gap-y-1 @3xl:col-span-7">
-          <Label htmlFor={fields.socialLinks.id}>
-            {t("createBreweryPage.fields.socialLinks.label")}
-          </Label>
-
-          <div className="flex flex-col items-start gap-y-4">
-            <div className="flex w-full flex-col gap-y-6">
-              {socialLinks.map((socialLink, index) => (
-                <SocialLink
-                  key={index}
-                  index={index}
-                  socialLink={socialLink}
-                  onChange={handleChangeSocialLink}
-                  onRemove={handleRemoveSocialLink}
-                />
-              ))}
-            </div>
-
-            <button
-              type="button"
-              onClick={handleAddSocialLink}
-              aria-label={t("createBreweryPage.fields.socialLinks.actions.add")}
-              className={cn(
-                "ml-2 flex flex-row items-center gap-x-2 rounded px-1",
-                "focus-visible:outline-offset-4",
-              )}
-            >
-              <PlusIcon className="size-4" />
-
-              <span>
-                {t("createBreweryPage.fields.socialLinks.actions.add")}
-              </span>
-            </button>
-          </div>
-        </div>
-
-        <FormInput
-          label={t("createBreweryPage.fields.contactEmail.label")}
-          field={fields.contactEmail}
-          type="email"
-          className="col-span-2 @3xl:col-span-4"
-        />
-
-        <FormInput
-          label={t("createBreweryPage.fields.contactPhoneNumber.label")}
-          field={fields.contactPhoneNumber}
-          type="tel"
-          className="col-span-2 @3xl:col-span-3"
-        />
-
-        <Button
-          type="submit"
-          disabled={isPending}
-          className={cn("mt-2", "col-span-2 @3xl:col-span-7")}
+    <QueryClientProvider>
+      <FormProvider context={form.context}>
+        <form
+          {...getFormProps(form)}
+          ref={formRef}
+          className={cn(
+            "grid gap-x-6 gap-y-8",
+            "w-full grid-cols-2 @3xl:w-192 @3xl:grid-cols-7",
+          )}
         >
-          {isPending
-            ? t("createBreweryPage.actions.submitting")
-            : t("createBreweryPage.actions.submit")}
-        </Button>
-      </form>
-    </FormProvider>
+          <FormInput
+            label={t("createBreweryPage.fields.name.label")}
+            field={fields.name}
+            type="text"
+            className="col-span-2 @3xl:col-span-5"
+          />
+
+          <FormInput
+            label={t("createBreweryPage.fields.creationYear.label")}
+            field={fields.creationYear}
+            type="number"
+            className="col-span-2 col-start-1 row-start-6 @3xl:col-start-6 @3xl:row-start-1"
+          />
+
+          <div className="col-span-2 flex flex-col gap-y-1 @3xl:col-span-7">
+            <Label>
+              {t("createBreweryPage.fields.addressSearch.label")}
+            </Label>
+
+            <AddressAutocomplete
+              getSessionToken={getSessionToken}
+              onAddressSelect={handleAddressSelect}
+            />
+          </div>
+
+          <FormCountrySelect
+            label={t("createBreweryPage.fields.country.label")}
+            field={fields.country}
+            value={countryCode}
+            searchPlaceholder={t("form.fields.countrySelect.searchPlaceholder")}
+            className="col-span-2 @3xl:col-span-3"
+          />
+
+          <FormInput
+            label={t("createBreweryPage.fields.state.label")}
+            field={fields.state}
+            type="text"
+            className="@3xl:col-span-2"
+          />
+
+          <FormInput
+            label={t("createBreweryPage.fields.city.label")}
+            field={fields.city}
+            type="text"
+            className="@3xl:col-span-2"
+          />
+
+          <FormInput
+            label={t("createBreweryPage.fields.address.label")}
+            field={fields.address}
+            type="text"
+            className="col-span-2 @3xl:col-span-7"
+          />
+
+          <FormTextarea
+            label={t("createBreweryPage.fields.description.label")}
+            field={fields.description}
+            rows={4}
+            className="col-span-2 @3xl:col-span-7"
+          />
+
+          <FormInput
+            label={t("createBreweryPage.fields.websiteLink.label")}
+            field={fields.websiteLink}
+            type="text"
+            className="col-span-2 @3xl:col-span-7"
+          />
+
+          <div className="col-span-2 flex flex-col gap-y-1 @3xl:col-span-7">
+            <Label htmlFor={fields.socialLinks.id}>
+              {t("createBreweryPage.fields.socialLinks.label")}
+            </Label>
+
+            <div className="flex flex-col items-start gap-y-4">
+              <div className="flex w-full flex-col gap-y-6">
+                {socialLinks.map((socialLink, index) => (
+                  <SocialLink
+                    key={index}
+                    index={index}
+                    socialLink={socialLink}
+                    onChange={handleChangeSocialLink}
+                    onRemove={handleRemoveSocialLink}
+                  />
+                ))}
+              </div>
+
+              <button
+                type="button"
+                onClick={handleAddSocialLink}
+                aria-label={t("createBreweryPage.fields.socialLinks.actions.add")}
+                className={cn(
+                  "ml-2 flex flex-row items-center gap-x-2 rounded px-1",
+                  "focus-visible:outline-offset-4",
+                )}
+              >
+                <PlusIcon className="size-4" />
+
+                <span>
+                  {t("createBreweryPage.fields.socialLinks.actions.add")}
+                </span>
+              </button>
+            </div>
+          </div>
+
+          <FormInput
+            label={t("createBreweryPage.fields.contactEmail.label")}
+            field={fields.contactEmail}
+            type="email"
+            className="col-span-2 @3xl:col-span-4"
+          />
+
+          <FormInput
+            label={t("createBreweryPage.fields.contactPhoneNumber.label")}
+            field={fields.contactPhoneNumber}
+            type="tel"
+            className="col-span-2 @3xl:col-span-3"
+          />
+
+          <Button
+            type="submit"
+            disabled={isPending}
+            className={cn("mt-2", "col-span-2 @3xl:col-span-7")}
+          >
+            {isPending
+              ? t("createBreweryPage.actions.submitting")
+              : t("createBreweryPage.actions.submit")}
+          </Button>
+        </form>
+      </FormProvider>
+    </QueryClientProvider>
   );
 };
 

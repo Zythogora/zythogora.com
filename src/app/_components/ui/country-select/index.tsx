@@ -3,7 +3,7 @@
 import { Command } from "cmdk";
 import { CheckIcon, ChevronDownIcon, SearchIcon } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import CountryFlag from "@/app/_components/icons/country-flag";
 import Button from "@/app/_components/ui/button";
@@ -24,11 +24,13 @@ interface CountrySelectProps
     Partial<ReturnType<typeof getSelectProps>>,
     Pick<ComponentProps<"input">, "placeholder" | "disabled" | "className"> {
   onChange?: (value: Country) => void;
+  value?: Country | null;
   searchPlaceholder?: string;
 }
 
 const CountrySelect = ({
   onChange,
+  value,
   placeholder,
   searchPlaceholder,
   className,
@@ -38,7 +40,15 @@ const CountrySelect = ({
   const locale = useLocale();
 
   const [open, setOpen] = useState(false);
-  const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
+  const [selectedCountry, setSelectedCountry] = useState<Country | null>(
+    value ?? null,
+  );
+
+  useEffect(() => {
+    if (value !== undefined) {
+      setSelectedCountry(value);
+    }
+  }, [value]);
 
   const countryList = Object.entries(countries.getNames(locale))
     .map(([code, name]) => ({ code, name }))

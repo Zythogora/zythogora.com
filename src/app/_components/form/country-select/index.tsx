@@ -1,16 +1,20 @@
 "use client";
 
 import { getSelectProps, type FieldMetadata } from "@conform-to/react";
+import { useLocale } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 
 import CountrySelect from "@/app/_components/ui/country-select";
 import FormError from "@/app/_components/ui/form-error";
 import Label from "@/app/_components/ui/label";
+import countries from "@/lib/i18n/countries";
+import type { Country } from "@/lib/i18n/countries/types";
 import { cn } from "@/lib/tailwind";
 
 interface FormCountrySelectProps {
   label: string;
   field: FieldMetadata;
+  value?: string;
   placeholder?: string;
   searchPlaceholder?: string;
   disabled?: boolean;
@@ -19,13 +23,32 @@ interface FormCountrySelectProps {
 
 const FormCountrySelect = ({
   label,
+  value,
   placeholder,
   searchPlaceholder,
   field,
   disabled,
   className,
 }: FormCountrySelectProps) => {
-  const [selectedCountryCode, setSelectedCountryCode] = useState<string>("");
+  const locale = useLocale();
+
+  const [selectedCountryCode, setSelectedCountryCode] = useState<string>(
+    value ?? "",
+  );
+
+  useEffect(() => {
+    if (value !== undefined) {
+      setSelectedCountryCode(value);
+    }
+  }, [value]);
+
+  const countryValue: Country | null = selectedCountryCode
+    ? {
+        code: selectedCountryCode,
+        name:
+          countries.getName(selectedCountryCode, locale) ?? selectedCountryCode,
+      }
+    : null;
 
   const inputRef = useRef<HTMLInputElement>(null);
   useEffect(() => {
@@ -58,7 +81,8 @@ const FormCountrySelect = ({
           {...restSelectProps}
           name={name}
           key={key}
-          onChange={(value) => setSelectedCountryCode(value.code)}
+          value={countryValue}
+          onChange={(country) => setSelectedCountryCode(country.code)}
           disabled={disabled}
           placeholder={placeholder}
           searchPlaceholder={searchPlaceholder}

@@ -9,3 +9,10 @@ export type Place = {
   name: string;
   address: string;
 };
+
+export type PlaceAddressDetails = {
+  country: string;
+  state: string | null;
+  city: string | null;
+  address: string | null;
+};
