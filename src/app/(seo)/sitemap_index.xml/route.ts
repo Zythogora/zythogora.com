@@ -1,7 +1,7 @@
-import { generateSitemaps as generateBeerSitemaps } from "@/app/beers/sitemap";
-import { generateSitemaps as generateBrewerySitemaps } from "@/app/breweries/sitemap";
-import { generateSitemaps as generateReviewSitemaps } from "@/app/reviews/sitemap";
-import { generateSitemaps as generateUserSitemaps } from "@/app/users/sitemap";
+import { generateSitemaps as generateBeerSitemaps } from "@/app/(seo)/beers/sitemap";
+import { generateSitemaps as generateBrewerySitemaps } from "@/app/(seo)/breweries/sitemap";
+import { generateSitemaps as generateReviewSitemaps } from "@/app/(seo)/reviews/sitemap";
+import { generateSitemaps as generateUserSitemaps } from "@/app/(seo)/users/sitemap";
 import prisma from "@/lib/prisma";
 import { getAbsoluteUrl } from "@/lib/seo";
 
