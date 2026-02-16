@@ -1,9 +1,9 @@
 import { Button, Heading, Link, Preview, Text } from "@react-email/components";
 
-import { publicConfig } from "@/lib/config/client-config";
 import EmailTemplateLayout from "@/lib/email/templates/layout";
 import { getTranslationsByLocale } from "@/lib/i18n";
 import { Routes } from "@/lib/routes";
+import { getAbsoluteUrl } from "@/lib/seo";
 
 interface FriendRequestEmailProps {
   requesterUsername: string;
@@ -19,8 +19,12 @@ const FriendRequestEmail = async ({
   // TODO: Find a way to determine the locale of the addressee (profile settings?)
   const t = await getTranslationsByLocale("en");
 
-  const acceptFriendRequestUrl = `${publicConfig.baseUrl}${Routes.ACCEPT_FRIEND_REQUEST}?id=${friendRequestId}`;
-  const rejectFriendRequestUrl = `${publicConfig.baseUrl}${Routes.DENY_FRIEND_REQUEST}?id=${friendRequestId}`;
+  const acceptFriendRequestUrl = getAbsoluteUrl(
+    `${Routes.ACCEPT_FRIEND_REQUEST}?id=${friendRequestId}`,
+  );
+  const rejectFriendRequestUrl = getAbsoluteUrl(
+    `${Routes.DENY_FRIEND_REQUEST}?id=${friendRequestId}`,
+  );
 
   return (
     <EmailTemplateLayout>

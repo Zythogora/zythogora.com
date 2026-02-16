@@ -69,6 +69,8 @@ export type BeerReview = {
   slug: string;
   globalScore: number;
   servingFrom: ServingFrom;
+  comment?: string;
+  pictureUrl?: string;
   username: string;
   createdAt: Date;
 };

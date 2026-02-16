@@ -5,6 +5,7 @@ import BreweryBeerList from "@/app/[locale]/(business)/(with-header)/breweries/[
 import BreweryCard from "@/app/[locale]/(business)/(with-header)/breweries/[brewerySlug]/_components/brewery-card";
 import BreweryReviews from "@/app/[locale]/(business)/(with-header)/breweries/[brewerySlug]/_components/brewery-reviews";
 import BreweryTabList from "@/app/[locale]/(business)/(with-header)/breweries/[brewerySlug]/_components/brewery-tab-list";
+import BreweryJsonLd from "@/app/[locale]/(business)/(with-header)/breweries/[brewerySlug]/json-ld";
 import { brewerySearchParamsSchema } from "@/app/[locale]/(business)/(with-header)/breweries/[brewerySlug]/schemas";
 import { Tabs, TabContent } from "@/app/_components/ui/tabs";
 import { getBreweryBySlug } from "@/domain/breweries";
@@ -15,6 +16,7 @@ import { redirect } from "@/lib/i18n";
 import prisma from "@/lib/prisma";
 import { Routes } from "@/lib/routes";
 import { generatePath } from "@/lib/routes/utils";
+import { getAlternates } from "@/lib/seo";
 import { cn } from "@/lib/tailwind";
 import { exhaustiveCheck } from "@/lib/typescript/utils";
 
@@ -76,6 +78,10 @@ export async function generateMetadata({
   return {
     title,
     description,
+    alternates: getAlternates(
+      generatePath(Routes.BREWERY, { brewerySlug: brewery.slug }),
+      locale,
+    ),
     openGraph: {
       title,
       description,
@@ -119,26 +125,33 @@ const BreweryPage = async ({
   }
 
   return (
-    <div className={cn("flex w-full flex-col", "gap-y-16 md:gap-y-12")}>
-      <BreweryCard brewery={brewery} />
+    <>
+      <BreweryJsonLd brewery={brewery} />
 
-      <div className="px-10 md:px-0">
-        <Tabs defaultValue={searchParamsResult.data.tab}>
-          <BreweryTabList brewerySlug={brewerySlug} />
+      <div className={cn("flex w-full flex-col", "gap-y-16 md:gap-y-12")}>
+        <BreweryCard brewery={brewery} />
 
-          <TabContent value="beers">
-            <BreweryBeerList brewerySlug={brewerySlug} beers={brewery.beers} />
-          </TabContent>
+        <div className="px-10 md:px-0">
+          <Tabs defaultValue={searchParamsResult.data.tab}>
+            <BreweryTabList brewerySlug={brewerySlug} />
 
-          <TabContent value="reviews">
-            <BreweryReviews
-              brewerySlug={brewerySlug}
-              page={searchParamsResult.data.page}
-            />
-          </TabContent>
-        </Tabs>
+            <TabContent value="beers">
+              <BreweryBeerList
+                brewerySlug={brewerySlug}
+                beers={brewery.beers}
+              />
+            </TabContent>
+
+            <TabContent value="reviews">
+              <BreweryReviews
+                brewerySlug={brewerySlug}
+                page={searchParamsResult.data.page}
+              />
+            </TabContent>
+          </Tabs>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

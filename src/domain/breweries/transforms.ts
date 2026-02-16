@@ -1,4 +1,4 @@
-"server only";
+import "server-only";
 
 import { transformRawColorToColor } from "@/domain/beers/transforms";
 import type {
@@ -50,8 +50,11 @@ export const transformRawBreweryReviewToBreweryReview = (
   id: rawBreweryReview.id,
   slug: rawBreweryReview.slug,
   globalScore: rawBreweryReview.globalScore.toNumber(),
+  comment: rawBreweryReview.comment ?? undefined,
+  pictureUrl: rawBreweryReview.pictureUrl ?? undefined,
   beer: {
     id: rawBreweryReview.beer.id,
+    slug: rawBreweryReview.beer.slug,
     name: rawBreweryReview.beer.name,
     style: rawBreweryReview.beer.style.name,
     abv: rawBreweryReview.beer.abv,

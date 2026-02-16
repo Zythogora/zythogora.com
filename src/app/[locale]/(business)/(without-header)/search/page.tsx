@@ -9,6 +9,7 @@ import Await from "@/app/_components/await";
 import { searchBeers, searchBreweries, searchUsers } from "@/domain/search";
 import { redirect } from "@/lib/i18n";
 import { Routes } from "@/lib/routes";
+import { getAlternates } from "@/lib/seo";
 
 import type { Metadata } from "next";
 
@@ -34,6 +35,7 @@ export async function generateMetadata({
       brewery: t("searchPage.metadata.breweryTabTitle"),
       user: t("searchPage.metadata.userTabTitle"),
     }[searchParamsResult.data.kind],
+    alternates: getAlternates(Routes.SEARCH, locale),
   };
 }
 

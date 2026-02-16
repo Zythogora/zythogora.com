@@ -1,4 +1,4 @@
-"server only";
+import "server-only";
 
 import { hash as argon2Hash, verify as argon2Verify } from "@node-rs/argon2";
 

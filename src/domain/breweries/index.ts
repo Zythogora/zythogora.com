@@ -1,4 +1,4 @@
-"server only";
+import "server-only";
 
 import { nanoid } from "nanoid";
 import { cache } from "react";
@@ -25,6 +25,7 @@ import type {
 } from "@/lib/pagination/types";
 import prisma, { getPrismaTransactionClient } from "@/lib/prisma";
 import { slugify } from "@/lib/prisma/utils";
+import { transformRawStatsToAggregateRating } from "@/lib/seo/transforms";
 
 export const getBreweryBySlug = cache(
   async (brewerySlug: string): Promise<Brewery> => {
@@ -67,6 +68,19 @@ export const getBreweryBySlug = cache(
     return transformRawBreweryToBrewery(brewery);
   },
 );
+
+export const getBreweryAggregateRatingById = async (breweryId: string) => {
+  const result = await prisma.reviews.aggregate({
+    where: { beer: { breweryId } },
+    _avg: { globalScore: true },
+    _count: true,
+  });
+
+  return transformRawStatsToAggregateRating({
+    count: result._count,
+    average: result._avg.globalScore,
+  });
+};
 
 interface GetBreweryReviewsParams {
   userId: string;

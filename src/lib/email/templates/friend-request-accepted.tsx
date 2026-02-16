@@ -1,10 +1,10 @@
 import { Heading, Link, Preview, Text } from "@react-email/components";
 
-import { publicConfig } from "@/lib/config/client-config";
 import EmailTemplateLayout from "@/lib/email/templates/layout";
 import { getTranslationsByLocale } from "@/lib/i18n";
 import { Routes } from "@/lib/routes";
 import { generatePath } from "@/lib/routes/utils";
+import { getAbsoluteUrl } from "@/lib/seo";
 
 interface FriendRequestAcceptedEmailProps {
   requesterUsername: string;
@@ -43,9 +43,9 @@ const FriendRequestAcceptedEmail = async ({
         {t.rich("email.friendRequestAccepted.profileCta", {
           link: (chunks) => (
             <Link
-              href={`${publicConfig.baseUrl}${generatePath(Routes.PROFILE, {
-                username: addresseeUsername,
-              })}`}
+              href={getAbsoluteUrl(
+                generatePath(Routes.PROFILE, { username: addresseeUsername }),
+              )}
             >
               {chunks}
             </Link>
