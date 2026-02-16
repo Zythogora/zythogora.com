@@ -1,6 +1,7 @@
 "use server";
 
 import { parseWithZod } from "@conform-to/zod/v4";
+import { updateTag } from "next/cache";
 import { getLocale } from "next-intl/server";
 
 import { reviewSchema } from "@/app/[locale]/(business)/(without-header)/breweries/[brewerySlug]/beers/[beerSlug]/review/schemas";
@@ -14,6 +15,7 @@ import {
 } from "@/domain/beers/errors";
 import { getCurrentUser } from "@/lib/auth";
 import { redirect } from "@/lib/i18n";
+import prisma from "@/lib/prisma";
 import { Routes } from "@/lib/routes";
 import { generatePath } from "@/lib/routes/utils";
 
@@ -102,6 +104,22 @@ export const reviewAction = async (
       resetForm: false,
       formErrors: ["createReviewPage.errors.SOMETHING_WENT_WRONG"],
     });
+  }
+
+  // Invalidate caches affected by the new review
+  updateTag(`beer:${createdReview.beer.slug}`);
+  updateTag(`beer:${createdReview.beerId}:reviews`);
+  updateTag(`brewery:${createdReview.beer.brewery.slug}`);
+  updateTag(`brewery:${createdReview.beer.brewery.slug}:reviews`);
+
+  // Invalidate the reviewer's profile cache
+  const reviewer = await prisma.users.findUnique({
+    where: { id: createdReview.userId },
+    select: { username: true },
+  });
+  if (reviewer) {
+    updateTag(`user:${reviewer.username.toLowerCase()}`);
+    updateTag(`user:${reviewer.username.toLowerCase()}:reviews`);
   }
 
   redirect({

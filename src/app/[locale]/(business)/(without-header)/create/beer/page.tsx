@@ -2,7 +2,7 @@ import { headers } from "next/headers";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import CreateBeerForm from "@/app/[locale]/(business)/(without-header)/create/beer/_components/form";
-import { getColors, getStyleCategories } from "@/domain/beers";
+import { getCachedColors, getCachedStyleCategories } from "@/domain/beers/cache";
 import { auth } from "@/lib/auth/server";
 import { redirect } from "@/lib/i18n";
 import { Routes } from "@/lib/routes";
@@ -29,8 +29,8 @@ const CreateBeerPage = async ({
   }
 
   const [styleCategories, colors] = await Promise.all([
-    getStyleCategories(),
-    getColors(),
+    getCachedStyleCategories(),
+    getCachedColors(),
   ]);
 
   return (

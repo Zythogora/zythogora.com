@@ -1,6 +1,7 @@
 "use server";
 
 import { parseWithZod } from "@conform-to/zod/v4";
+import { updateTag } from "next/cache";
 import { getLocale } from "next-intl/server";
 
 import { createBeer } from "@/domain/beers";
@@ -40,6 +41,9 @@ export const createBeerAction = async (
   }
 
   const beer = await createBeer(submission.value);
+
+  // Invalidate brewery cache since it shows beer list
+  updateTag(`brewery:${beer.brewery.slug}`);
 
   redirect({
     href: generatePath(Routes.BEER, {

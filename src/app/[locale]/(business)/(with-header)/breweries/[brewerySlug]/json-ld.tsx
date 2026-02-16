@@ -1,8 +1,8 @@
 import JsonLd from "@/app/_components/json-ld";
 import {
-  getAllBreweryReviews,
-  getBreweryAggregateRatingById,
-} from "@/domain/breweries";
+  getCachedAllBreweryReviews,
+  getCachedBreweryAggregateRatingById,
+} from "@/domain/breweries/cache";
 import type { Brewery } from "@/domain/breweries/types";
 import { Routes } from "@/lib/routes";
 import { generatePath } from "@/lib/routes/utils";
@@ -16,8 +16,8 @@ interface BreweryJsonLdProps {
 
 const BreweryJsonLd = async ({ brewery }: BreweryJsonLdProps) => {
   const [aggregateRating, latestReviews] = await Promise.all([
-    getBreweryAggregateRatingById(brewery.id),
-    getAllBreweryReviews({ brewerySlug: brewery.slug, limit: 5, page: 1 }),
+    getCachedBreweryAggregateRatingById(brewery.slug, brewery.id),
+    getCachedAllBreweryReviews({ brewerySlug: brewery.slug, limit: 5, page: 1 }),
   ]);
 
   const breweryUrl = getAbsoluteUrl(

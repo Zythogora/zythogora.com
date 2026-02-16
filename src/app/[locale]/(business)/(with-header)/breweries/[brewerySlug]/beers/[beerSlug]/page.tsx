@@ -7,7 +7,7 @@ import BeerJsonLd from "@/app/[locale]/(business)/(with-header)/breweries/[brewe
 import { beerPageSearchParamsSchema } from "@/app/[locale]/(business)/(with-header)/breweries/[brewerySlug]/beers/[beerSlug]/schemas";
 import ShareButton from "@/app/_components/share-button";
 import Button from "@/app/_components/ui/button";
-import { getBeerBySlug } from "@/domain/beers";
+import { getCachedBeerBySlug } from "@/domain/beers/cache";
 import { config } from "@/lib/config";
 import { publicConfig } from "@/lib/config/client-config";
 import { StaticGenerationMode } from "@/lib/config/types";
@@ -76,7 +76,7 @@ export async function generateMetadata({
 
   const t = await getTranslations({ locale });
 
-  const beer = await getBeerBySlug(beerSlug, brewerySlug).catch(() =>
+  const beer = await getCachedBeerBySlug(beerSlug, brewerySlug).catch(() =>
     notFound(),
   );
 
@@ -134,7 +134,7 @@ const BeerPage = async ({
     });
   }
 
-  const beer = await getBeerBySlug(beerSlug, brewerySlug).catch(() =>
+  const beer = await getCachedBeerBySlug(beerSlug, brewerySlug).catch(() =>
     notFound(),
   );
 

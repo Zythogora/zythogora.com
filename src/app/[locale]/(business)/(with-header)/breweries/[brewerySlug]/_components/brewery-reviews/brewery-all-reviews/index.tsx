@@ -7,8 +7,10 @@ import ReviewPictureGrid from "@/app/_components/review-picture-grid";
 import ReviewPictureGridLoader from "@/app/_components/review-picture-grid/loader";
 import { ChipTabContent } from "@/app/_components/ui/chip-tabs";
 import Pagination from "@/app/_components/ui/pagination";
-import { getAllBreweryReviews } from "@/domain/breweries";
-import { getLatestBreweryPublicPictures } from "@/domain/breweries";
+import {
+  getCachedAllBreweryReviews,
+  getCachedLatestBreweryPublicPictures,
+} from "@/domain/breweries/cache";
 
 interface BreweryAllReviewsProps {
   brewerySlug: string;
@@ -21,9 +23,9 @@ const BreweryAllReviews = async ({
 }: BreweryAllReviewsProps) => {
   const t = await getTranslations();
 
-  const latestPicturesPromise = getLatestBreweryPublicPictures({ brewerySlug });
+  const latestPicturesPromise = getCachedLatestBreweryPublicPictures({ brewerySlug });
 
-  const allReviewsPromise = getAllBreweryReviews({
+  const allReviewsPromise = getCachedAllBreweryReviews({
     brewerySlug,
     page,
   });

@@ -8,7 +8,7 @@ import BreweryTabList from "@/app/[locale]/(business)/(with-header)/breweries/[b
 import BreweryJsonLd from "@/app/[locale]/(business)/(with-header)/breweries/[brewerySlug]/json-ld";
 import { brewerySearchParamsSchema } from "@/app/[locale]/(business)/(with-header)/breweries/[brewerySlug]/schemas";
 import { Tabs, TabContent } from "@/app/_components/ui/tabs";
-import { getBreweryBySlug } from "@/domain/breweries";
+import { getCachedBreweryBySlug } from "@/domain/breweries/cache";
 import { config } from "@/lib/config";
 import { publicConfig } from "@/lib/config/client-config";
 import { StaticGenerationMode } from "@/lib/config/types";
@@ -66,7 +66,7 @@ export async function generateMetadata({
 
   const { brewerySlug } = await params;
 
-  const brewery = await getBreweryBySlug(brewerySlug).catch(() => notFound());
+  const brewery = await getCachedBreweryBySlug(brewerySlug).catch(() => notFound());
 
   const title = `${brewery.name} | ${publicConfig.appName}`;
   const description = t("breweryPage.metadata.description", {
@@ -115,7 +115,7 @@ const BreweryPage = async ({
     });
   }
 
-  const brewery = await getBreweryBySlug(brewerySlug).catch(() => notFound());
+  const brewery = await getCachedBreweryBySlug(brewerySlug).catch(() => notFound());
 
   if (brewery.slug !== brewerySlug) {
     redirect({
