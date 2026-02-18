@@ -9,6 +9,7 @@ import { getTranslations } from "next-intl/server";
 import { hash, verify } from "@/lib/auth/crypto";
 import { UserRecordNotFoundError } from "@/lib/auth/errors";
 import { config } from "@/lib/config";
+import { addToSpan, recordError } from "@/lib/logger";
 import { publicConfig } from "@/lib/config/client-config";
 import { sendEmail } from "@/lib/email";
 import ResetPasswordEmail from "@/lib/email/templates/reset-password";
@@ -40,7 +41,8 @@ export const auth = betterAuth({
       ]);
 
       if (!user || !stats) {
-        console.error(`User with id ${betterAuthUser.id} not found`);
+        addToSpan({ "user.id": betterAuthUser.id, "auth.error": "user_record_not_found" });
+        recordError(new Error("User record not found in custom session"));
         throw new UserRecordNotFoundError();
       }
 

@@ -1,6 +1,7 @@
 import "server-only";
 
 import { transformRawColorToColor } from "@/domain/beers/transforms";
+import { addToSpan } from "@/lib/logger";
 import type {
   RawUserReview,
   RawUser,
@@ -24,9 +25,10 @@ const bigIntToNumber = (value: bigint, context: string): number => {
     return Number(value);
   }
 
-  console.error(
-    `Value: "${value}" is out of bounds to be a Number (${context})`,
-  );
+  addToSpan({
+    "transform.error": "bigint_out_of_bounds",
+    "transform.context": context,
+  });
   return 0;
 };
 

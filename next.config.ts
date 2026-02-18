@@ -9,6 +9,7 @@ const nextConfig: NextConfig = withNextIntl({
     serverActions: {
       bodySizeLimit: "2500KB",
     },
+    instrumentationHook: true,
   },
   images: {
     remotePatterns: [

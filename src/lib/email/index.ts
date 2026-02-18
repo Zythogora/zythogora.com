@@ -4,6 +4,7 @@ import { Resend } from "resend";
 
 import { config } from "@/lib/config";
 import { EmailError } from "@/lib/email/errors";
+import { recordError } from "@/lib/logger";
 
 import type { ReactNode } from "react";
 
@@ -23,7 +24,7 @@ export const sendEmail = async <Data>(
   });
 
   if (error || !email) {
-    console.error(error);
+    recordError(error instanceof Error ? error : new Error(String(error)));
     throw new EmailError();
   }
 

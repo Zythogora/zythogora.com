@@ -2,6 +2,7 @@
 
 import { sendFriendRequest } from "@/domain/users";
 import { getCurrentUser } from "@/lib/auth";
+import { recordError } from "@/lib/logger";
 
 export const addFriend = async (userId: string) => {
   const currentUser = await getCurrentUser();
@@ -13,7 +14,7 @@ export const addFriend = async (userId: string) => {
   try {
     await sendFriendRequest(userId);
   } catch (error) {
-    console.error(error);
+    recordError(error);
     return { success: false };
   }
 

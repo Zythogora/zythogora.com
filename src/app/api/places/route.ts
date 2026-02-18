@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 
 import { getCurrentUser } from "@/lib/auth";
+import { addToSpan, recordError } from "@/lib/logger";
 import { getAutocompleteSuggestions } from "@/lib/places";
 
 export async function GET(request: Request) {
@@ -20,11 +21,13 @@ export async function GET(request: Request) {
     );
   }
 
+  addToSpan({ "user.id": user.id });
+
   try {
     const suggestions = await getAutocompleteSuggestions(search, sessionToken);
     return NextResponse.json(suggestions);
   } catch (error) {
-    console.error("Error fetching place suggestions:", error);
+    recordError(error);
     return NextResponse.json(
       { error: "Failed to fetch place suggestions" },
       { status: 500 },

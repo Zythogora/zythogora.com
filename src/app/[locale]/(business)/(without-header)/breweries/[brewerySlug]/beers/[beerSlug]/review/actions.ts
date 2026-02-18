@@ -14,6 +14,7 @@ import {
 } from "@/domain/beers/errors";
 import { getCurrentUser } from "@/lib/auth";
 import { redirect } from "@/lib/i18n";
+import { recordError } from "@/lib/logger";
 import { Routes } from "@/lib/routes";
 import { generatePath } from "@/lib/routes/utils";
 
@@ -97,7 +98,7 @@ export const reviewAction = async (
       });
     }
 
-    console.error(error);
+    recordError(error);
     return submission.reply({
       resetForm: false,
       formErrors: ["createReviewPage.errors.SOMETHING_WENT_WRONG"],

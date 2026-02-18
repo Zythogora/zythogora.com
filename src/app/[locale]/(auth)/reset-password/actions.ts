@@ -5,6 +5,7 @@ import { parseWithZod } from "@conform-to/zod/v4";
 import { resetPasswordSchema } from "@/app/[locale]/(auth)/reset-password/schemas";
 import { resetPassword } from "@/domain/auth";
 import { InvalidTokenError } from "@/domain/auth/errors";
+import { recordError } from "@/lib/logger";
 
 import type { SubmissionResult } from "@conform-to/react";
 
@@ -35,7 +36,7 @@ export const resetPasswordAction = async (
       });
     }
 
-    console.error(error);
+    recordError(error);
     return submission.reply({
       resetForm: false,
     });

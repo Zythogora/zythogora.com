@@ -11,6 +11,7 @@ import {
   UnknownFriendshipError,
 } from "@/domain/users/errors";
 import { getCurrentUser } from "@/lib/auth";
+import { recordError } from "@/lib/logger";
 
 export const rejectPreviouslyAcceptedFriendRequestAction = async (
   friendRequestId: string,
@@ -28,7 +29,7 @@ export const rejectPreviouslyAcceptedFriendRequestAction = async (
         !(error instanceof UnknownFriendRequestError) &&
         !(error instanceof UnknownFriendshipError)
       ) {
-        console.error(error);
+        recordError(error);
       }
 
       return { success: false };
@@ -53,7 +54,7 @@ export const acceptPreviouslyRejectedFriendRequestAction = async (
         !(error instanceof UnauthorizedFriendRequestApprovalError) &&
         !(error instanceof UnknownFriendRequestError)
       ) {
-        console.error(error);
+        recordError(error);
       }
 
       return { success: false };

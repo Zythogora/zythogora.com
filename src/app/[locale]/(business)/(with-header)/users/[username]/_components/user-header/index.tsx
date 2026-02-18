@@ -1,4 +1,5 @@
 import { InfoIcon } from "lucide-react";
+import { recordError } from "@/lib/logger";
 import { getTranslations } from "next-intl/server";
 
 import AddFriendButton from "@/app/[locale]/(business)/(with-header)/users/[username]/_components/user-header/add-friend";
@@ -45,7 +46,7 @@ const UserHeader = async ({ user, visitedCountries }: UserHeaderProps) => {
       return null;
     }
 
-    console.error(error);
+    recordError(error);
     return null;
   });
 

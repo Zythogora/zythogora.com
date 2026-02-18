@@ -35,6 +35,7 @@ import { getOrCreatePurchaseLocation } from "@/domain/reviews";
 import { transformRawBeerReviewToBeerReviewWithPicture } from "@/domain/reviews/transforms";
 import { getCurrentUser } from "@/lib/auth";
 import { config } from "@/lib/config";
+import { addToSpan, recordError } from "@/lib/logger";
 import {
   checkImageForExplicitContent,
   createPreviews,
@@ -324,6 +325,8 @@ export const reviewBeer = async (review: CreateReviewData) => {
     throw new UnauthorizedBeerReviewError();
   }
 
+  addToSpan({ "user.id": user.id });
+
   const beer = await prisma.beers.findUnique({
     where: { id: review.beerId },
   });
@@ -332,8 +335,11 @@ export const reviewBeer = async (review: CreateReviewData) => {
     throw new UnknownBeerError();
   }
 
+  addToSpan({ "beer.id": beer.id });
+
   let pictureUrl: string | null = null;
   if (review.picture) {
+    addToSpan({ "review.has_picture": true });
     const imageBuffer = Buffer.from(await review.picture.arrayBuffer());
 
     const [explicitContentResult, optimizedImageResult] =
@@ -343,15 +349,14 @@ export const reviewBeer = async (review: CreateReviewData) => {
       ]);
 
     if (explicitContentResult.status === "rejected") {
-      console.error(
-        "Failed to check for explicit content",
-        explicitContentResult.reason,
-      );
+      recordError(explicitContentResult.reason);
+      addToSpan({ "review.error": "explicit_content_check_failed" });
       throw new ExplicitContentCheckError();
     }
 
     if (optimizedImageResult.status === "rejected") {
-      console.error("Failed to optimize image", optimizedImageResult.reason);
+      recordError(optimizedImageResult.reason);
+      addToSpan({ "review.error": "image_optimization_failed" });
       throw new ImageOptimizationError();
     }
 
@@ -359,7 +364,7 @@ export const reviewBeer = async (review: CreateReviewData) => {
     const optimizedImage = optimizedImageResult.value;
 
     if (isExplicit) {
-      console.error(`Explicit content detected: ${JSON.stringify(detections)}`);
+      addToSpan({ "review.explicit_content": true });
       throw new ExplicitContentError();
     }
 
@@ -388,7 +393,8 @@ export const reviewBeer = async (review: CreateReviewData) => {
         ),
       ]);
     } catch (error) {
-      console.error("Failed to upload image", error);
+      recordError(error);
+      addToSpan({ "review.error": "file_upload_failed" });
       throw new FileUploadError();
     }
 
@@ -400,13 +406,18 @@ export const reviewBeer = async (review: CreateReviewData) => {
     user.id,
   ).catch((error) => {
     if (error instanceof UnknownPlaceError) {
-      console.error(
-        `Unknown purchase location: ${review.purchaseType === PurchaseType.PHYSICAL_LOCATION ? review.purchaseLocationId : ""}`,
-      );
+      addToSpan({
+        "review.error": "unknown_purchase_location",
+        "review.purchase_location_id":
+          review.purchaseType === PurchaseType.PHYSICAL_LOCATION
+            ? (review.purchaseLocationId ?? "")
+            : "",
+      });
       throw new UnknownPurchaseLocationError();
     }
 
-    console.error("Unknown error getting purchase location", error);
+    recordError(error);
+    addToSpan({ "review.error": "purchase_location_fetch_failed" });
     return undefined;
   });
 
@@ -447,6 +458,8 @@ export const reviewBeer = async (review: CreateReviewData) => {
     },
     include: { beer: { include: { brewery: true } } },
   });
+
+  addToSpan({ "review.id": createdReview.id });
 
   return createdReview;
 };

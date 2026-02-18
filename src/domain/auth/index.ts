@@ -10,6 +10,7 @@ import {
   UsernameAlreadyExistsError,
 } from "@/domain/auth/errors";
 import { auth } from "@/lib/auth/server";
+import { recordError } from "@/lib/logger";
 import prisma from "@/lib/prisma";
 import { Routes } from "@/lib/routes";
 
@@ -48,7 +49,7 @@ export const signUp = async ({ username, email, password }: SignUpParams) => {
       }
     }
 
-    console.error(error);
+    recordError(error);
     throw new UnknownSignUpError();
   }
 
@@ -71,7 +72,7 @@ export const signUp = async ({ username, email, password }: SignUpParams) => {
       },
     });
 
-    console.error(error);
+    recordError(error);
     throw new UnknownSignUpError();
   }
 
@@ -114,7 +115,7 @@ export const resetPassword = async ({
       }
     }
 
-    console.error(error);
+    recordError(error);
     throw new UnknownResetPasswordError();
   }
 };

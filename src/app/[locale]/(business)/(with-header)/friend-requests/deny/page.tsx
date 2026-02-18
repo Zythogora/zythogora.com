@@ -11,6 +11,7 @@ import {
   UnknownFriendRequestError,
 } from "@/domain/users/errors";
 import { redirect } from "@/lib/i18n";
+import { recordError } from "@/lib/logger";
 import { Routes } from "@/lib/routes";
 import { generatePath } from "@/lib/routes/utils";
 
@@ -53,7 +54,7 @@ const RejectFriendRequestPage = async ({
       });
     }
 
-    console.error(error);
+    recordError(error);
     return false;
   });
 

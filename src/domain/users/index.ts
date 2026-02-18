@@ -34,6 +34,7 @@ import type {
 } from "@/domain/users/types";
 import { getCurrentUser } from "@/lib/auth";
 import { sendEmail } from "@/lib/email";
+import { addToSpan, recordError } from "@/lib/logger";
 import FriendRequestEmail from "@/lib/email/templates/friend-request";
 import FriendRequestAcceptedEmail from "@/lib/email/templates/friend-request-accepted";
 import { getTranslationsByLocale } from "@/lib/i18n";
@@ -275,6 +276,8 @@ export const sendFriendRequest = async (addresseeId: string) => {
   if (!user) {
     throw new UnauthorizedFriendRequestError();
   }
+
+  addToSpan({ "user.id": user.id, "friend_request.addressee_id": addresseeId });
 
   if (addresseeId === user.id) {
     throw new InvalidFriendRequestError();
@@ -525,8 +528,15 @@ export const rejectPreviouslyAcceptedFriendRequest = async (
 
     // Should not happen, invalid database state
     if (!friendship) {
-      console.error(
-        `Unknown friendship between ${user.id} and ${friendRequest.requesterId}, however friend request ${friendRequestId} is accepted`,
+      addToSpan({
+        "user.id": user.id,
+        "friend_request.id": friendRequestId,
+        "error": "db_inconsistency_missing_friendship",
+      });
+      recordError(
+        new Error(
+          "Accepted friend request has no corresponding friendship record",
+        ),
       );
       throw new UnknownFriendshipError();
     }

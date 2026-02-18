@@ -5,6 +5,7 @@ import ResetPasswordForm from "@/app/[locale]/(auth)/reset-password/_components/
 import { resetPasswordSearchParamsSchema } from "@/app/[locale]/(auth)/reset-password/schemas";
 import { auth } from "@/lib/auth/server";
 import { Link, redirect } from "@/lib/i18n";
+import { addToSpan } from "@/lib/logger";
 import { Routes } from "@/lib/routes";
 
 import type { Metadata } from "next";
@@ -87,7 +88,7 @@ const ResetPasswordPage = async ({
   }
 
   // This should never happen
-  console.error("No token or error");
+  addToSpan({ "auth.warning": "reset_password_no_token_or_error" });
   redirect({ href: Routes.HOME, locale });
 };
 
