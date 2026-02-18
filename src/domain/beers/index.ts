@@ -56,6 +56,7 @@ import prisma, { getPrismaTransactionClient } from "@/lib/prisma";
 import { slugify } from "@/lib/prisma/utils";
 import { transformRawStatsToAggregateRating } from "@/lib/seo/transforms";
 import { uploadFile } from "@/lib/storage";
+import { deleteFlaggedImageAfter40Days } from "@/lib/workflows/delete-flagged-image";
 
 export const getBeerBySlug = cache(
   async (beerSlug: string, brewerySlug: string): Promise<Beer> => {
@@ -392,6 +393,7 @@ export const reviewBeer = async (review: CreateReviewData) => {
         });
         spanAttrs["review.explicit_content.flagged_image_url"] =
           `${config.supabase.storageUrl}/object/public/flagged-images/${flaggedFileName}`;
+        void deleteFlaggedImageAfter40Days(flaggedFileName);
       } catch {
         // Best-effort — don't block the error response if upload fails
       }
