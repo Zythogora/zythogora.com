@@ -53,6 +53,7 @@ export const auth = betterAuth({
           username: user.username,
           email: betterAuthUser.email,
           image: betterAuthUser.image,
+          createdAt: betterAuthUser.createdAt,
           reviewCount: user._count.reviews,
           uniqueBeerCount: Number(stats.count),
         },

@@ -34,7 +34,7 @@ import type {
 } from "@/domain/users/types";
 import { getCurrentUser } from "@/lib/auth";
 import { sendEmail } from "@/lib/email";
-import { addToSpan, recordError } from "@/lib/logger";
+import { addToSpan, addUserToSpan, recordError } from "@/lib/logger";
 import FriendRequestEmail from "@/lib/email/templates/friend-request";
 import FriendRequestAcceptedEmail from "@/lib/email/templates/friend-request-accepted";
 import { getTranslationsByLocale } from "@/lib/i18n";
@@ -214,6 +214,8 @@ export const getFriendshipStatus = async (
     throw new UnauthorizedFriendshipStatusCallError();
   }
 
+  addUserToSpan(user);
+
   if (userId === user.id) {
     throw new InvalidFriendRequestError();
   }
@@ -277,7 +279,8 @@ export const sendFriendRequest = async (addresseeId: string) => {
     throw new UnauthorizedFriendRequestError();
   }
 
-  addToSpan({ "user.id": user.id, "friend_request.addressee_id": addresseeId });
+  addUserToSpan(user);
+  addToSpan({ "friend_request.addressee_id": addresseeId });
 
   if (addresseeId === user.id) {
     throw new InvalidFriendRequestError();
@@ -358,6 +361,8 @@ export const acceptFriendRequest = async (
     throw new UnauthorizedFriendRequestApprovalError();
   }
 
+  addUserToSpan(user);
+
   return getPrismaTransactionClient()(async (tx) => {
     const friendRequest = await tx.friendRequests.findUnique({
       where: {
@@ -394,6 +399,8 @@ export const acceptPreviouslyRejectedFriendRequest = async (
   if (!user) {
     throw new UnauthorizedFriendRequestApprovalError();
   }
+
+  addUserToSpan(user);
 
   await getPrismaTransactionClient()(async (tx) => {
     const friendRequest = await tx.friendRequests.findUnique({
@@ -475,6 +482,8 @@ export const rejectFriendRequest = async (friendRequestId: string) => {
     throw new UnauthorizedFriendRequestRejectionError();
   }
 
+  addUserToSpan(user);
+
   const friendRequest = await prisma.friendRequests.findUnique({
     where: {
       id: friendRequestId,
@@ -508,6 +517,8 @@ export const rejectPreviouslyAcceptedFriendRequest = async (
   if (!user) {
     throw new UnauthorizedFriendRequestRejectionError();
   }
+
+  addUserToSpan(user);
 
   const friendRequest = await prisma.friendRequests.findUnique({
     where: {

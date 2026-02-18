@@ -18,6 +18,7 @@ import {
 import type { Brewery, BreweryReview } from "@/domain/breweries/types";
 import { transformRawBeerReviewToBeerReviewWithPicture } from "@/domain/reviews/transforms";
 import { getCurrentUser } from "@/lib/auth";
+import { addUserToSpan } from "@/lib/logger";
 import { getPaginatedResults } from "@/lib/pagination";
 import type {
   PaginatedResults,
@@ -267,6 +268,8 @@ export const createBrewery = async (data: CreateBreweryData) => {
   if (!user) {
     throw new UnauthorizedBreweryCreationError();
   }
+
+  addUserToSpan(user);
 
   const id = nanoid();
 

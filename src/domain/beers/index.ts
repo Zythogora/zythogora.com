@@ -35,7 +35,12 @@ import { getOrCreatePurchaseLocation } from "@/domain/reviews";
 import { transformRawBeerReviewToBeerReviewWithPicture } from "@/domain/reviews/transforms";
 import { getCurrentUser } from "@/lib/auth";
 import { config } from "@/lib/config";
-import { addToSpan, recordError } from "@/lib/logger";
+import {
+  addToSpan,
+  addUserToSpan,
+  addReviewToSpan,
+  recordError,
+} from "@/lib/logger";
 import {
   checkImageForExplicitContent,
   createPreviews,
@@ -293,6 +298,8 @@ export const createBeer = async (data: CreateBeerData) => {
     throw new UnauthorizedBeerCreationError();
   }
 
+  addUserToSpan(user);
+
   const id = nanoid();
 
   const beer = await prisma.beers.create({
@@ -325,7 +332,8 @@ export const reviewBeer = async (review: CreateReviewData) => {
     throw new UnauthorizedBeerReviewError();
   }
 
-  addToSpan({ "user.id": user.id });
+  addUserToSpan(user);
+  addReviewToSpan(review);
 
   const beer = await prisma.beers.findUnique({
     where: { id: review.beerId },
@@ -335,11 +343,10 @@ export const reviewBeer = async (review: CreateReviewData) => {
     throw new UnknownBeerError();
   }
 
-  addToSpan({ "beer.id": beer.id });
+  addToSpan({ "beer.id": beer.id, "beer.name": beer.name });
 
   let pictureUrl: string | null = null;
   if (review.picture) {
-    addToSpan({ "review.has_picture": true });
     const imageBuffer = Buffer.from(await review.picture.arrayBuffer());
 
     const [explicitContentResult, optimizedImageResult] =
@@ -364,7 +371,32 @@ export const reviewBeer = async (review: CreateReviewData) => {
     const optimizedImage = optimizedImageResult.value;
 
     if (isExplicit) {
-      addToSpan({ "review.explicit_content": true });
+      const flaggedFileId = nanoid();
+      const flaggedFileName = `${user.id}/${flaggedFileId}.jpg`;
+
+      const spanAttrs: Record<string, string | boolean> = {
+        "review.explicit_content": true,
+        "review.explicit_content.adult": detections?.adult ?? "UNKNOWN",
+        "review.explicit_content.racy": detections?.racy ?? "UNKNOWN",
+        "review.explicit_content.violence": detections?.violence ?? "UNKNOWN",
+        "review.explicit_content.spoof": detections?.spoof ?? "UNKNOWN",
+        "review.explicit_content.medical": detections?.medical ?? "UNKNOWN",
+      };
+
+      try {
+        await uploadFile({
+          bucketName: "flagged-images",
+          fileName: flaggedFileName,
+          fileBody: optimizedImage,
+          contentType: "image/jpeg",
+        });
+        spanAttrs["review.explicit_content.flagged_image_url"] =
+          `${config.supabase.storageUrl}/object/public/flagged-images/${flaggedFileName}`;
+      } catch {
+        // Best-effort — don't block the error response if upload fails
+      }
+
+      addToSpan(spanAttrs);
       throw new ExplicitContentError();
     }
 

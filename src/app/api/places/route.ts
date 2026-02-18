@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
 import { getCurrentUser } from "@/lib/auth";
-import { addToSpan, recordError } from "@/lib/logger";
+import { addToSpan, addUserToSpan, recordError } from "@/lib/logger";
 import { getAutocompleteSuggestions } from "@/lib/places";
 
 export async function GET(request: Request) {
@@ -21,7 +21,8 @@ export async function GET(request: Request) {
     );
   }
 
-  addToSpan({ "user.id": user.id });
+  addUserToSpan(user);
+  addToSpan({ "search.query": search });
 
   try {
     const suggestions = await getAutocompleteSuggestions(search, sessionToken);
