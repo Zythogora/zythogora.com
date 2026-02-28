@@ -281,6 +281,7 @@ export const createBrewery = async (data: CreateBreweryData) => {
       address: data.address,
       creationYear: data.creationYear,
       description: data.description,
+      organic: data.organic,
       websiteLink: data.websiteLink,
       socialLinks: data.socialLinks,
       contactEmail: data.contactEmail,

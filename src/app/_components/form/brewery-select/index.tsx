@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import BrewerySelect from "@/app/_components/ui/brewery-select";
 import FormError from "@/app/_components/ui/form-error";
 import Label from "@/app/_components/ui/label";
+import type { BreweryResult } from "@/domain/search/types";
 import { cn } from "@/lib/tailwind";
 
 interface FormBrewerySelectProps {
@@ -15,6 +16,7 @@ interface FormBrewerySelectProps {
   searchPlaceholder?: string;
   disabled?: boolean;
   className?: string;
+  onBreweryChange?: (brewery: BreweryResult) => void;
 }
 
 const FormBrewerySelect = ({
@@ -24,6 +26,7 @@ const FormBrewerySelect = ({
   searchPlaceholder,
   disabled,
   className,
+  onBreweryChange,
 }: FormBrewerySelectProps) => {
   const [selectedBreweryId, setSelectedBreweryId] = useState<string>("");
 
@@ -59,7 +62,10 @@ const FormBrewerySelect = ({
           name={name}
           key={key}
           popoverId={`${field.id}-popover`}
-          onChange={(value) => setSelectedBreweryId(value.id)}
+          onChange={(value) => {
+            setSelectedBreweryId(value.id);
+            onBreweryChange?.(value);
+          }}
           disabled={disabled}
           placeholder={placeholder}
           searchPlaceholder={searchPlaceholder}

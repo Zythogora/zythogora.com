@@ -745,6 +745,9 @@
       "description": {
         "label": "Description"
       },
+      "organic": {
+        "label": "Organic"
+      },
       "websiteLink": {
         "label": "Website link"
       },

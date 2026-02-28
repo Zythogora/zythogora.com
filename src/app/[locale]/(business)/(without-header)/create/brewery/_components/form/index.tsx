@@ -17,6 +17,7 @@ import {
   createBrewerySchema,
   type CreateBreweryData,
 } from "@/app/[locale]/(business)/(without-header)/create/brewery/schemas";
+import FormCheckbox from "@/app/_components/form/checkbox";
 import FormCountrySelect from "@/app/_components/form/country-select";
 import FormInput from "@/app/_components/form/input";
 import FormTextarea from "@/app/_components/form/textarea";
@@ -156,6 +157,12 @@ const CreateBreweryForm = () => {
           label={t("createBreweryPage.fields.description.label")}
           field={fields.description}
           rows={4}
+          className="col-span-2 @3xl:col-span-7"
+        />
+
+        <FormCheckbox
+          label={t("createBreweryPage.fields.organic.label")}
+          field={fields.organic}
           className="col-span-2 @3xl:col-span-7"
         />
 

@@ -1736,6 +1736,7 @@ export const BreweriesScalarFieldEnum = {
   socialLinks: 'socialLinks',
   contactEmail: 'contactEmail',
   contactPhoneNumber: 'contactPhoneNumber',
+  organic: 'organic',
   createdAt: 'createdAt',
   createdBy: 'createdBy',
   updatedAt: 'updatedAt',

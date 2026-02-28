@@ -4,7 +4,7 @@ import { FormProvider, getFormProps, useForm } from "@conform-to/react";
 import { parseWithZod } from "@conform-to/zod/v4";
 import { getZodConstraint } from "@conform-to/zod/v4";
 import { useTranslations } from "next-intl";
-import { useActionState, useTransition } from "react";
+import { useActionState, useRef, useTransition } from "react";
 
 import { createBeerAction } from "@/app/[locale]/(business)/(without-header)/create/beer/actions";
 import { createBeerSchema } from "@/app/[locale]/(business)/(without-header)/create/beer/schemas";
@@ -17,6 +17,7 @@ import FormTextarea from "@/app/_components/form/textarea";
 import QueryClientProvider from "@/app/_components/providers/query-client-provider";
 import Button from "@/app/_components/ui/button";
 import type { Color, StyleCategory } from "@/domain/beers/types";
+import type { BreweryResult } from "@/domain/search/types";
 import { Routes } from "@/lib/routes";
 import { cn } from "@/lib/tailwind";
 
@@ -33,6 +34,8 @@ const CreateBeerForm = ({ styleCategories, colors }: CreateBeerFormProps) => {
     undefined,
   );
   const [isPending, startTransition] = useTransition();
+
+  const organicDirty = useRef(false);
 
   const [form, fields] = useForm({
     id: "create-beer-form",
@@ -54,6 +57,15 @@ const CreateBeerForm = ({ styleCategories, colors }: CreateBeerFormProps) => {
     shouldValidate: "onBlur",
     shouldRevalidate: "onInput",
   });
+
+  const handleBreweryChange = (brewery: BreweryResult) => {
+    if (!organicDirty.current) {
+      form.update({
+        name: fields.organic.name,
+        value: brewery.organic ? "on" : "",
+      });
+    }
+  };
 
   return (
     <QueryClientProvider>
@@ -82,6 +94,7 @@ const CreateBeerForm = ({ styleCategories, colors }: CreateBeerFormProps) => {
           <FormBrewerySelect
             label={t("createBeerPage.fields.brewery.label")}
             field={fields.breweryId}
+            onBreweryChange={handleBreweryChange}
             className="col-span-8 @3xl:col-span-7"
           />
 
@@ -129,6 +142,9 @@ const CreateBeerForm = ({ styleCategories, colors }: CreateBeerFormProps) => {
           <FormCheckbox
             label={t("createBeerPage.fields.organic.label")}
             field={fields.organic}
+            onCheckedChange={() => {
+              organicDirty.current = true;
+            }}
             className="col-span-8 @3xl:col-span-3"
           />
 

@@ -33,6 +33,7 @@ export type Brewery = {
   }[];
   contactEmail?: string;
   contactPhoneNumber?: string;
+  organic: boolean;
   beers: BreweryBeer[];
 };
 

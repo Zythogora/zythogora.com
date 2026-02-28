@@ -49,6 +49,7 @@ export type BreweriesMinAggregateOutputType = {
   websiteLink: string | null
   contactEmail: string | null
   contactPhoneNumber: string | null
+  organic: boolean | null
   createdAt: Date | null
   createdBy: string | null
   updatedAt: Date | null
@@ -68,6 +69,7 @@ export type BreweriesMaxAggregateOutputType = {
   websiteLink: string | null
   contactEmail: string | null
   contactPhoneNumber: string | null
+  organic: boolean | null
   createdAt: Date | null
   createdBy: string | null
   updatedAt: Date | null
@@ -88,6 +90,7 @@ export type BreweriesCountAggregateOutputType = {
   socialLinks:PrismaJson.SocialLink
   contactEmail: number
   contactPhoneNumber: number
+  organic: number
   createdAt: number
   createdBy: number
   updatedAt: number
@@ -117,6 +120,7 @@ export type BreweriesMinAggregateInputType = {
   websiteLink?: true
   contactEmail?: true
   contactPhoneNumber?: true
+  organic?: true
   createdAt?: true
   createdBy?: true
   updatedAt?: true
@@ -136,6 +140,7 @@ export type BreweriesMaxAggregateInputType = {
   websiteLink?: true
   contactEmail?: true
   contactPhoneNumber?: true
+  organic?: true
   createdAt?: true
   createdBy?: true
   updatedAt?: true
@@ -156,6 +161,7 @@ export type BreweriesCountAggregateInputType = {
   socialLinks?: true
   contactEmail?: true
   contactPhoneNumber?: true
+  organic?: true
   createdAt?: true
   createdBy?: true
   updatedAt?: true
@@ -263,6 +269,7 @@ export type BreweriesGroupByOutputType = {
   socialLinks:PrismaJson.SocialLink[]
   contactEmail: string | null
   contactPhoneNumber: string | null
+  organic: boolean
   createdAt: Date
   createdBy: string
   updatedAt: Date
@@ -306,6 +313,7 @@ export type BreweriesWhereInput = {
   socialLinks?:PJTG.NullableListFilter<PrismaJson.SocialLink>
   contactEmail?: Prisma.StringNullableFilter<"Breweries"> | string | null
   contactPhoneNumber?: Prisma.StringNullableFilter<"Breweries"> | string | null
+  organic?: Prisma.BoolFilter<"Breweries"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Breweries"> | Date | string
   createdBy?: Prisma.StringFilter<"Breweries"> | string
   updatedAt?: Prisma.DateTimeFilter<"Breweries"> | Date | string
@@ -329,6 +337,7 @@ export type BreweriesOrderByWithRelationInput = {
   socialLinks?: Prisma.SortOrder
   contactEmail?: Prisma.SortOrderInput | Prisma.SortOrder
   contactPhoneNumber?: Prisma.SortOrderInput | Prisma.SortOrder
+  organic?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   createdBy?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -355,6 +364,7 @@ export type BreweriesWhereUniqueInput = Prisma.AtLeast<{
   socialLinks?: Prisma.JsonNullableListFilter<"Breweries">
   contactEmail?: Prisma.StringNullableFilter<"Breweries"> | string | null
   contactPhoneNumber?: Prisma.StringNullableFilter<"Breweries"> | string | null
+  organic?: Prisma.BoolFilter<"Breweries"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Breweries"> | Date | string
   createdBy?: Prisma.StringFilter<"Breweries"> | string
   updatedAt?: Prisma.DateTimeFilter<"Breweries"> | Date | string
@@ -378,6 +388,7 @@ export type BreweriesOrderByWithAggregationInput = {
   socialLinks?: Prisma.SortOrder
   contactEmail?: Prisma.SortOrderInput | Prisma.SortOrder
   contactPhoneNumber?: Prisma.SortOrderInput | Prisma.SortOrder
+  organic?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   createdBy?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -406,6 +417,7 @@ export type BreweriesScalarWhereWithAggregatesInput = {
   socialLinks?:PJTG.NullableListFilter<PrismaJson.SocialLink>
   contactEmail?: Prisma.StringNullableWithAggregatesFilter<"Breweries"> | string | null
   contactPhoneNumber?: Prisma.StringNullableWithAggregatesFilter<"Breweries"> | string | null
+  organic?: Prisma.BoolWithAggregatesFilter<"Breweries"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Breweries"> | Date | string
   createdBy?: Prisma.StringWithAggregatesFilter<"Breweries"> | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Breweries"> | Date | string
@@ -426,6 +438,7 @@ export type BreweriesCreateInput = {
   socialLinks?:PJTG.CreateManyInput<PrismaJson.SocialLink>
   contactEmail?: string | null
   contactPhoneNumber?: string | null
+  organic?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   createdByUser: Prisma.UsersCreateNestedOneWithoutCreatedBreweriesInput
@@ -447,6 +460,7 @@ export type BreweriesUncheckedCreateInput = {
   socialLinks?:PJTG.CreateManyInput<PrismaJson.SocialLink>
   contactEmail?: string | null
   contactPhoneNumber?: string | null
+  organic?: boolean
   createdAt?: Date | string
   createdBy: string
   updatedAt?: Date | string
@@ -468,6 +482,7 @@ export type BreweriesUpdateInput = {
   socialLinks?:PJTG.UpdateManyInput<PrismaJson.SocialLink>
   contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPhoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  organic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdByUser?: Prisma.UsersUpdateOneRequiredWithoutCreatedBreweriesNestedInput
@@ -489,6 +504,7 @@ export type BreweriesUncheckedUpdateInput = {
   socialLinks?:PJTG.UpdateManyInput<PrismaJson.SocialLink>
   contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPhoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  organic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.StringFieldUpdateOperationsInput | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -510,6 +526,7 @@ export type BreweriesCreateManyInput = {
   socialLinks?:PJTG.CreateManyInput<PrismaJson.SocialLink>
   contactEmail?: string | null
   contactPhoneNumber?: string | null
+  organic?: boolean
   createdAt?: Date | string
   createdBy: string
   updatedAt?: Date | string
@@ -530,6 +547,7 @@ export type BreweriesUpdateManyMutationInput = {
   socialLinks?:PJTG.UpdateManyInput<PrismaJson.SocialLink>
   contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPhoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  organic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -548,6 +566,7 @@ export type BreweriesUncheckedUpdateManyInput = {
   socialLinks?:PJTG.UpdateManyInput<PrismaJson.SocialLink>
   contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPhoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  organic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.StringFieldUpdateOperationsInput | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -588,6 +607,7 @@ export type BreweriesCountOrderByAggregateInput = {
   socialLinks?: Prisma.SortOrder
   contactEmail?: Prisma.SortOrder
   contactPhoneNumber?: Prisma.SortOrder
+  organic?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   createdBy?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -611,6 +631,7 @@ export type BreweriesMaxOrderByAggregateInput = {
   websiteLink?: Prisma.SortOrder
   contactEmail?: Prisma.SortOrder
   contactPhoneNumber?: Prisma.SortOrder
+  organic?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   createdBy?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -630,6 +651,7 @@ export type BreweriesMinOrderByAggregateInput = {
   websiteLink?: Prisma.SortOrder
   contactEmail?: Prisma.SortOrder
   contactPhoneNumber?: Prisma.SortOrder
+  organic?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   createdBy?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -771,6 +793,7 @@ export type BreweriesCreateWithoutBeersInput = {
   socialLinks?:PJTG.CreateManyInput<PrismaJson.SocialLink>
   contactEmail?: string | null
   contactPhoneNumber?: string | null
+  organic?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   createdByUser: Prisma.UsersCreateNestedOneWithoutCreatedBreweriesInput
@@ -791,6 +814,7 @@ export type BreweriesUncheckedCreateWithoutBeersInput = {
   socialLinks?:PJTG.CreateManyInput<PrismaJson.SocialLink>
   contactEmail?: string | null
   contactPhoneNumber?: string | null
+  organic?: boolean
   createdAt?: Date | string
   createdBy: string
   updatedAt?: Date | string
@@ -827,6 +851,7 @@ export type BreweriesUpdateWithoutBeersInput = {
   socialLinks?:PJTG.UpdateManyInput<PrismaJson.SocialLink>
   contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPhoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  organic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdByUser?: Prisma.UsersUpdateOneRequiredWithoutCreatedBreweriesNestedInput
@@ -847,6 +872,7 @@ export type BreweriesUncheckedUpdateWithoutBeersInput = {
   socialLinks?:PJTG.UpdateManyInput<PrismaJson.SocialLink>
   contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPhoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  organic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.StringFieldUpdateOperationsInput | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -867,6 +893,7 @@ export type BreweriesCreateWithoutCreatedByUserInput = {
   socialLinks?:PJTG.CreateManyInput<PrismaJson.SocialLink>
   contactEmail?: string | null
   contactPhoneNumber?: string | null
+  organic?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   updatedByUser: Prisma.UsersCreateNestedOneWithoutUpdatedBreweriesInput
@@ -887,6 +914,7 @@ export type BreweriesUncheckedCreateWithoutCreatedByUserInput = {
   socialLinks?:PJTG.CreateManyInput<PrismaJson.SocialLink>
   contactEmail?: string | null
   contactPhoneNumber?: string | null
+  organic?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   updatedBy: string
@@ -917,6 +945,7 @@ export type BreweriesCreateWithoutUpdatedByUserInput = {
   socialLinks?:PJTG.CreateManyInput<PrismaJson.SocialLink>
   contactEmail?: string | null
   contactPhoneNumber?: string | null
+  organic?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   createdByUser: Prisma.UsersCreateNestedOneWithoutCreatedBreweriesInput
@@ -937,6 +966,7 @@ export type BreweriesUncheckedCreateWithoutUpdatedByUserInput = {
   socialLinks?:PJTG.CreateManyInput<PrismaJson.SocialLink>
   contactEmail?: string | null
   contactPhoneNumber?: string | null
+  organic?: boolean
   createdAt?: Date | string
   createdBy: string
   updatedAt?: Date | string
@@ -986,6 +1016,7 @@ export type BreweriesScalarWhereInput = {
   socialLinks?:PJTG.NullableListFilter<PrismaJson.SocialLink>
   contactEmail?: Prisma.StringNullableFilter<"Breweries"> | string | null
   contactPhoneNumber?: Prisma.StringNullableFilter<"Breweries"> | string | null
+  organic?: Prisma.BoolFilter<"Breweries"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Breweries"> | Date | string
   createdBy?: Prisma.StringFilter<"Breweries"> | string
   updatedAt?: Prisma.DateTimeFilter<"Breweries"> | Date | string
@@ -1022,6 +1053,7 @@ export type BreweriesCreateManyCreatedByUserInput = {
   socialLinks?:PJTG.CreateManyInput<PrismaJson.SocialLink>
   contactEmail?: string | null
   contactPhoneNumber?: string | null
+  organic?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   updatedBy: string
@@ -1041,6 +1073,7 @@ export type BreweriesCreateManyUpdatedByUserInput = {
   socialLinks?:PJTG.CreateManyInput<PrismaJson.SocialLink>
   contactEmail?: string | null
   contactPhoneNumber?: string | null
+  organic?: boolean
   createdAt?: Date | string
   createdBy: string
   updatedAt?: Date | string
@@ -1060,6 +1093,7 @@ export type BreweriesUpdateWithoutCreatedByUserInput = {
   socialLinks?:PJTG.UpdateManyInput<PrismaJson.SocialLink>
   contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPhoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  organic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedByUser?: Prisma.UsersUpdateOneRequiredWithoutUpdatedBreweriesNestedInput
@@ -1080,6 +1114,7 @@ export type BreweriesUncheckedUpdateWithoutCreatedByUserInput = {
   socialLinks?:PJTG.UpdateManyInput<PrismaJson.SocialLink>
   contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPhoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  organic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1100,6 +1135,7 @@ export type BreweriesUncheckedUpdateManyWithoutCreatedByUserInput = {
   socialLinks?:PJTG.UpdateManyInput<PrismaJson.SocialLink>
   contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPhoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  organic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedBy?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1119,6 +1155,7 @@ export type BreweriesUpdateWithoutUpdatedByUserInput = {
   socialLinks?:PJTG.UpdateManyInput<PrismaJson.SocialLink>
   contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPhoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  organic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdByUser?: Prisma.UsersUpdateOneRequiredWithoutCreatedBreweriesNestedInput
@@ -1139,6 +1176,7 @@ export type BreweriesUncheckedUpdateWithoutUpdatedByUserInput = {
   socialLinks?:PJTG.UpdateManyInput<PrismaJson.SocialLink>
   contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPhoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  organic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.StringFieldUpdateOperationsInput | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1159,6 +1197,7 @@ export type BreweriesUncheckedUpdateManyWithoutUpdatedByUserInput = {
   socialLinks?:PJTG.UpdateManyInput<PrismaJson.SocialLink>
   contactEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   contactPhoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  organic?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.StringFieldUpdateOperationsInput | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1209,6 +1248,7 @@ export type BreweriesSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   socialLinks?: boolean
   contactEmail?: boolean
   contactPhoneNumber?: boolean
+  organic?: boolean
   createdAt?: boolean
   createdBy?: boolean
   updatedAt?: boolean
@@ -1233,6 +1273,7 @@ export type BreweriesSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   socialLinks?: boolean
   contactEmail?: boolean
   contactPhoneNumber?: boolean
+  organic?: boolean
   createdAt?: boolean
   createdBy?: boolean
   updatedAt?: boolean
@@ -1255,6 +1296,7 @@ export type BreweriesSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   socialLinks?: boolean
   contactEmail?: boolean
   contactPhoneNumber?: boolean
+  organic?: boolean
   createdAt?: boolean
   createdBy?: boolean
   updatedAt?: boolean
@@ -1277,13 +1319,14 @@ export type BreweriesSelectScalar = {
   socialLinks?: boolean
   contactEmail?: boolean
   contactPhoneNumber?: boolean
+  organic?: boolean
   createdAt?: boolean
   createdBy?: boolean
   updatedAt?: boolean
   updatedBy?: boolean
 }
 
-export type BreweriesOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "slug" | "name" | "countryAlpha2Code" | "state" | "city" | "address" | "description" | "creationYear" | "websiteLink" | "socialLinks" | "contactEmail" | "contactPhoneNumber" | "createdAt" | "createdBy" | "updatedAt" | "updatedBy", ExtArgs["result"]["breweries"]>
+export type BreweriesOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "slug" | "name" | "countryAlpha2Code" | "state" | "city" | "address" | "description" | "creationYear" | "websiteLink" | "socialLinks" | "contactEmail" | "contactPhoneNumber" | "organic" | "createdAt" | "createdBy" | "updatedAt" | "updatedBy", ExtArgs["result"]["breweries"]>
 export type BreweriesInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   createdByUser?: boolean | Prisma.UsersDefaultArgs<ExtArgs>
   updatedByUser?: boolean | Prisma.UsersDefaultArgs<ExtArgs>
@@ -1323,6 +1366,7 @@ export type $BreweriesPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     socialLinks:PrismaJson.SocialLink[]
     contactEmail: string | null
     contactPhoneNumber: string | null
+    organic: boolean
     createdAt: Date
     createdBy: string
     updatedAt: Date
@@ -1766,6 +1810,7 @@ export interface BreweriesFieldRefs {
   readonly socialLinks: Prisma.FieldRef<"Breweries", 'Json[]'>
   readonly contactEmail: Prisma.FieldRef<"Breweries", 'String'>
   readonly contactPhoneNumber: Prisma.FieldRef<"Breweries", 'String'>
+  readonly organic: Prisma.FieldRef<"Breweries", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"Breweries", 'DateTime'>
   readonly createdBy: Prisma.FieldRef<"Breweries", 'String'>
   readonly updatedAt: Prisma.FieldRef<"Breweries", 'DateTime'>

@@ -29,6 +29,7 @@ export const transformRawBreweryToBrewery = async (
   socialLinks: rawBrewery.socialLinks ?? undefined,
   contactEmail: rawBrewery.contactEmail ?? undefined,
   contactPhoneNumber: rawBrewery.contactPhoneNumber ?? undefined,
+  organic: rawBrewery.organic,
   beers: rawBrewery.beers.map(transformRawBreweryBeerToBreweryBeer),
 });
 

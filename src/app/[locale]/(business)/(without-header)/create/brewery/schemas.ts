@@ -20,6 +20,9 @@ const createBreweryBaseSchema = z
       })
       .optional(),
     description: z.string().optional(),
+    organic: z
+      .preprocess((val) => val === "on" || val === true, z.boolean())
+      .default(false),
     websiteLink: zUrl.optional(),
     socialLinks: z.array(
       z.object({

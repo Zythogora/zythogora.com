@@ -14,6 +14,7 @@ interface FormCheckboxProps {
   field: FieldMetadata;
   disabled?: boolean;
   className?: string;
+  onCheckedChange?: (checked: boolean) => void;
 }
 
 const FormCheckbox = ({
@@ -21,10 +22,15 @@ const FormCheckbox = ({
   field,
   disabled,
   className,
+  onCheckedChange,
 }: FormCheckboxProps) => {
   const [checked, setChecked] = useState<boolean>(
     field.value === "on" || field.value === true,
   );
+
+  useEffect(() => {
+    setChecked(field.value === "on" || field.value === true);
+  }, [field.value]);
 
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -55,7 +61,10 @@ const FormCheckbox = ({
       <Checkbox
         checked={checked}
         disabled={disabled}
-        onCheckedChange={(isChecked) => setChecked(isChecked === true)}
+        onCheckedChange={(isChecked) => {
+          setChecked(isChecked === true);
+          onCheckedChange?.(isChecked === true);
+        }}
         {...ariaInputProps}
       />
 

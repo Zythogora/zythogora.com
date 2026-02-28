@@ -7,6 +7,7 @@ import { Fragment, useEffect, useRef, useState } from "react";
 import CountryFlag from "@/app/_components/icons/country-flag";
 import LinkIcon from "@/app/_components/icons/link";
 import { LocationIcon } from "@/app/_components/icons/location";
+import OrganicIcon from "@/app/_components/icons/organic";
 import SocialIcon from "@/app/_components/icons/social";
 import { getSocialIconType } from "@/app/_components/icons/social/utils";
 import {
@@ -15,6 +16,11 @@ import {
   CollapsibleTrigger,
 } from "@/app/_components/ui/collapsible";
 import DescriptionList from "@/app/_components/ui/description-list";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/app/_components/ui/tooltip";
 import type { Brewery } from "@/domain/breweries/types";
 import { cn } from "@/lib/tailwind";
 import { useMediaQuery } from "@/lib/tailwind/hooks";
@@ -81,9 +87,38 @@ const BreweryCard = ({ brewery }: BreweryCardProps) => {
             <div className="bg-foreground absolute bottom-1.5 left-[calc(50%-theme(spacing.8))] h-1 w-16 rounded-full opacity-50" />
           ) : null}
 
-          <h1 className="w-full text-center text-2xl md:text-4xl">
-            {brewery.name}
-          </h1>
+          {brewery.organic ? (
+            <div
+              className={cn(
+                "flex flex-row items-center",
+                "gap-x-2 md:gap-x-3",
+              )}
+            >
+              <h1 className="grow text-left text-2xl md:text-4xl">
+                {brewery.name}
+              </h1>
+
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <OrganicIcon
+                    size={28}
+                    className={cn(
+                      "size-5 md:size-7",
+                      "fill-[oklch(0.45_0.15_150)] dark:fill-[oklch(0.7_0.15_150)]",
+                    )}
+                  />
+                </TooltipTrigger>
+
+                <TooltipContent side="bottom">
+                  {t("createBreweryPage.fields.organic.label")}
+                </TooltipContent>
+              </Tooltip>
+            </div>
+          ) : (
+            <h1 className="w-full text-center text-2xl md:text-4xl">
+              {brewery.name}
+            </h1>
+          )}
 
           <div
             className={cn(

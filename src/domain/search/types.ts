@@ -22,6 +22,7 @@ export type BreweryResult = {
   name: string;
   country: Country;
   beerCount: number;
+  organic: boolean;
 };
 
 export type UserResult = {

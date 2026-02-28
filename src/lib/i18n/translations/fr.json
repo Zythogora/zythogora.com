@@ -742,6 +742,9 @@
       "description": {
         "label": "Description"
       },
+      "organic": {
+        "label": "Bio"
+      },
       "websiteLink": {
         "label": "Lien du site web"
       },

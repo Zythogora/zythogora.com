@@ -45,6 +45,7 @@ model Breweries {
   socialLinks        Json[]  @map("social_links")
   contactEmail       String? @map("contact_email")
   contactPhoneNumber String? @map("contact_phone_number")
+  organic            Boolean @default(false)
 
   createdAt     DateTime @default(now()) @map("created_at")
   createdBy     String   @map("created_by")

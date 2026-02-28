@@ -165,6 +165,7 @@ export const searchBreweries = async ({
       name: brewery.name,
       country: await getCountry(brewery.countryAlpha2Code),
       beerCount: _count.beers,
+      organic: brewery.organic,
     })),
   );
 
