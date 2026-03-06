@@ -4,6 +4,9 @@ node_modules
 .vercel
 prisma/seeding/existing/data
 
+# Generated
+public/data
+
 # Files
 .env
 *.tsbuildinfo

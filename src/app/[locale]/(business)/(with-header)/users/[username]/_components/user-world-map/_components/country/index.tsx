@@ -10,6 +10,7 @@ import type { MouseEvent, TouchEvent } from "react";
 
 interface UserWorldMapCountryProps {
   feature: MapFeature;
+  isoA2: string;
   pathGenerator: GeoPath;
   stats?: UserCountryStats;
   onInteraction: (event: MouseEvent | TouchEvent, id: string) => void;
@@ -18,6 +19,7 @@ interface UserWorldMapCountryProps {
 
 const UserWorldMapCountry = ({
   feature,
+  isoA2,
   pathGenerator,
   stats,
   onInteraction,
@@ -27,9 +29,9 @@ const UserWorldMapCountry = ({
 
   let countryName: string;
   try {
-    countryName = getCountry(feature.properties.a3).name;
+    countryName = getCountry(isoA2).name;
   } catch {
-    countryName = feature.properties.a3;
+    countryName = isoA2;
   }
 
   return (
@@ -41,9 +43,9 @@ const UserWorldMapCountry = ({
       aria-label={countryName}
       onClick={(e) => {
         e.stopPropagation();
-        onInteraction(e, feature.properties.a3);
+        onInteraction(e, isoA2);
       }}
-      onMouseMove={(e) => onInteraction(e, feature.properties.a3)}
+      onMouseMove={(e) => onInteraction(e, isoA2)}
       onMouseLeave={onLeave}
       data-visited={!!stats}
       className={cn(

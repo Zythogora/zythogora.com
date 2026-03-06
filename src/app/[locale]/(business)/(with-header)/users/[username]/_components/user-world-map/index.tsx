@@ -7,6 +7,7 @@ import { zoom, type D3ZoomEvent } from "d3-zoom";
 import countries from "i18n-iso-countries";
 import { useTranslations } from "next-intl";
 import {
+  useCallback,
   useEffect,
   useMemo,
   useRef,
@@ -17,6 +18,7 @@ import {
 
 import UserWorldMapCountry from "@/app/[locale]/(business)/(with-header)/users/[username]/_components/user-world-map/_components/country";
 import { useWorldMapData } from "@/app/[locale]/(business)/(with-header)/users/[username]/_components/user-world-map/hooks";
+import type { MapFeature } from "@/app/[locale]/(business)/(with-header)/users/[username]/_components/user-world-map/types";
 import {
   HoverCard,
   HoverCardContent,
@@ -46,19 +48,22 @@ const UserWorldMap = ({ username, stats }: UserWorldMapProps) => {
   const { getCountry } = useCountryCode();
   const { worldData, isLoading } = useWorldMapData();
 
+  // Get the effective ISO alpha-2 code for a map feature.
+  // Features with their own ISO_A2 (e.g., "GP" for Guadeloupe) use it directly.
+  // Sub-units with ISO_A2="-99" (e.g., England, Azores) fall back to the parent
+  // country's alpha-2 via the ADM0_A3 property.
+  const getFeatureIsoA2 = useCallback((feature: MapFeature): string => {
+    if (feature.properties.ISO_A2 !== "-99") {
+      return feature.properties.ISO_A2;
+    }
+    return countries.alpha3ToAlpha2(feature.properties.ADM0_A3) ?? "-99";
+  }, []);
+
   const visitedMap = useMemo<Record<string, UserCountryStats>>(
     () =>
       stats.reduce(
         (acc, stat) => {
-          const numeric = countries.alpha2ToAlpha3(stat.countryCode);
-          if (numeric) {
-            // Kosovo is represented as XKX in the ISO 3166-1 alpha-3 standard but
-            // the library uses XKK which is the Unicode version of it.
-            // https://github.com/michaelwittig/node-i18n-iso-countries/pull/365
-            // We normalize to XKX to match the world map data format.
-            const normalizedCode = numeric === "XKK" ? "XKX" : numeric;
-            acc[normalizedCode] = stat;
-          }
+          acc[stat.countryCode] = stat;
           return acc;
         },
         {} as Record<string, UserCountryStats>,
@@ -212,16 +217,20 @@ const UserWorldMap = ({ username, stats }: UserWorldMapProps) => {
         onClick={() => setTooltipOpen(false)}
       >
         <g ref={gRef}>
-          {worldData.map((feature) => (
-            <UserWorldMapCountry
-              key={feature.properties.a3}
-              feature={feature}
-              pathGenerator={pathGenerator}
-              stats={visitedMap[feature.properties.a3]}
-              onInteraction={handleInteraction}
-              onLeave={handleLeave}
-            />
-          ))}
+          {worldData.map((feature) => {
+            const isoA2 = getFeatureIsoA2(feature);
+            return (
+              <UserWorldMapCountry
+                key={`${feature.properties.ADM0_A3}-${feature.properties.ISO_A2}`}
+                feature={feature}
+                isoA2={isoA2}
+                pathGenerator={pathGenerator}
+                stats={visitedMap[isoA2]}
+                onInteraction={handleInteraction}
+                onLeave={handleLeave}
+              />
+            );
+          })}
         </g>
       </svg>
     </div>

@@ -9,7 +9,7 @@ import type { Topology, GeometryCollection } from "topojson-specification";
 
 interface WorldAtlasTopology extends Topology {
   objects: {
-    countries: GeometryCollection;
+    map_units: GeometryCollection;
   };
 }
 
@@ -45,9 +45,7 @@ export const useWorldMapData = () => {
       return;
     }
 
-    fetchPromise = fetch(
-      "https://cdn.jsdelivr.net/npm/visionscarto-world-atlas@1/world/110m.json",
-    )
+    fetchPromise = fetch("/data/world-50m-map-units.json")
       .then((res) => {
         if (!res.ok) {
           throw new Error("Failed to load map data");
@@ -56,7 +54,7 @@ export const useWorldMapData = () => {
       })
       .then(
         (data: WorldAtlasTopology) =>
-          topojson.feature(data, data.objects.countries)
+          topojson.feature(data, data.objects.map_units)
             .features as MapFeature[],
       );
 
