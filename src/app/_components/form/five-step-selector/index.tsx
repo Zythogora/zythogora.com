@@ -71,7 +71,7 @@ const FormFiveStepSelector = ({
           key={key}
           {...ariaInputProps}
           {...restProps}
-          onValueChange={(value) => setSelectedValue(possibleValues[value]!)}
+          onValueChange={(value) => setSelectedValue(value !== undefined ? possibleValues[value]! : "")}
         />
 
         <FormError id={field.errorId} errors={field.errors} />

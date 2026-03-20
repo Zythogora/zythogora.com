@@ -12,7 +12,7 @@ interface FiveStepSelectorProps extends Omit<
   ComponentProps<typeof RadioGroup.Root>,
   "value" | "defaultValue" | "onValueChange"
 > {
-  onValueChange?: (value: number) => void;
+  onValueChange?: (value: number | undefined) => void;
   className?: string;
 }
 
@@ -51,6 +51,12 @@ const FiveStepSelector = ({
         <Fragment key={possibleValue}>
           <RadioGroup.Item
             value={possibleValue.toString()}
+            onClick={() => {
+              if (selectedValue === possibleValue) {
+                setSelectedValue(undefined);
+                onValueChange?.(undefined);
+              }
+            }}
             data-progress-checked={
               selectedValue ? possibleValue <= selectedValue : false
             }
