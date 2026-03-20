@@ -31,11 +31,18 @@ const FiveStepSelector = ({
     onValueChange?.(parsedValue);
   };
 
+  const handleClick = (value: number) => {
+    if (selectedValue === value) {
+      setSelectedValue(undefined);
+      onValueChange?.(undefined);
+    }
+  };
+
   return (
     <RadioGroup.Root
       data-slot="selector"
       {...restProps}
-      value={`${selectedValue}`}
+      value={selectedValue !== undefined ? `${selectedValue}` : ""}
       onValueChange={handleValueChange}
       loop={false}
       className={cn(
@@ -51,12 +58,7 @@ const FiveStepSelector = ({
         <Fragment key={possibleValue}>
           <RadioGroup.Item
             value={possibleValue.toString()}
-            onClick={() => {
-              if (selectedValue === possibleValue) {
-                setSelectedValue(undefined);
-                onValueChange?.(undefined);
-              }
-            }}
+            onClick={() => handleClick(possibleValue)}
             data-progress-checked={
               selectedValue ? possibleValue <= selectedValue : false
             }
