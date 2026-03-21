@@ -48,6 +48,10 @@ const FormFiveStepSelector = ({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { defaultValue, value, type, ...ariaInputProps } = restInputProps;
 
+  const handleValueChange = (value: number | undefined) => {
+    setSelectedValue(value !== undefined ? possibleValues[value]! : "");
+  };
+
   return (
     <div
       className={cn(
@@ -71,7 +75,7 @@ const FormFiveStepSelector = ({
           key={key}
           {...ariaInputProps}
           {...restProps}
-          onValueChange={(value) => setSelectedValue(value !== undefined ? possibleValues[value]! : "")}
+          onValueChange={handleValueChange}
         />
 
         <FormError id={field.errorId} errors={field.errors} />
