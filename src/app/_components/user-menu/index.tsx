@@ -1,7 +1,13 @@
 "use client";
 
-import { LogInIcon, LogOutIcon, UserRoundPlusIcon } from "lucide-react";
+import {
+  LogInIcon,
+  LogOutIcon,
+  SettingsIcon,
+  UserRoundPlusIcon,
+} from "lucide-react";
 import { useTranslations } from "next-intl";
+import { useState } from "react";
 import { toast } from "sonner";
 
 import DiscordIcon from "@/app/_components/icons/social/types/discord";
@@ -53,6 +59,12 @@ interface UserMenuProps {
   className?: string;
 }
 
+interface UserMenuStats {
+  userId: string;
+  reviewCount: number;
+  uniqueBeerCount: number;
+}
+
 const UserMenu = ({ className }: UserMenuProps) => {
   const t = useTranslations();
 
@@ -62,12 +74,38 @@ const UserMenu = ({ className }: UserMenuProps) => {
   const { push } = useRouterWithSearchParams();
   const pathname = usePathname();
 
-  const handleViewProfile = () => {
-    if (session) {
-      router.push(
-        generatePath(Routes.PROFILE, { username: session.user.username }),
-      );
+  const [fetchedStats, setFetchedStats] = useState<UserMenuStats | null>(null);
+  const stats =
+    session && fetchedStats?.userId === session.user.id ? fetchedStats : null;
+
+  const handleOpenChange = async (open: boolean) => {
+    if (!open || !session || stats) {
+      return;
     }
+
+    const response = await fetch("/api/me/stats").catch(() => null);
+    if (response?.ok) {
+      setFetchedStats({ ...(await response.json()), userId: session.user.id });
+    }
+  };
+
+  const handleViewProfile = () => {
+    if (!session) {
+      return;
+    }
+
+    if (session.user.username === null) {
+      router.push(Routes.WELCOME);
+      return;
+    }
+
+    router.push(
+      generatePath(Routes.PROFILE, { username: session.user.username }),
+    );
+  };
+
+  const handleSettings = () => {
+    router.push(Routes.SETTINGS);
   };
 
   const handleSignIn = () => {
@@ -85,7 +123,7 @@ const UserMenu = ({ className }: UserMenuProps) => {
   };
 
   return (
-    <DropdownMenu>
+    <DropdownMenu onOpenChange={handleOpenChange}>
       <DropdownMenuTrigger asChild>
         <UserMenuTrigger className={className} />
       </DropdownMenuTrigger>
@@ -104,28 +142,30 @@ const UserMenu = ({ className }: UserMenuProps) => {
               className="flex flex-col gap-y-2 p-4"
             >
               <p className="truncate text-lg font-bold">
-                {session.user.username}
+                {session.user.username ?? t("userMenu.user.finishSetup")}
               </p>
 
-              <div className="flex w-full flex-row justify-between gap-x-4">
-                <p className="text-sm leading-none">
-                  {t.rich("userMenu.user.reviews", {
-                    count: session.user.reviewCount,
-                    muted: (chunks) => (
-                      <span className="text-foreground/62.5">{chunks}</span>
-                    ),
-                  })}
-                </p>
+              {stats ? (
+                <div className="flex w-full flex-row justify-between gap-x-4">
+                  <p className="text-sm leading-none">
+                    {t.rich("userMenu.user.reviews", {
+                      count: stats.reviewCount,
+                      muted: (chunks) => (
+                        <span className="text-foreground/62.5">{chunks}</span>
+                      ),
+                    })}
+                  </p>
 
-                <p className="text-right text-sm leading-none">
-                  {t.rich("userMenu.user.beers", {
-                    count: session.user.uniqueBeerCount,
-                    muted: (chunks) => (
-                      <span className="text-foreground/62.5">{chunks}</span>
-                    ),
-                  })}
-                </p>
-              </div>
+                  <p className="text-right text-sm leading-none">
+                    {t.rich("userMenu.user.beers", {
+                      count: stats.uniqueBeerCount,
+                      muted: (chunks) => (
+                        <span className="text-foreground/62.5">{chunks}</span>
+                      ),
+                    })}
+                  </p>
+                </div>
+              ) : null}
             </DropdownMenuItem>
 
             <DropdownMenuSeparator />
@@ -159,6 +199,17 @@ const UserMenu = ({ className }: UserMenuProps) => {
 
         {session ? (
           <DropdownMenuGroup>
+            {session.user.username !== null ? (
+              <DropdownMenuItem
+                onClick={handleSettings}
+                className="flex flex-row gap-x-2"
+              >
+                <SettingsIcon className="text-foreground size-4" />
+
+                {t("userMenu.settings")}
+              </DropdownMenuItem>
+            ) : null}
+
             <DropdownMenuItem
               onClick={handleSignOut}
               className="flex flex-row gap-x-2"

@@ -13,6 +13,7 @@ import ForbiddenIcon from "@/app/_components/icons/forbidden";
 import OpenSourceIcon from "@/app/_components/icons/open-source";
 import PintIcon from "@/app/_components/icons/pint";
 import ReviewIcon from "@/app/_components/icons/review";
+import OnboardingGuard from "@/app/_components/onboarding-guard";
 import QueryClientProvider from "@/app/_components/providers/query-client-provider";
 import Button from "@/app/_components/ui/button";
 import { Toaster } from "@/app/_components/ui/sonner";
@@ -47,6 +48,8 @@ const HomePage = () => {
   return (
     <div className="relative isolate flex flex-col overflow-x-clip scroll-smooth bg-stone-50">
       <Toaster forceTheme="light" position="bottom-center" richColors />
+
+      <OnboardingGuard />
 
       <Suspense>
         <HasVerifiedEmail />

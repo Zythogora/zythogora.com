@@ -14,6 +14,14 @@ export const zRequiredString = z
   })
   .trim();
 
+export const zUsername = z
+  .string({ error: "form.errors.FIELD_REQUIRED" })
+  .min(3, { message: "auth.signUp.errors.USERNAME_TOO_SHORT" })
+  .max(25, { message: "auth.signUp.errors.USERNAME_TOO_LONG" })
+  .regex(/^[a-zA-Z0-9_]+$/, {
+    message: "auth.signUp.errors.USERNAME_INVALID_CHARACTERS",
+  });
+
 export const zEmail = z
   .email({
     error: (issue) =>

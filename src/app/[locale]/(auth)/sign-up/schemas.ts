@@ -1,17 +1,11 @@
 import { z } from "zod";
 
 import { zEmail } from "@/lib/validator";
-import { zPassword } from "@/lib/validator";
+import { zPassword, zUsername } from "@/lib/validator";
 
 export const signUpSchema = z
   .object({
-    username: z
-      .string({ error: "form.errors.FIELD_REQUIRED" })
-      .min(3, { message: "auth.signUp.errors.USERNAME_TOO_SHORT" })
-      .max(25, { message: "auth.signUp.errors.USERNAME_TOO_LONG" })
-      .regex(/^[a-zA-Z0-9_]+$/, {
-        message: "auth.signUp.errors.USERNAME_INVALID_CHARACTERS",
-      }),
+    username: zUsername,
     email: zEmail,
     password: zPassword({
       tooShort: "form.errors.PASSWORD_TOO_SHORT",

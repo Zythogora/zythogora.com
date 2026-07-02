@@ -45,6 +45,24 @@ import type {
 import prisma, { getPrismaTransactionClient } from "@/lib/prisma";
 import type { PrismaTransactionClient } from "@/lib/prisma/types";
 
+export const getUserMenuStats = cache(async (userId: string) => {
+  const [reviewCount, [stats]] = await Promise.all([
+    prisma.reviews.count({
+      where: { userId },
+    }),
+    prisma.$queryRaw`
+      SELECT COUNT(DISTINCT beer_id) AS unique_beers
+      FROM public.reviews
+      WHERE user_id = ${userId};
+    ` as Promise<{ unique_beers: bigint }[]>,
+  ]);
+
+  return {
+    reviewCount,
+    uniqueBeerCount: Number(stats?.unique_beers ?? 0),
+  };
+});
+
 export const getUserByUsername = cache(
   async (username: string): Promise<User> => {
     const [[user], [stats]] = await Promise.all([

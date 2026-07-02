@@ -1,5 +1,6 @@
 import { ThemeProvider } from "next-themes";
 
+import OnboardingGuard from "@/app/_components/onboarding-guard";
 import { availableThemes } from "@/app/_components/providers/theme-provider";
 import { Toaster } from "@/app/_components/ui/sonner";
 
@@ -15,6 +16,8 @@ const BusinessLayout = ({ children }: PropsWithChildren) => {
       disableTransitionOnChange
     >
       <Toaster position="bottom-center" richColors />
+
+      <OnboardingGuard />
 
       <div className="relative">{children}</div>
     </ThemeProvider>
