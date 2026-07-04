@@ -78,7 +78,7 @@ const ServingFromSelector = ({
       data-slot="selector"
       loop={false}
       className={cn(
-        "grid grid-cols-5 rounded *:-mx-px",
+        "shadow-hard-drop grid grid-cols-5 rounded *:-mx-px",
         "bg-background dark:bg-stone-700",
         "has-focus-visible:outline-3!",
         "has-focus-visible:outline-primary-700! dark:has-focus-visible:outline-primary-100!",
@@ -94,12 +94,9 @@ const ServingFromSelector = ({
             "group/serving-from-item",
             "border-foreground relative flex items-center justify-center border-2 px-4",
             "py-4 @3xl:py-6",
-            "before:bg-foreground before:absolute before:-inset-x-0.5 before:top-0 before:-bottom-1 before:z-[-2]",
             "first-of-type:rounded-l last-of-type:rounded-r",
-            "first-of-type:before:rounded-l last-of-type:before:rounded-r",
-            "data-[state=checked]:bg-primary data-[state=checked]:-bottom-0.5 data-[state=checked]:before:hidden",
+            "data-[state=checked]:bg-primary data-[state=checked]:-bottom-0.5",
             "focus-visible:bottom-0! focus-visible:z-50",
-            "focus-visible:before:hidden",
           )}
         >
           <ServingFromIcon

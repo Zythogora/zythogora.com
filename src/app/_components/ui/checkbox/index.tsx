@@ -15,15 +15,16 @@ const Checkbox = ({
     <CheckboxPrimitive.Root
       data-slot="checkbox"
       className={cn(
-        "group/checkbox border-foreground bg-background relative size-8 cursor-pointer rounded border-2",
-        "dark:bg-stone-700",
+        "group/checkbox",
+        "border-foreground relative size-8 cursor-pointer rounded border-2",
+        "bg-background dark:bg-stone-700",
         "data-[state=checked]:bg-primary data-[state=checked]:text-foreground",
         "dark:data-[state=checked]:bg-primary dark:data-[state=checked]:text-stone-700",
         "disabled:cursor-not-allowed disabled:opacity-50",
         "dark:disabled:text-foreground!",
         "aria-invalid:ring-destructive/20 aria-invalid:border-destructive",
         "dark:aria-invalid:ring-destructive/40",
-        "before:bg-background before:border-foreground before:absolute before:-inset-0.5 before:z-[-1] before:rounded before:border-2 before:drop-shadow",
+        "shadow-[0_2px_0_0_var(--color-foreground)]",
         className,
       )}
       {...restProps}

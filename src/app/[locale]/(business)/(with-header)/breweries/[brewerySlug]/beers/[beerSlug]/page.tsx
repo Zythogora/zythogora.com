@@ -157,7 +157,7 @@ const BeerPage = async ({
       <BeerJsonLd beer={beer} />
 
       <div className="flex w-full flex-col gap-y-12">
-        <div className={cn("isolate flex flex-col", "gap-y-6 md:gap-y-2")}>
+        <div className={cn("flex flex-col", "gap-y-6 md:gap-y-2")}>
           <BeerCard
             name={beer.name}
             brewery={beer.brewery}
@@ -180,10 +180,7 @@ const BeerPage = async ({
           >
             <Button
               asChild
-              className={cn(
-                "grow",
-                "md:rounded-t-md md:rounded-bl-[14px] md:before:rounded-t md:before:rounded-bl-xl",
-              )}
+              className={cn("grow", "md:rounded-t-md md:rounded-bl-[14px]")}
             >
               <Link
                 href={generatePath(Routes.REVIEW_FORM, {
@@ -207,7 +204,7 @@ const BeerPage = async ({
               )}
               triggerClassName={cn(
                 "shrink-0",
-                "md:rounded-t-md md:rounded-br-[14px] md:before:rounded-t md:before:rounded-br-xl",
+                "md:rounded-t-md md:rounded-br-[14px]",
               )}
             />
           </div>

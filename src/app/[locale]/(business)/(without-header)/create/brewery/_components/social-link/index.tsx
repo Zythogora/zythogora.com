@@ -39,11 +39,13 @@ const SocialLink = ({
     <div className="w-full">
       <div
         className={cn(
-          "grid w-full grid-cols-[auto_max-content] rounded-[7px] *:m-[-1px]",
+          "grid w-full grid-cols-[auto_max-content] rounded-[7px] *:-m-px",
+          "shadow-hard-drop [--hard-shadow-spread:1px]",
           "focus-within:outline-3 focus-within:outline-offset-1",
           "focus-within:outline-primary-700 dark:focus-within:outline-primary-100",
-          "before:bg-foreground relative before:absolute before:inset-[-1px] before:bottom-[-3px] before:z-[-1] before:rounded",
-          "**:data-[slot=input-container]:rounded-none **:data-[slot=input-container]:focus-within:z-50",
+          "has-aria-invalid:[--hard-shadow-color:var(--color-destructive)]",
+          "**:data-[slot=input-container]:rounded-none **:data-[slot=input-container]:shadow-none",
+          "**:data-[slot=input-container]:focus-within:z-50",
           "**:data-[slot=input]:rounded-none",
         )}
       >
@@ -62,7 +64,6 @@ const SocialLink = ({
           )}
           className={cn(
             "col-start-1 row-start-1 rounded-tl",
-            "before:bottom-0",
             "*:data-[slot=input]:rounded-tl!",
           )}
         />
@@ -82,7 +83,6 @@ const SocialLink = ({
           )}
           className={cn(
             "col-start-1 row-start-2 rounded-bl",
-            "before:rounded-none before:rounded-bl",
             "*:data-[slot=input]:rounded-bl!",
           )}
         />

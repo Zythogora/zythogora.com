@@ -597,7 +597,7 @@ const UserReviewPage = async ({
             />
           ) : null}
 
-          <div className="isolate">
+          <div>
             <ShareButton
               label={t("reviewPage.actions.share")}
               link={getAbsoluteUrl(

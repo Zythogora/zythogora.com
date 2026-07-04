@@ -88,8 +88,10 @@ const FileUpload = ({
             className={cn(
               "min-h-64",
               "data-[dragging=true]:bg-primary-100",
-              "has-focus-within:outline-primary has-focus-within:outline-3 has-focus-within:outline-offset-2",
-              "has-focus-within:hover:bottom-0 has-focus-within:hover:before:-bottom-1",
+              "has-focus-within:outline-3 has-focus-within:outline-offset-2",
+              "has-focus-within:outline-primary-700 dark:has-focus-within:outline-primary-100",
+              "has-focus-within:hover:bottom-0 has-focus-within:hover:[--hard-shadow-depth:2px]",
+              "has-[input:focus]:outline-primary!",
             )}
           >
             <input
@@ -123,7 +125,7 @@ const FileUpload = ({
                     aria-label={t("form.fields.fileUpload.ctaRemoveFile")}
                     variant="outline"
                     size="icon"
-                    className="border-foreground absolute top-4 right-4 size-8 rounded-full border-2 before:rounded-full"
+                    className="border-foreground absolute top-4 right-4 size-8 rounded-full border-2 [--hard-shadow-color:transparent]"
                   >
                     <XIcon className="size-4 stroke-3" aria-hidden="true" />
                   </Button>

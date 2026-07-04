@@ -71,7 +71,7 @@ const SignInForm = () => {
       {...getFormProps(form)}
       className={cn(
         "flex w-full flex-col gap-y-8",
-        "**:data-[slot=input-container]:has-aria-invalid:before:bg-red-800",
+        "**:data-[slot=input-container]:has-aria-invalid:[--hard-shadow-color:var(--color-red-800)]",
         "**:data-[slot=input]:focus-visible:outline-foreground **:data-[slot=input]:aria-invalid:border-red-800",
         "**:data-[slot=show-password-button]:focus-visible:outline-foreground **:data-[slot=show-password-button]:group-has-aria-invalid/input:fill-red-800",
         "**:data-[slot=form-error]:text-red-900",

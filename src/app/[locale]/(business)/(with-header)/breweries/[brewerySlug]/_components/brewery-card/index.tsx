@@ -19,7 +19,6 @@ import type { Brewery } from "@/domain/breweries/types";
 import { cn } from "@/lib/tailwind";
 import { useMediaQuery } from "@/lib/tailwind/hooks";
 
-
 interface BreweryCardProps {
   brewery: Brewery;
 }
@@ -61,10 +60,9 @@ const BreweryCard = ({ brewery }: BreweryCardProps) => {
       <CollapsibleTrigger
         className={cn(
           "@container/brewery-card",
-          "relative isolate rounded-none",
-          "before:bg-foreground before:absolute before:inset-0 before:-bottom-0.5 before:z-[-1]",
-          "md:before:rounded",
-          "focus-visible:-outline-offset-2 md:focus-visible:rounded md:focus-visible:outline-offset-0",
+          "shadow-hard-drop relative",
+          "rounded-none md:rounded",
+          "focus-visible:-outline-offset-2 md:focus-visible:outline-offset-0",
           {
             "cursor-pointer": isExpandable,
           },

@@ -55,10 +55,10 @@ const StyleSelect = ({
           role="combobox"
           value={selectedStyle?.id}
           className={cn(
-            "group/style-select-trigger font-medium",
-            "justify-between pr-4",
-            "hover:bottom-0 hover:before:-bottom-1",
-            "aria-invalid:before:bg-destructive",
+            "group/style-select-trigger",
+            "justify-between pr-4 font-medium",
+            "hover:bottom-0 hover:[--hard-shadow-depth:2px]",
+            "aria-invalid:[--hard-shadow-color:var(--color-destructive)]",
             className,
           )}
         >

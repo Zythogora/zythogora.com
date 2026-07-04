@@ -46,7 +46,7 @@ const HomePage = () => {
   );
 
   return (
-    <div className="relative isolate flex flex-col overflow-x-clip scroll-smooth bg-stone-50">
+    <div className="relative flex flex-col overflow-x-clip scroll-smooth bg-stone-50">
       <Toaster forceTheme="light" position="bottom-center" richColors />
 
       <OnboardingGuard />
@@ -136,7 +136,7 @@ const HomePage = () => {
               "top-[50vh] group-data-[open=true]:top-6",
               "-translate-y-1/2 group-data-[open=true]:translate-y-0",
               "dark:**:data-[slot=input]:border-stone-300",
-              "dark:**:data-[slot=input-container]:before:bg-stone-300",
+              "dark:**:data-[slot=input-container]:[--hard-shadow-color:var(--color-stone-300)]",
             )}
           />
         </QueryClientProvider>

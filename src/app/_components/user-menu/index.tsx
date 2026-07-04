@@ -41,9 +41,9 @@ export const UserMenuTrigger = ({
       variant="outline"
       size="icon"
       className={cn(
-        "size-10 shrink-0 rounded-full before:rounded-full",
+        "size-10 shrink-0 rounded-full",
         // Disable default button hover effects
-        "transition-none hover:bottom-0 hover:before:-bottom-1",
+        "transition-none hover:bottom-0 hover:[--hard-shadow-depth:2px]",
         // Add the outline on hover
         "hover:outline-primary hover:outline-3 hover:outline-offset-2",
         className,

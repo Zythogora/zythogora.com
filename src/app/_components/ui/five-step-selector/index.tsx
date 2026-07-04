@@ -39,10 +39,10 @@ const FiveStepSelector = ({
       onValueChange={handleValueChange}
       loop={false}
       className={cn(
-        "border-foreground relative flex h-12 w-full grow touch-none items-center justify-between gap-x-2 rounded-full border-2 p-3 pl-5 select-none",
+        "border-foreground flex h-12 w-full grow touch-none items-center justify-between gap-x-2 rounded-full border-2 p-3 pl-5 select-none",
+        "shadow-hard-drop [--hard-shadow-depth:4px] [--hard-shadow-spread:-2px]",
         "bg-background dark:bg-stone-700",
-        "data-[disabled]:opacity-50",
-        "before:bg-foreground before:absolute before:inset-0 before:-bottom-1 before:z-[-1] before:rounded-full",
+        "data-disabled:opacity-50",
         "has-focus-visible:outline-primary! has-focus-visible:outline-3!",
         className,
       )}

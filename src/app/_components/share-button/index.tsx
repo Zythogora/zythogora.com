@@ -47,7 +47,7 @@ const ShareButton = ({
           aria-label={label}
           title={label}
           className={cn(
-            "data-[state=open]:hover:bottom-0 data-[state=open]:hover:before:-bottom-1",
+            "data-[state=open]:hover:bottom-0 data-[state=open]:hover:[--hard-shadow-depth:2px]",
             triggerClassName,
           )}
           {...restProps}
