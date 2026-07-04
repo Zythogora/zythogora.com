@@ -2,7 +2,7 @@
 
 import { getFormProps, getInputProps, useForm } from "@conform-to/react";
 import { getZodConstraint, parseWithZod } from "@conform-to/zod/v4";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { useActionState, useEffect, useTransition } from "react";
 import { toast } from "sonner";
 
@@ -12,7 +12,7 @@ import Button from "@/app/_components/ui/button";
 import FormError from "@/app/_components/ui/form-error";
 import Input from "@/app/_components/ui/input";
 import Label from "@/app/_components/ui/label";
-import { redirect } from "@/lib/i18n";
+import { useRouter } from "@/lib/i18n";
 import { Routes } from "@/lib/routes";
 import { cn } from "@/lib/tailwind";
 
@@ -23,7 +23,7 @@ interface ResetPasswordFormProps {
 const ResetPasswordForm = ({ token }: ResetPasswordFormProps) => {
   const t = useTranslations();
 
-  const locale = useLocale();
+  const router = useRouter();
 
   const [lastResult, action] = useActionState(resetPasswordAction, undefined);
   const [isPending, startTransition] = useTransition();
@@ -32,9 +32,9 @@ const ResetPasswordForm = ({ token }: ResetPasswordFormProps) => {
     if (lastResult?.status === "success") {
       toast.success(t("auth.resetPassword.success"));
 
-      redirect({ href: `${Routes.SIGN_IN}?passwordResetSuccess=true`, locale });
+      router.push(`${Routes.SIGN_IN}?passwordResetSuccess=true`);
     }
-  }, [lastResult, locale, t]);
+  }, [lastResult, router, t]);
 
   const [form, fields] = useForm({
     lastResult,
@@ -57,7 +57,11 @@ const ResetPasswordForm = ({ token }: ResetPasswordFormProps) => {
   });
 
   return (
-    <form {...getFormProps(form)} className="flex w-full flex-col gap-y-8">
+    <form
+      {...getFormProps(form)}
+      action={action}
+      className="flex w-full flex-col gap-y-8"
+    >
       <input type="hidden" name="token" value={token} />
 
       <div className="flex flex-col gap-y-8">

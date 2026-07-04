@@ -45,6 +45,7 @@ const SignUpForm = () => {
   return (
     <form
       {...getFormProps(form)}
+      action={action}
       className={cn(
         "flex w-full flex-col gap-y-8",
         "**:data-[slot=input-container]:has-aria-invalid:[--hard-shadow-color:var(--color-red-800)]",

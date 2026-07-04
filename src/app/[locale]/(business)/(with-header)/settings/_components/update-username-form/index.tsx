@@ -86,6 +86,7 @@ const UpdateUsernameForm = ({ currentUsername }: UpdateUsernameFormProps) => {
   return (
     <form
       {...getFormProps(form)}
+      action={action}
       className={cn("flex w-full flex-col gap-y-6", "md:max-w-md")}
     >
       <FormInput

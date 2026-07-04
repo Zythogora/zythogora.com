@@ -60,6 +60,7 @@ const CreateBeerForm = ({ styleCategories, colors }: CreateBeerFormProps) => {
       <FormProvider context={form.context}>
         <form
           {...getFormProps(form)}
+          action={action}
           className={cn(
             "grid gap-x-6 gap-y-8",
             "w-full grid-cols-8 @3xl:w-3xl @3xl:grid-cols-7",
