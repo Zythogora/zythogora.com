@@ -271,7 +271,7 @@ export type SessionsCreateInput = {
   expiresAt: Date | string
   token: string
   createdAt: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
   ipAddress?: string | null
   userAgent?: string | null
   user: Prisma.BetterAuthUsersCreateNestedOneWithoutSessionsInput
@@ -282,7 +282,7 @@ export type SessionsUncheckedCreateInput = {
   expiresAt: Date | string
   token: string
   createdAt: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
   ipAddress?: string | null
   userAgent?: string | null
   userId: string
@@ -315,7 +315,7 @@ export type SessionsCreateManyInput = {
   expiresAt: Date | string
   token: string
   createdAt: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
   ipAddress?: string | null
   userAgent?: string | null
   userId: string
@@ -432,7 +432,7 @@ export type SessionsCreateWithoutUserInput = {
   expiresAt: Date | string
   token: string
   createdAt: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
   ipAddress?: string | null
   userAgent?: string | null
 }
@@ -442,7 +442,7 @@ export type SessionsUncheckedCreateWithoutUserInput = {
   expiresAt: Date | string
   token: string
   createdAt: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
   ipAddress?: string | null
   userAgent?: string | null
 }
@@ -492,7 +492,7 @@ export type SessionsCreateManyUserInput = {
   expiresAt: Date | string
   token: string
   createdAt: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
   ipAddress?: string | null
   userAgent?: string | null
 }
