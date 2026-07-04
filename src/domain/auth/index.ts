@@ -45,7 +45,10 @@ export const signUp = async ({ username, email, password }: SignUpParams) => {
     });
   } catch (error) {
     if (error instanceof APIError) {
-      if (error.body?.code === "USER_ALREADY_EXISTS") {
+      if (
+        error.body?.code === "USER_ALREADY_EXISTS" ||
+        error.body?.code === "USER_ALREADY_EXISTS_USE_ANOTHER_EMAIL"
+      ) {
         throw new EmailAlreadyExistsError();
       } else if (error.body?.code === "PASSWORD_TOO_SHORT") {
         throw new PasswordTooShortError();
