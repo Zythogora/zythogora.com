@@ -7,9 +7,9 @@ const Textarea = ({ className, ...restProps }: ComponentProps<"textarea">) => {
     <div
       data-slot="textarea-container"
       className={cn(
-        "relative h-fit",
-        "before:bg-foreground before:absolute before:inset-0 before:-bottom-0.5 before:z-[-1] before:rounded",
-        "has-aria-invalid:before:bg-destructive",
+        "h-fit",
+        "shadow-hard-drop rounded",
+        "has-aria-invalid:[--hard-shadow-color:var(--color-destructive)]",
         className,
       )}
     >

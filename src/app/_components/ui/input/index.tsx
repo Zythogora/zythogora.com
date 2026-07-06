@@ -19,8 +19,8 @@ const Input = ({ className, type, ...restProps }: ComponentProps<"input">) => {
       data-slot="input-container"
       className={cn(
         "group/input",
-        "before:bg-foreground relative before:absolute before:inset-0 before:-bottom-0.5 before:z-[-1] before:rounded",
-        "has-aria-invalid:before:bg-destructive",
+        "shadow-hard-drop relative rounded",
+        "has-aria-invalid:[--hard-shadow-color:var(--color-destructive)]",
         className,
       )}
     >

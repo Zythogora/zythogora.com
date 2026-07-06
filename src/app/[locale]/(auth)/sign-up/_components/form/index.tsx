@@ -45,9 +45,10 @@ const SignUpForm = () => {
   return (
     <form
       {...getFormProps(form)}
+      action={action}
       className={cn(
         "flex w-full flex-col gap-y-8",
-        "**:data-[slot=input-container]:has-aria-invalid:before:bg-red-800",
+        "**:data-[slot=input-container]:has-aria-invalid:[--hard-shadow-color:var(--color-red-800)]",
         "**:data-[slot=input]:focus-visible:outline-foreground **:data-[slot=input]:aria-invalid:border-red-800",
         "**:data-[slot=show-password-button]:focus-visible:outline-foreground **:data-[slot=show-password-button]:group-has-aria-invalid/input:fill-red-800",
         "**:data-[slot=form-error]:text-red-900",
@@ -79,11 +80,11 @@ const SignUpForm = () => {
             <div
               className={cn(
                 "flex flex-col rounded-[7px] *:-m-px",
+                "shadow-hard-drop [--hard-shadow-spread:1px]",
                 "focus-within:outline-3 focus-within:outline-offset-1 focus-within:outline-stone-500",
-                "before:bg-foreground relative before:absolute before:inset-[-1px] before:bottom-[-3px] before:z-[-1] before:rounded",
-                "**:data-[slot=input-container]:rounded-none **:data-[slot=input-container]:focus-within:z-50!",
-                "**:data-[slot=input-container]:before:bottom-0",
-                "not-focus-within:**:data-[slot=input-container]:last-of-type:before:-bottom-0.5!",
+                "has-aria-invalid:[--hard-shadow-color:var(--color-red-800)]",
+                "**:data-[slot=input-container]:rounded-none **:data-[slot=input-container]:shadow-none",
+                "**:data-[slot=input-container]:focus-within:z-50!",
                 "**:data-[slot=input-container]:has-aria-invalid:z-40",
                 "**:data-[slot=input]:rounded-none",
               )}

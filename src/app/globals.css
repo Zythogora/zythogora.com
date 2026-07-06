@@ -116,6 +116,18 @@
   }
 }
 
+@utility shadow-hard {
+  box-shadow:
+    0 0 0 2px var(--hard-shadow-color, var(--color-foreground)),
+    0 var(--hard-shadow-depth, 2px) 0 2px
+      var(--hard-shadow-color, var(--color-foreground));
+}
+
+@utility shadow-hard-drop {
+  box-shadow: 0 var(--hard-shadow-depth, 2px) 0 var(--hard-shadow-spread, 0)
+    var(--hard-shadow-color, var(--color-foreground));
+}
+
 @layer base {
   *:focus-visible {
     @apply outline-primary outline-3;

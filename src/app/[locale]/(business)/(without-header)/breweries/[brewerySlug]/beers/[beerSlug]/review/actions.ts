@@ -12,7 +12,7 @@ import {
   ImageOptimizationError,
   UnknownPurchaseLocationError,
 } from "@/domain/beers/errors";
-import { getCurrentUser } from "@/lib/auth";
+import { getCurrentUserOrRedirect } from "@/lib/auth";
 import { redirect } from "@/lib/i18n";
 import { Routes } from "@/lib/routes";
 import { generatePath } from "@/lib/routes/utils";
@@ -24,16 +24,7 @@ export const reviewAction = async (
 ) => {
   const locale = await getLocale();
 
-  const user = await getCurrentUser();
-  if (!user) {
-    redirect({
-      href: {
-        pathname: Routes.SIGN_IN,
-        query: { redirect: pathname },
-      },
-      locale,
-    });
-  }
+  await getCurrentUserOrRedirect({ redirectTo: pathname });
 
   const submission = parseWithZod(formData, {
     schema: reviewSchema,

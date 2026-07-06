@@ -59,7 +59,7 @@ const FormPriceInput = ({
         {label}
       </Label>
 
-      <div className="relative isolate">
+      <div className="relative">
         <Input
           {...getInputProps(priceField, {
             type: "text",
@@ -77,7 +77,7 @@ const FormPriceInput = ({
           className={cn(
             "[--inset-x:--spacing(3)] [--inset-y:--spacing(4)]",
             "border-foreground absolute inset-y-(--inset-y) right-(--inset-x) m-0 w-fit gap-x-0 border-2 py-0 pr-1 pl-2 text-right",
-            "before:hidden",
+            "[--hard-shadow-color:transparent]",
             "hover:bg-foreground/10 hover:bottom-(--inset-y)",
             "[&>span]:text-xs",
             "[&>svg]:size-4",

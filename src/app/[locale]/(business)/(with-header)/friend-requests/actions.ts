@@ -17,7 +17,7 @@ export const rejectPreviouslyAcceptedFriendRequestAction = async (
 ) => {
   const user = await getCurrentUser();
 
-  if (!user) {
+  if (!user || user.username === null) {
     return { success: false };
   }
 
@@ -43,7 +43,7 @@ export const acceptPreviouslyRejectedFriendRequestAction = async (
 ) => {
   const user = await getCurrentUser();
 
-  if (!user) {
+  if (!user || user.username === null) {
     return { success: false };
   }
 

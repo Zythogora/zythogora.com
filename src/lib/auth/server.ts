@@ -7,7 +7,6 @@ import { customSession } from "better-auth/plugins";
 import { getTranslations } from "next-intl/server";
 
 import { hash, verify } from "@/lib/auth/crypto";
-import { UserRecordNotFoundError } from "@/lib/auth/errors";
 import { config } from "@/lib/config";
 import { publicConfig } from "@/lib/config/client-config";
 import { sendEmail } from "@/lib/email";
@@ -26,33 +25,17 @@ export const auth = betterAuth({
 
   plugins: [
     customSession(async ({ user: betterAuthUser, session }) => {
-      const [user, [stats]] = await Promise.all([
-        prisma.users.findUnique({
-          where: { id: betterAuthUser.id },
-          include: { _count: { select: { reviews: true } } },
-        }),
-
-        prisma.$queryRaw`
-          SELECT COUNT(DISTINCT beer_id)
-          FROM public.reviews
-          WHERE user_id = ${betterAuthUser.id};
-        ` as Promise<{ count: number }[]>,
-      ]);
-
-      if (!user || !stats) {
-        console.error(`User with id ${betterAuthUser.id} not found`);
-        throw new UserRecordNotFoundError();
-      }
+      const user = await prisma.users.findUnique({
+        where: { id: betterAuthUser.id },
+      });
 
       return {
         user: {
           id: betterAuthUser.id,
           name: betterAuthUser.name,
-          username: user.username,
+          username: user?.username ?? null,
           email: betterAuthUser.email,
           image: betterAuthUser.image,
-          reviewCount: user._count.reviews,
-          uniqueBeerCount: Number(stats.count),
         },
         session,
       };
@@ -67,6 +50,11 @@ export const auth = betterAuth({
 
   account: {
     modelName: "Accounts",
+
+    accountLinking: {
+      enabled: true,
+      trustedProviders: ["google"],
+    },
   },
 
   verification: {
@@ -85,6 +73,15 @@ export const auth = betterAuth({
   advanced: {
     cookiePrefix: config.auth.cookiePrefix,
   },
+
+  socialProviders: config.auth.google
+    ? {
+        google: {
+          clientId: config.auth.google.clientId,
+          clientSecret: config.auth.google.clientSecret,
+        },
+      }
+    : {},
 
   // Email/Password provider
   emailAndPassword: {

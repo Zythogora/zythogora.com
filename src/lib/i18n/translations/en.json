@@ -13,6 +13,14 @@
       "button": "Activate your account",
       "buttonFallback": "If the button does not work, you can also copy and paste the following URL into your browser: <link>{activationUrl}</link>."
     },
+    "welcomeOnboarding": {
+      "subject": "Welcome to Zythogora",
+      "preview": "Your Zythogora account is ready",
+      "title": "Welcome to <highlight>Zythogora</highlight>",
+      "text": "We are happy to count you among us {username}!",
+      "text2": "Your account is all set up. Time to grab a pint and share your first review!",
+      "button": "Start exploring"
+    },
     "resetPassword": {
       "subject": "Reset your Zythogora password",
       "preview": "Reset your password",
@@ -178,7 +186,8 @@
   "userMenu": {
     "user": {
       "reviews": "{count, plural, =0 {0 <muted>reviews</muted>} =1 {1 <muted>review</muted>} other {# <muted>reviews</muted>}}",
-      "beers": "{count, plural, =0 {0 <muted>beers</muted>} =1 {1 <muted>beer</muted>} other {# <muted>beers</muted>}}"
+      "beers": "{count, plural, =0 {0 <muted>beers</muted>} =1 {1 <muted>beer</muted>} other {# <muted>beers</muted>}}",
+      "finishSetup": "Finish setting up your account"
     },
     "locale": {
       "menuLabel": "Language",
@@ -192,6 +201,7 @@
       "system": "System theme"
     },
     "discord": "Got feedback?<br></br>Found a bug?<br></br>Join the discord!",
+    "settings": "Settings",
     "auth": {
       "signIn": "Sign in",
       "signUp": "Sign up",
@@ -232,6 +242,17 @@
         "USERNAME_INVALID_CHARACTERS": "The username can only contain numbers, letters and underscores (_)",
         "USERNAME_ALREADY_EXISTS": "This username already exists",
         "EMAIL_ALREADY_EXISTS": "This email already exists"
+      }
+    },
+    "welcome": {
+      "metadata": {
+        "title": "Choose your username | Zythogora"
+      },
+      "title": "One last step!<br></br>Pick your username",
+      "description": "This is the name other beer lovers will see on your reviews.",
+      "actions": {
+        "continue": "Continue",
+        "continuePending": "Saving..."
       }
     },
     "emailVerification": {
@@ -493,6 +514,22 @@
       "removeFriend": {
         "label": "Remove friend"
       }
+    }
+  },
+  "settingsPage": {
+    "metadata": {
+      "title": "Settings | Zythogora"
+    },
+    "title": "Settings",
+    "username": {
+      "title": "Username",
+      "description": "Renaming your account changes your profile and review links. Links to your old username will stop working.",
+      "success": "Your username has been updated!",
+      "unchanged": "No changes to save"
+    },
+    "actions": {
+      "save": "Save changes",
+      "savePending": "Saving..."
     }
   },
   "reviewPage": {

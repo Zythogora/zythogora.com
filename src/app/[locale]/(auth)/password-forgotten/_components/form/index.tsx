@@ -54,7 +54,11 @@ const PasswordForgottenForm = ({ email }: PasswordForgottenFormProps) => {
   });
 
   return (
-    <form {...getFormProps(form)} className="flex w-full flex-col gap-y-8">
+    <form
+      {...getFormProps(form)}
+      action={action}
+      className="flex w-full flex-col gap-y-8"
+    >
       <Input
         label={t("form.fields.email.label")}
         placeholder={t("form.fields.email.placeholder")}

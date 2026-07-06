@@ -55,6 +55,24 @@ export class UnknownSignUpError extends SignUpError {
   }
 }
 
+export enum UsernameErrorType {
+  UNKNOWN_USERNAME_ERROR = "UNKNOWN_USERNAME_ERROR",
+}
+
+export class UsernameError extends AuthError {
+  constructor(message: string) {
+    super(message);
+    this.name = "UsernameError";
+  }
+}
+
+export class UnknownUsernameError extends UsernameError {
+  constructor() {
+    super(UsernameErrorType.UNKNOWN_USERNAME_ERROR);
+    this.name = "UnknownUsernameError";
+  }
+}
+
 export enum ResetPasswordErrorType {
   INVALID_TOKEN = "INVALID_TOKEN",
   UNKNOWN_RESET_PASSWORD_ERROR = "UNKNOWN_RESET_PASSWORD_ERROR",

@@ -10,6 +10,7 @@ import {
 } from "next-intl/server";
 
 import JsonLd from "@/app/_components/json-ld";
+import QueryClientProvider from "@/app/_components/providers/query-client-provider";
 import { publicConfig } from "@/lib/config/client-config";
 import { routing } from "@/lib/i18n";
 import type { Locale } from "@/lib/i18n";
@@ -97,9 +98,7 @@ export default async function RootLayout({
               url: publicConfig.baseUrl,
               potentialAction: {
                 "@type": "SearchAction",
-                target: getAbsoluteUrl(
-                  "/search?search={search_term_string}",
-                ),
+                target: getAbsoluteUrl("/search?search={search_term_string}"),
                 // @ts-expect-error - query-input is not typed in schema-dts
                 "query-input": "required name=search_term_string",
               },
@@ -108,7 +107,7 @@ export default async function RootLayout({
         />
 
         <NextIntlClientProvider messages={messages}>
-          {children}
+          <QueryClientProvider>{children}</QueryClientProvider>
         </NextIntlClientProvider>
 
         <Analytics />

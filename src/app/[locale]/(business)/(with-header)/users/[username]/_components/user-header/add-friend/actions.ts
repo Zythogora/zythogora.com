@@ -6,7 +6,7 @@ import { getCurrentUser } from "@/lib/auth";
 export const addFriend = async (userId: string) => {
   const currentUser = await getCurrentUser();
 
-  if (!currentUser) {
+  if (!currentUser || currentUser.username === null) {
     return { success: false };
   }
 

@@ -1,7 +1,14 @@
 "use client";
 
-import { LogInIcon, LogOutIcon, UserRoundPlusIcon } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import {
+  LogInIcon,
+  LogOutIcon,
+  SettingsIcon,
+  UserRoundPlusIcon,
+} from "lucide-react";
 import { useTranslations } from "next-intl";
+import { useState } from "react";
 import { toast } from "sonner";
 
 import DiscordIcon from "@/app/_components/icons/social/types/discord";
@@ -35,9 +42,9 @@ export const UserMenuTrigger = ({
       variant="outline"
       size="icon"
       className={cn(
-        "size-10 shrink-0 rounded-full before:rounded-full",
+        "size-10 shrink-0 rounded-full",
         // Disable default button hover effects
-        "transition-none hover:bottom-0 hover:before:-bottom-1",
+        "transition-none hover:bottom-0 hover:[--hard-shadow-depth:2px]",
         // Add the outline on hover
         "hover:outline-primary hover:outline-3 hover:outline-offset-2",
         className,
@@ -62,12 +69,41 @@ const UserMenu = ({ className }: UserMenuProps) => {
   const { push } = useRouterWithSearchParams();
   const pathname = usePathname();
 
+  const [isOpen, setIsOpen] = useState(false);
+
+  const { data: stats, isPending: areStatsPending } = useQuery({
+    queryKey: ["me", "stats", session?.user.id],
+    queryFn: async (): Promise<{
+      reviewCount: number;
+      uniqueBeerCount: number;
+    }> => {
+      const response = await fetch("/api/me/stats");
+      if (!response.ok) {
+        throw new Error("Failed to fetch user stats");
+      }
+      return response.json();
+    },
+    enabled: isOpen && Boolean(session),
+    staleTime: 60 * 1000,
+  });
+
   const handleViewProfile = () => {
-    if (session) {
-      router.push(
-        generatePath(Routes.PROFILE, { username: session.user.username }),
-      );
+    if (!session) {
+      return;
     }
+
+    if (session.user.username === null) {
+      router.push(Routes.WELCOME);
+      return;
+    }
+
+    router.push(
+      generatePath(Routes.PROFILE, { username: session.user.username }),
+    );
+  };
+
+  const handleSettings = () => {
+    router.push(Routes.SETTINGS);
   };
 
   const handleSignIn = () => {
@@ -85,7 +121,7 @@ const UserMenu = ({ className }: UserMenuProps) => {
   };
 
   return (
-    <DropdownMenu>
+    <DropdownMenu onOpenChange={setIsOpen}>
       <DropdownMenuTrigger asChild>
         <UserMenuTrigger className={className} />
       </DropdownMenuTrigger>
@@ -104,28 +140,36 @@ const UserMenu = ({ className }: UserMenuProps) => {
               className="flex flex-col gap-y-2 p-4"
             >
               <p className="truncate text-lg font-bold">
-                {session.user.username}
+                {session.user.username ?? t("userMenu.user.finishSetup")}
               </p>
 
-              <div className="flex w-full flex-row justify-between gap-x-4">
-                <p className="text-sm leading-none">
-                  {t.rich("userMenu.user.reviews", {
-                    count: session.user.reviewCount,
-                    muted: (chunks) => (
-                      <span className="text-foreground/62.5">{chunks}</span>
-                    ),
-                  })}
-                </p>
+              {stats ? (
+                <div className="flex w-full flex-row justify-between gap-x-4">
+                  <p className="text-sm leading-none">
+                    {t.rich("userMenu.user.reviews", {
+                      count: stats.reviewCount,
+                      muted: (chunks) => (
+                        <span className="text-foreground/62.5">{chunks}</span>
+                      ),
+                    })}
+                  </p>
 
-                <p className="text-right text-sm leading-none">
-                  {t.rich("userMenu.user.beers", {
-                    count: session.user.uniqueBeerCount,
-                    muted: (chunks) => (
-                      <span className="text-foreground/62.5">{chunks}</span>
-                    ),
-                  })}
-                </p>
-              </div>
+                  <p className="text-right text-sm leading-none">
+                    {t.rich("userMenu.user.beers", {
+                      count: stats.uniqueBeerCount,
+                      muted: (chunks) => (
+                        <span className="text-foreground/62.5">{chunks}</span>
+                      ),
+                    })}
+                  </p>
+                </div>
+              ) : areStatsPending ? (
+                <div className="flex w-full animate-pulse flex-row justify-between gap-x-4">
+                  <div className="bg-foreground/25 h-7 w-16 rounded-full" />
+
+                  <div className="bg-foreground/25 h-7 w-12 rounded-full" />
+                </div>
+              ) : null}
             </DropdownMenuItem>
 
             <DropdownMenuSeparator />
@@ -159,6 +203,17 @@ const UserMenu = ({ className }: UserMenuProps) => {
 
         {session ? (
           <DropdownMenuGroup>
+            {session.user.username !== null ? (
+              <DropdownMenuItem
+                onClick={handleSettings}
+                className="flex flex-row gap-x-2"
+              >
+                <SettingsIcon className="text-foreground size-4" />
+
+                {t("userMenu.settings")}
+              </DropdownMenuItem>
+            ) : null}
+
             <DropdownMenuItem
               onClick={handleSignOut}
               className="flex flex-row gap-x-2"

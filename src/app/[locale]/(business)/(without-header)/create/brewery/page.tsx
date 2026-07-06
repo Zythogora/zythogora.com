@@ -1,9 +1,7 @@
-import { headers } from "next/headers";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import CreateBreweryForm from "@/app/[locale]/(business)/(without-header)/create/brewery/_components/form";
-import { auth } from "@/lib/auth/server";
-import { redirect } from "@/lib/i18n";
+import { getCurrentUserOrRedirect } from "@/lib/auth";
 import { Routes } from "@/lib/routes";
 
 const CreateBreweryPage = async ({
@@ -13,19 +11,7 @@ const CreateBreweryPage = async ({
   setRequestLocale(locale);
   const t = await getTranslations({ locale });
 
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
-
-  if (!session) {
-    redirect({
-      href: {
-        pathname: Routes.SIGN_IN,
-        query: { redirect: Routes.CREATE_BREWERY },
-      },
-      locale,
-    });
-  }
+  await getCurrentUserOrRedirect({ redirectTo: Routes.CREATE_BREWERY });
 
   return (
     <div className="@container flex size-full min-h-screen items-center justify-center p-8">

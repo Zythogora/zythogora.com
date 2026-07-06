@@ -13,7 +13,7 @@ import ForbiddenIcon from "@/app/_components/icons/forbidden";
 import OpenSourceIcon from "@/app/_components/icons/open-source";
 import PintIcon from "@/app/_components/icons/pint";
 import ReviewIcon from "@/app/_components/icons/review";
-import QueryClientProvider from "@/app/_components/providers/query-client-provider";
+import OnboardingGuard from "@/app/_components/onboarding-guard";
 import Button from "@/app/_components/ui/button";
 import { Toaster } from "@/app/_components/ui/sonner";
 import UserMenu, { UserMenuTrigger } from "@/app/_components/user-menu";
@@ -45,8 +45,10 @@ const HomePage = () => {
   );
 
   return (
-    <div className="relative isolate flex flex-col overflow-x-clip scroll-smooth bg-stone-50">
+    <div className="relative flex flex-col overflow-x-clip scroll-smooth bg-stone-50">
       <Toaster forceTheme="light" position="bottom-center" richColors />
+
+      <OnboardingGuard />
 
       <Suspense>
         <HasVerifiedEmail />
@@ -121,22 +123,20 @@ const HomePage = () => {
           </svg>
         </div>
 
-        <QueryClientProvider>
-          <HeaderSearchBar
-            onFocus={onFocus}
-            onLeave={onLeave}
-            className={cn(
-              "font-paragraph z-50 text-base font-normal",
-              "absolute left-[50vw] -translate-x-1/2",
-              "w-[calc(100%-(--spacing(16)))] md:w-lg",
-              "transition-all duration-500",
-              "top-[50vh] group-data-[open=true]:top-6",
-              "-translate-y-1/2 group-data-[open=true]:translate-y-0",
-              "dark:**:data-[slot=input]:border-stone-300",
-              "dark:**:data-[slot=input-container]:before:bg-stone-300",
-            )}
-          />
-        </QueryClientProvider>
+        <HeaderSearchBar
+          onFocus={onFocus}
+          onLeave={onLeave}
+          className={cn(
+            "font-paragraph z-50 text-base font-normal",
+            "absolute left-[50vw] -translate-x-1/2",
+            "w-[calc(100%-(--spacing(16)))] md:w-lg",
+            "transition-all duration-500",
+            "top-[50vh] group-data-[open=true]:top-6",
+            "-translate-y-1/2 group-data-[open=true]:translate-y-0",
+            "dark:**:data-[slot=input]:border-stone-300",
+            "dark:**:data-[slot=input-container]:[--hard-shadow-color:var(--color-stone-300)]",
+          )}
+        />
 
         <div
           className={cn(

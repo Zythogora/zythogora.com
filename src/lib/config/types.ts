@@ -34,24 +34,40 @@ const parseArray = z.string().transform((str, ctx): string[] => {
   }
 });
 
-export const serverSideSchema = z.object({
-  NODE_ENV: z.nativeEnum(NodeEnv),
-  STATIC_GENERATION: z.nativeEnum(StaticGenerationMode),
-  DATABASE_URL: z.string().url(),
-  DIRECT_URL: z.string().url(),
-  SUPABASE_STORAGE_URL: z.string().url(),
-  S3_REGION: z.string(),
-  S3_ACCESS_KEY: z.string(),
-  S3_SECRET_KEY: z.string(),
-  GCP_PROJECT_ID: z.string(),
-  GCP_SERVICE_ACCOUNT_EMAIL: z.string().email(),
-  GCP_SERVICE_ACCOUNT_PRIVATE_KEY: z.string(),
-  RESEND_API_KEY: z.string(),
-  EMAIL_FROM: z.string(),
-  COOKIE_PREFIX: z.string(),
-  HASH_PEPPER_SECRET: z.string(),
-  AVAILABLE_PROVIDERS: parseArray,
-});
+export const serverSideSchema = z
+  .object({
+    NODE_ENV: z.nativeEnum(NodeEnv),
+    STATIC_GENERATION: z.nativeEnum(StaticGenerationMode),
+    DATABASE_URL: z.string().url(),
+    DIRECT_URL: z.string().url(),
+    SUPABASE_STORAGE_URL: z.string().url(),
+    S3_REGION: z.string(),
+    S3_ACCESS_KEY: z.string(),
+    S3_SECRET_KEY: z.string(),
+    GCP_PROJECT_ID: z.string(),
+    GCP_SERVICE_ACCOUNT_EMAIL: z.string().email(),
+    GCP_SERVICE_ACCOUNT_PRIVATE_KEY: z.string(),
+    RESEND_API_KEY: z.string(),
+    EMAIL_FROM: z.string(),
+    COOKIE_PREFIX: z.string(),
+    HASH_PEPPER_SECRET: z.string(),
+    AVAILABLE_PROVIDERS: parseArray,
+    GOOGLE_CLIENT_ID: z.string().optional(),
+    GOOGLE_CLIENT_SECRET: z.string().optional(),
+  })
+  .superRefine((env, ctx) => {
+    if (
+      env.AVAILABLE_PROVIDERS.includes("google") &&
+      (!env.GOOGLE_CLIENT_ID || !env.GOOGLE_CLIENT_SECRET)
+    ) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["GOOGLE_CLIENT_ID"],
+        message:
+          'GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET are required when AVAILABLE_PROVIDERS contains "google"',
+      });
+    }
+  });
 
 export const clientSideSchema = z.object({
   NEXT_PUBLIC_BASE_URL: z.string().url(),

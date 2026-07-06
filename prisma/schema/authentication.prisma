@@ -5,7 +5,7 @@ model BetterAuthUsers {
   emailVerified Boolean
   image         String?
   createdAt     DateTime
-  updatedAt     DateTime
+  updatedAt     DateTime   @updatedAt
   sessions      Sessions[]
   accounts      Accounts[]
 
@@ -21,7 +21,7 @@ model Sessions {
   expiresAt DateTime
   token     String
   createdAt DateTime
-  updatedAt DateTime
+  updatedAt DateTime        @updatedAt
   ipAddress String?
   userAgent String?
   userId    String
@@ -46,7 +46,7 @@ model Accounts {
   scope                 String?
   password              String?
   createdAt             DateTime
-  updatedAt             DateTime
+  updatedAt             DateTime        @updatedAt
 
   @@map("accounts")
   @@schema("authentication")
@@ -58,7 +58,7 @@ model Verifications {
   value      String
   expiresAt  DateTime
   createdAt  DateTime?
-  updatedAt  DateTime?
+  updatedAt  DateTime? @updatedAt
 
   @@map("verifications")
   @@schema("authentication")

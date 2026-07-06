@@ -267,7 +267,7 @@ export type BetterAuthUsersCreateInput = {
   emailVerified: boolean
   image?: string | null
   createdAt: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
   sessions?: Prisma.SessionsCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountsCreateNestedManyWithoutUserInput
   user?: Prisma.UsersCreateNestedOneWithoutBetterAuthUserInput
@@ -280,7 +280,7 @@ export type BetterAuthUsersUncheckedCreateInput = {
   emailVerified: boolean
   image?: string | null
   createdAt: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
   sessions?: Prisma.SessionsUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountsUncheckedCreateNestedManyWithoutUserInput
   user?: Prisma.UsersUncheckedCreateNestedOneWithoutBetterAuthUserInput
@@ -319,7 +319,7 @@ export type BetterAuthUsersCreateManyInput = {
   emailVerified: boolean
   image?: string | null
   createdAt: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
 }
 
 export type BetterAuthUsersUpdateManyMutationInput = {
@@ -442,7 +442,7 @@ export type BetterAuthUsersCreateWithoutSessionsInput = {
   emailVerified: boolean
   image?: string | null
   createdAt: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
   accounts?: Prisma.AccountsCreateNestedManyWithoutUserInput
   user?: Prisma.UsersCreateNestedOneWithoutBetterAuthUserInput
 }
@@ -454,7 +454,7 @@ export type BetterAuthUsersUncheckedCreateWithoutSessionsInput = {
   emailVerified: boolean
   image?: string | null
   createdAt: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
   accounts?: Prisma.AccountsUncheckedCreateNestedManyWithoutUserInput
   user?: Prisma.UsersUncheckedCreateNestedOneWithoutBetterAuthUserInput
 }
@@ -506,7 +506,7 @@ export type BetterAuthUsersCreateWithoutAccountsInput = {
   emailVerified: boolean
   image?: string | null
   createdAt: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
   sessions?: Prisma.SessionsCreateNestedManyWithoutUserInput
   user?: Prisma.UsersCreateNestedOneWithoutBetterAuthUserInput
 }
@@ -518,7 +518,7 @@ export type BetterAuthUsersUncheckedCreateWithoutAccountsInput = {
   emailVerified: boolean
   image?: string | null
   createdAt: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
   sessions?: Prisma.SessionsUncheckedCreateNestedManyWithoutUserInput
   user?: Prisma.UsersUncheckedCreateNestedOneWithoutBetterAuthUserInput
 }
@@ -570,7 +570,7 @@ export type BetterAuthUsersCreateWithoutUserInput = {
   emailVerified: boolean
   image?: string | null
   createdAt: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
   sessions?: Prisma.SessionsCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountsCreateNestedManyWithoutUserInput
 }
@@ -582,7 +582,7 @@ export type BetterAuthUsersUncheckedCreateWithoutUserInput = {
   emailVerified: boolean
   image?: string | null
   createdAt: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
   sessions?: Prisma.SessionsUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountsUncheckedCreateNestedManyWithoutUserInput
 }

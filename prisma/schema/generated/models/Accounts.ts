@@ -338,7 +338,7 @@ export type AccountsCreateInput = {
   scope?: string | null
   password?: string | null
   createdAt: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
   user: Prisma.BetterAuthUsersCreateNestedOneWithoutAccountsInput
 }
 
@@ -355,7 +355,7 @@ export type AccountsUncheckedCreateInput = {
   scope?: string | null
   password?: string | null
   createdAt: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
 }
 
 export type AccountsUpdateInput = {
@@ -403,7 +403,7 @@ export type AccountsCreateManyInput = {
   scope?: string | null
   password?: string | null
   createdAt: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
 }
 
 export type AccountsUpdateManyMutationInput = {
@@ -553,7 +553,7 @@ export type AccountsCreateWithoutUserInput = {
   scope?: string | null
   password?: string | null
   createdAt: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
 }
 
 export type AccountsUncheckedCreateWithoutUserInput = {
@@ -568,7 +568,7 @@ export type AccountsUncheckedCreateWithoutUserInput = {
   scope?: string | null
   password?: string | null
   createdAt: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
 }
 
 export type AccountsCreateOrConnectWithoutUserInput = {
@@ -628,7 +628,7 @@ export type AccountsCreateManyUserInput = {
   scope?: string | null
   password?: string | null
   createdAt: Date | string
-  updatedAt: Date | string
+  updatedAt?: Date | string
 }
 
 export type AccountsUpdateWithoutUserInput = {

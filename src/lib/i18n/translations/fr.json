@@ -13,6 +13,14 @@
       "button": "Activez votre compte",
       "buttonFallback": "Si le bouton ne fonctionne pas, vous pouvez également copier et coller l'URL suivante dans votre navigateur : <link>{activationUrl}</link>."
     },
+    "welcomeOnboarding": {
+      "subject": "Bienvenue sur Zythogora",
+      "preview": "Votre compte Zythogora est prêt",
+      "title": "Bienvenue sur <highlight>Zythogora</highlight>",
+      "text": "Nous sommes heureux de vous compter parmi nous {username} !",
+      "text2": "Votre compte est prêt. Il est temps de prendre une pinte et de partager votre première critique !",
+      "button": "Commencer l'exploration"
+    },
     "resetPassword": {
       "subject": "Réinitialisez votre mot de passe Zythogora",
       "preview": "Réinitialisez votre mot de passe",
@@ -178,7 +186,8 @@
   "userMenu": {
     "user": {
       "reviews": "{count, plural, =0 {0 <muted>critique</muted>} =1 {1 <muted>critique</muted>} other {# <muted>critiques</muted>}}",
-      "beers": "{count, plural, =0 {0 <muted>bière</muted>} =1 {1 <muted>bière</muted>} other {# <muted>bières</muted>}}"
+      "beers": "{count, plural, =0 {0 <muted>bière</muted>} =1 {1 <muted>bière</muted>} other {# <muted>bières</muted>}}",
+      "finishSetup": "Finalisez votre compte"
     },
     "locale": {
       "menuLabel": "Langue",
@@ -192,6 +201,7 @@
       "system": "Thème système"
     },
     "discord": "Des suggestions ?<br></br>Un bug trouvé ?<br></br>Rejoignez le discord !",
+    "settings": "Paramètres",
     "auth": {
       "signIn": "Connexion",
       "signUp": "Créer un compte",
@@ -232,6 +242,17 @@
         "USERNAME_INVALID_CHARACTERS": "Le nom d'utilisateur ne peut contenir que des chiffres, des lettres et des tirets du bas (_)",
         "USERNAME_ALREADY_EXISTS": "Ce nom d'utilisateur existe déjà",
         "EMAIL_ALREADY_EXISTS": "Cet email existe déjà"
+      }
+    },
+    "welcome": {
+      "metadata": {
+        "title": "Choisissez votre nom d'utilisateur | Zythogora"
+      },
+      "title": "Une dernière étape !<br></br>Choisissez votre nom d'utilisateur",
+      "description": "C'est le nom que les autres amateurs de bière verront sur vos critiques.",
+      "actions": {
+        "continue": "Continuer",
+        "continuePending": "Enregistrement..."
       }
     },
     "emailVerification": {
@@ -490,6 +511,22 @@
       "removeFriend": {
         "label": "Supprimer de mes amis"
       }
+    }
+  },
+  "settingsPage": {
+    "metadata": {
+      "title": "Paramètres | Zythogora"
+    },
+    "title": "Paramètres",
+    "username": {
+      "title": "Nom d'utilisateur",
+      "description": "Renommer votre compte modifie les liens vers votre profil et vos critiques. Les liens vers votre ancien nom d'utilisateur ne fonctionneront plus.",
+      "success": "Votre nom d'utilisateur a été mis à jour !",
+      "unchanged": "Aucune modification à enregistrer"
+    },
+    "actions": {
+      "save": "Enregistrer les modifications",
+      "savePending": "Enregistrement..."
     }
   },
   "reviewPage": {

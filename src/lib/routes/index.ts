@@ -4,8 +4,11 @@ export const Routes = {
   SIGN_UP_VERIFICATION: "/sign-up/email-verification",
   PASSWORD_FORGOTTEN: "/password-forgotten",
   RESET_PASSWORD: "/reset-password",
+  WELCOME: "/welcome",
 
   HOME: "/",
+
+  SETTINGS: "/settings",
 
   SEARCH: "/search",
 

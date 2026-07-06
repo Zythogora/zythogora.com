@@ -8,7 +8,6 @@ import { toast } from "sonner";
 import { addFriend } from "@/app/[locale]/(business)/(with-header)/users/[username]/_components/user-header/add-friend/actions";
 import Button from "@/app/_components/ui/button";
 import { useRouter } from "@/lib/i18n";
-import { cn } from "@/lib/tailwind";
 
 interface AddFriendButtonProps {
   friendId: string;
@@ -38,7 +37,7 @@ const AddFriendButton = ({ friendId, className }: AddFriendButtonProps) => {
   };
 
   return (
-    <div className={cn("isolate", className)}>
+    <div className={className}>
       <Button
         onClick={handleFriendRequest}
         disabled={isPending}

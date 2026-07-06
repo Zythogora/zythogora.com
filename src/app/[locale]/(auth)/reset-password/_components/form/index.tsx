@@ -2,7 +2,7 @@
 
 import { getFormProps, getInputProps, useForm } from "@conform-to/react";
 import { getZodConstraint, parseWithZod } from "@conform-to/zod/v4";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { useActionState, useEffect, useTransition } from "react";
 import { toast } from "sonner";
 
@@ -12,7 +12,7 @@ import Button from "@/app/_components/ui/button";
 import FormError from "@/app/_components/ui/form-error";
 import Input from "@/app/_components/ui/input";
 import Label from "@/app/_components/ui/label";
-import { redirect } from "@/lib/i18n";
+import { useRouter } from "@/lib/i18n";
 import { Routes } from "@/lib/routes";
 import { cn } from "@/lib/tailwind";
 
@@ -23,7 +23,7 @@ interface ResetPasswordFormProps {
 const ResetPasswordForm = ({ token }: ResetPasswordFormProps) => {
   const t = useTranslations();
 
-  const locale = useLocale();
+  const router = useRouter();
 
   const [lastResult, action] = useActionState(resetPasswordAction, undefined);
   const [isPending, startTransition] = useTransition();
@@ -32,9 +32,9 @@ const ResetPasswordForm = ({ token }: ResetPasswordFormProps) => {
     if (lastResult?.status === "success") {
       toast.success(t("auth.resetPassword.success"));
 
-      redirect({ href: `${Routes.SIGN_IN}?passwordResetSuccess=true`, locale });
+      router.push(`${Routes.SIGN_IN}?passwordResetSuccess=true`);
     }
-  }, [lastResult, locale, t]);
+  }, [lastResult, router, t]);
 
   const [form, fields] = useForm({
     lastResult,
@@ -57,7 +57,11 @@ const ResetPasswordForm = ({ token }: ResetPasswordFormProps) => {
   });
 
   return (
-    <form {...getFormProps(form)} className="flex w-full flex-col gap-y-8">
+    <form
+      {...getFormProps(form)}
+      action={action}
+      className="flex w-full flex-col gap-y-8"
+    >
       <input type="hidden" name="token" value={token} />
 
       <div className="flex flex-col gap-y-8">
@@ -71,12 +75,12 @@ const ResetPasswordForm = ({ token }: ResetPasswordFormProps) => {
               <div
                 className={cn(
                   "flex flex-col rounded-[7px] *:-m-px",
+                  "shadow-hard-drop [--hard-shadow-spread:1px]",
                   "focus-within:outline-3 focus-within:outline-offset-1",
                   "focus-within:outline-primary-700 dark:focus-within:outline-primary-100",
-                  "before:bg-foreground relative before:absolute before:-inset-px before:bottom-[-3px] before:z-[-1] before:rounded",
-                  "**:data-[slot=input-container]:rounded-none **:data-[slot=input-container]:focus-within:z-50!",
-                  "**:data-[slot=input-container]:before:bottom-0",
-                  "not-focus-within:**:data-[slot=input-container]:last-of-type:before:-bottom-0.5!",
+                  "has-aria-invalid:[--hard-shadow-color:var(--color-red-800)]",
+                  "**:data-[slot=input-container]:rounded-none **:data-[slot=input-container]:shadow-none",
+                  "**:data-[slot=input-container]:focus-within:z-50!",
                   "**:data-[slot=input-container]:has-aria-invalid:z-40",
                   "**:data-[slot=input]:rounded-none",
                 )}

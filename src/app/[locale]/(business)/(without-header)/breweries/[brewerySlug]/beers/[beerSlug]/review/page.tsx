@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import ReviewForm from "@/app/[locale]/(business)/(without-header)/breweries/[brewerySlug]/beers/[beerSlug]/review/_components/form";
 import ReviewFormHeader from "@/app/[locale]/(business)/(without-header)/breweries/[brewerySlug]/beers/[beerSlug]/review/_components/header";
 import { getBeerBySlug } from "@/domain/beers";
-import { getCurrentUser } from "@/lib/auth";
+import { getCurrentUserOrRedirect } from "@/lib/auth";
 import { redirect } from "@/lib/i18n";
 import { Routes } from "@/lib/routes";
 import { generatePath } from "@/lib/routes/utils";
@@ -28,21 +28,9 @@ const ReviewPage = async ({
     });
   }
 
-  const user = await getCurrentUser();
-  if (!user) {
-    redirect({
-      href: {
-        pathname: Routes.SIGN_IN,
-        query: {
-          redirect: generatePath(Routes.REVIEW_FORM, {
-            brewerySlug,
-            beerSlug,
-          }),
-        },
-      },
-      locale,
-    });
-  }
+  await getCurrentUserOrRedirect({
+    redirectTo: generatePath(Routes.REVIEW_FORM, { brewerySlug, beerSlug }),
+  });
 
   return (
     <div className="@container flex size-full min-h-screen items-center justify-center">

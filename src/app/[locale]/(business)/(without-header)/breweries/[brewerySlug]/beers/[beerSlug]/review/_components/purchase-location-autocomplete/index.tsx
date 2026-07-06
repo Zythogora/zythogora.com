@@ -92,10 +92,10 @@ const PurchaseLocationAutocomplete = ({
             role="combobox"
             value={selectedLocation?.placeId}
             className={cn(
-              "group/purchase-location-autocomplete-trigger font-medium",
-              "justify-between pr-4",
-              "hover:bottom-0 hover:before:-bottom-1",
-              "aria-invalid:before:bg-destructive",
+              "group/purchase-location-autocomplete-trigger",
+              "justify-between pr-4 font-medium",
+              "hover:bottom-0 hover:[--hard-shadow-depth:2px]",
+              "aria-invalid:[--hard-shadow-color:var(--color-destructive)]",
             )}
             {...restSelectProps}
           >

@@ -155,7 +155,7 @@ const HeaderSearchBar = ({
                   onChange={handleSearchChange}
                   onFocus={() => setResultsVisible(true)}
                   className={cn(
-                    "before:rounded-full",
+                    "rounded-full",
                     "*:data-[slot=input]:rounded-full *:data-[slot=input]:pl-13",
                     "sm:*:data-[slot=input]:pr-22",
                   )}

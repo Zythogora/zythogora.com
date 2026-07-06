@@ -31,7 +31,7 @@ const Slider = ({ className, ...restProps }: SliderProps) => {
         "border-foreground relative flex h-12 w-full grow cursor-pointer touch-none items-center rounded-full border-2 p-0.5 select-none",
         "bg-background dark:bg-stone-700",
         "data-[disabled]:opacity-50",
-        "before:bg-foreground before:absolute before:inset-0 before:-bottom-1 before:z-[-1] before:rounded-full",
+        "shadow-hard-drop [--hard-shadow-depth:4px] [--hard-shadow-spread:-2px]",
         "focus-within:outline-primary focus-within:outline-3",
         className,
       )}
