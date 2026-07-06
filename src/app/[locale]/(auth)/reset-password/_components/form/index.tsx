@@ -78,7 +78,7 @@ const ResetPasswordForm = ({ token }: ResetPasswordFormProps) => {
                   "shadow-hard-drop [--hard-shadow-spread:1px]",
                   "focus-within:outline-3 focus-within:outline-offset-1",
                   "focus-within:outline-primary-700 dark:focus-within:outline-primary-100",
-                  "has-aria-invalid:[--hard-shadow-color:var(--color-red-800)]",
+                  "has-aria-invalid:[--hard-shadow-color:var(--color-red-800)] dark:has-aria-invalid:[--hard-shadow-color:var(--color-destructive)]",
                   "**:data-[slot=input-container]:rounded-none **:data-[slot=input-container]:shadow-none",
                   "**:data-[slot=input-container]:focus-within:z-50!",
                   "**:data-[slot=input-container]:has-aria-invalid:z-40",

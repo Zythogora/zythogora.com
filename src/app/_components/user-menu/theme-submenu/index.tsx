@@ -4,7 +4,7 @@ import { CheckIcon, Moon, Sun } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useTheme } from "next-themes";
 
-import { availableThemes } from "@/app/_components/providers/theme-provider";
+import { availableThemes } from "@/app/_components/providers/theme-provider/themes";
 import {
   DropdownMenuItem,
   DropdownMenuShortcut,

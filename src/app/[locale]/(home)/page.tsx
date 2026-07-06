@@ -45,7 +45,12 @@ const HomePage = () => {
   );
 
   return (
-    <div className="relative flex flex-col overflow-x-clip scroll-smooth bg-stone-50">
+    <div
+      className={cn(
+        "relative flex flex-col overflow-x-clip scroll-smooth",
+        "bg-stone-50 dark:bg-stone-900",
+      )}
+    >
       <Toaster forceTheme="light" position="bottom-center" richColors />
 
       <OnboardingGuard />
@@ -55,7 +60,12 @@ const HomePage = () => {
       </Suspense>
 
       <div className="absolute inset-x-0 top-0 flex flex-row items-center justify-between p-8">
-        <p className="font-title text-2xl font-semibold tracking-wide text-stone-950 uppercase">
+        <p
+          className={cn(
+            "font-title text-2xl font-semibold tracking-wide uppercase",
+            "text-stone-950 dark:text-stone-50",
+          )}
+        >
           Zythogora
         </p>
 
@@ -67,9 +77,14 @@ const HomePage = () => {
       <Bubbles className="z-10" />
 
       <div className="flex h-screen w-full flex-col-reverse">
-        <div className="bg-primary h-[calc(50vh-(--spacing(6)))]" />
+        <div
+          className={cn(
+            "h-[calc(50vh-(--spacing(6)))]",
+            "bg-primary dark:bg-primary-800",
+          )}
+        />
 
-        <Wave className="fill-primary h-12" />
+        <Wave className={cn("h-12", "fill-primary dark:fill-primary-800")} />
       </div>
 
       <div
@@ -249,7 +264,8 @@ const HomePage = () => {
 
       <div
         className={cn(
-          "bg-primary flex flex-col items-center justify-center gap-y-32",
+          "flex flex-col items-center justify-center gap-y-32",
+          "bg-primary dark:bg-primary-800",
           "pt-48 pb-16 xl:pt-0 xl:pb-48",
         )}
       >
@@ -257,7 +273,11 @@ const HomePage = () => {
           {t.rich("home.whatsZythogora", {
             br: () => <br />,
             highlight: (chunks) => (
-              <span className="text-background text-7xl">{chunks}</span>
+              <span
+                className={cn("text-7xl", "text-background dark:text-primary")}
+              >
+                {chunks}
+              </span>
             ),
           })}
         </h1>

@@ -279,7 +279,7 @@ export type BeersGroupByOutputType = {
   _max: BeersMaxAggregateOutputType | null
 }
 
-type GetBeersGroupByPayload<T extends BeersGroupByArgs> = Prisma.PrismaPromise<
+export type GetBeersGroupByPayload<T extends BeersGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<BeersGroupByOutputType, T['by']> &
       {
@@ -2504,6 +2504,11 @@ export type BeersFindManyArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    * Skip the first `n` Beers.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of Beers.
+   */
   distinct?: Prisma.BeersScalarFieldEnum | Prisma.BeersScalarFieldEnum[]
 }
 

@@ -1,5 +1,7 @@
 "use client";
 
+import { createContext, useContext } from "react";
+
 import {
   Dialog,
   DialogClose,
@@ -32,6 +34,20 @@ type CommonProps<T, U> = {
   [K in keyof T & keyof U]?: T[K] extends U[K] ? U[K] : never;
 };
 
+const ResponsiveDialogContext = createContext<boolean | null>(null);
+
+const useIsDesktop = () => {
+  const isDesktop = useContext(ResponsiveDialogContext);
+
+  if (isDesktop === null) {
+    throw new Error(
+      "ResponsiveDialog components must be used within ResponsiveDialog",
+    );
+  }
+
+  return isDesktop;
+};
+
 const ResponsiveDialog = ({
   dismissible,
   ...commonProps
@@ -39,10 +55,14 @@ const ResponsiveDialog = ({
   Pick<ComponentProps<typeof Drawer>, "dismissible">) => {
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
-  return isDesktop ? (
-    <Dialog {...commonProps} />
-  ) : (
-    <Drawer dismissible={dismissible} {...commonProps} />
+  return (
+    <ResponsiveDialogContext.Provider value={isDesktop}>
+      {isDesktop ? (
+        <Dialog {...commonProps} />
+      ) : (
+        <Drawer dismissible={dismissible} {...commonProps} />
+      )}
+    </ResponsiveDialogContext.Provider>
   );
 };
 ResponsiveDialog.displayName = "ResponsiveDialog";
@@ -53,7 +73,7 @@ const ResponsiveDialogPortal = (
     ComponentProps<typeof DrawerPortal>
   >,
 ) => {
-  const isDesktop = useMediaQuery("(min-width: 768px)");
+  const isDesktop = useIsDesktop();
   const ResponsiveComponent = isDesktop ? DialogPortal : DrawerPortal;
 
   return <ResponsiveComponent {...props} />;
@@ -66,7 +86,7 @@ const ResponsiveDialogOverlay = (
     ComponentProps<typeof DrawerOverlay>
   >,
 ) => {
-  const isDesktop = useMediaQuery("(min-width: 768px)");
+  const isDesktop = useIsDesktop();
   const ResponsiveComponent = isDesktop ? DialogOverlay : DrawerOverlay;
 
   return <ResponsiveComponent {...props} />;
@@ -79,7 +99,7 @@ const ResponsiveDialogTrigger = (
     ComponentProps<typeof DrawerTrigger>
   >,
 ) => {
-  const isDesktop = useMediaQuery("(min-width: 768px)");
+  const isDesktop = useIsDesktop();
   const ResponsiveComponent = isDesktop ? DialogTrigger : DrawerTrigger;
 
   return <ResponsiveComponent {...props} />;
@@ -92,7 +112,7 @@ const ResponsiveDialogClose = (
     ComponentProps<typeof DrawerClose>
   >,
 ) => {
-  const isDesktop = useMediaQuery("(min-width: 768px)");
+  const isDesktop = useIsDesktop();
   const ResponsiveComponent = isDesktop ? DialogClose : DrawerClose;
 
   return <ResponsiveComponent {...props} />;
@@ -107,7 +127,7 @@ const ResponsiveDialogContent = ({
   ComponentProps<typeof DrawerContent>
 > &
   Pick<ComponentProps<typeof Drawer>, "dismissible">) => {
-  const isDesktop = useMediaQuery("(min-width: 768px)");
+  const isDesktop = useIsDesktop();
   const ResponsiveComponent = isDesktop ? DialogContent : DrawerContent;
 
   return (
@@ -122,7 +142,7 @@ const ResponsiveDialogHeader = (
     ComponentProps<typeof DrawerHeader>
   >,
 ) => {
-  const isDesktop = useMediaQuery("(min-width: 768px)");
+  const isDesktop = useIsDesktop();
   const ResponsiveComponent = isDesktop ? DialogHeader : DrawerHeader;
 
   return <ResponsiveComponent {...props} />;
@@ -135,7 +155,7 @@ const ResponsiveDialogFooter = (
     ComponentProps<typeof DrawerFooter>
   >,
 ) => {
-  const isDesktop = useMediaQuery("(min-width: 768px)");
+  const isDesktop = useIsDesktop();
   const ResponsiveComponent = isDesktop ? DialogFooter : DrawerFooter;
 
   return <ResponsiveComponent {...props} />;
@@ -148,7 +168,7 @@ const ResponsiveDialogTitle = (
     ComponentProps<typeof DrawerTitle>
   >,
 ) => {
-  const isDesktop = useMediaQuery("(min-width: 768px)");
+  const isDesktop = useIsDesktop();
   const ResponsiveComponent = isDesktop ? DialogTitle : DrawerTitle;
 
   return <ResponsiveComponent {...props} />;
@@ -161,7 +181,7 @@ const ResponsiveDialogDescription = (
     ComponentProps<typeof DrawerDescription>
   >,
 ) => {
-  const isDesktop = useMediaQuery("(min-width: 768px)");
+  const isDesktop = useIsDesktop();
   const ResponsiveComponent = isDesktop ? DialogDescription : DrawerDescription;
 
   return <ResponsiveComponent {...props} />;

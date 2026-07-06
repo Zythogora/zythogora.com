@@ -174,7 +174,7 @@ export type BetterAuthUsersGroupByOutputType = {
   _max: BetterAuthUsersMaxAggregateOutputType | null
 }
 
-type GetBetterAuthUsersGroupByPayload<T extends BetterAuthUsersGroupByArgs> = Prisma.PrismaPromise<
+export type GetBetterAuthUsersGroupByPayload<T extends BetterAuthUsersGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<BetterAuthUsersGroupByOutputType, T['by']> &
       {
@@ -1365,6 +1365,11 @@ export type BetterAuthUsersFindManyArgs<ExtArgs extends runtime.Types.Extensions
    * Skip the first `n` BetterAuthUsers.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of BetterAuthUsers.
+   */
   distinct?: Prisma.BetterAuthUsersScalarFieldEnum | Prisma.BetterAuthUsersScalarFieldEnum[]
 }
 

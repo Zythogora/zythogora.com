@@ -38,6 +38,7 @@ const PurchaseLocationAutocomplete = ({
   const [selectedLocation, setSelectedLocation] =
     useState<AutocompleteLocation | null>(null);
 
+  // eslint-disable-next-line @tanstack/query/exhaustive-deps
   const { isPending, data } = useQuery({
     queryFn: async () => {
       const response = await fetch(

@@ -39,12 +39,18 @@ const SignUpPage = async ({ params }: PageProps<"/[locale]/sign-up">) => {
       <div
         className={cn(
           "relative flex h-3/4 min-h-fit flex-col items-center justify-between gap-y-4 p-12",
-          "before:bg-primary before:absolute before:inset-0 before:z-[-2]",
+          "before:absolute before:inset-0 before:z-[-2]",
+          "before:bg-primary dark:before:bg-primary-800",
           "**:data-[slot=button]:focus-visible:outline-foreground",
           availableProviders.length > 0 ? "justify-between" : "justify-center",
         )}
       >
-        <Wave className="fill-primary absolute top-[calc(-5%+10px)] z-50 h-1/20" />
+        <Wave
+          className={cn(
+            "absolute top-[calc(-5%+10px)] z-50 h-1/20",
+            "fill-primary dark:fill-primary-800",
+          )}
+        />
 
         <div className="flex w-full flex-col items-end gap-y-2 md:w-lg">
           <SignUpForm />

@@ -48,10 +48,12 @@ const SignUpForm = () => {
       action={action}
       className={cn(
         "flex w-full flex-col gap-y-8",
-        "**:data-[slot=input-container]:has-aria-invalid:[--hard-shadow-color:var(--color-red-800)]",
-        "**:data-[slot=input]:focus-visible:outline-foreground **:data-[slot=input]:aria-invalid:border-red-800",
-        "**:data-[slot=show-password-button]:focus-visible:outline-foreground **:data-[slot=show-password-button]:group-has-aria-invalid/input:fill-red-800",
-        "**:data-[slot=form-error]:text-red-900",
+        "**:data-[slot=input-container]:has-aria-invalid:[--hard-shadow-color:var(--color-red-800)] dark:**:data-[slot=input-container]:has-aria-invalid:[--hard-shadow-color:var(--color-destructive)]",
+        "**:data-[slot=input]:focus-visible:outline-foreground",
+        "dark:**:data-[slot=input]:aria-invalid:border-destructive **:data-[slot=input]:aria-invalid:border-red-800",
+        "**:data-[slot=show-password-button]:focus-visible:outline-foreground",
+        "dark:**:data-[slot=show-password-button]:group-has-aria-invalid/input:fill-destructive **:data-[slot=show-password-button]:group-has-aria-invalid/input:fill-red-800",
+        "**:data-[slot=form-error]:text-red-900 dark:**:data-[slot=form-error]:text-red-200",
       )}
     >
       <FormInput
@@ -82,7 +84,7 @@ const SignUpForm = () => {
                 "flex flex-col rounded-[7px] *:-m-px",
                 "shadow-hard-drop [--hard-shadow-spread:1px]",
                 "focus-within:outline-3 focus-within:outline-offset-1 focus-within:outline-stone-500",
-                "has-aria-invalid:[--hard-shadow-color:var(--color-red-800)]",
+                "has-aria-invalid:[--hard-shadow-color:var(--color-red-800)] dark:has-aria-invalid:[--hard-shadow-color:var(--color-destructive)]",
                 "**:data-[slot=input-container]:rounded-none **:data-[slot=input-container]:shadow-none",
                 "**:data-[slot=input-container]:focus-within:z-50!",
                 "**:data-[slot=input-container]:has-aria-invalid:z-40",

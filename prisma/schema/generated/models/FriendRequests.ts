@@ -167,7 +167,7 @@ export type FriendRequestsGroupByOutputType = {
   _max: FriendRequestsMaxAggregateOutputType | null
 }
 
-type GetFriendRequestsGroupByPayload<T extends FriendRequestsGroupByArgs> = Prisma.PrismaPromise<
+export type GetFriendRequestsGroupByPayload<T extends FriendRequestsGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<FriendRequestsGroupByOutputType, T['by']> &
       {
@@ -1295,6 +1295,11 @@ export type FriendRequestsFindManyArgs<ExtArgs extends runtime.Types.Extensions.
    * Skip the first `n` FriendRequests.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of FriendRequests.
+   */
   distinct?: Prisma.FriendRequestsScalarFieldEnum | Prisma.FriendRequestsScalarFieldEnum[]
 }
 

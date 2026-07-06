@@ -3,7 +3,7 @@
 import { useTheme } from "next-themes";
 import { Toaster as Sonner } from "sonner";
 
-import type { Theme } from "@/app/_components/providers/theme-provider";
+import type { Theme } from "@/app/_components/providers/theme-provider/themes";
 
 import type { ToasterProps as SonnerProps } from "sonner";
 
