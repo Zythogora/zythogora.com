@@ -153,7 +153,7 @@ export type StyleCategoriesGroupByOutputType = {
   _max: StyleCategoriesMaxAggregateOutputType | null
 }
 
-type GetStyleCategoriesGroupByPayload<T extends StyleCategoriesGroupByArgs> = Prisma.PrismaPromise<
+export type GetStyleCategoriesGroupByPayload<T extends StyleCategoriesGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<StyleCategoriesGroupByOutputType, T['by']> &
       {
@@ -1058,6 +1058,11 @@ export type StyleCategoriesFindManyArgs<ExtArgs extends runtime.Types.Extensions
    * Skip the first `n` StyleCategories.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of StyleCategories.
+   */
   distinct?: Prisma.StyleCategoriesScalarFieldEnum | Prisma.StyleCategoriesScalarFieldEnum[]
 }
 

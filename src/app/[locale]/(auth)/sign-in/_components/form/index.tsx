@@ -72,10 +72,12 @@ const SignInForm = () => {
       method="post"
       className={cn(
         "flex w-full flex-col gap-y-8",
-        "**:data-[slot=input-container]:has-aria-invalid:[--hard-shadow-color:var(--color-red-800)]",
-        "**:data-[slot=input]:focus-visible:outline-foreground **:data-[slot=input]:aria-invalid:border-red-800",
-        "**:data-[slot=show-password-button]:focus-visible:outline-foreground **:data-[slot=show-password-button]:group-has-aria-invalid/input:fill-red-800",
-        "**:data-[slot=form-error]:text-red-900",
+        "**:data-[slot=input-container]:has-aria-invalid:[--hard-shadow-color:var(--color-red-800)] dark:**:data-[slot=input-container]:has-aria-invalid:[--hard-shadow-color:var(--color-destructive)]",
+        "**:data-[slot=input]:focus-visible:outline-foreground",
+        "dark:**:data-[slot=input]:aria-invalid:border-destructive **:data-[slot=input]:aria-invalid:border-red-800",
+        "**:data-[slot=show-password-button]:focus-visible:outline-foreground",
+        "dark:**:data-[slot=show-password-button]:group-has-aria-invalid/input:fill-destructive **:data-[slot=show-password-button]:group-has-aria-invalid/input:fill-red-800",
+        "**:data-[slot=form-error]:text-red-900 dark:**:data-[slot=form-error]:text-red-200",
       )}
     >
       <div className="flex flex-col gap-y-8">

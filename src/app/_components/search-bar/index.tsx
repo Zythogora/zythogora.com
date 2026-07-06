@@ -53,7 +53,7 @@ const SearchBar = ({ className }: SearchBarProps) => {
         onChange={handleSearchChange}
         placeholder={t("searchPage.searchBarPlaceholder")}
         className={cn(
-          "before:rounded-full",
+          "rounded-full",
           "*:data-[slot=input]:rounded-full *:data-[slot=input]:pl-13",
         )}
       />

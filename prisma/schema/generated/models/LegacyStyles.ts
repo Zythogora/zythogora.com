@@ -153,7 +153,7 @@ export type LegacyStylesGroupByOutputType = {
   _max: LegacyStylesMaxAggregateOutputType | null
 }
 
-type GetLegacyStylesGroupByPayload<T extends LegacyStylesGroupByArgs> = Prisma.PrismaPromise<
+export type GetLegacyStylesGroupByPayload<T extends LegacyStylesGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<LegacyStylesGroupByOutputType, T['by']> &
       {
@@ -928,6 +928,11 @@ export type LegacyStylesFindManyArgs<ExtArgs extends runtime.Types.Extensions.In
    * Skip the first `n` LegacyStyles.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of LegacyStyles.
+   */
   distinct?: Prisma.LegacyStylesScalarFieldEnum | Prisma.LegacyStylesScalarFieldEnum[]
 }
 

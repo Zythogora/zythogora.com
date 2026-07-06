@@ -35,7 +35,7 @@ const Input = ({ className, type, ...restProps }: ComponentProps<"input">) => {
           "placeholder:text-foreground-muted placeholder:select-none",
           "disabled:bg-background-muted disabled:pointer-events-none disabled:cursor-not-allowed",
           "aria-invalid:border-destructive",
-          "aria-invalid:placeholder:text-destructive/50",
+          "aria-invalid:placeholder:text-destructive dark:aria-invalid:placeholder:text-red-200",
         )}
       />
 

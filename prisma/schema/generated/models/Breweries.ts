@@ -85,7 +85,7 @@ export type BreweriesCountAggregateOutputType = {
   description: number
   creationYear: number
   websiteLink: number
-  socialLinks:PrismaJson.SocialLink
+  socialLinks: number
   contactEmail: number
   contactPhoneNumber: number
   createdAt: number
@@ -274,7 +274,7 @@ export type BreweriesGroupByOutputType = {
   _max: BreweriesMaxAggregateOutputType | null
 }
 
-type GetBreweriesGroupByPayload<T extends BreweriesGroupByArgs> = Prisma.PrismaPromise<
+export type GetBreweriesGroupByPayload<T extends BreweriesGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<BreweriesGroupByOutputType, T['by']> &
       {
@@ -301,7 +301,7 @@ export type BreweriesWhereInput = {
   city?: Prisma.StringNullableFilter<"Breweries"> | string | null
   address?: Prisma.StringNullableFilter<"Breweries"> | string | null
   description?: Prisma.StringNullableFilter<"Breweries"> | string | null
-  creationYear?:unknown | null
+  creationYear?: Prisma.IntNullableFilter<"Breweries"> | number | null
   websiteLink?: Prisma.StringNullableFilter<"Breweries"> | string | null
   socialLinks?:PJTG.NullableListFilter<PrismaJson.SocialLink>
   contactEmail?: Prisma.StringNullableFilter<"Breweries"> | string | null
@@ -401,7 +401,7 @@ export type BreweriesScalarWhereWithAggregatesInput = {
   city?: Prisma.StringNullableWithAggregatesFilter<"Breweries"> | string | null
   address?: Prisma.StringNullableWithAggregatesFilter<"Breweries"> | string | null
   description?: Prisma.StringNullableWithAggregatesFilter<"Breweries"> | string | null
-  creationYear?:unknown | null
+  creationYear?: Prisma.IntNullableWithAggregatesFilter<"Breweries"> | number | null
   websiteLink?: Prisma.StringNullableWithAggregatesFilter<"Breweries"> | string | null
   socialLinks?:PJTG.NullableListFilter<PrismaJson.SocialLink>
   contactEmail?: Prisma.StringNullableWithAggregatesFilter<"Breweries"> | string | null
@@ -981,7 +981,7 @@ export type BreweriesScalarWhereInput = {
   city?: Prisma.StringNullableFilter<"Breweries"> | string | null
   address?: Prisma.StringNullableFilter<"Breweries"> | string | null
   description?: Prisma.StringNullableFilter<"Breweries"> | string | null
-  creationYear?:unknown | null
+  creationYear?: Prisma.IntNullableFilter<"Breweries"> | number | null
   websiteLink?: Prisma.StringNullableFilter<"Breweries"> | string | null
   socialLinks?:PJTG.NullableListFilter<PrismaJson.SocialLink>
   contactEmail?: Prisma.StringNullableFilter<"Breweries"> | string | null
@@ -1966,6 +1966,11 @@ export type BreweriesFindManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Skip the first `n` Breweries.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of Breweries.
+   */
   distinct?: Prisma.BreweriesScalarFieldEnum | Prisma.BreweriesScalarFieldEnum[]
 }
 

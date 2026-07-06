@@ -11,6 +11,8 @@ import {
 
 import JsonLd from "@/app/_components/json-ld";
 import QueryClientProvider from "@/app/_components/providers/query-client-provider";
+import ThemeProvider from "@/app/_components/providers/theme-provider";
+import { availableThemes } from "@/app/_components/providers/theme-provider/themes";
 import { publicConfig } from "@/lib/config/client-config";
 import { routing } from "@/lib/i18n";
 import type { Locale } from "@/lib/i18n";
@@ -89,30 +91,38 @@ export default async function RootLayout({
   return (
     <html lang={locale} suppressHydrationWarning>
       <body className={`${title.variable} ${paragraph.variable} antialiased`}>
-        <JsonLd
-          data={
-            {
-              "@context": "https://schema.org",
-              "@type": "WebSite",
-              name: publicConfig.appName,
-              url: publicConfig.baseUrl,
-              potentialAction: {
-                "@type": "SearchAction",
-                target: getAbsoluteUrl("/search?search={search_term_string}"),
-                // @ts-expect-error - query-input is not typed in schema-dts
-                "query-input": "required name=search_term_string",
-              },
-            } satisfies WithContext<WebSiteJsonLd>
-          }
-        />
+        <ThemeProvider
+          defaultTheme="system"
+          enableSystem
+          attribute="class"
+          themes={[...availableThemes]}
+          disableTransitionOnChange
+        >
+          <JsonLd
+            data={
+              {
+                "@context": "https://schema.org",
+                "@type": "WebSite",
+                name: publicConfig.appName,
+                url: publicConfig.baseUrl,
+                potentialAction: {
+                  "@type": "SearchAction",
+                  target: getAbsoluteUrl("/search?search={search_term_string}"),
+                  // @ts-expect-error - query-input is not typed in schema-dts
+                  "query-input": "required name=search_term_string",
+                },
+              } satisfies WithContext<WebSiteJsonLd>
+            }
+          />
 
-        <NextIntlClientProvider messages={messages}>
-          <QueryClientProvider>{children}</QueryClientProvider>
-        </NextIntlClientProvider>
+          <NextIntlClientProvider messages={messages}>
+            <QueryClientProvider>{children}</QueryClientProvider>
+          </NextIntlClientProvider>
 
-        <Analytics />
+          <Analytics />
 
-        <SpeedInsights />
+          <SpeedInsights />
+        </ThemeProvider>
       </body>
     </html>
   );
