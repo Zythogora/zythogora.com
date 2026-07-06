@@ -32,11 +32,14 @@ const WelcomeForm = () => {
       return;
     }
 
-    // Refresh the client-side session store before navigating so the
-    // onboarding guard sees the new username and does not bounce back here.
     (async () => {
-      await refetch();
-      router.push(Routes.HOME);
+      try {
+        await refetch();
+      } catch (error) {
+        console.error(error);
+      } finally {
+        router.push(Routes.HOME);
+      }
     })();
   }, [lastResult, refetch, router]);
 

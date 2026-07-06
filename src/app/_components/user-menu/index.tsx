@@ -1,5 +1,6 @@
 "use client";
 
+import { useQuery } from "@tanstack/react-query";
 import {
   LogInIcon,
   LogOutIcon,
@@ -59,12 +60,6 @@ interface UserMenuProps {
   className?: string;
 }
 
-interface UserMenuStats {
-  userId: string;
-  reviewCount: number;
-  uniqueBeerCount: number;
-}
-
 const UserMenu = ({ className }: UserMenuProps) => {
   const t = useTranslations();
 
@@ -74,20 +69,23 @@ const UserMenu = ({ className }: UserMenuProps) => {
   const { push } = useRouterWithSearchParams();
   const pathname = usePathname();
 
-  const [fetchedStats, setFetchedStats] = useState<UserMenuStats | null>(null);
-  const stats =
-    session && fetchedStats?.userId === session.user.id ? fetchedStats : null;
+  const [isOpen, setIsOpen] = useState(false);
 
-  const handleOpenChange = async (open: boolean) => {
-    if (!open || !session || stats) {
-      return;
-    }
-
-    const response = await fetch("/api/me/stats").catch(() => null);
-    if (response?.ok) {
-      setFetchedStats({ ...(await response.json()), userId: session.user.id });
-    }
-  };
+  const { data: stats, isPending: areStatsPending } = useQuery({
+    queryKey: ["me", "stats", session?.user.id],
+    queryFn: async (): Promise<{
+      reviewCount: number;
+      uniqueBeerCount: number;
+    }> => {
+      const response = await fetch("/api/me/stats");
+      if (!response.ok) {
+        throw new Error("Failed to fetch user stats");
+      }
+      return response.json();
+    },
+    enabled: isOpen && Boolean(session),
+    staleTime: 60 * 1000,
+  });
 
   const handleViewProfile = () => {
     if (!session) {
@@ -123,7 +121,7 @@ const UserMenu = ({ className }: UserMenuProps) => {
   };
 
   return (
-    <DropdownMenu onOpenChange={handleOpenChange}>
+    <DropdownMenu onOpenChange={setIsOpen}>
       <DropdownMenuTrigger asChild>
         <UserMenuTrigger className={className} />
       </DropdownMenuTrigger>
@@ -164,6 +162,12 @@ const UserMenu = ({ className }: UserMenuProps) => {
                       ),
                     })}
                   </p>
+                </div>
+              ) : areStatsPending ? (
+                <div className="flex w-full animate-pulse flex-row justify-between gap-x-4">
+                  <div className="bg-foreground/25 h-7 w-16 rounded-full" />
+
+                  <div className="bg-foreground/25 h-7 w-12 rounded-full" />
                 </div>
               ) : null}
             </DropdownMenuItem>

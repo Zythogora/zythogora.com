@@ -22,9 +22,6 @@ export const getCurrentUser = cache(async () => {
 
 type CurrentUser = NonNullable<Awaited<ReturnType<typeof getCurrentUser>>>;
 
-// Unlike `getCurrentUser`, this helper never returns null: it redirects to
-// the sign-in page when there is no session, and to the onboarding page when
-// the user has not picked a username yet (social sign-up).
 export const getCurrentUserOrRedirect = cache(
   async (opts?: { redirectTo?: string }) => {
     const user = await getCurrentUser();

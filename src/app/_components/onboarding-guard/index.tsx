@@ -6,9 +6,6 @@ import { authClient } from "@/lib/auth/client";
 import { useRouter } from "@/lib/i18n";
 import { Routes } from "@/lib/routes";
 
-// Users signed up through a social provider have no username until they
-// complete the onboarding. This guard sends them to the onboarding page
-// before they can browse the app.
 const OnboardingGuard = () => {
   const { data: session, isPending } = authClient.useSession();
 

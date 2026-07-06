@@ -25,9 +25,6 @@ export const auth = betterAuth({
 
   plugins: [
     customSession(async ({ user: betterAuthUser, session }) => {
-      // A social sign-up creates the better-auth user before the user has
-      // picked a username, so the `public.users` row may not exist yet. A
-      // null username marks a session that still needs onboarding.
       const user = await prisma.users.findUnique({
         where: { id: betterAuthUser.id },
       });

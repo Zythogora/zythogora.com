@@ -119,10 +119,7 @@ export const completeOnboarding = async ({
   let betterAuthUser;
   try {
     [, betterAuthUser] = await prisma.$transaction([
-      prisma.users.create({
-        data: { id: userId, username },
-      }),
-
+      prisma.users.create({ data: { id: userId, username } }),
       prisma.betterAuthUsers.update({
         where: { id: userId },
         data: { name: username },
