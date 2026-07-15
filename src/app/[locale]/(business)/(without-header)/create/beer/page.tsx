@@ -5,6 +5,12 @@ import { getColors, getStyleCategories } from "@/domain/beers";
 import { getCurrentUserOrRedirect } from "@/lib/auth";
 import { Routes } from "@/lib/routes";
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  robots: { index: false },
+};
+
 const CreateBeerPage = async ({
   params,
 }: PageProps<"/[locale]/create/beer">) => {

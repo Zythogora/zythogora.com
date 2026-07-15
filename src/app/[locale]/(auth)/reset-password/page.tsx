@@ -17,6 +17,7 @@ export async function generateMetadata({
 
   return {
     title: t("auth.resetPassword.metadata.title"),
+    robots: { index: false },
   };
 }
 

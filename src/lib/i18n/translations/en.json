@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "title": "Zythogora",
-    "description": "The ultimate app for beer reviews"
+    "title": "Zythogora - The ultimate app for beer reviews",
+    "description": "Rate beers in detail from appearance to mouthfeel, including aromas and flavors, and browse tasting reviews from the community. Free, ad-free and open source!"
   },
   "email": {
     "welcome": {
@@ -211,7 +211,7 @@
   "auth": {
     "signIn": {
       "metadata": {
-        "title": "Sign in | Zythogora"
+        "title": "Sign in"
       },
       "title": "Welcome<br></br>back!",
       "actions": {
@@ -228,7 +228,7 @@
     },
     "signUp": {
       "metadata": {
-        "title": "Sign up | Zythogora"
+        "title": "Sign up"
       },
       "title": "Welcome to<br></br>Zythogora",
       "actions": {
@@ -246,7 +246,7 @@
     },
     "welcome": {
       "metadata": {
-        "title": "Choose your username | Zythogora"
+        "title": "Choose your username"
       },
       "title": "One last step!<br></br>Pick your username",
       "description": "This is the name other beer lovers will see on your reviews.",
@@ -257,7 +257,7 @@
     },
     "emailVerification": {
       "metadata": {
-        "title": "Sign up | Zythogora"
+        "title": "Sign up"
       },
       "title": "An email has been sent to you<br></br>to verify your account.",
       "text": "Check your mailbox and click on the link<br></br>to be able to <link>sign-in</link>!",
@@ -265,7 +265,7 @@
     },
     "passwordForgotten": {
       "metadata": {
-        "title": "Password forgotten | Zythogora"
+        "title": "Password forgotten"
       },
       "title": "Password forgotten",
       "description": "Enter your email below to receive an email to reset your password.",
@@ -277,7 +277,7 @@
     },
     "resetPassword": {
       "metadata": {
-        "title": "Reset your password | Zythogora"
+        "title": "Reset your password"
       },
       "title": "Reset your password",
       "description": "Enter your new password below.",
@@ -334,9 +334,10 @@
   },
   "searchPage": {
     "metadata": {
-      "beerTabTitle": "Search for a beer | Zythogora",
-      "breweryTabTitle": "Search for a brewery | Zythogora",
-      "userTabTitle": "Search for a user | Zythogora"
+      "beerTabTitle": "Search for a beer",
+      "breweryTabTitle": "Search for a brewery",
+      "userTabTitle": "Search for a user",
+      "description": "Search thousands of beers and breweries on Zythogora, the free, ad-free and open source beer review platform."
     },
     "searchBarPlaceholder": "Search for a beer, a brewery or a user",
     "beer": {
@@ -373,7 +374,9 @@
   },
   "beerPage": {
     "metadata": {
-      "description": "Discover the {beerName} from {breweryName} and come share your opinion on Zythogora, the reference app for beer reviews!"
+      "title": "{beerName} - {style} at {abv}% ABV by {breweryName} ({countryName})",
+      "description": "Discover {beerName} by {breweryName} ({countryName}), a {style} at {abv}% ABV. Read the detailed tasting reviews and share your own on Zythogora!",
+      "descriptionWithRating": "{beerName} by {breweryName} ({countryName}), a {style} at {abv}% ABV, is rated {rating}/10 on Zythogora. Check out the community's reviews and share your own!"
     },
     "details": {
       "description": "Description",
@@ -419,7 +422,8 @@
   },
   "breweryPage": {
     "metadata": {
-      "description": "Check the brewery profile from {breweryName} ({countryName}) and discover its {beerCount} {beerCount, plural, =1 {beer} other {beers}}!"
+      "title": "{breweryName} ({countryName})",
+      "description": "Check the brewery profile from {breweryName} ({countryName}){beerCount, plural, =0 {} =1 { and discover the community's reviews} other { and discover the tasting reviews of its # beers}}!"
     },
     "location": "Origin",
     "creationYear": "Creation",
@@ -464,6 +468,7 @@
   },
   "profilePage": {
     "metadata": {
+      "description": "Find {username}{reviewCount, plural, =0 {} =1 { and their first detailed beer review} other { and their # detailed beer reviews from {uniqueBreweryCount, plural, =1 {1 brewery} other {# breweries{uniqueCountryCount, plural, =0 {} =1 {} other { and # different countries}}}}}} on Zythogora and send a friend request to follow all their tastings!",
       "uniqueBeers": "{count, plural, =1 {1 beer} other {# beers}}",
       "uniqueBreweries": "{count, plural, =1 {1 brewery} other {# breweries}}",
       "uniqueStyles": "{count, plural, =1 {1 style} other {# styles}}",
@@ -518,7 +523,7 @@
   },
   "settingsPage": {
     "metadata": {
-      "title": "Settings | Zythogora"
+      "title": "Settings"
     },
     "title": "Settings",
     "username": {

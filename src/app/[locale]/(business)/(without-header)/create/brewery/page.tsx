@@ -4,6 +4,12 @@ import CreateBreweryForm from "@/app/[locale]/(business)/(without-header)/create
 import { getCurrentUserOrRedirect } from "@/lib/auth";
 import { Routes } from "@/lib/routes";
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  robots: { index: false },
+};
+
 const CreateBreweryPage = async ({
   params,
 }: PageProps<"/[locale]/create/brewery">) => {

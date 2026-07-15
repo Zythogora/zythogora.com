@@ -17,6 +17,7 @@ export async function generateMetadata({
 
   return {
     title: t("auth.passwordForgotten.metadata.title"),
+    robots: { index: false },
   };
 }
 

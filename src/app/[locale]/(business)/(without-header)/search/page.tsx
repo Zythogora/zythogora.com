@@ -35,6 +35,7 @@ export async function generateMetadata({
       brewery: t("searchPage.metadata.breweryTabTitle"),
       user: t("searchPage.metadata.userTabTitle"),
     }[searchParamsResult.data.kind],
+    description: t("searchPage.metadata.description"),
     alternates: getAlternates(Routes.SEARCH, locale),
   };
 }

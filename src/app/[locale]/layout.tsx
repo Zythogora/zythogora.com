@@ -16,7 +16,7 @@ import { availableThemes } from "@/app/_components/providers/theme-provider/them
 import { publicConfig } from "@/lib/config/client-config";
 import { routing } from "@/lib/i18n";
 import type { Locale } from "@/lib/i18n";
-import { getAbsoluteUrl, getAlternates } from "@/lib/seo";
+import { getAbsoluteUrl } from "@/lib/seo";
 
 import type { Metadata, Viewport } from "next";
 import type { PropsWithChildren } from "react";
@@ -46,8 +46,10 @@ export async function generateMetadata({
 
   return {
     metadataBase: new URL(publicConfig.baseUrl),
-    alternates: getAlternates("/", locale),
-    title,
+    title: {
+      default: title,
+      template: `%s | ${publicConfig.appName}`,
+    },
     description,
     openGraph: {
       title,

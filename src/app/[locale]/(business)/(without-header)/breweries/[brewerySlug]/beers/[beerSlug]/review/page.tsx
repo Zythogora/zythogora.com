@@ -9,6 +9,12 @@ import { Routes } from "@/lib/routes";
 import { generatePath } from "@/lib/routes/utils";
 import { cn } from "@/lib/tailwind";
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  robots: { index: false },
+};
+
 const ReviewPage = async ({
   params,
 }: PageProps<"/[locale]/breweries/[brewerySlug]/beers/[beerSlug]/review">) => {

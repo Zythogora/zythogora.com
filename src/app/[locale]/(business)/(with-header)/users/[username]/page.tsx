@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { getTranslations } from "next-intl/server";
 import { Suspense } from "react";
 
 import UserReviewCard from "@/app/[locale]/(business)/(with-header)/users/[username]/_components/review-card";
@@ -15,7 +16,6 @@ import {
   getLatestPicturesByUser,
   getUserVisitedCountries,
 } from "@/domain/users";
-import { publicConfig } from "@/lib/config/client-config";
 import { redirect } from "@/lib/i18n";
 import { Routes } from "@/lib/routes";
 import { generatePath } from "@/lib/routes/utils";
@@ -28,11 +28,19 @@ export async function generateMetadata({
   params,
 }: PageProps<"/[locale]/users/[username]">): Promise<Metadata> {
   const { locale, username } = await params;
+  const t = await getTranslations({ locale });
 
   const user = await getUserByUsername(username).catch(() => notFound());
 
   return {
-    title: `${user.username} | ${publicConfig.appName}`,
+    title: user.username,
+    description: t("profilePage.metadata.description", {
+      username: user.username,
+      reviewCount: user.reviewCount,
+      uniqueBeerCount: user.uniqueBeerCount,
+      uniqueBreweryCount: user.uniqueBreweryCount,
+      uniqueCountryCount: user.uniqueCountryCount,
+    }),
     alternates: getAlternates(
       generatePath(Routes.PROFILE, { username: user.username }),
       locale,

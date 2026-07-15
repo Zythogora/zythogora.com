@@ -4,9 +4,10 @@ import {
   getBreweryAggregateRatingById,
 } from "@/domain/breweries";
 import type { Brewery } from "@/domain/breweries/types";
+import { publicConfig } from "@/lib/config/client-config";
 import { Routes } from "@/lib/routes";
 import { generatePath } from "@/lib/routes/utils";
-import { getAbsoluteUrl } from "@/lib/seo";
+import { getAbsoluteUrl, getBreadcrumbListJsonLd } from "@/lib/seo";
 
 import type { Brewery as BreweryJsonLdSchema, WithContext } from "schema-dts";
 
@@ -97,7 +98,24 @@ const BreweryJsonLd = async ({ brewery }: BreweryJsonLdProps) => {
       : {}),
   };
 
-  return <JsonLd data={data} />;
+  const breadcrumb = getBreadcrumbListJsonLd([
+    {
+      name: publicConfig.appName,
+      path: Routes.HOME,
+    },
+    {
+      name: brewery.name,
+      path: generatePath(Routes.BREWERY, { brewerySlug: brewery.slug }),
+    },
+  ]);
+
+  return (
+    <>
+      <JsonLd data={data} />
+
+      <JsonLd data={breadcrumb} />
+    </>
+  );
 };
 
 export default BreweryJsonLd;

@@ -46,7 +46,7 @@ export async function generateMetadata({
     () => notFound(),
   );
 
-  const title = `${review.user.username} - ${review.beer.name} | ${publicConfig.appName}`;
+  const title = `${review.user.username} - ${review.beer.name}`;
   const description = t("reviewPage.metadata.description", {
     username: review.user.username,
     beerName: review.beer.name,
@@ -68,7 +68,7 @@ export async function generateMetadata({
     openGraph: {
       type: "website",
       url: getAbsoluteUrl(reviewPath),
-      siteName: "Zythogora",
+      siteName: publicConfig.appName,
       title,
       description,
       images: review.pictureUrl
@@ -77,7 +77,7 @@ export async function generateMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      site: "Zythogora",
+      site: publicConfig.appName,
       title,
       description,
       images: review.pictureUrl
