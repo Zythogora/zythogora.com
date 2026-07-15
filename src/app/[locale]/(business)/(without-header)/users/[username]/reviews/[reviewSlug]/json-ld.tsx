@@ -1,9 +1,10 @@
 import JsonLd from "@/app/_components/json-ld";
 import { getBeerAggregateRatingById } from "@/domain/beers";
 import type { Review } from "@/domain/users/types";
+import { publicConfig } from "@/lib/config/client-config";
 import { Routes } from "@/lib/routes";
 import { generatePath } from "@/lib/routes/utils";
-import { getAbsoluteUrl } from "@/lib/seo";
+import { getAbsoluteUrl, getBreadcrumbListJsonLd } from "@/lib/seo";
 
 import type { Review as ReviewJsonLdSchema, WithContext } from "schema-dts";
 
@@ -70,7 +71,33 @@ const ReviewJsonLd = async ({ review }: ReviewJsonLdProps) => {
     datePublished: review.createdAt.toISOString(),
   };
 
-  return <JsonLd data={data} />;
+  const breadcrumb = getBreadcrumbListJsonLd([
+    {
+      name: publicConfig.appName,
+      path: Routes.HOME,
+    },
+    {
+      name: review.user.username,
+      path: generatePath(Routes.PROFILE, {
+        username: review.user.username,
+      }),
+    },
+    {
+      name: `${review.user.username} - ${review.beer.name}`,
+      path: generatePath(Routes.REVIEW, {
+        username: review.user.username,
+        reviewSlug: review.slug,
+      }),
+    },
+  ]);
+
+  return (
+    <>
+      <JsonLd data={data} />
+
+      <JsonLd data={breadcrumb} />
+    </>
+  );
 };
 
 export default ReviewJsonLd;

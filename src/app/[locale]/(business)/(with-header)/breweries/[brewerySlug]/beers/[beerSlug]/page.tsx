@@ -7,7 +7,7 @@ import BeerJsonLd from "@/app/[locale]/(business)/(with-header)/breweries/[brewe
 import { beerPageSearchParamsSchema } from "@/app/[locale]/(business)/(with-header)/breweries/[brewerySlug]/beers/[beerSlug]/schemas";
 import ShareButton from "@/app/_components/share-button";
 import Button from "@/app/_components/ui/button";
-import { getBeerBySlug } from "@/domain/beers";
+import { getBeerAggregateRatingById, getBeerBySlug } from "@/domain/beers";
 import { config } from "@/lib/config";
 import { publicConfig } from "@/lib/config/client-config";
 import { StaticGenerationMode } from "@/lib/config/types";
@@ -80,11 +80,31 @@ export async function generateMetadata({
     notFound(),
   );
 
-  const title = `${beer.name} - ${beer.brewery.name} | ${publicConfig.appName}`;
-  const description = t("beerPage.metadata.description", {
+  const title = t("beerPage.metadata.title", {
     beerName: beer.name,
     breweryName: beer.brewery.name,
+    countryName: beer.brewery.country.name,
+    style: beer.style,
+    abv: beer.abv,
   });
+
+  const descriptionProps = {
+    beerName: beer.name,
+    breweryName: beer.brewery.name,
+    countryName: beer.brewery.country.name,
+    style: beer.style,
+    abv: beer.abv,
+  };
+
+  const aggregateRating = await getBeerAggregateRatingById(beer.id);
+
+  const description = aggregateRating
+    ? t("beerPage.metadata.descriptionWithRating", {
+        ...descriptionProps,
+        rating: Number(aggregateRating.ratingValue),
+        reviewCount: Number(aggregateRating.reviewCount),
+      })
+    : t("beerPage.metadata.description", descriptionProps);
 
   return {
     title,

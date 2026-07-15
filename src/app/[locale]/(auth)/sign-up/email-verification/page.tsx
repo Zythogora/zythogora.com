@@ -16,6 +16,7 @@ export async function generateMetadata({
 
   return {
     title: t("auth.emailVerification.metadata.title"),
+    robots: { index: false },
   };
 }
 

@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "title": "Zythogora",
-    "description": "L'app de référence pour la critique de bières"
+    "title": "Zythogora - L'app de référence pour la critique de bières",
+    "description": "Notez vos bières en détail de l'apparence au ressenti en bouche en passant par les arômes et saveurs et retrouvez les avis de la communauté. Gratuit, sans pub et open source !"
   },
   "email": {
     "welcome": {
@@ -211,7 +211,7 @@
   "auth": {
     "signIn": {
       "metadata": {
-        "title": "Connectez-vous | Zythogora"
+        "title": "Connectez-vous"
       },
       "title": "Heureux de<br></br>vous revoir !",
       "actions": {
@@ -228,7 +228,7 @@
     },
     "signUp": {
       "metadata": {
-        "title": "Créez votre compte | Zythogora"
+        "title": "Créez votre compte"
       },
       "title": "Bienvenue sur<br></br>Zythogora",
       "actions": {
@@ -246,7 +246,7 @@
     },
     "welcome": {
       "metadata": {
-        "title": "Choisissez votre nom d'utilisateur | Zythogora"
+        "title": "Choisissez votre nom d'utilisateur"
       },
       "title": "Une dernière étape !<br></br>Choisissez votre nom d'utilisateur",
       "description": "C'est le nom que les autres amateurs de bière verront sur vos critiques.",
@@ -257,7 +257,7 @@
     },
     "emailVerification": {
       "metadata": {
-        "title": "Créez votre compte | Zythogora"
+        "title": "Créez votre compte"
       },
       "title": "Un email vous a été envoyé<br></br>pour activer votre compte.",
       "text": "Vérifiez vos mails et cliquez sur le lien<br></br>pour pouvoir vous <link>connecter</link> !",
@@ -265,7 +265,7 @@
     },
     "passwordForgotten": {
       "metadata": {
-        "title": "Mot de passe oublié | Zythogora"
+        "title": "Mot de passe oublié"
       },
       "title": "Mot de passe oublié",
       "description": "Entrez votre adresse email ci-dessous pour recevoir un email de réinitialisation de mot de passe.",
@@ -277,7 +277,7 @@
     },
     "resetPassword": {
       "metadata": {
-        "title": "Réinitialisez votre mot de passe | Zythogora"
+        "title": "Réinitialisez votre mot de passe"
       },
       "title": "Réinitialisez votre mot de passe",
       "description": "Entrez votre nouveau mot de passe ci-dessous.",
@@ -334,9 +334,10 @@
   },
   "searchPage": {
     "metadata": {
-      "beerTabTitle": "Recherchez une bière | Zythogora",
-      "breweryTabTitle": "Recherchez une brasserie | Zythogora",
-      "userTabTitle": "Recherchez un utilisateur | Zythogora"
+      "beerTabTitle": "Recherchez une bière",
+      "breweryTabTitle": "Recherchez une brasserie",
+      "userTabTitle": "Recherchez un utilisateur",
+      "description": "Recherchez des milliers de bières et brasseries sur Zythogora, la plateforme de critique de bières gratuite, sans publicité et open source."
     },
     "searchBarPlaceholder": "Recherchez une bière, une brasserie ou un utilisateur",
     "beer": {
@@ -373,7 +374,9 @@
   },
   "beerPage": {
     "metadata": {
-      "description": "Découvrez la {beerName} de {breweryName} et venez partager votre avis sur Zythogora, l'app de référence pour la critique de bières !"
+      "title": "{beerName} - {style} à {abv}° de {breweryName} ({countryName})",
+      "description": "Découvrez la {beerName} de {breweryName} ({countryName}), une {style} à {abv}°. Lisez les avis de dégustation détaillés et partagez le vôtre sur Zythogora !",
+      "descriptionWithRating": "La {beerName} de {breweryName} ({countryName}), {style} à {abv}°, est notée {rating}/10 sur Zythogora. Découvrez les critiques de la communauté et partagez la vôtre !"
     },
     "details": {
       "description": "Description",
@@ -419,7 +422,8 @@
   },
   "breweryPage": {
     "metadata": {
-      "description": "Consultez le profil de la brasserie {breweryName} ({countryName}) et découvrez ses {beerCount} {beerCount, plural, =1 {bière} other {bières}} !"
+      "title": "{breweryName} ({countryName})",
+      "description": "Consultez le profil de la brasserie {breweryName} ({countryName}){beerCount, plural, =0 {} =1 { et découvrez les critiques de la communauté} other { et découvrez les avis de dégustations de ses # bières}} !"
     },
     "location": "Origine",
     "creationYear": "Création",
@@ -461,6 +465,7 @@
   },
   "profilePage": {
     "metadata": {
+      "description": "Retrouvez {username}{reviewCount, plural, =0 {} =1 { et sa première critique de bière détaillée} other { et ses # critiques de bières détaillées de {uniqueBreweryCount, plural, =1 {1 brasserie} other {# brasseries{uniqueCountryCount, plural, =0 {} =1 {} other { et de # pays différents}}}}}} sur Zythogora et envoyez une demande d'ami pour suivre toutes ses dégustations !",
       "uniqueBeers": "{count, plural, =0 {0 bière} =1 {1 bière} other {# bières}}",
       "uniqueBreweries": "{count, plural, =0 {0 brasserie} =1 {1 brasserie} other {# brasseries}}",
       "uniqueStyles": "{count, plural, =0 {0 style} =1 {1 style} other {# styles}}",
@@ -515,7 +520,7 @@
   },
   "settingsPage": {
     "metadata": {
-      "title": "Paramètres | Zythogora"
+      "title": "Paramètres"
     },
     "title": "Paramètres",
     "username": {

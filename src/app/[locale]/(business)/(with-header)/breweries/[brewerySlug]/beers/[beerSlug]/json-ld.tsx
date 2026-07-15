@@ -1,9 +1,10 @@
 import JsonLd from "@/app/_components/json-ld";
 import { getAllBeerReviews, getBeerAggregateRatingById } from "@/domain/beers";
 import type { Beer } from "@/domain/beers/types";
+import { publicConfig } from "@/lib/config/client-config";
 import { Routes } from "@/lib/routes";
 import { generatePath } from "@/lib/routes/utils";
-import { getAbsoluteUrl } from "@/lib/seo";
+import { getAbsoluteUrl, getBreadcrumbListJsonLd } from "@/lib/seo";
 
 import type { Product as ProductJsonLdSchema, WithContext } from "schema-dts";
 
@@ -113,7 +114,33 @@ const BeerJsonLd = async ({ beer }: BeerJsonLdProps) => {
       : {}),
   };
 
-  return <JsonLd data={data} />;
+  const breadcrumb = getBreadcrumbListJsonLd([
+    {
+      name: publicConfig.appName,
+      path: Routes.HOME,
+    },
+    {
+      name: beer.brewery.name,
+      path: generatePath(Routes.BREWERY, {
+        brewerySlug: beer.brewery.slug,
+      }),
+    },
+    {
+      name: beer.name,
+      path: generatePath(Routes.BEER, {
+        brewerySlug: beer.brewery.slug,
+        beerSlug: beer.slug,
+      }),
+    },
+  ]);
+
+  return (
+    <>
+      <JsonLd data={data} />
+
+      <JsonLd data={breadcrumb} />
+    </>
+  );
 };
 
 export default BeerJsonLd;

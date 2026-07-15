@@ -16,6 +16,7 @@ export async function generateMetadata({
 
   return {
     title: t("auth.signUp.metadata.title"),
+    robots: { index: false },
   };
 }
 

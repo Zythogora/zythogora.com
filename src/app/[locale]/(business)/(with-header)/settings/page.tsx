@@ -15,6 +15,7 @@ export async function generateMetadata({
 
   return {
     title: t("settingsPage.metadata.title"),
+    robots: { index: false },
   };
 }
 

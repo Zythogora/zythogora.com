@@ -1,8 +1,9 @@
 import JsonLd from "@/app/_components/json-ld";
 import type { User } from "@/domain/users/types";
+import { publicConfig } from "@/lib/config/client-config";
 import { Routes } from "@/lib/routes";
 import { generatePath } from "@/lib/routes/utils";
-import { getAbsoluteUrl } from "@/lib/seo";
+import { getAbsoluteUrl, getBreadcrumbListJsonLd } from "@/lib/seo";
 
 import type { Person as PersonJsonLdSchema, WithContext } from "schema-dts";
 
@@ -28,7 +29,24 @@ const UserJsonLd = ({ user }: UserJsonLdProps) => {
     },
   };
 
-  return <JsonLd data={data} />;
+  const breadcrumb = getBreadcrumbListJsonLd([
+    {
+      name: publicConfig.appName,
+      path: Routes.HOME,
+    },
+    {
+      name: user.username,
+      path: generatePath(Routes.PROFILE, { username: user.username }),
+    },
+  ]);
+
+  return (
+    <>
+      <JsonLd data={data} />
+
+      <JsonLd data={breadcrumb} />
+    </>
+  );
 };
 
 export default UserJsonLd;

@@ -68,7 +68,11 @@ export async function generateMetadata({
 
   const brewery = await getBreweryBySlug(brewerySlug).catch(() => notFound());
 
-  const title = `${brewery.name} | ${publicConfig.appName}`;
+  const title = t("breweryPage.metadata.title", {
+    breweryName: brewery.name,
+    countryName: brewery.location.country.name,
+  });
+
   const description = t("breweryPage.metadata.description", {
     breweryName: brewery.name,
     countryName: brewery.location.country.name,
